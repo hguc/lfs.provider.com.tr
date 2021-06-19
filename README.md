@@ -10,4 +10,4 @@ Türkçeleştirme sonrası Teşekkür niteliğinde; resmi LFS sitesinde, katkı 
 
 Yerelleştirme/Türkçe çeviri konusunda nasıl katkıda bulunulur?
 
-Linux From Scratch resmi web sitesinin paylaşılan kaynak kodlar içerisinde bulunan paragraf, cümle ve/veya kelimeleri imla ve yazım kurallarına uygun bir şekilde çevirerek katkı sağlayabilirsiniz. Düzenleme ve düzenlenen içeriğin onaya sunulması konusunda teknik bilgi ve yardım almak isterseniz yasinyilmaz@provider.com.tr eposta adresine yazabilir veya LinkedIn kullanıcı iseniz https://www.linkedin.com/in/ysnylmz/ bağlantısı üzerinden iletişime geçebilirsiniz.
+Linux From Scratch resmi web sitesinin paylaşılan kaynak kodları içerisinde bulunan paragraf, cümle ve/veya kelimeleri imla ve yazım kurallarına uygun bir şekilde çevirerek katkı sağlayabilirsiniz. Düzenleme ve düzenlenen içeriğin onaya sunulması konusunda teknik bilgi ve yardım almak isterseniz yasinyilmaz@provider.com.tr eposta adresine yazabilir veya LinkedIn kullanıcı iseniz https://www.linkedin.com/in/ysnylmz/ bağlantısı üzerinden iletişime geçebilirsiniz.
