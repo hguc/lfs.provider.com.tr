@@ -6,4 +6,4 @@ Türkiye/Türkçe internet sitesi https://lfs.provider.com.tr
 
 Linux from Scratch (Sıfırdan Linux) projesinin Türkiye HTTP Mirror sitesinin içeriklerini ve LFS anlatımlarının Türkçeleştirilmesine katkı sağlamak isteyenler web sitesinin tüm kaynak kodları paylaşılmıştır.
 
-Türkçeleştirme sonrası Teşekkür niteliğinde; resmi LFS sitesinde, katkı sağlayanlar kısmında istenirse Ad Soyad ve E-Posta bilgilerini içeren listeleme yapılacaktır. #LinuxfromScratch
+Türkçeleştirme sonrası Teşekkür niteliğinde; resmi LFS sitesinde, katkı sağlayanlar kısmında istenirse Ad Soyad ve E-Posta bilgilerini içeren listeleme yapılacaktır.
