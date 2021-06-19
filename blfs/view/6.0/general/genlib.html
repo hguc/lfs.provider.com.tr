@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;8.&nbsp;General Libraries
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Part&nbsp;III.&nbsp;General Libraries and Utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="general.html" title=
+          "General Libraries and Utilities">Prev</a>
+          <p>
+            General Libraries and Utilities
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="popt.html" title="popt-1.7-5">Next</a>
+          <p>
+            popt-1.7-5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="general.html" title=
+          "Part&nbsp;III.&nbsp;General Libraries and Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="general-genlib" name="general-genlib"></a>
+        <h1 class="chapter">
+          General Libraries
+        </h1>
+      </div>
+      <p>
+        Libraries contain code which is often required by more than one
+        program. This has the advantage that each program doesn't need to
+        duplicate code (and risk introducing bugs), it just has to call
+        functions from the libraries installed on the system. The most
+        obvious example of a set of libraries is <span class=
+        "application">Glibc</span> which is installed during the <span class=
+        "acronym">LFS</span> book. This contains all of the <span class=
+        "application">C</span> library functions which programs use.
+      </p>
+      <p>
+        There are two types of libraries: static and shared. Shared libraries
+        (usually <tt class="filename">libXXX.so</tt>) are loaded into memory
+        from the shared copy at runtime (hence the name). Static libraries
+        (<tt class="filename">libXXX.a</tt> ) are actually linked into the
+        program executable file itself, thus making the program file larger.
+        Quite often, you will find both static and shared copies of the same
+        library on your system.
+      </p>
+      <p>
+        Generally, you only need to install libraries when you are installing
+        software that needs the functionality they supply. In the
+        <span class="acronym">BLFS</span> book, each package is presented
+        with a list of (known) dependencies. Thus, you can figure out which
+        libraries you need to have before installing that program. If you are
+        installing something without using <span class="acronym">BLFS</span>
+        instructions, usually the <tt class="filename">README</tt> or
+        <tt class="filename">INSTALL</tt> file will contain details of the
+        program's requirements.
+      </p>
+      <p>
+        There are certain libraries which nearly <span class=
+        "emphasis"><em>everyone</em></span> will need at some point. In this
+        chapter we list these and some others and explain why you may want to
+        install them.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="pcre" name="pcre"></a>
+          <h1 class="sect1">
+            PCRE-5.0
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to PCRE
+            </h2>
+          </div>
+          <p>
+            The <span class="application"><span class=
+            "acronym">PCRE</span></span> package contains <span class=
+            "application">Perl</span> Compatible Regular Expression
+            libraries. These are useful for implementing regular expression
+            pattern matching using the same syntax and semantics as
+            <span class="application">Perl</span> 5.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2842112" name="id2842112"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=""></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-5.0.tar.bz2">
+                    <span class=
+                    "url">ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-5.0.tar.bz2</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download MD5 Sum: 813850808894d99fb5b1c41ec6335d4f
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 460 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated disk space required: 3.5 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.08 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of PCRE
+            </h2>
+          </div>
+          <p>
+            Install <span class="application"><span class=
+            "acronym">PCRE</span></span> by running the following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">./configure --prefix=/usr --enable-utf8 &amp;&amp;
+make &amp;&amp;
+make install</strong></span></kbd></pre>
+          <p>
+            If you reinstall <span class="application">grep</span> after
+            installing <span class="application">pcre</span>, <span class=
+            "application">grep</span> will get linked against <span class=
+            "application">pcre</span> and may cause problems if <tt class=
+            "filename">/usr</tt> is a separate mount point. To avoid this,
+            either pass the option <span class=
+            "emphasis"><em>--disable-perl-regexp</em></span> when executing
+            <span><strong class="command">./configure</strong></span> for
+            <span class="application">grep</span> or move <tt class=
+            "filename">libpcre</tt> to <tt class="filename">/lib</tt> as
+            follows.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">mv /usr/lib/libpcre.so.* /lib/ &amp;&amp;
+ln -sf ../../lib/libpcre.so.0 /usr/lib/libpcre.so</strong></span></kbd></pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command explanations
+            </h2>
+          </div>
+          <p>
+            <em class="parameter"><tt>--enable-utf8</tt></em>: This switch
+            includes the code for handling <span class="acronym">UTF</span>-8
+            character strings in the library.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <p>
+            The <span class="application"><span class=
+            "acronym">PCRE</span></span> package contains the <tt class=
+            "filename">libpcre</tt> libraries, <span><strong class=
+            "command">pcregrep</strong></span>, <span><strong class=
+            "command">pcretest</strong></span> and <span><strong class=
+            "command">pcre-config</strong></span>.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Description
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2705522" name="id2705522"></a>pcregrep
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">pcregrep</strong></span> is a
+              <span><strong class="command">grep</strong></span> that
+              understands <span class="application">Perl</span> compatible
+              regular expressions.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2659372" name="id2659372"></a>pcretest
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">pcretest</strong></span> can test
+              your <span class="application">Perl</span> compatible regular
+              expression.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2747323" name="id2747323"></a>pcre-config
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">pcre-config</strong></span> is
+              used during the compile process of programs linking to this
+              library.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="general.html" title=
+          "General Libraries and Utilities">Prev</a>
+          <p>
+            General Libraries and Utilities
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="popt.html" title="popt-1.7-5">Next</a>
+          <p>
+            popt-1.7-5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="general.html" title=
+          "Part&nbsp;III.&nbsp;General Libraries and Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

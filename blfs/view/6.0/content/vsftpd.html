@@ -1,0 +1,360 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      vsFTPD-2.0.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;24.&nbsp;Web serving
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="proftpd.html" title=
+          "ProFTPD-1.2.10">Prev</a>
+          <p>
+            ProFTPD-1.2.10
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../x/x.html" title=
+          "X + Window Managers">Next</a>
+          <p>
+            X + Window Managers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="web.html" title=
+          "Chapter&nbsp;24.&nbsp;Web serving">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="vsftpd" name="vsftpd"></a>
+        <h1 class="sect1">
+          vsFTPD-2.0.1
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to vsFTPD
+          </h2>
+        </div>
+        <p>
+          The <span class="application">vs<span class=
+          "acronym">FTP</span>D</span> package contains a very secure and
+          very small <span class="acronym">FTP</span> daemon. This is useful
+          for serving files over a network.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2658604" name="id2658604"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://vsftpd.beasts.org/users/cevans/vsftpd-2.0.1.tar.gz"><span class="url">
+                  ftp://vsftpd.beasts.org/users/cevans/vsftpd-2.0.1.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 63838791ec8b1375ed154fb2603e52e9
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 148 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 492 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.01 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2847050" name="id2847050"></a><span class=
+                  "application">vsFTPD</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2651553" name="id2651553"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/linux_pam.html">Linux-PAM-0.78</a>,
+              <a href="../postlfs/security.html#openssl">OpenSSL-0.9.7e</a>,
+              and <a href="../basicnet/tcpwrappers.html">tcpwrappers-7.6</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of vsFTPD
+          </h2>
+        </div>
+        <p>
+          For security reasons, running <span class=
+          "application">vs<span class="acronym">FTP</span>D</span> as an
+          unprivileged user and group is encouraged. Also, a user to map
+          anonymous users to should be created.
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">install -d -m 0755 /var/ftp/empty &amp;&amp;
+install -d -m 0755 /home/ftp &amp;&amp;
+groupadd vsftpd &amp;&amp;
+useradd -d /dev/null -c "vsFTPD User" -g vsftpd -s /bin/false vsftpd &amp;&amp;
+groupadd ftp &amp;&amp;
+useradd -c anonymous_user -d /home/ftp -g ftp -s /bin/false ftp</strong></span>
+</kbd></pre>
+        <p>
+          Install <span class="application">vs<span class=
+          "acronym">FTP</span>D</span> by running the following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make &amp;&amp;
+install -m 755 vsftpd /usr/sbin/vsftpd &amp;&amp;
+install -m 644 vsftpd.8 /usr/share/man/man8 &amp;&amp;
+install -m 644 vsftpd.conf.5 /usr/share/man/man5 &amp;&amp;
+install -m 644 vsftpd.conf /etc</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>install -d [...]</tt></em>: This creates
+          the directory that anonymous users will use (<tt class=
+          "filename">/home/ftp</tt>) and the directory the daemon will chroot
+          into (<tt class="filename">/var/ftp/empty</tt>).
+        </p>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              <tt class="filename">/home/ftp</tt> should not be owned by the
+              user vsftpd, or the user ftp.
+            </p>
+          </div>
+        </div>
+        <p>
+          <em class="parameter"><tt>echo "#define VSF_BUILD_TCPWRAPPERS"
+          &gt;&gt;builddefs.h</tt></em>: Use this prior to
+          <span><strong class="command">make</strong></span> to add support
+          for <span class="application">tcpwrappers</span>.
+        </p>
+        <p>
+          <em class="parameter"><tt>echo "#define VSF_BUILD_SSL"
+          &gt;&gt;builddefs.h</tt></em>: Use this prior to
+          <span><strong class="command">make</strong></span> to add support
+          for <span class="acronym">SSL</span>.
+        </p>
+        <p>
+          <em class="parameter"><tt>install -m [...]</tt></em>: The
+          <tt class="filename">Makefile</tt> hardwires <tt class=
+          "filename">/usr/local</tt> (if it exists). These commands install
+          the files in <tt class="filename">/usr</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring vsFTPD
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2674698" name="id2674698"></a>vsftpd init.d script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/vsftpd</tt>
+            init script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-6.0</a>
+            package.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make install-vsftpd</strong></span></kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2616952" name="id2616952"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/vsftpd.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2802498" name="id2802498"></a>Configuration
+                  information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="application">vs<span class=
+            "acronym">FTP</span>D</span> comes with a basic anonymous-only
+            configuration file that was copied to <tt class=
+            "filename">/etc</tt> above. This file should be modified because
+            it is now recommended to run <span><strong class=
+            "command">vsftpd</strong></span> in standalone mode as opposed to
+            <span><strong class=
+            "command">inetd</strong></span>/<span><strong class=
+            "command">xinetd</strong></span> mode. Also, you should specify
+            the privilege separation user created above. Finally, you should
+            specify the <span><strong class="command">chroot</strong></span>
+            directory. <span><strong class="command">man
+            vsftpd.conf</strong></span> will give you all the details.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt;&gt; /etc/vsftpd.conf &lt;&lt; "EOF"</strong></span>
+background=YES
+listen=YES
+nopriv_user=vsftpd
+secure_chroot_dir=/var/ftp/empty
+<span><strong class="command">EOF</strong></span></kbd></pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">vs<span class=
+          "acronym">FTP</span>D</span> package contains <span><strong class=
+          "command">vsftpd</strong></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2561376" name="id2561376"></a>vsftpd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">vsftpd</strong></span> is the
+            <span class="acronym">FTP</span> daemon.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-12 09:53:54 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="proftpd.html" title=
+          "ProFTPD-1.2.10">Prev</a>
+          <p>
+            ProFTPD-1.2.10
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../x/x.html" title=
+          "X + Window Managers">Next</a>
+          <p>
+            X + Window Managers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="web.html" title=
+          "Chapter&nbsp;24.&nbsp;Web serving">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

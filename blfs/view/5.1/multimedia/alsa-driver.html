@@ -1,0 +1,346 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      ALSA Driver-1.0.4
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="libdriv.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="alsa-lib.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          ALSA Driver-1.0.4
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to ALSA Driver
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class="acronym">ALSA</span>
+          Driver</span> package contains the <span class=
+          "acronym">ALSA</span> sound drivers. These are the next generation
+          of sound drivers for Linux.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3152489" name="id3152489"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.alsa-project.org/alsa/ftp/driver/alsa-driver-1.0.4.tar.bz2">
+                  http://www.alsa-project.org/alsa/ftp/driver/alsa-driver-1.0.4.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.alsa-project.org/pub/driver/alsa-driver-1.0.4.tar.bz2">
+                  ftp://ftp.alsa-project.org/pub/driver/alsa-driver-1.0.4.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.7 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 32 MB (for all drivers)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 1.26 SBU (for all drivers)
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of ALSA Driver
+          </h3>
+        </div>
+        <p>
+          Before installing the <span class="application"><span class=
+          "acronym">ALSA</span></span> drivers, note that in your kernel
+          configuration you should have <tt class="userinput">Sound Card
+          Support (CONFIG_SOUND)</tt> enabled but <span class=
+          "emphasis"><em>nothing</em></span> else in the Sound menu (with the
+          possible exception of TV Card Mixer support.) In particular, you
+          should <span class="emphasis"><em>not</em></span> have <tt class=
+          "userinput">OSS Sound Modules</tt> enabled as this will cause
+          problems when loading the <span class="application"><span class=
+          "acronym">ALSA</span></span> driver modules.
+        </p>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              Because <span class="application"><span class=
+              "acronym">ALSA</span></span> drivers are kernel modules, they
+              must be compiled with the same compiler used to compile the
+              kernel.
+            </p>
+          </div>
+        </div>
+        <p>
+          Install <span class="application"><span class="acronym">ALSA</span>
+          Driver</span> using the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">CC=/opt/gcc-2.95.3/bin/gcc ./configure \
+    --with-moddir=/lib/modules/`uname -r`/kernel/drivers/sound \
+    --with-kernel=/lib/modules/`uname -r`/build \
+    --with-sequencer=yes \
+    --with-oss=yes \
+    --with-isapnp=no \
+    --with-cards=all &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <p>
+          If this is the first time you have installed the <span class=
+          "application"><span class="acronym">ALSA</span></span> drivers, you
+          will need to create the <tt class="filename">/dev</tt> entries
+          using the script provided in the <span class=
+          "application"><span class="acronym">ALSA</span> Driver</span>
+          source tree:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">./snddevices</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--with-sequencer=yes</tt></i>: This tells
+          the <span class="application"><span class="acronym">ALSA</span>
+          Driver</span> package to build the sequencer modules. Most people
+          want them so you will usually want to leave it set to yes.
+        </p>
+        <p>
+          <i class="parameter"><tt>--with-oss=yes</tt></i>: This tells the
+          package to build the <span class="acronym">OSS</span>/Free
+          emulation modules. Again, most people want this so it's probably
+          best to stick with yes.
+        </p>
+        <p>
+          <i class="parameter"><tt>--with-isapnp=no</tt></i>: Most sound
+          cards these days are <span class="acronym">PCI</span> and
+          <span class="acronym">ISA</span> Plug and Play support isn't
+          needed. If you are using an <span class="acronym">ISA</span> PnP
+          sound card, it's best to say yes here. If your card is <span class=
+          "acronym">ISA</span>, but not PnP, it is safer to stay with 'no'.
+        </p>
+        <p>
+          <i class="parameter"><tt>--with-cards=all</tt></i>: You can tell
+          the script just to build the drivers for your particular sound card
+          here. For full information on which drivers are available, see
+          <span><b class="command">./configure --help</b></span>. If you
+          aren't sure which chipset your sound card uses, look at the file
+          <tt class="filename">CARDS-STATUS</tt> in the <span class=
+          "application"><span class="acronym">ALSA</span> Driver</span>
+          source tree. The default specified here will build all drivers.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring ALSA Driver
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3152778" name="id3152778"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/modules.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3152790" name="id3152790"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To configure the <span class="acronym">ALSA</span> drivers, you
+            need to add some lines to <tt class=
+            "filename">/etc/modules.conf</tt>:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/modules.conf &lt;&lt; "EOF"
+alias char-major-14 soundcore
+alias char-major-116 snd
+
+alias snd-card-0 snd-<i class="replaceable"><tt>[soundcard-name]</tt></i>
+
+alias sound-slot-0 snd-card-0
+
+alias sound-service-0-0 snd-mixer-oss
+alias sound-service-0-1 snd-seq-oss
+alias sound-service-0-3 snd-pcm-oss
+alias sound-service-0-8 snd-seq-midi
+EOF</b></span></tt>
+</pre>
+          <p>
+            <i class="replaceable"><tt>[soundcard-name]</tt></i> needs to be
+            replaced with the driver relevant to your sound card. If you have
+            more than one sound card, you can add additional sections by
+            repeating the above, changing the first 0 to 1 and so on.
+          </p>
+          <p>
+            After editing <tt class="filename">/etc/modules.conf</tt> you
+            need to run <span><b class="command">depmod</b></span>. If the
+            drivers you have compiled are for the version of the kernel you
+            are currently running, simply run:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">depmod</b></span></tt>
+</pre>
+          <p>
+            If you are compiling drivers for a different kernel version than
+            those you are running, you will need to use a line similar to:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">depmod -a 2.4.22 -F /boot/System.map-2.4.22</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class="acronym">ALSA</span>
+          Driver</span> package contains the <span class=
+          "acronym">ALSA</span> sound card drivers and include files.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3153353" name="id3153353"></a><span class=
+                  "acronym">ALSA</span> sound card drivers
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            These are kernel modules which provide audio and <span class=
+            "acronym">MIDI</span> functionality to the operating system.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3153653" name="id3153653"></a>include files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            These are installed in <tt class=
+            "filename">/usr/include/sound</tt> and are required to compile
+            certain packages such as <span class="application"><span class=
+            "acronym">ALSA</span> Libraries</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="libdriv.html">Prev</a><br />
+        Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers
+      </div>
+      <div class="next">
+        <a accesskey="n" href="alsa-lib.html">Next</a><br />
+        ALSA Library-1.0.4
+      </div>
+      <div class="up">
+        <a accesskey="u" href="libdriv.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,128 @@
+Submitted By:            Pierre Labastie <pierre_DOT_labastie_AT_neuf_DOT_fr>
+Date:                    2020-09-20
+Initial Package Version: 1.32
+Upstream Status:         committed
+Origin:                  Upstream
+Description:             Fix glib2 gtk-doc generation and tests
+
+Glib2 needs three fixes from the development version of gtk-doc,
+which are necessary for correctly detecting which symbols
+are undocumented/undeclared/unused in GLib. See
+https://gitlab.gnome.org/GNOME/glib/-/commit/60dd272b
+
+This patch is a backport of those fixes to 1.32.
+
+diff -Naur a/gtkdoc/scan.py b/gtkdoc/scan.py
+--- a/gtkdoc/scan.py	2019-07-28 10:42:31.000000000 +0200
++++ b/gtkdoc/scan.py	2020-09-20 09:29:34.454010558 +0200
+@@ -96,19 +96,8 @@
+         (struct|union)\s*
+         \w*\s*{""", re.VERBOSE),
+     # 12-14: OTHER TYPEDEFS
+-    re.compile(
+-        r"""^\s*typedef\s+
+-        (?:struct|union)\s+\w+[\s\*]+
+-        (\w+)                                # 1: name
+-        \s*;""", re.VERBOSE),
+-    re.compile(
+-        r"""^\s*
+-        (?:G_GNUC_EXTENSION\s+)?
+-        typedef\s+
+-        (.+[\s\*])                           # 1: e.g. 'unsigned int'
+-        (\w+)                                # 2: name
+-        (?:\s*\[[^\]]+\])*
+-        \s*;""", re.VERBOSE),
++    None,  # in InitScanner()
++    None,  # in InitScanner()
+     re.compile(r'^\s*typedef\s+'),
+     # 15: VARIABLES (extern'ed variables)
+     None,  # in InitScanner()
+@@ -267,6 +256,21 @@
+         %s                                   # 3: optional decorator
+         \s*;""" % optional_decorators_regex, re.VERBOSE)
+     # OTHER TYPEDEFS
++    CLINE_MATCHER[12] = re.compile(
++        r"""^\s*typedef\s+
++        (?:struct|union)\s+\w+[\s\*]+
++        (\w+)                                # 1: name
++        %s                                   # 2: optional decorator
++        \s*;""" % optional_decorators_regex, re.VERBOSE)
++    CLINE_MATCHER[13] = re.compile(
++        r"""^\s*
++        (?:G_GNUC_EXTENSION\s+)?
++        typedef\s+
++        (.+?[\s\*])                          # 1: e.g. 'unsigned int'
++        (\w+)                                # 2: name
++        (?:\s*\[[^\]]+\])*
++        %s                                   # 3: optional decorator
++        \s*;""" % optional_decorators_regex, re.VERBOSE)
+     CLINE_MATCHER[15] = re.compile(
+         r"""^\s*
+         (?:extern|[A-Za-z_]+VAR%s)\s+
+@@ -534,7 +538,7 @@
+         # section (#endif /* XXX_DEPRECATED */
+         if deprecated_conditional_nest == 0 and '_DEPRECATED' in line:
+             m = re.search(r'^\s*#\s*(if*|define|endif)', line)
+-            if not (m or in_declaration == 'enum'):
++            if not (m or in_declaration == 'enum' or in_declaration == 'struct'):
+                 logging.info('Found deprecation annotation (decl: "%s"): "%s"',
+                              in_declaration, line.strip())
+                 deprecated_conditional_nest += 0.1
+@@ -561,6 +565,11 @@
+                     logging.info('Found start of comment: %s', line.strip())
+                 continue
+ 
++            # Skip begin/end deprecation macros.
++            m = re.search(r'^\s*G_GNUC_(BEGIN|END)_IGNORE_DEPRECATIONS', line)
++            if m:
++                continue
++
+             logging.info('no decl: %s', line.strip())
+ 
+             cm = [m.match(line) for m in CLINE_MATCHER]
+@@ -944,9 +953,17 @@
+                     title = '<TITLE>%s</TITLE>' % objectname
+ 
+                 logging.info('Store struct: "%s"', symbol)
++                # Structs could contain deprecated members and that doesn't
++                # mean the whole struct is deprecated, so they are ignored when
++                # setting deprecated_conditional_nest above. Here we can check
++                # if the _DEPRECATED is between '}' and ';' which would mean
++                # the struct as a whole is deprecated.
++                if re.search(r'\n\s*\}.*_DEPRECATED.*;\s*$', decl):
++                    deprecated = '<DEPRECATED/>\n'
+                 if AddSymbolToList(slist, symbol):
+                     structsym = in_declaration.upper()
+-                    stripped_decl = re.sub('(%s)' % optional_decorators_regex, '', decl)
++                    regex = r'(?:\s+(?:G_GNUC_\w+(?:\(\w*\))?%s))' % ignore_decorators
++                    stripped_decl = re.sub(regex, '', decl)
+                     decl_list.append('<%s>\n<NAME>%s</NAME>\n%s%s</%s>\n' %
+                                      (structsym, symbol, deprecated, stripped_decl, structsym))
+                     if symbol in forward_decls:
+diff -Naur a/tests/scan.py b/tests/scan.py
+--- a/tests/scan.py	2019-07-25 07:45:36.000000000 +0200
++++ b/tests/scan.py	2020-09-20 09:29:06.798332431 +0200
+@@ -552,6 +552,23 @@
+         slist, doc_comments = self.scanHeaderContent([header])
+         self.assertDecl('data', expected, slist)
+ 
++    def test_HandleDeprecatedMemberDecorator(self):
++        """Struct with deprecated members."""
++        header = textwrap.dedent("""\
++            struct data {
++              int x1 G_GNUC_DEPRECATED;
++              int x2 G_GNUC_DEPRECATED_FOR(replacement);
++            };""")
++        expected = textwrap.dedent("""\
++            struct data {
++              int x1;
++              int x2;
++            };""")
++        scan.InitScanner(self.options)
++        slist, doc_comments = self.scanHeaderContent(
++                header.splitlines(keepends=True))
++        self.assertDecl('data', expected, slist)
++
+ 
+ class ScanHeaderContentUnions(ScanHeaderContentTestCase):
+     """Test parsing of union declarations."""

@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Dhcpcd-2.0.8
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;14.&nbsp;DHCP Clients
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="dhcp.html" title="DHCP Clients">Prev</a>
+          <p>
+            DHCP Clients
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="other.html" title=
+          "Other Connections">Next</a>
+          <p>
+            Other Connections
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="dhcp.html" title=
+          "Chapter&nbsp;14.&nbsp;DHCP Clients">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="dhcpcd" name="dhcpcd"></a>
+        <h1 class="sect1">
+          Dhcpcd-2.0.8
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Dhcpcd
+          </h2>
+        </div>
+        <p>
+          <span class="application">dhcpcd</span>is an implementation of the
+          DHCP client specified in RFC2131. This is useful for connecting
+          your computer to a network which uses DHCP to assign network
+          addresses.
+        </p>
+        <h3>
+          <a id="id2579093" name="id2579093"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://download.berlios.de/dhcpcd/dhcpcd-2.0.8.tar.bz2"><span class="url">
+                http://download.berlios.de/dhcpcd/dhcpcd-2.0.8.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.osuosl.org/pub/gentoo/distfiles/dhcpcd-2.0.8.tar.bz2">
+                <span class=
+                "url">ftp://ftp.osuosl.org/pub/gentoo/distfiles/dhcpcd-2.0.8.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: ec91c33b6d9cb46a42f9564e573fd249
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 123 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 1.2 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: less than 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/dhcpcd"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/dhcpcd</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Dhcpcd
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">dhcpcd</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix="" --mandir=/usr/share/man &amp;&amp;
+make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+chmod -v 754 /etc/dhcpc/dhcpcd.exe</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--prefix=""</tt></em>: There may be a
+          good reason for abandoning the normal BLFS convention of using
+          <em class="parameter"><tt>--prefix=/usr</tt></em> here. If you are
+          installing DHCP, it is likely that it is required during the boot
+          process and <tt class="filename">/usr</tt> may be network mounted,
+          in which case <span><strong class="command">dhcpcd</strong></span>
+          wouldn't be available due to being on the network! Therefore,
+          depending on your situation, you may want it to be installed in
+          <tt class="filename">/sbin</tt> or <tt class=
+          "filename">/usr/sbin</tt>. This command installs to <tt class=
+          "filename">/sbin</tt>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Dhcpcd
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="dhcpcd-config" name="dhcpcd-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/dhcpc/dhcpcd.exe</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="dhcpcd-init" name="dhcpcd-init"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To configure <span><strong class=
+            "command">dhcpcd</strong></span>, you need to first install the
+            network service script, <tt class=
+            "filename">/etc/sysconfig/network-devices/services/dhcpcd</tt>
+            included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-20060910</a>
+            package (as user <tt class="systemitem">root</tt>):
+          </p>
+          <pre class="root"><kbd class=
+          "command">make install-service-dhcpcd</kbd></pre>
+          <p>
+            Whenever <span><strong class="command">dhcpcd</strong></span>
+            configures or shuts down a network interface, it executes the
+            script <tt class="filename">/etc/dhcpc/dhcpcd.exe</tt>. This
+            script can be customized to perform additional actions for the
+            network interface. See the man page of <span><strong class=
+            "command">dhcpcd</strong></span> for more details.
+          </p>
+          <p>
+            <a id="dhcpcd-config2" name="dhcpcd-config2"></a>Finally, as the
+            <tt class="systemitem">root</tt> user create the <tt class=
+            "filename">/etc/sysconfig/network-devices/ifconfig.eth0/dhcpcd</tt>
+            configuration file using the following commands. Adjust
+            appropriately for additional interfaces:
+          </p>
+          <pre class="root"><kbd class=
+          "command">install -v -d /etc/sysconfig/network-devices/ifconfig.eth0 &amp;&amp;
+cat &gt; /etc/sysconfig/network-devices/ifconfig.eth0/dhcpcd &lt;&lt; "EOF"
+<tt class="literal">ONBOOT="yes"
+SERVICE="dhcpcd"
+DHCP_START="<em class=
+"replaceable"><tt>&lt;insert appropriate start options here&gt;</tt></em>"
+DHCP_STOP="-k <em class=
+"replaceable"><tt>&lt;insert additional stop options here&gt;</tt></em>"
+
+# Set PRINTIP="yes" to have the script print
+# the DHCP assigned IP address
+PRINTIP="no"
+
+# Set PRINTALL="yes" to print the DHCP assigned values for
+# IP, SM, DG, and 1st NS. This requires PRINTIP="yes".
+PRINTALL="no"</tt>
+EOF</kbd></pre>
+          <p>
+            For more information on the appropriate <tt class=
+            "envar">DHCP_START</tt> and <tt class="envar">DHCP_STOP</tt>
+            values, examine the man page for <span><strong class=
+            "command">dhcpcd</strong></span>.
+          </p>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                <a id="dhcpcd-config3" name="dhcpcd-config3"></a>The default
+                behavior of <span><strong class=
+                "command">dhcpcd</strong></span> is to overwrite (after
+                making backup copies) <tt class=
+                "filename">/etc/resolv.conf</tt>, <tt class=
+                "filename">/etc/yp.conf</tt> and <tt class=
+                "filename">/etc/ntp.conf</tt> with new files containing
+                information from the DHCP server. If this is undesirable,
+                review the <span><strong class=
+                "command">dhcpcd</strong></span> man page for switches to add
+                to the <tt class="envar">DHCP_START</tt> value.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Program:</span></strong> <span class="seg">dhcpcd</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directory:</span></strong> <span class="seg">/etc/dhcpc and
+              /var/lib/dhcpc</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2726950" name="id2726950"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="dhcpcd-prog" name="dhcpcd-prog"></a><span class=
+                  "term"><span><strong class=
+                  "command">dhcpcd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an implementation of the DHCP client specified in
+                    RFC2131 (when -r option is not specified) and RFC1541
+                    (when -r option is specified).
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-02-14 11:57:11 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dhcp.html" title="DHCP Clients">Prev</a>
+          <p>
+            DHCP Clients
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="other.html" title=
+          "Other Connections">Next</a>
+          <p>
+            Other Connections
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="dhcp.html" title=
+          "Chapter&nbsp;14.&nbsp;DHCP Clients">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

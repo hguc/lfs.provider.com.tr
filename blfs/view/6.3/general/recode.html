@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Recode-3.6
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;10.&nbsp;General Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="rman.html" title="rman-3.2">Prev</a>
+          <p>
+            rman-3.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="icon-naming-utils.html" title=
+          "icon-naming-utils-0.8.2">Next</a>
+          <p>
+            icon-naming-utils-0.8.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genutils.html" title=
+          "Chapter&nbsp;10.&nbsp;General Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="recode" name="recode"></a>Recode-3.6
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Recode
+        </h2>
+        <p>
+          The <span class="application">Recode</span> package contains a
+          program for converting text between character sets, and a library
+          that exposes this functionality to other applications. Note that
+          the same functionality (but with different API) is provided by
+          <span class="command"><strong>iconv</strong></span>, which is
+          installed in LFS as a part of <span class=
+          "application">Glibc</span>.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The <span class="application">Recode</span> package is no longer
+            maintained upstream. Wishlist bugs such as <a class="ulink" href=
+            "http://bugs.debian.org/94966">http://bugs.debian.org/94966</a>
+            will never be fixed.
+          </p>
+        </div>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://ftp.gnu.org/gnu/recode/recode-3.6.tar.gz">http://ftp.gnu.org/gnu/recode/recode-3.6.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.gnu.org/gnu/recode/recode-3.6.tar.gz">ftp://ftp.gnu.org/gnu/recode/recode-3.6.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: be3f40ad2e93dae5cd5f628264bf1877
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.7 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 24 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Required patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/recode-3.6-fixes-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/recode-3.6-fixes-1.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Recode Dependencies
+        </h3>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="python.html" title=
+          "Python-2.5.2">Python-2.5.2</a> (for the &ldquo;<span class=
+          "quote">bigauto</span>&rdquo; test) and <a class="ulink" href=
+          "http://dmalloc.com/">Dmalloc</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/recode">http://wiki.linuxfromscratch.org/blfs/wiki/recode</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Recode
+        </h2>
+        <p>
+          Install <span class="application">Recode</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">patch -Np1 -i ../recode-3.6-fixes-1.patch &amp;&amp;
+./configure --prefix=/usr --without-included-gettext &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          To test the results, issue: <span class="command"><strong>make
+          check</strong></span>. The testsuite will warn about the
+          &ldquo;<span class="quote">bigauto</span>&rdquo; test being
+          skipped. The editors did not attempt to run this test to the end,
+          because it uses obsolete Python constructions.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--without-included-gettext</code></em>:
+          This parameter forces the use of <code class=
+          "function">gettext</code> implementation provided by <span class=
+          "application">Glibc</span> instead of the very old internal copy.
+          The internal copy produces incorrect output in UTF-8 locales.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">recode</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">librecode.{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="recode-prog" name="recode-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>recode</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    converts text between character sets.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="librecode" name="librecode"></a><span class=
+                    "term"><code class=
+                    "filename">librecode.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains functions for character set conversion.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-19 00:38:19 +0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="rman.html" title="rman-3.2">Prev</a>
+          <p>
+            rman-3.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="icon-naming-utils.html" title=
+          "icon-naming-utils-0.8.2">Next</a>
+          <p>
+            icon-naming-utils-0.8.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genutils.html" title=
+          "Chapter&nbsp;10.&nbsp;General Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

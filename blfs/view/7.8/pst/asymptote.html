@@ -1,0 +1,315 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      asymptote-2.35
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.8">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 7.8
+      </h4>
+      <h3>
+        Chapter&nbsp;54.&nbsp;Typesetting
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="texlive.html" title=
+          "texlive-20150521-source">Prev</a>
+          <p>
+            texlive-20150521-source
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="biber.html" title=
+          "biblatex-biber-2.1">Next</a>
+          <p>
+            biblatex-biber-2.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="typesetting.html" title=
+          "Chapter&nbsp;54.&nbsp;Typesetting">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.8">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="asymptote" name="asymptote"></a>asymptote-2.35
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to asymptote
+        </h2>
+        <p>
+          <span class="application">Asymptote</span> is a powerful
+          descriptive vector graphics language that provides a natural
+          coordinate-based framework for technical drawing. Labels and
+          equations can be typeset with LaTeX.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.8
+          platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://downloads.sourceforge.net/sourceforge/asymptote/asymptote-2.35.src.tgz">
+                http://downloads.sourceforge.net/sourceforge/asymptote/asymptote-2.35.src.tgz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 199e971792072527bd0cb1583d8ef3fb
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 3.2 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 162 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 1.8 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Asymptote Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="gs.html" title=
+          "ghostscript-9.16">ghostscript-9.16</a>, <a class="xref" href=
+          "texlive.html" title="texlive-20150521-source">texlive-20150521</a>
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="../x/freeglut.html" title=
+          "Freeglut-3.0.0">Freeglut-3.0.0</a> (for 3D drawing), <a class=
+          "xref" href="../general/gc.html" title="GC-7.4.2">GC-7.4.2</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="ulink" href="http://www.fftw.org/">FFTW</a>, <a class=
+          "xref" href="../general/gsl.html" title="Gsl-1.16">Gsl-1.16</a>
+        </p>
+        <h4>
+          Optional (at runtime, to use xasy)
+        </h4>
+        <p class="optional">
+          <a class="ulink" href=
+          "http://effbot.org/downloads/Imaging-1.1.7.tar.gz">Imaging</a>
+          which needs <a class="ulink" href=
+          "http://www.linuxfromscratch.org/patches/downloads/Imaging/Imaging-1.1.7-freetype_fix-1.patch">
+          Imaging-1.1.7-freetype_fix-1.patch</a> and has a build dependency
+          of <a class="xref" href="../general/python2.html" title=
+          "Python-2.7.10">Python-2.7.10</a> (re-) compiled against <a class=
+          "xref" href="../general/tk.html" title="Tk-8.6.4">Tk-8.6.4</a> to
+          provide <code class="filename">_tkinter.so</code>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/asymptote">http://wiki.linuxfromscratch.org/blfs/wiki/asymptote</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of asymptote
+        </h2>
+        <p>
+          Install <span class="application">asymptote</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &amp;&amp;
+./configure --prefix=/opt/texlive/2015 \
+ --bindir=/opt/texlive/2015/bin/$TEXARCH \
+ --datarootdir=/opt/texlive/2015/texmf-dist \
+ --infodir=/opt/texlive/2015/texmf-dist/doc/info \
+ --libdir=/opt/texlive/2015/texmf-dist \
+ --mandir=/opt/texlive/2015/texmf-dist/doc/man \
+ --enable-gc=system \
+ --with-latex=/opt/texlive/2015/texmf-dist/tex/latex \
+ --with-context=/opt/texlive/2015/texmf-dist/tex/context/third &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          To test the results, issue: <span class="command"><strong>make
+          check</strong></span>.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--prefix=, --bindir=, --datarootdir=,
+          --infodir=, --mandir= ...</code></em> : these switches ensure that
+          the files installed from source will overwrite any corresponding
+          files previously installed by <span class=
+          "application">install-tl-unx</span> so that the alternative methods
+          of installing <span class="application">texlive</span> are
+          consistent..
+        </p>
+        <p>
+          Exceptionally, asymptote will create an <code class=
+          "filename">asymptote/</code> subdirectory for <code class=
+          "filename">asymptote.info</code> even though the <code class=
+          "filename">asy-faq.info</code> file will be in the main
+          <span class="application">texlive</span> <code class=
+          "filename">info/</code> directory. Both files <span class=
+          "emphasis"><em>will</em></span> be found by <span class=
+          "command"><strong>info</strong></span>.
+        </p>
+        <p>
+          <em class=
+          "parameter"><code>--libdir=/opt/texlive/2015/texmf-dist;</code></em>:
+          This parameter ensures that the <code class=
+          "filename">asymptote</code> directory will similarly overwrite any
+          files installed by install-tl-unx.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-gc=system</code></em>: this
+          ensures that the system version of <code class=
+          "filename">libgc.so</code> will be used instead of the version
+          shipped with this package.
+        </p>
+        <p>
+          <em class="parameter"><code>--with-latex= ...
+          --with-context=</code></em>: These switches ensure that style files
+          and a tex file will be installed into the <span class=
+          "application">texlive</span> directories instead of creating a
+          <code class="filename">texmf-local</code> directory for them.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">asy, xasy</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/opt/texlive/2015texmf-dist/asymptote,
+              /opt/texlive/2015/doc/asymptote,
+              /opt/texlive/2015/info/asymptote</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="asy" name="asy"></a><span class=
+                    "term"><span class="command"><strong>asy</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a vector graphics program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xasy" name="xasy"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xasy</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a Python script providing the preliminary GUI for asy.
+                    It can be used for final adjustments of an existing asy
+                    file.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2015-09-23 01:09:58 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="texlive.html" title=
+          "texlive-20150521-source">Prev</a>
+          <p>
+            texlive-20150521-source
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="biber.html" title=
+          "biblatex-biber-2.1">Next</a>
+          <p>
+            biblatex-biber-2.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="typesetting.html" title=
+          "Chapter&nbsp;54.&nbsp;Typesetting">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.8">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

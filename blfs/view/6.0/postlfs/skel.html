@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Configuring for Adding Users
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;3.&nbsp;After <span class="acronym">LFS</span>
+          Configuration Issues
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="config.html" title=
+          "After LFS Configuration Issues">Prev</a>
+          <p>
+            After LFS Configuration Issues
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="profile.html" title=
+          "The Bash Shell Startup Files">Next</a>
+          <p>
+            The Bash Shell Startup Files
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="postlfs-config-skel" name="postlfs-config-skel"></a>
+        <h1 class="sect1">
+          Configuring for Adding Users
+        </h1>
+      </div>
+      <p>
+        Together, the <span><strong class=
+        "command">/usr/sbin/useradd</strong></span> command and <tt class=
+        "filename">/etc/skel</tt> directory (both are easy to setup and use)
+        provide a way to assure new users are added on your <span class=
+        "acronym">LFS</span> system with the same beginning settings for
+        things like <tt class="envar">PATH</tt>, keyboard processing and
+        environmental variables. Using these two facilities makes it easier
+        to assure this initial state for each new user.
+      </p>
+      <p>
+        The <tt class="filename">/etc/skel</tt> directory holds copies of
+        various initialization and other files that may be copied to the new
+        user's home directory when the <span><strong class=
+        "command">/usr/sbin/useradd</strong></span> program adds the new
+        user.
+      </p>
+      <p>
+        <span class="emphasis"><em>Useradd</em></span>
+      </p>
+      <p>
+        The <span><strong class="command">useradd</strong></span> program
+        uses a collection of default values kept in <tt class=
+        "filename">/etc/default/useradd</tt>, if it exists. If the file does
+        not exist, then it uses some internal defaults. You can see the
+        default values by running <span><strong class=
+        "command">/usr/sbin/useradd -D</strong></span>.
+      </p>
+      <p>
+        To change these values to something new, create a base <tt class=
+        "filename">/etc/default/useradd</tt> file with the same values as the
+        output of <span><strong class="command">/usr/sbin/useradd
+        -D</strong></span>. Here is a sample.
+      </p>
+      <pre class="screen"># Begin /etc/default/useradd
+
+GROUP=100
+HOME=/home
+INACTIVE=-1
+EXPIRE=
+SHELL=
+SKEL=/etc/skel
+
+# End /etc/default/useradd</pre>
+      <p>
+        The only thing missing from the file is a default shell. Add that by
+        running:
+      </p>
+      <pre class="userinput"><kbd class="command"><span><strong class=
+      "command">/usr/sbin/useradd -D -s/bin/bash</strong></span></kbd></pre>
+      <p>
+        This will set the <tt class="envar">SHELL</tt>= line to <tt class=
+        "envar">SHELL</tt>=/bin/bash.
+      </p>
+      <p>
+        <span><strong class="command">Useradd</strong></span> has many
+        parameters that can be set in the <tt class=
+        "filename">/etc/default/useradd</tt> file.
+      </p>
+      <p>
+        For more information see <span><strong class="command">man
+        useradd</strong></span>.
+      </p>
+      <p>
+        <span class="emphasis"><em>/etc/skel</em></span>
+      </p>
+      <p>
+        To get started, create an <tt class="filename">/etc/skel</tt>
+        directory and make sure it is writable only by the system
+        administrator, usually root. Creating the directory as root is the
+        best way to go.
+      </p>
+      <p>
+        The mode of any files from this part of the book that you put in
+        <tt class="filename">/etc/skel</tt> should be writable only by the
+        owner. Also, since there is no telling what kind of sensitive
+        information a user may eventually place in their copy of these files,
+        you should make them unreadable by "group" and "other".
+      </p>
+      <p>
+        You can also put other files in <tt class="filename">/etc/skel</tt>
+        and different permissions may be needed for them.
+      </p>
+      <p>
+        Decide which initialization files should be provided in every (or
+        most) new user's home directory. The decisions you make will affect
+        what you do in the next two sections, <a href="profile.html">The Bash
+        Shell Startup Files</a> and <a href="vimrc.html">The vimrc Files</a>.
+        Some or all of those files will be useful for root, any
+        already-existing users, and new users.
+      </p>
+      <p>
+        The files from those sections that you might want to place in
+        <tt class="filename">/etc/skel</tt> include <tt class=
+        "filename">.inputrc</tt>, <tt class="filename">.bash_profile</tt>,
+        <tt class="filename">.bashrc</tt>, <tt class=
+        "filename">.bash_logout</tt>, <tt class="filename">.dircolors</tt>,
+        and <tt class="filename">.vimrc</tt>. If you are unsure which of
+        these should be placed there, just continue to the following
+        sections, read each section and any references provided, and then
+        make your decision.
+      </p>
+      <p>
+        You will run a slightly modified set of commands for files which are
+        placed in <tt class="filename">/etc/skel</tt>. Each section will
+        remind you of this. In brief, the book's commands have been written
+        for files <span class="emphasis"><em>not</em></span> added to
+        <tt class="filename">/etc/skel</tt> and just send the results to the
+        user's home directory. If the file is going to be in <tt class=
+        "filename">/etc/skel</tt>, change the book's command(s) to send
+        output there instead and then just copy the file from <tt class=
+        "filename">/etc/skel</tt> to the appropriate directories, like
+        <tt class="filename">/etc</tt>, <tt class="filename">~</tt> or the
+        home directory of any other user already in the system.
+      </p>
+      <p>
+        <span class="emphasis"><em>When Adding a User</em></span>
+      </p>
+      <p>
+        When adding a new user with <span><strong class=
+        "command">useradd</strong></span>, use the <tt class="option">-m</tt>
+        parameter, which tells <span><strong class=
+        "command">useradd</strong></span> to create the user's home directory
+        and copy files from <tt class="filename">/etc/skel</tt> (can be
+        overridden) to the new user's home directory. For example:
+      </p>
+      <pre class="screen"><span><strong class=
+      "command">useradd -m jwrober</strong></span></pre>
+      <p class="updated">
+        Last updated on 2005-01-14 17:30:04 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="config.html" title=
+          "After LFS Configuration Issues">Prev</a>
+          <p>
+            After LFS Configuration Issues
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="profile.html" title=
+          "The Bash Shell Startup Files">Next</a>
+          <p>
+            The Bash Shell Startup Files
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,11 @@
+#!/bin/bash
+set +h
+set -e
+
+cd $PKGDIR
+./configure --prefix=/usr --libdir=/lib --docdir=/usr/share/doc/xz-5.0.4
+make
+make -k check >> $TEST_LOG 2>&1 || true
+make pkgconfigdir=/usr/lib/pkgconfig install
+echo -e "\n\nTotalseconds: $SECONDS\n"
+exit

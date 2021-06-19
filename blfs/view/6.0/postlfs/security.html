@@ -1,0 +1,427 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;4.&nbsp;Security
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Part&nbsp;II.&nbsp;Post <span class="acronym">LFS</span>
+          Configuration and Extra Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="netfs.html" title=
+          "Configuring for Network Filesystems">Prev</a>
+          <p>
+            Configuring for Network Filesystems
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cracklib.html" title="cracklib-2.7">Next</a>
+          <p>
+            cracklib-2.7
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Part&nbsp;II.&nbsp;Post LFS Configuration and Extra Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="postlfs-security" name="postlfs-security"></a>
+        <h1 class="chapter">
+          Security
+        </h1>
+      </div>
+      <p>
+        Security takes many forms in a computing environment. This chapter
+        gives examples of three different types of security: access,
+        prevention and detection.
+      </p>
+      <p>
+        Access for users is usually handled by <span><strong class=
+        "command">login</strong></span> or an application designed to handle
+        the login function. In this chapter, we show how to enhance
+        <span><strong class="command">login</strong></span> by setting
+        policies with <span class="application"><span class=
+        "acronym">PAM</span></span> modules. Access via networks can also be
+        secured by policies set by <span class="application">iptables</span>,
+        commonly referred to as a firewall. For applications that don't offer
+        the best security, you can use the <span class=
+        "application">Stunnel</span> package to wrap an application daemon
+        inside an <span class="acronym">SSL</span> tunnel.
+      </p>
+      <p>
+        Prevention of breaches, like a trojan, are assisted by applications
+        like <span class="application">GnuPG</span>, specifically the ability
+        to confirm signed packages, which recognizes modifications of the
+        <span class="acronym">TAR</span> ball after the packager creates it.
+      </p>
+      <p>
+        Finally, we touch on detection with a package that stores
+        "signatures" of critical files (defined by the administrator) and
+        then regenerates those "signatures" and compares for files that have
+        been changed.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="openssl" name="openssl"></a>
+          <h1 class="sect1">
+            OpenSSL-0.9.7e
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to OpenSSL
+            </h2>
+          </div>
+          <p>
+            The <span class="application">Open<span class=
+            "acronym">SSL</span></span> package contains management tools and
+            libraries relating to cryptography. These are useful for
+            providing cryptography functions to other packages, notably
+            <span class="application">OpenSSH</span>, email applications and
+            web browsers (for accessing <span class="acronym">HTTPS</span>
+            sites).
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2649910" name="id2649910"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://www.openssl.org/source/openssl-0.9.7e.tar.gz"><span class="url">
+                    http://www.openssl.org/source/openssl-0.9.7e.tar.gz</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.openssl.org/source/openssl-0.9.7e.tar.gz"><span class="url">
+                    ftp://ftp.openssl.org/source/openssl-0.9.7e.tar.gz</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download MD5 sum: a8777164bca38d84e5eb2b1535223474
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 3.0 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated disk space required: 35 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 1.16 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2595090" name="id2595090"></a><span class=
+                    "application">Open<span class="acronym">SSL</span></span>
+                    dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2616396" name="id2616396"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../general/genutils.html#bc">bc-1.06</a>
+                (recommended if you run the test suite during the build)
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of OpenSSL
+            </h2>
+          </div>
+          <p>
+            Install <span class="application">Open<span class=
+            "acronym">SSL</span></span> by running the following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">sed 's/^passwd/openssl-passwd/' doc/apps/passwd.pod \
+    &gt; doc/apps/openssl-passwd.pod &amp;&amp;
+rm doc/apps/passwd.pod &amp;&amp;
+mv doc/crypto/{,openssl_}threads.pod &amp;&amp;
+./config --openssldir=/etc/ssl --prefix=/usr shared &amp;&amp;
+sed -i 's%SHLIBDIRS= fips crypto ssl%SHLIBDIRS= crypto ssl%g' Makefile &amp;&amp;
+make MANDIR=/usr/share/man</strong></span></kbd></pre>
+          <p>
+            Now, as the root user:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make MANDIR=/usr/share/man install &amp;&amp;
+cp -r certs /etc/ssl</strong></span></kbd></pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command explanations
+            </h2>
+          </div>
+          <p>
+            <tt class="option">no-rc5 no-idea</tt>: When added to the
+            <span><strong class="command">./config</strong></span> command,
+            this will eliminate the building of those encryption methods.
+            Patent licenses may be needed for you to utilize either of those
+            methods in your projects.
+          </p>
+          <p>
+            <span><strong class="command">rm
+            doc/apps/passwd.pod</strong></span>: This command prevents
+            <span class="application">Open<span class=
+            "acronym">SSL</span></span> from installing its passwd man page
+            over an existing man page with the same name.
+          </p>
+          <p>
+            <span><strong class="command">mv
+            doc/crypto/{,openssl_}threads.pod</strong></span>: This commands
+            prevents <span class="application">Open<span class=
+            "acronym">SSL</span></span> from overwriting an existing man page
+            from <span class="application">Perl</span>.
+          </p>
+          <p>
+            <span><strong class="command">sed -i 's%SHLIBDIRS= fips crypto
+            ssl%SHLIBDIRS= crypto ssl%g' Makefile</strong></span>: This
+            command prevents installation of the non-existent <tt class=
+            "filename">libfips</tt> library.
+          </p>
+          <p>
+            <span><strong class="command">make MANDIR=/usr/share/man; make
+            MANDIR=/usr/share/man install</strong></span>: These commands
+            install <span class="application">Open<span class=
+            "acronym">SSL</span></span> with the man pages in <tt class=
+            "filename">/usr/share/man</tt> instead of <tt class=
+            "filename">/etc/ssl/man</tt>.
+          </p>
+          <p>
+            <span><strong class="command">cp -r certs
+            /etc/ssl</strong></span>: The certificates must be copied
+            manually since the install script skips this step.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Configuring OpenSSL
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="openssl-config" name="openssl-config"></a>Config
+                    files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/ssl/openssl.cnf</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2712044" name="id2712044"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              Most people who just want to use <span class=
+              "application">Open<span class="acronym">SSL</span></span> for
+              providing functions to other programs such as <span class=
+              "application">Open<span class="acronym">SSH</span></span> and
+              web browsers won't need to worry about configuring <span class=
+              "application">Open<span class="acronym">SSL</span></span>.
+              Configuring <span class="application">Open<span class=
+              "acronym">SSL</span></span> is an advanced topic and so those
+              who do would normally be expected to either know how to do it
+              or to be able to find out how to do it.
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <div class="segmentedlist">
+            <div class="seglistitem">
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Programs:</span></strong> <span class="seg">c_rehash and
+                openssl</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Libraries:</span></strong> <span class="seg">libcrypto.[so,a]
+                and libssl.[so,a]</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Directories:</span></strong> <span class="seg">/etc/ssl and
+                /usr/include/ssl</span>
+              </div>
+            </div>
+          </div>
+          <div class="variablelist">
+            <h3>
+              <a id="id2649074" name="id2649074"></a>Short Descriptions
+            </h3>
+            <dl>
+              <dt>
+                <a id="c_rehash" name="c_rehash"></a><span class=
+                "term"><span><strong class=
+                "command">c_rehash</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a <span class="application">Perl</span> script that
+                  scans all files in a directory and adds symbolic links to
+                  their hash values.
+                </p>
+              </dd>
+              <dt>
+                <a id="openssl-prog" name="openssl-prog"></a><span class=
+                "term"><span><strong class=
+                "command">openssl</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a command-line tool for using the various cryptography
+                  functions of <span class="application">Open<span class=
+                  "acronym">SSL</span></span>'s crypto library from the
+                  shell. It can be used for various functions which are
+                  documented in <span><strong class="command">man 1
+                  openssl</strong></span>.
+                </p>
+              </dd>
+              <dt>
+                <a id="libcrypto" name="libcrypto"></a><span class=
+                "term"><tt class="filename">libcrypto.[so,a]</tt></span>
+              </dt>
+              <dd>
+                <p>
+                  implements a wide range of cryptographic algorithms used in
+                  various Internet standards. The services provided by this
+                  library are used by the <span class=
+                  "application">Open<span class="acronym">SSL</span></span>
+                  implementations of <span class="acronym">SSL</span>,
+                  <span class="acronym">TLS</span> and <span class=
+                  "acronym">S/MIME</span>, and they have also been used to
+                  implement <span class="application">Open<span class=
+                  "acronym">SSH</span></span>, <span class=
+                  "application">Open<span class="acronym">PGP</span></span>,
+                  and other cryptographic standards.
+                </p>
+              </dd>
+              <dt>
+                <a id="libssl" name="libssl"></a><span class=
+                "term"><tt class="filename">libssl.[so,a]</tt></span>
+              </dt>
+              <dd>
+                <p>
+                  implements the Secure Sockets Layer (<span class=
+                  "acronym">SSL</span> v2/v3) and Transport Layer Security
+                  (<span class="acronym">TLS</span> v1) protocols. It
+                  provides a rich <span class="acronym">API</span>,
+                  documentation on which can be found by running
+                  <span><strong class="command">man 3 ssl</strong></span>.
+                </p>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="netfs.html" title=
+          "Configuring for Network Filesystems">Prev</a>
+          <p>
+            Configuring for Network Filesystems
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cracklib.html" title="cracklib-2.7">Next</a>
+          <p>
+            cracklib-2.7
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Part&nbsp;II.&nbsp;Post LFS Configuration and Extra Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

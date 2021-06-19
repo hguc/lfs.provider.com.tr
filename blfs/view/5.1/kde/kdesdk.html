@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      kdesdk-3.2.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;29.&nbsp;KDE Additional Packages</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="kdeedu.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="kdevelop.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          kdesdk-3.2.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to kdesdk
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2971575" name="id2971575"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://mirrors.isc.org/pub/kde/stable/3.2.2/src/kdesdk-3.2.2.tar.bz2">
+                  http://mirrors.isc.org/pub/kde/stable/3.2.2/src/kdesdk-3.2.2.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.kde.org/pub/kde/stable/3.2.2/src/kdesdk-3.2.2.tar.bz2">
+                  ftp://ftp.kde.org/pub/kde/stable/3.2.2/src/kdesdk-3.2.2.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 3.8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 65 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 5.03 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2973613" name="id2973613"></a><span class=
+                  "application">kdesdk</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2973635" name="id2973635"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="kdebase.html">kdebase-3.2.2</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2973647" name="id2973647"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/graphlib.html#libjpeg">libjpeg-6b</a>,
+              <a href="../general/libxml2.html">libxml2-2.6.9</a> and
+              <a href="../content/databases.html#db">Berkeley DB-4.2.52.2</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of kdesdk
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">kdesdk</span> with:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=$KDE_PREFIX --disable-debug \
+    --disable-dependency-tracking &amp;&amp;
+make</b></span></tt>
+</pre>
+        <p>
+          The <span><b class="command">make</b></span> command will error out
+          two times. On the first occurrence, enter the following sed command
+          and continue with the compilation:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">sed -i 's/class istream;/#include &lt;istream.h&gt;/' \
+    kbabel/common/libgettext/pofiles.cc &amp;&amp;
+make</b></span></tt>
+</pre>
+        <p>
+          Repeat the previous procedure:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">sed -i 's/class istream;/#include &lt;istream.h&gt;/' \
+    umbrello/umbrello/classparser/tokenizer.cc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          Major programs in <span class="application">kdesdk</span> include
+          <span><b class="command">cervisia</b></span>, <span><b class=
+          "command">kbabel</b></span>, <span><b class=
+          "command">kcachegrind</b></span>, <span><b class=
+          "command">kompare</b></span> and <span><b class=
+          "command">umbrello</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2973470" name="id2973470"></a>cervisia
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">cervisia</b></span> provides a graphical
+            view of <span class="acronym">CVS</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2973485" name="id2973485"></a>kbabel
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">kbabel</b></span> is a suite of an
+            advanced <span class="acronym">PO</span> file editor comprising
+            <span><b class="command">kbabel</b></span>, a multi functional
+            <span><b class="command">catalogmanager</b></span> and a
+            dictionary for translators <span><b class=
+            "command">kbabeldict</b></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2974061" name="id2974061"></a>kcachegrind
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">kcachegrind</b></span> is a <span class=
+            "acronym">KDE</span> frontend for <span><b class=
+            "command">cachegrind</b></span>, part of <span class=
+            "application">Valgrind</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2974089" name="id2974089"></a>kompare
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">kompare</b></span> is a program to view
+            the differences between files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2974103" name="id2974103"></a>umbrello
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">umbrello</b></span> is a <span class=
+            "acronym">UML</span> modelling diagram tool.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="kdeedu.html">Prev</a><br />
+        kdeedu-3.2.2
+      </div>
+      <div class="next">
+        <a accesskey="n" href="kdevelop.html">Next</a><br />
+        kdevelop-3.0.3
+      </div>
+      <div class="up">
+        <a accesskey="u" href="add.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

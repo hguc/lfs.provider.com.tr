@@ -1,0 +1,29 @@
+<!--#set var="pageTitle" value="LFS Errata" -->
+<!--#include virtual="/lfs/header.html" -->
+<!--#include virtual="/lfs/menu.html" -->
+    <div class="main">
+     <h1>Errata for the 7.3 Version of the LFS Book</h1>
+       <h2>Miscellaneous Errata</h2>
+         <ul>
+           <li><p>Changes to some distros cause the build
+           of <b>check-0.9.9</b> to fail in Chapter 5.  The 
+           proper fix is to add <br/>--with-sysroot to the end
+           of the configure line in <b>Binutils-2.23.1 - Pass 2</b>.
+           </p>
+           
+           <p>An alternative fix is to change the build instructions of
+           <b>check</b> to be:</p>
+           
+           <pre>
+           <code>
+           CFLAGS="-L/tools/lib -lpthread" ./configure --prefix=/tools
+           CFLAGS="-L/tools/lib -lpthread" make
+           </code>
+           </pre>
+           </li>
+
+           <li><p>In Section 6.10, the results of the grep for SEARCH
+           should not include:  SEARCH_DIR("/tools/i686-pc-linux-gnu/lib")</li> 
+         </ul>
+
+<!--#include virtual="/common/footer.html" -->

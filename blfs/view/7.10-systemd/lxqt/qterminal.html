@@ -1,0 +1,300 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      qterminal-0.6.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.10">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch <span>(systemd edition)</span>
+        - Version 7.10
+      </h4>
+      <h3>
+        Chapter&nbsp;40.&nbsp;LXQt Applications
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="qtermwidget.html" title=
+          "qtermwidget-0.6.0">Prev</a>
+          <p>
+            qtermwidget-0.6.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="qscintilla.html" title=
+          "QScintilla-gpl-2.9.3">Next</a>
+          <p>
+            QScintilla-gpl-2.9.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lxqt-apps.html" title=
+          "Chapter&nbsp;40.&nbsp;LXQt Applications">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="qterminal" name="qterminal"></a>qterminal-0.6.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to qterminal
+        </h2>
+        <p>
+          The <span class="application">qterminal</span> package contains a
+          Qt widget based terminal emulator for <span class=
+          "application">Qt</span> with support for multiple tabs.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.10
+          platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://github.com/qterminal/qterminal/releases/download/0.6.0/qterminal-0.6.0.tar.xz">
+                https://github.com/qterminal/qterminal/releases/download/0.6.0/qterminal-0.6.0.tar.xz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: a033e898d17fcd3b0f9a839b029b0db4
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 100 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 5.2 MB (with the API
+                documentation)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.2 SBU (with the API documentation)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          qterminal Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="qtermwidget.html" title=
+          "qtermwidget-0.6.0">qtermwidget-0.6.0</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/doxygen.html" title=
+          "Doxygen-1.8.11">Doxygen-1.8.11</a> and <a class="xref" href=
+          "../pst/texlive.html" title=
+          "texlive-20160523b-source">texlive-20160523b</a> (or <a class=
+          "xref" href="../pst/tl-installer.html" title=
+          "install-tl-unx">install-tl-unx</a>)
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/qterminal">http://wiki.linuxfromscratch.org/blfs/wiki/qterminal</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of qterminal
+        </h2>
+        <p>
+          For compilation with <span class="application">Qt4</span>, see
+          &ldquo;<span class="quote">Command Explanations</span>&rdquo;,
+          below. Install <span class="application">qterminal</span> by
+          running the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -v build &amp;&amp;
+cd       build &amp;&amp;
+
+cmake -DCMAKE_BUILD_TYPE=Release  \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DUSE_SYSTEM_QXT=OFF        \
+      -DUSE_QT5=true              \
+      ..       &amp;&amp;
+
+make</kbd>
+</pre>
+        <p>
+          The choice of <code class="filename">/usr</code> prefix is due to
+          the general characteristics of this program, which can be used
+          without <span class="application">LXQt</span>.
+        </p>
+        <p>
+          If you have <a class="xref" href="../general/doxygen.html" title=
+          "Doxygen-1.8.11">Doxygen-1.8.11</a> installed, and wish to create
+          the API documentation, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">doxygen ../Doxyfile</kbd>
+</pre>
+        <p>
+          The html API documentation has been generated with the previous
+          command. Now, if you also have <a class="xref" href=
+          "../pst/texlive.html" title=
+          "texlive-20160523b-source">texlive-20160523b</a> (or <a class=
+          "xref" href="../pst/tl-installer.html" title=
+          "install-tl-unx">install-tl-unx</a>) installed, and wish to create
+          the pdf API reference manual, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -C docs/latex</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          To install the html API documentation, if you opted to generate it,
+          issue, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class=
+"command">install -v -m755 -d /usr/share/doc/qterminal-0.6.0/{html,pdf} &amp;&amp;
+cp -vr docs/html/* /usr/share/doc/qterminal-0.6.0/html</kbd>
+</pre>
+        <p>
+          The pdf API reference manual can be installed with, as the
+          <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">install -v -m644    docs/latex/refman.pdf \
+                    /usr/share/doc/qterminal-0.6.0/pdf</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>-DUSE_SYSTEM_QXT=OFF</code></em>: This
+          switch is necessary because the option has not been implemented if
+          linking with <span class="application">Qt5</span>. However, use it
+          also if you choose linking to <span class="application">Qt4</span>,
+          because <a class="ulink" href=
+          "https://bitbucket.org/libqxt/libqxt/wiki/Home">libqxt</a> is
+          required, but is no longer maintained.
+        </p>
+        <p>
+          <em class="parameter"><code>-DUSE_QT5=true</code></em>: This switch
+          is used in order to build this application linked to <span class=
+          "application">Qt5</span>. Toggle to &ldquo;<span class=
+          "quote">false</span>&rdquo;, if you prefer to use <span class=
+          "application">Qt4</span>.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">qterminal</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/share/qterminal and
+              /usr/share/doc/qterminal-0.6.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="qterminal-prog" name=
+                    "qterminal-prog"></a><span class="term"><span class=
+                    "command"><strong>qterminal</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a <span class="application">Qt</span> based
+                    lightweight terminal emulator.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2016-08-27 13:19:14 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="qtermwidget.html" title=
+          "qtermwidget-0.6.0">Prev</a>
+          <p>
+            qtermwidget-0.6.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="qscintilla.html" title=
+          "QScintilla-gpl-2.9.3">Next</a>
+          <p>
+            QScintilla-gpl-2.9.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lxqt-apps.html" title=
+          "Chapter&nbsp;40.&nbsp;LXQt Applications">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

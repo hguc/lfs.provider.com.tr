@@ -1,0 +1,237 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      DocBook XSL Stylesheets-1.65.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;44.&nbsp;Extensible Markup Language (XML)</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="xml.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="ps.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          DocBook XSL Stylesheets-1.65.1
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to DocBook XSL Stylesheets
+          </h3>
+        </div>
+        <p>
+          The <span class="application">DocBook <span class=
+          "acronym">XSL</span> Stylesheets</span> package contains
+          <span class="acronym">XSL</span> stylesheets. These are useful for
+          performing transformations on <span class="acronym">XML</span>
+          DocBook files.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3251256" name="id3251256"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/docbook/docbook-xsl-1.65.1.tar.gz">
+                  http://prdownloads.sourceforge.net/docbook/docbook-xsl-1.65.1.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.5 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 13.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.01 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3253263" name="id3253263"></a><span class=
+                  "application">DocBook <span class="acronym">XSL</span>
+                  Stylesheets</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3253279" name="id3253279"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/libxslt.html">libxslt-1.1.6</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of DocBook XSL Stylesheets
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">DocBook <span class=
+          "acronym">XSL</span> Stylesheets</span> by running the following
+          commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">install -d /usr/share/xml/docbook/xsl-stylesheets-1.65.1 &amp;&amp;
+cp -af VERSION common extensions fo html htmlhelp images javahelp lib \
+    manpages params profiling template tools xhtml \
+    /usr/share/xml/docbook/xsl-stylesheets-1.65.1 &amp;&amp;
+install -d /usr/share/doc/xml &amp;&amp;
+cp -af doc/* /usr/share/doc/xml &amp;&amp;
+if [ ! -f /etc/xml/catalog ]; then mkdir -p /etc/xml; xmlcatalog --noout \
+    --create /etc/xml/catalog; fi &amp;&amp;
+if [ ! -e /etc/xml/docbook ]; then xmlcatalog --noout --create \
+    /etc/xml/docbook; fi &amp;&amp;
+xmlcatalog --noout --add "rewriteSystem" \
+    "http://docbook.sourceforge.net/release/xsl/1.65.1" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.65.1" /etc/xml/catalog &amp;&amp;
+xmlcatalog --noout --add "rewriteURI" \
+    "http://docbook.sourceforge.net/release/xsl/1.65.1" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.65.1" /etc/xml/catalog &amp;&amp;
+xmlcatalog --noout --add "rewriteSystem" \
+    "http://docbook.sourceforge.net/release/xsl/current" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.65.1" /etc/xml/catalog &amp;&amp;
+xmlcatalog --noout --add "rewriteURI" \
+    "http://docbook.sourceforge.net/release/xsl/current" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.65.1" /etc/xml/catalog &amp;&amp;
+xmlcatalog --noout --add "delegateSystem" \
+    "http://docbook.sourceforge.net/release/xsl/" \
+    "file:///etc/xml/docbook" /etc/xml/catalog &amp;&amp;
+xmlcatalog --noout --add "delegateURI" \
+    "http://docbook.sourceforge.net/release/xsl/" \
+    "file:///etc/xml/docbook" /etc/xml/catalog</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring DocBook XSL Stylesheets
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3252738" name="id3252738"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/xml/catalog</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3252750" name="id3252750"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The above installation script creates the files and updates the
+            catalog.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">DocBook <span class=
+          "acronym">XSL</span> Stylesheets</span> package contains
+          <span class="acronym">XSL</span> style sheets for <span class=
+          "acronym">HTML</span> and <span class="acronym">FO</span>.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="xml.html">Prev</a><br />
+        Chapter&nbsp;44.&nbsp;Extensible Markup Language (XML)
+      </div>
+      <div class="next">
+        <a accesskey="n" href="ps.html">Next</a><br />
+        Chapter&nbsp;45.&nbsp;PostScript
+      </div>
+      <div class="up">
+        <a accesskey="u" href="xml.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

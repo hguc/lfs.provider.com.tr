@@ -1,0 +1,775 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      HAL-0.5.7.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;11.&nbsp;System Utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="dbus.html" title="D-BUS-0.62">Prev</a>
+          <p>
+            D-BUS-0.62
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="prog.html" title="Programming">Next</a>
+          <p>
+            Programming
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;11.&nbsp;System Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="hal" name="hal"></a>
+        <h1 class="sect1">
+          HAL-0.5.7.1
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to HAL
+          </h2>
+        </div>
+        <p>
+          <span class="application">HAL</span> is a hardware abstraction
+          layer, which is a piece of software that provides a view of the
+          various hardware attached to a system. In addition to this,
+          <span class="application">HAL</span> keeps detailed metadata for
+          each piece of hardware and provides hooks such that system and
+          desktop-level software can react to changes in the hardware
+          configuration in order to maintain system policy.
+        </p>
+        <p>
+          The most important goal of <span class="application">HAL</span> is
+          to provide plug-and-play facilities for UNIX-like desktops with
+          focus on providing a rich and extensible description of device
+          characteristics and features. One example of the functionality
+          provided by <span class="application">HAL</span> is when you plug
+          in a USB storage device. <span class="application">HAL</span> can
+          automatically create a mount point in <tt class=
+          "filename">/media</tt> and mount the device.
+        </p>
+        <h3>
+          <a id="id2592958" name="id2592958"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://freedesktop.org/~david/dist/hal-0.5.7.1.tar.gz"><span class="url">
+                http://freedesktop.org/~david/dist/hal-0.5.7.1.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/hal-0.5.7.1.tar.gz">
+                <span class=
+                "url">ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/hal-0.5.7.1.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: d7a7741808ba130f8aff3f5d3b5689e4
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.5 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 19.0 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2618080" name="id2618080"></a>HAL Dependencies
+        </h3>
+        <h4>
+          <a id="id2548770" name="id2548770"></a>Required
+        </h4>
+        <p class="required">
+          <a href="glib2.html">GLib-2.10.3</a>, <a href=
+          "dbus.html">D-BUS-0.62</a> (see the <a href=
+          "dbus.html#hal-requirements">HAL Requirements</a>), <a href=
+          "python.html">Python-2.4.4</a>, and <a href=
+          "perl-modules.html#perl-xml-parser">XML::Parser-2.34</a>
+        </p>
+        <h4>
+          <a id="id2624324" name="id2624324"></a>Recommended
+        </h4>
+        <p class="recommended">
+          <a href="pciutils.html">PCI Utilities-2.2.3</a> (with a current
+          <tt class="filename">pci.ids</tt> file) and <a href=
+          "usbutils.html">usbutils-0.72</a> (with a current <tt class=
+          "filename">usb.ids</tt> file)
+        </p>
+        <h4>
+          <a id="id2626296" name="id2626296"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="pkgconfig.html">pkg-config-0.20</a>, <a href=
+          "intltool.html">intltool-0.34.2</a>, <a href=
+          "libusb.html">libusb-0.1.12</a>, <a href=
+          "doxygen.html">Doxygen-1.4.6</a>, and <a href=
+          "../pst/docbook-utils.html">DocBook-utils-0.6.14</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/hal"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/hal</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of HAL
+          </h2>
+        </div>
+        <p>
+          You must create a dedicated user and group before installing the
+          package. Though the default BLFS instructions run the <span class=
+          "application">HAL</span> daemon as the <tt class=
+          "systemitem">root</tt> user, a configuration file is installed
+          which has the dedicated user's name hard-coded in it. This causes a
+          confusing message to be generated when starting the <span class=
+          "application">D-BUS</span> daemon. Issue the following commands as
+          the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">groupadd -g 19 haldaemon &amp;&amp;
+useradd -c "HAL Daemon User" -d /dev/null -u 19 \
+        -g haldaemon -s /bin/false haldaemon</kbd></pre>
+        <p>
+          Install <span class="application">HAL</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --libexecdir=/usr/lib/hal \
+            --localstatedir=/var &amp;&amp;
+make</kbd></pre>
+        <p>
+          To test the results, issue <span><strong class="command">make
+          check</strong></span>.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+install -v -m755 -d /var/run/hald</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--libexecdir=/usr/lib/hal</tt></em>: This
+          parameter forces the installation of libexec files to <tt class=
+          "filename">/usr/lib/hal</tt> instead of <tt class=
+          "filename">/usr/libexec</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--localstatedir=/var</tt></em>: This
+          parameter forces the creation of the <tt class="filename">pid</tt>
+          file to <tt class="filename">/var/run/hald</tt> instead of
+          <tt class="filename">/usr/var/run/hald</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="hal-runtime-dependencies" name=
+          "hal-runtime-dependencies"></a>
+          <h2 class="sect2">
+            Run-Time Dependencies
+          </h2>
+        </div>
+        <p>
+          The <a href="hal.html#hal-device-manager"><span><strong class=
+          "command">hal-device-manager</strong></span></a> program requires
+          several additional packages to be installed before it will run. The
+          list is significant and requires a substantial commitment to
+          install them. It is left up to you to determine if the time and
+          effort spent installing the following packages is worth using the
+          <span><strong class="command">hal-device-manager</strong></span>
+          program.
+        </p>
+        <p>
+          Though the only requirement to run the <span><strong class=
+          "command">hal-device-manager</strong></span> program is installing
+          <a href=
+          "http://ftp.gnome.org/pub/gnome/sources/gnome-python/"><span class=
+          "url">GNOME-Python</span></a>, the dependency list is staggering.
+          The following list does not include the dependencies already
+          identified in the BLFS book. For example, <span class=
+          "application">libgnome</span> already lists <span class=
+          "application">GNOME VFS</span>, <span class=
+          "application">GConf</span>, etc., so they are not repeated here.
+          Note that some of the dependencies have their own dependencies,
+          which have their own, and so forth and so on.
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li>
+              <p>
+                <a href=
+                "http://ftp.gnome.org/pub/gnome/sources/gnome-python/"><span class="url">
+                GNOME-Python</span></a>
+              </p>
+              <div class="itemizedlist">
+                <ul>
+                  <li>
+                    <p>
+                      <a href="http://www.pygtk.org/"><span class=
+                      "url">PyGTK</span></a> (required)
+                    </p>
+                    <div class="itemizedlist">
+                      <ul>
+                        <li>
+                          <p>
+                            <a href=
+                            "http://www.cairographics.org/pycairo"><span class="url">
+                            Pycairo</span></a> (optional)
+                          </p>
+                          <div class="itemizedlist">
+                            <ul>
+                              <li>
+                                <p>
+                                  <a href=
+                                  "http://www.cairographics.org/snapshots/"><span class="url">
+                                  libsvg-cairo</span></a> (optional)
+                                </p>
+                                <div class="itemizedlist">
+                                  <ul>
+                                    <li>
+                                      <p>
+                                        <a href=
+                                        "http://www.cairographics.org/snapshots/">
+                                        <span class="url">libsvg</span></a>
+                                        (required)
+                                      </p>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </li>
+                              <li>
+                                <p>
+                                  <a href=
+                                  "http://www.pygtk.org/"><span class="url">PyGTK</span></a>
+                                  (optional, and circular)
+                                </p>
+                              </li>
+                              <li>
+                                <p>
+                                  <a href=
+                                  "http://sourceforge.net/projects/numpy"><span class="url">
+                                  Numerical Python</span></a> (optional)
+                                </p>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                        <li>
+                          <p>
+                            <a href=
+                            "http://sourceforge.net/projects/numpy"><span class="url">
+                            Numerical Python</span></a> (optional)
+                          </p>
+                        </li>
+                        <li>
+                          <p>
+                            <a href="libglade.html">libglade-2.6.0</a>
+                            (required)
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <p>
+                      <a href=
+                      "../gnome/libgnomeui.html">libgnomeui-2.14.1</a>
+                      (optional)
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <a href="../gnome/libgnome.html">libgnome-2.14.1</a>
+                      (required)
+                    </p>
+                  </li>
+                  <li>
+                    <p>
+                      <a href=
+                      "http://ftp.gnome.org/pub/gnome/sources/pyorbit/"><span class="url">
+                      PyORBit</span></a> (optional)
+                    </p>
+                    <div class="itemizedlist">
+                      <ul>
+                        <li>
+                          <p>
+                            <a href="../gnome/ORBit2.html">ORBit2-2.14.2</a>
+                            (required)
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The dependency list is designed to start at the bottom and work
+              your way up until the last package to install is <span class=
+              "application">GNOME-Python</span>. Note that the dependencies
+              marked as &ldquo;<span class="quote">required</span>&rdquo; are
+              required for the package it is listed under. For example, you
+              don't need to install <span class="application">ORBit</span> if
+              you don't plan on installing <span class=
+              "application">PyORBit</span>. The minimum packages you could
+              install to support running <a href=
+              "hal.html#hal-device-manager"><span><strong class=
+              "command">hal-device-manager</strong></span></a> would be (in
+              this order): <a href=
+              "../gnome/libgnome.html">libgnome-2.14.1</a>, <a href=
+              "libglade.html">libglade-2.6.0</a>, <a href=
+              "http://www.pygtk.org/"><span class="url">PyGTK</span></a> and
+              <a href=
+              "http://ftp.gnome.org/pub/gnome/sources/gnome-python/"><span class="url">
+              GNOME-Python</span></a>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring HAL
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="hal-config" name="hal-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/dbus-1/system.d/hal.conf</tt>,
+            <tt class="filename">/etc/dbus-1/system.d/halusers.conf</tt> and
+            <tt class="filename">/etc/hal/*</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2799412" name="id2799412"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The default setup for <span class="application">HAL</span> is to
+            allow only certain users to invoke methods such as Mount(). These
+            are the <tt class="systemitem">root</tt> user and the user
+            determined to be at the active console using <a href=
+            "http://wiki.linuxfromscratch.org/blfs/wiki/linux-pam"><span class="url">
+            pam_console</span></a>. If you are not set up to use <a href=
+            "../postlfs/linux-pam.html">Linux-PAM-0.99.4.0</a> and <a href=
+            "http://wiki.linuxfromscratch.org/blfs/wiki/linux-pam"><span class="url">
+            pam_console</span></a>, create a group that is allowed to invoke
+            <span class="application">HAL</span> methods with the following
+            commands:
+          </p>
+          <pre class="root"><kbd class=
+          "command">groupadd -g 61 halusers &amp;&amp;
+cat &gt; /etc/dbus-1/system.d/halusers.conf &lt;&lt; "EOF"
+<tt class="literal">&lt;!DOCTYPE busconfig PUBLIC
+ "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd"&gt;
+&lt;busconfig&gt;
+
+  &lt;!-- Allow users in the halusers group invoke HAL methods --&gt;
+  &lt;policy group="halusers"&gt;
+    &lt;allow send_interface="org.freedesktop.Hal.Device.SystemPowerManagement"/&gt;
+    &lt;allow send_interface="org.freedesktop.Hal.Device.LaptopPanel"/&gt;
+    &lt;allow send_interface="org.freedesktop.Hal.Device.Volume"/&gt;
+    &lt;allow send_interface="org.freedesktop.Hal.Device.Volume.Crypto"/&gt;
+  &lt;/policy&gt;
+
+&lt;/busconfig&gt;</tt>
+EOF</kbd></pre>
+          <p>
+            Now add the users you would like to the <tt class=
+            "systemitem">halusers</tt> group to use <span class=
+            "application">HAL</span>. Note that these users still need to
+            have appropriate permissions to access the devices that
+            <span class="application">HAL</span> will invoke its methods on.
+          </p>
+          <p>
+            With the above configuration in place, authorized users now have
+            the ability to unmount disk partitions mounted at non-standard
+            locations such as <tt class="filename">/pub</tt>. If you'd like
+            to restrict this policy to only drives which are considered
+            removable or hotpluggable, add the following configuration file
+            as the <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/hal/fdi/policy/no-fixed-drives.fdi &lt;&lt; "EOF"
+<tt class=
+"literal">&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;!-- -*- SGML -*- --&gt;
+
+&lt;!-- Don't allow HAL methods on disks that are not
+     removable or hotpluggable --&gt;
+
+&lt;deviceinfo version="0.2"&gt;
+&lt;device&gt;
+  &lt;match key="@block.storage_device:storage.hotpluggable" bool="false"&gt;
+    &lt;match key="@block.storage_device:storage.removable" bool="false"&gt;
+      &lt;merge key="volume.ignore" type="bool"&gt;true&lt;/merge&gt;
+    &lt;/match&gt;
+  &lt;/match&gt;
+&lt;/device&gt;
+&lt;/deviceinfo&gt;</tt>
+EOF</kbd></pre>
+          <p>
+            <span class="application">HAL</span> only provides the methods
+            such as Mount() to act on hardware. In order to take advantage of
+            these, a <span class="application">HAL</span> event handler such
+            as <a href=
+            "../gnome/gnome-volume-manager.html">gnome-volume-manager-1.5.15</a>
+            or <a href="http://ivman.sourceforge.net/"><span class=
+            "url">Ivman</span></a> should be installed.
+          </p>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                <span class="application">HAL</span> will ignore any devices
+                listed in <tt class="filename">/etc/fstab</tt> for the
+                purpose of automounting. You must remove any listings for
+                devices that you would like automounted such as CD-ROMs or
+                USB keys.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="hal-init" name="hal-init"></a>Boot Script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To automatically start the <span><strong class=
+            "command">hald</strong></span> daemon when the system is
+            rebooted, install the <tt class=
+            "filename">/etc/rc.d/init.d/haldaemon</tt> bootscript from the
+            <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-20060910</a>
+            package.
+          </p>
+          <div class="important">
+            <div class="admonhead">
+              <img alt="[Important]" src="../images/important.png" />
+              <h3 class="admontitle">
+                Important
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                If the system-wide <span class="application">D-BUS</span>
+                daemon was running during the installation of <span class=
+                "application">HAL</span>, ensure you stop and restart the
+                <span class="application">D-BUS</span> daemon before
+                attempting to start the <span><strong class=
+                "command">hald</strong></span> daemon.
+              </p>
+            </div>
+          </div>
+          <pre class="root"><kbd class=
+          "command">make install-haldaemon</kbd></pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">hal-device,
+              hal-device-manager, hal-find-by-capability,
+              hal-find-by-property, hal-get-property, hal-set-property, hald
+              and lshal</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libhal.{so,a} and
+              libhal-storage,{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/etc/hal,
+              /usr/include/hal, /usr/lib/hal, /usr/share/doc/hal-0.5.7.1,
+              /usr/share/hal and /var/run/hald</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2730112" name="id2730112"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="hal-device" name="hal-device"></a><span class=
+                  "term"><span><strong class=
+                  "command">hal-device</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to create, remove or show a <span class=
+                    "application">HAL</span> device.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="hal-device-manager" name=
+                  "hal-device-manager"></a><span class=
+                  "term"><span><strong class=
+                  "command">hal-device-manager</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    shows a graphical representation of all the devices
+                    <span class="application">HAL</span> is aware of. This
+                    program requires <a href=
+                    "hal.html#hal-runtime-dependencies">GNOME-Python</a>.
+                    Here is a <a href=
+                    "http://cvs.freedesktop.org/*checkout*/hal/hal/doc/spec/hal-devices1.png">
+                    <span class="url">screenshot</span></a> of
+                    <span><strong class=
+                    "command">hal-device-manager</strong></span>
+                    communicating with the HAL daemon and displaying a tree
+                    of device objects. The shown properties in the screenshot
+                    are for a device object representing a hard disk.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="hal-find-by-capability" name=
+                  "hal-find-by-capability"></a><span class=
+                  "term"><span><strong class=
+                  "command">hal-find-by-capability</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints the Unique Device Identifiers for <span class=
+                    "application">HAL</span> device objects of a given
+                    capability.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="hal-find-by-property" name=
+                  "hal-find-by-property"></a><span class=
+                  "term"><span><strong class=
+                  "command">hal-find-by-property</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints the Unique Device Identifiers for <span class=
+                    "application">HAL</span> device objects where a given
+                    property assumes a given value.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="hal-get-property" name=
+                  "hal-get-property"></a><span class=
+                  "term"><span><strong class=
+                  "command">hal-get-property</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    retrieves a property from a device.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="hal-set-property" name=
+                  "hal-set-property"></a><span class=
+                  "term"><span><strong class=
+                  "command">hal-set-property</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    attempts to set property for a device. Note that, due to
+                    security considerations, it may not be possible to set a
+                    property.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="hald" name="hald"></a><span class=
+                  "term"><span><strong class=
+                  "command">hald</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">HAL</span> daemon
+                    program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="lshal" name="lshal"></a><span class=
+                  "term"><span><strong class=
+                  "command">lshal</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    shows all devices and their properties. If the --monitor
+                    option is given then the device list and all devices are
+                    monitored for changes.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libhal" name="libhal"></a><span class=
+                  "term"><tt class="filename">libhal.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    contains the API functions required by the <span class=
+                    "application">HAL</span> programs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libhal-storage" name=
+                  "libhal-storage"></a><span class="term"><tt class=
+                  "filename">libhal-storage.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    contains the API functions required by the <span class=
+                    "application">HAL</span> storage and volume utility
+                    programs.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-21 11:50:20 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dbus.html" title="D-BUS-0.62">Prev</a>
+          <p>
+            D-BUS-0.62
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="prog.html" title="Programming">Next</a>
+          <p>
+            Programming
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;11.&nbsp;System Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

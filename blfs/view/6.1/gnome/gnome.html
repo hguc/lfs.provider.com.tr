@@ -1,0 +1,475 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Part&nbsp;IX.&nbsp;GNOME
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="../kde/kde-i18n.html" title=
+          "Kde-i18n-3.4.1">Prev</a>
+          <p>
+            Kde-i18n-3.4.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="core.html" title=
+          "GNOME Core Packages">Next</a>
+          <p>
+            GNOME Core Packages
+          </p>
+        </li>
+        <li class="up">.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="part" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="gnome" name="gnome"></a>
+        <h1 class="part">
+          GNOME
+        </h1>
+      </div>
+      <div class="partintro" lang="en" xml:lang="en">
+        <div>
+          <div>
+            <div>
+              <h1 class="title">
+                <a id="id2808680" name="id2808680"></a>Introduction to GNOME
+              </h1>
+            </div>
+          </div>
+        </div>
+        <p>
+          This chapter presents the instructions to install a complete
+          <span class="application">GNOME</span>-2.10.1 desktop environment
+          and a limited <span class="application">GNOME</span> 1.4 library
+          environment that is sufficient to run <span class=
+          "application">GNOME</span> 1.4 applications included in this book.
+          The order of the pages follow the build order defined by the
+          <span class="application">GNOME</span> development team as
+          published in previous versions of the <a href=
+          "http://www.gnome.org/start/2.10/notes/rninstallation.html"><span class="url">
+          release notes</span></a>. Note that the development team did not
+          publish a build order for the 2.10.1 release.
+        </p>
+        <p>
+          The installation of <span class="application">GNOME</span>-2.10.1
+          is a large undertaking and one we would like to see you complete
+          with the least amount of stress. One of the first goals in this
+          installation is to protect your previously installed software,
+          especially if you are testing <span class=
+          "application">GNOME</span> on your machine. <span class=
+          "application">GNOME</span>-2.10 packages utilize the <tt class=
+          "option">--prefix=option</tt> passed to <span><strong class=
+          "command">configure</strong></span>, so you will use that and an
+          environment variable (<tt class="envar">GNOME_PREFIX</tt>) to add
+          flexibility to the installation.
+        </p>
+        <p>
+          To install <span class="application">GNOME</span> as your desktop
+          of choice, it is recommended that you install using <tt class=
+          "option">--prefix=/usr</tt>. If you are not sure that you are going
+          to keep the <span class="application">GNOME</span> installation, or
+          you think you will update to the newest releases as they become
+          available, you should install with <tt class=
+          "option">--prefix=/opt/gnome-2.10</tt>. Setting the environment
+          variable and the additional edits required by the second option are
+          covered on the pre-installation page.
+        </p>
+        <p>
+          If you choose the second option, removal of <span class=
+          "application">GNOME</span>-2.10.1 is as easy as removing the edits
+          from the pre-installation page and issuing the following command:
+        </p>
+        <pre class="root"><kbd class=
+        "command">rm -rf /opt/gnome-2.10</kbd></pre>
+        <p>
+          If your system was completely built per LFS and BLFS instructions,
+          you have a very good chance of using <span class=
+          "application">GNOME</span>-2.10.1 after your first installation. If
+          you are a typical LFS user, you have made modifications to the
+          instructions along the way knowing that you have to take those
+          modifications into account on future installations. You should have
+          no problems integrating <span class=
+          "application">GNOME</span>-2.10.1 into your unique setup, but you
+          will have to install almost 50 packages before you can run
+          <span class="application">GNOME</span> through any testing
+          (assuming your window manager is preinstalled and tested). You
+          should anticipate that you will be rebuilding <span class=
+          "application">GNOME</span> at least once to make adjustments for
+          your setup.
+        </p>
+        <p>
+          If you are building a <span class="application">GNOME</span> 1.4
+          desktop environment, you would install only those libraries in the
+          <span class="application">GNOME</span> 1.4 chapter <span class=
+          "emphasis"><em>and</em></span> any dependencies listed on those
+          pages, whether labeled or not. <span class=
+          "application">GNOME</span> packages without pages are simply
+          installed with:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/opt/gnome &amp;&amp;
+make</kbd></pre>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <p>
+          These instructions are simplistic to facilitate removal of
+          <span class="application">GNOME</span> 1.4 from BLFS systems when
+          it is no longer necessary. These instructions may be refined later
+          to comply with BLFS standards for file locations, specifically
+          <tt class="filename">/opt/gnome/etc</tt> to <tt class=
+          "filename">/etc</tt> and <tt class="filename">/opt/gnome/var</tt>
+          to <tt class="filename">/var</tt>. You should consider using the
+          <span class="application">GNOME</span> 1.4 hint located at <a href=
+          "http://www.linuxfromscratch.org/hints/"><span class=
+          "url">http://www.linuxfromscratch.org/hints/</span></a> if you have
+          no interest in <span class="application">GNOME</span>-2.10.1.
+        </p>
+        <div class="toc">
+          <h3>
+            Table of Contents
+          </h3>
+          <ul>
+            <li class="chapter">
+              <h4>
+                <a href="core.html">30. GNOME Core Packages</a>
+              </h4>
+              <ul>
+                <li class="sect1">
+                  <a href=
+                  "core.html#gnome-pre-install-config">Pre-installation
+                  Configuration</a>
+                </li>
+                <li class="sect1">
+                  <a href="ORBit2.html">ORBit2-2.12.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="libbonobo.html">Libbonobo-2.8.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="GConf.html">GConf-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href=
+                  "gnome-desktop-file-utils.html">Desktop-file-utils-0.10</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-mime-data.html">GNOME MIME Data-2.4.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-vfs.html">GNOME Virtual File
+                  System-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="libgnome.html">Libgnome-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="libgnomecanvas.html">Libgnomecanvas-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="libbonoboui.html">Libbonoboui-2.8.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-icon-theme.html">GNOME Icon Theme-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-keyring.html">Gnome-keyring-0.4.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="libgnomeui.html">Libgnomeui-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="gtk-engines.html">GTK Engines-2.6.3</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-themes.html">GNOME Themes-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="scrollkeeper.html">ScrollKeeper-0.3.14</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-desktop.html">GNOME Desktop-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href=
+                  "gnome-backgrounds.html">Gnome-backgrounds-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-menus.html">Gnome-menus-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-panel.html">GNOME Panel-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-session.html">GNOME Session-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="vte.html">VTE-0.11.13</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-terminal.html">GNOME Terminal-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="libgtop.html">LibGTop-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gail.html">GAIL-1.8.3</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-applets.html">GNOME Applets-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="eel.html">EEL-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="nautilus.html">Nautilus-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-doc-utils.html">GNOME Doc Utils-0.2.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="libgtkhtml.html">Libgtkhtml-2.6.3</a>
+                </li>
+                <li class="sect1">
+                  <a href="yelp.html">Yelp-2.6.5</a>
+                </li>
+                <li class="sect1">
+                  <a href="control-center.html">Control Center-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome2-user-docs.html">GNOME2 User Docs-2.8.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="config.html">Configuring the Core GNOME
+                  Packages</a>
+                </li>
+              </ul>
+            </li>
+            <li class="chapter">
+              <h4>
+                <a href="add.html">31. GNOME Additional Packages</a>
+              </h4>
+              <ul>
+                <li class="sect1">
+                  <a href="add.html#libgnomecups">libgnomecups-0.2.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="libgnomeprint.html">libgnomeprint-2.10.3</a>
+                </li>
+                <li class="sect1">
+                  <a href="libgnomeprintui.html">libgnomeprintui-2.10.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="gal.html">GAL-2.4.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="gtkhtml.html">GtkHTML-3.6.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="evolution-data-server.html">Evolution Data
+                  Server-1.2.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="bug-buddy.html">bug-buddy-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="gtksourceview.html">gtksourceview-1.2.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="gedit.html">gedit-2.10.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="eog.html">EOG-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="ggv.html">GGV-2.8.4</a>
+                </li>
+                <li class="sect1">
+                  <a href="file-roller.html">File Roller-2.10.3</a>
+                </li>
+                <li class="sect1">
+                  <a href="gconf-editor.html">GConf Editor-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-utils.html">GNOME Utilities-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href=
+                  "system-tools-backends.html">system-tools-backends-1.2.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-system-monitor.html">GNOME System
+                  Monitor-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="nautilus-cd-burner.html">Nautilus CD
+                  Burner-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-media.html">GNOME Media-2.10.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-audio.html">gnome-audio-2.0.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-netstatus.html">GNOME Netstatus-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="gcalctool.html">gcalctool-5.5.42</a>
+                </li>
+                <li class="sect1">
+                  <a href="gpdf.html">GPdf-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="gucharmap.html">gucharmap-1.4.3</a>
+                </li>
+                <li class="sect1">
+                  <a href="zenity.html">Zenity-2.10.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="at-spi.html">AT SPI-1.6.4</a>
+                </li>
+                <li class="sect1">
+                  <a href="libgail-gnome.html">libgail-gnome-1.1.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="java-access-bridge.html">Java Access
+                  Bridge-1.4.5</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-speech.html">GNOME Speech-0.3.7</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-mag.html">GNOME Magnifier-0.12.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnopernicus.html">Gnopernicus-0.10.9</a>
+                </li>
+                <li class="sect1">
+                  <a href="gok.html">GOK-1.0.4</a>
+                </li>
+                <li class="sect1">
+                  <a href="epiphany.html">Epiphany-1.6.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnomemeeting.html">GnomeMeeting-1.2.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-games.html">GNOME Games-2.10.1</a>
+                </li>
+                <li class="sect1">
+                  <a href="gdm.html">GDM-2.6.0.9</a>
+                </li>
+              </ul>
+            </li>
+            <li class="chapter">
+              <h4>
+                <a href="otherlibs.html">32. GNOME 1.4 Libraries</a>
+              </h4>
+              <ul>
+                <li class="sect1">
+                  <a href=
+                  "otherlibs.html#gnome-otherlib-config">Pre-installation
+                  Configuration</a>
+                </li>
+                <li class="sect1">
+                  <a href="ORBit.html">ORBit-0.5.17</a>
+                </li>
+                <li class="sect1">
+                  <a href="oaf.html">OAF-0.6.10</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-libs.html">GNOME Libraries-1.4.2</a>
+                </li>
+                <li class="sect1">
+                  <a href="gdkpixbuf.html">GDK Pixel Buffer-0.22.0</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-print.html">GNOME Print-0.37</a>
+                </li>
+                <li class="sect1">
+                  <a href="bonobo14.html">Bonobo-1.0.22</a>
+                </li>
+                <li class="sect1">
+                  <a href="gconf1.html">GConf-1.0.9</a>
+                </li>
+                <li class="sect1">
+                  <a href="gnome-vfs1.html">GNOME Virtual File
+                  System-1.0.5</a>
+                </li>
+                <li class="sect1">
+                  <a href="libglade14.html">Libglade-0.17</a>
+                </li>
+                <li class="sect1">
+                  <a href="gal1.html">GAL-0.24</a>
+                </li>
+                <li class="sect1">
+                  <a href="guppi.html">Guppi-0.40.3</a>
+                </li>
+                <li class="sect1">
+                  <a href="libcapplet.html">Libcapplet-1.5.11</a>
+                </li>
+                <li class="sect1">
+                  <a href="soup.html">Soup-0.7.11</a>
+                </li>
+                <li class="sect1">
+                  <a href="libghttp.html">Libghttp-1.0.9</a>
+                </li>
+                <li class="sect1">
+                  <a href="gtkhtml1.html">GtkHTML-1.1.7</a>
+                </li>
+              </ul>
+            </li>
+          </ul>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="../kde/kde-i18n.html" title=
+          "Kde-i18n-3.4.1">Prev</a>
+          <p>
+            Kde-i18n-3.4.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="core.html" title=
+          "GNOME Core Packages">Next</a>
+          <p>
+            GNOME Core Packages
+          </p>
+        </li>
+        <li class="up">.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

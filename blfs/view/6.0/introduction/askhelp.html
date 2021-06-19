@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Asking for help and the FAQ
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;1.&nbsp;Welcome to <span class="acronym">BLFS</span>
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="newsserver.html" title=
+          "News server">Prev</a>
+          <p>
+            News server
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="contactinfo.html" title=
+          "Contact information">Next</a>
+          <p>
+            Contact information
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="welcome.html" title=
+          "Chapter&nbsp;1.&nbsp;Welcome to BLFS">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="intro-welcome-askhelp" name="intro-welcome-askhelp"></a>
+        <h1 class="sect1">
+          Asking for help and the FAQ
+        </h1>
+      </div>
+      <p>
+        If you encounter a problem while using this book, and your problem is
+        not listed in the <span class="acronym">FAQ</span> (<a href=
+        "http://www.linuxfromscratch.org/faq"><span class=
+        "url">http://www.linuxfromscratch.org/faq</span></a>), you will find
+        that most of the people on Internet Relay Chat (<span class=
+        "acronym">IRC</span>) and on the mailing lists are willing to help
+        you. An overview of the <span class="acronym">LFS</span> mailing
+        lists can be found in <a href="maillists.html">Mailing lists</a>. To
+        assist us in diagnosing and solving your problem, include as much
+        relevant information as possible in your request for help.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Things to check prior to asking
+          </h2>
+        </div>
+        <p>
+          Before asking for help, you should review the following items:
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li>
+              <p>
+                Is the hardware support compiled into the kernel or available
+                as a module to the kernel? If it is a module, is it
+                configured properly in <tt class="filename">modules.conf</tt>
+                and has it been loaded? You should use <span><strong class=
+                "command">lsmod</strong></span> as root to see if it's
+                loaded. Check the <tt class="filename">sys.log</tt> or run
+                <span><strong class="command">modprobe
+                &lt;driver&gt;</strong></span> to review any error message.
+                If it loads properly, you may need to add the
+                <span><strong class="command">modprobe</strong></span> to
+                your boot scripts.
+              </p>
+            </li>
+            <li>
+              <p>
+                Are your permissions properly set, especially for devices?
+                <span class="acronym">LFS</span> uses groups to make these
+                settings easier, but it also adds the step of adding users to
+                groups to allow access. A simple <span><strong class=
+                "command">moduser -G audio &lt;user&gt;</strong></span> may
+                be all that's necessary for that user to have access to the
+                sound system. Any question that starts out with "It works as
+                root, but not as ..." requires a thorough review of
+                permissions prior to asking.
+              </p>
+            </li>
+            <li>
+              <p>
+                <span class="acronym">BLFS</span> liberally uses <tt class=
+                "filename">/opt/&lt;package&gt;</tt>. The main objection to
+                this centers around the need to expand your environment
+                variables for each package placed there (e.g.,
+                PATH=$PATH:/opt/kde/bin). In some cases, the package will
+                walk you through the changes, but some will not. The section
+                called "<a href="beyond.html"><span class="url">Going Beyond
+                BLFS</span></a>" is available to help you check.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Things to mention
+          </h2>
+        </div>
+        <p>
+          Apart from a brief explanation of the problem you're having, the
+          essential things to include in your request are:
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li>
+              <p>
+                the version of the book you are using (being 6.0),
+              </p>
+            </li>
+            <li>
+              <p>
+                the package or section giving you problems,
+              </p>
+            </li>
+            <li>
+              <p>
+                the exact error message or symptom you are receiving,
+              </p>
+            </li>
+            <li>
+              <p>
+                whether you have deviated from the book or <span class=
+                "acronym">LFS</span> at all.
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+          (Note that saying that you've deviated from the book doesn't mean
+          that we won't help you. It'll just help us to see other possible
+          causes of your problem.)
+        </p>
+        <p>
+          Expect guidance instead of specific instructions. If you are
+          instructed to read something, please do so. It generally implies
+          that the answer was way too obvious and that the question would not
+          have been asked if a little research was done prior to asking. The
+          volunteers in the mailing list prefer not to be used as an
+          alternative to doing reasonable research on your end. In addition,
+          the quality of your experience with <span class=
+          "acronym">BLFS</span> is also greatly enhanced by this research,
+          and the quality of volunteers is enhanced because they don't feel
+          that their time has been abused, so they are far more likely to
+          participate.
+        </p>
+        <p>
+          An excellent article on asking for help on the Internet in general
+          has been written by Eric S. Raymond. It is available online at
+          <a href=
+          "http://www.catb.org/~esr/faqs/smart-questions.html"><span class=
+          "url">http://www.catb.org/~esr/faqs/smart-questions.html</span></a>.
+          Read and follow the hints in that document and you are much more
+          likely to get a response to start with and also to get the help you
+          actually need.
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-04 00:30:54 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="newsserver.html" title=
+          "News server">Prev</a>
+          <p>
+            News server
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="contactinfo.html" title=
+          "Contact information">Next</a>
+          <p>
+            Contact information
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="welcome.html" title=
+          "Chapter&nbsp;1.&nbsp;Welcome to BLFS">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

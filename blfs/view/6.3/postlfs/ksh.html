@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      ksh-2008-02-02
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;Shells
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dash.html" title="Dash-0.5.4">Prev</a>
+          <p>
+            Dash-0.5.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../general/general.html" title=
+          "General Libraries and Utilities">Next</a>
+          <p>
+            General Libraries and Utilities
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="shells.html" title=
+          "Chapter&nbsp;7.&nbsp;Shells">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ksh" name="ksh"></a>ksh-2008-02-02
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to ksh
+        </h2>
+        <p>
+          <span class="application">ksh</span> is the AT&amp;T Korn Shell.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            You must agree to the terms of the CPL-1.0 license in order to
+            download the software. The download site is password protected,
+            and the username and password are listed at the bottom of
+            <a class="ulink" href=
+            "http://www.research.att.com/~gsf/license/cpl-1.0.html">this
+            license</a>.
+          </p>
+        </div>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Ksh Download (HTTP): <a class="ulink" href=
+                "http://www.research.att.com/~gsf/download/tgz/ast-ksh.2008-02-02.tgz">
+                http://www.research.att.com/~gsf/download/tgz/ast-ksh.2008-02-02.tgz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Ksh Download MD5 sum: d2a71e320fbaa7a0fd950a27c7e4b099
+              </p>
+            </li>
+            <li>
+              <p>
+                Ksh Download size: 1.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                INIT Download (HTTP): <a class="ulink" href=
+                "http://www.research.att.com/~gsf/download/tgz/INIT.2008-02-02.tgz">
+                http://www.research.att.com/~gsf/download/tgz/INIT.2008-02-02.tgz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                INIT Download MD5 sum: 740c6fc775bf2f7b6bff463bdbad1c31
+              </p>
+            </li>
+            <li>
+              <p>
+                INIT Download size: 340 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 32 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 2 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/ksh">http://wiki.linuxfromscratch.org/blfs/wiki/ksh</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of ksh
+        </h2>
+        <p>
+          Unlike other BLFS packages, you will need to first create a working
+          directory in which to extract the sources and perform the build.
+          Install <span class="application">ksh</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir ksh &amp;&amp;
+cd ksh &amp;&amp;
+tar -xf ../INIT.2008-02-02.tgz &amp;&amp;
+tar -xf ../ast-ksh.2008-02-02.tgz &amp;&amp;
+bin/package make</kbd>
+</pre>
+        <p>
+          The test suite for this package requires other packages from the
+          AT&amp;T ast software library, namely <span class=
+          "application">nmake</span>, in which case, you'd be better to
+          install the <span class="application">ast-base</span> package using
+          the same instructions. The <span class="application">package</span>
+          command will accept a <em class="parameter"><code>test</code></em>
+          argument to test the package.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">install -v -m755 arch/linux.i386/bin/ksh /bin &amp;&amp;
+install -v -m644 arch/linux.i386/man/man1/sh.1 \
+    /usr/share/man/man1/ksh.1 &amp;&amp;
+install -v -m755 -d /usr/share/doc/ksh-2008-02-02 &amp;&amp;
+install -v -m644 lib/package/{ast-ksh,INIT}.html \
+    /usr/share/doc/ksh-2008-02-02</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>bin/package make</strong></span>:
+          This command rebuilds the ast <span class="application">INIT</span>
+          package and builds the ast <span class="application">ksh</span>
+          package.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring ksh
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="ksh-config" name="ksh-config"></a>Config Files
+          </h3>
+          <p>
+            <span class="application">ksh</span> sources <code class=
+            "filename">/etc/profile</code>, <code class=
+            "filename">/etc/suid_profile</code>, and <code class=
+            "filename">$HOME/.profile</code>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            Update <code class="filename">/etc/shells</code> to include the
+            <span class="application">ksh</span> shell by issuing the
+            following command as the <code class="systemitem">root</code>
+            user:
+          </p>
+          <pre class="root">
+<kbd class="command">cat &gt;&gt; /etc/shells &lt;&lt; "EOF"
+<code class="literal">/bin/ksh</code>
+EOF</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">ksh</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Description
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ksh-prog" name="ksh-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ksh</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the AT&amp;T ast Korn shell.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-05-09 07:42:27 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dash.html" title="Dash-0.5.4">Prev</a>
+          <p>
+            Dash-0.5.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../general/general.html" title=
+          "General Libraries and Utilities">Next</a>
+          <p>
+            General Libraries and Utilities
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="shells.html" title=
+          "Chapter&nbsp;7.&nbsp;Shells">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,818 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      PPP-2.4.4
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;13.&nbsp;Connecting to a Network
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="connect.html" title=
+          "Connecting to a Network">Prev</a>
+          <p>
+            Connecting to a Network
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="dhcpcd.html" title="dhcpcd-3.0.19">Next</a>
+          <p>
+            dhcpcd-3.0.19
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="connect.html" title=
+          "Chapter&nbsp;13.&nbsp;Connecting to a Network">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ppp" name="ppp"></a>PPP-2.4.4
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to PPP
+        </h2>
+        <p>
+          The <span class="application">PPP</span> package contains the
+          <span class="command"><strong>pppd</strong></span> daemon and the
+          <span class="command"><strong>chat</strong></span> program. This is
+          used for connecting to other machines; often for connecting to the
+          Internet via a dial-up or PPPoE connection to an ISP.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://samba.org/ftp/ppp/ppp-2.4.4.tar.gz">http://samba.org/ftp/ppp/ppp-2.4.4.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/ppp-2.4.4.tar.gz">
+                ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/ppp-2.4.4.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 183800762e266132218b204dfb428d29
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 673 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 5.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          PPP Dependencies
+        </h3>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="libpcap.html" title=
+          "libpcap-0.9.6">libpcap-0.9.6</a> (needed to do PPP filtering),
+          <a class="xref" href="../postlfs/linux-pam.html" title=
+          "Linux-PAM-0.99.10.0">Linux-PAM-0.99.10.0</a> (to authenticate
+          incoming calls using PAM), and <a class="ulink" href=
+          "http://linux-atm.sourceforge.net/">Linux ATM</a> (to build the
+          pppoatm.so plugin)
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/PPP">http://wiki.linuxfromscratch.org/blfs/wiki/PPP</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of PPP
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            <span class="application">PPP</span> support (CONFIG_PPP), the
+            asynchronous line discipline (CONFIG_PPP_ASYNC), the driver for
+            your serial port device and/or the PPP over Ethernet (PPPoE)
+            protocol driver (CONGIG_PPPOE) must be compiled into the kernel
+            or loaded as kernel modules. Udev doesn't load the ppp_generic
+            and pppoe modules automatically, they must be mentioned in the
+            <code class="filename">/etc/sysconfig/modules</code> file.
+          </p>
+        </div>
+        <p>
+          Create (as <code class="systemitem">root</code>) the group for
+          users who may run <span class="application">PPP</span>:
+        </p>
+        <pre class="root">
+<kbd class="command">groupadd -g 52 pppusers</kbd>
+</pre>
+        <p>
+          Install <span class="application">PPP</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+make install-etcppp &amp;&amp;
+install -d /etc/ppp/peers &amp;&amp;
+install -m755 scripts/{pon,poff,plog} /usr/bin &amp;&amp;
+install -m644 scripts/pon.1 /usr/share/man/man1</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>make install-etcppp</strong></span>:
+          This command puts example configuration files in <code class=
+          "filename">/etc/ppp</code>.
+        </p>
+        <p>
+          <span class="command"><strong>install -d
+          /etc/ppp/peers</strong></span>: This command creates a directory
+          for PPP peer description files.
+        </p>
+        <p>
+          <em class="parameter"><code>USE_PAM=y</code></em>: Add this
+          argument to the <span class="command"><strong>make</strong></span>
+          command to compile in support for PAM, usually needed for
+          authenticating inbound calls against a central database.
+        </p>
+        <p>
+          <em class="parameter"><code>HAVE_INET6=y</code></em>: Add this
+          argument to the <span class="command"><strong>make</strong></span>
+          command to compile in support for IPv6.
+        </p>
+        <p>
+          <em class="parameter"><code>CBCP=y</code></em>: Add this argument
+          to the <span class="command"><strong>make</strong></span> command
+          to compile in support for Microsoft proprietary Callback Control
+          Protocol.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring PPP
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="ppp-config" name="ppp-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/ppp/*</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            The <span class="application">PPP</span> daemon requires some
+            configuration. The main trick is scripting the connection. For
+            dialup and GPRS connections, this can be done either using the
+            <span class="command"><strong>chat</strong></span> program which
+            comes with this package, or by using external tools such as
+            <a class="ulink" href="http://alumnit.ca/wiki/?WvDial">WvDial</a>
+            or <span class="application">KPPP</span> from <a class="xref"
+            href="../kde/kdenetwork.html" title=
+            "Kdenetwork-3.5.9">kdenetwork-3.5.9</a>. The text below explains
+            how to set up dialup and GPRS and PPPoE connections using only
+            tools provided with the <span class="application">PPP</span>
+            package. All configuration steps in this section are executed as
+            <code class="systemitem">root</code> user.
+          </p>
+          <p>
+            Add the users who may run <span class="application">PPP</span> to
+            the <code class="systemitem">pppusers</code> group:
+          </p>
+          <pre class="root">
+<kbd class="command">usermod -a -G pppusers <em class=
+"replaceable"><code>&lt;username&gt;</code></em></kbd>
+</pre>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2718090" name="id2718090"></a>Setting the
+                    passwords
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <div class="admon warning">
+              <img alt="[Warning]" src="../images/warning.png" />
+              <h3>
+                Warning
+              </h3>
+              <p>
+                Instructions in this section result in your password
+                appearing on the screen in a visible clear-text form. Make
+                sure that nobody else looks at the screen.
+              </p>
+            </div>
+            <p>
+              Passwords are stored in <code class=
+              "filename">/etc/ppp/pap-secrets</code> and <code class=
+              "filename">/etc/ppp/chap-secrets</code> files, depending on the
+              authentication method used by the ISP. If in doubt, place the
+              password into both files. E.g., if the username given by the
+              ISP is &ldquo;<span class="quote">jdoe</span>&rdquo;, the
+              password is &ldquo;<span class="quote">guessit</span>&rdquo;,
+              the ISP uses PAP and the user wants to name this account
+              &ldquo;<span class="quote">dialup</span>&rdquo; in order to
+              distinguish it from other PPP accounts, the following file has
+              to be created:
+            </p>
+            <pre class="root">
+<kbd class="command">touch /etc/ppp/pap-secrets
+chmod 600 /etc/ppp/pap-secrets
+cat &gt;&gt;/etc/ppp/pap-secrets &lt;&lt;"EOF"</kbd>
+<code class=
+"literal"># username      remotename    password        IP for the peer
+jdoe            dialup        guessit         *</code>
+<kbd class="command">EOF</kbd>
+</pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2718164" name="id2718164"></a>DNS Server
+                    Configuration
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              If you don't run your own caching DNS server, create a simple
+              <span class="command"><strong>ip-up</strong></span> script (to
+              be called by <span class="command"><strong>pppd</strong></span>
+              automatically once the connection is brought up) that populates
+              the <code class="filename">/etc/resolv.conf</code> file with
+              nameservers specified by the ISP.
+            </p>
+            <pre class="root">
+<kbd class="command">cat &gt;/etc/ppp/ip-up &lt;&lt;"EOF"</kbd>
+<code class="literal">#!/bin/sh
+if [ "$USEPEERDNS" = "1" ] &amp;&amp; [ -s /etc/ppp/resolv.conf ]
+then
+        install -m 644 /etc/ppp/resolv.conf /etc/resolv.conf
+fi</code>
+<kbd class="command">EOF
+chmod 755 /etc/ppp/ip-up</kbd>
+</pre>
+            <p>
+              If you use a caching DNS server such as <a class="xref" href=
+              "../server/bind.html" title="BIND-9.4.1-P1">BIND-9.4.1-P1</a>
+              or <a class="ulink" href=
+              "http://www.phys.uu.nl/~rombouts/pdnsd.html">Pdnsd</a>, the
+              script above is wrong for you. In such case, write your own
+              script that tells your caching nameserver to forward queries to
+              upstream DNS servers specified in the $DNS1 and $DNS2
+              environment variables.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2718250" name="id2718250"></a>Dialup Modem
+                    Connection
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              Dialup connections are established with the help of a modem
+              connected to a computer and the telephone line. The modem dials
+              a telephone number of the ISP's modem, and they exchange data
+              using the signal frequencies 300-4000 Hz. Typical data transfer
+              rate is 40-50 kilobits per second, and the gateway ping time
+              (latency) is up to 300-400 ms. In order to configure the dialup
+              connection, it is required to know the telephone number of the
+              ISP's modem pool, the username and the password.
+            </p>
+            <p>
+              In order to configure a dialup connection, two files have to be
+              created: a chat script that automates the connection procedure
+              (common for all dialup accounts), and a peer file that provides
+              configuration information about a specific connection to
+              <span class="command"><strong>pppd</strong></span>:
+            </p>
+            <pre class="root">
+<kbd class="command">cat &gt;/etc/ppp/dialup.chat &lt;&lt;"EOF"</kbd>
+<code class=
+"literal">ABORT BUSY ABORT 'NO CARRIER' ABORT VOICE ABORT 'NO DIALTONE'
+ABORT 'NO DIAL TONE' ABORT 'NO ANSWER' ABORT DELAYED
+ABORT ERROR ABORT BLACKLISTED
+
+TIMEOUT 5
+'' AT
+# \T is the phone number, passed from /etc/ppp/peers/<em class=
+"replaceable"><code>dialup</code></em>
+OK-+++\dATH0-OK ATD\T
+TIMEOUT 75
+CONNECT \d\c</code>
+<kbd class="command">EOF
+
+cat &gt;/etc/ppp/peers/<em class=
+"replaceable"><code>dialup</code></em> &lt;&lt;"EOF"</kbd>
+<code class="literal"># Your username at the ISP
+user "<em class="replaceable"><code>jdoe</code></em>"
+# What should be in the second column in /etc/ppp/*-secrets
+remotename "<em class="replaceable"><code>dialup</code></em>"
+# Replace <em class=
+"replaceable"><code>TTTTTTT</code></em> with the ISP phone number
+connect "/usr/sbin/chat -T <em class=
+"replaceable"><code>TTTTTTT</code></em> -f /etc/ppp/dialup.chat"
+
+# Specify your modem serial port and speed below
+<em class="replaceable"><code>/dev/ttyS0</code></em>
+<em class="replaceable"><code>115200</code></em>
+
+# The settings below usually don't need to be changed
+updetach
+noauth
+hide-password
+debug
+lock
+defaultroute
+noipdefault
+usepeerdns</code>
+<kbd class="command">EOF</kbd>
+</pre>
+            <p>
+              The first three lines of the <code class=
+              "filename">/etc/ppp/dialup.chat</code> file abort the script
+              when it receives an indication of an error from the modem. Then
+              the timeout is set to 5 seconds and the script checks that the
+              modem responds to the dummy AT command at all. If not, measures
+              are taken to dewedge it (by interrupting the data transfer and
+              going on hook). Then the telephone number is dialed, and the
+              script waits for the answer for 75 seconds. The serial
+              connection is considered established when the modem sends the
+              string CONNECT.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2718395" name="id2718395"></a>GPRS and EDGE
+                    Connections
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              GPRS and EDGE connections are established with the help of a
+              cellular phone connected to a computer via serial or USB cable,
+              or using Bluetooth. The phone exchanges data packets with the
+              nearest base station, which can be up to 35 kilometers away.
+              The maximum possible data transfer rate is 170 kilobits per
+              second for GPRS and 474 kilobits per second for EDGE, but many
+              cellular operators impose lower limits, such as 64 kilobits per
+              second. The gateway ping time is 900 ms for GPRS, which makes
+              playing many online games impossible and causes connection to
+              ICQ to be unreliable. In order to configure a GPRS or EDGE
+              connection, it is required to know the access point name (APN)
+              and, rarely, the username and the password. In most cases,
+              billing is based on the telephone number, and the
+              username/password pair is not needed, as assumed in the example
+              below.
+            </p>
+            <p>
+              In order to configure a GPRS connection, two files have to be
+              created: a chat script that automates the connection procedure
+              (common for all GPRS accounts), and a peer file that provides
+              configuration information about a specific connection to
+              <span class="command"><strong>pppd</strong></span>:
+            </p>
+            <pre class="root">
+<kbd class="command">cat &gt;/etc/ppp/gprs.chat &lt;&lt;"EOF"</kbd>
+<code class=
+"literal">ABORT BUSY ABORT 'NO CARRIER' ABORT VOICE ABORT 'NO DIALTONE'
+ABORT 'NO DIAL TONE' ABORT 'NO ANSWER' ABORT DELAYED
+ABORT ERROR ABORT BLACKLISTED
+
+TIMEOUT 5
+'' AT
+OK-+++\dATH0-OK ATZ
+# \T is the APN, passed from /etc/ppp/peers/<em class=
+"replaceable"><code>gprs</code></em>
+# This example stores the APN as profile #1 in the phone.
+# The "telephone number", *99***&lt;profile_number&gt;#, is always the same.
+# If you want to store this as profile #2, change 1 to 2 in the
+# following two lines.
+OK AT+CGDCONT=<em class="replaceable"><code>1</code></em>,"IP","\T"
+OK "ATD*99***<em class="replaceable"><code>1</code></em>#"
+CONNECT \d\c</code>
+<kbd class="command">EOF
+
+cat &gt;/etc/ppp/peers/<em class=
+"replaceable"><code>gprs</code></em> &lt;&lt;"EOF"</kbd>
+<code class="literal"># Replace <em class=
+"replaceable"><code>inet.example.com</code></em> with the proper APN for your provider
+connect "/usr/sbin/chat -T <em class=
+"replaceable"><code>inet.example.com</code></em> -f /etc/ppp/gprs.chat"
+
+# Specify your cellphone serial port and speed below
+# Note: you must manually send some vendor-specific AT commands
+# to certain old cellular phones (such as Sony-Ericsson T200)
+# in order to achieve connection speed more than 9600 bits ber second.
+<em class="replaceable"><code>/dev/ttyS1</code></em>
+<em class="replaceable"><code>115200</code></em>
+
+# The settings below usually don't need to be changed
+noccp
+noauth
+updetach
+debug
+lock
+defaultroute
+noipdefault
+usepeerdns</code>
+<kbd class="command">EOF</kbd>
+</pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2718536" name="id2718536"></a>PPPoE connections
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              PPPoE connections are established over Ethernet, typically
+              between a computer and an ADSL router (usually installed in the
+              same room) that forwards the packets down the telephone line
+              using frequencies 25-2500 kHz, thus not interfering with voice
+              calls. Although the router can, in theory, forward any Ethernet
+              packet, PPP encapsulation is used for password-based
+              authentication, so that the ISP can limit the bandwidth and
+              charge money according to the chosen tariff. The maximum data
+              transfer rate on ADSL is 24 megabits per second, and the
+              gateway ping time is typically less than 10 ms. In order to
+              configure a PPPoE connection, it is required to know the
+              username, the password, and, sometimes, the service name and/or
+              the access concentrator name.
+            </p>
+            <p>
+              In order to configure a PPPoE connection, only the peer file
+              has to be created:
+            </p>
+            <pre class="root">
+<kbd class="command">cat &gt;/etc/ppp/peers/<em class=
+"replaceable"><code>adsl</code></em> &lt;&lt;"EOF"</kbd>
+<code class="literal">plugin rp-pppoe.so
+# Ethernet interface name
+<em class="replaceable"><code>eth0</code></em>
+# Your username at the ISP
+user "<em class="replaceable"><code>jdoe</code></em>"
+# What should be in the second column in /etc/ppp/*-secrets
+remotename "<em class="replaceable"><code>adsl</code></em>"
+# If needed, specify the service and the access concentrator name
+# rp_pppoe_service "<em class="replaceable"><code>internet</code></em>"
+# rp_pppoe_ac "<em class="replaceable"><code>ac1</code></em>"
+
+# The settings below usually don't need to be changed
+noauth
+hide-password
+updetach
+debug
+defaultroute
+noipdefault
+usepeerdns</code>
+<kbd class="command">EOF</kbd>
+</pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2718623" name="id2718623"></a>Establishing the
+                    connection manually
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              In order to establish a PPP connection described by the
+              <code class="filename">/etc/ppp/peers/<em class=
+              "replaceable"><code>peername</code></em></code> file, run, as
+              root or as a member of the <code class=
+              "systemitem">pppusers</code> group:
+            </p>
+            <pre class="userinput">
+<kbd class="command">pon <em class=
+"replaceable"><code>peername</code></em></kbd>
+</pre>
+            <p>
+              In order to tear the connection down, run:
+            </p>
+            <pre class="userinput">
+<kbd class="command">poff <em class=
+"replaceable"><code>peername</code></em></kbd>
+</pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2718680" name="id2718680"></a>Bringing up PPPoE
+                    connection at boot time
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              If your service provider does not charge by the minute, it is
+              usually good to have a bootscript handle the connection for
+              you. You can, of course, choose not to install the following
+              script, and start your connection manually with the
+              <span class="command"><strong>pon</strong></span> command, as
+              described above. If you wish your PPPoE connection to be
+              brought up at boot time, run:
+            </p>
+            <pre class="root">
+<kbd class="command">make install-service-pppoe</kbd>
+</pre>
+            <p>
+              The above command installs the <code class=
+              "filename">pppoe</code> service script and the <code class=
+              "filename">/etc/ppp/peers/pppoe</code> file with some settings
+              that make sense for most PPPoE connections. The bootscript
+              calls <span class="command"><strong>pppd</strong></span> with
+              the the following options:
+            </p>
+            <pre class="screen">
+pppd call pppoe ${1} linkname ${1} ${PPP_OPTS}
+</pre>
+            <p>
+              Here &ldquo;<span class="quote">${1}</span>&rdquo; is the
+              network interface name, &ldquo;<span class="quote">linkname
+              ${1}</span>&rdquo; is added for creation of the <code class=
+              "filename">/var/run/ppp-${1}.pid</code> file with the
+              <span class="command"><strong>pppd</strong></span> process ID
+              (to be used when bringing the connection down), and the
+              &ldquo;<span class="quote">${PPP_OPTS}</span>&rdquo; variable
+              contains user-specified options such as &ldquo;<span class=
+              "quote">user</span>&rdquo; and &ldquo;<span class=
+              "quote">remotename</span>&rdquo;.
+            </p>
+            <p>
+              Now create the config file for use with the <code class=
+              "filename">pppoe</code> service script:
+            </p>
+            <pre class="root">
+<kbd class=
+"command">install -v -d /etc/sysconfig/network-devices/ifconfig.eth0 &amp;&amp;
+cat &gt; /etc/sysconfig/network-devices/ifconfig.eth0/pppoe &lt;&lt; "EOF"
+<code class="literal">ONBOOT="yes"
+SERVICE="pppoe"
+PPP_OPTS="user <em class=
+"replaceable"><code>jdoe</code></em> remotename <em class=
+"replaceable"><code>adsl</code></em>"</code>
+EOF</kbd>
+</pre>
+            <div class="admon note">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3>
+                Note
+              </h3>
+              <p>
+                Instead of specifying additional options in the $PPP_OPTS
+                variable, you can also edit the <code class=
+                "filename">/etc/ppp/peers/pppoe</code> file, but then your
+                configuration will be lost when upgrading BLFS bootscripts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">chat, pon, poff, plog, pppd, pppdump,
+              pppoe-discovery and pppstats</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">Several plugin modules installed in
+              <code class="filename">/usr/lib/pppd/2.4.4</code></span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/ppp, /usr/include/pppd and
+              /usr/lib/pppd</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="chat" name="chat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>chat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    defines a conversational exchange between the computer
+                    and the modem. Its primary purpose is to establish the
+                    connection between the Point-to-Point Protocol Daemon
+                    (PPPD) and the remote <span class=
+                    "command"><strong>pppd</strong></span> process.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pon" name="pon"></a><span class=
+                    "term"><span class="command"><strong>pon</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the script that establishes a PPP connection
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="poff" name="poff"></a><span class=
+                    "term"><span class=
+                    "command"><strong>poff</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the script that tears a PPP connection down.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="plog" name="plog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>plog</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a script that prints the tail of the PPP log.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pppd" name="pppd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pppd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the Point to Point Protocol daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pppdump" name="pppdump"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pppdump</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to convert <span class="application">PPP</span>
+                    record files to a readable format.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pppstats" name="pppstats"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pppstats</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to print <span class="application">PPP</span>
+                    statistics.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-06-09 09:48:57 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="connect.html" title=
+          "Connecting to a Network">Prev</a>
+          <p>
+            Connecting to a Network
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="dhcpcd.html" title="dhcpcd-3.0.19">Next</a>
+          <p>
+            dhcpcd-3.0.19
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="connect.html" title=
+          "Chapter&nbsp;13.&nbsp;Connecting to a Network">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

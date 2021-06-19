@@ -1,0 +1,18 @@
+#!/bin/bash
+set +h
+set -e
+
+cat > /boot/grub/grub.cfg << "EOF"
+# Begin /boot/grub/grub.cfg
+set default=0
+set timeout=5
+
+insmod ext2
+set root=(hd0,2)
+
+menuentry "GNU/Linux, Linux 3.8.1-lfs-7.3" {
+        linux   /boot/vmlinuz-3.8.1-lfs-7.3 root=/dev/sda2 ro
+}
+EOF
+echo -e "\n\nTotalseconds: $SECONDS\n"
+exit

@@ -1,0 +1,195 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;14.&nbsp;DHCP Clients
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Part&nbsp;IV.&nbsp;Connecting to a Network
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="wvdial.html" title="WvDial-1.54.0">Prev</a>
+          <p>
+            WvDial-1.54.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="dhcpcd.html" title=
+          "dhcpcd-1.3.22-pl4">Next</a>
+          <p>
+            dhcpcd-1.3.22-pl4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="connect.html" title=
+          "Part&nbsp;IV.&nbsp;Connecting to a Network">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="connect-dhcp" name="connect-dhcp"></a>
+        <h1 class="chapter">
+          DHCP Clients
+        </h1>
+      </div>
+      <p>
+        <span class="acronym">DHCP</span> stands for Dynamic Host
+        Configuration Protocol. It is a protocol used by many sites to
+        automatically provide information such as <span class=
+        "acronym">IP</span> addresses, subnet masks and routing information
+        to computers. If your network uses <span class="acronym">DHCP</span>,
+        you will need a <span class="acronym">DHCP</span> client in order to
+        connect to it. <span class="acronym">DHCP</span> is also used by some
+        cable modems.
+      </p>
+      <p>
+        <span class="acronym">BLFS</span> currently provides installation
+        instructions for two <span class="acronym">DHCP</span> clients,
+        <span><strong class="command">dhclient</strong></span> (from the
+        <span class="application">dhcp</span> package) and
+        <span><strong class="command">dhcpcd</strong></span>. <span class=
+        "acronym">BLFS</span> presents both sets of installation instructions
+        and discusses how to create an appropriate service script to work
+        with the <span><strong class="command">network</strong></span>
+        bootscript and the <span class="acronym">DHCP</span> client of your
+        choice.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="dhcp-client" name="dhcp-client"></a>
+          <h1 class="sect1">
+            DHCP-3.0.2 Client
+          </h1>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">DHCP</span></span> package comes with both a client
+          (<span><strong class="command">dhclient</strong></span>) and a
+          server program for using <span class="acronym">DHCP</span>. If you
+          want to install this package, the instructions can be found at
+          <a href="../server/dhcp.html">DHCP-3.0.2</a>. Note that if you only
+          want to use the client, you do <span class=
+          "emphasis"><em>not</em></span> need to run the server and so do not
+          need the startup script and links provided for the server daemon.
+          You only need to run the <span class="acronym">DHCP</span> server
+          if you're providing this service to a network, and it's likely that
+          you'll know if that's the case; if it isn't, don't run the server!
+          Once you have installed the package, return here for information on
+          how to configure the client (<span><strong class=
+          "command">dhclient</strong></span>).
+        </p>
+        <p>
+          <a id="dhclient-service" name="dhclient-service"></a>To configure
+          <span><strong class="command">dhclient</strong></span>, you need to
+          first install the network service script, <tt class=
+          "filename">/etc/sysconfig/network-devices/services/dhclient</tt>
+          included in the <a href=
+          "../introduction/bootscripts.html">blfs-bootscripts-6.0</a> package
+          (as root).
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install-service-dhclient</strong></span></kbd></pre>
+        <p>
+          <a id="dhclient-config1" name="dhclient-config1"></a>Next, create
+          the <tt class=
+          "filename">/etc/sysconfig/network-devices/ifconfig.eth0/dhclient</tt>
+          configuration file with the following commands as the root user.
+          Adjust as necessary for additional interfaces.
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">install -d /etc/sysconfig/network-devices/ifconfig.eth0 &amp;&amp;
+cat &gt; /etc/sysconfig/network-devices/ifconfig.eth0/dhclient &lt;&lt; "EOF"</strong></span>
+ONBOOT="yes"
+SERVICE="dhclient"
+DHCP_START="-q <em class=
+"replaceable"><tt>[add additional start parameters here]</tt></em>"
+DHCP_STOP="-q -r <em class=
+"replaceable"><tt>[add additional stop parameters here]</tt></em>"
+<span><strong class="command">EOF</strong></span></kbd></pre>
+        <p>
+          For more information on the appropriate <tt class=
+          "envar">DHCP_START</tt> and <tt class="envar">DHCP_STOP</tt>
+          values, examine the man page for <span><strong class=
+          "command">dhclient</strong></span>.
+        </p>
+        <p>
+          <a id="dhclient-config2" name="dhclient-config2"></a>Finally, you
+          should create the <tt class="filename">/etc/dhclient.conf</tt> file
+          using the following commands as the root user:
+        </p>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              You'll need to add a second interface definition to the file if
+              you have more than one interface.
+            </p>
+          </div>
+        </div>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">cat &gt; /etc/dhclient.conf &lt;&lt; "EOF"</strong></span>
+# dhclient.conf
+
+interface "eth0"{
+prepend domain-name-servers 127.0.0.1;
+request subnet-mask, broadcast-address, time-offset, routers,
+        domain-name, domain-name-servers, host-name;
+require subnet-mask, domain-name-servers;
+}
+# end dhclient.conf
+<span><strong class="command">EOF</strong></span></kbd></pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="wvdial.html" title="WvDial-1.54.0">Prev</a>
+          <p>
+            WvDial-1.54.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="dhcpcd.html" title=
+          "dhcpcd-1.3.22-pl4">Next</a>
+          <p>
+            dhcpcd-1.3.22-pl4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="connect.html" title=
+          "Part&nbsp;IV.&nbsp;Connecting to a Network">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

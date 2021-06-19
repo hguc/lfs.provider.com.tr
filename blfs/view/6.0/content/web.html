@@ -1,0 +1,535 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;24.&nbsp;Web serving
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Part&nbsp;VII.&nbsp;Content Serving
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="postgresql.html" title=
+          "PostgreSQL-7.4.6">Prev</a>
+          <p>
+            PostgreSQL-7.4.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="php.html" title="PHP-5.0.3">Next</a>
+          <p>
+            PHP-5.0.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="content.html" title=
+          "Part&nbsp;VII.&nbsp;Content Serving">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="content-web" name="content-web"></a>
+        <h1 class="chapter">
+          Web serving
+        </h1>
+      </div>
+      <p>
+        This chapter includes applications that respond to requests
+        originating from <span class="acronym">LAN</span>, intranet and
+        internet clients. Specifically covered are <span class=
+        "acronym">HTTP</span> requests and <span class="acronym">FTP</span>
+        requests.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="apache" name="apache"></a>
+          <h1 class="sect1">
+            Apache-2.0.53
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to Apache
+            </h2>
+          </div>
+          <p>
+            The <span class="application">Apache</span> package contains an
+            open-source <span class="acronym">HTTP</span> server. It is
+            useful for creating local intranet web sites or running huge web
+            serving operations.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2583831" name="id2583831"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://www.apache.org/dist/httpd/httpd-2.0.53.tar.bz2"><span class="url">
+                    http://www.apache.org/dist/httpd/httpd-2.0.53.tar.bz2</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.tux.org/pub/net/apache/dist/httpd/httpd-2.0.53.tar.bz2">
+                    <span class=
+                    "url">ftp://ftp.tux.org/pub/net/apache/dist/httpd/httpd-2.0.53.tar.bz2</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download MD5 sum: 94f3a793fb1665365724943206cce23f
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 4.8 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated disk space required: 49.4 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 1.08 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2670719" name="id2670719"></a>Additional
+                    downloads
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Required Patch: <a href=
+                    "http://www.linuxfromscratch.org/blfs/downloads/6.0/httpd-2.0.53-config-1.patch">
+                    <span class=
+                    "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/httpd-2.0.53-config-1.patch</span></a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2611479" name="id2611479"></a><span class=
+                    "application">Apache</span> dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2748756" name="id2748756"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="databases.html#db">Berkeley DB-4.3.27</a> or
+                <a href="../general/gdbm.html">GDBM-1.8.3</a>, <a href=
+                "../postlfs/security.html#openssl">OpenSSL-0.9.7e</a>,
+                <a href="../server/openldap.html">OpenLDAP-2.2.20</a>,
+                <a href="../general/expat.html">expat-1.95.8</a> and <a href=
+                "../general/doxygen.html">Doxygen-1.4.1</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of Apache
+            </h2>
+          </div>
+          <p>
+            For security reasons, running the server as an unprivileged user
+            and group is strongly encouraged. Create the following group and
+            user using the following commands (as root):
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">groupadd apache &amp;&amp;
+useradd -c "Apache Server" -d /dev/null -g apache -s /bin/false apache</strong></span></kbd></pre>
+          <p>
+            The following patch will define the layout of destination
+            directories and, among them, the build directory at <tt class=
+            "filename">/usr/lib/apache/build</tt>. This will allow the
+            modules added to <span class="application">Apache</span> to be
+            configured without errors. Apply the patch:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">patch -Np1 -i ../httpd-2.0.53-config-1.patch</strong></span></kbd></pre>
+          <p>
+            Build and install <span class="application">Apache</span> by
+            running the following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">./configure --enable-layout=FHS --enable-mods-shared=all &amp;&amp;
+make</strong></span></kbd></pre>
+          <p>
+            Now, as the root user:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make install &amp;&amp;
+chown root:root /usr/sbin/{apxs,apachectl,dbmmanage,envvars-std,envvars} \
+    /usr/include/apache/* /usr/lib/apache/httpd.exp \
+    /usr/share/man/man1/{dbmmanage,htdigest,htpasswd}.1 \
+    /usr/share/man/man8/{ab,apachectl,apxs,httpd}.8 \
+    /usr/share/man/man8/{logresolve,rotatelogs,suexec}.8 &amp;&amp;
+chown -R apache:apache /srv/www</strong></span></kbd></pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command explanations
+            </h2>
+          </div>
+          <p>
+            <tt class="option">--with-expat=/usr</tt>: Uses system installed
+            <span class="application">expat</span>. <span class=
+            "emphasis"><em>If you have installed <span class=
+            "application">expat</span> and do not use this switch, the
+            <span class="application">Apache</span> installation may
+            overwrite some files from the <span class=
+            "application">expat</span> installation.</em></span>
+          </p>
+          <p>
+            <em class="parameter"><tt>--enable-mods-shared=all</tt></em>: The
+            modules should be compiled and used as Dynamic Shared Objects
+            (<span class="acronym">DSO</span>s) so they can be included and
+            excluded from the server using the run-time configuration
+            directives.
+          </p>
+          <p>
+            <tt class="option">--enable-ssl</tt>: Use this switch to create
+            the <tt class="filename">mod_ssl</tt> module and enable
+            <span class="acronym">SSL</span> support.
+          </p>
+          <p>
+            <span><strong class="command">chown root:root
+            ...</strong></span>: This command changes the ownership of some
+            installed files, the result of building the package as a user
+            other than root.
+          </p>
+          <p>
+            <span><strong class="command">chown -R apache:apache
+            /srv/www</strong></span>: By default, the installation process
+            installs files (documentation, error messages, default icons,
+            etc.) with the ownership of the user that extracted the files
+            from the tar file. If you want to change the ownership to another
+            user, you should do so at this point. The only requirement is
+            that the document directories need to be accessable by the
+            <span><strong class="command">httpd</strong></span> process with
+            (r-x) permissions and files need to be readable (r--) by the
+            apache user.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Configuring Apache
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="apache-config" name="apache-config"></a>Config
+                    files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/apache/*</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2586519" name="id2586519"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The main configuration file is named <tt class=
+              "filename">httpd.conf</tt>. Modify it to run the server as a
+              dedicated user:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">sed -i -e "s%User nobody%User apache%" \
+       -e "s%^Group #-1%Group apache%" \
+    /etc/apache/httpd.conf</strong></span></kbd></pre>
+            <p>
+              See <a href=
+              "http://httpd.apache.org/docs-2.0/configuring.html"><span class="url">
+              http://httpd.apache.org/docs-2.0/configuring.html</span></a>
+              for detailed instructions on customizing your <span class=
+              "application">Apache</span> <span class="acronym">HTTP</span>
+              server.
+            </p>
+            <p>
+              There's a problem with the ISAPI <span class=
+              "acronym">DSO</span> module caused from compiling with
+              <span class="application"><span class=
+              "acronym">GCC</span></span>-3.4.1. Comment out the module from
+              the configuration file with the following command:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">sed -i -e "s/^LoadModule isapi_module/# &amp;/" \
+    /etc/apache/httpd.conf</strong></span></kbd></pre>
+            <p>
+              <a id="apache-init" name="apache-init"></a>If you want the
+              <span class="application">Apache</span> server to start
+              automatically when the system is booted, install the <tt class=
+              "filename">/etc/rc.d/init.d/apache</tt> init script included in
+              the <a href=
+              "../introduction/bootscripts.html">blfs-bootscripts-6.0</a>
+              package.
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">make install-apache</strong></span></kbd></pre>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <div class="segmentedlist">
+            <div class="seglistitem">
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Programs:</span></strong> <span class="seg">ab, apachectl,
+                apr-config, apu-config, apxs, checkgid, dbmmanage, htdbm,
+                htdigest, htpasswd, httpd, instdso.sh, logresolve and
+                rotatelogs</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Libraries:</span></strong> <span class="seg">libapr-0.[so,a],
+                libaprutil-0.[so,a] and /usr/lib/apache/*.so</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Directories:</span></strong> <span class="seg">/etc/apache,
+                /srv/www, /usr/include/apache, /usr/lib/apache and
+                /var/log/apache</span>
+              </div>
+            </div>
+          </div>
+          <div class="variablelist">
+            <h3>
+              <a id="id2785161" name="id2785161"></a>Short Descriptions
+            </h3>
+            <dl>
+              <dt>
+                <a id="ab" name="ab"></a><span class=
+                "term"><span><strong class=
+                "command">ab</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a tool for benchmarking your <span class=
+                  "application">Apache</span> <span class=
+                  "acronym">HTTP</span> server.
+                </p>
+              </dd>
+              <dt>
+                <a id="apachectl" name="apachectl"></a><span class=
+                "term"><span><strong class=
+                "command">apachectl</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a front end to the <span class=
+                  "application">Apache</span> <span class=
+                  "acronym">HTTP</span> server which is designed to help the
+                  administrator control the functioning of the <span class=
+                  "application">Apache</span> httpd daemon.
+                </p>
+              </dd>
+              <dt>
+                <a id="apxs" name="apxs"></a><span class=
+                "term"><span><strong class=
+                "command">apxs</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a tool for building and installing extension modules for
+                  the <span class="application">Apache</span> <span class=
+                  "acronym">HTTP</span> server.
+                </p>
+              </dd>
+              <dt>
+                <a id="dbmanage" name="dbmanage"></a><span class=
+                "term"><span><strong class=
+                "command">dbmanage</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is used to create and update the <tt class=
+                  "filename">DBM</tt> format files used to store usernames
+                  and passwords for basic authentication of <span class=
+                  "acronym">HTTP</span> users.
+                </p>
+              </dd>
+              <dt>
+                <a id="htdigest" name="htdigest"></a><span class=
+                "term"><span><strong class=
+                "command">htdigest</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is used to create and update the flat-files used to store
+                  usernames, realms and passwords for digest authentication
+                  of <span class="acronym">HTTP</span> users.
+                </p>
+              </dd>
+              <dt>
+                <a id="htpasswd" name="htpasswd"></a><span class=
+                "term"><span><strong class=
+                "command">htpasswd</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is used to create and update the flat-files used to store
+                  usernames and passwords for basic authentication of
+                  <span class="acronym">HTTP</span> users.
+                </p>
+              </dd>
+              <dt>
+                <a id="httpd" name="httpd"></a><span class=
+                "term"><span><strong class=
+                "command">httpd</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is the <span class="application">Apache</span> <span class=
+                  "acronym">HTTP</span> server program.
+                </p>
+              </dd>
+              <dt>
+                <a id="instdso.sh" name="instdso.sh"></a><span class=
+                "term"><span><strong class=
+                "command">instdso.sh</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a script which installs <span class=
+                  "application">Apache</span> <span class=
+                  "acronym">DSO</span> modules.
+                </p>
+              </dd>
+              <dt>
+                <a id="logresolve" name="logresolve"></a><span class=
+                "term"><span><strong class=
+                "command">logresolve</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a post-processing program to resolve <span class=
+                  "acronym">IP</span>-addresses in <span class=
+                  "application">Apache</span>'s access log files.
+                </p>
+              </dd>
+              <dt>
+                <a id="rotatelogs" name="rotatelogs"></a><span class=
+                "term"><span><strong class=
+                "command">rotatelogs</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a simple program for use in conjunction with
+                  <span class="application">Apache</span>'s piped log file
+                  feature.
+                </p>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="postgresql.html" title=
+          "PostgreSQL-7.4.6">Prev</a>
+          <p>
+            PostgreSQL-7.4.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="php.html" title="PHP-5.0.3">Next</a>
+          <p>
+            PHP-5.0.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="content.html" title=
+          "Part&nbsp;VII.&nbsp;Content Serving">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

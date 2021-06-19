@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      XviD-1.0.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="liba52.html" title="liba52-0.7.4">Prev</a>
+          <p>
+            liba52-0.7.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xine-lib.html" title=
+          "xine Libraries-1.0">Next</a>
+          <p>
+            xine Libraries-1.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="libdriv.html" title=
+          "Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="xvid" name="xvid"></a>
+        <h1 class="sect1">
+          XviD-1.0.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to XviD
+          </h2>
+        </div>
+        <p>
+          <span class="application">XviD</span> is a <span class=
+          "acronym">MPEG</span>-4 compliant video <span class=
+          "acronym">CODEC</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2720212" name="id2720212"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://files.xvid.org/downloads/xvidcore-1.0.2.tar.bz2"><span class="url">
+                  http://files.xvid.org/downloads/xvidcore-1.0.2.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 Sum: e8ffc32146991fcff286ccdcd6a16a49
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 541 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 7.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.19 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2496480" name="id2496480"></a><span class=
+                  "application">XviD</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2755242" name="id2755242"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/NASM.html">NASM-0.98.38</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of XviD
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">XviD</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">cd build/generic &amp;&amp;
+./configure --prefix=/usr &amp;&amp;
+make  &amp;&amp;
+make install &amp;&amp;
+ln -sf libxvidcore.so.4.0 /usr/lib/libxvidcore.so.4 &amp;&amp;
+ln -sf libxvidcore.so.4 /usr/lib/libxvidcore.so</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">ln -s libxvidcore.so.4
+          /usr/lib/libxvidcore.so</strong></span>: This command makes
+          applications linked against <tt class="filename">.so</tt> names,
+          link to <tt class="filename">.so.<em class=
+          "replaceable"><tt>MAJOR</tt></em></tt>. This ensures better binary
+          compatibility, as <span class="application">XviD</span> developers
+          take care not changing the <em class=
+          "replaceable"><tt>MAJOR</tt></em> number until there is an
+          incompatible <span class="acronym">ABI</span> change.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">XviD</span> core package contains the
+          <tt class="filename">libxvidcore</tt> library.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2767857" name="id2767857"></a>libxvidcore
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libxvidcore</tt> provides functions to
+            encode and decode most <span class="acronym">MPEG</span>-4 video
+            data.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-01-10 10:48:41 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="liba52.html" title="liba52-0.7.4">Prev</a>
+          <p>
+            liba52-0.7.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xine-lib.html" title=
+          "xine Libraries-1.0">Next</a>
+          <p>
+            xine Libraries-1.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="libdriv.html" title=
+          "Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

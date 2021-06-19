@@ -1,0 +1,12 @@
+#!/bin/bash
+set +h
+set -e
+
+cd $PKGDIR
+sed -i 's@Sending processes@& configured via /etc/inittab@g' src/init.c
+sed -i -e '/utmpdump/d' \
+       -e '/mountpoint/d' src/Makefile
+make -C src
+make -C src install
+echo -e "\n\nTotalseconds: $SECONDS\n"
+exit

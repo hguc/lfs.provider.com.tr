@@ -1,0 +1,197 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      which-2.16 and alternatives
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;11.&nbsp;System Utilities</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="hdparm.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="unzip.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          which-2.16 and alternatives
+        </h1>
+      </div>
+      <p>
+        The presence or absence of the which program in the main <span class=
+        "acronym">LFS</span> book is probably one of the most contentious
+        issues we have on the mailing lists. It has resulted in at least one
+        flame war in the past. To hopefully put an end to this once and for
+        all, we here present two of the options for equipping your system
+        with "which". The question of which "which" is for you to decide.
+      </p>
+      <p>
+        The first option is to install the actual <span class=
+        "acronym">GNU</span> program <span class=
+        "emphasis"><em>which</em></span>.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to which
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2704774" name="id2704774"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.xs4all.nl/~carlo17/which/which-2.16.tar.gz">http://www.xs4all.nl/~carlo17/which/which-2.16.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnu.org/gnu/which/which-2.16.tar.gz">ftp://ftp.gnu.org/gnu/which/which-2.16.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 123 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 940 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.03 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of which
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">which</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">which</span> package contains
+          <span><b class="command">which</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2705862" name="id2705862"></a>which
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">which</b></span> shows the full path of
+            (shell) commands.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            The 'which' script
+          </h3>
+        </div>
+        <p>
+          The second option (for those who don't want to install the program)
+          is to create a simple script:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /usr/bin/which &lt;&lt; "EOF"</b></span>
+#!/bin/bash
+type -pa "$@" | head -n 1 ; exit ${PIPESTATUS[0]}
+<span><b class="command">EOF
+chmod 755 /usr/bin/which
+chown root:root /usr/bin/which</b></span></tt>
+</pre>
+        <p>
+          This should work OK and is probably the easiest solution for most
+          cases, but is not the most comprehensive implementation.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="hdparm.html">Prev</a><br />
+        hdparm-5.5
+      </div>
+      <div class="next">
+        <a accesskey="n" href="unzip.html">Next</a><br />
+        UnZip-5.51
+      </div>
+      <div class="up">
+        <a accesskey="u" href="sysutils.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

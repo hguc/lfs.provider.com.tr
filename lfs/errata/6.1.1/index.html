@@ -1,0 +1,60 @@
+<!--#set var="pageTitle" value="LFS Errata" -->
+<!--#include virtual="/lfs/header.html" -->
+<!--#include virtual="/lfs/menu.html" -->
+    <div class="main">
+     <h1>Errata for the 6.1.1 Version of the LFS Book</h1>
+
+<!--       <p>No known errata at this time.</p> -->
+
+<!-- TEMPLATE
+       <h2>Known Security Vulnerabilities</h2>
+         <ul>
+            <li><p>Item 1</p></li>
+            <li><p>Item 2</p></li>
+         </ul>
+
+       <h2>Miscellaneous Errata</h2>
+         <ul>
+           <li><p>Item 1</p></li>
+           <li><p>Item 2</p></li>
+         </ul>
+
+     END TEMPLATE -->
+
+       <h2>Known Security Vulnerabilities</h2>
+         <ul>
+           <li><p>A buffer overflow vulnerability in Tar versions from 1.14
+               through 1.15.90 has been identified <a
+               href="http://www.cve.mitre.org/cgi-bin/cvename.cgi?name=CVE-2006-0300">here</a>,
+               and it is recommended to apply this <a
+               href="http://www.linuxfromscratch.org/patches/downloads/tar/tar-1.15.1-security_fixes-1.patch">patch</a>.
+               </p></li>
+
+            <li><p>A buffer overflow vulnerability has been identified in
+                the `sprintf' function of Perl-5.8.7.  Details can be found 
+                <a 
+                href="http://www.perlfoundation.org/news/2005/sprintf_patch_released.html">here</a>, 
+                and it is recommended to apply this <a 
+                href="http://www.linuxfromscratch.org/patches/downloads/perl/perl-5.8.7-sprintf_vulnerability-1.patch">patch</a>.
+                </p></li>
+         </ul>
+
+       <h2>Miscellaneous Errata</h2>
+         <ul>
+           <li><p>Compiling gcc-3.4.3 while running a 2.6.12 or later kernel
+               will result in testsuite failures due to a new kernel feature.
+               Use the patch located <a 
+               href="http://www.linuxfromscratch.org/patches/downloads/gcc/gcc-3.4.3-pch-1.patch">here</a>
+               </p></li>
+           <li><p>Tcl's configure script has a syntax error.  Correct it by
+               executing this sed command right before running configure:</p>
+               <p class="cmd">&nbsp;sed -i "s/relid'/relid/" configure</p></li>
+           <li><p>The Module-Init-Tools instructions contain a tar command for 
+               unpacking the testsuite tarball. The tar command has a 
+               --strip-path=1 option - this in incorrect. The correct option is
+               --strip-components=1.</p></li>
+         </ul>
+
+
+
+<!--#include virtual="/common/footer.html" -->

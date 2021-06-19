@@ -1,0 +1,292 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      rsync-2.6.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;22.&nbsp;Other Server Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="openssh.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="openldap.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          rsync-2.6.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to rsync
+          </h3>
+        </div>
+        <p>
+          The <span class="application">rsync</span> package contains the
+          <span><b class="command">rsync</b></span> utility. This is useful
+          for synchronizing large file archives over a network.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2856392" name="id2856392"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://rsync.samba.org/ftp/rsync/rsync-2.6.2.tar.gz">http://rsync.samba.org/ftp/rsync/rsync-2.6.2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://gd.tuwien.ac.at/utils/admin-tools/rsync/rsync-2.6.2.tar.gz">
+                  ftp://gd.tuwien.ac.at/utils/admin-tools/rsync/rsync-2.6.2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 504 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 6.5 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.20 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2856955" name="id2856955"></a><span class=
+                  "application">rsync</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2856980" name="id2856980"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/popt.html">popt-1.7</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of rsync
+          </h3>
+        </div>
+        <p>
+          For security reasons, running the <span class=
+          "application">rsync</span> server as an unprivileged user and group
+          is encouraged. Create the rsyncd user and group with the following
+          commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">groupadd rsyncd &amp;&amp;
+useradd -c rsyncd -d /home/rsync -g rsyncd -s /bin/false rsyncd</b></span>
+</tt>
+</pre>
+        <p>
+          Install <span class="application">rsync</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install </b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring rsync
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2856903" name="id2856903"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/rsyncd.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2856918" name="id2856918"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This is a simple download-only configuration. See the rsyncd
+            man-page for additional options (i.e., user authentication).
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /etc/rsyncd.conf &lt;&lt; "EOF"</b></span>
+# This is a basic rsync configuration file
+# It exports a single module without user authentication.
+
+motd file = /home/rsync/welcome.msg
+use chroot = yes
+
+[localhost]
+    path = /home/rsync
+    comment = Default rsync module
+    read only = yes
+    list = yes
+    uid = rsyncd
+    gid = rsyncd
+
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2856473" name="id2856473"></a>rsyncd init.d script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Note that you only want to start the <span class=
+            "application">rsync</span> server if you want to provide a
+            <span class="application">rsync</span> archive on your machine.
+            The <span class="application">rsync</span> client doesn't need
+            this script to be used.
+          </p>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/rsyncd</tt>
+            init script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-rsyncd</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">rsync</span> package contains
+          <span><b class="command">rsync</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2856499" name="id2856499"></a>rsync
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="application">rsync</span> is a replacement for
+            <span><b class="command">rcp</b></span> (and <span><b class=
+            "command">scp</b></span>) that has many more features. It uses
+            the "rsync algorithm" which provides a very fast method of
+            syncing remote files. It does this by sending just the
+            differences in the files across the link, without requiring that
+            both sets of files are present at one end of the link beforehand.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="openssh.html">Prev</a><br />
+        OpenSSH-3.8.1p1
+      </div>
+      <div class="next">
+        <a accesskey="n" href="openldap.html">Next</a><br />
+        OpenLDAP-2.1.30
+      </div>
+      <div class="up">
+        <a accesskey="u" href="other.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

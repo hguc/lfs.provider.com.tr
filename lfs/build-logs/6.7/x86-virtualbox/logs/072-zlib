@@ -1,0 +1,82 @@
+Sun Sep 19 00:55:17 UTC 2010
+
+KB: 776140	/
+
+Checking for gcc...
+Checking for shared library support...
+Building shared library libz.so.1.2.5 with gcc.
+Checking for off64_t... Yes.
+Checking for fseeko... Yes.
+Checking for unistd.h... Yes.
+Checking whether to use vs[n]printf() or s[n]printf()... using vs[n]printf().
+Checking for vsnprintf() in stdio.h... Yes.
+Checking for return value of vsnprintf()... Yes.
+Checking for attribute(visibility) support... Yes.
+make[1]: Entering directory `/sources/zlib-1.2.5'
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o example.o example.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o adler32.o adler32.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o compress.o compress.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o crc32.o crc32.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o deflate.o deflate.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o gzclose.o gzclose.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o gzlib.o gzlib.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o gzread.o gzread.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o gzwrite.o gzwrite.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o infback.o infback.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o inffast.o inffast.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o inflate.o inflate.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o inftrees.o inftrees.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o trees.o trees.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o uncompr.o uncompr.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o zutil.o zutil.c
+ar rc libz.a adler32.o compress.o crc32.o deflate.o gzclose.o gzlib.o gzread.o gzwrite.o infback.o inffast.o inflate.o inftrees.o trees.o uncompr.o zutil.o 
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1 -o example example.o -L. libz.a
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1   -c -o minigzip.o minigzip.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1 -o minigzip minigzip.o -L. libz.a
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/adler32.o adler32.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/compress.o compress.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/crc32.o crc32.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/deflate.o deflate.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/gzclose.o gzclose.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/gzlib.o gzlib.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/gzread.o gzread.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/gzwrite.o gzwrite.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/infback.o infback.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/inffast.o inffast.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/inflate.o inflate.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/inftrees.o inftrees.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/trees.o trees.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/uncompr.o uncompr.c
+gcc -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -DPIC -c -o objs/zutil.o zutil.c
+gcc -shared -Wl,-soname,libz.so.1,--version-script,zlib.map -mstackrealign -fPIC -O3 -fPIC -D_LARGEFILE64_SOURCE=1 -o libz.so.1.2.5 adler32.lo compress.lo crc32.lo deflate.lo gzclose.lo gzlib.lo gzread.lo gzwrite.lo infback.lo inffast.lo inflate.lo inftrees.lo trees.lo uncompr.lo zutil.lo  -lc -L. libz.a
+rm -f libz.so libz.so.1
+ln -s libz.so.1.2.5 libz.so
+ln -s libz.so.1.2.5 libz.so.1
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1 -o examplesh example.o -L. libz.so.1.2.5
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1 -o minigzipsh minigzip.o -L. libz.so.1.2.5
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1 -D_FILE_OFFSET_BITS=64 -c -o example64.o example.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1 -o example64 example64.o -L. libz.a
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1 -D_FILE_OFFSET_BITS=64 -c -o minigzip64.o minigzip.c
+gcc -mstackrealign -fPIC -O3 -D_LARGEFILE64_SOURCE=1 -o minigzip64 minigzip64.o -L. libz.a
+make[1]: Leaving directory `/sources/zlib-1.2.5'
+make[1]: Entering directory `/sources/zlib-1.2.5'
+cp libz.a /usr/lib
+cp libz.so.1.2.5 /usr/lib
+cd /usr/lib; chmod u=rw,go=r libz.a
+cp zlib.3 /usr/share/man/man3
+chmod 644 /usr/share/man/man3/zlib.3
+cp zlib.pc /usr/lib/pkgconfig
+chmod 644 /usr/lib/pkgconfig/zlib.pc
+cp zlib.h zconf.h /usr/include
+chmod 644 /usr/include/zlib.h /usr/include/zconf.h
+make[1]: Leaving directory `/sources/zlib-1.2.5'
+`/usr/lib/libz.so.1' -> `/lib/libz.so.1'
+`/usr/lib/libz.so.1.2.5' -> `/lib/libz.so.1.2.5'
+`/usr/lib/libz.so' -> `../../lib/libz.so.1.2.5'
+
+
+Totalseconds: 19
+
+
+KB: 779984	/
+

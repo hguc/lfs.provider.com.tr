@@ -1,0 +1,303 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      gnome-mount-0.4
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;32.&nbsp;GNOME Additional Packages
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="gnome-system-monitor.html" title=
+          "GNOME System Monitor-2.14.5">Prev</a>
+          <p>
+            GNOME System Monitor-2.14.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="nautilus-cd-burner.html" title=
+          "Nautilus CD Burner-2.14.3">Next</a>
+          <p>
+            Nautilus CD Burner-2.14.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="add.html" title=
+          "Chapter&nbsp;32.&nbsp;GNOME Additional Packages">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="gnome-mount" name="gnome-mount"></a>
+        <h1 class="sect1">
+          gnome-mount-0.4
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to gnome-mount
+          </h2>
+        </div>
+        <p>
+          The <span class="application">gnome-mount</span> package contains
+          programs for mounting, unmounting and ejecting storage devices. The
+          goal for <span class="application">gnome-mount</span> is to get the
+          appropriate GNOME software (such as <span class=
+          "application">gnome-volume-manager</span> and <span class=
+          "application">GNOME-VFS</span>) to use this instead of invoking
+          <span><strong class=
+          "command">mount</strong></span>/<span><strong class=
+          "command">umount</strong></span>/<span><strong class=
+          "command">eject</strong></span> or direct <span class=
+          "application">HAL</span> invoking methods.
+        </p>
+        <p>
+          All the <span class="application">gnome-mount</span> programs
+          utilize the methods on <span class="application">HAL</span> and as
+          such run unprivileged. The rationale for <span class=
+          "application">gnome-mount</span> is to have a centralized place (in
+          <span class="application">GConf</span>) where settings (e.g., mount
+          options and mount locations) are maintained.
+        </p>
+        <h3>
+          <a id="id2830260" name="id2830260"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://people.freedesktop.org/~david/dist/gnome-mount-0.4.tar.gz">
+                <span class=
+                "url">http://people.freedesktop.org/~david/dist/gnome-mount-0.4.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 75f260ea6b0ec3c5e0af3c722fbd9568
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 364 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 3.1 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2883303" name="id2883303"></a>gnome-mount Dependencies
+        </h3>
+        <h4>
+          <a id="id2989604" name="id2989604"></a>Required
+        </h4>
+        <p class="required">
+          <a href="gnome-keyring.html">gnome-keyring-0.4.9</a>, <a href=
+          "libgnomeui.html">libgnomeui-2.14.1</a>, and <a href=
+          "../general/hal.html">HAL-0.5.7.1</a>
+        </p>
+        <h4>
+          <a id="id2936630" name="id2936630"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="../general/intltool.html">intltool-0.34.2</a> and <a href=
+          "nautilus.html">Nautilus-2.14.3</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/gnome-mount"><span class="url">
+          http://wiki.linuxfromscratch.org/blfs/wiki/gnome-mount</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of gnome-mount
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">gnome-mount</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=$(pkg-config --variable=prefix ORBit-2.0) \
+            --sysconfdir=/etc/gnome/2.14.3 &amp;&amp;
+make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--prefix=$(pkg-config --variable=prefix
+          ORBit-2.0)</tt></em>: Setting the prefix using this parameter
+          instead of with <tt class="envar">$GNOME_PREFIX</tt> will ensure
+          that the prefix is consistent with the installation environment and
+          the package will be installed in the correct location.
+        </p>
+        <p>
+          <em class="parameter"><tt>--sysconfdir=/etc/gnome/2.14.3</tt></em>:
+          This parameter causes the configuration files to be installed in
+          <tt class="filename">/etc/gnome/2.14.3</tt> instead of <tt class=
+          "filename">$GNOME_PREFIX/etc</tt>. Additionally (if applicable),
+          the parameter ensures that the <span class=
+          "application">GConf</span>-2 database is correctly updated.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">gnome-eject,
+              gnome-mount and gnome-umount</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class=
+              "seg">libgnome-mount.{so,a} Nautilus extention</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg"><tt class=
+              "envar">$GNOME_PREFIX</tt>/share/gnome-mount</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2859030" name="id2859030"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="gnome-mount-prog" name=
+                  "gnome-mount-prog"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnome-mount</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to automatically mount storage media and other
+                    removable media.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnome-umount" name="gnome-umount"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnome-umount</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to <span><strong class=
+                    "command">gnome-mount</strong></span> used to
+                    automatically unmount storage media and other removable
+                    media.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnome-eject" name="gnome-eject"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnome-eject</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to <span><strong class=
+                    "command">gnome-mount</strong></span> used to
+                    automatically open and close (if supported by the drive)
+                    the drive door and tray in CD/DVD drives.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-18 13:38:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnome-system-monitor.html" title=
+          "GNOME System Monitor-2.14.5">Prev</a>
+          <p>
+            GNOME System Monitor-2.14.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="nautilus-cd-burner.html" title=
+          "Nautilus CD Burner-2.14.3">Next</a>
+          <p>
+            Nautilus CD Burner-2.14.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="add.html" title=
+          "Chapter&nbsp;32.&nbsp;GNOME Additional Packages">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

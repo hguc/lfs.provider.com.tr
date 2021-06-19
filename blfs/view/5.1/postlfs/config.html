@@ -1,0 +1,1014 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;3.&nbsp;After LFS Configuration Issues
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;II.&nbsp;Post LFS Configuration and Extra Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="postlfs.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="skel.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          After LFS Configuration Issues
+        </h1>
+      </div>
+      <p>
+        The intention of <span class="acronym">LFS</span> is to provide a
+        basic system which you can build upon. There are several things,
+        about tidying up the system, which many people wonder about once they
+        have done the base install. We hope to cover these issues in this
+        chapter.
+      </p>
+      <p>
+        Most people coming from a Windows background to Linux find the
+        concept of text-only configuration files slightly strange. In Linux,
+        just about all configuration is done via text files. The majority of
+        these files can be found in the <tt class="filename">/etc</tt>
+        hierarchy. There are often graphical configuration programs available
+        for different subsystems but most are simply pretty front ends to the
+        process of editing the file. The advantage of text-only configuration
+        is that you can edit parameters using your favorite text editor,
+        whether that be vim, emacs or anything else.
+      </p>
+      <p>
+        The first task is making a recovery diskette because it's the most
+        critical need. Then the system is configured to ease addition of new
+        users, in "Configuring for Adding Users", because this can affect the
+        choices you make in the three subsequent topics - "/etc/inputrc",
+        "The Bash Shell Startup Files" and "/etc/vimrc, ~/.vimrc".
+      </p>
+      <p>
+        The remaining topics, "/etc/issue (Customizing your logon)",
+        "/etc/shells", "Random number generation", "Man page issues" and
+        "Info page issues" are then addressed, in that order. They don't have
+        much interaction with the other topics in this chapter.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h1 class="sect1">
+            Creating a Custom Boot Disk
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Decent Rescue Boot Disk Needs
+            </h3>
+          </div>
+          <p>
+            This section is really about creating a <span class=
+            "emphasis"><em>rescue</em></span> diskette. As the name
+            <span class="emphasis"><em>rescue</em></span> implies, the host
+            system has a problem, often lost partition information or
+            corrupted file systems, that prevents it from booting and/or
+            operating normally. For this reason, you <span class=
+            "emphasis"><em>must not</em></span> depend on resources from the
+            host being "rescued". To presume that any given partition or hard
+            drive <span class="emphasis"><em>will</em></span> be available is
+            a risky presumption.
+          </p>
+          <p>
+            Heeding the warning, the rescue disk created here has no
+            dependency on the host system's resources, other than basic
+            bootability and hardware soundness. At a minimum, the most common
+            sorts of failures requiring a rescue boot disk should be
+            addressed by the contents of the boot disk. This would include
+            the common loss of partitioning (master boot record is lost or
+            corrupted), file system corruption, and the need to allow
+            creation and editing of files that may have been lost or
+            corrupted, possibly as an effect of the other two problems.
+          </p>
+          <p>
+            Additional utilities should be available to search for text or
+            files, copy, move and remove files, and many other normal
+            operations that might be expected to be needed when
+            reconstructing.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              This Minimal Decent Rescue Disk
+            </h3>
+          </div>
+          <p>
+            The intent here is to create a "rescue boot disk" that will
+            support the common operations listed above. These functions are
+            provided by including selected executables from <span class=
+            "application"><a href=
+            "http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">busybox</a></span>
+            and <span class="application"><a href=
+            "http://freshmeat.net/projects/e2fsprogs/">e2fsprogs</a></span>.
+            A basic editor and rudimentary disk partitioning utility may also
+            be optionally included.
+          </p>
+          <p>
+            This, however, is not the limit. A minimal disk is described
+            here, but you can add anything you can fit on the floppy.
+            Furthermore, if one floppy is not enough to meet your needs, you
+            can make a multi-diskette rescue set that means, essentially, the
+            sky is the limit. This is discussed below. The number of other
+            possible variations are just too numerous to mention here.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Build the Rescue Boot Disk
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2570668" name="id2570668"></a>Prerequisites
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              You should have known-good floppy diskettes available. Some
+              people prefer to use the <span><b class=
+              "command">fdformat</b></span> command to prepare these because
+              it also does a verification. See the man page for more details.
+              Another good idea is to always prepare duplicates of the rescue
+              diskette. Media does deteriorate.
+            </p>
+            <p>
+              These instructions presume a base <span class=
+              "acronym">LFS</span> install using ext2/ext3 file systems.
+            </p>
+            <p>
+              You need to have loopback device support enabled in your host's
+              kernel to use this procedure.
+            </p>
+            <p>
+              You should make a custom kernel that includes only those
+              features needed to rescue your system, so it will have the
+              least size. No sense in building in support for things like
+              <span class="application">XFree86</span>, <span class=
+              "application">DRI</span>, etc, as most rescues are performed
+              from the command prompt. Along the same lines, if you have
+              <a href="../general/gcc2.html">GCC-2.95.3</a>, it is known to
+              produce smaller kernels. So you might want to use that compiler
+              for this kernel. If you do so, don't overlook any loadable
+              modules (which are not addressed here) you might need - they
+              need to be compiled with the same compiler used to make the
+              kernel.
+            </p>
+            <p>
+              The rescue image must include support for the file system of
+              your choice (we presume ext2/3 here), ramdisk and initial
+              ramdisk (initrd). Disable everything that you can in the kernel
+              configuration. You should keep support for the proc file system
+              and tempfs file system enabled because of their general
+              utility. The proc file system is needed for the <span><b class=
+              "command">mount</b></span> to report properly.
+            </p>
+            <p>
+              If you install <span class="emphasis"><em>only</em></span> the
+              minimal set of components shown in this document, you will need
+              a kernel that is 643 or fewer blocks in size. If you want the
+              optional programs - a very basic editor, like <span><b class=
+              "command">ed</b></span>, and rudimentary disk partitioning,
+              like <span><b class="command">sfdisk</b></span> - the kernel
+              will need to be 595 or fewer blocks in size. This should not be
+              a major problem unless your needs are fairly esoteric. On the
+              system used to develop this version of the procedures, using
+              only ext2 file systems and not using networking or <span class=
+              "acronym">CD</span>s for recovery, the kernel image is only 481
+              blocks. And there may be more to gain - it has not been closely
+              examined for additional gains.
+            </p>
+            <p>
+              This kernel image will be called "rescueimage" hereinafter. You
+              can actually name your image anything you like and just use its
+              name instead in any commands that include "rescueimage".
+            </p>
+            <p>
+              If you can not get your rescueimage down to the size needed to
+              allow all you need on the ramdisk image, don't fret. You can
+              always build a two diskette set, one boot and one root
+              diskette. The kernel will prompt you to insert the root file
+              system diskette. This will allow room for a compressed ramdisk
+              image of 1440 blocks and a rescueimage of the same size.
+            </p>
+            <p>
+              The rescueimage size limits given above are likely to vary as
+              local system-specific configurations change. Use them only as a
+              guideline and not as gospel. The size of rescueimage as shown
+              by <span><b class="command">ls -sk</b></span> is only an
+              approximation because of some "overhead". On the system used to
+              develop this version of these procedures, that command shows
+              488 blocks but the actual number of blocks written is only 480
+              and a fraction, which means that 481 blocks are actually used.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2570818" name="id2570818"></a>Rescue Disk Build
+                    Process
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The basic process will be:
+            </p>
+            <div class="itemizedlist">
+              <ul>
+                <li>
+                  <p>
+                    make a mount point for a file system
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    make an empty file to hold the file system
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    bind the empty file to a loopback device
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    make a 4MB file system
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    mount the file system
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    add components to the file system
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    make the compressed initrd
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    join rescueimage and initrd onto a diskette
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <p>
+              The initial ramdisk will be automatically loaded at boot time
+              if setup is done correctly.
+            </p>
+            <p>
+              <span class="emphasis"><em>Make a mount point and an empty file
+              to hold a file system</em></span>
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">mkdir -p /mnt/loop1
+dd if=/dev/zero of=/tmp/rfloppy bs=1k count=4096</b></span></tt>
+</pre>
+            <p>
+              <span class="emphasis"><em>Command explanations</em></span>
+            </p>
+            <p>
+              <span><b class="command">dd</b></span>: This is a generalized
+              input-to-output copy utility that also has many transformation
+              capabilities.
+            </p>
+            <p>
+              <i class="parameter"><tt>if=/dev/zero</tt></i>: This parameter
+              assigns <span><b class="command">dd</b></span>'s input file to
+              a device that returns an infinite stream of zeroes.
+            </p>
+            <p>
+              <i class="parameter"><tt>of=/tmp/rfloppy</tt></i>: This
+              parameter directs <span><b class="command">dd</b></span>'s
+              output to <tt class="filename">/tmp/rfloppy</tt>.
+            </p>
+            <p>
+              <i class="parameter"><tt>bs=1k count=4096</tt></i>: These
+              parameters tell <span><b class="command">dd</b></span> to read
+              and write in "chunks" of 1024 bytes and process 4096 "chunks".
+            </p>
+            <p>
+              <span class="emphasis"><em>Bind the file to a loopback device,
+              make a file system and mount it.</em></span>
+            </p>
+            <p>
+              The reason these commands are used is that they work regardless
+              of the version of <span><b class="command">mount</b></span>
+              (older ones don't have the <tt class="userinput">-o loop</tt>
+              option) or if <tt class="filename">/etc/mtab</tt> is symlinked
+              to <tt class="filename">/proc</tt> (which causes mount to be
+              unable to properly "unbind" a loop device, due to "lost"
+              information). An alternate set of commands is provided, after
+              these three commands, that you can use if you don't have either
+              of these situations.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">losetup /dev/loop1 /tmp/rfloppy
+mke2fs -m 0 -N 504 /dev/loop1
+mount -t ext2 /dev/loop1 /mnt/loop1</b></span></tt>
+</pre>
+            <p>
+              <span class="emphasis"><em>Command explanations</em></span>
+            </p>
+            <p>
+              <span><b class="command">losetup /dev/loop1
+              /tmp/rfloppy</b></span>: This command "binds" a loopback device
+              to the empty file.
+            </p>
+            <p>
+              <span><b class="command">mke2fs -m 0 -N 504
+              /dev/loop1</b></span>: This command makes an ext2 file system
+              on the loopback device (which really means it is created in the
+              file to which the loopback device is bound) and reserves no
+              blocks. The <tt class="userinput">-N 504</tt> parameter causes
+              only 504 inodes to be allocated, leaving more space for other
+              things needed in the file system.
+            </p>
+            <p>
+              <span><b class="command">mount -t ext2 /dev/loop1
+              /mnt/loop1</b></span>: This mounts the file system just
+              created, just as if it were a real device, like a hard drive or
+              diskette. This allows all the normal system I/O commands to
+              operate as if a real device were present.
+            </p>
+            <p>
+              If your <span><b class="command">mount</b></span> supports the
+              <tt class="option">-o loop</tt> option <span class=
+              "emphasis"><em>and</em></span> your <tt class=
+              "filename">/etc/mtab</tt> is a real file, rather than a symlink
+              to <tt class="filename">/proc</tt>, the three above commands
+              can be replaced by these next two commands.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">mke2fs -F -m 0 -N 504 /tmp/rfloppy
+mount -o loop /tmp/rfloppy /mnt/loop1</b></span></tt>
+</pre>
+            <p>
+              <span class="emphasis"><em>Command explanations</em></span>
+            </p>
+            <p>
+              <span><b class="command">mke2fs -F -m 0 -N 504
+              /tmp/rfloppy</b></span>: As before, a file system is made, with
+              only 504 inodes and no reserved blocks, that will be bound to a
+              loopback device. The <tt class="userinput">-F</tt> parameter
+              just suppresses an irritating question issued when
+              <span><b class="command">mke2fs</b></span> realizes that you
+              are not accessing a device.
+            </p>
+            <p>
+              <span><b class="command">mount -o loop /tmp/rfloppy
+              /mnt/loop1</b></span>: This command tells <span><b class=
+              "command">mount</b></span> to bind the named file to a loopback
+              device it automatically selects (the first available) and mount
+              the device on <tt class="filename">/mnt/loop1</tt>.
+            </p>
+            <p>
+              <span class="emphasis"><em>Add components to the file
+              system</em></span>
+            </p>
+            <p>
+              <span class="emphasis"><em>A cautionary note:</em></span> if
+              you are not running in a <span><b class=
+              "command">chroot</b></span> environment, be sure that you do
+              not accidentally omit the <tt class="filename">/mnt/loop1</tt>
+              reference in the commands. If you do so, you might replace the
+              equivalent components on your host with the components that are
+              installed by these procedures. Even if you are in a chroot
+              environment, you may need to be careful if the environment is
+              your freshly built <span class="acronym">LFS</span> system
+              which you intend to use as a host in the future.
+            </p>
+            <p>
+              First, to have as much free space as possible, remove the
+              <tt class="filename">lost+found</tt> directory, which is not
+              needed because it is only used by <span><b class=
+              "command">fsck</b></span>. Since <span><b class=
+              "command">fsck</b></span> will never be run on this file
+              system, it is unneeded.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">rmdir /mnt/loop1/lost+found/</b></span></tt>
+</pre>
+            <p>
+              Now make a minimal set of directories.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">mkdir /mnt/loop1/{dev,proc,etc,sbin,bin,lib,mnt,usr,var}</b></span></tt>
+</pre>
+            <p>
+              Add needed device files to the initrd image. If you use devfs,
+              the following command works well, as you only have the devices
+              you use anyway.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cp -dpR /dev/* /mnt/loop1/dev</b></span></tt>
+</pre>
+            <p>
+              If you used <span><b class="command">MAKEDEV</b></span> to
+              create your devices on your host, you'll want to use something
+              similar to this longer command, to minimize wasting space with
+              unneeded inodes.
+            </p>
+            <p>
+              <span class="emphasis"><em>You must modify this to suit your
+              rescueimage configuration and other needs.</em></span> For
+              example, you may need <span class="acronym">SCSI</span> devices
+              and may not need frame buffer devices or the pseudo-terminal
+              directory. Also, the number of hard drives and partitions that
+              you include should be the minimal that you need. Extensive
+              analysis has not been done on the list below, so there are more
+              inodes and space to be gained by "fine tuning" this set.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">mkdir /mnt/loop1/dev/pts
+cp -a \ 
+    /dev/null /dev/console \
+    /dev/fb[0-7] /dev/fd /dev/fd0 /dev/fd0h1440 /dev/full \
+    /dev/hda* /dev/hdb* /dev/hdc* /dev/hdd* /dev/initctl /dev/kmem \
+    /dev/loop[0-3] /dev/lp0 /dev/mem /dev/port \
+    /dev/psaux /dev/ram \
+    /dev/ram0 /dev/ram1 /dev/ram2 /dev/ram3 /dev/random /dev/rtc \
+    /dev/shm /dev/stderr /dev/stdin /dev/stdout /dev/tty \
+    /dev/tty[0-9] /dev/ttyS0 /dev/ttyS1 /dev/urandom /dev/zero \
+  /mnt/loop1/dev</b></span></tt>
+</pre>
+            <p>
+              <span class="emphasis"><em>What is needed in the <tt class=
+              "filename">/etc</tt> directory</em></span>
+            </p>
+            <p>
+              If you choose, you can copy all or selected parts of your
+              <tt class="filename">/etc/passwd</tt> and <tt class=
+              "filename">/etc/group</tt> files. But even if each is less than
+              1024 bytes, you will lose two inodes and two blocks of space on
+              the initial ramdisk. This only really matters because of trying
+              to squeeze everything onto a 1.44MB diskette. Every little bit
+              helps. The strategy taken here is to create these two files as
+              part of the rescue boot and initialization process. The
+              commands that make the two files will be embedded inside the
+              <tt class="filename">rcS</tt> script that <tt class=
+              "filename">linuxrc</tt> (really <span class=
+              "application"><a href=
+              "http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">busybox</a></span>
+              ) invokes after the initrd is loaded. This way no more inodes
+              or blocks are used on the diskette to carry these files.
+            </p>
+            <p>
+              Some might like to copy their <tt class=
+              "filename">/etc/rc*</tt> directory into the ramdisk image, but
+              this may have no value, other than archival use, in a
+              worst-case recovery scenario. If you want automatic
+              initialization of the system after repair, they may have some
+              value. But few people need or want this to happen. If the file
+              system on the hard drives are corrupted, what good will mount
+              scripts do? Some scripts may be useful, like access to a
+              network to copy over backup data when the hard drive's file
+              systems are usable again. The point is that you should copy
+              only the parts that you can use because space is at a premium
+              on the diskette.
+            </p>
+            <p>
+              Here, only the <tt class="filename">fstab</tt> will be
+              included. This is handy because it eases mounting of partitions
+              that may be useful and also can be examined and used as a guide
+              as to what is available and what may need reconstruction.
+              Because it may be larger than needed, you should edit it to
+              remove any useless entries and minimize commentary. No other
+              editing is needed because the boot scripts are not included and
+              no automatic mounting will be done using the <tt class=
+              "filename">fstab</tt>. If you decide to include some boot
+              scripts that might try to mount things, change the <tt class=
+              "filename">fstab</tt>'s entries to <span><b class=
+              "command">noauto</b></span> in the options field so they don't
+              cause an attempt to mount a potentially corrupt partition. Copy
+              it to <tt class="filename">/tmp</tt>, edit it as desired and
+              then:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cp -a /tmp/fstab /mnt/loop1/etc</b></span></tt>
+</pre>
+            <p>
+              Now the initialization script will be added. As mentioned
+              above, <span><b class="command">linuxrc</b></span> is symlinked
+              to <span class="application"><a href=
+              "http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">busybox</a></span>
+              . After the kernel and initial ramdisk have been loaded, the
+              kernel gives control to <span><b class=
+              "command">linuxrc</b></span> (<span class=
+              "application"><a href="http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">
+              busybox</a></span> ). It wants to run an <tt class=
+              "filename">/etc/init.d/rcS</tt> script to do any initial setup.
+            </p>
+            <p>
+              If you use devfsd, you will need to set up the <tt class=
+              "filename">rcS</tt> script to handle the devfsd startup. Put
+              the following commands in <tt class=
+              "filename">/mnt/loop1/etc/init.d/rcS</tt>. You may also want to
+              add some of the processes shown in the non-devfs version that
+              follows.
+            </p>
+            <pre class="screen">
+<tt class="userinput">#!/bin/sh
+mount -t devfs devfs /dev
+/sbin/devfsd /dev</tt>
+</pre>
+            <p>
+              If you don't use devfsd, but created a static <tt class=
+              "filename">/dev</tt> directory using <span><b class=
+              "command">MAKEDEV</b></span>, or any similar process, the
+              <tt class="filename">rcS</tt> script will do slightly different
+              things. Also, don't forget that it is creating the <tt class=
+              "filename">/etc/passwd</tt> and <tt class=
+              "filename">/etc/group</tt> files, thus saving space on the
+              diskette.
+            </p>
+            <p>
+              The script made next will mount <tt class=
+              "filename">/proc</tt>, turn on swap (no harm is done if it
+              fails), make the <tt class="filename">/etc/passwd</tt> and
+              <tt class="filename">/etc/group</tt> files, create a log
+              directory and turn on swapping. Create the script with:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">mkdir -p /mnt/loop1/etc/init.d
+cat &gt;/mnt/loop1/etc/init.d/rcS &lt;&lt; EOD</b></span>
+#!/bin/sh
+mount -t proc proc /proc
+swapon -a
+
+echo "root:x:0:0:root:/root:/bin/bash" &gt; /etc/passwd
+
+<span><b class="command">cat &gt; /etc/group &lt;&lt;EOF</b></span>
+root:x:0:
+bin:x:1:
+sys:x:2:
+kmem:x:3:
+tty:x:4:
+tape:x:5:
+daemon:x:6:
+floppy:x:7:
+disk:x:8:
+lp:x:9:
+dialout:x:10:
+audio:x:11:
+<span><b class="command">EOF
+chmod 644 /etc/passwd /etc/group</b></span>
+
+mkdir /var/log
+
+<span><b class="command">EOD
+chmod u+x /mnt/loop1/etc/init.d/rcS</b></span></tt>
+</pre>
+            <p>
+              Unless you add a lot to this script, which <span class=
+              "emphasis"><em>is</em></span> encouraged, the above should be
+              reasonably close to what you need.
+            </p>
+            <p>
+              <span class="emphasis"><em>Install packages</em></span>
+            </p>
+            <p>
+              There are two packages that must be installed. The <span class=
+              "application"><a href=
+              "http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">busybox</a></span>
+              package incorporates the core functions that provide a shell
+              and many basic utilities. A file system package, like
+              <span class="application"><a href=
+              "http://freshmeat.net/projects/e2fsprogs/">e2fsprogs</a></span>,
+              or a package for the file system you are using, will provide a
+              minimal set of utilities for file system checking and
+              reconstruction. The whole package will not be installed, but
+              only certain needed components.
+            </p>
+            <p>
+              If you use devfsd, you will also need to install that software.
+            </p>
+            <p>
+              Install <span class="application"><a href=
+              "http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">busybox</a></span>
+              into the initial ramdisk image. Busybox incorporates many Unix
+              utility program functions into a single small executable file.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">make &amp;&amp;
+make PREFIX=/mnt/loop1 install &amp;&amp;
+&gt; /mnt/loop1/var/utmp</b></span></tt>
+</pre>
+            <p>
+              A <tt class="filename">var/utmp</tt> is made because
+              <span class="application"><a href=
+              "http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">busybox</a></span>
+              needs it for the reboot command to work properly. If this file
+              doesn't exist when <span class="application"><a href=
+              "http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">busybox</a></span>
+              is started, the reboot command will not work. This would be a
+              bad thing for people that have no reset button available to
+              them.
+            </p>
+            <p>
+              If you use devfs to create devices on the fly and free up
+              precious inodes on the floppy, you'll also install devfsd to
+              facilitate the devices that <span class="application"><a href=
+              "http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">busybox</a></span>
+              expects to find. Use the following commands to do the install.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">mv GNUmakefile Makefile &amp;&amp;
+make &amp;&amp;
+make PREFIX=/mnt/loop1 install</b></span></tt>
+</pre>
+            <p>
+              <span class="emphasis"><em>Install part of <span class=
+              "application">e2fsprogs</span></em></span>
+            </p>
+            <p>
+              If you use the ext2 or ext3 (journaling) file system, you can
+              use the commands below to install the minimal functionality
+              that should allow you to get your hard drives usable again. If
+              you use ext3, keep in mind that it is a part of the
+              <span class="application">e2fsprogs</span> package and you can
+              get the components, which are mostly hard links, from the same
+              places shown below. If you use some other file system, such as
+              reiserfs, you should apply the <span class=
+              "emphasis"><em>principals</em></span> you see here to install
+              parts of that package instead.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">LDFLAGS='-s'
+mkdir build &amp;&amp;
+cd build &amp;&amp;
+../configure --prefix=/mnt/loop1/usr --with-root-prefix="" \
+    --disable-swapfs --disable-debugfs \
+    --enable-dynamic-e2fsck --disable-nls --disable-evms \
+    --disable-rpath &amp;&amp;
+make LDFLAGS="$LDFLAGS" &amp;&amp;
+strip -p --strip-unneeded --remove-section=.comment \
+    -o /mnt/loop1/sbin/mke2fs misc/mke2fs &amp;&amp;
+strip -p --strip-unneeded --remove-section=.comment \
+    -o /mnt/loop1/sbin/e2fsck e2fsck/e2fsck &amp;&amp;
+chmod 555 /mnt/loop1/sbin/{mke2fs,e2fsck}
+</b></span></tt>
+</pre>
+            <p>
+              <span class="emphasis"><em>Two useful utilities</em></span>
+            </p>
+            <p>
+              There are two very useful utilities that any rescue disk should
+              have, to help in faster and more accurate recovery. The first
+              is a partitioning utility. The <span><b class=
+              "command">sfdisk</b></span> program is used here because of its
+              small size and great power. Be warned though - it is not what
+              is considered to be "user friendly". But the <span><b class=
+              "command">fdisk</b></span> and <span><b class=
+              "command">cfdisk</b></span> programs are substantially larger
+              or require more shared objects, like <span class=
+              "application">ncurses</span> .
+            </p>
+            <p>
+              The second utility is an editor. Most graphical editors are
+              inherently too large and also require additional shared
+              objects. For this reason, <span><b class=
+              "command">ed</b></span> is used here. It is small, requires no
+              additional shared objects and is a regex-based editor that is
+              the ancestor to almost all subsequent editors that support
+              regex-based editing, whether graphical or not. It is a "context
+              editor" and offers powerful, but non-graphical, editing
+              features. There are many other editors that may be suitable -
+              feel free to use one of them instead.
+            </p>
+            <p>
+              Read the <span class="application">busybox</span> <tt class=
+              "filename">INSTALL</tt> and <tt class="filename">README</tt>
+              files to see how to include a <span><b class=
+              "command">vi</b></span> editor. It has not been investigated
+              here yet, so it may or may not easily fit onto a single
+              diskette image such as is made here.
+            </p>
+            <p>
+              You can install these or not, but it is important for you to
+              have some capability such as these offer. Exactly how you would
+              install the utilities you choose will have to be determined by
+              you.
+            </p>
+            <p>
+              <span><b class="command">Sfdisk</b></span> and <span><b class=
+              "command">ed</b></span> are installed by, essentially, copying
+              them from your host. Strip is used, just to assure that they
+              carry no "excess baggage", even though the base <span class=
+              "acronym">LFS</span> install should have stripped them already.
+              Use the following commands:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">strip -p --strip-unneeded --remove-section=.comment \
+    -o /mnt/loop1/sbin/sfdisk /sbin/sfdisk
+strip -p --strip-unneeded --remove-section=.comment \
+    -o /mnt/loop1/bin/ed /bin/ed
+chmod 555 /mnt/loop1/sbin/sfdisk /mnt/loop1/bin/ed</b></span></tt>
+</pre>
+            <p>
+              Also, keeping in mind your space limitations, copy any other
+              binaries and libraries you need to the image. Use the
+              <span><b class="command">ldd</b></span> command to see which
+              libraries you will need to copy over for any executables. Don't
+              forget to also strip them <span class=
+              "emphasis"><em>before</em></span> copying them to the ramdisk
+              image or use the <span><b class="command">strip</b></span>, as
+              above, to "copy" them.
+            </p>
+            <p>
+              <span class="emphasis"><em>Set up the lib directory</em></span>
+            </p>
+            <p>
+              Once you have installed all the utilities from above and any
+              additional ones you want, use the <span><b class=
+              "command">ldd</b></span> command, as mentioned above, on those
+              that were not listed in this document. If any additional
+              libraries are needed, add them into the setup commands shown
+              next.
+            </p>
+            <p>
+              If you installed only those things shown above, the shared
+              objects needed will be minimal. You can add them to the ramdisk
+              image with:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">strip -p --strip-unneeded --remove-section=.comment \
+    -o /mnt/loop1/lib/libc.so.6 /lib/libc-2.3.3.so &amp;&amp;
+strip -p --strip-unneeded --remove-section=.comment \
+    -o /mnt/loop1/lib/ld-linux.so.2 /lib/ld-2.3.3.so &amp;&amp;
+strip -p --strip-unneeded --remove-section=.comment \
+    -o /mnt/loop1/lib/libdl.so.2 /lib/libdl-2.3.3.so &amp;&amp;
+chmod 555 /mnt/loop1/lib/{libc.so.6,ld-linux.so.2,libdl.so.2}</b></span></tt>
+</pre>
+            <p>
+              Note that the above commands change the names of the libraries,
+              eliminating the need for the usual symlinks. If you add any
+              additional shared objects, be alert for similar opportunities
+              and also the pitfalls that may be present.
+            </p>
+            <p>
+              <span class="emphasis"><em>Make the compressed
+              initrd</em></span>
+            </p>
+            <p>
+              Unmount the loopback file. If you used <span><b class=
+              "command">mount</b></span>'s <tt class="option">-o loop</tt>
+              option, the "bond" between the loop device and the file will be
+              removed when the unmount is done. Just omit the <span><b class=
+              "command">losetup -d /dev/loop1</b></span> from the following
+              sequence. The <tt class="userinput">-9</tt> parameter is used
+              with <span><b class="command">gzip</b></span> to make the
+              smallest possible compressed image. To make sure it will fit on
+              the diskette, list the file's size.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">umount /mnt/loop1 &amp;&amp;
+losetup -d /dev/loop1 &amp;&amp;  # Omit if mount's -o loop was used
+gzip -9 &lt; /tmp/rfloppy &gt; /tmp/rootfs.gz
+ls -l /tmp/rootfs.gz</b></span></tt>
+</pre>
+            <p>
+              <span class="emphasis"><em>Join rescueimage and initrd onto a
+              diskette</em></span>
+            </p>
+            <p>
+              Now the rescueimage and initial ramdisk image will be written
+              to the boot diskette. Before doing this, calculate the number
+              of blocks needed for rescueimage and for <tt class=
+              "filename">/tmp/rootfs.gz</tt> (the initial ramdisk),
+              individually, by dividing each size by 1024 and adding one if
+              there is any remainder. Add these two results together. They
+              must total 1,440 or fewer blocks. If they total more than this,
+              don't worry too much. Changes to make a two-diskette set are
+              presented later. Of course, you could reexamine your choices
+              and try to shrink either the rescueimage or the initial ramdisk
+              image.
+            </p>
+            <p>
+              To make a single-floppy rescue, using devfs, use the following
+              commands. If you use the static <tt class="filename">/dev</tt>
+              setup, use <tt class="filename">/dev/fd0</tt> instead of the
+              /dev/floppy/0.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">dd if=rescueimage of=/dev/floppy/0 bs=1k
+rdev /dev/floppy/0 0,0
+rdev -R /dev/floppy/0 0</b></span></tt>
+</pre>
+            <p>
+              <span class="emphasis"><em>Command explanations</em></span>
+            </p>
+            <p>
+              <span><b class="command">rdev /dev/floppy/0 0,0</b></span>:
+              sets the root file system the kernel will use when it boots.
+              Because it loads an initrd, it will automatically set that as
+              the root device, initially. So, the <tt class="option">0,0</tt>
+              gives it "no value", telling the kernel to not mount any other
+              device. Some folks give <tt class="filename">/dev/fd0</tt> or
+              something similar. But this has effect <span class=
+              "emphasis"><em>only</em></span> when <span><b class=
+              "command">linuxrc</b></span> (really <span class=
+              "application"><a href=
+              "http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">busybox</a></span>
+              ) exits and the normal <span><b class="command">init</b></span>
+              processes get invoked. Since this is not being done here, and
+              the floppy is <span class="emphasis"><em>not</em></span> a
+              valid file system, it would be useless here. A hard drive would
+              be a better choice if you are looking to automatically bring
+              the system up after repair. Since <span class=
+              "application"><a href=
+              "http://www.busybox.net/downloads/busybox-0.60.4.tar.bz2">busybox</a></span>
+              provides the <span><b class="command">reboot</b></span>
+              command, automatic initialization is not needed.
+            </p>
+            <p>
+              The <span><b class="command">rdev -R /dev/floppy/0 0</b></span>
+              will set the "root flags" to zero. They have no use in this
+              application.
+            </p>
+            <p>
+              The <span><b class="command">dd</b></span> from above showed
+              some results, like
+            </p>
+            <pre class="screen">
+        480+1 records in
+        480+1 records out
+</pre>
+            <p>
+              In this example the rescueimage (kernel) was 480+1 blocks in
+              size. Make sure that this number, which may be different for
+              you, matches your calculations from above. You need to
+              calculate a "magic number" now that will be inserted into
+              rescueimage. The value consists of three significant parts. Two
+              are discussed here. The third is touched upon later.
+            </p>
+            <p>
+              Bits 0 - 10 will contain the size of rescueimage, in blocks,
+              that you calculated above, and which should match the results
+              from the dd above. Bit 14 (the 15th bit, which is 2 to the 14th
+              power, or 16,384) is a flag that, when set to 1, tells the
+              kernel an initial ramdisk is to be loaded. So for the
+              single-floppy rescue diskette, the two numbers 16,384 and 481
+              (or whatever number is right for your rescueimage size) are
+              added together to produce a decimal value, like 16865. This
+              value is inserted into the proper place in rescueimage by the
+              <span><b class="command">rdev</b></span> command done next.
+            </p>
+            <p>
+              Insert the "magic number" into rescueimage and then write the
+              root file system right after rescueimage on the floppy by
+              executing the following commands, with the proper numbers
+              inserted. Notice that the <span><b class=
+              "command">seek</b></span> parameter's number must be the size,
+              in blocks, of your rescueimage. If you use the static
+              <tt class="filename">/dev</tt> setup, use <tt class=
+              "filename">/dev/fd0</tt> in the commands below, instead of
+              <tt class="filename">/dev/floppy/0</tt>.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">rdev -r /dev/floppy/0 <i class="replaceable"><tt>16865</tt></i>
+dd if=/tmp/rootfs.gz of=/dev/floppy/0 bs=1k seek=<i class=
+"replaceable"><tt>481</tt></i></b></span></tt>
+</pre>
+            <p>
+              In this command, <span><b class="command">seek</b></span> was
+              used to position to the block following the end of the
+              rescueimage (480+1) and begin writing the root file system to
+              the floppy.
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              A Two-diskette Rescue Setup
+            </h3>
+          </div>
+          <p>
+            If you just can't live with a single-diskette rescue system, here
+            is what to do to make a simple two-diskette system. Note that the
+            endless possibilities presented by the availability of
+            <span><b class="command">linuxrc</b></span> and other components
+            are not addressed here. Here you will just use the kernel's
+            ability to prompt for a second diskette that contains the initrd
+            image and load it.
+          </p>
+          <p>
+            Modify the above instructions as follows. First a different magic
+            number is needed. The 15th bit (bit 14) still needs to be set,
+            but the size of the rescueimage, in blocks, is replaced with a
+            zero. The third component, which was not discussed above, is now
+            used. This is the 16th bit (bit 15) of the "magic number". When
+            set, it tells the kernel to ask the user to insert the "root"
+            floppy. It then loads the initrd image from that diskette.
+            Because the size of the rescueimage was replaced by zero, the
+            kernel starts loading from the "zero'th" block (the first one) on
+            the second diskette.
+          </p>
+          <p>
+            The 16th bit (bit 15) represents 2 raised to the 15th power, or
+            32,768. So the new magic number is 32,768 + 16384, which is
+            49,152. This value tells the kernel to prompt for, and then load,
+            an initial ramdisk image from the first block on the inserted
+            floppy. So your first modification is to the command to write the
+            "magic number" to the rescueimage image on the diskette.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">rdev -r /dev/floppy/0 <i class="replaceable"><tt>49152</tt></i></b></span></tt>
+</pre>
+          <p>
+            Note that the initrd image is <span class=
+            "emphasis"><em>not</em></span> copied to the diskette yet. Remove
+            the boot diskette and insert another diskette that will hold your
+            root file system. Run this modified command (don't forget to use
+            <tt class="filename">/dev/fd0</tt> if you don't use devfs). Note
+            that no <span><b class="command">seek</b></span> parameter is
+            used.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">dd if=/tmp/rootfs.gz of=/dev/floppy/0 bs=1k</b></span></tt>
+</pre>
+          <p>
+            That's all there is to it. The possibilities from here are
+            limited only by your imagination and tenacity in pursuing
+            enhancements. And your willingness to research available
+            documentation. A good starting point is the "Documentation"
+            directory in your kernel source tree. More help may be gained at
+            <a href=
+            "http://linuxfromscratch.org/hints/news.html"><span class="acronym">
+            LFS</span> Hints</a> (please use a mirror site that is suitable)
+            and <a href="http://www.tldp.org">TLDP</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="postlfs.html">Prev</a><br />
+        Part&nbsp;II.&nbsp;Post LFS Configuration and Extra Software
+      </div>
+      <div class="next">
+        <a accesskey="n" href="skel.html">Next</a><br />
+        Configuring for Adding Users
+      </div>
+      <div class="up">
+        <a accesskey="u" href="postlfs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

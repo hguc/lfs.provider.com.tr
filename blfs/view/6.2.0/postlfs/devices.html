@@ -1,0 +1,217 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      About Devices
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;3.&nbsp;After LFS Configuration Issues
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="users.html" title=
+          "About System Users and Groups">Prev</a>
+          <p>
+            About System Users and Groups
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="profile.html" title=
+          "The Bash Shell Startup Files">Next</a>
+          <p>
+            The Bash Shell Startup Files
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="postlfs-devices" name="postlfs-devices"></a>
+        <h1 class="sect1">
+          About Devices
+        </h1>
+      </div>
+      <p>
+        Although most devices needed by packages in BLFS and beyond are set
+        up properly by <span class="application">udev</span> using the
+        default rules installed by LFS in <tt class=
+        "filename">/etc/udev/rules.d</tt>, there are cases where the rules
+        must be modified or augmented.
+      </p>
+      <p class="usernotes">
+        User Notes: <a href=
+        "http://wiki.linuxfromscratch.org/blfs/wiki/aboutdevices"><span class="url">
+        http://wiki.linuxfromscratch.org/blfs/wiki/aboutdevices</span></a>
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Multiple Sound Cards
+          </h2>
+        </div>
+        <p>
+          If there are multiple sound cards in a system, the "default" sound
+          card becomes random. The method to establish sound card order
+          depends on whether the drivers are modules or not. If the sound
+          card drivers are compiled into the kernel, control is via kernel
+          command line parameters in <tt class=
+          "filename">/boot/grub/menu.lst</tt>. For example, if a system has
+          both an FM801 card and a SoundBlaster PCI card, the following can
+          be appended to the command line:
+        </p>
+        <pre class="screen"><tt class=
+        "literal">snd-fm801.index=0 snd-ens1371.index=1</tt></pre>
+        <p>
+          If the sound card drivers are built as modules, the order can be
+          established in the <tt class="filename">/etc/modprobe.conf</tt>
+          file with:
+        </p>
+        <pre class="screen"><tt class="literal">options snd-fm801 index=0
+options snd-ens1371 index=1</tt></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Udev Device Attrubutes
+          </h2>
+        </div>
+        <p>
+          Fine-tuning of device attributes such as group name and permissions
+          is possible by creating extra <span class="application">udev</span>
+          rules, matching on something like this (on one line). The vendor
+          and product can be found by searching the /sys/devices directory
+          entries or using <span><strong class=
+          "command">udevinfo</strong></span> after the device has been
+          attached. See the documentation in the current <span class=
+          "application">udev</span> directory of <tt class=
+          "filename">/usr/share/doc</tt> for details.
+        </p>
+        <pre class="screen"><tt class=
+        "literal">SUBSYSTEM=="usb_device", SYSFS{idVendor}=="05d8",
+   SYSFS{idProduct}=="4002", GROUP:="scanner", MODE:="0640"</tt></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            USB Device Issues
+          </h2>
+        </div>
+        <p>
+          Some older applications, such as <span class=
+          "application">VMware</span>, need the following deprecated entry in
+          the <tt class="filename">/etc/fstab</tt> file. This is not normally
+          needed.
+        </p>
+        <pre class="screen"><tt class=
+        "literal">usbfs  /proc/bus/usb  usbfs  devgid=14,devmode=0660  0  0</tt></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Devices for Servers
+          </h2>
+        </div>
+        <p>
+          In some cases, it makes sense to disable <span class=
+          "application">udev</span> completely and create static devices.
+          Servers are one example of this situation. Does a server need the
+          capability of handling dynamic devices? Only the system
+          administrator can answer that question, but in many cases the
+          answer will be no.
+        </p>
+        <p>
+          If dynamic devices are not desired, then static devices must be
+          created on the system. In the default configuration, the <tt class=
+          "filename">/etc/rc.d/rcsysinit.d/S10udev</tt> boot script mounts a
+          <tt class="systemitem">tmpfs</tt> partition over the <tt class=
+          "filename">/dev</tt> directory. This problem can be overcome by
+          mounting the root partition temporarily:
+        </p>
+        <div class="warning">
+          <div class="admonhead">
+            <img alt="[Warning]" src="../images/warning.png" />
+            <h3 class="admontitle">
+              Warning
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              If the instructions below are not followed carefully, your
+              system could become unbootable.
+            </p>
+          </div>
+        </div>
+        <pre class="userinput"><kbd class="command">mount --bind / /mnt
+cp -a /dev/* /mnt/dev
+rm /etc/rc.d/rcsysinit.d/{S10udev,S45udev_retry}
+umount /mnt</kbd></pre>
+        <p>
+          At this point, the system will use static devices upon the next
+          reboot. Create any desired additional devices using
+          <span><strong class="command">mknod</strong></span>.
+        </p>
+        <p>
+          If you want to restore the dynamic devices, recreate the <tt class=
+          "filename">/etc/rc.d/rcsysinit.d/{S10udev,S45udev_retry}</tt>
+          symbolic links and reboot again. Static devices do not need to be
+          removed (console and null are always needed) because they are
+          covered by the <tt class="systemitem">tmpfs</tt> partition. Disk
+          usage for devices is negligible (about 20&ndash;30 bytes per
+          entry.)
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2006-09-23 10:46:31 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="users.html" title=
+          "About System Users and Groups">Prev</a>
+          <p>
+            About System Users and Groups
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="profile.html" title=
+          "The Bash Shell Startup Files">Next</a>
+          <p>
+            The Bash Shell Startup Files
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

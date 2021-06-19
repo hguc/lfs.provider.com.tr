@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      iptables-1.3.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;4.&nbsp;Security
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="shadow.html" title="Shadow-4.0.4.1">Prev</a>
+          <p>
+            Shadow-4.0.4.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="firewall.html" title=
+          "Setting up a network firewall">Next</a>
+          <p>
+            Setting up a network firewall
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="iptables" name="iptables"></a>
+        <h1 class="sect1">
+          iptables-1.3.1
+        </h1>
+      </div>
+      <p>
+        The next part of this chapter deals with firewalls. The principal
+        firewall tool for Linux, as of the 2.4 kernel series, is <span class=
+        "application">iptables</span>. It replaces <span class=
+        "application">ipchains</span> from the 2.2 series and <span class=
+        "application">ipfwadm</span> from the 2.0 series. You will need to
+        install <span class="application">iptables</span> if you intend on
+        using any form of a firewall.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="iptables-kernel" name="iptables-kernel"></a>
+          <h2 class="sect2">
+            Introduction to iptables
+          </h2>
+        </div>
+        <p>
+          A firewall in Linux is accomplished through a portion of the kernel
+          called netfilter. The interface to netfilter is <span class=
+          "application">iptables</span>. To use it, the appropriate kernel
+          configuration parameters are found in Device Drivers -&gt;
+          Networking Support -&gt; Networking Options -&gt; Network Packet
+          Filtering -&gt; IP: Netfilter Configuration.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2659277" name="id2659277"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.iptables.org/files/iptables-1.3.1.tar.bz2"><span class="url">
+                  http://www.iptables.org/files/iptables-1.3.1.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.netfilter.org/pub/iptables/iptables-1.3.1.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.netfilter.org/pub/iptables/iptables-1.3.1.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: c3358a3bd0d7755df0b64a5063db296b
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 177 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 3.8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.14 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of iptables
+          </h2>
+        </div>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              Installation of <span class="application">iptables</span> will
+              fail if raw kernel headers are found in <tt class=
+              "filename">/usr/src/linux</tt> either as actual files or a
+              symlink. As of the Linux 2.6 kernel series, this directory
+              should no longer exist because appropriate headers were
+              installed in the linux-libc-headers package during the base
+              <span class="acronym">LFS</span> installation.
+            </p>
+            <p>
+              For some non-x86 architectures, the raw kernel headers may be
+              required. In that case, add the environment variable
+              KERNEL_DIR=/usr/src/linux to the make commands below.
+            </p>
+          </div>
+        </div>
+        <p>
+          Install <span class="application">iptables</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make PREFIX=/usr LIBDIR=/lib BINDIR=/sbin</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make PREFIX=/usr LIBDIR=/lib BINDIR=/sbin install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>PREFIX=/usr LIBDIR=/lib
+          BINDIR=/sbin</tt></em>: Compiles and installs <span class=
+          "application">iptables</span> libraries into <tt class=
+          "filename">/lib</tt>, binaries into <tt class="filename">/sbin</tt>
+          and the remainder into the <tt class="filename">/usr</tt> hierarchy
+          instead of <tt class="filename">/usr/local</tt>. Firewalls are
+          generally activated during the boot process and <tt class=
+          "filename">/usr</tt> may not be mounted at that time.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">iptables,
+              iptables-restore, iptables-save and ip6tables</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libip6t_*.so and
+              libipt_*.so</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directory:</span></strong> <span class=
+              "seg">/lib/iptables</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2733067" name="id2733067"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="iptables-prog" name="iptables-prog"></a><span class=
+              "term"><span><strong class=
+              "command">iptables</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is used to set up, maintain, and inspect the tables of
+                <span class="acronym">IP</span> packet filter rules in the
+                Linux kernel.
+              </p>
+            </dd>
+            <dt>
+              <a id="iptables-restore" name=
+              "iptables-restore"></a><span class="term"><span><strong class=
+              "command">iptables-restore</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is used to restore <span class="acronym">IP</span> Tables
+                from data specified on <span class="acronym">STDIN</span>.
+                Use I/O redirection provided by your shell to read from a
+                file.
+              </p>
+            </dd>
+            <dt>
+              <a id="iptables-save" name="iptables-save"></a><span class=
+              "term"><span><strong class=
+              "command">iptables-save</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is used to dump the contents of an <span class=
+                "acronym">IP</span> Table in easily parseable format to
+                <span class="acronym">STDOUT</span>. Use I/O-redirection
+                provided by your shell to write to a file.
+              </p>
+            </dd>
+            <dt>
+              <a id="ip6tables" name="ip6tables"></a><span class=
+              "term"><span><strong class=
+              "command">ip6tables</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is used to set up, maintain, and inspect the tables of
+                <span class="acronym">IP</span>v6 packet filter rules in the
+                Linux kernel. Several different tables may be defined. Each
+                table contains a number of built-in chains and may also
+                contain user-defined chains.
+              </p>
+            </dd>
+            <dt>
+              <a id="libip-iptables" name="libip-iptables"></a><span class=
+              "term"><tt class="filename">libip*.so</tt></span>
+            </dt>
+            <dd>
+              <p>
+                library modules are various modules (implemented as dynamic
+                libraries) which extend the core functionality of
+                <span><strong class="command">iptables</strong></span>.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-03-13 00:24:56 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="shadow.html" title="Shadow-4.0.4.1">Prev</a>
+          <p>
+            Shadow-4.0.4.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="firewall.html" title=
+          "Setting up a network firewall">Next</a>
+          <p>
+            Setting up a network firewall
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,422 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Linux-PAM-0.80
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;4.&nbsp;Security
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="cracklib.html" title=
+          "CrackLib-2.8.3">Prev</a>
+          <p>
+            CrackLib-2.8.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="shadow.html" title="Shadow-4.0.9">Next</a>
+          <p>
+            Shadow-4.0.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="Linux_PAM" name="Linux_PAM"></a>
+        <h1 class="sect1">
+          Linux-PAM-0.80
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Linux-PAM
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Linux-PAM</span> package contains
+          Pluggable Authentication Modules. This is useful to enable the
+          local system administrator to choose how applications authenticate
+          users.
+        </p>
+        <h3>
+          <a id="id2728044" name="id2728044"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://www.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.80.tar.bz2">
+                <span class=
+                "url">http://www.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.80.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.80.tar.bz2">
+                <span class=
+                "url">ftp://ftp.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.80.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: ccff87fe639efdfc22b1ba4a0f08ec57
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 376 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 8.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.2 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2641031" name="id2641031"></a>Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <p class="title">
+            <b>Documentation</b>
+          </p>
+          <ul compact="compact">
+            <li>
+              <p>
+                Optional documentation: <a href=
+                "http://www.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.80-docs.tar.bz2">
+                <span class=
+                "url">http://www.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.80-docs.tar.bz2</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2635803" name="id2635803"></a>Linux-PAM Dependencies
+        </h3>
+        <h4>
+          <a id="id2669710" name="id2669710"></a>Recommended
+        </h4>
+        <p>
+          <a href="cracklib.html">CrackLib-2.8.3</a>
+        </p>
+        <h4>
+          <a id="id2671267" name="id2671267"></a>Optional
+        </h4>
+        <p>
+          <a href=
+          "http://sourceforge.net/projects/sgmltools-lite/"><span class=
+          "url">sgmltools-lite</span></a> and <a href=
+          "../server/databases.html#db">Berkeley DB-4.3.28</a> (for
+          pam_userdb module)
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Linux-PAM
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Linux-PAM</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i 's|DICT_DIR_CANDIDATES="|&amp;/lib /lib/cracklib |' \
+    configure &amp;&amp;
+./configure --enable-static-libpam --with-mailspool=/var/mail \
+    --enable-read-both-confs --sysconfdir=/etc \
+    --mandir=/usr/share/man &amp;&amp;
+make</kbd></pre>
+        <p>
+          If you downloaded the documentation and wish to install it, unpack
+          the tarball into the <tt class="filename">doc</tt> directory:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">tar -jxf ../Linux-PAM-0.80-docs.tar.bz2 -C doc</kbd></pre>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+mv -v /lib/libpam.a /lib/libpam_misc.a /lib/libpamc.a /usr/lib &amp;&amp;
+rm -v /lib/libpam{,c,_misc}.so &amp;&amp;
+ln -v -sf ../../lib/libpam.so.0.80 /usr/lib/libpam.so &amp;&amp;
+ln -v -sf ../../lib/libpam_misc.so.0.80 /usr/lib/libpam_misc.so &amp;&amp;
+ln -v -sf ../../lib/libpamc.so.0.80 /usr/lib/libpamc.so</kbd></pre>
+        <p>
+          Install the documentation using the following commands:
+        </p>
+        <pre class="root"><kbd class=
+        "command">install -v -d -m755 /usr/share/doc/Linux-PAM-0.80 &amp;&amp;
+for DOCTYPE in html ps specs txts
+do
+    cp -v -R doc/$DOCTYPE /usr/share/doc/Linux-PAM-0.80
+done</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">sed -i
+          's|DICT_DIR_CANDIDATES="|&amp;/lib /lib/cracklib |'
+          configure</strong></span>: This command changes where
+          <span><strong class="command">configure</strong></span> looks to
+          find the <span class="application">CrackLib</span> dictionary.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-static-libpam</tt></em>: This
+          switch builds static PAM libraries as well as the dynamic
+          libraries.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-mailspool=/var/mail</tt></em>:
+          This switch makes the mailspool directory FHS compliant.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-read-both-confs</tt></em>: This
+          switch lets the local administrator choose which configuration file
+          setup to use.
+        </p>
+        <p>
+          <span><strong class="command">mv -v /lib/libpam.a
+          /lib/libpam_misc.a /lib/libpamc.a /usr/lib</strong></span>: This
+          command moves the static libraries to <tt class=
+          "filename">/usr/lib</tt> to comply with FHS guidelines.
+        </p>
+        <p>
+          <span><strong class="command">rm -v /lib/libpam{,c,_misc}.so; ln -v
+          -sf ... /usr/lib/...</strong></span>: These commands move the
+          <tt class="filename">.so</tt> symlinks from <tt class=
+          "filename">/lib</tt> to <tt class="filename">/usr/lib</tt>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Linux-PAM
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="pam-config" name="pam-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/security/*</tt> and <tt class=
+            "filename">/etc/pam.d/*</tt> or <tt class=
+            "filename">/etc/pam.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2750901" name="id2750901"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Configuration information is placed in <tt class=
+            "filename">/etc/pam.d/</tt> or <tt class=
+            "filename">/etc/pam.conf</tt> depending on user preference. Below
+            are example files of each type:
+          </p>
+          <pre class="screen"><tt class="literal"># Begin /etc/pam.d/other
+
+auth            required        pam_unix.so     nullok
+account         required        pam_unix.so
+session         required        pam_unix.so
+password        required        pam_unix.so     nullok
+
+# End /etc/pam.d/other
+
+# Begin /etc/pam.conf
+
+other           auth            required        pam_unix.so     nullok
+other           account         required        pam_unix.so
+other           session         required        pam_unix.so
+other           password        required        pam_unix.so     nullok
+
+# End /etc/pam.conf</tt></pre>
+          <p>
+            The <span class="application">PAM</span> man page
+            (<span><strong class="command">man pam</strong></span>) provides
+            a good starting point for descriptions of fields and allowable
+            entries. The <a href=
+            "http://www.kernel.org/pub/linux/libs/pam/Linux-PAM-html/pam.html">
+            <span class="url">Linux-PAM guide for system
+            administrators</span></a> is recommended for further reading.
+          </p>
+          <p>
+            Refer to <a href=
+            "http://www.kernel.org/pub/linux/libs/pam/modules.html"><span class="url">
+            http://www.kernel.org/pub/linux/libs/pam/modules.html</span></a>
+            for a list of various modules available.
+          </p>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                You should now reinstall the <a href=
+                "shadow.html">Shadow-4.0.9</a> package.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">unix_chkpwd and
+              pam_tally</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libpam.[so,a],
+              libpamc.[so,a], and libpam_misc.[so,a]</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/etc/pam.d,
+              /etc/security, /lib/security, and /usr/include/security</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2751258" name="id2751258"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="unix_chkpwd" name="unix_chkpwd"></a><span class=
+                  "term"><span><strong class=
+                  "command">unix_chkpwd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    checks user passwords that are stored in read protected
+                    databases.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="pam_tally" name="pam_tally"></a><span class=
+                  "term"><span><strong class=
+                  "command">pam_tally</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to view or manipulate the <tt class=
+                    "filename">faillog</tt> file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libpam" name="libpam"></a><span class=
+                  "term"><tt class="filename">libpam.[so,a]</tt></span>
+                </td>
+                <td>
+                  <p>
+                    provides the interfaces between applications and the PAM
+                    modules.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="cracklib.html" title=
+          "CrackLib-2.8.3">Prev</a>
+          <p>
+            CrackLib-2.8.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="shadow.html" title="Shadow-4.0.9">Next</a>
+          <p>
+            Shadow-4.0.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

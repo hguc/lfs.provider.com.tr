@@ -1,0 +1,613 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      GIMP-2.2.17
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;31.&nbsp;Individual Office Programs
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnucash.html" title="GnuCash-2.2.4">Prev</a>
+          <p>
+            GnuCash-2.2.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="evolution.html" title=
+          "Evolution-2.10.3">Next</a>
+          <p>
+            Evolution-2.10.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="office.html" title=
+          "Chapter&nbsp;31.&nbsp;Individual Office Programs">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="gimp" name="gimp"></a>GIMP-2.2.17
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to GIMP
+        </h2>
+        <p>
+          The <span class="application">GIMP</span> package contains the GNU
+          Image Manipulation Program. This is useful for photo retouching,
+          image composition and image authoring.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://ftp.gwdg.de/pub/misc/grafik/gimp/gimp/v2.2/gimp-2.2.17.tar.bz2">
+                http://ftp.gwdg.de/pub/misc/grafik/gimp/gimp/v2.2/gimp-2.2.17.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.gimp.org/pub/gimp/v2.2/gimp-2.2.17.tar.bz2">ftp://ftp.gimp.org/pub/gimp/v2.2/gimp-2.2.17.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 4f509ed4a605452d88e04045ff388d58
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 13.1 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 310 MB (additional 314 MB to
+                install the help system)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 4.6 SBU (additional 0.6 SBU to run the
+                test suite and additional 9.1 SBU to build the help files)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <p class="title">
+            <b>Help System</b>
+          </p>
+          <ul class="compact">
+            <li>
+              <p>
+                Optional help files: <a class="ulink" href=
+                "ftp://anduin.linuxfromscratch.org/BLFS/svn/g/gimp-help-2-0.12.tar.gz">
+                ftp://anduin.linuxfromscratch.org/BLFS/svn/g/gimp-help-2-0.12.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: fc1e2153eafa04fa701b23818029c3e1
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 59.8 MB
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          GIMP Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="../x/gtk2.html" title=
+          "GTK+-2.10.13">GTK+-2.10.13</a>, <a class="xref" href=
+          "../general/libart_lgpl.html" title=
+          "libart_lgpl-2.3.19">libart_lgpl-2.3.19</a>, and <a class="xref"
+          href="../general/perl-modules.html#perl-xml-parser" title=
+          "XML::Parser-2.34">XML::Parser-2.34</a>
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="../general/libjpeg.html" title=
+          "libjpeg-6b">libjpeg-6b</a> and <a class="xref" href=
+          "../general/libtiff.html" title="LibTIFF-3.8.2">LibTIFF-3.8.2</a>
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            If the recommended dependencies are not installed, the
+            <span class="command"><strong>configure</strong></span> switches
+            below will need to be modified as explained in <a class="xref"
+            href="gimp.html#gimp-cmd-explanations" title=
+            "Command Explanations">the section called &ldquo;Command
+            Explanations&rdquo;</a> below.
+          </p>
+        </div>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/libmng.html" title=
+          "libmng-1.0.9">libmng-1.0.9</a>, <a class="xref" href=
+          "../general/librsvg.html" title=
+          "librsvg-2.16.1">librsvg-2.16.1</a>, <a class="xref" href=
+          "../general/aalib.html" title="AAlib-1.4rc5">AAlib-1.4rc5</a>,
+          <a class="xref" href="../general/lcms.html" title=
+          "little cms-1.16">little cms-1.16</a>, <a class="xref" href=
+          "../general/libexif.html" title=
+          "libexif-0.6.16">libexif-0.6.16</a>, <a class="xref" href=
+          "../general/libxslt.html" title=
+          "libxslt-1.1.22">libxslt-1.1.22</a>, <a class="xref" href=
+          "../multimedia/alsa.html" title="ALSA-1.0.13">ALSA-1.0.13</a>,
+          <a class="xref" href="../general/libgtkhtml.html" title=
+          "libgtkhtml-2.11.1">libgtkhtml-2.11.1</a> (required to build the
+          help system browser plugin), <a class="ulink" href=
+          "http://wvware.sourceforge.net/libwmf.html">libwmf</a>, <a class=
+          "xref" href="../general/python-modules.html#pygtk" title=
+          "PyGTK-2.10.6">PyGTK-2.10.6</a> (including the gtk and pango
+          modules), <a class="ulink" href=
+          "http://gimp-print.sourceforge.net/">Gimp-Print version 4.2.7</a>,
+          an <a class="xref" href="../server/mail.html" title=
+          "Chapter&nbsp;20.&nbsp;Mail Server Software">MTA</a> (that provides
+          a <span class="command"><strong>sendmail</strong></span> program),
+          and <a class="xref" href="../general/gtk-doc.html" title=
+          "GTK-Doc-1.8">GTK-Doc-1.8</a>
+        </p>
+        <h4>
+          Optional (for Building Documentation from the Help Tarball)
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/libxslt.html" title=
+          "libxslt-1.1.22">libxslt-1.1.22</a>, <a class="xref" href=
+          "../pst/DocBook.html" title="DocBook XML DTD-4.5">DocBook XML
+          DTD-4.5</a>, and <a class="xref" href="../pst/docbook-xsl.html"
+          title="DocBook XSL Stylesheets-1.71.1">DocBook XSL
+          Stylesheets-1.71.1</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/gimp">http://wiki.linuxfromscratch.org/blfs/wiki/gimp</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of GIMP
+        </h2>
+        <p>
+          Install <span class="application">GIMP</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --disable-print &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          To test the results, issue: <span class="command"><strong>make
+          check</strong></span>.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+install -v -m755 -d /usr/share/doc/gimp-2.2.17 &amp;&amp;
+install -v -m644 docs/{Wilber*,keybindings.txt,quick_reference.ps} \
+                    /usr/share/doc/gimp-2.2.17</kbd>
+</pre>
+        <p>
+          The <code class="filename">gimp-help</code> tarball contains a help
+          system designed for use with external web browsers, the internal
+          <span class="application">GIMP</span> help browser, and HTML
+          renderers. The tarball only contains the XML sources, so you will
+          need the <span class="command"><strong>xsltproc</strong></span>
+          program from <a class="xref" href="../general/libxslt.html" title=
+          "libxslt-1.1.22">libxslt-1.1.22</a> to build the HTML files.
+        </p>
+        <p>
+          If you downloaded the <code class="filename">gimp-help</code>
+          tarball, unpack it and change into the root of the newly created
+          source tree (as an unprivileged user). Issue the following commands
+          to install the help files:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="gimp-cmd-explanations" name=
+          "gimp-cmd-explanations"></a>Command Explanations
+        </h2>
+        <p>
+          <code class="option">-disable-print</code>: This option disables
+          print support and is required if the obsolete <span class=
+          "application">Gimp-Print</span> package is not installed. Print
+          support for the <span class="application">Gimp</span> can be
+          provided later by installing the <a class="xref" href=
+          "../pst/gutenprint.html" title=
+          "Gutenprint-5.0.1">Gutenprint-5.0.1</a> package.
+        </p>
+        <p>
+          <code class="option">--without-libjpeg</code>: This option is
+          necessary if <span class="application">libjpeg</span> is not
+          installed.
+        </p>
+        <p>
+          <code class="option">--without-libtiff</code>: This option is
+          necessary if <span class="application">libtiff</span> is not
+          installed.
+        </p>
+        <p>
+          <code class="option">--enable-gtk-doc</code>: Use this parameter if
+          <span class="application">GTK-Doc</span> is installed and you wish
+          to rebuild the API documentation.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring GIMP
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="gimp-config" name="gimp-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/gimp/2.0/*</code> and <code class=
+            "filename">~/.gimp-2.0/gimprc</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            <span class="application">GIMP</span> executes a configuration
+            wizard for each user upon their initial use of the program.
+          </p>
+          <p>
+            <span class="application">GIMP</span> executes the <span class=
+            "command"><strong>mozilla</strong></span> web browser by default
+            to view the help files. If you do not have <span class=
+            "application">Mozilla</span>, or prefer a different web browser,
+            you can set a new system value in <code class=
+            "filename">/etc/gimp/2.0/gimprc</code>. Execute the following
+            command as the <code class="systemitem">root</code> user,
+            replacing <em class=
+            "replaceable"><code>&lt;browser&gt;</code></em> with your
+            preferred web browser:
+          </p>
+          <pre class="root">
+<kbd class="command">echo '(web-browser "<em class=
+"replaceable"><code>&lt;browser&gt;</code></em> %s")' &gt;&gt; /etc/gimp/2.0/gimprc</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">gimp, gimp-2.2, gimp-remote,
+              gimp-remote-2.2, and gimptool-2.0</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libgimp-2.0.so, libgimpbase-2.0.so,
+              libgimpcolor-2.0.so, libgimpmath-2.0.so, libgimpmodule-2.0.so,
+              libgimpthumb-2.0.so, libgimpui-2.0.so, libgimpwidgets-2.0.so,
+              and many other modules and plugin libraries</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/gimp, /usr/include/gimp-2.0,
+              /usr/lib/gimp, /usr/share/doc/gimp-2.2.17, /usr/share/gimp and
+              /usr/share/gtk-doc/html/libgimp{,base,color,math,module,thumb,widgets}</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gimp-prog" name="gimp-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gimp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to <span class=
+                    "command"><strong>gimp-2.2</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gimp-2.2" name="gimp-2.2"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gimp-2.2</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an image manipulation program. It works with a variety
+                    of image formats and provides a large selection of tools.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gimp-remote" name="gimp-remote"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gimp-remote</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to <span class=
+                    "command"><strong>gimp-remote-2.2</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gimp-remote-2.2" name=
+                    "gimp-remote-2.2"></a><span class="term"><span class=
+                    "command"><strong>gimp-remote-2.2</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a small utility that tells a running <span class=
+                    "application">GIMP</span> to open a local or remote image
+                    file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gimptool-2.0" name="gimptool-2.0"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gimptool-2.0</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool that can build plug-ins or scripts and install
+                    them if they are distributed in one source file.
+                    <span class=
+                    "command"><strong>gimptool-2.0</strong></span> can also
+                    be used by programs that need to know what libraries and
+                    include-paths <span class="application">GIMP</span> was
+                    compiled with.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgimp-2.0" name="libgimp-2.0"></a><span class=
+                    "term"><code class=
+                    "filename">libgimp-2.0.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides C bindings for <span class=
+                    "application">GIMP</span>'s Procedural Database (PDB)
+                    which offers an interface to core functions and to
+                    functionality provided by plug-ins.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgimpbase-2.0" name=
+                    "libgimpbase-2.0"></a><span class="term"><code class=
+                    "filename">libgimpbase-2.0.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides the C functions for basic <span class=
+                    "application">GIMP</span> functionality such as
+                    determining enumeration data types, gettext translation,
+                    determining <span class="application">GIMP</span>'s
+                    version number and capabilities, handling data files and
+                    accessing the environment.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgimpcolor-2.0" name=
+                    "libgimpcolor-2.0"></a><span class="term"><code class=
+                    "filename">libgimpcolor-2.0.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides the C functions relating to RGB, HSV and CMYK
+                    colors as well as converting colors between different
+                    color models and performing adaptive supersampling on an
+                    area.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgimpmath-2.0" name=
+                    "libgimpmath-2.0"></a><span class="term"><code class=
+                    "filename">libgimpmath-2.0.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains C functions which provide mathematical
+                    definitions and macros, manipulate 3x3 transformation
+                    matrices, set up and manipulate vectors and the MD5
+                    message-digest algorithm.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgimpmodule-2.0" name=
+                    "libgimpmodule-2.0"></a><span class="term"><code class=
+                    "filename">libgimpmodule-2.0.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides the C functions which implements module loading
+                    using GModule and keeps a list of GimpModule's found in a
+                    given searchpath.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgimpthumb-2.0" name=
+                    "libgimpthumb-2.0"></a><span class="term"><code class=
+                    "filename">libgimpthumb-2.0.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides the C functions for handling <span class=
+                    "application">GIMP</span>'s thumbnail objects.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgimpui-2.0" name=
+                    "libgimpui-2.0"></a><span class="term"><code class=
+                    "filename">libgimpui-2.0.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the <span class="application">GIMP</span> common
+                    user interface functions.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgimpwidgets-2.0" name=
+                    "libgimpwidgets-2.0"></a><span class="term"><code class=
+                    "filename">libgimpwidgets-2.0.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains <span class="application">GIMP</span> and
+                    <span class="application">GTK</span> widget creation and
+                    manipulation functions.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-04-10 07:56:53 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnucash.html" title="GnuCash-2.2.4">Prev</a>
+          <p>
+            GnuCash-2.2.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="evolution.html" title=
+          "Evolution-2.10.3">Next</a>
+          <p>
+            Evolution-2.10.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="office.html" title=
+          "Chapter&nbsp;31.&nbsp;Individual Office Programs">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

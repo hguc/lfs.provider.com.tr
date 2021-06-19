@@ -1,0 +1,218 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Going Beyond BLFS
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;2.&nbsp;Important Information</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="bootscripts.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="../postlfs/postlfs.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Going Beyond BLFS
+        </h1>
+      </div>
+      <p>
+        The packages that are installed in this book are only the tip of the
+        iceberg. We hope that the experience you gained with the <span class=
+        "acronym">LFS</span> book and the <span class="acronym">BLFS</span>
+        book will give you the background needed to compile, install and
+        configure packages that are not included in this book.
+      </p>
+      <p>
+        When you want to install a package to a location other than
+        <tt class="filename">/</tt>, or <tt class="filename">/usr</tt>, you
+        are installing outside the default environment settings on most
+        machines. The following examples should assist you in determining how
+        to correct this situation. The examples cover the complete range of
+        settings that may need updating, but they are not all needed in every
+        situation.
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li>
+            <p>
+              Expand the <tt class="envar">PATH</tt> to include <tt class=
+              "filename">$PREFIX/bin</tt>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Expand the <tt class="envar">PATH</tt> for root to include
+              <tt class="filename">$PREFIX/sbin</tt>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Add <tt class="filename">$PREFIX/lib</tt> to <tt class=
+              "filename">/etc/ld.so.conf</tt> or expand <tt class=
+              "envar">LD_LIBRARY_PATH</tt> to include it. Before using the
+              latter option, check out <a href=
+              "http://www.visi.com/~barr/ldpath.html">http://www.visi.com/~barr/ldpath.html</a>.
+              If you modify <tt class="filename">/etc/ld.so.conf</tt>
+              remember to update <tt class="filename">/etc/ld.so.cache</tt>
+              by executing <span><b class="command">ldconfig</b></span>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Add <tt class="filename">$PREFIX/man</tt> to <tt class=
+              "filename">/etc/man.conf</tt> or expand <tt class=
+              "envar">MANPATH</tt>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Add <tt class="filename">$PREFIX/info</tt> to <tt class=
+              "envar">INFOPATH</tt>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Add <tt class="filename">$PREFIX/lib/pkgconfig</tt> to
+              <tt class="envar">PKG_CONFIG_PATH</tt>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Add <tt class="filename">$PREFIX/include</tt> to <tt class=
+              "envar">CPPFLAGS</tt> when compiling packages that depend on
+              the package you installed.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        If you are in search of a package that is not in the book, the
+        following are different ways you can search for the concerned
+        package.
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li>
+            <p>
+              If you know the name of the package, then search FreshMeat for
+              at <a href="http://freshmeat.net/">http://freshmeat.net/</a>.
+              Also search Google at <a href=
+              "http://google.com/">http://google.com/</a>. Sometimes a search
+              for the rpm at <a href=
+              "http://rpmfind.net/">http://rpmfind.net/</a> or the deb at
+              <a href=
+              "http://www.debian.org/distrib/packages#search_packages">http://www.debian.org/distrib/packages#search_packages</a>
+              can also lead to the website for the package.
+            </p>
+          </li>
+          <li>
+            <p>
+              If you know the name of the executable, but not the package
+              that the executable belongs to, first try a google search with
+              the name of the executable. If the results are overwhelming,
+              try searching for the given executable in the Debian repository
+              at <a href=
+              "http://www.debian.org/distrib/packages#search_contents">http://www.debian.org/distrib/packages#search_contents</a>.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        Some general hints on handling new packages:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li>
+            <p>
+              Many of the newer packages follow the <span><b class=
+              "command">./configure &amp;&amp; make &amp;&amp; make
+              install</b></span> <span class="emphasis"><em>dance</em></span>
+              routine. Help on the options accepted by configure can be
+              obtained via the command <span><b class="command">./configure
+              --help</b></span>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Most of the packages contain documentation on compiling and
+              installing the package. Some of the documents are excellent,
+              some not so excellent. Check out the homepage of the package
+              for any additional and updated hints for compiling and
+              configuring the package.
+            </p>
+          </li>
+          <li>
+            <p>
+              If you are having a problem compiling the package, try
+              searching the lfs archives at <a href=
+              "http://search.linuxfromscratch.org/">http://search.linuxfromscratch.org/</a>
+              for the error or if that fails try searching google. If
+              everything else fails, try the blfs support
+              mailing-list/news-server.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="admonition">
+        <div class="admonhead">
+          <img alt="[Tip]" src="../images/tip.png" />
+          <h3 class="tip">
+            Tip
+          </h3>
+        </div>
+        <div class="admonbody">
+          <p>
+            If you have found a package that is only available in .deb or
+            .rpm format, there are two small scripts rpm2targz and deb2targz
+            that are available at <a href=
+            "http://downloads.linuxfromscratch.org/deb2targz.tar.bz2">http://downloads.linuxfromscratch.org/deb2targz.tar.bz2</a>
+            and <a href=
+            "http://downloads.linuxfromscratch.org/rpm2targz.tar.bz2">http://downloads.linuxfromscratch.org/rpm2targz.tar.bz2</a>
+            to convert the archives into a simple tar.gz format.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="bootscripts.html">Prev</a><br />
+        BLFS Boot Scripts
+      </div>
+      <div class="next">
+        <a accesskey="n" href="../postlfs/postlfs.html">Next</a><br />
+        Part&nbsp;II.&nbsp;Post LFS Configuration and Extra Software
+      </div>
+      <div class="up">
+        <a accesskey="u" href="important.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

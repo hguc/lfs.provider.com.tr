@@ -1,0 +1,437 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Running a Subversion Server
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;24.&nbsp;Other Server Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="cvsserver.html" title=
+          "Running a CVS Server">Prev</a>
+          <p>
+            Running a CVS Server
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../x/x.html" title=
+          "X + Window Managers">Next</a>
+          <p>
+            X + Window Managers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="other.html" title=
+          "Chapter&nbsp;24.&nbsp;Other Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="svnserver" name="svnserver"></a>
+        <h1 class="sect1">
+          Running a Subversion Server
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Running a Subversion Server
+          </h2>
+        </div>
+        <p>
+          This section will describe how to set up, administer and secure a
+          <span class="application">Subversion</span> server.
+        </p>
+        <h3>
+          <a id="id2752649" name="id2752649"></a>Subversion Server
+          Dependencies
+        </h3>
+        <h4>
+          <a id="id2849673" name="id2849673"></a>Required
+        </h4>
+        <p>
+          <a href="../basicnet/subversion.html">Subversion-1.1.4</a> and
+          <a href="openssh.html">OpenSSH-4.1p1</a>
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Setting up a Subversion Server.
+          </h2>
+        </div>
+        <p>
+          The following instructions will install a <span class=
+          "application">Subversion</span> server, which will be set up to use
+          <span class="application">OpenSSH</span> as the secure remote
+          access method, with <span><strong class=
+          "command">svnserve</strong></span> available for anonymous access.
+        </p>
+        <p>
+          Configuration of the <span class="application">Subversion</span>
+          server consists of the following steps:
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2759771" name="id2759771"></a>1. Setup Users,
+                  Groups, and Permissions
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            You'll need to be user <tt class="systemitem">root</tt> for the
+            initial portion of configuration. Create the <tt class=
+            "systemitem">svn</tt> user and group with the following commands:
+          </p>
+          <pre class="root"><kbd class=
+          "command">groupadd -g 56 svn &amp;&amp;
+useradd -c "SVN Owner" -d /home/svn -m -g svn -s /bin/false -u 56 svn</kbd></pre>
+          <p>
+            If you plan to have multiple repositories, you should have a
+            group dedicated to each repository for ease of administration.
+            Create the <tt class="systemitem">svntest</tt> group for the test
+            repository and add the <tt class="systemitem">svn</tt> user to
+            that group with the following commands:
+          </p>
+          <pre class="root"><kbd class=
+          "command">groupadd -g 57 svntest &amp;&amp;
+usermod -G svntest svn</kbd></pre>
+          <p>
+            Additionally you should set <span><strong class="command">umask
+            002</strong></span> while working with a repository so that all
+            new files will be writable by owner and group. This is made
+            mandatory by creating a wrapper script for <span><strong class=
+            "command">svn</strong></span> and <span><strong class=
+            "command">svnserve</strong></span>:
+          </p>
+          <pre class="root"><kbd class=
+          "command">mv /usr/bin/svn /usr/bin/svn.orig &amp;&amp;
+mv /usr/bin/svnserve /usr/bin/svnserve.orig &amp;&amp;
+cat &gt;&gt; /usr/bin/svn &lt;&lt; "EOF"
+<tt class="literal">#!/bin/sh
+umask 002
+/usr/bin/svn.orig "$@"</tt>
+EOF
+cat &gt;&gt; /usr/bin/svnserve &lt;&lt; "EOF"
+<tt class="literal">#!/bin/sh
+umask 002
+/usr/bin/svnserve.orig "$@"</tt>
+EOF
+chmod 0755 /usr/bin/svn{,serve}</kbd></pre>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                If you use <span class="application">Apache</span> for
+                working with the repository over HTTP, even for anonymous
+                access, you should wrap <span><strong class=
+                "command">/usr/sbin/httpd</strong></span> in a similar
+                script.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2701963" name="id2701963"></a>2. Create a
+                  Subversion repository.
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            With subversion-1.1.0 and greater, a new type of repository
+            data-store is available, FSFS. There is a tradeoff for speed with
+            the new backend, however, the repository can now be placed on a
+            network mount, and any corruption does not require an admin to
+            recover the repository. For more information and comparison
+            between FSFS and BDB, see <a href=
+            "http://svnbook.red-bean.com/svnbook-1.1/ch05.html#svn-ch-5-sect-1.2.A">
+            <span class=
+            "url">http://svnbook.red-bean.com/svnbook-1.1/ch05.html#svn-ch-5-sect-1.2.A</span></a>.
+            Optionally you can pass <tt class="option">bdb</tt> in place of
+            <tt class="option">fsfs</tt> in the following command to create a
+            BerkeleyDB data-store.
+          </p>
+          <p>
+            Create a new <span class="application">Subversion</span>
+            repository with the following commands:
+          </p>
+          <pre class="root"><kbd class=
+          "command">install -d -m0755 /srv &amp;&amp;
+install -d -m0755 -o svn -g svn /srv/svn/repositories &amp;&amp;
+svnadmin create --fs-type fsfs /srv/svn/repositories/svntest</kbd></pre>
+          <p>
+            Now that the repository is created, we need to populate it with
+            something useful. You'll need to have a predefined directory
+            layout setup exactly as you want your repository to look. For
+            example, here is a sample BLFS layout setup with a root of
+            <tt class="filename">svntest/</tt>. You'll need to setup a
+            directory tree similar to the following:
+          </p>
+          <pre class="screen"><tt class=
+          "literal">          svntest/            # The name of the repository
+             trunk/           # Contains the existing source tree
+                BOOK/
+                bootscripts/
+                edguide/
+                patches/
+                scripts/
+             branches/        # Needed for additional branches
+             tags/            # Needed for tagging release points</tt></pre>
+          <p>
+            Once you've created your directory layout as shown above, you are
+            ready to do the initial import:
+          </p>
+          <pre class="root"><kbd class=
+          "command">svn import -m "Initial import." \
+    <em class="replaceable"><tt>[/path/to/source/tree]</tt></em> \
+    file:///srv/svn/repositories/svntest</kbd></pre>
+          <p>
+            Now go ahead and change owner and group information on the
+            repository, and add an unprivileged user to the <tt class=
+            "systemitem">svn</tt> and <tt class="systemitem">svntest</tt>
+            groups:
+          </p>
+          <pre class="root"><kbd class=
+          "command">chown -R svn:svntest /srv/svn/repositories/svntest &amp;&amp;
+chmod -R g+w /srv/svn/repositories/svntest &amp;&amp;
+chmod g+s /srv/svn/repositories/svntest/db &amp;&amp;
+usermod -G svn,svntest,<em class=
+"replaceable"><tt>[insert existing groups]</tt></em> <em class=
+"replaceable"><tt>[username]</tt></em></kbd></pre>
+          <p>
+            <tt class="systemitem">svntest</tt> is the group assigned to the
+            svntest repository. As mentioned earlier, this eases
+            administration of multiple repositories when using <span class=
+            "application">OpenSSH</span> for authentication. Going forward,
+            you'll need to add your unprivileged user, and any additional
+            users that you wish to have write access to the repository, to
+            the <tt class="systemitem">svn</tt> and <tt class=
+            "systemitem">svntest</tt> groups.
+          </p>
+          <p>
+            In addition, you'll notice that the new repository's <tt class=
+            "filename">db</tt> directory is set-groupID. If the reasoning is
+            not immediately obvious, when using any external authentication
+            method (such as <span><strong class=
+            "command">ssh</strong></span>), the sticky bit is set so that all
+            new files will be owned by the user, but group of <tt class=
+            "systemitem">svntest</tt>. Anyone in the <tt class=
+            "systemitem">svntest</tt> group can create files, but still give
+            the entire group write access to those files. This avoids locking
+            out other users from the repository.
+          </p>
+          <p>
+            Now, go ahead and return to an unprivileged user account, and
+            take a look at your new repository using <span><strong class=
+            "command">svnlook</strong></span>:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">svnlook tree /srv/svn/repositories/svntest/</kbd></pre>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                You may need to log out and back in again to refresh your
+                group memberships. '<span><strong class="command">su
+                <em class=
+                "replaceable"><tt>[username]</tt></em></strong></span>'
+                should work around this as well.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2872723" name="id2872723"></a>3. Configure the
+                  Server
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            As mentioned previously, these instructions will configure the
+            server to use only <span><strong class=
+            "command">ssh</strong></span> for write access to the repository
+            and to provide anonymous access using <span><strong class=
+            "command">svnserve</strong></span>. There are several other ways
+            to provide access to the repository. These additional
+            configurations are best explained at <a href=
+            "http://svnbook.red-bean.com/"><span class=
+            "url">http://svnbook.red-bean.com/</span></a>.
+          </p>
+          <p>
+            Access configuration needs to be done for each repository. Create
+            the <tt class="filename">svnserve.conf</tt> file for the svntest
+            repository using the following commands:
+          </p>
+          <pre class="root"><kbd class=
+          "command">cp /srv/svn/repositories/svntest/conf/svnserve.conf \
+    /srv/svn/repositories/svntest/conf/svnserve.conf.default &amp;&amp;
+cat &gt; /srv/svn/repositories/svntest/conf/svnserve.conf &lt;&lt; "EOF"
+<tt class="literal">[general]
+anon-access = read
+auth-access = write</tt>
+EOF</kbd></pre>
+          <p>
+            There is not a lot to the configuration file at all. You'll
+            notice that only the general section is required. Take a look at
+            the <tt class="filename">svnserve.conf.default</tt> file for
+            information on using <span><strong class=
+            "command">svnserve</strong></span>'s built-in authentication
+            method.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="svnserver-init" name="svnserver-init"></a>4.
+                  Starting the Server
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            There are a couple of ways to start <span><strong class=
+            "command">svnserve</strong></span>. The most common way is to
+            start it as an <span><strong class=
+            "command">inetd</strong></span> or <span><strong class=
+            "command">xinetd</strong></span> process. Alternately, you can
+            use a bootscript to start the service at startup.
+          </p>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                If you do not wish to provide anonymous access to your svn
+                repositories or use <span><strong class=
+                "command">svnserve</strong></span>'s built-in authentication,
+                you do not need to run <span><strong class=
+                "command">svnserve</strong></span>.
+              </p>
+            </div>
+          </div>
+          <p>
+            If you use <span><strong class="command">inetd</strong></span>,
+            add a line to <tt class="filename">/etc/inetd.conf</tt> using the
+            following commands:
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt;&gt; /etc/inetd.conf &lt;&lt; "EOF"
+<tt class=
+"literal">svn stream tcp nowait svn /usr/bin/svnserve svnserve -i</tt>
+EOF</kbd></pre>
+          <p>
+            If you use <span><strong class="command">xinetd</strong></span>,
+            the following command will create the <span class=
+            "application">Subversion</span> server file as <tt class=
+            "filename">/etc/xinetd.d/svn</tt>:
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt;&gt; /etc/xinetd.d/svn &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/xinetd.d/svn
+
+service svn
+{
+        port                    = 3690
+        socket_type             = stream
+        protocol                = tcp
+        wait                    = no
+        user                    = svn
+        server                  = /usr/bin/svnserve
+        server_args             = -i -r /srv/svn/repositories
+}
+
+# End /etc/xinetd.d/svn</tt>
+EOF</kbd></pre>
+          <p>
+            Finally, if you wish to simply start the sever at startup,
+            install the svn bootscript included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-6.1</a>
+            package.
+          </p>
+          <pre class="root"><kbd class="command">make install-svn</kbd></pre>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="cvsserver.html" title=
+          "Running a CVS Server">Prev</a>
+          <p>
+            Running a CVS Server
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../x/x.html" title=
+          "X + Window Managers">Next</a>
+          <p>
+            X + Window Managers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="other.html" title=
+          "Chapter&nbsp;24.&nbsp;Other Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

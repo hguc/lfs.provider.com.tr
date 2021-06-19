@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Wget-1.9.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;18.&nbsp;Basic Networking Programs</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="cvs.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="tcpwrappers.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Wget-1.9.1
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Wget
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Wget</span> package contains a
+          utility useful for non-interactive downloading of files from the
+          Web.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2780925" name="id2780925"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.gnu.org/gnu/wget/wget-1.9.1.tar.gz">http://ftp.gnu.org/gnu/wget/wget-1.9.1.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnu.org/gnu/wget/wget-1.9.1.tar.gz">ftp://ftp.gnu.org/gnu/wget/wget-1.9.1.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 6.2 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.11 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2780965" name="id2780965"></a><span class=
+                  "application">Wget</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2782102" name="id2782102"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a> and
+              <a href="http://www.inet.no/dante/">Dante</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Wget
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Wget</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--prefix=/usr</tt></i>: This compiles and
+          installs <span><b class="command">wget</b></span> into the
+          <tt class="filename">/usr</tt> hierarchy instead of <tt class=
+          "filename">/usr/local</tt>.
+        </p>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc</tt></i>: This relocates
+          the configuration file from <tt class="filename">/usr/etc</tt> to
+          <tt class="filename">/etc</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Wget
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2781977" name="id2781977"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/wgetrc</tt>, <tt class=
+            "filename">~/.wgetrc</tt>
+          </p>
+          <p>
+            There are no required changes in these files.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Wget</span> package contains
+          <span><b class="command">wget</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2781703" name="id2781703"></a>wget
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">wget</b></span> retrieves files from the
+            Web using the <span class="acronym">HTTP</span>, <span class=
+            "acronym">HTTPS</span> and <span class="acronym">FTP</span>
+            protocols. It is designed to be non-interactive, for background
+            or unattended operations.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="cvs.html">Prev</a><br />
+        CVS-1.11.16
+      </div>
+      <div class="next">
+        <a accesskey="n" href="tcpwrappers.html">Next</a><br />
+        tcpwrappers-7.6
+      </div>
+      <div class="up">
+        <a accesskey="u" href="netprogs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

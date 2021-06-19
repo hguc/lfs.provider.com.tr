@@ -1,0 +1,374 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      DocBook XSL Stylesheets-1.67.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;44.&nbsp;Extensible Markup Language (<span class=
+          "acronym">XML</span>)
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="xml.html" title=
+          "Extensible Markup Language (XML)">Prev</a>
+          <p>
+            Extensible Markup Language (XML)
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ps.html" title="PostScript">Next</a>
+          <p>
+            PostScript
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="xml.html" title=
+          "Chapter&nbsp;44.&nbsp;Extensible Markup Language (XML)">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="docbook-xsl" name="docbook-xsl"></a>
+        <h1 class="sect1">
+          DocBook XSL Stylesheets-1.67.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to DocBook XSL Stylesheets
+          </h2>
+        </div>
+        <p>
+          The <span class="application">DocBook <span class=
+          "acronym">XSL</span> Stylesheets</span> package contains
+          <span class="acronym">XSL</span> stylesheets. These are useful for
+          performing transformations on <span class="acronym">XML</span>
+          DocBook files.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2624029" name="id2624029"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/docbook/docbook-xsl-1.67.2.tar.bz2">
+                  <span class=
+                  "url">http://prdownloads.sourceforge.net/docbook/docbook-xsl-1.67.2.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: deb1864e3e190465dcc26145d2667a84
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 975 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 25 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.01 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2897464" name="id2897464"></a><span class=
+                  "application">DocBook <span class="acronym">XSL</span>
+                  Stylesheets</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2949980" name="id2949980"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/libxslt.html">libxslt-1.1.12</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of DocBook XSL Stylesheets
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">DocBook <span class=
+          "acronym">XSL</span> Stylesheets</span> by running the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">install -d /usr/share/xml/docbook/xsl-stylesheets-1.67.2 &amp;&amp;
+chown -R root:root . &amp;&amp;
+cp -af INSTALL VERSION common eclipse extensions fo html htmlhelp \
+    images javahelp lib manpages params profiling template xhtml \
+    /usr/share/xml/docbook/xsl-stylesheets-1.67.2 &amp;&amp;
+install -d /usr/share/doc/xml &amp;&amp;
+cp -af doc/* /usr/share/doc/xml &amp;&amp;
+cd /usr/share/xml/docbook/xsl-stylesheets-1.67.2 &amp;&amp;
+sh INSTALL &amp;&amp;
+if [ ! -f /etc/xml/catalog ]; then mkdir -p /etc/xml; xmlcatalog \
+    --noout --create /etc/xml/catalog; fi &amp;&amp;
+if [ ! -e /etc/xml/docbook ]; then xmlcatalog --noout --create \
+    /etc/xml/docbook; fi &amp;&amp;
+xmlcatalog --noout --add "rewriteSystem" \
+    "http://docbook.sourceforge.net/release/xsl/1.67.2" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.67.2" /etc/xml/catalog &amp;&amp;
+xmlcatalog --noout --add "rewriteURI" \
+    "http://docbook.sourceforge.net/release/xsl/1.67.2" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.67.2" /etc/xml/catalog &amp;&amp;
+xmlcatalog --noout --add "delegateSystem" \
+    "http://docbook.sourceforge.net/release/xsl/" \
+    "file:///etc/xml/docbook" /etc/xml/catalog &amp;&amp;
+xmlcatalog --noout --add "delegateURI" \
+    "http://docbook.sourceforge.net/release/xsl/" \
+    "file:///etc/xml/docbook" /etc/xml/catalog</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">sh INSTALL</strong></span>: This
+          command creates a local catalog for the <span class=
+          "acronym">XSL</span> files.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring DocBook XSL Stylesheets
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="docbook-xsl-config" name=
+                  "docbook-xsl-config"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/xml/catalog</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2732356" name="id2732356"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The system profile needs to be updated to utilize the new
+            installed catalog. This can be done with the following command:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/profile.d/xsl.sh &lt;&lt; "EOF"</strong></span>
+# Set up Environment Variable for XSL Processing
+export XML_CATALOG_FILES="/usr/share/xml/docbook/\
+xsl-stylesheets-1.67.2/catalog.xml /etc/xml/catalog"
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            The above installation script creates the files and updates the
+            catalog. Some project stylesheets reference specific versions of
+            <span class="acronym">XSL</span> stylesheets, like <span class=
+            "acronym">BLFS</span>, which needs the following additional
+            commands. These commands can also serve as an example for using a
+            single <span class="acronym">XSL</span> version to support any
+            hard coded versions, as needed.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">xmlcatalog --noout --add "rewriteSystem" \
+    "http://docbook.sourceforge.net/release/xsl/1.65.1" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.67.2" \
+    /etc/xml/catalog &amp;&amp;
+xmlcatalog --noout --add "rewriteURI" \
+    "http://docbook.sourceforge.net/release/xsl/1.65.1" \
+    "/usr/share/xml/docbook/xsl-stylesheets-1.67.2" \
+    /etc/xml/catalog</strong></span></kbd></pre>
+          <p>
+            Alternatively, other versions can be installed in their own
+            versioned directories and catalog entries made in the following
+            form:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">xmlcatalog --noout --add "rewriteSystem" \
+    "http://docbook.sourceforge.net/release/xsl/<em class=
+"replaceable"><tt>[version]</tt></em>" \
+    "/usr/share/xml/docbook/xsl-stylesheets-<em class=
+"replaceable"><tt>[version]</tt></em>" \
+    /etc/xml/catalog &amp;&amp;
+xmlcatalog --noout --add "rewriteURI" \
+    "http://docbook.sourceforge.net/release/xsl/<em class=
+"replaceable"><tt>[version]</tt></em>" \
+    "/usr/share/xml/docbook/xsl-stylesheets-<em class=
+"replaceable"><tt>[version]</tt></em>" \
+    /etc/xml/catalog</strong></span></kbd></pre>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                To use XSL Stylesheets for GTK-Doc, and possibly other
+                packages, a "current" version is needed instead of a specific
+                version number. In this case, use the following instructions:
+              </p>
+              <div class="literallayout">
+                <p>
+                  <strong class="userinput"><tt><span><strong class=
+                  "command">xmlcatalog --noout --add "rewriteSystem" \<br />
+                      "http://docbook.sourceforge.net/release/xsl/current"
+                  \<br />
+                      "/usr/share/xml/docbook/xsl-stylesheets-1.67.2" \<br />
+                      /etc/xml/catalog   &amp;&amp;<br />
+                  <br />
+                  xmlcatalog --noout --add "rewriteURI" \<br />
+                      "http://docbook.sourceforge.net/release/xsl/current"
+                  \<br />
+                      "/usr/share/xml/docbook/xsl-stylesheets-1.67.2" \<br />
+                      /etc/xml/catalog</strong></span></tt></strong>
+                </p>
+              </div>
+              <p>
+                This is a workaround that may or may not work for other
+                packages that may need a "current" catalog version.
+              </p>
+            </div>
+          </div>
+          <p>
+            For <span class="acronym">LFS</span> 6.0, version 1.65.1 of this
+            package should be installed. In addition, you need to make a
+            symbolic link as described in the <tt class=
+            "filename">INSTALL</tt> file of <span class="acronym">LFS</span>
+            6.0.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cd /usr/share/xml/docbook/ &amp;&amp;
+ln -s xsl-stylesheets-1.65.1 xsl-stylesheets-current</strong></span></kbd></pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed Files:</span></strong>
+              <span class="seg"><span class="acronym">XSL</span> style sheets
+              for <span class="acronym">HTML</span> and <span class=
+              "acronym">FO</span></span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/share/xml/docbook/xsl-stylesheets-1.67.2 and
+              /usr/share/doc/xml</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-04-03 00:40:42 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xml.html" title=
+          "Extensible Markup Language (XML)">Prev</a>
+          <p>
+            Extensible Markup Language (XML)
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ps.html" title="PostScript">Next</a>
+          <p>
+            PostScript
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="xml.html" title=
+          "Chapter&nbsp;44.&nbsp;Extensible Markup Language (XML)">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

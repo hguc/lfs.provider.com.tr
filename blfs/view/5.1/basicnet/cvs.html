@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      CVS-1.11.16
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;18.&nbsp;Basic Networking Programs</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="rsync.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="wget.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          CVS-1.11.16
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to CVS
+          </h3>
+        </div>
+        <p>
+          <span class="application"><span class="acronym">CVS</span></span>
+          is the Concurrent Versioning System. This is a version control
+          system useful for projects using a central repository to hold files
+          and then track all changes made to those files. These instructions
+          install the client used to manipulate the repository, creation of a
+          repository is covered at <a href=
+          "../server/cvsserver.html">cvsserver</a>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2778676" name="id2778676"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "https://ccvs.cvshome.org/files/documents/19/152/cvs-1.11.16.tar.bz2">
+                  https://ccvs.cvshome.org/files/documents/19/152/cvs-1.11.16.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.7 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 25.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.31 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of CVS
+          </h3>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">cvs</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring CVS
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2780571" name="id2780571"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.cvsrc</tt>, <tt class=
+            "filename">~/.cvswrappers</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2780589" name="id2780589"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.cvsrc</tt> is the main <span class=
+            "application"><span class="acronym">CVS</span></span>
+            configuration file. This file is used by users to specify
+            defaults for different <span><b class="command">cvs</b></span>
+            commands, for example to make all <span><b class="command">cvs
+            diff</b></span> commands run with <tt class="userinput">-u</tt>,
+            a user would add <tt class="userinput">diff -u</tt> to their
+            <tt class="filename">.cvsrc</tt> file.
+          </p>
+          <p>
+            <tt class="filename">~/.cvswrappers</tt> specifies wrappers to be
+            used in addition to those specified in the <tt class=
+            "filename">CVSROOT/cvswrappers</tt> file in the repository.
+          </p>
+          <p>
+            <tt class="filename">~/.cvspass</tt> can hold passwords to
+            complete logins to servers.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">CVS</span></span> package contains <span><b class=
+          "command">cvs</b></span>, <span><b class=
+          "command">cvsbug</b></span> and <span><b class=
+          "command">rcs2log</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2781530" name="id2781530"></a>cvs
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This is the main program file for the concurrent versioning
+            system.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2781539" name="id2781539"></a>cvsbug
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This is used to send problem reports about <span class=
+            "application"><span class="acronym">CVS</span></span> to a
+            central support site.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2781554" name="id2781554"></a>rcs2log
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="acronym">RCS</span> to Change Log generator.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="rsync.html">Prev</a><br />
+        rsync-2.6.2 client
+      </div>
+      <div class="next">
+        <a accesskey="n" href="wget.html">Next</a><br />
+        Wget-1.9.1
+      </div>
+      <div class="up">
+        <a accesskey="u" href="netprogs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

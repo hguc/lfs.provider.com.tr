@@ -1,0 +1,853 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      PDL-2.4.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;12.&nbsp;Programming
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="NASM.html" title="NASM-0.98.39">Prev</a>
+          <p>
+            NASM-0.98.39
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="perl-modules.html" title=
+          "Perl Modules">Next</a>
+          <p>
+            Perl Modules
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="pdl" name="pdl"></a>
+        <h1 class="sect1">
+          PDL-2.4.2
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to PDL
+          </h2>
+        </div>
+        <p>
+          <span class="application">PDL</span> (Perl Data Language) gives
+          standard <span class="application">Perl</span> the ability to
+          compactly store and quickly manipulate the large N-dimensional data
+          arrays common to scientific computing. <span class=
+          "application">PDL</span> turns <span class=
+          "application">Perl</span> into an array-oriented, numerical
+          language similar to such commercial packages as <span class=
+          "application">IDL</span> and <span class=
+          "application">MatLab</span>. One can write simple <span class=
+          "application">Perl</span> expressions to manipulate entire
+          numerical arrays all at once.
+        </p>
+        <p>
+          <span class="application">PDL</span> provides extensive numerical
+          and semi-numerical functionality with support for two- and
+          three-dimensional visualisation as well as a variety of I/O
+          formats. The goal is to allow <span class="application">PDL</span>
+          to interact with a variety of external numerical packages, graphics
+          and visualisation systems. Easy interfacing to such systems is one
+          of the core design features of <span class=
+          "application">PDL</span>.
+        </p>
+        <h3>
+          <a id="id2738299" name="id2738299"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://prdownloads.sourceforge.net/pdl/PDL-2.4.2.tar.gz"><span class="url">
+                http://prdownloads.sourceforge.net/pdl/PDL-2.4.2.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: edd056a006eae8b46e8ef804b9774a93
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 2.1 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 74 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 2.56 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2698759" name="id2698759"></a>PDL Dependencies
+        </h3>
+        <p>
+          <span class="application">PDL</span> is a collection of over 90
+          <span class="application">Perl</span> modules. Some of these
+          modules require additional libraries and/or <span class=
+          "application">Perl</span> modules for full functionality. Listed
+          below are the modules which require additional software or
+          configuration. If you don't need a particular module's
+          functionality, you don't need to install its dependencies. The
+          dependency tree for each module is listed downward, meaning you'll
+          need to start at the bottom of a module's tree and work up. The
+          dependencies are listed in the same order as they are in the
+          <tt class="filename">DEPENDENCIES</tt> file, found in the package
+          source tree.
+        </p>
+        <h4>
+          <a id="id2645561" name="id2645561"></a>PDL::NiceSlice
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::NiceSlice module is used
+          to enhance <span class="application">PDL</span>'s slice syntax.
+          &ldquo;<span class="quote">Slicing</span>&rdquo; is a term used in
+          the process of creating a cross-section, or slice, of a
+          <span class="application">PDL</span> object (piddle).
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href=
+                "http://www.cpan.org/authors/id/P/PM/PMQS/Filter-1.30.tar.gz">
+                <span class="url">Filter-1.30</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2746672" name="id2746672"></a>Inline::Pdlpp
+        </h4>
+        <p>
+          The Inline::Pdlpp module allows you to define fast PP code inline
+          in your scripts.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href=
+                "http://www.cpan.org/authors/id/I/IN/INGY/Inline-0.44.tar.gz">
+                <span class="url">Inline-0.44</span></a>
+              </p>
+              <div class="itemizedlist">
+                <ul>
+                  <li>
+                    <p>
+                      <a href=
+                      "http://www.cpan.org/authors/id/D/DC/DCONWAY/Parse-RecDescent-1.94.tar.gz">
+                      <span class="url">Parse-RecDescent-1.94</span></a>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2843148" name="id2843148"></a>Perldl
+        </h4>
+        <p>
+          <span><strong class="command">perldl</strong></span> is a simple
+          shell (written in <span class="application">Perl</span>) which
+          allows interactive use of <span class="application">PDL</span>.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href=
+                "http://www.cpan.org/authors/id/H/HA/HAYASHI/Term-ReadLine-Gnu-1.15.tar.gz">
+                <span class="url">Term-ReadLine-Gnu-1.15</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2800886" name="id2800886"></a>PDL::Graphics::TriD
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::Graphics::TriD module
+          implements a generic 3D plotting interface for <span class=
+          "application">PDL</span>. Points, lines and surfaces (among other
+          objects) are supported.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                OpenGL (<a href="../x/xfree86.html">XFree86-4.5.0</a> or
+                <a href="../x/installing.html#xorg">X.org-6.8.2</a>)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2699724" name="id2699724"></a>PDL::Graphics::PGPLOT
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::Graphics::PGPLOT module
+          is a convenience interface to the <span class=
+          "application">PGPLOT</span> commands, implemented using the object
+          oriented <span class="application">PGPLOT</span> plotting package
+          in the <span class=
+          "application">PDL</span>::Graphics::PGPLOT::Window module.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href=
+                "http://www.cpan.org/authors/id/K/KG/KGB/PGPLOT-2.18.tar.gz"><span class="url">
+                pgperl</span></a>
+              </p>
+              <div class="itemizedlist">
+                <ul>
+                  <li>
+                    <p>
+                      <a href=
+                      "http://www.cpan.org/authors/id/K/KG/KGB/ExtUtils-F77-1.14.tar.gz">
+                      <span class="url">ExtUtils-F77-1.14</span></a>
+                    </p>
+                    <div class="itemizedlist">
+                      <ul>
+                        <li>
+                          <p>
+                            <a href="gcc.html">GCC-3.4.3</a> (Fortran
+                            compiler)
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <p>
+                      <a href=
+                      "http://www.astro.caltech.edu/~tjp/pgplot/"><span class="url">
+                      PGPLOT</span></a>
+                    </p>
+                    <div class="itemizedlist">
+                      <ul>
+                        <li>
+                          <p>
+                            X (<a href="../x/xfree86.html">XFree86-4.5.0</a>
+                            or <a href=
+                            "../x/installing.html#xorg">X.org-6.8.2</a>),
+                            <a href="../x/lesstif.html">LessTif-0.94.4</a>,
+                            <a href="tk.html">Tk-8.4.11</a> and <a href=
+                            "gcc.html">GCC-3.4.3</a> (Fortran compiler)
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2595026" name="id2595026"></a>PDL::Graphics::PLPLOT
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::Graphics::PLPLOT module
+          is a simple interface to the <span class=
+          "application">PLplot</span> plotting library.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href="http://plplot.sourceforge.net/"><span class=
+                "url">PLplot</span></a>
+              </p>
+              <div class="itemizedlist">
+                <ul>
+                  <li>
+                    <p>
+                      <a href="pkgconfig.html">pkg-config-0.19</a>, X
+                      (<a href="../x/xfree86.html">XFree86-4.5.0</a> or
+                      <a href="../x/installing.html#xorg">X.org-6.8.2</a>),
+                      <a href="../x/gtk.html">GTK+-1.2.10</a>, <a href=
+                      "freetype2.html">FreeType-2.1.10</a>, <a href=
+                      "http://www.boutell.com/gd/"><span class=
+                      "url">GD</span></a>, <a href=
+                      "http://www.svgalib.org/"><span class=
+                      "url">SVGAlib</span></a>, <a href=
+                      "../gnome/gnome-libs.html">GNOME Libraries-1.4.2</a>,
+                      <a href="jdk.html">JDK-1.5.0</a>, <a href=
+                      "tk.html">Tk-8.4.11</a>, <a href=
+                      "Python.html">Python-2.4.1</a> (with the <a href=
+                      "http://www.pfdubois.com/numpy/"><span class=
+                      "url">Numerical Extension</span></a>), <a href=
+                      "gcc.html">GCC-3.4.3</a> (Fortran compiler), <a href=
+                      "http://www.swig.org/"><span class=
+                      "url">SWIG</span></a>, <a href=
+                      "http://sourceforge.net/projects/incrtcl/"><span class=
+                      "url">iTcl</span></a>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2628574" name="id2628574"></a>PDL::Graphics::IIS
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::Graphics::IIS module
+          provides an interface to any image display &ldquo;<span class=
+          "quote">device</span>&rdquo; which supports the &ldquo;<span class=
+          "quote">IIS protocol</span>&rdquo;.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href=
+                "http://tdc-www.harvard.edu/software/saoimage.html"><span class="url">
+                SAOimage</span></a>
+              </p>
+              <div class="itemizedlist">
+                <ul>
+                  <li>
+                    <p>
+                      X (<a href="../x/xfree86.html">XFree86-4.5.0</a> or
+                      <a href="../x/installing.html#xorg">X.org-6.8.2</a>)
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+            <li>
+              <p>
+                <a href=
+                "http://iraf.noao.edu/iraf/web/projects/x11iraf/x11iraf.html">
+                <span class="url">X11 IRAF</span></a>
+              </p>
+              <div class="itemizedlist">
+                <ul>
+                  <li>
+                    <p>
+                      X (<a href="../x/xfree86.html">XFree86-4.5.0</a> or
+                      <a href="../x/installing.html#xorg">X.org-6.8.2</a>)
+                      and <a href="tk.html">Tk-8.4.11</a>
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2656448" name="id2656448"></a>PDL::Graphics::Karma
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::Graphics::Karma module is
+          an interface to <span class="application">Karma</span>
+          visualisation applications.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href=
+                "http://www.atnf.csiro.au/computing/software/karma/"><span class="url">
+                Karma</span></a>
+              </p>
+              <div class="itemizedlist">
+                <ul>
+                  <li>
+                    <p>
+                      X (<a href="../x/xfree86.html">XFree86-4.5.0</a> or
+                      <a href="../x/installing.html#xorg">X.org-6.8.2</a>)
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <p>
+          <span class="emphasis"><em>Note:</em></span> You may need to modify
+          the <tt class="option">WHERE_KARMA =&gt; undef</tt> line in the
+          source tree <tt class="filename">perldl.conf</tt> file to point to
+          your installation of <span class="application">Karma</span>
+        </p>
+        <h4>
+          <a id="id2756201" name="id2756201"></a>PDL::IO::Pic
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::IO::Pic module implements
+          I/O for a number of popular image formats by exploiting the
+          <span><strong class="command">xxxtopnm</strong></span> and
+          <span><strong class="command">pnmtoxxx</strong></span> converters
+          from the <span class="application">Netpbm</span> package and the
+          <span><strong class="command">cjpeg</strong></span> and
+          <span><strong class="command">djpeg</strong></span> converters. It
+          also contains the routine wmpeg to write MPEG movies from piddles
+          representing image stacks.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href="http://netpbm.sourceforge.net/"><span class=
+                "url">Netpbm</span></a>, <a href=
+                "graphlib.html#libjpeg">libjpeg-6b</a> and <a href=
+                "ftp://mm-ftp.cs.berkeley.edu/pub/multimedia/mpeg/encode/"><span class="url">
+                mpeg_encode</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2708555" name="id2708555"></a>PDL::Slatec
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::Slatec module serves the
+          dual purpose of providing an interface to parts of the slatec
+          library and showing how to interface <span class=
+          "application">PDL</span> to an external library. The module
+          provides routines to manipulate matrices, calculate FFTs, fit data
+          using polynomials, and interpolate/integrate data using piecewise
+          cubic Hermite interpolation.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href=
+                "http://www.cpan.org/authors/id/K/KG/KGB/ExtUtils-F77-1.14.tar.gz">
+                <span class="url">ExtUtils-F77-1.14</span></a>
+              </p>
+              <div class="itemizedlist">
+                <ul>
+                  <li>
+                    <p>
+                      <a href="gcc.html">GCC-3.4.3</a> (Fortran compiler)
+                    </p>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2556133" name="id2556133"></a>PDL::GSL
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::<span class=
+          "application">GSL</span> module is an interface to the functions
+          provided by the Gnu Scientific Library.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href="http://www.gnu.org/software/gsl/"><span class=
+                "url">GSL</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2672009" name="id2672009"></a>PDL::FFTW
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::<span class=
+          "application">FFTW</span> module is a means to interface
+          <span class="application">PDL</span> with the <span class=
+          "application">FFTW</span> library. It's similar to the standard FFT
+          routine but it's usually faster and has support for real
+          transforms. It works well for the types of piddles for which the
+          library was compiled (otherwise it must do conversions).
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href="http://www.fftw.org/"><span class=
+                "url">FFTW-2.x</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2557311" name="id2557311"></a>PDL::IO::Browser
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::IO::Browser module is a
+          2D cursor terminal data browser for piddles.
+        </p>
+        <p>
+          There is no additional software required to use the module.
+          However, the default is to not install the module because some
+          platforms don't provide a curses compatible library. To enable the
+          module, issue the following command:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i -e "s/WITH_IO_BROWSER =&gt; 0/WITH_IO_BROWSER =&gt; 1/" \
+    perldl.conf</kbd></pre>
+        <h4>
+          <a id="id2659938" name="id2659938"></a>PDL::IO::NDF
+        </h4>
+        <p>
+          The <span class="application">PDL</span>::IO::NDF module adds the
+          ability to read and write Starlink N-dimensional data files as
+          N-dimensional piddles.
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href=
+                "http://www.cpan.org/authors/id/A/AA/AALLAN/Astro-FITS-Header-2.8.1.tar.gz">
+                <span class="url">Astro-FITS-Header-2.8.1</span></a>
+              </p>
+              <div class="itemizedlist">
+                <ul>
+                  <li>
+                    <p>
+                      <a href=
+                      "http://www.cpan.org/authors/id/P/PR/PRATZLAFF/Astro-FITS-CFITSIO-1.03.tar.gz">
+                      <span class="url">Astro-FITS-CFITSIO-1.03</span></a>
+                    </p>
+                    <div class="itemizedlist">
+                      <ul>
+                        <li>
+                          <p>
+                            <a href=
+                            "http://heasarc.gsfc.nasa.gov/docs/software/fitsio/">
+                            <span class="url">CFITSIO</span></a>
+                          </p>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <p>
+                      <a href=
+                      "ftp://ftp.starlink.rl.ac.uk/pub/ussc/store/starperl/starperl.tar.Z">
+                      <span class="url">NDFPERL-1.45</span></a>
+                    </p>
+                    <div class="itemizedlist">
+                      <ul>
+                        <li>
+                          <p>
+                            <a href=
+                            "ftp://ftp.starlink.rl.ac.uk/pub/ussc/store/starperl/starperl.tar.Z">
+                            <span class="url">Starlink-Config-1.00</span></a>
+                          </p>
+                          <div class="itemizedlist">
+                            <ul>
+                              <li>
+                                <p>
+                                  <a href=
+                                  "http://star-www.rl.ac.uk/"><span class=
+                                  "url">Starlink IMG</span></a>
+                                </p>
+                                <div class="itemizedlist">
+                                  <ul>
+                                    <li>
+                                      <p>
+                                        <a href=
+                                        "http://star-www.rl.ac.uk/"><span class="url">
+                                        Starlink NDF</span></a>
+                                      </p>
+                                      <div class="itemizedlist">
+                                        <ul>
+                                          <li>
+                                            <p>
+                                              <a href=
+                                              "gcc.html">GCC-3.4.3</a>
+                                              (Fortran compiler)
+                                            </p>
+                                          </li>
+                                        </ul>
+                                      </div>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                  <li>
+                    <p>
+                      <a href=
+                      "ftp://ftp.starlink.rl.ac.uk/pub/ussc/store/starperl/starperl.tar.Z">
+                      <span class="url">GSDPERL-1.13</span></a>
+                    </p>
+                    <div class="itemizedlist">
+                      <ul>
+                        <li>
+                          <p>
+                            <a href=
+                            "ftp://ftp.starlink.rl.ac.uk/pub/ussc/store/starperl/starperl.tar.Z">
+                            <span class="url">Starlink-Config-1.00</span></a>
+                          </p>
+                          <div class="itemizedlist">
+                            <ul>
+                              <li>
+                                <p>
+                                  <a href=
+                                  "http://star-www.rl.ac.uk/"><span class=
+                                  "url">Starlink GSD</span></a>
+                                </p>
+                                <div class="itemizedlist">
+                                  <ul>
+                                    <li>
+                                      <p>
+                                        <a href="gcc.html">GCC-3.4.3</a>
+                                        (Fortran compiler)
+                                      </p>
+                                    </li>
+                                  </ul>
+                                </div>
+                              </li>
+                            </ul>
+                          </div>
+                        </li>
+                      </ul>
+                    </div>
+                  </li>
+                </ul>
+              </div>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of PDL
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">PDL</span> (and all the
+          dependency <span class="application">Perl</span> modules) by
+          running the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">perl Makefile.PL &amp;&amp;
+make &amp;&amp;
+make test</kbd></pre>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring PDL
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="pdl-config" name="pdl-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.perldlrc</tt> and <tt class=
+            "filename">local.perldlrc</tt> in the current directory
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2635581" name="id2635581"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            See <a href=
+            "http://pdl.sourceforge.net/PDLdocs/perldl.html#the%20startup%20file%20~/.perldlrc">
+            <span class=
+            "url">http://pdl.sourceforge.net/PDLdocs/perldl.html#the startup
+            file ~/.perldlrc</span></a> for information about configuring
+            <span><strong class="command">perldl</strong></span> to suit your
+            needs.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">pdl, pdldoc,
+              perldl, and pptemplate</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Modules:</span></strong> <span class="seg">90+ individual
+              <span class="application">Perl</span> modules</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/lib/perl5/site_perl/5.8.6/i686-linux/{,auto/}PDL</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2726864" name="id2726864"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="pdl-prog" name="pdl-prog"></a><span class=
+                  "term"><span><strong class=
+                  "command">pdl</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a binary program called from <span class=
+                    "application">PDL</span> scripts which is used to
+                    interface <span><strong class=
+                    "command">perldl</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="pdldoc" name="pdldoc"></a><span class=
+                  "term"><span><strong class=
+                  "command">pdldoc</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a shell interface to <span class=
+                    "application">PDL</span> documentation.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="perldl" name="perldl"></a><span class=
+                  "term"><span><strong class=
+                  "command">perldl</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a simple shell (written in <span class=
+                    "application">Perl</span>) for interactive use of
+                    <span class="application">PDL</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="pptemplate" name="pptemplate"></a><span class=
+                  "term"><span><strong class=
+                  "command">pptemplate</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a script to generate <tt class=
+                    "filename">Makefile.PL</tt> and PP file skeletons.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="NASM.html" title="NASM-0.98.39">Prev</a>
+          <p>
+            NASM-0.98.39
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="perl-modules.html" title=
+          "Perl Modules">Next</a>
+          <p>
+            Perl Modules
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

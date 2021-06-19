@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Links-2.1pre33
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;15.&nbsp;Text Web Browsers
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="textweb.html" title=
+          "Text Web Browsers">Prev</a>
+          <p>
+            Text Web Browsers
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lynx.html" title="Lynx-2.8.6rel.5">Next</a>
+          <p>
+            Lynx-2.8.6rel.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="textweb.html" title=
+          "Chapter&nbsp;15.&nbsp;Text Web Browsers">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="Links" name="Links"></a>Links-2.1pre33
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Links
+        </h2>
+        <p>
+          <span class="application">Links</span> is a text and graphics mode
+          WWW browser. It includes support for rendering tables and frames,
+          features background downloads, can display colors and has many
+          other features.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://links.twibright.com/download/links-2.1pre33.tar.bz2">http://links.twibright.com/download/links-2.1pre33.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/links-2.1pre33.tar.bz2">
+                ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/links-2.1pre33.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 8c4bc1ebbf4962d290df8218bfc21413
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 4.1 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 25 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.3 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Recommended patch: <a class="ulink" href=
+                "ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/links-2.1pre33-utf8.diff.bz2">
+                ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/links-2.1pre33-utf8.diff.bz2</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Do I Need the Patch?
+        </h3>
+        <p>
+          In text mode, unpatched <span class="application">Links</span>
+          cannot be configured to use UTF-8 or other multibyte encodings for
+          the terminal input/output. This limitation renders <span class=
+          "application">Links</span> useless as a text-based browser in
+          multibyte locales. See general discussion of this type of issue in
+          the <a class="xref" href=
+          "../introduction/locale-issues.html#locale-not-valid-option" title=
+          "The Needed Encoding is Not a Valid Option in the Program">Needed
+          Encoding Not a Valid Option</a> section on the <a class="xref"
+          href="../introduction/locale-issues.html" title=
+          "Locale Related Issues">Locale Related Issues</a> page.
+        </p>
+        <p>
+          The patch adds the &ldquo;<span class="quote">UTF-8
+          I/O</span>&rdquo; configuration option. With this option enabled,
+          <span class="application">Links</span> first renders the page using
+          an 8-bit character set configured by the user, and then converts
+          from this character set to UTF-8. The opposite conversion is
+          applied to user input. This approach works if there is an 8-bit
+          character set that contains all the characters that the user
+          considers to be important. Such character set does not exist, e.g.,
+          for Chinese hieroglyphs, or when it is required to display both
+          Cyrillic and Greek characters.
+        </p>
+        <h3>
+          Do I Have to Enable Graphics Support?
+        </h3>
+        <p>
+          In graphical mode, <span class="application">Links</span> displays
+          text correctly even in UTF-8 locales, if all characters exist in
+          the built-in font used by <span class="application">Links</span>.
+          This font contains Basic Latin, Latin-1 Supplement (without
+          superscripts and vulgar fractions), Latin Extended-A, Latin
+          Extended-B (partially), Greek, Cyrillic and Hebrew characters. Form
+          submission in non-ISO-8859-1 locales is handled correctly when
+          running in X11-based graphical mode. Input handlers for other
+          graphics drivers (fb, directfb, svgalib) either misinterpret
+          non-ASCII characters, or don't allow them at all.
+        </p>
+        <p>
+          The patch has no effect on <span class="application">Links</span>
+          behavior in graphical mode.
+        </p>
+        <h3>
+          Links Dependencies
+        </h3>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="../general/gpm.html" title=
+          "GPM-1.20.1">GPM-1.20.1</a> (if mouse support is desired) and
+          <a class="xref" href="../postlfs/openssl.html" title=
+          "OpenSSL-0.9.8g">OpenSSL-0.9.8g</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          Support for graphical mode requires at least one of <a class="xref"
+          href="../general/gpm.html" title="GPM-1.20.1">GPM-1.20.1</a> (to be
+          used with a framebuffer-based console), <a class="ulink" href=
+          "http://www.svgalib.org/">SVGAlib</a>, <a class="ulink" href=
+          "http://www.directfb.org/">DirectFB</a>, and <a class="xref" href=
+          "../x/installing.html" title=
+          "Chapter&nbsp;23.&nbsp;X Window System Environment">X Window
+          System</a>
+        </p>
+        <p>
+          For decoding various image formats <span class=
+          "application">Links</span> can utilize <a class="xref" href=
+          "../general/libpng.html" title="libpng-1.2.29">libpng-1.2.29</a>,
+          <a class="xref" href="../general/libjpeg.html" title=
+          "libjpeg-6b">libjpeg-6b</a>, and <a class="xref" href=
+          "../general/libtiff.html" title="LibTIFF-3.8.2">LibTIFF-3.8.2</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/LinksBrowser">http://wiki.linuxfromscratch.org/blfs/wiki/LinksBrowser</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Links
+        </h2>
+        <p>
+          If desired, apply the patch:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">bzcat ../links-2.1pre33-utf8.diff.bz2 | patch -p1 &amp;&amp;
+cd intl &amp;&amp;
+./gen-intl &amp;&amp; ./synclang &amp;&amp;
+cd ..</kbd>
+</pre>
+        <p>
+          Install <span class="application">Links</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+install -v -d -m755 /usr/share/doc/links-2.1pre33 &amp;&amp;
+install -v -m644 doc/links_cal/* KEYS BRAILLE_HOWTO \
+    /usr/share/doc/links-2.1pre33</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>./gen-intl &amp;&amp;
+          ./synclang</strong></span>: These commands regenerate the language
+          table.
+        </p>
+        <p>
+          <code class="option">--enable-graphics</code>: This switch enables
+          support for graphics mode.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring Links
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="links-config" name="links-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">~/.links/*</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            <span class="application">Links</span> stores its configuration
+            in per-user files in the <code class="filename">~/.links</code>
+            directory. These files are created automatically when
+            <span class="command"><strong>links</strong></span> is run for
+            the first time.
+          </p>
+          <p>
+            For the correct display of non-ASCII characters, <span class=
+            "application">Links</span> has to be configured through the menu
+            (accessible by pressing the ESC key), as follows:
+          </p>
+          <div class="itemizedlist">
+            <ul>
+              <li>
+                <p>
+                  If running <span class="application">Links</span> in the
+                  text mode in a UTF-8 based locale, go to the
+                  &ldquo;<span class="quote">Setup &gt; Terminal
+                  options</span>&rdquo; menu item and check the
+                  &ldquo;<span class="quote">UTF-8 I/O</span>&rdquo; box.
+                </p>
+              </li>
+              <li>
+                <p>
+                  If running <span class="application">Links</span> in the
+                  text mode, go to the &ldquo;<span class="quote">Setup &gt;
+                  Character set</span>&rdquo; menu item and select the
+                  character set that matches your locale or, if you use UTF-8
+                  based locale, the character set that contains all
+                  characters that you want <span class=
+                  "application">Links</span> to be able to display.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Optionally, go to the &ldquo;<span class="quote">Setup &gt;
+                  Language</span>&rdquo; menu and select the user interface
+                  language.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Finally, select the &ldquo;<span class="quote">Setup &gt;
+                  Save options</span>&rdquo; menu item.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">links</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/share/doc/links-2.1pre33</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="links" name="links"></a><span class=
+                    "term"><span class=
+                    "command"><strong>links</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a text and graphics mode WWW browser.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-05-09 08:00:42 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="textweb.html" title=
+          "Text Web Browsers">Prev</a>
+          <p>
+            Text Web Browsers
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lynx.html" title="Lynx-2.8.6rel.5">Next</a>
+          <p>
+            Lynx-2.8.6rel.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="textweb.html" title=
+          "Chapter&nbsp;15.&nbsp;Text Web Browsers">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

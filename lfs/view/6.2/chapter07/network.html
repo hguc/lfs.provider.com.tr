@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.13.&nbsp;Configuring the network Script
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="lfs" class="6.2">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Linux From Scratch - Version 6.2
+        </h4>
+        <h3>
+          Chapter&nbsp;7.&nbsp;Setting Up System Bootscripts
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="symlinks.html" title=
+          "Creating custom symlinks to devices">Prev</a>
+          <p>
+            Creating custom symlinks to devices
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter08/chapter08.html" title=
+          "Making the LFS System Bootable">Next</a>
+          <p>
+            Making the LFS System Bootable
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;Setting Up System Bootscripts">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          7.13. Configuring the network Script
+        </h1>
+      </div>
+      <p>
+        This section only applies if a network card is to be configured.
+      </p>
+      <p>
+        If a network card will not be used, there is likely no need to create
+        any configuration files relating to network cards. If that is the
+        case, remove the <tt class="filename">network</tt> symlinks from all
+        run-level directories (<tt class="filename">/etc/rc.d/rc*.d</tt>).
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            7.13.1. Creating stable names for network interfaces
+          </h2>
+        </div>
+        <p>
+          Instructions in this section are optional if you have only one
+          network card.
+        </p>
+        <p>
+          With Udev and modular network drivers, the network interface
+          numbering is not persistent across reboots by default, because the
+          drivers are loaded in parallel and, thus, in random order. For
+          example, on a computer having two network cards made by Intel and
+          Realtek, the network card manufactured by Intel may become
+          <tt class="filename">eth0</tt> and the Realtek card becomes
+          <tt class="filename">eth1</tt>. In some cases, after a reboot the
+          cards get renumbered the other way around. To avoid this, create
+          Udev rules that assign stable names to network cards based on their
+          MAC addresses or bus positions.
+        </p>
+        <p>
+          If you are going to use MAC addresses to identify your network
+          cards, find the addresses with the following command:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">grep -H . /sys/class/net/*/address</kbd></pre>
+        <p>
+          For each network card (but not for the loopback interface), invent
+          a descriptive name, such as &ldquo;<span class=
+          "quote">realtek</span>&rdquo;, and create Udev rules similar to the
+          following:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; /etc/udev/rules.d/26-network.rules &lt;&lt; EOF
+<tt class=
+"literal">ACTION=="add", SUBSYSTEM=="net", SYSFS{address}=="<em class=
+"replaceable"><tt>00:e0:4c:12:34:56</tt></em>", \
+    NAME="<em class="replaceable"><tt>realtek</tt></em>"
+ACTION=="add", SUBSYSTEM=="net", SYSFS{address}=="<em class=
+"replaceable"><tt>00:a0:c9:78:9a:bc</tt></em>", \
+    NAME="<em class="replaceable"><tt>intel</tt></em>"</tt>
+EOF</kbd></pre>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              Although the examples in this book work properly, be aware that
+              <span class="application">udev</span> does not recognize the
+              backslash for line continuation. If modifying <span class=
+              "application">udev</span> rules with an editor, be sure to
+              leave each rule on one physical line.
+            </p>
+          </div>
+        </div>
+        <p>
+          If you are going to use the bus position as a key, create Udev
+          rules similar to the following:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; /etc/udev/rules.d/26-network.rules &lt;&lt; EOF
+<tt class="literal">ACTION=="add", SUBSYSTEM=="net", BUS=="<em class=
+"replaceable"><tt>pci</tt></em>", ID=="<em class=
+"replaceable"><tt>0000:00:0c.0</tt></em>", \
+    NAME="<em class="replaceable"><tt>realtek</tt></em>"
+ACTION=="add", SUBSYSTEM=="net", BUS=="<em class=
+"replaceable"><tt>pci</tt></em>", ID=="<em class=
+"replaceable"><tt>0000:00:0d.0</tt></em>", \
+    NAME="<em class="replaceable"><tt>intel</tt></em>"</tt>
+EOF</kbd></pre>
+        <p>
+          These rules will always rename the network cards to
+          &ldquo;<span class="quote">realtek</span>&rdquo; and
+          &ldquo;<span class="quote">intel</span>&rdquo;, independently of
+          the original numbering provided by the kernel (i.e.: the original
+          &ldquo;<span class="quote">eth0</span>&rdquo; and
+          &ldquo;<span class="quote">eth1</span>&rdquo; interfaces will no
+          longer exist, unless you put such &ldquo;<span class=
+          "quote">descriptive</span>&rdquo; names in the NAME key). Use the
+          descriptive names from the Udev rules instead of
+          &ldquo;<span class="quote">eth0</span>&rdquo; in the network
+          interface configuration files below.
+        </p>
+        <p>
+          Note that the rules above don't work for every setup. For example,
+          MAC-based rules break when bridges or VLANs are used, because
+          bridges and VLANs have the same MAC address as the network card.
+          One wants to rename only the network card interface, not the bridge
+          or VLAN interface, but the example rule matches both. If you use
+          such virtual interfaces, you have two potential solutions. One is
+          to add the DRIVER=="?*" key after SUBSYSTEM=="net" in MAC-based
+          rules which will stop matching the virtual interfaces. This is
+          known to fail with some older Ethernet cards because they don't
+          have the DRIVER variable in the uevent and thus the rule does not
+          match with such cards. Another solution is to switch to rules that
+          use the bus position as a key.
+        </p>
+        <p>
+          The second known non-working case is with wireless cards using the
+          MadWifi or HostAP drivers, because they create at least two
+          interfaces with the same MAC address and bus position. For example,
+          the Madwifi driver creates both an athX and a wifiX interface where
+          X is a digit. To differentiate these interfaces, add an appropriate
+          KERNEL parameter such as KERNEL=="ath*" after SUBSYSTEM=="net".
+        </p>
+        <p>
+          There may be other cases where the rules above don't work.
+          Currently, bugs on this topic are still being reported to Linux
+          distributions, and no solution that covers every case is available.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            7.13.2. Creating Network Interface Configuration Files
+          </h2>
+        </div>
+        <p>
+          Which interfaces are brought up and down by the network script
+          depends on the files and directories in the <tt class=
+          "filename">/etc/sysconfig/network-devices</tt> hierarchy. This
+          directory should contain a sub-directory for each interface to be
+          configured, such as <tt class="filename">ifconfig.xyz</tt>, where
+          &ldquo;<span class="quote">xyz</span>&rdquo; is a network interface
+          name. Inside this directory would be files defining the attributes
+          to this interface, such as its IP address(es), subnet masks, and so
+          forth.
+        </p>
+        <p>
+          The following command creates a sample <tt class=
+          "filename">ipv4</tt> file for the <span class=
+          "emphasis"><em>eth0</em></span> device:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cd /etc/sysconfig/network-devices &amp;&amp;
+mkdir -v ifconfig.eth0 &amp;&amp;
+cat &gt; ifconfig.eth0/ipv4 &lt;&lt; "EOF"
+<tt class="literal">ONBOOT=yes
+SERVICE=ipv4-static
+IP=192.168.1.1
+GATEWAY=192.168.1.2
+PREFIX=24
+BROADCAST=192.168.1.255</tt>
+EOF</kbd></pre>
+        <p>
+          The values of these variables must be changed in every file to
+          match the proper setup. If the <tt class="envar">ONBOOT</tt>
+          variable is set to &ldquo;<span class="quote">yes</span>&rdquo; the
+          network script will bring up the Network Interface Card (NIC)
+          during booting of the system. If set to anything but
+          &ldquo;<span class="quote">yes</span>&rdquo; the NIC will be
+          ignored by the network script and not be brought up.
+        </p>
+        <p>
+          The <tt class="envar">SERVICE</tt> variable defines the method used
+          for obtaining the IP address. The LFS-Bootscripts package has a
+          modular IP assignment format, and creating additional files in the
+          <tt class="filename">/etc/sysconfig/network-devices/services</tt>
+          directory allows other IP assignment methods. This is commonly used
+          for Dynamic Host Configuration Protocol (DHCP), which is addressed
+          in the BLFS book.
+        </p>
+        <p>
+          The <tt class="envar">GATEWAY</tt> variable should contain the
+          default gateway IP address, if one is present. If not, then comment
+          out the variable entirely.
+        </p>
+        <p>
+          The <tt class="envar">PREFIX</tt> variable needs to contain the
+          number of bits used in the subnet. Each octet in an IP address is 8
+          bits. If the subnet's netmask is 255.255.255.0, then it is using
+          the first three octets (24 bits) to specify the network number. If
+          the netmask is 255.255.255.240, it would be using the first 28
+          bits. Prefixes longer than 24 bits are commonly used by DSL and
+          cable-based Internet Service Providers (ISPs). In this example
+          (PREFIX=24), the netmask is 255.255.255.0. Adjust the <tt class=
+          "envar">PREFIX</tt> variable according to your specific subnet.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="resolv.conf" name="resolv.conf"></a>
+          <h2 class="sect2">
+            7.13.3. Creating the /etc/resolv.conf File
+          </h2>
+        </div>
+        <p>
+          If the system is going to be connected to the Internet, it will
+          need some means of Domain Name Service (DNS) name resolution to
+          resolve Internet domain names to IP addresses, and vice versa. This
+          is best achieved by placing the IP address of the DNS server,
+          available from the ISP or network administrator, into <tt class=
+          "filename">/etc/resolv.conf</tt>. Create the file by running the
+          following:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; /etc/resolv.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/resolv.conf
+
+domain {<em class="replaceable"><tt>&lt;Your Domain Name&gt;</tt></em>}
+nameserver <em class=
+"replaceable"><tt>&lt;IP address of your primary nameserver&gt;</tt></em>
+nameserver <em class=
+"replaceable"><tt>&lt;IP address of your secondary nameserver&gt;</tt></em>
+
+# End /etc/resolv.conf</tt>
+EOF</kbd></pre>
+        <p>
+          Replace <em class="replaceable"><tt>&lt;IP address of the
+          nameserver&gt;</tt></em> with the IP address of the DNS most
+          appropriate for the setup. There will often be more than one entry
+          (requirements demand secondary servers for fallback capability). If
+          you only need or want one DNS server, remove the second
+          <span class="emphasis"><em>nameserver</em></span> line from the
+          file. The IP address may also be a router on the local network.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="symlinks.html" title=
+          "Creating custom symlinks to devices">Prev</a>
+          <p>
+            Creating custom symlinks to devices
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../chapter08/chapter08.html" title=
+          "Making the LFS System Bootable">Next</a>
+          <p>
+            Making the LFS System Bootable
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;Setting Up System Bootscripts">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

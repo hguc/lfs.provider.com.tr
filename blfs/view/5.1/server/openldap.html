@@ -1,0 +1,615 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      OpenLDAP-2.1.30
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;22.&nbsp;Other Server Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="rsync.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="samba3.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          OpenLDAP-2.1.30
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to OpenLDAP
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Open<span class=
+          "acronym">LDAP</span></span> package provides an open source
+          implementation of the Lightweight Directory Access Protocol.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2857519" name="id2857519"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/infosys/network/OpenLDAP/openldap-release/openldap-2.1.30.tgz">
+                  http://gd.tuwien.ac.at/infosys/network/OpenLDAP/openldap-release/openldap-2.1.30.tgz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.1.30.tgz">
+                  ftp://ftp.openldap.org/pub/OpenLDAP/openldap-release/openldap-2.1.30.tgz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.0 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 116 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 7.52 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2858083" name="id2858083"></a><span class=
+                  "application">Open<span class="acronym">LDAP</span></span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2858108" name="id2858108"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../content/databases.html#db">Berkeley DB-4.2.52.2</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2858120" name="id2858120"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a>,
+              <a href="../general/gdbm.html">GDBM-1.8.3</a>, <a href=
+              "../basicnet/tcpwrappers.html">tcpwrappers-7.6</a>, <a href=
+              "../general/readline.html">readline-4.3</a>, <a href=
+              "../postlfs/heimdal.html">Heimdal-0.6.2</a> or <a href=
+              "../postlfs/mitkrb.html">MIT krb5-1.3.3</a>, and <a href=
+              "http://asg.web.cmu.edu/sasl/">Cyrus SASL</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of OpenLDAP
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Open<span class=
+          "acronym">LDAP</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --libexecdir=/usr/sbin \
+    --sysconfdir=/etc --localstatedir=/var/lib \
+    --disable-debug --enable-ldbm &amp;&amp;
+make depend &amp;&amp;
+make &amp;&amp;
+make test &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc</tt></i>: Sets the
+          configuration file directory to avoid the default of <tt class=
+          "filename">/usr/etc</tt>.
+        </p>
+        <p>
+          <i class="parameter"><tt>--libexecdir=/usr/sbin</tt></i>: Puts the
+          server executables in <tt class="filename">/usr/sbin</tt> instead
+          of <tt class="filename">/usr/libexec</tt>.
+        </p>
+        <p>
+          <tt class="option">--enable-ldbm</tt>: Build <span><b class=
+          "command">slapd</b></span> with primary database back end using
+          either <span class="application">Berkeley DB</span> or <span class=
+          "application"><span class="acronym">GNU</span> Database
+          Manager</span>.
+        </p>
+        <p>
+          <tt class="option">--disable-debug</tt>: Disable debugging code.
+        </p>
+        <p>
+          <span><b class="command">make test</b></span>: Validate correct
+          build of the package.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring OpenLDAP
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2857895" name="id2857895"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/openldap/*</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2857913" name="id2857913"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The only configuration needed for <span class=
+            "application">Open<span class="acronym">LDAP</span></span> is to
+            run <span><b class="command">ldconfig</b></span>. The
+            <span class="acronym">LDAP</span> server can be started by
+            <span><b class="command">/usr/sbin/slapd</b></span> as described
+            in the man page slapd(8). You can verify that <span class=
+            "acronym">LDAP</span> is running with <span><b class="command">ps
+            aux</b></span> and you can verify access to the <span class=
+            "acronym">LDAP</span> server with the following command:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">ldapsearch -x -b '' -s base '(objectclass=*)' namingContexts</b></span></tt>
+</pre>
+          <p>
+            The correct result is:
+          </p>
+          <pre class="screen">
+<tt class="computeroutput"># extended LDIF
+#
+# LDAPv3
+# base &lt;&gt; with scope base
+# filter: (objectclass=*)
+# requesting: namingContexts 
+#
+
+#
+dn:
+namingContexts: dc=my-domain,dc=com
+
+# search result
+search: 2
+result: 0 Success
+
+# numResponses: 2
+# numEntries: 1</tt>
+</pre>
+          <p>
+            Kill the server with this command:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">kill -INT `cat /var/lib/slapd.pid`</b></span></tt>
+</pre>
+          <p>
+            You are now ready to modify the <tt class=
+            "filename">/etc/openldap/slapd.conf</tt> to be specific to your
+            installation.
+          </p>
+          <p>
+            <span class="emphasis"><em>Utilizing <span class=
+            "application">GDBM</span></em></span>
+          </p>
+          <p>
+            To utilize <span class="application">GDBM</span> as the database
+            backend, the "database" entry in <tt class=
+            "filename">/etc/openldap/slapd.conf</tt> must be changed from
+            "bdb" to "ldbm". You can use both by creating an additional
+            database section in <tt class=
+            "filename">/etc/openldap/slapd.conf</tt>.
+          </p>
+          <p>
+            <span class="emphasis"><em>Securing your <span class=
+            "acronym">LDAP</span> server</em></span>
+          </p>
+          <p>
+            Significant configuration is needed for <span class=
+            "application">Open<span class="acronym">LDAP</span></span> to
+            utilize security features. The <a href=
+            "http://www.openldap.org/doc/admin21/">OpenLDAP 2.1
+            Administrator's Guide</a> is a good place to start for access
+            control settings, running as a user other than root and setting a
+            chroot environment.
+          </p>
+          <p>
+            <span class="emphasis"><em>User Tools</em></span>
+          </p>
+          <p>
+            Data can be added to the <span class="acronym">LDAP</span>
+            database via <span><b class="command">ldapadd</b></span>. There
+            are other programs that can use the database. For more
+            information see the appropriate man page.
+          </p>
+          <p>
+            <span class="emphasis"><em><span class=
+            "application">Mozilla</span> Address Directory</em></span>
+          </p>
+          <p>
+            By default, LDAPv2 support is disabled in the <tt class=
+            "filename">slapd.conf</tt> file. Once the database is properly
+            setup and <span class="application">Mozilla</span> is configured
+            to use the directory, you must add <tt class="option">allow
+            bind_v2</tt> to the <tt class="filename">slapd.conf</tt> file.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The Open<span class="acronym"><span class=
+          "acronym">LDAP</span></span> package contains <span><b class=
+          "command">ldapadd</b></span>, <span><b class=
+          "command">ldapcompare</b></span>, <span><b class=
+          "command">ldapdelete</b></span>, <span><b class=
+          "command">ldapmodify</b></span>, <span><b class=
+          "command">ldapmodrdn</b></span>, <span><b class=
+          "command">ldappasswd</b></span>, <span><b class=
+          "command">ldapsearch</b></span>, <span><b class=
+          "command">ldapwhoami</b></span>, <span><b class=
+          "command">slapadd</b></span>, <span><b class=
+          "command">slapcat</b></span>, <span><b class=
+          "command">slapd</b></span>, <span><b class=
+          "command">slapindex</b></span>, <span><b class=
+          "command">slappasswd</b></span>, <span><b class=
+          "command">slurpd</b></span>, <tt class="filename">liblber</tt> and
+          <tt class="filename">libldap</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2858658" name="id2858658"></a>ldapadd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ldapadd</b></span> opens a connection to
+            an <span class="acronym">LDAP</span> server, binds and adds
+            entries.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859273" name="id2859273"></a>ldapcompare
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ldapcompare</b></span> opens a
+            connection to an <span class="acronym">LDAP</span> server, binds
+            and performs a compare using specified parameters.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859290" name="id2859290"></a>ldapdelete
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ldapdelete</b></span> opens a connection
+            to an <span class="acronym">LDAP</span> server, binds and deletes
+            one or more entries.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859307" name="id2859307"></a>ldapmodify
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ldapmodify</b></span> opens a connection
+            to an <span class="acronym">LDAP</span> server, binds and
+            modifies entries.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859324" name="id2859324"></a>ldapmodrdn
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ldapmodrdn</b></span> opens a connection
+            to an <span class="acronym">LDAP</span> server, binds and
+            modifies the <span class="acronym">RDN</span> of entries.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859345" name="id2859345"></a>ldappasswd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ldappasswd</b></span> is a tool to set
+            the password of an <span class="acronym">LDAP</span> user.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859362" name="id2859362"></a>ldapsearch
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ldapsearch</b></span> opens a connection
+            to an <span class="acronym">LDAP</span> server, binds and
+            performs a search using specified parameters.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859379" name="id2859379"></a>ldapwhoami
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ldapwhoami</b></span> open a connection
+            to an <span class="acronym">LDAP</span> server, binds and
+            performs a whoami operation.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859397" name="id2859397"></a>slapadd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">slapadd</b></span> is used to add
+            entries specified in <span class="acronym">LDAP</span> Directory
+            Interchange Format (<span class="acronym">LDIF</span>) to a slapd
+            database.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859418" name="id2859418"></a>slapcat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">slapcat</b></span> is used to generate
+            an <span class="acronym">LDAP</span> <span class=
+            "acronym">LDIF</span> output based upon the contents of a slapd
+            database.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859439" name="id2859439"></a>slapd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">slapd</b></span> is the stand-alone
+            <span class="acronym">LDAP</span> server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859456" name="id2859456"></a>slapindex
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">slapindex</b></span> is used to
+            regenerate slapd indices based upon the current contents of a
+            database.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859469" name="id2859469"></a>slappasswd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">slappasswd</b></span> is an
+            Open<span class="acronym">LDAP</span> password utility.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859486" name="id2859486"></a>slurpd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">slurpd</b></span> is the stand-alone
+            <span class="acronym">LDAP</span> replication server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2859503" name="id2859503"></a>liblber and libldap
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            These libraries support the <span class="acronym">LDAP</span>
+            programs and provide functionality for other programs interacting
+            with <span class="acronym">LDAP</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="rsync.html">Prev</a><br />
+        rsync-2.6.2
+      </div>
+      <div class="next">
+        <a accesskey="n" href="samba3.html">Next</a><br />
+        Samba-3.0.4
+      </div>
+      <div class="up">
+        <a accesskey="u" href="other.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;11.&nbsp;System Utilities
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Part&nbsp;III.&nbsp;General Libraries and Utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="pilot-link.html" title=
+          "Pilot-link-0.11.8">Prev</a>
+          <p>
+            Pilot-link-0.11.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="fcron.html" title="Fcron-2.9.7">Next</a>
+          <p>
+            Fcron-2.9.7
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="general.html" title=
+          "Part&nbsp;III.&nbsp;General Libraries and Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="general-sysutils" name="general-sysutils"></a>
+        <h1 class="chapter">
+          System Utilities
+        </h1>
+      </div>
+      <p>
+        This chapter contains mainly hardware utilities. It also contains
+        some applications used by other applications in the book for
+        installation purposes.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="gpm" name="gpm"></a>
+          <h1 class="sect1">
+            GPM-1.20.1
+          </h1>
+        </div>
+        <div class="package" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to GPM
+            </h2>
+          </div>
+          <p>
+            The <span class="application">GPM</span> (General Purpose Mouse
+            daemon) package contains a mouse server for the console and
+            <span><strong class="command">xterm</strong></span>. It not only
+            provides cut and paste support generally, but its library
+            component is used by various software such as <span class=
+            "application">Links</span> to provide mouse support to the
+            application. It is useful on desktops, especially if following
+            (Beyond) Linux From Scratch instructions; it's often much easier
+            (and less error prone) to cut and paste between two console
+            windows than to type everything by hand!
+          </p>
+          <h3>
+            <a id="id2830388" name="id2830388"></a>Package Information
+          </h3>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://arcana.linux.it/pub/gpm/gpm-1.20.1.tar.bz2"><span class="url">
+                  ftp://arcana.linux.it/pub/gpm/gpm-1.20.1.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 2c63e827d755527950d9d13fe3d87692
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 556 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 6.7 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.09 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+          <h3>
+            <a id="id2761649" name="id2761649"></a>Additional Downloads
+          </h3>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Recommended Patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.1/gpm-1.20.1-segfault-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.1/gpm-1.20.1-segfault-1.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Recommended Patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.1/gpm-1.20.1-silent-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.1/gpm-1.20.1-silent-1.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="installation" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of GPM
+            </h2>
+          </div>
+          <p>
+            Install <span class="application">GPM</span> by running the
+            following commands:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">patch -Np1 -i ../gpm-1.20.1-segfault-1.patch &amp;&amp;
+patch -Np1 -i ../gpm-1.20.1-silent-1.patch &amp;&amp;
+./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+LDFLAGS="-lm" make</kbd></pre>
+          <p>
+            Now, as the <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class="command">make install &amp;&amp;
+cp -v conf/gpm-root.conf /etc &amp;&amp;
+ldconfig</kbd></pre>
+        </div>
+        <div class="commands" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command Explanations
+            </h2>
+          </div>
+          <p>
+            <span><strong class="command">LDFLAGS="-lm"</strong></span>: The
+            math library must be linked with <span><strong class=
+            "command">gpm</strong></span>, as ceil() is used in some cursor
+            scrolling logic.
+          </p>
+        </div>
+        <div class="configuration" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Configuring GPM
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="gpm-init" name="gpm-init"></a>Boot Script
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              Install the <tt class="filename">/etc/rc.d/init.d/gpm</tt> init
+              script included in the <a href=
+              "../introduction/bootscripts.html">blfs-bootscripts-6.1</a>
+              package.
+            </p>
+            <pre class="root"><kbd class=
+            "command">make install-gpm</kbd></pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="gpm-config" name="gpm-config"></a>Config Files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/gpm-root.conf</tt> and <tt class=
+              "filename">~/.gpm-root</tt>: The default and individual user
+              <span><strong class="command">gpm-root</strong></span>
+              configuration files.
+            </p>
+            <p>
+              <tt class="filename">/etc/sysconfig/mouse</tt>: This file
+              contains the name of your mouse device and the protocol which
+              it uses. To create this file, run the following as the
+              <tt class="systemitem">root</tt> user:
+            </p>
+            <pre class="root"><kbd class=
+            "command">cat &gt; /etc/sysconfig/mouse &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/sysconfig/mouse
+
+MDEVICE="<em class="replaceable"><tt>[yourdevice]</tt></em>"
+PROTOCOL="<em class="replaceable"><tt>[yourprotocol]</tt></em>"
+GPMOPTS="<em class="replaceable"><tt>[additional options]</tt></em>"
+
+# End /etc/sysconfig/mouse</tt>
+EOF</kbd></pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2735557" name="id2735557"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              Examples of values to set <tt class="envar">MDEVICE</tt>,
+              <tt class="envar">PROTOCOL</tt>, and <tt class=
+              "envar">GPMOPTS</tt> to are:
+            </p>
+            <pre class="screen"><tt class="literal">MDEVICE="/dev/psaux"
+PROTOCOL="imps2"
+GPMOPTS=""</tt></pre>
+            <p>
+              A list of which protocol values are known can be found by
+              running <span><strong class="command">gpm -t
+              -help</strong></span>. The <tt class="envar">MDEVICE</tt>
+              setting depends on which type of mouse you have. For example,
+              <tt class="filename">/dev/ttyS0</tt> for a serial mouse (on
+              Windows this is COM1), <tt class=
+              "filename">/dev/input/mice</tt> is often used for USB mice and
+              <tt class="filename">/dev/psaux</tt> for PS2 mice. <tt class=
+              "envar">GPMOPTS</tt> is the 'catch all' for any additional
+              options that are needed for your hardware.
+            </p>
+          </div>
+        </div>
+        <div class="content" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <div class="segmentedlist">
+            <div class="seglistitem">
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Programs:</span></strong> <span class="seg">disable-paste,
+                gpm, gpm-root, hltest, mev, and mouse-test</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Libraries:</span></strong> <span class="seg">None</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Directories:</span></strong> <span class="seg">None</span>
+              </div>
+            </div>
+          </div>
+          <div class="variablelist">
+            <h3>
+              <a id="id2623504" name="id2623504"></a>Short Descriptions
+            </h3>
+            <table border="0">
+              <col align="left" valign="top" />
+              <tbody>
+                <tr>
+                  <td>
+                    <a id="disable-paste" name=
+                    "disable-paste"></a><span class=
+                    "term"><span><strong class=
+                    "command">disable-paste</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a security mechanism used to disable the paste
+                      buffer.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="gpm-prog" name="gpm-prog"></a><span class=
+                    "term"><span><strong class=
+                    "command">gpm</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a cut and paste utility and mouse server for virtual
+                      consoles.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="gpm-root" name="gpm-root"></a><span class=
+                    "term"><span><strong class=
+                    "command">gpm-root</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a default handler for <span><strong class=
+                      "command">gpm</strong></span>. It is used to draw menus
+                      on the root window.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="hltest" name="hltest"></a><span class=
+                    "term"><span><strong class=
+                    "command">hltest</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a simple sample application using the high-level
+                      library, meant to be read by programmers trying to use
+                      the high-level library.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="mev" name="mev"></a><span class=
+                    "term"><span><strong class=
+                    "command">mev</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a program to report mouse events.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="mouse-test" name="mouse-test"></a><span class=
+                    "term"><span><strong class=
+                    "command">mouse-test</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a tool for determining the mouse type and device
+                      it's attached to.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="pilot-link.html" title=
+          "Pilot-link-0.11.8">Prev</a>
+          <p>
+            Pilot-link-0.11.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="fcron.html" title="Fcron-2.9.7">Next</a>
+          <p>
+            Fcron-2.9.7
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="general.html" title=
+          "Part&nbsp;III.&nbsp;General Libraries and Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

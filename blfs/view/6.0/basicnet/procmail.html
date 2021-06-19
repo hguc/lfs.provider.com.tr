@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Procmail-3.22
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;20.&nbsp;Mail/News Clients
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="mailnews.html" title=
+          "Mail/News Clients">Prev</a>
+          <p>
+            Mail/News Clients
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="fetchmail.html" title=
+          "Fetchmail-6.2.5">Next</a>
+          <p>
+            Fetchmail-6.2.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mailnews.html" title=
+          "Chapter&nbsp;20.&nbsp;Mail/News Clients">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="procmail" name="procmail"></a>
+        <h1 class="sect1">
+          Procmail-3.22
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Procmail
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Procmail</span> package contains an
+          autonomous mail processor. This is useful for filtering and sorting
+          incoming mail.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2802444" name="id2802444"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.procmail.org/procmail-3.22.tar.gz"><span class=
+                  "url">http://www.procmail.org/procmail-3.22.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.procmail.net/pub/procmail/procmail-3.22.tar.gz"><span class="url">
+                  ftp://ftp.procmail.net/pub/procmail/procmail-3.22.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 1678ea99b973eb77eda4ecf6acae53f1
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 338 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 1.5 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.38 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Procmail
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Procmail</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make LOCKINGTEST=/tmp install &amp;&amp;
+make install-suid</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">make LOCKINGTEST=/tmp
+          install</strong></span>: This prevents <span><strong class=
+          "command">make</strong></span> from asking you where to test
+          file-locking patterns.
+        </p>
+        <p>
+          <span><strong class="command">make install-suid</strong></span>:
+          Modifies permissions of the installed files.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Procmail
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2864336" name="id2864336"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/procmailrc</tt>, <tt class=
+            "filename">~/.procmailrc</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2717767" name="id2717767"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Recipes have to be written and placed in your <tt class=
+            "filename">~/.procmailrc</tt> for execution. The procmailex man
+            page is the starting place to learn how to write recipes.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Procmail</span> package contains
+          <span><strong class="command">procmail</strong></span>,
+          <span><strong class="command">formail</strong></span>,
+          <span><strong class="command">lockfile</strong></span> and
+          <span><strong class="command">mailstat</strong></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2657969" name="id2657969"></a>procmail
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">procmail</strong></span> is an
+            autonomous mail processor. It performs all the functions of a
+            <span class="acronym">MDA</span> (Mail Delivery Agent).
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2730216" name="id2730216"></a>formail
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">formail</strong></span> is a filter
+            that can be used to format mail into mailbox format.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2678453" name="id2678453"></a>lockfile
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">lockfile</strong></span> is a
+            utility that can lock a file for single use interactively or in a
+            script.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2689691" name="id2689691"></a>mailstat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">mailstat</strong></span> prints a
+            summary report of mail that has been filtered by
+            <span><strong class="command">procmail</strong></span> since the
+            last time <span><strong class="command">mailstat</strong></span>
+            was ran.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-11 15:17:38 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="mailnews.html" title=
+          "Mail/News Clients">Prev</a>
+          <p>
+            Mail/News Clients
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="fetchmail.html" title=
+          "Fetchmail-6.2.5">Next</a>
+          <p>
+            Fetchmail-6.2.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mailnews.html" title=
+          "Chapter&nbsp;20.&nbsp;Mail/News Clients">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

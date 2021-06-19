@@ -1,0 +1,1056 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      MIT Kerberos V5-1.6
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;4.&nbsp;Security
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="heimdal.html" title="Heimdal-0.7.2">Prev</a>
+          <p>
+            Heimdal-0.7.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cyrus-sasl.html" title=
+          "Cyrus SASL-2.1.21">Next</a>
+          <p>
+            Cyrus SASL-2.1.21
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="mitkrb" name="mitkrb"></a>
+        <h1 class="sect1">
+          MIT Kerberos V5-1.6
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to MIT Kerberos V5
+          </h2>
+        </div>
+        <p>
+          <span class="application">MIT Kerberos V5</span> is a free
+          implementation of Kerberos 5. Kerberos is a network authentication
+          protocol. It centralizes the authentication database and uses
+          kerberized applications to work with servers or services that
+          support Kerberos allowing single logins and encrypted communication
+          over internal networks or the Internet.
+        </p>
+        <h3>
+          <a id="id2604029" name="id2604029"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://web.mit.edu/kerberos/www/dist/krb5/1.6/krb5-1.6-signed.tar">
+                <span class=
+                "url">http://web.mit.edu/kerberos/www/dist/krb5/1.6/krb5-1.6-signed.tar</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: a365e39ff7d39639556c2797a0e1c3f4
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 12.0 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 124 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 1.4 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2728424" name="id2728424"></a>MIT Kerberos V5 Dependencies
+        </h3>
+        <h4>
+          <a id="id2634736" name="id2634736"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="linux-pam.html">Linux-PAM-0.99.4.0</a> (for
+          <span><strong class="command">xdm</strong></span> based logins),
+          <a href="../server/openldap.html">OpenLDAP-2.3.27</a>, and <a href=
+          "../general/prog.html#dejagnu">DejaGnu-1.4.4</a> (required to run
+          the test suite)
+        </p>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              Some sort of time synchronization facility on your system (like
+              <a href="../basicnet/ntp.html">NTP-4.2.0a</a>) is required
+              since Kerberos won't authenticate if there is a time difference
+              between a kerberized client and the KDC server.
+            </p>
+          </div>
+        </div>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/mitkrb"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/mitkrb</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of MIT Kerberos V5
+          </h2>
+        </div>
+        <p>
+          <span class="application">MIT Kerberos V5</span> is distributed in
+          a TAR file containing a compressed TAR package and a detached PGP
+          <tt class="filename">ASC</tt> file. You'll need to unpack the
+          distribution tar file, then unpack the compressed tar file before
+          starting the build.
+        </p>
+        <p>
+          After unpacking the distribution tarball and if you have <a href=
+          "gnupg.html">GnuPG-1.4.3</a> installed, you can authenticate the
+          package with the following command:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">gpg - -verify krb5-1.6.tar.gz.asc</kbd></pre>
+        <p>
+          Build <span class="application">MIT Kerberos V5</span> by running
+          the following commands:
+        </p>
+        <pre class="userinput"><kbd class="command">cd src &amp;&amp;
+./configure CPPFLAGS="-I/usr/include/et -I/usr/include/ss" \
+            --prefix=/usr \
+            --sysconfdir=/etc/krb5 \
+            --localstatedir=/var/lib \
+            --with-system-et \
+            --with-system-ss \
+            --enable-dns-for-realm \
+            --mandir=/usr/share/man &amp;&amp;
+make</kbd></pre>
+        <p>
+          The regression test suite is designed to be run after the
+          installation has been completed.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+
+mv -v /usr/bin/ksu /bin &amp;&amp;
+chmod -v 755 /bin/ksu &amp;&amp;
+mv -v /usr/lib/libkrb5.so.3* /lib &amp;&amp;
+mv -v /usr/lib/libk5crypto.so.3* /lib &amp;&amp;
+mv -v /usr/lib/libkrb5support.so.0* /lib &amp;&amp;
+
+ln -v -sf ../../lib/libkrb5.so.3.3 /usr/lib/libkrb5.so &amp;&amp;
+ln -v -sf ../../lib/libk5crypto.so.3.1 /usr/lib/libk5crypto.so &amp;&amp;
+ln -v -sf ../../lib/libkrb5support.so.0.1 /usr/lib/libkrb5support.so&amp;&amp;
+
+install -m644 -v ../doc/*.info* /usr/share/info &amp;&amp;
+for INFOFILE in 425 5-admin 5-install 5-user; do
+    install-info --info-dir=/usr/share/info \
+                 /usr/share/info/krb$INFOFILE.info
+    rm ../doc/krb$INFOFILE.info*
+done &amp;&amp;
+
+install -m755 -v -d /usr/share/doc/krb5-1.6 &amp;&amp;
+cp -Rv ../doc/* /usr/share/doc/krb5-1.6</kbd></pre>
+        <div class="warning">
+          <div class="admonhead">
+            <img alt="[Warning]" src="../images/warning.png" />
+            <h3 class="admontitle">
+              Warning
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              <span><strong class="command">login.krb5</strong></span> does
+              not support <span class="application">Shadow</span> passwords.
+              As a result, when the Kerberos server is unavailable, the
+              default fall through to <tt class="filename">/etc/password</tt>
+              will not work because the passwords have been moved to
+              <tt class="filename">/etc/shadow</tt> during the LFS build
+              process. Entering the following commands without moving the
+              passwords back to <tt class="filename">/etc/password</tt> could
+              prevent any logins.
+            </p>
+          </div>
+        </div>
+        <p>
+          After considering (and understanding) the above warning, the
+          following commands can be entered as the <tt class=
+          "systemitem">root</tt> user to replace the existing
+          <span><strong class="command">login</strong></span> program with
+          the Kerberized version (after preserving the original) and move the
+          support libraries to a location available when the <tt class=
+          "filename">/usr</tt> filesystem is not mounted:
+        </p>
+        <pre class="root"><kbd class=
+        "command">mv -v /bin/login /bin/login.shadow &amp;&amp;
+install -m755 -v /usr/sbin/login.krb5 /bin/login &amp;&amp;
+
+mv -v /usr/lib/libdes425.so.3* /lib &amp;&amp;
+mv -v /usr/lib/libkrb4.so.2* /lib &amp;&amp;
+
+ln -v -sf ../../lib/libdes425.so.3.0 /usr/lib/libdes425.so &amp;&amp;
+ln -v -sf ../../lib/libkrb4.so.2.0 /usr/lib/libkrb4.so &amp;&amp;
+
+ldconfig</kbd></pre>
+        <p>
+          To test the installation, you must have <a href=
+          "../general/prog.html#dejagnu">DejaGnu-1.4.4</a> installed and
+          issue: <span><strong class="command">make check</strong></span>.
+          The RPC layer tests will require a portmap daemon (see <a href=
+          "../basicnet/portmap.html">portmap-5beta</a>) running and
+          configured to listen on the regular network interface (not
+          localhost). See the &ldquo;<span class="quote">Testing the
+          Build</span>&rdquo; section of the <tt class=
+          "filename">krb5-install.html</tt> file in the <tt class=
+          "filename">../doc</tt> directory for complete information on
+          running the regression tests.
+        </p>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--enable-dns-for-realm</tt></em>: This
+          parameter allows realms to be resolved using the DNS server.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-system-et</tt></em>: This
+          parameter causes the build to use the system-installed versions of
+          the error-table support software.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-system-ss</tt></em>: This
+          parameter causes the build to use the system-installed versions of
+          the subsystem command-line interface software.
+        </p>
+        <p>
+          <em class="parameter"><tt>--localstatedir=/var/lib</tt></em>: This
+          parameter is used so that the Kerberos variable run-time data is
+          located in <tt class="filename">/var/lib</tt> instead of <tt class=
+          "filename">/usr/var</tt>.
+        </p>
+        <p>
+          <span><strong class="command">mv -v /usr/bin/ksu
+          /bin</strong></span>: Moves the <span><strong class=
+          "command">ksu</strong></span> program to the <tt class=
+          "filename">/bin</tt> directory so that it is available when the
+          <tt class="filename">/usr</tt> filesystem is not mounted.
+        </p>
+        <p>
+          <span><strong class="command">mv -v ... /lib &amp;&amp; ln -v -sf
+          ...</strong></span>: These libraries are moved to <tt class=
+          "filename">/lib</tt> so they are available when the <tt class=
+          "filename">/usr</tt> filesystem is not mounted.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring MIT Kerberos V5
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="krb5-config" name="krb5-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/krb5/krb5.conf</tt> and <tt class=
+            "filename">/var/lib/krb5kdc/kdc.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2620118" name="id2620118"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2647422" name="id2647422"></a>Kerberos
+                    Configuration
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <div class="tip">
+              <div class="admonhead">
+                <img alt="[Tip]" src="../images/tip.png" />
+                <h3 class="admontitle">
+                  Tip
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  You should consider installing some sort of password
+                  checking dictionary so that you can configure the
+                  installation to only accept strong passwords. A suitable
+                  dictionary to use is shown in the <a href=
+                  "cracklib.html">CrackLib-2.8.9</a> instructions. Note that
+                  only one file can be used, but you can concatenate many
+                  files into one. The configuration file shown below assumes
+                  you have installed a dictionary to <tt class=
+                  "filename">/usr/share/dict/words</tt>.
+                </p>
+              </div>
+            </div>
+            <p>
+              Create the Kerberos configuration file with the following
+              commands issued by the <tt class="systemitem">root</tt> user:
+            </p>
+            <pre class="root"><kbd class=
+            "command">install -v -m755 -d /etc/krb5 &amp;&amp;
+cat &gt; /etc/krb5/krb5.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/krb5/krb5.conf
+
+[libdefaults]
+    default_realm = <em class="replaceable"><tt>&lt;LFS.ORG&gt;</tt></em>
+    encrypt = true
+
+[realms]
+    <em class="replaceable"><tt>&lt;LFS.ORG&gt;</tt></em> = {
+        kdc = <em class="replaceable"><tt>&lt;belgarath.lfs.org&gt;</tt></em>
+        admin_server = <em class=
+"replaceable"><tt>&lt;belgarath.lfs.org&gt;</tt></em>
+        dict_file = /usr/share/dict/words
+    }
+
+[domain_realm]
+    .<em class="replaceable"><tt>&lt;lfs.org&gt;</tt></em> = <em class=
+"replaceable"><tt>&lt;LFS.ORG&gt;</tt></em>
+
+[logging]
+    kdc = SYSLOG[:INFO[:AUTH]]
+    admin_server = SYSLOG[INFO[:AUTH]]
+    default = SYSLOG[[:SYS]]
+
+# End /etc/krb5/krb5.conf</tt>
+EOF</kbd></pre>
+            <p>
+              You will need to substitute your domain and proper hostname for
+              the occurences of the <em class=
+              "replaceable"><tt>&lt;belgarath&gt;</tt></em> and <em class=
+              "replaceable"><tt>&lt;lfs.org&gt;</tt></em> names.
+            </p>
+            <p>
+              <tt class="option">default_realm</tt> should be the name of
+              your domain changed to ALL CAPS. This isn't required, but both
+              <span class="application">Heimdal</span> and MIT recommend it.
+            </p>
+            <p>
+              <tt class="option">encrypt = true</tt> provides encryption of
+              all traffic between kerberized clients and servers. It's not
+              necessary and can be left off. If you leave it off, you can
+              encrypt all traffic from the client to the server using a
+              switch on the client program instead.
+            </p>
+            <p>
+              The <tt class="option">[realms]</tt> parameters tell the client
+              programs where to look for the KDC authentication services.
+            </p>
+            <p>
+              The <tt class="option">[domain_realm]</tt> section maps a
+              domain to a realm.
+            </p>
+            <p>
+              Create the KDC database:
+            </p>
+            <pre class="root"><kbd class=
+            "command">kdb5_util create -r <em class=
+            "replaceable"><tt>&lt;LFS.ORG&gt;</tt></em> -s</kbd></pre>
+            <p>
+              Now you should populate the database with principles (users).
+              For now, just use your regular login name or <tt class=
+              "systemitem">root</tt>.
+            </p>
+            <pre class="root"><kbd class="command">kadmin.local
+<tt class="prompt">kadmin:</tt> add_policy dict-only
+<tt class="prompt">kadmin:</tt> addprinc -policy dict-only <em class=
+"replaceable"><tt>&lt;loginname&gt;</tt></em></kbd></pre>
+            <p>
+              The KDC server and any machine running kerberized server
+              daemons must have a host key installed:
+            </p>
+            <pre class="root"><kbd class="command"><tt class=
+            "prompt">kadmin:</tt> addprinc -randkey host/<em class=
+            "replaceable"><tt>&lt;belgarath.lfs.org&gt;</tt></em></kbd></pre>
+            <p>
+              After choosing the defaults when prompted, you will have to
+              export the data to a keytab file:
+            </p>
+            <pre class="root"><kbd class="command"><tt class=
+            "prompt">kadmin:</tt> ktadd host/<em class=
+            "replaceable"><tt>&lt;belgarath.lfs.org&gt;</tt></em></kbd></pre>
+            <p>
+              This should have created a file in <tt class=
+              "filename">/etc/krb5</tt> named <tt class=
+              "filename">krb5.keytab</tt> (Kerberos 5). This file should have
+              600 (<tt class="systemitem">root</tt> rw only) permissions.
+              Keeping the keytab files from public access is crucial to the
+              overall security of the Kerberos installation.
+            </p>
+            <p>
+              Eventually, you'll want to add server daemon principles to the
+              database and extract them to the keytab file. You do this in
+              the same way you created the host principles. Below is an
+              example:
+            </p>
+            <pre class="root"><kbd class="command"><tt class=
+            "prompt">kadmin:</tt> addprinc -randkey ftp/<em class=
+            "replaceable"><tt>&lt;belgarath.lfs.org&gt;</tt></em>
+<tt class="prompt">kadmin:</tt> ktadd ftp/<em class=
+"replaceable"><tt>&lt;belgarath.lfs.org&gt;</tt></em></kbd></pre>
+            <p>
+              Exit the <span><strong class="command">kadmin</strong></span>
+              program (use <span><strong class="command">quit</strong></span>
+              or <span><strong class="command">exit</strong></span>) and
+              return back to the shell prompt. Start the KDC daemon manually,
+              just to test out the installation:
+            </p>
+            <pre class="root"><kbd class=
+            "command">/usr/sbin/krb5kdc &amp;</kbd></pre>
+            <p>
+              Attempt to get a ticket with the following command:
+            </p>
+            <pre class="userinput"><kbd class="command">kinit <em class=
+            "replaceable"><tt>&lt;loginname&gt;</tt></em></kbd></pre>
+            <p>
+              You will be prompted for the password you created. After you
+              get your ticket, you can list it with the following command:
+            </p>
+            <pre class="userinput"><kbd class="command">klist</kbd></pre>
+            <p>
+              Information about the ticket should be displayed on the screen.
+            </p>
+            <p>
+              To test the functionality of the keytab file, issue the
+              following command:
+            </p>
+            <pre class="userinput"><kbd class="command">ktutil
+<tt class="prompt">ktutil:</tt> rkt /etc/krb5/krb5.keytab
+<tt class="prompt">ktutil:</tt> l</kbd></pre>
+            <p>
+              This should dump a list of the host principal, along with the
+              encryption methods used to access the principal.
+            </p>
+            <p>
+              At this point, if everything has been successful so far, you
+              can feel fairly confident in the installation and configuration
+              of the package.
+            </p>
+            <p>
+              Install the <tt class="filename">/etc/rc.d/init.d/kerberos</tt>
+              init script included in the <a href=
+              "../introduction/bootscripts.html">blfs-bootscripts-20060910</a>
+              package.
+            </p>
+            <pre class="root"><kbd class=
+            "command">make install-kerberos</kbd></pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2558224" name="id2558224"></a>Using Kerberized
+                    Client Programs
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              To use the kerberized client programs (<span><strong class=
+              "command">telnet</strong></span>, <span><strong class=
+              "command">ftp</strong></span>, <span><strong class=
+              "command">rsh</strong></span>, <span><strong class=
+              "command">rcp</strong></span>, <span><strong class=
+              "command">rlogin</strong></span>), you first must get an
+              authentication ticket. Use the <span><strong class=
+              "command">kinit</strong></span> program to get the ticket.
+              After you've acquired the ticket, you can use the kerberized
+              programs to connect to any kerberized server on the network.
+              You will not be prompted for authentication until your ticket
+              expires (default is one day), unless you specify a different
+              user as a command line argument to the program.
+            </p>
+            <p>
+              The kerberized programs will connect to non kerberized daemons,
+              warning you that authentication is not encrypted.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2652020" name="id2652020"></a>Using Kerberized
+                    Server Programs
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              Using kerberized server programs (<span><strong class=
+              "command">telnetd</strong></span>, <span><strong class=
+              "command">kpropd</strong></span>, <span><strong class=
+              "command">klogind</strong></span> and <span><strong class=
+              "command">kshd</strong></span>) requires two additional
+              configuration steps. First the <tt class=
+              "filename">/etc/services</tt> file must be updated to include
+              eklogin and krb5_prop. Second, the <tt class=
+              "filename">inetd.conf</tt> or <tt class=
+              "filename">xinetd.conf</tt> must be modified for each server
+              that will be activated, usually replacing the server from
+              <a href="../basicnet/inetutils.html">Inetutils-1.4.2</a>.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2669807" name="id2669807"></a>Additional
+                    Information
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              For additional information consult <a href=
+              "http://web.mit.edu/kerberos/www/krb5-1.6/#documentation"><span class="url">
+              Documentation for krb-1.6</span></a> on which the above
+              instructions are based.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">ftp, ftpd,
+              gss-client, gss-server, k5srvutil, kadmin, kadmin.local,
+              kadmind, kdb5_ldap_util, kdb5_util, kdestroy, kinit, klist,
+              klogind, kpasswd, kprop, kpropd, krb5-config, krb5-send-pr,
+              krb524d, krb524init, krb5kdc, kshd, ksu, ktutil, kvno,
+              login.krb5, rcp, rlogin, rsh, sclient, sim_client, sim_server,
+              sserver, telnet, telnetd, uuclient, uuserver and v4rcp</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libdes425.so,
+              libgssapi_krb5.so, libgssrpc.so, libk5crypto.so,
+              libkadm5clnt.so, libkadm5srv.so, libkdb5.so, libkdb_ldap.so,
+              libkrb4.so, libkrb5.so and libkrb5support.so</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/etc/krb5,
+              /usr/include/{gssapi,gssrpc,kerberosIV,krb5}, /usr/lib/krb5,
+              /usr/share/{doc/krb5-1.6,examples,gnats} and
+              /var/lib/krb5kdc</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2718379" name="id2718379"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="ftp-mitkrb" name="ftp-mitkrb"></a><span class=
+                  "term"><span><strong class=
+                  "command">ftp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized FTP client.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ftpd-mitkrb" name="ftpd-mitkrb"></a><span class=
+                  "term"><span><strong class=
+                  "command">ftpd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized FTP daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="k5srvutil" name="k5srvutil"></a><span class=
+                  "term"><span><strong class=
+                  "command">k5srvutil</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a host keytable manipulation utility.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kadmin-mitkrb" name="kadmin-mitkrb"></a><span class=
+                  "term"><span><strong class=
+                  "command">kadmin</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an utility used to make modifications to the Kerberos
+                    database.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kadmind-mitkrb" name=
+                  "kadmind-mitkrb"></a><span class=
+                  "term"><span><strong class="command">kadmind</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a server for administrative access to a Kerberos
+                    database.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kdb5_util" name="kdb5_util"></a><span class=
+                  "term"><span><strong class=
+                  "command">kdb5_util</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the KDC database utility.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kdestroy-mitkrb" name=
+                  "kdestroy-mitkrb"></a><span class=
+                  "term"><span><strong class=
+                  "command">kdestroy</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    removes the current set of tickets.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kinit-mitkrb" name="kinit-mitkrb"></a><span class=
+                  "term"><span><strong class=
+                  "command">kinit</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to authenticate to the Kerberos server as a
+                    principal and acquire a ticket granting ticket that can
+                    later be used to obtain tickets for other services.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="klist-mitkrb" name="klist-mitkrb"></a><span class=
+                  "term"><span><strong class=
+                  "command">klist</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    reads and displays the current tickets in the credential
+                    cache.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="klogind" name="klogind"></a><span class=
+                  "term"><span><strong class=
+                  "command">klogind</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the server that responds to <span><strong class=
+                    "command">rlogin</strong></span> requests.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kpasswd-mitkrb" name=
+                  "kpasswd-mitkrb"></a><span class=
+                  "term"><span><strong class="command">kpasswd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a program for changing Kerberos 5 passwords.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kprop" name="kprop"></a><span class=
+                  "term"><span><strong class=
+                  "command">kprop</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    takes a principal database in a specified format and
+                    converts it into a stream of database records.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kpropd" name="kpropd"></a><span class=
+                  "term"><span><strong class=
+                  "command">kpropd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    receives a database sent by <span><strong class=
+                    "command">kprop</strong></span> and writes it as a local
+                    database.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="krb5-config-prog2" name=
+                  "krb5-config-prog2"></a><span class=
+                  "term"><span><strong class=
+                  "command">krb5-config</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    gives information on how to link programs against
+                    libraries.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="krb5kdc" name="krb5kdc"></a><span class=
+                  "term"><span><strong class=
+                  "command">krb5kdc</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a Kerberos 5 server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kshd" name="kshd"></a><span class=
+                  "term"><span><strong class=
+                  "command">kshd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the server that responds to <span><strong class=
+                    "command">rsh</strong></span> requests.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ksu" name="ksu"></a><span class=
+                  "term"><span><strong class=
+                  "command">ksu</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the super user program using Kerberos protocol.
+                    Requires a properly configured <tt class=
+                    "filename">/etc/shells</tt> and <tt class=
+                    "filename">~/.k5login</tt> containing principals
+                    authorized to become super users.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ktutil-mitkrb" name="ktutil-mitkrb"></a><span class=
+                  "term"><span><strong class=
+                  "command">ktutil</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a program for managing Kerberos keytabs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kvno" name="kvno"></a><span class=
+                  "term"><span><strong class=
+                  "command">kvno</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints keyversion numbers of Kerberos principals.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="login.krb5" name="login.krb5"></a><span class=
+                  "term"><span><strong class=
+                  "command">login.krb5</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized login program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rcp-mitkrb" name="rcp-mitkrb"></a><span class=
+                  "term"><span><strong class=
+                  "command">rcp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized rcp client program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rlogin" name="rlogin"></a><span class=
+                  "term"><span><strong class=
+                  "command">rlogin</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized rlogin client program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rsh-mitkrb" name="rsh-mitkrb"></a><span class=
+                  "term"><span><strong class=
+                  "command">rsh</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized rsh client program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="telnet-mitkrb" name="telnet-mitkrb"></a><span class=
+                  "term"><span><strong class=
+                  "command">telnet</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized telnet client program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="telnetd-mitkrb" name=
+                  "telnetd-mitkrb"></a><span class=
+                  "term"><span><strong class="command">telnetd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized telnet server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libgssapi_krb5-mitkrb" name=
+                  "libgssapi_krb5-mitkrb"></a><span class="term"><tt class=
+                  "filename">libgssapi_krb5.so</tt></span>
+                </td>
+                <td>
+                  <p>
+                    contain the Generic Security Service Application
+                    Programming Interface (GSSAPI) functions which provides
+                    security services to callers in a generic fashion,
+                    supportable with a range of underlying mechanisms and
+                    technologies and hence allowing source-level portability
+                    of applications to different environments.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libkadm5clnt-mitkrb" name=
+                  "libkadm5clnt-mitkrb"></a><span class="term"><tt class=
+                  "filename">libkadm5clnt.so</tt></span>
+                </td>
+                <td>
+                  <p>
+                    contains the administrative authentication and password
+                    checking functions required by Kerberos 5 client-side
+                    programs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libkadm5srv-mitkrb" name=
+                  "libkadm5srv-mitkrb"></a><span class="term"><tt class=
+                  "filename">libkadm5srv.so</tt></span>
+                </td>
+                <td>
+                  <p>
+                    contain the administrative authentication and password
+                    checking functions required by Kerberos 5 servers.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libkdb5" name="libkdb5"></a><span class=
+                  "term"><tt class="filename">libkdb5.so</tt></span>
+                </td>
+                <td>
+                  <p>
+                    is a Kerberos 5 authentication/authorization database
+                    access library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libkrb5-mitkrb" name=
+                  "libkrb5-mitkrb"></a><span class="term"><tt class=
+                  "filename">libkrb5.so</tt></span>
+                </td>
+                <td>
+                  <p>
+                    is an all-purpose Kerberos 5 library.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-11 15:42:15 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="heimdal.html" title="Heimdal-0.7.2">Prev</a>
+          <p>
+            Heimdal-0.7.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cyrus-sasl.html" title=
+          "Cyrus SASL-2.1.21">Next</a>
+          <p>
+            Cyrus SASL-2.1.21
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

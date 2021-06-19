@@ -1,0 +1,545 @@
+Tue Sep 29 03:30:30 UTC 2015
+make[1]: Entering directory '/sources/attr-2.4.47'
+/tools/bin/make include libmisc libattr attr getfattr setfattr examples test m4 man doc po debian package
+make[2]: Entering directory '/sources/attr-2.4.47'
+/tools/bin/make -C include
+make[3]: Entering directory '/sources/attr-2.4.47/include'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/include'
+/tools/bin/make -C libmisc
+make[3]: Entering directory '/sources/attr-2.4.47/libmisc'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/libmisc'
+/tools/bin/make -C libattr
+make[3]: Entering directory '/sources/attr-2.4.47/libattr'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/libattr'
+/tools/bin/make -C attr
+make[3]: Entering directory '/sources/attr-2.4.47/attr'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/attr'
+/tools/bin/make -C getfattr
+make[3]: Entering directory '/sources/attr-2.4.47/getfattr'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/getfattr'
+/tools/bin/make -C setfattr
+make[3]: Entering directory '/sources/attr-2.4.47/setfattr'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/setfattr'
+/tools/bin/make -C examples
+make[3]: Entering directory '/sources/attr-2.4.47/examples'
+rm -f copyattr dep dep.bak *.[1-9].gz *.tmpo *.mo       
+make[3]: Leaving directory '/sources/attr-2.4.47/examples'
+/tools/bin/make -C test
+make[3]: Entering directory '/sources/attr-2.4.47/test'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/test'
+/tools/bin/make -C m4
+make[3]: Entering directory '/sources/attr-2.4.47/m4'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/m4'
+/tools/bin/make -C man
+make[3]: Entering directory '/sources/attr-2.4.47/man'
+/tools/bin/make -C man1
+make[4]: Entering directory '/sources/attr-2.4.47/man/man1'
+make[4]: Nothing to be done for 'default'.
+make[4]: Leaving directory '/sources/attr-2.4.47/man/man1'
+/tools/bin/make -C man3
+make[4]: Entering directory '/sources/attr-2.4.47/man/man3'
+make[4]: Nothing to be done for 'default'.
+make[4]: Leaving directory '/sources/attr-2.4.47/man/man3'
+/tools/bin/make -C man5
+make[4]: Entering directory '/sources/attr-2.4.47/man/man5'
+make[4]: Nothing to be done for 'default'.
+make[4]: Leaving directory '/sources/attr-2.4.47/man/man5'
+make[3]: Leaving directory '/sources/attr-2.4.47/man'
+/tools/bin/make -C doc
+make[3]: Entering directory '/sources/attr-2.4.47/doc'
+make[3]: 'default' is up to date.
+make[3]: Leaving directory '/sources/attr-2.4.47/doc'
+/tools/bin/make -C po
+make[3]: Entering directory '/sources/attr-2.4.47/po'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/po'
+/tools/bin/make -C debian
+make[3]: Entering directory '/sources/attr-2.4.47/debian'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/debian'
+/tools/bin/make -C package
+make[3]: Entering directory '/sources/attr-2.4.47/package'
+make[3]: Nothing to be done for 'default'.
+make[3]: Leaving directory '/sources/attr-2.4.47/package'
+make[2]: Leaving directory '/sources/attr-2.4.47'
+/tools/bin/make -C test/ tests
+make[2]: Entering directory '/sources/attr-2.4.47/test'
+*** attr.test ***
+Unescaped left brace in regex is deprecated, passed through in regex; marked by <-- HERE in m/%{ <-- HERE (\w+)}/ at run line 87.
+[9] $ mkdir d -- ok
+[10] $ cd d -- ok
+[12] $ touch f -- ok
+[13] $ setfattr -n user -v value f -- ok
+[16] $ setfattr -n user. -v value f -- ok
+[19] $ setfattr -n user.name f -- failed
+setfattr: f: Operation not supported  != ~
+[20] $ getfattr -d f -- failed
+~                                     != # file: f
+~                                     != user.name
+~                                     != 
+[25] $ setfattr -x user.name f -- failed
+setfattr: f: Operation not supported  != ~
+[26] $ sh -c 'getfattr -n user.name f && echo zero exit code' -- failed
+f: user.name: Operation not supported != f: user.name: No such attribute
+[29] $ setfattr -n user.n -v value f -- failed
+setfattr: f: Operation not supported  != ~
+[30] $ rm f -- ok
+[35] $ touch f -- ok
+[36] $ setfattr -n user.vvvvvvvvvvvv -v vvvvvvvvvvvv f -- failed
+setfattr: f: Operation not supported  != ~
+[37] $ setfattr -n user.wwwwwwww -v wwwwwwww f -- failed
+setfattr: f: Operation not supported  != ~
+[38] $ setfattr -n user.xxxx -v xxxx f -- failed
+setfattr: f: Operation not supported  != ~
+[39] $ getfattr -d f -- failed
+~                                     != # file: f
+~                                     != user.vvvvvvvvvvvv="vvvvvvvvvvvv"
+~                                     != user.wwwwwwww="wwwwwwww"
+~                                     != user.xxxx="xxxx"
+~                                     != 
+[46] $ setfattr -n user.wwwwwwww -v wwww f -- failed
+setfattr: f: Operation not supported  != ~
+[47] $ getfattr -d f -- failed
+~                                     != # file: f
+~                                     != user.vvvvvvvvvvvv="vvvvvvvvvvvv"
+~                                     != user.wwwwwwww="wwww"
+~                                     != user.xxxx="xxxx"
+~                                     != 
+[54] $ setfattr -n user.xxxx -v xxxxxxxx f -- failed
+setfattr: f: Operation not supported  != ~
+[55] $ getfattr -d f -- failed
+~                                     != # file: f
+~                                     != user.vvvvvvvvvvvv="vvvvvvvvvvvv"
+~                                     != user.wwwwwwww="wwww"
+~                                     != user.xxxx="xxxxxxxx"
+~                                     != 
+[62] $ rm f -- ok
+[66] $ touch f -- ok
+[67] $ setfattr -n user.name -v 0xbabe f -- failed
+setfattr: f: Operation not supported  != ~
+[68] $ setfattr -n user.name2 -v 0s3q2+7w== f -- failed
+setfattr: f: Operation not supported  != ~
+[69] $ setfattr -n user.name3 -v 0xdeface f -- failed
+setfattr: f: Operation not supported  != ~
+[70] $ getfattr -d -e hex f -- failed
+~                                     != # file: f
+~                                     != user.name=0xbabe
+~                                     != user.name2=0xdeadbeef
+~                                     != user.name3=0xdeface
+~                                     != 
+[77] $ getfattr -d -e base64 f -- failed
+~                                     != # file: f
+~                                     != user.name=0sur4=
+~                                     != user.name2=0s3q2+7w==
+~                                     != user.name3=0s3vrO
+~                                     != 
+[84] $ rm f -- ok
+[88] $ touch f -- ok
+[89] $ setfattr -n user.novalue f -- failed
+setfattr: f: Operation not supported  != ~
+[90] $ setfattr -n user.somename -v somevalue f -- failed
+setfattr: f: Operation not supported  != ~
+[91] $ setfattr -n user.somename -v somevalue f -- failed
+setfattr: f: Operation not supported  != ~
+[92] $ setfattr -n user.longername -v longervalue f -- failed
+setfattr: f: Operation not supported  != ~
+[93] $ setfattr -n user.short -v value f -- failed
+setfattr: f: Operation not supported  != ~
+[94] $ setfattr -n user.novalue-yet f -- failed
+setfattr: f: Operation not supported  != ~
+[95] $ ls -s f -- failed
+0 f                                   != 4 f
+[98] $ getfattr -d f -- failed
+~                                     != # file: f
+~                                     != user.longername="longervalue"
+~                                     != user.novalue
+~                                     != user.novalue-yet
+~                                     != user.short="value"
+~                                     != user.somename="somevalue"
+~                                     != 
+[107] $ setfattr -n user.novalue-yet -v avalue-now f -- failed
+setfattr: f: Operation not supported  != ~
+[108] $ getfattr -d f -- failed
+~                                     != # file: f
+~                                     != user.longername="longervalue"
+~                                     != user.novalue
+~                                     != user.novalue-yet="avalue-now"
+~                                     != user.short="value"
+~                                     != user.somename="somevalue"
+~                                     != 
+[117] $ setfattr -x user.noname f -- failed
+setfattr: f: Operation not supported  != setfattr: f: No such attribute
+[120] $ setfattr -x user.somename f -- failed
+setfattr: f: Operation not supported  != ~
+[121] $ setfattr -x user.short f -- failed
+setfattr: f: Operation not supported  != ~
+[122] $ getfattr -d f -- failed
+~                                     != # file: f
+~                                     != user.longername="longervalue"
+~                                     != user.novalue
+~                                     != user.novalue-yet="avalue-now"
+~                                     != 
+[129] $ setfattr -x user.longername f -- failed
+setfattr: f: Operation not supported  != ~
+[130] $ setfattr -x user.novalue f -- failed
+setfattr: f: Operation not supported  != ~
+[131] $ setfattr -x user.novalue-yet f -- failed
+setfattr: f: Operation not supported  != ~
+[132] $ getfattr -d f -- ok
+[133] $ ls -s f -- ok
+[136] $ rm f -- ok
+[140] $ touch f g h -- ok
+[141] $ setfattr -n user.novalue f g h -- failed
+setfattr: f: Operation not supported  != ~
+setfattr: g: Operation not supported  != ~
+setfattr: h: Operation not supported  != ~
+[142] $ getfattr f g h | ../sort-getfattr-output -- failed
+                                      != # file: f
+                                      != user.novalue
+~                                     != 
+~                                     != # file: g
+~                                     != user.novalue
+~                                     != 
+~                                     != # file: h
+~                                     != user.novalue
+~                                     != 
+[153] $ setfattr -n user.name -v value f -- failed
+setfattr: f: Operation not supported  != ~
+[154] $ getfattr f g h | ../sort-getfattr-output -- failed
+                                      != # file: f
+                                      != user.name
+~                                     != user.novalue
+~                                     != 
+~                                     != # file: g
+~                                     != user.novalue
+~                                     != 
+~                                     != # file: h
+~                                     != user.novalue
+~                                     != 
+[166] $ getfattr -d f g h | ../sort-getfattr-output -- failed
+                                      != # file: f
+                                      != user.name="value"
+~                                     != user.novalue
+~                                     != 
+~                                     != # file: g
+~                                     != user.novalue
+~                                     != 
+~                                     != # file: h
+~                                     != user.novalue
+~                                     != 
+[178] $ setfattr -n user.name -v value g -- failed
+setfattr: g: Operation not supported  != ~
+[179] $ getfattr f g h | ../sort-getfattr-output -- failed
+                                      != # file: f
+                                      != user.name
+~                                     != user.novalue
+~                                     != 
+~                                     != # file: g
+~                                     != user.name
+~                                     != user.novalue
+~                                     != 
+~                                     != # file: h
+~                                     != user.novalue
+~                                     != 
+[192] $ setfattr -x user.novalue h -- failed
+setfattr: h: Operation not supported  != ~
+[193] $ getfattr f g h | ../sort-getfattr-output -- failed
+                                      != # file: f
+                                      != user.name
+~                                     != user.novalue
+~                                     != 
+~                                     != # file: g
+~                                     != user.name
+~                                     != user.novalue
+~                                     != 
+[203] $ rm f g h -- ok
+[207] $ touch f -- ok
+[208] $ ln -s f l -- ok
+[209] $ setfattr -n user.filename -v f l -- failed
+setfattr: l: Operation not supported  != ~
+[210] $ setfattr -n user.filename -v l l -- failed
+setfattr: l: Operation not supported  != ~
+[211] $ setfattr -h -n user.filename -v l l -- ok
+[214] $ getfattr -d f l | ../sort-getfattr-output -- failed
+                                      != # file: f
+                                      != user.filename="l"
+~                                     != 
+~                                     != # file: l
+~                                     != user.filename="l"
+~                                     != 
+[222] $ rm f -- ok
+[226] $ mkdir src -- ok
+[227] $ touch src/target -- ok
+[228] $ setfattr -n user.color -v blue src/target -- failed
+setfattr: src/target: Operation not supported != ~
+[229] $ ln -s src symlink -- ok
+[230] $ getfattr -n user.color -h symlink 2>/dev/null -- ok
+[234] $ touch "f " -- ok
+[235] $ setfattr -n user.name -v value "f " -- failed
+setfattr: f : Operation not supported != ~
+[236] $ getfattr -d "f " -- failed
+~                                     != # file: f 
+~                                     != user.name="value"
+~                                     != 
+[241] $ rm "f " -- ok
+[245] $ touch f -- ok
+[246] $ setfattr -n "user.sp ace" -v value f -- failed
+setfattr: f: Operation not supported  != ~
+[247] $ setfattr -n "user.special " -v value f -- failed
+setfattr: f: Operation not supported  != ~
+[248] $ getfattr f -- failed
+~                                     != # file: f
+~                                     != user.sp ace
+~                                     != user.special 
+~                                     != 
+[254] $ getfattr -d f -- failed
+~                                     != # file: f
+~                                     != user.sp ace="value"
+~                                     != user.special ="value"
+~                                     != 
+[260] $ setfattr -x "user.sp ace" f -- failed
+setfattr: f: Operation not supported  != ~
+[261] $ setfattr -n "user.sp ace" -v value f -- failed
+setfattr: f: Operation not supported  != ~
+[262] $ setfattr -x "user.sp ace" f -- failed
+setfattr: f: Operation not supported  != ~
+[263] $ setfattr -x "user.special " f -- failed
+setfattr: f: Operation not supported  != ~
+[264] $ rm f -- ok
+[266] $ cd .. -- ok
+[267] $ rm -rf d -- ok
+[271] $ mkdir -p 1/2/3 -- ok
+[272] $ setfattr -n "user.9" 1 -- failed
+setfattr: 1: Operation not supported  != ~
+[273] $ setfattr -n "user.a" 1 -- failed
+setfattr: 1: Operation not supported  != ~
+[274] $ setfattr -n "user.9" 1/2 -- failed
+setfattr: 1/2: Operation not supported != ~
+[275] $ setfattr -n "user.a" 1/2 -- failed
+setfattr: 1/2: Operation not supported != ~
+[276] $ setfattr -n "user.9" 1/2/3 -- failed
+setfattr: 1/2/3: Operation not supported != ~
+[277] $ setfattr -n "user.a" 1/2/3 -- failed
+setfattr: 1/2/3: Operation not supported != ~
+[279] $ getfattr -h -L -R -m '.' -e hex 1 | grep -v selinux | ./sort-getfattr-output -- failed
+                                      != # file: 1
+                                      != user.9
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/2
+~                                     != user.9
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/2/3
+~                                     != user.9
+~                                     != user.a
+~                                     != 
+[293] $ getfattr -h -P -R -m '.' -e hex 1/2 | grep -v selinux | ./sort-getfattr-output -- failed
+                                      != # file: 1/2
+                                      != user.9
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/2/3
+~                                     != user.9
+~                                     != user.a
+~                                     != 
+[303] $ rm -R 1 -- ok
+[307] $ mkdir -p 1/sub -- ok
+[308] $ mkdir 1/link -- ok
+[309] $ touch 1/link/link-file -- ok
+[310] $ touch 1/sub/sub-file -- ok
+[311] $ ln -s `pwd`/1/link 1/sub/link -- ok
+[312] $ setfattr -n "user.a" 1 -- failed
+setfattr: 1: Operation not supported  != ~
+[313] $ setfattr -n "user.a" 1/link/link-file -- failed
+setfattr: 1/link/link-file: Operation not supported != ~
+[314] $ setfattr -n "user.a" 1/link -- failed
+setfattr: 1/link: Operation not supported != ~
+[315] $ setfattr -n "user.a" 1/sub/sub-file -- failed
+setfattr: 1/sub/sub-file: Operation not supported != ~
+[316] $ setfattr -n "user.a" 1/sub -- failed
+setfattr: 1/sub: Operation not supported != ~
+[317] $ getfattr -P -R 1 | ./sort-getfattr-output -- failed
+                                      != # file: 1
+                                      != user.a
+~                                     != 
+~                                     != # file: 1/link
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/link/link-file
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/sub
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/sub/link
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/sub/sub-file
+~                                     != user.a
+~                                     != 
+[337] $ getfattr -R -P 1/sub | ./sort-getfattr-output -- failed
+                                      != # file: 1/sub
+                                      != user.a
+~                                     != 
+~                                     != # file: 1/sub/link
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/sub/sub-file
+~                                     != user.a
+~                                     != 
+[348] $ getfattr -L -R 1 | ./sort-getfattr-output -- failed
+                                      != # file: 1
+                                      != user.a
+~                                     != 
+~                                     != # file: 1/link
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/link/link-file
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/sub
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/sub/link
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/sub/link/link-file
+~                                     != user.a
+~                                     != 
+~                                     != # file: 1/sub/sub-file
+~                                     != user.a
+~                                     != 
+[371] $ getfattr -R 1/sub/link | ./sort-getfattr-output -- failed
+                                      != # file: 1/sub/link
+                                      != user.a
+~                                     != 
+~                                     != # file: 1/sub/link/link-file
+~                                     != user.a
+~                                     != 
+[379] $ getfattr -L -R 1/sub/link | ./sort-getfattr-output -- failed
+                                      != # file: 1/sub/link
+                                      != user.a
+~                                     != 
+~                                     != # file: 1/sub/link/link-file
+~                                     != user.a
+~                                     != 
+[387] $ rm -R 1 -- ok
+114 commands (38 passed, 76 failed)
+Makefile:40: recipe for target 'attr.test' failed
+make[2]: *** [attr.test] Error 76
+make[2]: Target 'tests' not remade because of errors.
+make[2]: Leaving directory '/sources/attr-2.4.47/test'
+Makefile:116: recipe for target 'tests' failed
+make[1]: *** [tests] Error 2
+/tools/bin/make -C test/ root-tests
+make[2]: Entering directory '/sources/attr-2.4.47/test'
+Note: Tests must run as root
+/bin/sh: @echo: command not found
+Unescaped left brace in regex is deprecated, passed through in regex; marked by <-- HERE in m/%{ <-- HERE (\w+)}/ at run line 87.
+[1] $ mkdir d -- ok
+[2] $ cd d -- ok
+[4] $ touch f -- ok
+[5] $ setfattr -n user.test -v test f -- failed
+setfattr: f: Operation not supported  != ~
+[6] $ ln -s f l -- ok
+[7] $ setfattr -h -n trusted.test -v test l -- ok
+[10] $ getfattr -m- -d f -- failed
+~                                     != # file: f
+~                                     != user.test="test"
+~                                     != 
+[16] $ getfattr -m- -d l -- failed
+~                                     != # file: l
+~                                     != user.test="test"
+~                                     != 
+[22] $ getfattr -m- -hd l -- ok
+[28] $ getfattr -m- -Rd . | ../sort-getfattr-output -- failed
+                                      != # file: f
+                                      != user.test="test"
+~                                     != 
+~                                     != # file: l
+~                                     != user.test="test"
+~                                     != 
+[36] $ getfattr -m- -Rhd . | ../sort-getfattr-output -- failed
+# file: l                             != # file: f
+trusted.test="test"                   != user.test="test"
+                                      == 
+~                                     != # file: l
+~                                     != trusted.test="test"
+~                                     != 
+[45] $ ln -s . here -- ok
+[46] $ getfattr -m- -Rd here | ../sort-getfattr-output -- failed
+                                      != # file: here/f
+                                      != user.test="test"
+~                                     != 
+~                                     != # file: here/l
+~                                     != user.test="test"
+~                                     != 
+[54] $ getfattr -m- -Rhd here -- ok
+[56] $ getfattr -m- -RLhd here | ../sort-getfattr-output -- failed
+# file: here/l                        != # file: here/f
+trusted.test="test"                   != user.test="test"
+                                      == 
+~                                     != # file: here/l
+~                                     != trusted.test="test"
+~                                     != 
+[64] $ getfattr -m- -RPhd here -- ok
+[67] $ mkdir sub -- ok
+[68] $ mv f l sub -- ok
+[69] $ getfattr -m- -Rd . | ../sort-getfattr-output -- failed
+                                      != # file: sub/f
+                                      != user.test="test"
+~                                     != 
+~                                     != # file: sub/l
+~                                     != user.test="test"
+~                                     != 
+[77] $ getfattr -m- -Rhd . | ../sort-getfattr-output -- failed
+# file: sub/l                         != # file: sub/f
+trusted.test="test"                   != user.test="test"
+                                      == 
+~                                     != # file: sub/l
+~                                     != trusted.test="test"
+~                                     != 
+[86] $ mkdir sub2 -- ok
+[87] $ ln -s ../sub sub2/to-sub -- ok
+[88] $ getfattr -m- -Rhd sub2 -- ok
+[90] $ getfattr -m- -RLhd sub2 | ../sort-getfattr-output -- failed
+# file: sub2/to-sub/l                 != # file: sub2/to-sub/f
+trusted.test="test"                   != user.test="test"
+                                      == 
+~                                     != # file: sub2/to-sub/l
+~                                     != trusted.test="test"
+~                                     != 
+[98] $ getfattr -m- -RPhd sub2 -- ok
+[101] $ ln -s .. sub/up -- ok
+[102] $ getfattr -m- -RLhd . | ../sort-getfattr-output -- failed
+# file: sub/l                         != # file: sub/f
+trusted.test="test"                   != user.test="test"
+                                      == 
+# file: sub2/to-sub/l                 != # file: sub/l
+trusted.test="test"                   == trusted.test="test"
+                                      == 
+~                                     != # file: sub2/to-sub/f
+~                                     != user.test="test"
+~                                     != 
+~                                     != # file: sub2/to-sub/l
+~                                     != trusted.test="test"
+~                                     != 
+[115] $ cd .. -- ok
+[116] $ rm -rf d -- ok
+29 commands (18 passed, 11 failed)
+Makefile:46: recipe for target 'root/getfattr.test' failed
+make[2]: *** [root/getfattr.test] Error 11
+make[2]: Target 'root-tests' not remade because of errors.
+make[2]: Leaving directory '/sources/attr-2.4.47/test'
+Makefile:116: recipe for target 'root-tests' failed
+make[1]: *** [root-tests] Error 2
+make[1]: Leaving directory '/sources/attr-2.4.47'

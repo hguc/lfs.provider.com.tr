@@ -1,0 +1,354 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      CVS-1.11.18
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;18.&nbsp;Basic Networking Programs
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="rsync.html" title=
+          "rsync-2.6.3 client">Prev</a>
+          <p>
+            rsync-2.6.3 client
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="subversion.html" title=
+          "Subversion-1.1.3">Next</a>
+          <p>
+            Subversion-1.1.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="cvs" name="cvs"></a>
+        <h1 class="sect1">
+          CVS-1.11.18
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to CVS
+          </h2>
+        </div>
+        <p>
+          <span class="application"><span class="acronym">CVS</span></span>
+          is the Concurrent Versioning System. This is a version control
+          system useful for projects using a central repository to hold files
+          and then track all changes made to those files. These instructions
+          install the client used to manipulate the repository, creation of a
+          repository is covered at <a href="../server/cvsserver.html">Running
+          a CVS Server</a>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2809670" name="id2809670"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "https://ccvs.cvshome.org/files/documents/19/534/cvs-1.11.18.tar.bz2">
+                  <span class=
+                  "url">https://ccvs.cvshome.org/files/documents/19/534/cvs-1.11.18.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 1dd5c16064906617e4358738bfe59b66
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 20 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.31 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2684594" name="id2684594"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Recommended patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/cvs-1.11.18-zlib-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/cvs-1.11.18-zlib-1.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2671069" name="id2671069"></a><span class=
+                  "application">CVS</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2826507" name="id2826507"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/gdbm.html">GDBM-1.8.3</a>, <a href=
+              "http://www.pdc.kth.se/kth-krb/"><span class=
+              "url">krb4</span></a>, <a href="../postlfs/mitkrb.html">MIT
+              krb5-1.4</a> or <a href=
+              "../postlfs/heimdal.html">Heimdal-0.6.3</a>, <a href=
+              "../pst/gs.html">AFPL Ghostscript-8.14</a> or <a href=
+              "../pst/espgs.html">ESP Ghostscript-7.07.1</a>, <a href=
+              "../server/mail.html"><span class="url">MTA</span></a> and
+              <a href="../postlfs/editors.html#vim">Vim-6.3</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of CVS
+          </h2>
+        </div>
+        <p>
+          By default <span class="application"><span class=
+          "acronym">CVS</span></span> is statically linked against the zlib
+          library included in its source tree. This makes it exposed to
+          possible security vulnerabilities in that library. If you want to
+          modify CVS to use the newest system shared zlib library apply the
+          following patch:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">patch -Np1 -i ../cvs-1.11.18-zlib-1.patch</strong></span></kbd></pre>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">cvs</span></span> by running the following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring CVS
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2718088" name="id2718088"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.cvsrc</tt>, <tt class=
+            "filename">~/.cvswrappers</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2739390" name="id2739390"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.cvsrc</tt> is the main <span class=
+            "application"><span class="acronym">CVS</span></span>
+            configuration file. This file is used by users to specify
+            defaults for different <span><strong class=
+            "command">cvs</strong></span> commands, for example to make all
+            <span><strong class="command">cvs diff</strong></span> commands
+            run with <strong class="userinput"><tt>-u</tt></strong>, a user
+            would add <strong class="userinput"><tt>diff -u</tt></strong> to
+            their <tt class="filename">.cvsrc</tt> file.
+          </p>
+          <p>
+            <tt class="filename">~/.cvswrappers</tt> specifies wrappers to be
+            used in addition to those specified in the <tt class=
+            "filename">CVSROOT/cvswrappers</tt> file in the repository.
+          </p>
+          <p>
+            <tt class="filename">~/.cvspass</tt> can hold passwords to
+            complete logins to servers.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">CVS</span></span> package contains <span><strong class=
+          "command">cvs</strong></span>, <span><strong class=
+          "command">cvsbug</strong></span> and <span><strong class=
+          "command">rcs2log</strong></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2654717" name="id2654717"></a>cvs
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This is the main program file for the concurrent versioning
+            system.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2651559" name="id2651559"></a>cvsbug
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This is used to send problem reports about <span class=
+            "application"><span class="acronym">CVS</span></span> to a
+            central support site.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2479562" name="id2479562"></a>rcs2log
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="acronym">RCS</span> to Change Log generator.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-11 08:57:40 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="rsync.html" title=
+          "rsync-2.6.3 client">Prev</a>
+          <p>
+            rsync-2.6.3 client
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="subversion.html" title=
+          "Subversion-1.1.3">Next</a>
+          <p>
+            Subversion-1.1.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

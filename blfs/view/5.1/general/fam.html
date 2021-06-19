@@ -1,0 +1,325 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      FAM-2.7.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;8.&nbsp;General Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="slang.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="libxml.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          FAM-2.7.0
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to FAM
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">FAM</span></span> package contains a File Alteration
+          Monitor which is useful for notifying applications of changes to
+          the file system.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2654240" name="id2654240"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://oss.sgi.com/projects/fam/download/stable/fam-2.7.0.tar.gz">
+                  ftp://oss.sgi.com/projects/fam/download/stable/fam-2.7.0.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 320 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 6.9 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.68 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2653453" name="id2653453"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Dnotify patch (Recommended): <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/fam-2.7.0-dnotify-1.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/fam-2.7.0-dnotify-1.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2653622" name="id2653622"></a><span class=
+                  "application"><span class="acronym">FAM</span></span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2653632" name="id2653632"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../basicnet/portmap.html">portmap-5beta</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of FAM
+          </h3>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">FAM</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../fam-2.7.0-dnotify-1.patch &amp;&amp;
+autoreconf -f -i &amp;&amp;
+./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">patch -Np1 -i
+          ../fam-2.7.0-dnotify-1.patch</b></span>: This patch enables
+          <span class="application"><span class="acronym">FAM</span></span>
+          to use the Linux kernel dnotify mechanism to inform the calling
+          process of file modifications, rather than polling the file system
+          for modifications.
+        </p>
+        <p>
+          <span><b class="command">autoreconf -f -i</b></span> This command
+          is necessary since the dnotify patch affects the <tt class=
+          "filename">configure.ac</tt> and <tt class=
+          "filename">Makefile.am</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring FAM
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2654052" name="id2654052"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/rpc</tt>, <tt class=
+            "filename">/etc/fam.conf</tt>, <tt class=
+            "filename">/etc/inetd.conf</tt>, <tt class=
+            "filename">/etc/xinetd.d/fam</tt> or <tt class=
+            "filename">/etc/xinetd.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2654059" name="id2654059"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Configuring the file alteration monitor.
+          </p>
+          <p>
+            If you use <span class="application">inetd</span>, add the
+            <span class="application"><span class="acronym">FAM</span></span>
+            entry to <tt class="filename">/etc/inetd.conf</tt> with the
+            following command:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">echo "sgi_fam/1-2 stream  rpc/tcp wait root /usr/sbin/famd fam" &gt;&gt; /etc/inetd.conf</b></span></tt>
+</pre>
+          <p>
+            If you use <span class="application">xinetd</span>, add an entry
+            to <tt class="filename">/etc/xinetd.conf</tt> with the following
+            command (be sure the "nogroup" group exists):
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/xinetd.conf &lt;&lt; "EOF"</b></span>
+    # description: FAM - file alteration monitor
+    service sgi_fam
+    {
+        type            = RPC UNLISTED
+        socket_type     = stream
+        user            = root
+        group           = nogroup
+        server          = /usr/sbin/famd
+        wait            = yes
+        protocol        = tcp
+        rpc_version     = 2
+        rpc_number      = 391002
+    }
+<span><b class="command">EOF</b></span></tt>
+</pre>
+          <p>
+            If you do not have any inetd daemon installed and have no wish to
+            install one, you can also start fam during system startup by
+            installing <tt class="filename">/etc/rc.d/init.d/fam</tt> init
+            script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-fam</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">FAM</span></span> package contains the <span><b class=
+          "command">famd</b></span> executable and <tt class=
+          "filename">libfam</tt> libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2654336" name="id2654336"></a>famd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">famd</b></span> is the file alteration
+            monitor.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="slang.html">Prev</a><br />
+        slang-1.4.9
+      </div>
+      <div class="next">
+        <a accesskey="n" href="libxml.html">Next</a><br />
+        libxml-1.8.17
+      </div>
+      <div class="up">
+        <a accesskey="u" href="genlib.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

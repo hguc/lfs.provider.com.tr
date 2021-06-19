@@ -1,0 +1,23 @@
+Wed Sep 12 13:50:46 GMT 2007
+
+KB: 980004	/
+
+make[1]: Entering directory `/sources/iana-etc-2.20'
+ln -f -s protocol-numbers.dist protocol-numbers
+gawk --re-interval -f protocols.gawk -v strip=no \
+	    protocol-numbers > protocols
+ln -f -s port-numbers.dist port-numbers
+gawk -f services.gawk -v strip=no port-numbers > services
+make[1]: Leaving directory `/sources/iana-etc-2.20'
+make[1]: Entering directory `/sources/iana-etc-2.20'
+install -d /etc
+install -m 644 protocols /etc
+install -m 644 services /etc
+make[1]: Leaving directory `/sources/iana-etc-2.20'
+
+
+Totalseconds: 2
+
+
+KB: 982592	/
+

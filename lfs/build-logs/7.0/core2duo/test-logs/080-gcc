@@ -1,0 +1,805 @@
+Thu Oct 13 17:09:22 UTC 2011
+make[1]: Entering directory `/sources/gcc-build'
+make[2]: Entering directory `/sources/gcc-build'
+make[3]: Entering directory `/sources/gcc-build/libiberty'
+make[4]: Entering directory `/sources/gcc-build/libiberty/testsuite'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/sources/gcc-build/libiberty/testsuite'
+make[3]: Leaving directory `/sources/gcc-build/libiberty'
+make[3]: Entering directory `/sources/gcc-build/fixincludes'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/sources/gcc-build/fixincludes'
+make[3]: Entering directory `/sources/gcc-build/lto-plugin'
+make  all-am
+make[4]: Entering directory `/sources/gcc-build/lto-plugin'
+make[4]: Nothing to be done for `all-am'.
+make[4]: Leaving directory `/sources/gcc-build/lto-plugin'
+make[3]: Leaving directory `/sources/gcc-build/lto-plugin'
+make[3]: Entering directory `/sources/gcc-build/intl'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/sources/gcc-build/intl'
+make[3]: Entering directory `/sources/gcc-build/build-x86_64-unknown-linux-gnu/libiberty'
+make[4]: Entering directory `/sources/gcc-build/build-x86_64-unknown-linux-gnu/libiberty/testsuite'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/sources/gcc-build/build-x86_64-unknown-linux-gnu/libiberty/testsuite'
+make[3]: Leaving directory `/sources/gcc-build/build-x86_64-unknown-linux-gnu/libiberty'
+make[3]: Entering directory `/sources/gcc-build/build-x86_64-unknown-linux-gnu/fixincludes'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/sources/gcc-build/build-x86_64-unknown-linux-gnu/fixincludes'
+make[3]: Entering directory `/sources/gcc-build/libcpp'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/sources/gcc-build/libcpp'
+make[3]: Entering directory `/sources/gcc-build/libdecnumber'
+make[3]: Nothing to be done for `all'.
+make[3]: Leaving directory `/sources/gcc-build/libdecnumber'
+make[3]: Entering directory `/sources/gcc-build/gcc'
+make[3]: Leaving directory `/sources/gcc-build/gcc'
+Checking multilib configuration for libgcc...
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgcc'
+# If this is the top-level multilib, build all the other
+# multilibs.
+# Early copyback; see "all" above for the rationale.  The
+# early copy is necessary so that the gcc -B options find
+# the right startup files when linking shared libgcc.
+/bin/sh ../../../gcc-4.6.1/libgcc/../mkinstalldirs ../.././gcc
+parts="crtbegin.o crtbeginS.o crtbeginT.o crtend.o crtendS.o crtprec32.o crtprec64.o crtprec80.o crtfastmath.o";					\
+for file in $parts; do					\
+  rm -f ../.././gcc/$file;		\
+  /tools/bin/install -c -m 644 $file ../.././gcc/;	\
+  case $file in 					\
+    *.a)						\
+      ranlib ../.././gcc/$file ;;	\
+  esac;							\
+done
+# @multilib_flags@ is still needed because this may use
+# /sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include    and -O2  -g -O2 -DIN_GCC   -W -Wall -Wwrite-strings -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition  -isystem ./include  -fPIC -g -DHAVE_GTHR_DEFAULT -DIN_LIBGCC2 -D__GCC_FLOAT_NOT_NEEDED -fno-stack-protector  directly.
+# @multilib_dir@ is not really necessary, but sometimes it has
+# more uses than just a directory name.
+/bin/sh ../../../gcc-4.6.1/libgcc/../mkinstalldirs .
+/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include    -O2  -g -O2 -DIN_GCC   -W -Wall -Wwrite-strings -Wcast-qual -Wstrict-prototypes -Wmissing-prototypes -Wold-style-definition  -isystem ./include  -fPIC -g -DHAVE_GTHR_DEFAULT -DIN_LIBGCC2 -D__GCC_FLOAT_NOT_NEEDED -fno-stack-protector  -shared -nodefaultlibs -Wl,--soname=libgcc_s.so.1 -Wl,--version-script=libgcc.map -o ./libgcc_s.so.1.tmp -g -O2 -B./ _muldi3_s.o _negdi2_s.o _lshrdi3_s.o _ashldi3_s.o _ashrdi3_s.o _cmpdi2_s.o _ucmpdi2_s.o _clear_cache_s.o _enable_execute_stack_s.o _trampoline_s.o __main_s.o _absvsi2_s.o _absvdi2_s.o _addvsi3_s.o _addvdi3_s.o _subvsi3_s.o _subvdi3_s.o _mulvsi3_s.o _mulvdi3_s.o _negvsi2_s.o _negvdi2_s.o _ctors_s.o _ffssi2_s.o _ffsdi2_s.o _clz_s.o _clzsi2_s.o _clzdi2_s.o _ctzsi2_s.o _ctzdi2_s.o _popcount_tab_s.o _popcountsi2_s.o _popcountdi2_s.o _paritysi2_s.o _paritydi2_s.o _powisf2_s.o _powidf2_s.o _powixf2_s.o _mulsc3_s.o _muldc3_s.o _mulxc3_s.o _divsc3_s.o _divdc3_s.o _divxc3_s.o _bswapsi2_s.o _bswapdi2_s.o _fixunssfsi_s.o _fixunsdfsi_s.o _fixunsxfsi_s.o _fixsfdi_s.o _fixdfdi_s.o _fixxfdi_s.o _fixunssfdi_s.o _fixunsdfdi_s.o _fixunsxfdi_s.o _floatdisf_s.o _floatdidf_s.o _floatdixf_s.o _floatundisf_s.o _floatundidf_s.o _floatundixf_s.o _divdi3_s.o _moddi3_s.o _udivdi3_s.o _umoddi3_s.o _udiv_w_sdiv_s.o _udivmoddi4_s.o addtf3_s.o divtf3_s.o multf3_s.o negtf2_s.o subtf3_s.o unordtf2_s.o fixtfsi_s.o fixunstfsi_s.o floatsitf_s.o floatunsitf_s.o fixtfdi_s.o fixunstfdi_s.o floatditf_s.o floatunditf_s.o fixtfti_s.o fixunstfti_s.o floattitf_s.o floatuntitf_s.o extendsftf2_s.o extenddftf2_s.o extendxftf2_s.o trunctfsf2_s.o trunctfdf2_s.o trunctfxf2_s.o getf2_s.o letf2_s.o eqtf2_s.o _divtc3_s.o _multc3_s.o _powitf2_s.o unwind-dw2_s.o unwind-dw2-fde-glibc_s.o unwind-sjlj_s.o gthr-gnat_s.o unwind-c_s.o emutls_s.o -lc && rm -f ./libgcc_s.so && if [ -f ./libgcc_s.so.1 ]; then mv -f ./libgcc_s.so.1 ./libgcc_s.so.1.backup; else true; fi && mv ./libgcc_s.so.1.tmp ./libgcc_s.so.1 && ln -s libgcc_s.so.1 ./libgcc_s.so
+# Now that we have built all the objects, we need to copy
+# them back to the GCC directory.  Too many things (other
+# in-tree libraries, and DejaGNU) know about the layout
+# of the build tree, for now.
+make install-leaf DESTDIR=../.././gcc \
+  slibdir= libsubdir= MULTIOSDIR=.
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgcc'
+/bin/sh ../../../gcc-4.6.1/libgcc/../mkinstalldirs ../.././gcc
+/tools/bin/install -c -m 644 libgcc_eh.a ../.././gcc/
+chmod 644 ../.././gcc/libgcc_eh.a
+ranlib ../.././gcc/libgcc_eh.a
+/bin/sh ../../../gcc-4.6.1/libgcc/../mkinstalldirs ../.././gcc; /tools/bin/install -c -m 644 ./libgcc_s.so.1 ../.././gcc/libgcc_s.so.1; rm -f ../.././gcc/libgcc_s.so; ln -s libgcc_s.so.1 ../.././gcc/libgcc_s.so
+/bin/sh ../../../gcc-4.6.1/libgcc/../mkinstalldirs ../.././gcc
+/tools/bin/install -c -m 644 libgcc.a ../.././gcc/
+chmod 644 ../.././gcc/libgcc.a
+ranlib ../.././gcc/libgcc.a
+/tools/bin/install -c -m 644 libgcov.a ../.././gcc/
+chmod 644 ../.././gcc/libgcov.a
+ranlib ../.././gcc/libgcov.a
+parts="crtbegin.o crtbeginS.o crtbeginT.o crtend.o crtendS.o crtprec32.o crtprec64.o crtprec80.o crtfastmath.o";				\
+for file in $parts; do					\
+  rm -f ../.././gcc/$file;		\
+  /tools/bin/install -c -m 644 $file ../.././gcc/;	\
+  case $file in 					\
+    *.a)						\
+      ranlib ../.././gcc/$file ;;	\
+  esac;							\
+done
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgcc'
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgcc'
+Checking multilib configuration for libgomp...
+Checking multilib configuration for libstdc++-v3...
+Checking multilib configuration for libiberty...
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libiberty'
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libiberty/testsuite'
+make[4]: Nothing to be done for `all'.
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libiberty/testsuite'
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libiberty'
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3'
+make "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CC_FOR_TARGET=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000 " "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "includedir=/usr/include" "prefix=/usr" "tooldir=/usr/x86_64-unknown-linux-gnu" "gxx_include_dir=/usr/include/c++/4.6.1" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "LD=/sources/gcc-build/./gcc/collect-ld" "RANLIB=ranlib" "NM=/sources/gcc-build/./gcc/nm" "NM_FOR_BUILD=" "NM_FOR_TARGET=nm" "DESTDIR=" "WERROR=" all-recursive
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3'
+Making all in include
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include'
+Making all in libsupc++
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/libsupc++'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/libsupc++'
+Making all in doc
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/doc'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/doc'
+Making all in src
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src'
+Making all in po
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/po'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/po'
+Making all in testsuite
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/testsuite'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/testsuite'
+Making all in python
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/python'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/python'
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3'
+true "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CC_FOR_TARGET=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000   " "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "includedir=/usr/include" "prefix=/usr" "tooldir=/usr/x86_64-unknown-linux-gnu" "gxx_include_dir=/usr/include/c++/4.6.1" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "LD=/sources/gcc-build/./gcc/collect-ld" "RANLIB=ranlib" "NM=/sources/gcc-build/./gcc/nm" "NM_FOR_BUILD=" "NM_FOR_TARGET=nm" "DESTDIR=" "WERROR=" DO=all multi-do # make
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3'
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3'
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3'
+Checking multilib configuration for libmudflap...
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap'
+make "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "JC1FLAGS=" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000 " "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "prefix=/usr" "includedir=/usr/include" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "CC=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "CXX=/sources/gcc-build/./gcc/g++ -B/sources/gcc-build/./gcc/ -nostdinc++ -nostdinc++ -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include/x86_64-unknown-linux-gnu -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include -I/sources/gcc-4.6.1/libstdc++-v3/libsupc++ -I/sources/gcc-4.6.1/libstdc++-v3/include/backward -I/sources/gcc-4.6.1/libstdc++-v3/testsuite/util -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src/.libs -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "LD=/sources/gcc-build/./gcc/collect-ld" "LIBCFLAGS=-g -O2" "NM=/sources/gcc-build/./gcc/nm" "PICFLAG=" "RANLIB=ranlib" "DESTDIR=" all-recursive
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap'
+Making all in testsuite
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap/testsuite'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap/testsuite'
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap'
+true "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "JC1FLAGS=" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000   " "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "prefix=/usr" "includedir=/usr/include" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "CC=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "CXX=/sources/gcc-build/./gcc/g++ -B/sources/gcc-build/./gcc/ -nostdinc++ -nostdinc++ -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include/x86_64-unknown-linux-gnu -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include -I/sources/gcc-4.6.1/libstdc++-v3/libsupc++ -I/sources/gcc-4.6.1/libstdc++-v3/include/backward -I/sources/gcc-4.6.1/libstdc++-v3/testsuite/util -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src/.libs -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "LD=/sources/gcc-build/./gcc/collect-ld" "LIBCFLAGS=-g -O2" "NM=/sources/gcc-build/./gcc/nm" "PICFLAG=" "RANLIB=ranlib" "DESTDIR=" DO=all multi-do # make
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap'
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap'
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap'
+Checking multilib configuration for libssp...
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libssp'
+make "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "JC1FLAGS=" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000 " "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "prefix=/usr" "includedir=/usr/include" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "CC=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "CXX=/sources/gcc-build/./gcc/g++ -B/sources/gcc-build/./gcc/ -nostdinc++ -nostdinc++ -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include/x86_64-unknown-linux-gnu -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include -I/sources/gcc-4.6.1/libstdc++-v3/libsupc++ -I/sources/gcc-4.6.1/libstdc++-v3/include/backward -I/sources/gcc-4.6.1/libstdc++-v3/testsuite/util -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src/.libs -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "LD=/sources/gcc-build/./gcc/collect-ld" "LIBCFLAGS=-g -O2" "NM=/sources/gcc-build/./gcc/nm" "PICFLAG=" "RANLIB=ranlib" "DESTDIR=" all-am
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libssp'
+true "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "JC1FLAGS=" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000  " "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "prefix=/usr" "includedir=/usr/include" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "CC=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "CXX=/sources/gcc-build/./gcc/g++ -B/sources/gcc-build/./gcc/ -nostdinc++ -nostdinc++ -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include/x86_64-unknown-linux-gnu -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include -I/sources/gcc-4.6.1/libstdc++-v3/libsupc++ -I/sources/gcc-4.6.1/libstdc++-v3/include/backward -I/sources/gcc-4.6.1/libstdc++-v3/testsuite/util -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src/.libs -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "LD=/sources/gcc-build/./gcc/collect-ld" "LIBCFLAGS=-g -O2" "NM=/sources/gcc-build/./gcc/nm" "PICFLAG=" "RANLIB=ranlib" "DESTDIR=" DO=all multi-do # make
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libssp'
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libssp'
+Checking multilib configuration for libquadmath...
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libquadmath'
+make "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "JC1FLAGS=" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000 -I ../../../gcc-4.6.1/libquadmath/../gcc/doc/include" "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "prefix=/usr" "includedir=/usr/include" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "CC=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "CXX=/sources/gcc-build/./gcc/g++ -B/sources/gcc-build/./gcc/ -nostdinc++ -nostdinc++ -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include/x86_64-unknown-linux-gnu -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include -I/sources/gcc-4.6.1/libstdc++-v3/libsupc++ -I/sources/gcc-4.6.1/libstdc++-v3/include/backward -I/sources/gcc-4.6.1/libstdc++-v3/testsuite/util -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src/.libs -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "LD=/sources/gcc-build/./gcc/collect-ld" "LIBCFLAGS=-g -O2" "NM=/sources/gcc-build/./gcc/nm" "PICFLAG=" "RANLIB=ranlib" "DESTDIR=" all-am
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libquadmath'
+true "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "JC1FLAGS=" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000 -I ../../../gcc-4.6.1/libquadmath/../gcc/doc/include -I ../../../gcc-4.6.1/libquadmath/../gcc/doc/include" "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "prefix=/usr" "includedir=/usr/include" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "CC=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "CXX=/sources/gcc-build/./gcc/g++ -B/sources/gcc-build/./gcc/ -nostdinc++ -nostdinc++ -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include/x86_64-unknown-linux-gnu -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include -I/sources/gcc-4.6.1/libstdc++-v3/libsupc++ -I/sources/gcc-4.6.1/libstdc++-v3/include/backward -I/sources/gcc-4.6.1/libstdc++-v3/testsuite/util -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src/.libs -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "LD=/sources/gcc-build/./gcc/collect-ld" "LIBCFLAGS=-g -O2" "NM=/sources/gcc-build/./gcc/nm" "PICFLAG=" "RANLIB=ranlib" "DESTDIR=" DO=all multi-do # make
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libquadmath'
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libquadmath'
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp'
+make  all-recursive
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp'
+Making all in testsuite
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp/testsuite'
+make[5]: Nothing to be done for `all'.
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp/testsuite'
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp'
+true  DO=all multi-do # make
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp'
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp'
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp'
+make[2]: Leaving directory `/sources/gcc-build'
+make[1]: Leaving directory `/sources/gcc-build'
+make[1]: Entering directory `/sources/gcc-build'
+make[2]: Entering directory `/sources/gcc-build'
+make[3]: Entering directory `/sources/gcc-build/fixincludes'
+autogen -T ../../gcc-4.6.1/fixincludes/check.tpl ../../gcc-4.6.1/fixincludes/inclhack.def
+make[3]: autogen: Command not found
+make[3]: *** [check] Error 127
+make[3]: Leaving directory `/sources/gcc-build/fixincludes'
+make[2]: *** [check-fixincludes] Error 2
+make[3]: Entering directory `/sources/gcc-build/gcc'
+Making a new config file...
+echo "set tmpdir /sources/gcc-build/gcc/testsuite" >> ./tmp0
+make[4]: Entering directory `/sources/gcc-build/gcc'
+test -d plugin || mkdir plugin
+test -d testsuite || mkdir testsuite
+test -d testsuite/gcc || mkdir testsuite/gcc
+(rootme=`${PWDCMD-pwd}`; export rootme; \
+srcdir=`cd ../../gcc-4.6.1/gcc; ${PWDCMD-pwd}` ; export srcdir ; \
+cd testsuite/gcc; \
+rm -f tmp-site.exp; \
+sed '/set tmpdir/ s|testsuite$|testsuite/gcc|' \
+	< ../../site.exp > tmp-site.exp; \
+/bin/sh ${srcdir}/../move-if-change tmp-site.exp site.exp; \
+EXPECT=`if [ -f ${rootme}/../expect/expect ] ; then echo ${rootme}/../expect/expect ; else echo expect ; fi` ; export EXPECT ; \
+if [ -f ${rootme}/../expect/expect ] ; then  \
+   TCL_LIBRARY=`cd .. ; cd ${srcdir}/../tcl/library ; ${PWDCMD-pwd}` ; \
+    export TCL_LIBRARY ; fi ; \
+runtestflags= ; \
+if [ -n "" ] ; then \
+  runtestflags=""; \
+elif [ -n "" ] ; then \
+  parts="`echo '  ' \
+	  | sed 's/=[^ ]* / /g'`"; \
+  for part in `find $srcdir/testsuite/gcc* -name \*.exp` ; do \
+    part=`basename $part` ; \
+    case " $parts $runtestflags " in \
+      *" $part "*) ;; \
+      *) runtestflags="$runtestflags $part" ;; \
+    esac ; \
+  done ; \
+fi ; \
+`if [ -f ${srcdir}/../dejagnu/runtest ] ; then echo ${srcdir}/../dejagnu/runtest ; else echo runtest; fi` --tool gcc  $runtestflags)
+WARNING: Couldn't find the global config file.
+Test Run By root on Thu Oct 13 17:19:47 2011
+Native configuration is x86_64-unknown-linux-gnu
+
+		=== gcc tests ===
+
+Schedule of variations:
+    unix
+
+Running target unix
+Using /tools/share/dejagnu/baseboards/unix.exp as board description file for target.
+Using /tools/share/dejagnu/config/unix.exp as generic interface file for target.
+Using /sources/gcc-4.6.1/gcc/testsuite/config/default.exp as tool-and-target-specific interface file.
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.c-torture/compile/compile.exp ...
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O0  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O0  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O1  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O1  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O3 -fomit-frame-pointer  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O3 -fomit-frame-pointer  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O3 -g  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O3 -g  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -Os  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -Os  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2 -flto -flto-partition=none  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2 -flto -flto-partition=none  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2 -flto  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2 -flto  (test for excess errors)
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.c-torture/execute/builtins/builtins.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.c-torture/execute/execute.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.c-torture/execute/ieee/ieee.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.c-torture/unsorted/unsorted.exp ...
+
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/autopar/autopar.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/charset/charset.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/compat/compat.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/compat/struct-layout-1.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/cpp/cpp.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/cpp/trad/trad.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/debug/debug.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/debug/dwarf2/dwarf2.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/dfp/dfp.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/dg.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/fixed-point/fixed-point.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/format/format.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/gomp/gomp.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/graphite/graphite.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/guality/guality.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/ipa/ipa.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/lto/lto.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/matrix/matrix.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/noncompile/noncompile.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/pch/pch.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/plugin/plugin.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/special/mips-abi.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/special/special.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/struct/struct-reorg.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/tls/tls.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/torture/dg-torture.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/torture/stackalign/stackalign.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/torture/tls/tls.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/tree-prof/tree-prof.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/tree-ssa/tree-ssa.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/vect/costmodel/i386/i386-costmodel-vect.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/vect/costmodel/ppc/ppc-costmodel-vect.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/vect/costmodel/spu/spu-costmodel-vect.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/vect/costmodel/x86_64/x86_64-costmodel-vect.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/vect/vect.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/vmx/vmx.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/vxworks/vxworks.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.dg/weak/weak.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/acker1.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/arm-isr.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/bprob.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/dectest.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/dhry.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/gcov.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/help.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/i386-prefetch.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/linkage.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/matrix1.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/mg-2.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/mg.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/options.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/sieve.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.misc-tests/sort2.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/alpha/alpha.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/arm/aapcs/aapcs.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/arm/arm.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/arm/neon/neon.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/avr/avr.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/avr/torture/avr-torture.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/bfin/bfin.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/cris/cris.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/cris/torture/cris-torture.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/frv/frv.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/i386/i386.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/i386/math-torture/math-torture.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/i386/stackalign/stackalign.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/ia64/ia64.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/m68k/m68k.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/microblaze/microblaze.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/mips/inter/mips16-inter.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/mips/mips-nonpic/mips-nonpic.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/mips/mips.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/powerpc/powerpc.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/rx/rx.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/s390/s390.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/sh/sh.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/sparc/sparc.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/spu/ea/ea.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/spu/spu.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/x86_64/abi/abi-x86_64.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/x86_64/abi/avx/abi-avx.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/x86_64/abi/callabi/callabi.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.target/xstormy16/xstormy16.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/gcc.test-framework/test-framework.exp ...
+skipping test framework tests, CHECK_TEST_FRAMEWORK is not defined
+
+		=== gcc Summary ===
+
+# of expected passes		77471
+# of unexpected failures	16
+# of expected failures		212
+# of unsupported tests		1069
+/sources/gcc-build/gcc/xgcc  version 4.6.1 (GCC) 
+
+make[4]: [check-parallel-gcc] Error 1 (ignored)
+make[4]: Leaving directory `/sources/gcc-build/gcc'
+make[4]: Entering directory `/sources/gcc-build/gcc'
+test -d plugin || mkdir plugin
+test -d testsuite || mkdir testsuite
+test -d testsuite/g++ || mkdir testsuite/g++
+(rootme=`${PWDCMD-pwd}`; export rootme; \
+srcdir=`cd ../../gcc-4.6.1/gcc; ${PWDCMD-pwd}` ; export srcdir ; \
+cd testsuite/g++; \
+rm -f tmp-site.exp; \
+sed '/set tmpdir/ s|testsuite$|testsuite/g++|' \
+	< ../../site.exp > tmp-site.exp; \
+/bin/sh ${srcdir}/../move-if-change tmp-site.exp site.exp; \
+EXPECT=`if [ -f ${rootme}/../expect/expect ] ; then echo ${rootme}/../expect/expect ; else echo expect ; fi` ; export EXPECT ; \
+if [ -f ${rootme}/../expect/expect ] ; then  \
+   TCL_LIBRARY=`cd .. ; cd ${srcdir}/../tcl/library ; ${PWDCMD-pwd}` ; \
+    export TCL_LIBRARY ; fi ; \
+runtestflags= ; \
+if [ -n "" ] ; then \
+  runtestflags=""; \
+elif [ -n "" ] ; then \
+  parts="`echo '  ' \
+	  | sed 's/=[^ ]* / /g'`"; \
+  for part in `find $srcdir/testsuite/g++* -name \*.exp` ; do \
+    part=`basename $part` ; \
+    case " $parts $runtestflags " in \
+      *" $part "*) ;; \
+      *) runtestflags="$runtestflags $part" ;; \
+    esac ; \
+  done ; \
+fi ; \
+`if [ -f ${srcdir}/../dejagnu/runtest ] ; then echo ${srcdir}/../dejagnu/runtest ; else echo runtest; fi` --tool g++  $runtestflags)
+WARNING: Couldn't find the global config file.
+Test Run By root on Thu Oct 13 17:50:27 2011
+Native configuration is x86_64-unknown-linux-gnu
+
+		=== g++ tests ===
+
+Schedule of variations:
+    unix
+
+Running target unix
+Using /tools/share/dejagnu/baseboards/unix.exp as board description file for target.
+Using /tools/share/dejagnu/config/unix.exp as generic interface file for target.
+Using /sources/gcc-4.6.1/gcc/testsuite/config/default.exp as tool-and-target-specific interface file.
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/bprob/bprob.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/charset/charset.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/compat/compat.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/compat/struct-layout-1.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/debug/debug.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/debug/dwarf2/dwarf2.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/dfp/dfp.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/dg.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/gcov/gcov.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/gomp/gomp.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/graphite/graphite.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/guality/guality.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/lto/lto.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/pch/pch.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/plugin/plugin.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/special/ecos.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/tls/tls.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/torture/dg-torture.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/torture/stackalign/stackalign.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/tree-prof/tree-prof.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.dg/vect/vect.exp ...
+Running /sources/gcc-4.6.1/gcc/testsuite/g++.old-deja/old-deja.exp ...
+
+		=== g++ Summary ===
+
+# of expected passes		27485
+# of expected failures		164
+# of unsupported tests		341
+/sources/gcc-build/gcc/testsuite/g++/../../g++  version 4.6.1 (GCC) 
+
+make[4]: Leaving directory `/sources/gcc-build/gcc'
+make[3]: Leaving directory `/sources/gcc-build/gcc'
+make[3]: Entering directory `/sources/gcc-build/intl'
+make[3]: Nothing to be done for `check'.
+make[3]: Leaving directory `/sources/gcc-build/intl'
+make[3]: Entering directory `/sources/gcc-build/libcpp'
+make[3]: Nothing to be done for `check'.
+make[3]: Leaving directory `/sources/gcc-build/libcpp'
+make[3]: Entering directory `/sources/gcc-build/libdecnumber'
+make[3]: Nothing to be done for `check'.
+make[3]: Leaving directory `/sources/gcc-build/libdecnumber'
+make[3]: Entering directory `/sources/gcc-build/libiberty'
+make[4]: Entering directory `/sources/gcc-build/libiberty/testsuite'
+gcc -DHAVE_CONFIG_H -g -O2 -I.. -I../../../gcc-4.6.1/libiberty/testsuite/../../include  -o test-demangle \
+	../../../gcc-4.6.1/libiberty/testsuite/test-demangle.c ../libiberty.a
+./test-demangle < ../../../gcc-4.6.1/libiberty/testsuite/demangle-expected
+./test-demangle: 827 tests, 0 failures
+gcc -DHAVE_CONFIG_H -g -O2 -I.. -I../../../gcc-4.6.1/libiberty/testsuite/../../include  -DHAVE_CONFIG_H -I.. -o test-pexecute \
+	../../../gcc-4.6.1/libiberty/testsuite/test-pexecute.c ../libiberty.a
+./test-pexecute
+gcc -DHAVE_CONFIG_H -g -O2 -I.. -I../../../gcc-4.6.1/libiberty/testsuite/../../include  -DHAVE_CONFIG_H -I.. -o test-expandargv \
+	../../../gcc-4.6.1/libiberty/testsuite/test-expandargv.c ../libiberty.a
+./test-expandargv
+PASS: test-expandargv-0.
+PASS: test-expandargv-1.
+PASS: test-expandargv-2.
+PASS: test-expandargv-3.
+PASS: test-expandargv-4.
+PASS: test-expandargv-5.
+PASS: test-expandargv-6.
+make[4]: Leaving directory `/sources/gcc-build/libiberty/testsuite'
+make[3]: Leaving directory `/sources/gcc-build/libiberty'
+make[3]: Entering directory `/sources/gcc-build/lto-plugin'
+make[3]: Nothing to be done for `check'.
+make[3]: Leaving directory `/sources/gcc-build/lto-plugin'
+make[2]: Target `check-host' not remade because of errors.
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3'
+Making check in include
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include'
+make[4]: Nothing to be done for `check'.
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include'
+Making check in libsupc++
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/libsupc++'
+make[4]: Nothing to be done for `check'.
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/libsupc++'
+Making check in doc
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/doc'
+make[4]: Nothing to be done for `check'.
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/doc'
+Making check in src
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src'
+make[4]: Nothing to be done for `check'.
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src'
+Making check in po
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/po'
+/bin/sh /sources/gcc-4.6.1/libstdc++-v3/../mkinstalldirs /sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/po/share/locale
+mkdir -p -- /sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/po/share/locale
+catalogs='de.mo fr.mo'; \
+for cat in $catalogs; do \
+  cat=`basename $cat`; \
+  lang=`echo $cat | sed 's/\.mo$//'`; \
+  install_dir=/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/po/share/locale/$lang/LC_MESSAGES; \
+  /bin/sh /sources/gcc-4.6.1/libstdc++-v3/../mkinstalldirs $install_dir; \
+  /tools/bin/install -c -m 644 $cat $install_dir/libstdc++.mo; \
+done
+mkdir -p -- /sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/po/share/locale/de/LC_MESSAGES
+mkdir -p -- /sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/po/share/locale/fr/LC_MESSAGES
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/po'
+Making check in testsuite
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/testsuite'
+make  check-DEJAGNU
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/testsuite'
+Making a new site.exp file...
+AR="ar"; export AR; \
+RANLIB="ranlib"; export RANLIB; \
+if [ -z "" ] \
+    && [ "" = "-j" ]; then \
+  make  check-DEJAGNUnormal0 check-DEJAGNUnormal1 \
+	  check-DEJAGNUnormal2 check-DEJAGNUnormal3; \
+  for idx in 0 1 2 3; do \
+    mv -f normal$idx/libstdc++.sum normal$idx/libstdc++.sum.sep; \
+    mv -f normal$idx/libstdc++.log normal$idx/libstdc++.log.sep; \
+  done; \
+  mv -f libstdc++.sum libstdc++.sum.sep; \
+  mv -f libstdc++.log libstdc++.log.sep; \
+  /bin/sh ../../../../gcc-4.6.1/libstdc++-v3/testsuite/../../contrib/dg-extract-results.sh \
+    libstdc++.sum.sep normal0/libstdc++.sum.sep \
+    normal1/libstdc++.sum.sep normal2/libstdc++.sum.sep \
+    normal3/libstdc++.sum.sep > libstdc++.sum; \
+  /bin/sh ../../../../gcc-4.6.1/libstdc++-v3/testsuite/../../contrib/dg-extract-results.sh -L \
+    libstdc++.log.sep normal0/libstdc++.log.sep \
+    normal1/libstdc++.log.sep normal2/libstdc++.log.sep \
+    normal3/libstdc++.log.sep > libstdc++.log; \
+  exit 0; \
+fi; \
+srcdir=`CDPATH="${ZSH_VERSION+.}:" && cd ../../../../gcc-4.6.1/libstdc++-v3/testsuite && pwd`; export srcdir; \
+EXPECT=expect; export EXPECT; \
+runtest=runtest; \
+if [ -z "$runtest" ]; then runtest=runtest; fi; \
+tool=libstdc++; \
+dirs=; \
+case "" in \
+  normal0) \
+    if /bin/sh -c "$runtest --version" > /dev/null 2>&1; then \
+      $runtest  --tool $tool --srcdir $srcdir \
+		 abi.exp; \
+    else echo "WARNING: could not find \`runtest'" 1>&2; :;\
+    fi; \
+    dirs="`cd $srcdir; echo [013-9][0-9]_*/* [ab]* de* [ep]*/*`";; \
+  normal1) \
+    dirs="`cd $srcdir; echo 2[0-2]_*/*`";; \
+  normal2) \
+    dirs="`cd $srcdir; echo 2[4-9]_*/*`";; \
+  normal3) \
+    dirs="`cd $srcdir; echo 23_*/* t*/*`";; \
+esac; \
+if [ -n "" ]; then cd ""; fi; \
+if /bin/sh -c "$runtest --version" > /dev/null 2>&1; then \
+  if [ -n "$dirs" ]; then \
+    $runtest  --tool $tool --srcdir $srcdir \
+	     \
+	    "conformance.exp=`echo $dirs | sed 's/ /* /g;s/$/*/'`"; \
+  else \
+    $runtest  --tool $tool --srcdir $srcdir \
+	    ; \
+  fi; \
+else echo "WARNING: could not find \`runtest'" 1>&2; :;\
+fi
+WARNING: Couldn't find the global config file.
+Test Run By root on Thu Oct 13 17:59:32 2011
+Native configuration is x86_64-unknown-linux-gnu
+
+		=== libstdc++ tests ===
+
+Schedule of variations:
+    unix
+
+Running target unix
+Using /tools/share/dejagnu/baseboards/unix.exp as board description file for target.
+Using /tools/share/dejagnu/config/unix.exp as generic interface file for target.
+Using /sources/gcc-4.6.1/libstdc++-v3/testsuite/config/default.exp as tool-and-target-specific interface file.
+Running /sources/gcc-4.6.1/libstdc++-v3/testsuite/libstdc++-abi/abi.exp ...
+Running /sources/gcc-4.6.1/libstdc++-v3/testsuite/libstdc++-dg/conformance.exp ...
+
+		=== libstdc++ Summary ===
+
+# of expected passes		8283
+# of expected failures		84
+# of unsupported tests		115
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/testsuite'
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/testsuite'
+Making check in python
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/python'
+make[4]: Nothing to be done for `check'.
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/python'
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3'
+true "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CC_FOR_TARGET=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000  " "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "includedir=/usr/include" "prefix=/usr" "tooldir=/usr/x86_64-unknown-linux-gnu" "gxx_include_dir=/usr/include/c++/4.6.1" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "LD=/sources/gcc-build/./gcc/collect-ld" "RANLIB=ranlib" "NM=/sources/gcc-build/./gcc/nm" "NM_FOR_BUILD=" "NM_FOR_TARGET=nm" "DESTDIR=" "WERROR=" DO=all multi-do # make
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3'
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3'
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap'
+Making check in testsuite
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap/testsuite'
+make  check-DEJAGNU
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap/testsuite'
+Making a new site.exp file...
+srcdir=`CDPATH="${ZSH_VERSION+.}:" && cd ../../../../gcc-4.6.1/libmudflap/testsuite && pwd`; export srcdir; \
+EXPECT=`if [ -f ../../expect/expect ] ; then echo ../../expect/expect ; else echo expect ; fi`; export EXPECT; \
+runtest=`if [ -f ../../../../gcc-4.6.1/libmudflap/testsuite/../../dejagnu/runtest ] ; then echo ../../../../gcc-4.6.1/libmudflap/testsuite/../../dejagnu/runtest ; else echo runtest ;  fi`; \
+if /bin/sh -c "$runtest --version" > /dev/null 2>&1; then \
+  exit_status=0; l='libmudflap'; for tool in $l; do \
+    if $runtest  --tool $tool --srcdir $srcdir ; \
+    then :; else exit_status=1; fi; \
+  done; \
+else echo "WARNING: could not find \`runtest'" 1>&2; :;\
+fi; \
+exit $exit_status
+WARNING: Couldn't find the global config file.
+Test Run By root on Thu Oct 13 18:24:45 2011
+Native configuration is x86_64-unknown-linux-gnu
+
+		=== libmudflap tests ===
+
+Schedule of variations:
+    unix
+
+Running target unix
+Using /tools/share/dejagnu/baseboards/unix.exp as board description file for target.
+Using /tools/share/dejagnu/config/unix.exp as generic interface file for target.
+Using /sources/gcc-4.6.1/libmudflap/testsuite/config/default.exp as tool-and-target-specific interface file.
+Running /sources/gcc-4.6.1/libmudflap/testsuite/libmudflap.c/cfrags.exp ...
+FAIL: libmudflap.c/pass49-frag.c execution test
+FAIL: libmudflap.c/pass49-frag.c output pattern test
+FAIL: libmudflap.c/pass49-frag.c execution test
+FAIL: libmudflap.c/pass49-frag.c output pattern test
+FAIL: libmudflap.c/pass49-frag.c (-O2) execution test
+FAIL: libmudflap.c/pass49-frag.c (-O2) output pattern test
+FAIL: libmudflap.c/pass49-frag.c (-O2) execution test
+FAIL: libmudflap.c/pass49-frag.c (-O2) output pattern test
+FAIL: libmudflap.c/pass49-frag.c (-O3) execution test
+FAIL: libmudflap.c/pass49-frag.c (-O3) output pattern test
+FAIL: libmudflap.c/pass49-frag.c (-O3) execution test
+FAIL: libmudflap.c/pass49-frag.c (-O3) output pattern test
+Running /sources/gcc-4.6.1/libmudflap/testsuite/libmudflap.c/externs.exp ...
+Running /sources/gcc-4.6.1/libmudflap/testsuite/libmudflap.c++/c++frags.exp ...
+Running /sources/gcc-4.6.1/libmudflap/testsuite/libmudflap.c++/ctors.exp ...
+Running /sources/gcc-4.6.1/libmudflap/testsuite/libmudflap.cth/cthfrags.exp ...
+
+		=== libmudflap Summary ===
+
+# of expected passes		1415
+# of unexpected failures	12
+make[5]: *** [check-DEJAGNU] Error 1
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap/testsuite'
+make[4]: *** [check-am] Error 2
+make[4]: Target `check' not remade because of errors.
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap/testsuite'
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap'
+true "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "JC1FLAGS=" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000  " "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "prefix=/usr" "includedir=/usr/include" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "CC=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "CXX=/sources/gcc-build/./gcc/g++ -B/sources/gcc-build/./gcc/ -nostdinc++ -nostdinc++ -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include/x86_64-unknown-linux-gnu -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include -I/sources/gcc-4.6.1/libstdc++-v3/libsupc++ -I/sources/gcc-4.6.1/libstdc++-v3/include/backward -I/sources/gcc-4.6.1/libstdc++-v3/testsuite/util -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src/.libs -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "LD=/sources/gcc-build/./gcc/collect-ld" "LIBCFLAGS=-g -O2" "NM=/sources/gcc-build/./gcc/nm" "PICFLAG=" "RANLIB=ranlib" "DESTDIR=" DO=all multi-do # make
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap'
+make[3]: *** [check-recursive] Error 1
+make[3]: Target `check' not remade because of errors.
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libmudflap'
+make[2]: *** [check-target-libmudflap] Error 2
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libssp'
+true "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "JC1FLAGS=" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000 " "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "prefix=/usr" "includedir=/usr/include" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "CC=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "CXX=/sources/gcc-build/./gcc/g++ -B/sources/gcc-build/./gcc/ -nostdinc++ -nostdinc++ -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include/x86_64-unknown-linux-gnu -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include -I/sources/gcc-4.6.1/libstdc++-v3/libsupc++ -I/sources/gcc-4.6.1/libstdc++-v3/include/backward -I/sources/gcc-4.6.1/libstdc++-v3/testsuite/util -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src/.libs -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "LD=/sources/gcc-build/./gcc/collect-ld" "LIBCFLAGS=-g -O2" "NM=/sources/gcc-build/./gcc/nm" "PICFLAG=" "RANLIB=ranlib" "DESTDIR=" DO=all multi-do # make
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libssp'
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libquadmath'
+true "AR_FLAGS=rc" "CC_FOR_BUILD=gcc" "CFLAGS=-g -O2" "CXXFLAGS=-g -O2 -D_GNU_SOURCE" "CFLAGS_FOR_BUILD=-g -O2" "CFLAGS_FOR_TARGET=-g -O2" "INSTALL=/tools/bin/install -c" "INSTALL_DATA=/tools/bin/install -c -m 644" "INSTALL_PROGRAM=/tools/bin/install -c" "INSTALL_SCRIPT=/tools/bin/install -c" "JC1FLAGS=" "LDFLAGS=" "LIBCFLAGS=-g -O2" "LIBCFLAGS_FOR_TARGET=-g -O2" "MAKE=make" "MAKEINFO=makeinfo --split-size=5000000 --split-size=5000000 -I ../../../gcc-4.6.1/libquadmath/../gcc/doc/include" "PICFLAG=" "PICFLAG_FOR_TARGET=" "SHELL=/bin/sh" "RUNTESTFLAGS=" "exec_prefix=/usr" "infodir=/usr/share/info" "libdir=/usr/lib" "prefix=/usr" "includedir=/usr/include" "AR=ar" "AS=/sources/gcc-build/./gcc/as" "CC=/sources/gcc-build/./gcc/xgcc -B/sources/gcc-build/./gcc/ -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "CXX=/sources/gcc-build/./gcc/g++ -B/sources/gcc-build/./gcc/ -nostdinc++ -nostdinc++ -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include/x86_64-unknown-linux-gnu -I/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/include -I/sources/gcc-4.6.1/libstdc++-v3/libsupc++ -I/sources/gcc-4.6.1/libstdc++-v3/include/backward -I/sources/gcc-4.6.1/libstdc++-v3/testsuite/util -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src -L/sources/gcc-build/x86_64-unknown-linux-gnu/libstdc++-v3/src/.libs -B/usr/x86_64-unknown-linux-gnu/bin/ -B/usr/x86_64-unknown-linux-gnu/lib/ -isystem /usr/x86_64-unknown-linux-gnu/include -isystem /usr/x86_64-unknown-linux-gnu/sys-include   " "LD=/sources/gcc-build/./gcc/collect-ld" "LIBCFLAGS=-g -O2" "NM=/sources/gcc-build/./gcc/nm" "PICFLAG=" "RANLIB=ranlib" "DESTDIR=" DO=all multi-do # make
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libquadmath'
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libiberty'
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libiberty/testsuite'
+make[4]: Nothing to be done for `check'.
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libiberty/testsuite'
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libiberty'
+make[3]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp'
+Making check in testsuite
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp/testsuite'
+make  check-DEJAGNU
+make[5]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp/testsuite'
+Making a new site.exp file...
+srcdir=`CDPATH="${ZSH_VERSION+.}:" && cd ../../../../gcc-4.6.1/libgomp/testsuite && pwd`; export srcdir; \
+EXPECT=expect; export EXPECT; \
+runtest=runtest; \
+if /bin/sh -c "$runtest --version" > /dev/null 2>&1; then \
+  exit_status=0; l='libgomp'; for tool in $l; do \
+    if $runtest  --tool $tool --srcdir $srcdir ; \
+    then :; else exit_status=1; fi; \
+  done; \
+else echo "WARNING: could not find \`runtest'" 1>&2; :;\
+fi; \
+exit $exit_status
+WARNING: Couldn't find the global config file.
+Test Run By root on Thu Oct 13 18:26:33 2011
+Native configuration is x86_64-unknown-linux-gnu
+
+		=== libgomp tests ===
+
+Schedule of variations:
+    unix
+
+Running target unix
+Using /tools/share/dejagnu/baseboards/unix.exp as board description file for target.
+Using /tools/share/dejagnu/config/unix.exp as generic interface file for target.
+Using /sources/gcc-4.6.1/libgomp/testsuite/config/default.exp as tool-and-target-specific interface file.
+Running /sources/gcc-4.6.1/libgomp/testsuite/libgomp.c/c.exp ...
+Running /sources/gcc-4.6.1/libgomp/testsuite/libgomp.c++/c++.exp ...
+Running /sources/gcc-4.6.1/libgomp/testsuite/libgomp.fortran/fortran.exp ...
+No libgfortran library found, will not execute fortran tests
+Running /sources/gcc-4.6.1/libgomp/testsuite/libgomp.graphite/graphite.exp ...
+
+		=== libgomp Summary ===
+
+# of expected passes		1063
+make[5]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp/testsuite'
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp/testsuite'
+make[4]: Entering directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp'
+true  DO=all multi-do # make
+make[4]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp'
+make[3]: Leaving directory `/sources/gcc-build/x86_64-unknown-linux-gnu/libgomp'
+make[2]: Target `check-target' not remade because of errors.
+make[2]: Leaving directory `/sources/gcc-build'
+make[1]: *** [do-check] Error 2
+make[1]: Target `check' not remade because of errors.
+make[1]: Leaving directory `/sources/gcc-build'
+cat <<'EOF' |
+LAST_UPDATED: Obtained from SVN: tags/gcc_4_6_1_release revision 175473
+
+Native configuration is x86_64-unknown-linux-gnu
+
+		=== g++ tests ===
+
+
+Running target unix
+
+		=== g++ Summary ===
+
+# of expected passes		27485
+# of expected failures		164
+# of unsupported tests		341
+/sources/gcc-build/gcc/testsuite/g++/../../g++  version 4.6.1 (GCC) 
+
+		=== gcc tests ===
+
+
+Running target unix
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O0  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O0  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O1  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O1  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O3 -fomit-frame-pointer  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O3 -fomit-frame-pointer  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O3 -g  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O3 -g  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -Os  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -Os  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2 -flto -flto-partition=none  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2 -flto -flto-partition=none  (test for excess errors)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2 -flto  (internal compiler error)
+FAIL: gcc.c-torture/compile/limits-exprparen.c  -O2 -flto  (test for excess errors)
+
+		=== gcc Summary ===
+
+# of expected passes		77471
+# of unexpected failures	16
+# of expected failures		212
+# of unsupported tests		1069
+/sources/gcc-build/gcc/xgcc  version 4.6.1 (GCC) 
+
+		=== libgomp tests ===
+
+
+Running target unix
+
+		=== libgomp Summary ===
+
+# of expected passes		1063
+		=== libmudflap tests ===
+
+
+Running target unix
+FAIL: libmudflap.c/pass49-frag.c execution test
+FAIL: libmudflap.c/pass49-frag.c output pattern test
+FAIL: libmudflap.c/pass49-frag.c execution test
+FAIL: libmudflap.c/pass49-frag.c output pattern test
+FAIL: libmudflap.c/pass49-frag.c (-O2) execution test
+FAIL: libmudflap.c/pass49-frag.c (-O2) output pattern test
+FAIL: libmudflap.c/pass49-frag.c (-O2) execution test
+FAIL: libmudflap.c/pass49-frag.c (-O2) output pattern test
+FAIL: libmudflap.c/pass49-frag.c (-O3) execution test
+FAIL: libmudflap.c/pass49-frag.c (-O3) output pattern test
+FAIL: libmudflap.c/pass49-frag.c (-O3) execution test
+FAIL: libmudflap.c/pass49-frag.c (-O3) output pattern test
+
+		=== libmudflap Summary ===
+
+# of expected passes		1415
+# of unexpected failures	12
+		=== libstdc++ tests ===
+
+
+Running target unix
+
+		=== libstdc++ Summary ===
+
+# of expected passes		8283
+# of expected failures		84
+# of unsupported tests		115
+
+Compiler version: 4.6.1 (GCC) 
+Platform: x86_64-unknown-linux-gnu
+configure flags: --prefix=/usr --libexecdir=/usr/lib --enable-shared --enable-threads=posix --enable-__cxa_atexit --enable-clocale=gnu --enable-languages=c,c++ --disable-multilib --disable-bootstrap --with-system-zlib
+EOF
+Mail -s "Results for 4.6.1 (GCC) testsuite on x86_64-unknown-linux-gnu" gcc-testresults@gcc.gnu.org &&
+mv /sources/gcc-build/./gcc/testsuite/g++/g++.sum /sources/gcc-build/./gcc/testsuite/g++/g++.sum.sent &&
+mv /sources/gcc-build/./gcc/testsuite/gcc/gcc.sum /sources/gcc-build/./gcc/testsuite/gcc/gcc.sum.sent &&
+mv /sources/gcc-build/./x86_64-unknown-linux-gnu/libgomp/testsuite/libgomp.sum /sources/gcc-build/./x86_64-unknown-linux-gnu/libgomp/testsuite/libgomp.sum.sent &&
+mv /sources/gcc-build/./x86_64-unknown-linux-gnu/libmudflap/testsuite/libmudflap.sum /sources/gcc-build/./x86_64-unknown-linux-gnu/libmudflap/testsuite/libmudflap.sum.sent &&
+mv /sources/gcc-build/./x86_64-unknown-linux-gnu/libstdc++-v3/testsuite/libstdc++.sum /sources/gcc-build/./x86_64-unknown-linux-gnu/libstdc++-v3/testsuite/libstdc++.sum.sent &&
+mv /sources/gcc-build/./gcc/testsuite/g++/g++.log /sources/gcc-build/./gcc/testsuite/g++/g++.log.sent &&
+mv /sources/gcc-build/./gcc/testsuite/gcc/gcc.log /sources/gcc-build/./gcc/testsuite/gcc/gcc.log.sent &&
+mv /sources/gcc-build/./x86_64-unknown-linux-gnu/libgomp/testsuite/libgomp.log /sources/gcc-build/./x86_64-unknown-linux-gnu/libgomp/testsuite/libgomp.log.sent &&
+mv /sources/gcc-build/./x86_64-unknown-linux-gnu/libmudflap/testsuite/libmudflap.log /sources/gcc-build/./x86_64-unknown-linux-gnu/libmudflap/testsuite/libmudflap.log.sent &&
+mv /sources/gcc-build/./x86_64-unknown-linux-gnu/libstdc++-v3/testsuite/libstdc++.log /sources/gcc-build/./x86_64-unknown-linux-gnu/libstdc++-v3/testsuite/libstdc++.log.sent &&
+true

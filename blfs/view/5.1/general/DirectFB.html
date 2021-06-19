@@ -1,0 +1,420 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      DirectFB-0.9.20
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;9.&nbsp;Graphics and Font Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="SVGAlib.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="imlib2.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          DirectFB-0.9.20
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to DirectFB
+          </h3>
+        </div>
+        <p>
+          <span class="application">DirectFB</span> is a graphics library on
+          top of the Linux frame buffer device. It offers maximum hardware
+          accelerated performance at a minimum of resource usage and
+          overhead.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687924" name="id2687924"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.directfb.org/download/DirectFB/DirectFB-0.9.20.tar.gz">
+                  http://www.directfb.org/download/DirectFB/DirectFB-0.9.20.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 13 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.65 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2688528" name="id2688528"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Optional image and video providers: <a href=
+                  "http://www.directfb.org/download/DirectFB-extra/DirectFB-extra-0.9.16.tar.gz">
+                  http://www.directfb.org/download/DirectFB-extra/DirectFB-extra-0.9.16.tar.gz</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2688545" name="id2688545"></a><span class=
+                  "application">DirectFB</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2688555" name="id2688555"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="freetype2.html">FreeType-2.1.7</a>, <a href=
+              "graphlib.html#libjpeg">libjpeg-6b</a> and <a href=
+              "libpng.html">libpng-1.2.5</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2688577" name="id2688577"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../multimedia/sdl.html">SDL-1.2.7</a>, <a href=
+              "../multimedia/libmpeg3.html">libmpeg3-1.5.4</a> <a href=
+              "pkgconfig.html">pkgconfig-0.15.0</a>, <a href=
+              "imlib2.html">Imlib2-1.1.0</a>, <a href=
+              "../multimedia/openquicktime.html">OpenQuicktime-1.0</a> and
+              <a href="../multimedia/avifile.html">Avifile-0.7.38</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of DirectFB
+          </h3>
+        </div>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              DirectFB needs a Linux kernel with frame buffer support. Check
+              the documentation in the kernel tree (<tt class=
+              "filename">/usr/src/linux/Documentation/fb/</tt>) on how to
+              enable the frame buffer device for your graphics card.
+            </p>
+          </div>
+        </div>
+        <p>
+          Install <span class="application">DirectFB</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <p>
+          If you decided to add any optional image and video providers, then
+          you have to install the DirectFB-extra package too:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The current version of avifile does not work with DirectFB. You
+              have to use the avifile version which can be found at <a href=
+              "http://www.directfb.org/download/contrib/">http://www.directfb.org/download/contrib/</a>
+              or alternatively disable the avifile video provider by calling
+              configure with <span><b class=
+              "command">--disable-avifile</b></span>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring DirectFB
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2688777" name="id2688777"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/directfbrc</tt>, <tt class=
+            "filename">~/.directfbrc</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2688798" name="id2688798"></a>Configuration
+                  information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            DirectFB is shipped with reasonable defaults but you might have
+            to tweak things. There are several ways to do this. You may edit
+            the system-wide configuration file <tt class=
+            "filename">/etc/directfbrc</tt>, the user-specific <tt class=
+            "filename">~/.directfbrc</tt> or you may configure the DirectFB
+            application via the command-line. Consult the directfbrc(5)
+            manual page for details.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The DirectFB package provides <span><b class=
+          "command">dfbdump</b></span>, <span><b class=
+          "command">dfbg</b></span>, <span><b class=
+          "command">dfbinfo</b></span>, <span><b class=
+          "command">dfblayer</b></span>, <span><b class=
+          "command">directfb-config</b></span>, <span><b class=
+          "command">directfb-csource</b></span> and <tt class=
+          "filename">libdirectfb</tt> libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2688944" name="id2688944"></a>dfbdump
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This is a simple debugging tool for DirectFB that shows a list of
+            surfaces and windows.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2688953" name="id2688953"></a>dfbg
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">dfbg</b></span> is a background
+            configuration tool.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2689175" name="id2689175"></a>dfbinfo
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This tool enumerates input devices.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2689183" name="id2689183"></a>dfblayer
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">dfblayer</b></span> is a display layer
+            configuration tool.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2689196" name="id2689196"></a>directfb-config
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">directfb-config</b></span> provides all
+            flags to link static binaries with selectable drivers and other
+            modules built in.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2689210" name="id2689210"></a>directfb-csource
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This is a C code generation utility for DirectFB surfaces.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2689219" name="id2689219"></a>libdirectfb
+                  libraries
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            They provide hardware graphics acceleration, input device
+            handling and abstraction, integrated windowing system with
+            support for translucent windows and multiple display layers on
+            top of the Linux frame buffer device.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="SVGAlib.html">Prev</a><br />
+        SVGAlib-1.4.3
+      </div>
+      <div class="next">
+        <a accesskey="n" href="imlib2.html">Next</a><br />
+        Imlib2-1.1.0
+      </div>
+      <div class="up">
+        <a accesskey="u" href="graphlib.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

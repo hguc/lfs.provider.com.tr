@@ -1,0 +1,798 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;26.&nbsp;X Libraries
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Part&nbsp;VII.&nbsp;X + Window Managers
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="xconfig.html" title=
+          "Additional X Window System Configuration">Prev</a>
+          <p>
+            Additional X Window System Configuration
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="GTK.html" title="GTK+-1.2.10">Next</a>
+          <p>
+            GTK+-1.2.10
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="x.html" title=
+          "Part&nbsp;VII.&nbsp;X + Window Managers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="x-lib" name="x-lib"></a>
+        <h1 class="chapter">
+          X Libraries
+        </h1>
+      </div>
+      <p>
+        This chapter does not contain libraries that are required to run
+        <span class="application">X</span>. It does contain libraries that
+        enhance <span class="application">X</span>. In some cases the
+        enhancement is as simple as font support. In others it is as complex
+        as libraries that sit between <span class="application">X</span> and
+        applications that run on <span class="application">X</span> whose
+        purpose is to standardize the look and feel and inter-process
+        communications for different applications. They also assist
+        programmers by supplying common elements.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="qt" name="qt"></a>
+          <h1 class="sect1">
+            Qt-3.3.7
+          </h1>
+        </div>
+        <div class="package" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to Qt
+            </h2>
+          </div>
+          <p>
+            The <span class="application">Qt</span> package contains a
+            <span class="application">C++</span> GUI library. This is useful
+            for creating graphical applications or executing graphical
+            applications that are dynamically linked to the <span class=
+            "application">Qt</span> library. One of the major users of
+            <span class="application">Qt</span> is <span class=
+            "application">KDE</span>.
+          </p>
+          <h3>
+            <a id="id2718291" name="id2718291"></a>Package Information
+          </h3>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.silug.org/mirrors/ftp.trolltech.com/qt/source/qt-x11-free-3.3.7.tar.bz2">
+                  <span class=
+                  "url">http://ftp.silug.org/mirrors/ftp.trolltech.com/qt/source/qt-x11-free-3.3.7.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.trolltech.com/qt/source/qt-x11-free-3.3.7.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.trolltech.com/qt/source/qt-x11-free-3.3.7.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 655e21cf6a7e66daf8ec6ceda81aae1e
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 13.9 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 170 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 11.3 SBU (full), 7.5 SBU (sub-tools)
+                </p>
+              </li>
+            </ul>
+          </div>
+          <h3>
+            <a id="id2676780" name="id2676780"></a>Additional Downloads
+          </h3>
+          <h3>
+            <a id="id2757866" name="id2757866"></a>Qt Dependencies
+          </h3>
+          <h4>
+            <a id="id2829065" name="id2829065"></a>Required
+          </h4>
+          <p class="required">
+            <a href="installing.html">X Window System</a>
+          </p>
+          <h4>
+            <a id="id2592609" name="id2592609"></a>Recommended
+          </h4>
+          <p class="recommended">
+            <a href="../general/graphlib.html#libjpeg">libjpeg-6b</a> and
+            <a href="../general/libmng.html">libmng-1.0.9</a>
+          </p>
+          <p>
+            Note: if for whatever reason you do not have the recommended
+            libraries installed on your system, you must remove the
+            corresponding <em class="parameter"><tt>-system-<em class=
+            "replaceable"><tt>&lt;library&gt;</tt></em></tt></em> and
+            <em class="parameter"><tt>-plugin-imgfmt-<em class=
+            "replaceable"><tt>&lt;library&gt;</tt></em></tt></em> parameters
+            from the <span><strong class="command">configure</strong></span>
+            commands shown in the instructions below.
+          </p>
+          <h4>
+            <a id="id2730663" name="id2730663"></a>Optional
+          </h4>
+          <p class="optional">
+            <a href="../multimedia/nas.html">NAS-1.7</a>, <a href=
+            "../pst/printing.html#cups">CUPS-1.2.7</a>, <a href=
+            "../server/mysql.html">MySQL-5.0.21</a>, <a href=
+            "../server/postgresql.html">PostgreSQL-8.1.3</a>, <a href=
+            "../general/unixodbc.html">unixODBC-2.2.11</a>, <a href=
+            "http://sqlite.org/"><span class="url">SQLite</span></a> and
+            <a href="http://firebird.sourceforge.net/"><span class=
+            "url">Firebird</span></a>
+          </p>
+          <p class="usernotes">
+            User Notes: <a href=
+            "http://wiki.linuxfromscratch.org/blfs/wiki/qt"><span class=
+            "url">http://wiki.linuxfromscratch.org/blfs/wiki/qt</span></a>
+          </p>
+        </div>
+        <div class="installation" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of Qt
+            </h2>
+          </div>
+          <p>
+            The <span class="application">Qt</span> source hard codes the
+            location of the <span class="application">X Window System</span>
+            installtion to <tt class="filename">/usr/X11R6</tt>. If you've
+            installed the <span class="application">X Window System</span> in
+            any prefix other than <tt class="filename">/usr/X11R6</tt>, then
+            you should correct the <span class="application">qmake</span>
+            configuration files with the following commands, replacing
+            <em class="replaceable"><tt>&lt;PREFIX&gt;</tt></em> with the
+            installation prefix of the <span class="application">X Window
+            System</span>:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">for file in $(grep -lr "X11R6" *)
+do
+    sed -i "s@/usr/X11R6@<em class=
+"replaceable"><tt>&lt;PREFIX&gt;</tt></em>@g" $file
+done</kbd></pre>
+          <p>
+            There are several ways to install a complicated package such as
+            <span class="application">Qt</span>. The files are not completely
+            position independent. Installation procedures execute the program
+            <span><strong class="command">pkg-config</strong></span> to
+            determine the location of package executables, libraries,
+            headers, and other files. For <span class=
+            "application">Qt</span>, <span><strong class=
+            "command">pkg-config</strong></span> will look for the file
+            <tt class="filename">lib/pkgconfig/qt-mt.pc</tt> which must be
+            modified if relocating the package. This file is set up correctly
+            by the build process.
+          </p>
+          <p>
+            The default installation places the files in <tt class=
+            "filename">/usr/local/qt/</tt>. Many commercial distributions
+            place the files in the system's <tt class="filename">/usr</tt>
+            hierarchy. The package can also be installed in an arbitrary
+            directory.
+          </p>
+          <p>
+            This section will demonstrate two different methods.
+          </p>
+          <div class="warning">
+            <div class="admonhead">
+              <img alt="[Warning]" src="../images/warning.png" />
+              <h3 class="admontitle">
+                Warning
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                Building <span class="application">Qt</span> in a
+                <span><strong class="command">chroot</strong></span>
+                environment may fail.
+              </p>
+            </div>
+          </div>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                The build time for <span class="application">Qt</span> is
+                quite long. If you want to save some time and don't want the
+                tutorials and examples, change the first <span><strong class=
+                "command">make</strong></span> command to:
+              </p>
+              <pre class="userinput"><kbd class=
+              "command">make sub-tools</kbd></pre>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2767456" name="id2767456"></a>Method 1 -
+                    Installing in the '/usr' Hierarchy
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The advantage of this method is that no updates to the
+              <tt class="filename">/etc/ld.so.conf</tt> or <tt class=
+              "filename">/etc/man_db.conf</tt> files are required. The
+              package files are distributed within several subdirectories of
+              the <tt class="filename">/usr</tt> hierarchy. This is the
+              method that most commercial distributions use.
+            </p>
+            <div class="note">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="admontitle">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  If <span class="application">Qt</span> is being
+                  reinstalled, run the following commands from a console or
+                  non-Qt based window manager. It overwrites <span class=
+                  "application">Qt</span> libraries that should not be in use
+                  during the install process.
+                </p>
+              </div>
+            </div>
+            <pre class="userinput"><kbd class=
+            "command">sed -i -e 's:$(QTDIR)/include:&amp;/qt:' \
+       -e 's:$(QTDIR)/lib:&amp;/qt:' \
+    mkspecs/linux*/qmake.conf &amp;&amp;
+
+bash
+export PATH=$PWD/bin:$PATH &amp;&amp;
+export LD_LIBRARY_PATH=$PWD/lib:$LD_LIBRARY_PATH &amp;&amp;
+
+./configure -prefix /usr \
+            -docdir /usr/share/doc/qt \
+            -headerdir /usr/include/qt \
+            -plugindir /usr/lib/qt/plugins \
+            -datadir /usr/share/qt \
+            -translationdir /usr/share/qt/translations \
+            -sysconfdir /etc/qt \
+            -qt-gif \
+            -system-zlib \
+            -system-libpng \
+            -system-libjpeg \
+            -system-libmng \
+            -plugin-imgfmt-png \
+            -plugin-imgfmt-jpeg \
+            -plugin-imgfmt-mng \
+            -no-exceptions \
+            -thread \
+            -tablet &amp;&amp;
+
+find -type f -name Makefile | xargs sed -i "s@-Wl,-rpath,/usr/lib@@g" &amp;&amp;
+make &amp;&amp;
+exit</kbd></pre>
+            <p>
+              This package does not come with a test suite.
+            </p>
+            <p>
+              Now, as the <tt class="systemitem">root</tt> user:
+            </p>
+            <pre class="root"><kbd class="command">make install &amp;&amp;
+ln -v -sf libqt-mt.so /usr/lib/libqt.so &amp;&amp;
+cp -v -r doc/man /usr/share &amp;&amp;
+cp -v -r examples /usr/share/doc/qt</kbd></pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2621585" name="id2621585"></a>Method 2 -
+                    Installing in '/opt'
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              This is the method recommended by the <span class=
+              "application">Qt</span> developers. It has the advantage of
+              keeping all the package files consolidated in a dedicated
+              directory hierarchy. By using this method, an update can be
+              made without overwriting a previous installation and users can
+              easily revert to a previous version by changing one symbolic
+              link.
+            </p>
+            <p>
+              The <span class="application">Qt</span> developers use a
+              default location of <tt class="filename">/usr/local/qt/</tt>,
+              however this procedure puts the files in <tt class=
+              "filename">/opt/qt-3.3.7/</tt> and then creates a symbolic link
+              to <tt class="filename">/opt/qt/</tt>.
+            </p>
+            <pre class="userinput"><kbd class="command">bash
+export QTDIR=$PWD &amp;&amp;
+export LD_LIBRARY_PATH=$PWD/lib:$LD_LIBRARY_PATH &amp;&amp;
+export PATH=$PWD/bin:$PATH &amp;&amp;
+
+./configure -prefix /opt/qt-3.3.7 \
+            -sysconfdir /etc/qt \
+            -qt-gif \
+            -system-zlib \
+            -system-libpng \
+            -system-libjpeg \
+            -system-libmng \
+            -plugin-imgfmt-png \
+            -plugin-imgfmt-jpeg \
+            -plugin-imgfmt-mng \
+            -no-exceptions \
+            -thread \
+            -tablet &amp;&amp;
+
+make &amp;&amp;
+exit</kbd></pre>
+            <p>
+              This package does not come with a test suite.
+            </p>
+            <p>
+              Now, as the <tt class="systemitem">root</tt> user:
+            </p>
+            <pre class="root"><kbd class="command">make install &amp;&amp;
+ln -v -sfn qt-3.3.7 /opt/qt &amp;&amp;
+ln -v -s libqt-mt.so /opt/qt/lib/libqt.so &amp;&amp;
+cp -v -r doc/man /opt/qt/doc &amp;&amp;
+cp -v -r examples /opt/qt/doc</kbd></pre>
+            <div class="note">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="admontitle">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  If you pass the <tt class="option">-plugin-sql-<em class=
+                  "replaceable"><tt>&lt;driver&gt;</tt></em></tt> switch to
+                  the <span><strong class="command">configure</strong></span>
+                  command, you must also pass <tt class="option">-I<em class=
+                  "replaceable"><tt>&lt;/path/to/sql/headers&gt;</tt></em></tt>
+                  so <span><strong class="command">make</strong></span> can
+                  find the appropriate header files.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="commands" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command Explanations
+            </h2>
+          </div>
+          <p>
+            <span><strong class="command">sed -i -e ...
+            mkspecs/linux*/qmake.conf</strong></span>: Directories in
+            <tt class="filename">qmake.conf</tt> need to be adjusted to match
+            the BLFS Method 1 installation directories.
+          </p>
+          <p>
+            <span><strong class="command">bash</strong></span>: This command
+            enters a sub-shell to isolate environment changes.
+          </p>
+          <p>
+            <span><strong class="command">export QTDIR=$PWD</strong></span>:
+            This command defines where the root of the <span class=
+            "application">Qt</span> directory is located.
+          </p>
+          <p>
+            <span><strong class="command">export
+            LD_LIBRARY_PATH=$PWD/lib:$LD_LIBRARY_PATH</strong></span>: This
+            command allows the not yet installed <span class=
+            "application">Qt</span> libraries to be used by the not yet
+            installed <span class="application">Qt</span> programs.
+          </p>
+          <p>
+            <span><strong class="command">export
+            PATH=$PWD/bin:$PATH</strong></span>: This command allows the
+            build process to find supporting executables.
+          </p>
+          <p>
+            <em class="parameter"><tt>-qt-gif</tt></em>: This switch adds
+            support for <tt class="filename">gif</tt> files to the libraries.
+          </p>
+          <p>
+            <em class="parameter"><tt>-system-zlib -system-libpng
+            -system-libjpeg -system-mng</tt></em>: These switches force the
+            build instructions to use the shared libraries that are on your
+            system instead of creating a custom set of support libraries for
+            these functions.
+          </p>
+          <p>
+            <em class="parameter"><tt>-plugin-imgfmt-png -plugin-imgfmt-jpeg
+            -plugin-imgfmt-mng</tt></em>: These switches enable run-time
+            linking of the referenced libraries.
+          </p>
+          <p>
+            <em class="parameter"><tt>-no-exceptions</tt></em>: This switch
+            disables the exceptions coding generated by the <span class=
+            "application">C++</span> compiler.
+          </p>
+          <p>
+            <em class="parameter"><tt>-thread</tt></em>: This switch adds
+            support for multi-threading.
+          </p>
+          <p>
+            <span><strong class="command">find -type f -name Makefile | xargs
+            sed -i "s@-Wl,-rpath,/usr/lib@@g"</strong></span>: This command
+            removes hardcoded run-time paths. Otherwise, <span><strong class=
+            "command">uic</strong></span> always tries to run with
+            <span class="application">Qt</span> libraries in <tt class=
+            "filename">/usr/lib</tt>.
+          </p>
+          <p>
+            <span><strong class="command">ln -v -s libqt-mt.so
+            /usr/lib/libqt.so</strong></span>: This command allows
+            <span><strong class="command">configure</strong></span> scripts
+            to find a working <span class="application">Qt</span>
+            installation.
+          </p>
+          <p>
+            <span><strong class="command">cp -v -r doc/man /usr/share (or
+            /opt/qt/doc)</strong></span>: This command installs the man pages
+            which are missed by <span><strong class="command">make
+            install</strong></span>.
+          </p>
+          <p>
+            <span><strong class="command">cp -v -r examples /usr/share/doc/qt
+            (or /opt/qt/doc)</strong></span>: This command installs the
+            examples which are missed by <span><strong class="command">make
+            install</strong></span>.
+          </p>
+          <p>
+            <span><strong class="command">exit</strong></span>: This command
+            returns to the parent shell and eliminates environment variables
+            set earlier.
+          </p>
+        </div>
+        <div class="configuration" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Configuring Qt
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="qt-config" name="qt-config"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The <tt class="envar">QTDIR</tt> environment variable needs to
+              be set when building packages that depend on <span class=
+              "application">Qt</span>. Add the following to the <tt class=
+              "filename">.bash_profile</tt> initialization script for each
+              user that builds packages using the <span class=
+              "application">Qt</span> libraries. Alternatively, the variable
+              can be set in the system wide <tt class=
+              "filename">/etc/profile</tt> file.
+            </p>
+            <p>
+              For Method 1 (This is optional, only set this if an application
+              is unable to find the installed libraries):
+            </p>
+            <pre class="screen"><tt class=
+            "literal">export QTDIR=/usr</tt></pre>
+            <p>
+              or for Method 2:
+            </p>
+            <pre class="screen"><tt class=
+            "literal">export QTDIR=/opt/qt</tt></pre>
+            <p>
+              If you installed <span class="application">Qt</span> using
+              Method 2, you also need to update the following configuration
+              files so that <span class="application">Qt</span> is correctly
+              found by other packages and system processes.
+            </p>
+            <p>
+              Update the <tt class="filename">/etc/ld.so.conf</tt> and
+              <tt class="filename">/etc/man_db.conf</tt> files:
+            </p>
+            <pre class="root"><kbd class=
+            "command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF" &amp;&amp;
+<tt class="literal"># Begin qt addition to /etc/ld.so.conf
+
+/opt/qt/lib
+
+# End qt addition</tt>
+EOF
+ldconfig &amp;&amp;
+cat &gt;&gt; /etc/man_db.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin qt addition to man_db.conf
+
+MANDATORY_MANPATH /opt/qt/doc/man
+
+# End qt addition to man_db.conf</tt>
+EOF</kbd></pre>
+            <p>
+              Update the <tt class="envar">PKG_CONFIG_PATH</tt> environment
+              variable in your <tt class="filename">~/.bash_profile</tt> or
+              <tt class="filename">/etc/profile</tt> with the following:
+            </p>
+            <pre class="screen"><tt class=
+            "literal">PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/qt/lib/pkgconfig</tt></pre>
+            <p>
+              If you want the <span class="application">Qt</span> executables
+              in your shell search path, update the <tt class=
+              "envar">PATH</tt> environment variable in your <tt class=
+              "filename">~/.bash_profile</tt> or <tt class=
+              "filename">/etc/profile</tt> to include <tt class=
+              "filename">/opt/qt/bin</tt>.
+            </p>
+            <p>
+              As with most libraries, there is no explicit configuration to
+              do. After updating <tt class="filename">/etc/ld.so.conf</tt> as
+              explained above, run <span><strong class=
+              "command">/sbin/ldconfig</strong></span> so that
+              <span><strong class="command">ldd</strong></span> can find the
+              shared libraries.
+            </p>
+          </div>
+        </div>
+        <div class="content" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <div class="segmentedlist">
+            <div class="seglistitem">
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Programs:</span></strong> <span class="seg">assistant,
+                designer, linguist, lrelease, lupdate, moc, qm2ts, qmake,
+                qtconfig, and uic</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Libraries:</span></strong> <span class="seg">libqt-mt.so,
+                libqt.so libqui.so, libdesignercore.a, libeditor.a, and
+                libqassistantclient.a</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Directories:</span></strong> <span class="seg">/opt/qt-3.3.7
+                or /usr/lib/qt, /usr/share/qt, /usr/share/doc/qt,
+                /usr/include/qt, and /etc/qt</span>
+              </div>
+            </div>
+          </div>
+          <div class="variablelist">
+            <h3>
+              <a id="id2672940" name="id2672940"></a>Short Descriptions
+            </h3>
+            <table border="0">
+              <col align="left" valign="top" />
+              <tbody>
+                <tr>
+                  <td>
+                    <a id="assistant" name="assistant"></a><span class=
+                    "term"><span><strong class=
+                    "command">assistant</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a tool for presenting on-line documentation.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="designer" name="designer"></a><span class=
+                    "term"><span><strong class=
+                    "command">designer</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a full-fledged GUI builder. It includes powerful
+                      features such as preview mode, automatic widget layout,
+                      support for custom widgets, and an advanced property
+                      editor.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="linguist" name="linguist"></a><span class=
+                    "term"><span><strong class=
+                    "command">linguist</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      provides support for translating applications into
+                      local languages.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="lrelease" name="lrelease"></a><span class=
+                    "term"><span><strong class=
+                    "command">lrelease</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a simple command line tool. It reads a Qt project
+                      file and produces message files used by the
+                      application.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="lupdate" name="lupdate"></a><span class=
+                    "term"><span><strong class=
+                    "command">lupdate</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      reads a Qt project file, finds the translatable strings
+                      in the specified source, header and Qt Designer
+                      interface files, and produces or updates the
+                      translation files listed in the project file.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="moc" name="moc"></a><span class=
+                    "term"><span><strong class=
+                    "command">moc</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      generates Qt meta object support code.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="qm2ts" name="qm2ts"></a><span class=
+                    "term"><span><strong class=
+                    "command">qm2ts</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a tool for converting Qt message file formats.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="qmake" name="qmake"></a><span class=
+                    "term"><span><strong class=
+                    "command">qmake</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      qmake uses information stored in project files to
+                      determine what should go in the makefiles it generates.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="qtconfig" name="qtconfig"></a><span class=
+                    "term"><span><strong class=
+                    "command">qtconfig</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is used to customize the appearance of Qt applications.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="uic" name="uic"></a><span class=
+                    "term"><span><strong class=
+                    "command">uic</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a Qt user interface compiler.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-15 18:08:14 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xconfig.html" title=
+          "Additional X Window System Configuration">Prev</a>
+          <p>
+            Additional X Window System Configuration
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="GTK.html" title="GTK+-1.2.10">Next</a>
+          <p>
+            GTK+-1.2.10
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="x.html" title=
+          "Part&nbsp;VII.&nbsp;X + Window Managers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,256 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      libusb-0.1.8
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;8.&nbsp;General Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="libpcap.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="graphlib.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          libusb-0.1.8
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to libusb
+          </h3>
+        </div>
+        <p>
+          The <span class="application">libusb</span> package contains a
+          library used by some applications for <span class=
+          "acronym">USB</span> device access.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2665338" name="id2665338"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/libusb/libusb-0.1.8.tar.gz">
+                  http://prdownloads.sourceforge.net/libusb/libusb-0.1.8.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 314 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 2.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.03 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2666508" name="id2666508"></a><span class=
+                  "application">libusb</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2666473" name="id2666473"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../pst/openjade.html">OpenJade-1.3.2</a> and <a href=
+              "../pst/sgml-dtd-3.html">DocBook SGML DTD-3.1</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of libusb
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">libusb</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --disable-build-docs &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--disable-build-docs</tt></i>: This switch
+          turns off the default enabled building of documentation since it
+          requires <span class="application">OpenJade</span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring libusb
+          </h3>
+        </div>
+        <p>
+          libusb requires the usbfs kernel filesystem to be mounted on
+          <tt class="filename">/proc/bus/usb</tt>. Applications require the
+          files in this directory to be accessible to the user, sometimes for
+          both reading and writing.
+        </p>
+        <p>
+          To restrict access to <span class="acronym">USB</span> devices,
+          create the usb group:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">groupadd -g 15 usb</b></span></tt>
+</pre>
+        <p>
+          To get usbfs mounted on boot, we will create a special init script,
+          because just putting an extra line into <tt class=
+          "filename">/etc/fstab</tt> does not work for those who compiled
+          "USB device filesystem" as a kernel module. Install <tt class=
+          "filename">/etc/rc.d/init.d/usb</tt> init script included in the
+          <a href="../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+          package.
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-usb</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">libusb</span> package contains
+          <tt class="filename">libusb</tt> libraries, the <tt class=
+          "filename">/usr/include/usb.h</tt> header, and a <span><b class=
+          "command">usb-config</b></span> script.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2666642" name="id2666642"></a>libusb libraries
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libusb</tt> libraries contain C functions
+            for accessing <span class="acronym">USB</span> hardware.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2666661" name="id2666661"></a>usb-config
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The <span><b class="command">usb-config</b></span> script
+            provides the right compiler and linker flags for programs using
+            this library.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="libpcap.html">Prev</a><br />
+        libpcap-0.8.3
+      </div>
+      <div class="next">
+        <a accesskey="n" href="graphlib.html">Next</a><br />
+        Chapter&nbsp;9.&nbsp;Graphics and Font Libraries
+      </div>
+      <div class="up">
+        <a accesskey="u" href="genlib.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

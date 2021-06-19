@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Pango-1.4.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;26.&nbsp;X Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="gtk.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="atk.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Pango-1.4.0
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Pango
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Pango</span> package contains the
+          <tt class="filename">libpango</tt> library. This is useful for the
+          layout and rendering of text.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2926203" name="id2926203"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/graphics/gimp/gtk/v2.4/pango-1.4.0.tar.gz">
+                  http://gd.tuwien.ac.at/graphics/gimp/gtk/v2.4/pango-1.4.0.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gtk.org/pub/gtk/v2.4/pango-1.4.0.tar.gz">ftp://ftp.gtk.org/pub/gtk/v2.4/pango-1.4.0.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 22.8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.49 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2926275" name="id2926275"></a><span class=
+                  "application">Pango</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2926273" name="id2926273"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/glib2.html">GLib-2.4.1</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2927763" name="id2927763"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="http://freedesktop.org/~fontconfig/release/">Xft</a>
+              (included in <a href="xfree86.html">XFree86-4.4.0</a> or
+              <a href="installing.html#xorg">X.org-6.7.0</a>), <a href=
+              "../general/freetype2.html">FreeType-2.1.7</a>, <a href=
+              "../general/fontconfig.html">Fontconfig-2.2.2</a> and <a href=
+              "../gnome/gtk-doc.html">GTK-Doc-1.2</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Pango
+          </h3>
+        </div>
+        <p>
+          In order for <span class="application">Pango</span> to find
+          <span class="application">Xft</span>, the <tt class=
+          "envar">PKG_CONFIG_PATH</tt> must include <tt class=
+          "filename">/usr/X11R6/lib/pkgconfig</tt>. This is a good time to
+          add it if you haven't already. You can utilize the example for
+          <tt class="filename">X.sh</tt> to create a script for modifying
+          this variable located in the section <a href=
+          "../postlfs/profile.html">The Bash Shell Startup Files</a>.
+        </p>
+        <p>
+          Install <span class="application">Pango</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc</tt></i>: This switch
+          installs the configuration files into <tt class=
+          "filename">/etc</tt> instead of <tt class="filename">/usr/etc</tt>.
+        </p>
+        <p>
+          <tt class="option">--enable-gtk-doc</tt>: This switch will rebuild
+          the <span class="acronym">API</span> documentation during the
+          <span><b class="command">make</b></span> command.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Pango</span> package contains
+          <tt class="filename">libpango</tt> libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2927404" name="id2927404"></a>Pango libraries
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="application">Pango</span> libraries contain low
+            level layout rendering routines, a high level driver for laying
+            out entire blocks of text, and routines to assist in editing
+            internationalized text.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="gtk.html">Prev</a><br />
+        GTK+-1.2.10
+      </div>
+      <div class="next">
+        <a accesskey="n" href="atk.html">Next</a><br />
+        ATK-1.6.1
+      </div>
+      <div class="up">
+        <a accesskey="u" href="lib.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      libvdpau-va-gl-0.3.4
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.6-systemd">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch (systemd edition) - Version
+        7.6-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;42.&nbsp;Multimedia Libraries and Drivers
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libvdpau.html" title="libvdpau-0.8">Prev</a>
+          <p>
+            libvdpau-0.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libvorbis.html" title=
+          "libvorbis-1.3.4">Next</a>
+          <p>
+            libvorbis-1.3.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="libdriv.html" title=
+          "Chapter&nbsp;42.&nbsp;Multimedia Libraries and Drivers">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.6-systemd">
+          Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="libvdpau-va-gl" name="libvdpau-va-gl"></a>libvdpau-va-gl-0.3.4
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to libvdpau-va-gl
+        </h2>
+        <p>
+          The <span class="application">libvdpau-va-gl</span> package
+          contains the VDPAU driver for hardware that supports VAAPI.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.6
+          systemd platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://github.com/i-rinat/libvdpau-va-gl/archive/v0.3.4.tar.gz">
+                https://github.com/i-rinat/libvdpau-va-gl/archive/v0.3.4.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 09ceb2f75eafccc9b002d35ede0de6a5
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 100 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 4.0 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: less than 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The tarball name for libvdpau-va-gl does not include the package
+            name, although it does expand to libvdpau-va-gl-0.3.4. The file
+            should be renamed after downloading:
+          </p>
+          <pre class="screen">
+<span class=
+"command"><strong>mv v0.3.4.tar.gz libvdpau-va-gl-0.3.4.tar.gz</strong></span>
+</pre>
+        </div>
+        <h3>
+          libvdpau-va-gl Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="../general/cmake.html" title=
+          "CMake-3.0.1">CMake-3.0.1</a>, <a class="xref" href="ffmpeg.html"
+          title="FFmpeg-2.3.3">FFmpeg-2.3.3</a>, <a class="xref" href=
+          "../x/glu.html" title="GLU-9.0.0">GLU-9.0.0</a>, <a class="xref"
+          href="libva.html" title="libva-1.3.1">libva-1.3.1</a>, and
+          <a class="xref" href="libvdpau.html" title=
+          "libvdpau-0.8">libvdpau-0.8</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/libvdpau-va-gl">http://wiki.linuxfromscratch.org/blfs/wiki/libvdpau-va-gl</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of libvdpau-va-gl
+        </h2>
+        <p>
+          Install <span class="application">libvdpau-va-gl</span> by running
+          the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">cmake -DCMAKE_INSTALL_PREFIX=/usr -DCMAKE_BUILD_TYPE=Release &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          To test the results, issue: <span class="command"><strong>make
+          check</strong></span> from an X terminal.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>-DCMAKE_BUILD_TYPE=Release</code></em>:
+          This switch is used to apply higher level of the compiler
+          optimizations.
+        </p>
+      </div>
+      <div class="using" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Using libvdpau-va-gl
+        </h2>
+        <p>
+          To use this driver with VDPAU apps, you need to set the
+          <code class="envar">VDPAU_DRIVER</code> environment variable to
+          <em class="parameter"><code>va_gl</code></em>.
+        </p>
+        <p>
+          You can permanently set the environment variable by expanding the
+          system wide configuration. Run the following command as the
+          <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">cat &gt; /etc/profile.d/libvdpau-va-gl.sh &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/profile.d/libvdpau-va-gl.sh
+
+export VDPAU_DRIVER=va_gl
+
+# End /etc/profile.d/libvdpau-va-gl.sh</code>
+EOF</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed VDPAU Driver:</strong>
+              <span class="segbody">libvdpau_va_gl.so</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libvdpau_va_gl" name=
+                    "libvdpau_va_gl"></a><span class="term"><code class=
+                    "filename">libvdpau_va_gl.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a VDPAU driver for hardware that supports VAAPI.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2014-08-24 06:24:04 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libvdpau.html" title="libvdpau-0.8">Prev</a>
+          <p>
+            libvdpau-0.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libvorbis.html" title=
+          "libvorbis-1.3.4">Next</a>
+          <p>
+            libvorbis-1.3.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="libdriv.html" title=
+          "Chapter&nbsp;42.&nbsp;Multimedia Libraries and Drivers">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.6-systemd">
+          Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

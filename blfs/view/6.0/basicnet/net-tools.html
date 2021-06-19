@@ -1,0 +1,560 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Net-tools-1.60
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;18.&nbsp;Basic Networking Programs
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="ntp.html" title="NTP-4.2.0">Prev</a>
+          <p>
+            NTP-4.2.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="netutils.html" title=
+          "Basic Networking Utilities">Next</a>
+          <p>
+            Basic Networking Utilities
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="net-tools" name="net-tools"></a>
+        <h1 class="sect1">
+          Net-tools-1.60
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Net-tools
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Net-tools</span> package is a
+          collection of programs for controlling the network subsystem of the
+          Linux kernel.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2764733" name="id2764733"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.tazenda.demon.co.uk/phil/net-tools/net-tools-1.60.tar.bz2">
+                  <span class=
+                  "url">http://www.tazenda.demon.co.uk/phil/net-tools/net-tools-1.60.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.ibiblio.org/pub/Linux/distributions/rootlinux/rootlinux-1.3/source/base/net-tools/net-tools-1.60.tar.gz">
+                  <span class=
+                  "url">ftp://ftp.ibiblio.org/pub/Linux/distributions/rootlinux/rootlinux-1.3/source/base/net-tools/net-tools-1.60.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum (HTTP): 888774accab40217dde927e21979c165
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum (FTP): e1e83a4d4cdd72d35bcf90d76a16206f
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 194 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 4.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.10 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2754072" name="id2754072"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required Patch (if compiled using <span class=
+                  "application">GCC</span>-3.4.x): <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/net-tools-1.60-gcc34-3.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/net-tools-1.60-gcc34-3.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/net-tools-1.60-kernel_headers-2.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/net-tools-1.60-kernel_headers-2.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/net-tools-1.60-mii_ioctl-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/net-tools-1.60-mii_ioctl-1.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Net-tools
+          </h2>
+        </div>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The <span class="application">Net-tools</span> package installs
+              a <span><strong class="command">hostname</strong></span>
+              program which will overwrite the existing program installed by
+              <span class="application">Coreutils</span> during a base
+              <span class="acronym">LFS</span> installation. If, for whatever
+              reason, you need to reinstall the <span class=
+              "application">Coreutils</span> package after installing
+              <span class="application">Net-tools</span>, you should use the
+              <tt class=
+              "filename">coreutils-5.2.1-suppress_hostname_uptime_kill_su-1.patch</tt>
+              patch if you wish to preserve the <span class=
+              "application">Net-tools</span> <span><strong class=
+              "command">hostname</strong></span> program.
+            </p>
+          </div>
+        </div>
+        <p>
+          If you don't know what to answer to all the questions asked during
+          the <span><strong class="command">make config</strong></span> phase
+          below, then just accept the defaults (the build command below
+          automates this). This will be just fine in the majority of cases.
+          What you're asked here is a bunch of questions about which network
+          protocols you've enabled in your kernel. The default answers will
+          enable the tools from this package to work with the most common
+          protocols: <span class="acronym">TCP</span>, <span class=
+          "acronym">PPP</span>, and several others. You still need to
+          actually enable these protocols in the kernel&mdash;what you do
+          here is merely telling the package to include support for those
+          protocols in its programs, but it's up to the kernel to make the
+          protocols available.
+        </p>
+        <p>
+          Install <span class="application">Net-tools</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">patch -Np1 -i ../net-tools-1.60-gcc34-3.patch &amp;&amp;
+patch -Np1 -i ../net-tools-1.60-kernel_headers-2.patch &amp;&amp;
+patch -Np1 -i ../net-tools-1.60-mii_ioctl-1.patch &amp;&amp;
+yes "" | make config &amp;&amp;
+sed -i -e 's|HAVE_IP_TOOLS 0|HAVE_IP_TOOLS 1|g' \
+       -e 's|HAVE_MII 0|HAVE_MII 1|g' config.h &amp;&amp;
+sed -i -e 's|# HAVE_IP_TOOLS=0|HAVE_IP_TOOLS=1|g' \
+       -e 's|# HAVE_MII=0|HAVE_MII=1|g' config.make &amp;&amp;
+make &amp;&amp;
+make update</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">yes "" | make config</strong></span>:
+          Piping <span><strong class="command">yes</strong></span> to
+          <span><strong class="command">make config</strong></span> skips the
+          interactive configuration and accepts the defaults.
+        </p>
+        <p>
+          <span><strong class="command">sed -i -e ...</strong></span>: These
+          two <span><strong class="command">sed</strong></span>s change the
+          configuration files to force building the <span><strong class=
+          "command">ipmaddr</strong></span>, <span><strong class=
+          "command">iptunnel</strong></span> and <span><strong class=
+          "command">mii-tool</strong></span> programs.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Net-tools</span> package contains
+          <span><strong class="command">arp</strong></span>,
+          <span><strong class="command">dnsdomainname</strong></span>,
+          <span><strong class="command">domainname</strong></span>,
+          <span><strong class="command">hostname</strong></span>,
+          <span><strong class="command">ifconfig</strong></span>,
+          <span><strong class="command">ipmaddr</strong></span>,
+          <span><strong class="command">iptunnel</strong></span>,
+          <span><strong class="command">mii-tool</strong></span>,
+          <span><strong class="command">nameif</strong></span>,
+          <span><strong class="command">netstat</strong></span>,
+          <span><strong class="command">nisdomainname</strong></span>,
+          <span><strong class="command">plipconfig</strong></span>,
+          <span><strong class="command">rarp</strong></span>,
+          <span><strong class="command">route</strong></span>,
+          <span><strong class="command">slattach</strong></span> and
+          <span><strong class="command">ypdomainname</strong></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2565795" name="id2565795"></a>arp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">arp</strong></span> is used to
+            manipulate the kernel's <span class="acronym">ARP</span> cache,
+            usually to add or delete an entry, or to dump the entire cache.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2552716" name="id2552716"></a>dnsdomainname
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">dnsdomainname</strong></span>
+            reports the system's <span class="acronym">DNS</span> domain
+            name.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2560530" name="id2560530"></a>domainname
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">domainname</strong></span> reports
+            or sets the system's <span class=
+            "acronym">NIS</span>/<span class="acronym">YP</span> domain name.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2655018" name="id2655018"></a>hostname
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">hostname</strong></span> reports or
+            sets the name of the current host system.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2620866" name="id2620866"></a>ifconfig
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">ifconfig</strong></span> is the
+            main utility for configuring network interfaces.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2496622" name="id2496622"></a>ipmaddr
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">ipmaddr</strong></span> adds,
+            deletes and shows an interface's multicast addresses.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2740015" name="id2740015"></a>iptunnel
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">iptunnel</strong></span> adds,
+            changes, deletes and shows an interface's tunnels.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2562580" name="id2562580"></a>mii-tool
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">mii-tool</strong></span> checks or
+            sets the status of a network interface's Media Independent
+            Interface (<span class="acronym">MII</span>) unit.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2573359" name="id2573359"></a>nameif
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">nameif</strong></span> names
+            network interfaces based on <span class="acronym">MAC</span>
+            addresses.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2722344" name="id2722344"></a>netstat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">netstat</strong></span> is used to
+            report network connections, routing tables, and interface
+            statistics.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2614251" name="id2614251"></a>nisdomainname
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">nisdomainname</strong></span> does
+            the same as <span><strong class=
+            "command">domainname</strong></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2624290" name="id2624290"></a>plipconfig
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">plipconfig</strong></span> is used
+            to fine tune the <span class="acronym">PLIP</span> device
+            parameters, to improve its performance.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2584455" name="id2584455"></a>rarp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">rarp</strong></span> is used to
+            manipulate the kernel's <span class="acronym">RARP</span> table.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677599" name="id2677599"></a>route
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">route</strong></span> is used to
+            manipulate the <span class="acronym">IP</span> routing table.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2615569" name="id2615569"></a>slattach
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">slattach</strong></span> attaches a
+            network interface to a serial line. This allows you to use normal
+            terminal lines for point-to-point links to other computers.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2791169" name="id2791169"></a>ypdomainname
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">ypdomainname</strong></span> does
+            the same as <span><strong class=
+            "command">domainname</strong></span>.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-11 08:57:40 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="ntp.html" title="NTP-4.2.0">Prev</a>
+          <p>
+            NTP-4.2.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="netutils.html" title=
+          "Basic Networking Utilities">Next</a>
+          <p>
+            Basic Networking Utilities
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

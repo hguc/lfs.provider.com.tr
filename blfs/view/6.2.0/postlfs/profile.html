@@ -1,0 +1,695 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      The Bash Shell Startup Files
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;3.&nbsp;After LFS Configuration Issues
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="devices.html" title="About Devices">Prev</a>
+          <p>
+            About Devices
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="vimrc.html" title=
+          "The /etc/vimrc and ~/.vimrc Files">Next</a>
+          <p>
+            The /etc/vimrc and ~/.vimrc Files
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="postlfs-config-profile" name="postlfs-config-profile"></a>
+        <h1 class="sect1">
+          The Bash Shell Startup Files
+        </h1>
+      </div>
+      <p>
+        The shell program <tt class="filename">/bin/bash</tt> (hereafter
+        referred to as just "the shell") uses a collection of startup files
+        to help create an environment. Each file has a specific use and may
+        affect login and interactive environments differently. The files in
+        the <tt class="filename">/etc</tt> directory generally provide global
+        settings. If an equivalent file exists in your home directory it may
+        override the global settings.
+      </p>
+      <p>
+        An interactive login shell is started after a successful login, using
+        <tt class="filename">/bin/login</tt>, by reading the <tt class=
+        "filename">/etc/passwd</tt> file. This shell invocation normally
+        reads <tt class="filename">/etc/profile</tt> and its private
+        equivalent <tt class="filename">~/.bash_profile</tt> upon startup.
+      </p>
+      <p>
+        An interactive non-login shell is normally started at the
+        command-line using a shell program (e.g., <tt class=
+        "prompt">[prompt]$</tt><span><strong class=
+        "command">/bin/bash</strong></span>) or by the <span><strong class=
+        "command">/bin/su</strong></span> command. An interactive non-login
+        shell is also started with a terminal program such as
+        <span><strong class="command">xterm</strong></span> or
+        <span><strong class="command">konsole</strong></span> from within a
+        graphical environment. This type of shell invocation normally copies
+        the parent environment and then reads the user's <tt class=
+        "filename">~/.bashrc</tt> file for additional startup configuration
+        instructions.
+      </p>
+      <p>
+        A non-interactive shell is usually present when a shell script is
+        running. It is non-interactive because it is processing a script and
+        not waiting for user input between commands. For these shell
+        invocations, only the environment inherited from the parent shell is
+        used.
+      </p>
+      <p>
+        The file <tt class="filename">~/.bash_logout</tt> is not used for an
+        invocation of the shell. It is read and executed when a user exits
+        from an interactive login shell.
+      </p>
+      <p>
+        Many distributions use <tt class="filename">/etc/bashrc</tt> for
+        system wide initialization of non-login shells. This file is usually
+        called from the user's <tt class="filename">~/.bashrc</tt> file and
+        is not built directly into <span><strong class=
+        "command">bash</strong></span> itself. This convention is followed in
+        this section.
+      </p>
+      <p>
+        For more information see <span><strong class="command">info
+        bash</strong></span> -- <span class="strong"><strong>Nodes: Bash
+        Startup Files and Interactive Shells</strong></span>.
+      </p>
+      <div class="note">
+        <div class="admonhead">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3 class="admontitle">
+            Note
+          </h3>
+        </div>
+        <div class="admonbody">
+          <p>
+            Most of the instructions below are used to create files located
+            in the <tt class="filename">/etc</tt> directory structure which
+            requires you to execute the commands as the <tt class=
+            "systemitem">root</tt> user. If you elect to create the files in
+            user's home directories instead, you should run the commands as
+            an unprivileged user.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="etc-profile-profile" name="etc-profile-profile"></a>
+          <h2 class="sect2">
+            /etc/profile
+          </h2>
+        </div>
+        <p>
+          Here is a base <tt class="filename">/etc/profile</tt>. This file
+          starts by setting up some helper functions and some basic
+          parameters. It specifies some <span><strong class=
+          "command">bash</strong></span> history parameters and, for security
+          purposes, disables keeping a permanent history file for the
+          <tt class="systemitem">root</tt> user. It also sets a default user
+          prompt. It then calls small, single purpose scripts in the
+          <tt class="filename">/etc/profile.d</tt> directory to provide most
+          of the initialization.
+        </p>
+        <p>
+          For more information on the escape sequences you can use for your
+          prompt (i.e., the <tt class="envar">PS1</tt> environment variable)
+          see <span><strong class="command">info bash</strong></span> --
+          <span class="strong"><strong>Node: Printing a
+          Prompt</strong></span>.
+        </p>
+        <pre class="root"><kbd class=
+        "command">cat &gt; /etc/profile &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/profile
+# Written for Beyond Linux From Scratch
+# by James Robertson &lt;jameswrobertson@earthlink.net&gt;
+# modifications by Dagmar d'Surreal &lt;rivyqntzne@pbzpnfg.arg&gt;
+
+# System wide environment variables and startup programs.
+
+# System wide aliases and functions should go in /etc/bashrc.  Personal
+# environment variables and startup programs should go into
+# ~/.bash_profile.  Personal aliases and functions should go into
+# ~/.bashrc.
+
+# Functions to help us manage paths.  Second argument is the name of the
+# path variable to be modified (default: PATH)
+pathremove () {
+        local IFS=':'
+        local NEWPATH
+        local DIR
+        local PATHVARIABLE=${2:-PATH}
+        for DIR in ${!PATHVARIABLE} ; do
+                if [ "$DIR" != "$1" ] ; then
+                  NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
+                fi
+        done
+        export $PATHVARIABLE="$NEWPATH"
+}
+
+pathprepend () {
+        pathremove $1 $2
+        local PATHVARIABLE=${2:-PATH}
+        export $PATHVARIABLE="$1${!PATHVARIABLE:+:${!PATHVARIABLE}}"
+}
+
+pathappend () {
+        pathremove $1 $2
+        local PATHVARIABLE=${2:-PATH}
+        export $PATHVARIABLE="${!PATHVARIABLE:+${!PATHVARIABLE}:}$1"
+}
+
+
+# Set the initial path
+export PATH=/bin:/usr/bin
+
+if [ $EUID -eq 0 ] ; then
+        pathappend /sbin:/usr/sbin
+        unset HISTFILE
+fi
+
+# Setup some environment variables.
+export HISTSIZE=1000
+export HISTIGNORE="&amp;:[bf]g:exit"
+#export PS1="[\u@\h \w]\\$ "
+export PS1='\u@\h:\w\$ '
+
+for script in /etc/profile.d/*.sh ; do
+        if [ -r $script ] ; then
+                . $script
+        fi
+done
+
+# Now to clean up
+unset pathremove pathprepend pathappend
+
+# End /etc/profile</tt>
+EOF</kbd></pre>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="etc-profile.d" name="etc-profile.d"></a>The
+                  /etc/profile.d Directory
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Now create the <tt class="filename">/etc/profile.d</tt>
+            directory, where the individual initialization scripts are
+            placed:
+          </p>
+          <pre class="root"><kbd class=
+          "command">install --directory --mode=0755 --owner=root --group=root /etc/profile.d</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="etc-profile.d-dircolors.sh" name=
+                  "etc-profile.d-dircolors.sh"></a>/etc/profile.d/dircolors.sh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This script uses the <tt class="filename">~/.dircolors</tt> and
+            <tt class="filename">/etc/dircolors</tt> files to control the
+            colors of file names in a directory listing. They control
+            colorized output of things like <span><strong class="command">ls
+            --color</strong></span>. The explanation of how to initialize
+            these files is at the end of this section.
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/profile.d/dircolors.sh &lt;&lt; "EOF"
+<tt class=
+"literal"># Setup for /bin/ls to support color, the alias is in /etc/bashrc.
+if [ -f "/etc/dircolors" ] ; then
+        eval $(dircolors -b /etc/dircolors)
+
+        if [ -f "$HOME/.dircolors" ] ; then
+                eval $(dircolors -b $HOME/.dircolors)
+        fi
+fi
+alias ls='ls --color=auto'</tt>
+EOF</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="extrapaths.sh" name=
+                  "extrapaths.sh"></a>/etc/profile.d/extrapaths.sh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This script adds several useful paths to the <tt class=
+            "envar">PATH</tt> and <tt class="envar">PKG_CONFIG_PATH</tt>
+            environment variables. If you want, you can uncomment the last
+            section to put a dot at the end of your path. This will allow
+            executables in the current working directory to be executed
+            without specifiying a ./, however you are warned that this is
+            generally considered a security hazard.
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/profile.d/extrapaths.sh &lt;&lt; "EOF"
+<tt class="literal">if [ -d /usr/local/lib/pkgconfig ] ; then
+        pathappend /usr/local/lib/pkgconfig PKG_CONFIG_PATH
+fi
+if [ -d /usr/local/bin ]; then
+        pathprepend /usr/local/bin
+fi
+if [ -d /usr/local/sbin -a $EUID -eq 0 ]; then
+        pathprepend /usr/local/sbin
+fi
+for directory in $(find /opt/*/lib/pkgconfig -type d 2&gt;/dev/null); do
+        pathappend $directory PKG_CONFIG_PATH
+done
+for directory in $(find /opt/*/bin -type d 2&gt;/dev/null); do
+        pathappend $directory
+done
+if [ -d ~/bin ]; then
+        pathprepend ~/bin
+fi
+#if [ $EUID -gt 99 ]; then
+#        pathappend .
+#fi</tt>
+EOF</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="readline.sh" name=
+                  "readline.sh"></a>/etc/profile.d/readline.sh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This script sets up the default <tt class="filename">inputrc</tt>
+            configuration file. If the user does not have individual
+            settings, it uses the global file.
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/profile.d/readline.sh &lt;&lt; "EOF"
+<tt class="literal"># Setup the INPUTRC environment variable.
+if [ -z "$INPUTRC" -a ! -f "$HOME/.inputrc" ] ; then
+        INPUTRC=/etc/inputrc
+fi
+export INPUTRC</tt>
+EOF</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="umask.sh" name=
+                  "umask.sh"></a>/etc/profile.d/umask.sh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Setting the <span><strong class="command">umask</strong></span>
+            value is important for security. Here the default group write
+            permissions are turned off for system users and when the user
+            name and group name are not the same.
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/profile.d/umask.sh &lt;&lt; "EOF"
+<tt class="literal"># By default we want the umask to get set.
+if [ "$(id -gn)" = "$(id -un)" -a $EUID -gt 99 ] ; then
+  umask 002
+else
+  umask 022
+fi</tt>
+EOF</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="X.sh" name="X.sh"></a>/etc/profile.d/X.sh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            If <span class="application">X</span> is installed, the
+            <tt class="envar">PATH</tt> and <tt class=
+            "envar">PKG_CONFIG_PATH</tt> variables are also updated.
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/profile.d/X.sh &lt;&lt; "EOF"
+<tt class="literal">if [ -x /usr/X11R6/bin/X ]; then
+        pathappend /usr/X11R6/bin
+fi
+if [ -d /usr/X11R6/lib/pkgconfig ] ; then
+        pathappend /usr/X11R6/lib/pkgconfig PKG_CONFIG_PATH
+fi</tt>
+EOF</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="extra-prompt.sh" name=
+                  "extra-prompt.sh"></a>/etc/profile.d/extra-prompt.sh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This script shows an example of a different way of setting the
+            prompt. The normal variable, <tt class="envar">PS1</tt>, is
+            supplemented by <tt class="envar">PROMPT_COMMAND</tt>. If set,
+            the value of <tt class="envar">PROMPT_COMMAND</tt> is executed as
+            a command prior to issuing each primary prompt. The sequence \e
+            is an ESC character. \a is a BEL character. For a reference on
+            <span><strong class="command">xterm</strong></span> escape
+            sequences, see <a href=
+            "http://rtfm.etla.org/xterm/ctlseq.html"><span class=
+            "url">http://rtfm.etla.org/xterm/ctlseq.html</span></a>.
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/profile.d/extra-prompt.sh &lt;&lt; "EOF"
+<tt class=
+"literal">PROMPT_COMMAND='echo -ne "\e[1m${USER}@${HOSTNAME} : ${PWD}\e[0m\a"'
+export PROMPT_COMMAND</tt>
+EOF</kbd></pre>
+          <p>
+            The escape sequences above are BOLD, NORMAL, and BEL.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="i18n.sh" name="i18n.sh"></a>'/etc/profile.d/i18n.sh'
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This script sets an environment variable necessary for native
+            language support. A full discussion on determining this variable
+            can be found on the <a href=
+            "../../../../lfs/view/6.2/chapter07/profile.html"><span class=
+            "url">LFS Bash Shell Startup Files</span></a> page.
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/profile.d/i18n.sh &lt;&lt; "EOF"
+<tt class="literal"># Set up i18n variables
+export LANG=<em class="replaceable"><tt>&lt;ll&gt;</tt></em>_<em class=
+"replaceable"><tt>&lt;CC&gt;</tt></em>.<em class=
+"replaceable"><tt>&lt;charmap&gt;</tt></em><em class=
+"replaceable"><tt>&lt;@modifiers&gt;</tt></em></tt>
+EOF</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2684346" name="id2684346"></a>Other Initialization
+                  Values
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Other initialization can easily be added to the <tt class=
+            "filename">profile</tt> by adding additional scripts to the
+            <tt class="filename">/etc/profile.d</tt> directory.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="etc-bashrc-profile" name="etc-bashrc-profile"></a>
+          <h2 class="sect2">
+            /etc/bashrc
+          </h2>
+        </div>
+        <p>
+          Here is a base <tt class="filename">/etc/bashrc</tt>. Comments in
+          the file should explain everything you need.
+        </p>
+        <pre class="root"><kbd class=
+        "command">cat &gt; /etc/bashrc &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/bashrc
+# Written for Beyond Linux From Scratch
+# by James Robertson &lt;jameswrobertson@earthlink.net&gt;
+# updated by Bruce Dubbs &lt;bdubbs@linuxfromscratch.org&gt;
+
+# Make sure that the terminal is set up properly for each shell
+
+if [ -f /etc/profile.d/tinker-term.sh ]; then
+  source /etc/profile.d/tinker-term.sh
+fi
+
+# System wide aliases and functions.
+
+# System wide environment variables and startup programs should go into
+# /etc/profile.  Personal environment variables and startup programs
+# should go into ~/.bash_profile.  Personal aliases and functions should
+# go into ~/.bashrc
+
+# Provides a colored /bin/ls command.  Used in conjunction with code in
+# /etc/profile.
+
+alias ls='ls --color=auto'
+
+# Provides prompt for non-login shells, specifically shells started
+# in the X environment. [Review the LFS archive thread titled
+# PS1 Environment Variable for a great case study behind this script
+# addendum.]
+
+#export PS1="[\u@\h \w]\\$ "
+export PS1='\u@\h:\w\$ '
+
+# End /etc/bashrc</tt>
+EOF</kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="bash_profile-profile" name="bash_profile-profile"></a>
+          <h2 class="sect2">
+            ~/.bash_profile
+          </h2>
+        </div>
+        <p>
+          Here is a base <tt class="filename">~/.bash_profile</tt>. If you
+          want each new user to have this file automatically, just change the
+          output of the command to <tt class=
+          "filename">/etc/skel/.bash_profile</tt> and check the permissions
+          after the command is run. You can then copy <tt class=
+          "filename">/etc/skel/.bash_profile</tt> to the home directories of
+          already existing users, including <tt class="systemitem">root</tt>,
+          and set the owner and group appropriately.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; ~/.bash_profile &lt;&lt; "EOF"
+<tt class="literal"># Begin ~/.bash_profile
+# Written for Beyond Linux From Scratch
+# by James Robertson &lt;jameswrobertson@earthlink.net&gt;
+# updated by Bruce Dubbs &lt;bdubbs@linuxfromscratch.org&gt;
+
+# Personal environment variables and startup programs.
+
+# Personal aliases and functions should go in ~/.bashrc.  System wide
+# environment variables and startup programs are in /etc/profile.
+# System wide aliases and functions are in /etc/bashrc.
+
+append () {
+  # First remove the directory
+  local IFS=':'
+  local NEWPATH
+  for DIR in $PATH; do
+     if [ "$DIR" != "$1" ]; then
+       NEWPATH=${NEWPATH:+$NEWPATH:}$DIR
+     fi
+  done
+
+  # Then append the directory
+  export PATH=$NEWPATH:$1
+}
+
+if [ -f "$HOME/.bashrc" ] ; then
+  source $HOME/.bashrc
+fi
+
+if [ -d "$HOME/bin" ] ; then
+  append $HOME/bin
+fi
+
+unset append
+
+# End ~/.bash_profile</tt>
+EOF</kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="bashrc-profile" name="bashrc-profile"></a>
+          <h2 class="sect2">
+            ~/.bashrc
+          </h2>
+        </div>
+        <p>
+          Here is a base <tt class="filename">~/.bashrc</tt>. The comments
+          and instructions for using <tt class="filename">/etc/skel</tt> for
+          <tt class="filename">.bash_profile</tt> above also apply here. Only
+          the target file names are different.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; ~/.bashrc &lt;&lt; "EOF"
+<tt class="literal"># Begin ~/.bashrc
+# Written for Beyond Linux From Scratch
+# by James Robertson &lt;jameswrobertson@earthlink.net&gt;
+
+# Personal aliases and functions.
+
+# Personal environment variables and startup programs should go in
+# ~/.bash_profile.  System wide environment variables and startup
+# programs are in /etc/profile.  System wide aliases and functions are
+# in /etc/bashrc.
+
+if [ -f "/etc/bashrc" ] ; then
+  source /etc/bashrc
+fi
+
+# End ~/.bashrc</tt>
+EOF</kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="bash_logout-profile" name="bash_logout-profile"></a>
+          <h2 class="sect2">
+            ~/.bash_logout
+          </h2>
+        </div>
+        <p>
+          This is an empty <tt class="filename">~/.bash_logout</tt> that can
+          be used as a template. You will notice that the base <tt class=
+          "filename">~/.bash_logout</tt> does not include a <strong class=
+          "userinput"><tt>clear</tt></strong> command. This is because the
+          clear is handled in the <tt class="filename">/etc/issue</tt> file.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt; ~/.bash_logout &lt;&lt; "EOF"
+<tt class="literal"># Begin ~/.bash_logout
+# Written for Beyond Linux From Scratch
+# by James Robertson &lt;jameswrobertson@earthlink.net&gt;
+
+# Personal items to perform on logout.
+
+# End ~/.bash_logout</tt>
+EOF</kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="etc-dircolors-profile" name="etc-dircolors-profile"></a>
+          <h2 class="sect2">
+            /etc/dircolors
+          </h2>
+        </div>
+        <p>
+          If you want to use the <tt class="filename">dircolors</tt>
+          capability, then run the following command. The <tt class=
+          "filename">/etc/skel</tt> setup steps shown above also can be used
+          here to provide a <tt class="filename">~/.dircolors</tt> file when
+          a new user is set up. As before, just change the output file name
+          on the following command and assure the permissions, owner, and
+          group are correct on the files created and/or copied.
+        </p>
+        <pre class="root"><kbd class=
+        "command">dircolors -p &gt; /etc/dircolors</kbd></pre>
+        <p>
+          If you wish to customize the colors used for different file types,
+          you can edit the <tt class="filename">/etc/dircolors</tt> file. The
+          instructions for setting the colors are embedded in the file.
+        </p>
+        <p>
+          Finally, Ian Macdonald has written an excellent collection of tips
+          and tricks to enhance your shell environment. You can read it
+          online at <a href=
+          "http://www.caliban.org/bash/index.shtml"><span class=
+          "url">http://www.caliban.org/bash/index.shtml</span></a>.
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-18 10:34:14 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="devices.html" title="About Devices">Prev</a>
+          <p>
+            About Devices
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="vimrc.html" title=
+          "The /etc/vimrc and ~/.vimrc Files">Next</a>
+          <p>
+            The /etc/vimrc and ~/.vimrc Files
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

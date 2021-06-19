@@ -1,0 +1,582 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Building Plasma 5
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-8.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 8.3
+      </h4>
+      <h3>
+        Chapter&nbsp;32.&nbsp;KDE Plasma 5
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="plasma5.html" title="KDE Plasma 5">Prev</a>
+          <p>
+            KDE Plasma 5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../gnome/gnome.html" title=
+          "Selected GNOME Applications  ">Next</a>
+          <p>
+            Selected GNOME Applications
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="plasma5.html" title=
+          "Chapter&nbsp;32.&nbsp;KDE Plasma 5">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 8.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="plasma5-build" name="plasma5-build"></a>Building Plasma 5
+      </h1>
+      <p>
+        KDE Plasma 5 is a collection of packages based on top of KDE
+        Frameworks 5 and QML. They implement the KDE Display Environment
+        (Plasma 5).
+      </p>
+      <p>
+        This package is known to build and work properly using an LFS-8.3
+        platform.
+      </p>
+      <p>
+        The instructions below build all of the Plasma 5 packages in one step
+        by using a bash script.
+      </p>
+      <h3>
+        Package Information
+      </h3>
+      <div class="itemizedlist">
+        <ul class="compact">
+          <li>
+            <p>
+              Download (HTTP): <a class="ulink" href=
+              "http://download.kde.org/stable/plasma/5.13.4">http://download.kde.org/stable/plasma/5.13.4</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              Download MD5 sum: See Below
+            </p>
+          </li>
+          <li>
+            <p>
+              Download size: 158 MB
+            </p>
+          </li>
+          <li>
+            <p>
+              Estimated disk space required: 1.0 GB (336 MB installed)
+            </p>
+          </li>
+          <li>
+            <p>
+              Estimated build time: 17 SBU (using parallelism=4)
+            </p>
+          </li>
+        </ul>
+      </div>
+      <h3>
+        Plasma 5 Dependencies
+      </h3>
+      <h4>
+        Required
+      </h4>
+      <p class="required">
+        <a class="xref" href="../gnome/GConf.html" title=
+        "GConf-3.2.6">GConf-3.2.6</a>, <a class="xref" href="../x/gtk2.html"
+        title="GTK+-2.24.32">GTK+-2.24.32</a>, <a class="xref" href=
+        "../x/gtk3.html" title="GTK+-3.22.30">GTK+-3.22.30</a>, <a class=
+        "xref" href="krameworks5.html" title=
+        "Building KDE Frameworks 5 (KF5)">KDE Frameworks-5.49.0</a>,
+        <a class="xref" href="../postlfs/libpwquality.html" title=
+        "libpwquality-1.4.0">libpwquality-1.4.0</a>, <a class="xref" href=
+        "../general/libxkbcommon.html" title=
+        "libxkbcommon-0.8.2">libxkbcommon-0.8.2</a>, <a class="xref" href=
+        "../x/mesa.html" title="Mesa-18.1.6">Mesa-18.1.6</a> built with
+        <a class="xref" href="../general/wayland.html" title=
+        "Wayland-1.15.0">Wayland-1.15.0</a>, <a class="xref" href=
+        "../basicnet/networkmanager.html" title=
+        "NetworkManager-1.12.2">NetworkManager-1.12.2</a>, <a class="xref"
+        href="../multimedia/pulseaudio.html" title=
+        "PulseAudio-12.2">PulseAudio-12.2</a>, <a class="xref" href=
+        "../general/python2.html" title="Python-2.7.15">Python-2.7.15</a>,
+        <a class="xref" href="../general/qca.html" title=
+        "Qca-2.1.3">qca-2.1.3</a>, <a class="xref" href=
+        "../multimedia/taglib.html" title="Taglib-1.11.1">taglib-1.11.1</a>,
+        and <a class="xref" href="../x/xcb-util-cursor.html" title=
+        "xcb-util-cursor-0.1.3">xcb-util-cursor-0.1.3</a>
+      </p>
+      <h4>
+        Recommended
+      </h4>
+      <p class="recommended">
+        <a class="xref" href="libdbusmenu-qt.html" title=
+        "libdbusmenu-qt-0.9.3+16.04.20160218">libdbusmenu-qt-0.9.3+16.04.20160218</a>,
+        <a class="xref" href="../multimedia/libcanberra.html" title=
+        "libcanberra-0.30">libcanberra-0.30</a>, <a class="xref" href=
+        "../x/x7driver.html#libinput" title=
+        "libinput-1.11.3">libinput-1.11.3</a>, <a class="xref" href=
+        "../postlfs/linux-pam.html" title=
+        "Linux-PAM-1.3.0">Linux-PAM-1.3.0</a>, <a class="xref" href=
+        "../general/lm_sensors.html" title=
+        "lm_sensors-3.4.0">lm_sensors-3.4.0</a>, <a class="xref" href=
+        "../x/oxygen-icons5.html" title=
+        "oxygen-icons5-5.49.0">oxygen-icons5-5.49.0</a>, and <a class="xref"
+        href="../general/pciutils.html" title=
+        "pciutils-3.6.2">pciutils-3.6.2</a>
+      </p>
+      <h4>
+        Optional
+      </h4>
+      <p class="optional">
+        <a class="xref" href="../x/glu.html" title="GLU-9.0.0">GLU-9.0.0</a>,
+        <a class="xref" href="../general/ibus.html" title=
+        "ibus-1.5.19">ibus-1.5.19</a>, <a class="xref" href=
+        "../x/x7driver.html#xorg-synaptics-driver" title=
+        "Xorg Synaptics Driver-1.9.1">Xorg Synaptics Driver-1.9.1</a>,
+        <a class="ulink" href=
+        "http://distributions.freedesktop.org/wiki/AppStream">appstream-qt</a>,
+        <a class="ulink" href="https://www.kdevelop.org/">KDevPlatform</a>,
+        <a class="ulink" href="http://gpsd.berlios.de">libgps</a>, <a class=
+        "ulink" href="https://github.com/libhybris/libhybris">libhybris</a>,
+        <a class="ulink" href=
+        "http://sourceforge.net/projects/libraw1394/">libraw1394</a>,
+        <a class="ulink" href=
+        "https://bitbucket.org/godsme/mockcpp">mockcpp</a>, <a class="ulink"
+        href=
+        "https://www.freedesktop.org/software/PackageKit/releases/">packagekit-qt</a>,
+        <a class="ulink" href=
+        "http://qalculate.sourceforge.net">Qalculate</a>, <a class="ulink"
+        href="https://launchpad.net/qapt">Qapt</a>, <a class="ulink" href=
+        "https://github.com/osiam/osiam">SCIM</a>, and <a class="ulink" href=
+        "http://www.dest-unreach.org/socat/">socat</a> (for pam_kwallet)
+      </p>
+      <p class="usernotes">
+        User Notes: <a class="ulink" href=
+        "http://wiki.linuxfromscratch.org/blfs/wiki/kf5">http://wiki.linuxfromscratch.org/blfs/wiki/kf5</a>
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Downloading KDE Plasma5
+        </h2>
+        <p>
+          The easiest way to get the KDE Plasma5 packages is to use a single
+          <span class="command"><strong>wget</strong></span> to fetch them
+          all at once:
+        </p>
+        <pre class="userinput">
+<kbd class="command">url=http://download.kde.org/stable/plasma/5.13.4/
+wget -r -nH -nd -A '*.xz' -np $url</kbd>
+<code class="literal">
+The options used here are:
+  -r            recurse through child directories
+  -nH           disable generation of host-prefixed directories
+  -nd           do not create a hierarchy of directories
+  -A '*.xz'     just get the *.xz files
+  -np           don't get parent directories</code>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Setting Package Order
+        </h2>
+        <p>
+          The order of building files is important due to internal
+          dependencies. Create the list of files in the proper order as
+          follows:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; plasma-5.13.4.md5 &lt;&lt; "EOF"
+<code class=
+"literal">2cfae8349d3c5a4d7b52269b6ef580bc  kdecoration-5.13.4.tar.xz
+dfe4e097033f48d5f3b56d7d9fe91c91  libkscreen-5.13.4.tar.xz
+939be7f1b81f8948d3026ea0f6b71332  libksysguard-5.13.4.tar.xz
+a5811405ebf81ced2d96dddda14dc65c  breeze-5.13.4.tar.xz
+544d7306a573a4b1af9cf15bea565f77  breeze-gtk-5.13.4.tar.xz
+6f1846e0f49c0e660ffea7b25d979f5c  kscreenlocker-5.13.4.tar.xz
+431d2a2eea56e05659d4d9bfee75b8f9  oxygen-5.13.4.tar.xz
+787f4cf0ebb6a296a907526f8a05d96e  kinfocenter-5.13.4.tar.xz
+38cdb99d3e7133dd8720073d184c0219  ksysguard-5.13.4.tar.xz
+886af79baa7b478ee25ce9491f0398bd  kwin-5.13.4.tar.xz
+3035c264c2c00d274995216f135a2525  plasma-workspace-5.13.4.tar.xz
+3f3de6be50ce252d5f000f200fd274c7  bluedevil-5.13.4.tar.xz
+a092d24dfd11b41c56a6babe7c8ec460  kde-gtk-config-5.13.4.tar.xz
+9bcb6800aa2049b77dd0e31b1f48bd86  khotkeys-5.13.4.tar.xz
+f5a94fb11385cd4df4df330193ebb395  kmenuedit-5.13.4.tar.xz
+bf91e1d9eefc6660de6027aceeff6c97  kscreen-5.13.4.tar.xz
+e7f0bfb74c5d5a9ff43e6de6cb0f0d8d  kwallet-pam-5.13.4.tar.xz
+7f666f407e8f1e076897e68295c8f5a7  kwayland-integration-5.13.4.tar.xz
+57638eed026c081df092baef0615eb92  kwrited-5.13.4.tar.xz
+69ff78fc195af7e4994429b44454f3f9  milou-5.13.4.tar.xz
+7c2bd25f90a7d55dc334897286facfc6  plasma-nm-5.13.4.tar.xz
+edef493711c1f8b7dde43390ff415eb4  plasma-pa-5.13.4.tar.xz
+4ab6df9997269d2263c3e6fb2d6b4bf7  plasma-workspace-wallpapers-5.13.4.tar.xz
+52deb7a41477d704a6895a7bdccaa1d7  polkit-kde-agent-1-5.13.4.tar.xz
+728661126e6f4d414c5fa2a7d596ecbf  powerdevil-5.13.4.tar.xz
+c1461af55b31cbf0473df4b30d90c376  plasma-desktop-5.13.4.tar.xz
+35d28871e37fd28602066706967a9bb0  kdeplasma-addons-5.13.4.tar.xz
+0b3cabd2f882599dffd5bd49b55a231e  kgamma5-5.13.4.tar.xz
+14e004c9d8112815b8bb0c6438a5d57f  ksshaskpass-5.13.4.tar.xz
+#b97352709bd0ed4a7a8d3f28630b85a6  plasma-sdk-5.13.4.tar.xz
+0c9af753ed311600b218747fa6eb5dcd  sddm-kcm-5.13.4.tar.xz
+b101c424b5b13cecf32aab93c4215e15  user-manager-5.13.4.tar.xz
+e46195de68d3cabbb0b73e4252aaf95b  discover-5.13.4.tar.xz
+#db28bc45387c0f4be49de795040df888  breeze-grub-5.13.4.tar.xz
+#85f27da438e5e6476220112e0728cdbe  breeze-plymouth-5.13.4.tar.xz
+4147607b008aefcc744eb19896a37f73  kactivitymanagerd-5.13.4.tar.xz
+a8ef5bd003ea74107d176d42ae0e83e9  plasma-integration-5.13.4.tar.xz
+7e4a31d74ae071054d225bb8075647fd  plasma-tests-5.13.4.tar.xz
+0600243811dbda474d1c994de6973d3f  plymouth-kcm-5.13.4.tar.xz
+643c83817fcd3668eedfc01b60ab4731  xdg-desktop-portal-kde-5.13.4.tar.xz
+147892484b3ba637840e47881b52434d  drkonqi-5.13.4.tar.xz
+52899d46e4fa6b293699d20163fa10d1  plasma-vault-5.13.4.tar.xz
+d6963e6b203d0bbc864f35a272370370  plasma-browser-integration-5.13.4.tar.xz
+90f115ede33aef5582ac17bf2a95f324  kde-cli-tools-5.13.4.tar.xz
+9672ac04c144af86dae18eeb47da01b9  systemsettings-5.13.4.tar.xz</code>
+EOF</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The breeze-grub, breeze-plymouth, and plymouth-kcm packages above
+            are all for customized support of <a class="ulink" href=
+            "https://www.freedesktop.org/wiki/Software/Plymouth/">Plymouth</a>
+            which is designed to be run within an initial ram disk during
+            boot (see <a class="xref" href="../postlfs/initramfs.html" title=
+            "About initramfs">the section called &ldquo;About
+            initramfs&rdquo;</a>). The plasma-sdk package is optional and
+            used for software development.
+          </p>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Plasma5
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            When installing multiple packages in a script, the installation
+            needs to be done as the root user. There are three general
+            options that can be used to do this:
+          </p>
+          <div class="orderedlist">
+            <ol>
+              <li>
+                <p>
+                  Run the entire script as the root user (not recommended).
+                </p>
+              </li>
+              <li>
+                <p>
+                  Use the <span class="command"><strong>sudo</strong></span>
+                  command from the <a class="xref" href=
+                  "../postlfs/sudo.html" title="Sudo-1.8.23">Sudo-1.8.23</a>
+                  package.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Use <span class="command"><strong>su -c "command
+                  arguments"</strong></span> (quotes required) which will ask
+                  for the root password for every iteration of the loop.
+                </p>
+              </li>
+            </ol>
+          </div>
+          <p>
+            One way to handle this situation is to create a short
+            <span class="command"><strong>bash</strong></span> function that
+            automatically selects the appropriate method. Once the command is
+            set in the environment, it does not need to be set again.
+          </p>
+          <pre class="userinput">
+<kbd class="command">as_root()
+{
+  if   [ $EUID = 0 ];        then $*
+  elif [ -x /usr/bin/sudo ]; then sudo $*
+  else                            su -c \\"$*\\"
+  fi
+}
+
+export -f as_root</kbd>
+</pre>
+        </div>
+        <p>
+          First, start a subshell that will exit on error:
+        </p>
+        <pre class="userinput">
+<kbd class="command">bash -e</kbd>
+</pre>
+        <p>
+          Install all of the packages by running the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">while read -r line; do
+
+    # Get the file name, ignoring comments and blank lines
+    if $(echo $line | grep -E -q '^ *$|^#' ); then continue; fi
+    file=$(echo $line | cut -d" " -f2)
+
+    pkg=$(echo $file|sed 's|^.*/||')          # Remove directory
+    packagedir=$(echo $pkg|sed 's|\.tar.*||') # Package directory
+
+    tar -xf $file
+    pushd $packagedir
+
+       mkdir build
+       cd    build
+
+       cmake -DCMAKE_INSTALL_PREFIX=$KF5_PREFIX \
+             -DCMAKE_BUILD_TYPE=Release         \
+             -DBUILD_TESTING=OFF                \
+             -Wno-dev ..  &amp;&amp;
+
+        make
+        as_root make install
+    popd
+
+
+    as_root rm -rf $packagedir
+    as_root /sbin/ldconfig
+
+done &lt; plasma-5.13.4.md5
+
+exit
+
+cd /usr/share/xsessions/
+[ -e plasma.desktop ] || as_root ln -sfv $KF5_PREFIX/share/xsessions/plasma.desktop
+
+cd $KF5_PREFIX/share/plasma/plasmoids
+
+for j in $(find -name \*.js); do
+  as_root ln -sfv ../code/$(basename $j) $(dirname $j)/../ui/
+done</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>ln -sfv ../code/$(basename $j)
+          $(dirname $j)/../ui/</strong></span>: Create symbolic links so qml
+          files can find needed javascript modules.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring Plasma
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Linux PAM Configuration
+          </h3>
+          <p>
+            If you built Plasma with the recommended <span class=
+            "application">Linux PAM</span> support, create necessary
+            configuration files by running the following commands as the
+            <code class="systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">cat &gt;&gt; /etc/pam.d/kde &lt;&lt; "EOF" 
+# Begin /etc/pam.d/kde
+
+auth     requisite      pam_nologin.so
+auth     required       pam_env.so
+
+auth     required       pam_succeed_if.so uid &gt;= 1000 quiet
+auth     include        system-auth
+
+account  include        system-account
+password include        system-password
+session  include        system-session
+
+# End /etc/pam.d/kde
+EOF
+
+cat &gt; /etc/pam.d/kde-np &lt;&lt; "EOF" 
+# Begin /etc/pam.d/kde-np
+
+auth     requisite      pam_nologin.so
+auth     required       pam_env.so
+
+auth     required       pam_succeed_if.so uid &gt;= 1000 quiet
+auth     required       pam_permit.so
+
+account  include        system-account
+password include        system-password
+session  include        system-session
+
+# End /etc/pam.d/kde-np
+EOF
+
+cat &gt; /etc/pam.d/kscreensaver &lt;&lt; "EOF"
+# Begin /etc/pam.d/kscreensaver
+
+auth    include system-auth
+account include system-account
+
+# End /etc/pam.d/kscreensaver
+EOF</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="starting" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Starting Plasma5
+        </h2>
+        <p>
+          You can start <span class="application">Plasma5</span> from
+          runlevel 3, using <a class="xref" href="../x/xinit.html" title=
+          "xinit-1.4.0">xinit-1.4.0</a>, or from runlevel 5, using a Display
+          Manager, such as <a class="xref" href="../x/lightdm.html" title=
+          "lightdm-1.24.0">lightdm-1.24.0</a>.
+        </p>
+        <p>
+          To start <span class="application">Plasma 5</span> using <a class=
+          "xref" href="../x/xinit.html" title="xinit-1.4.0">xinit-1.4.0</a>,
+          run the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; ~/.xinitrc &lt;&lt; "EOF"
+<code class=
+"literal">ck-launch-session dbus-launch --exit-with-session $KF5_PREFIX/bin/startkde</code>
+EOF
+
+startx</kbd>
+</pre>
+        <p>
+          The X session starts on the first unused virtual terminal, normally
+          vt7. You can switch to another vt<span class=
+          "emphasis"><em>n</em></span> simultaneously pressing the keys
+          Ctrl-Alt-F<span class="emphasis"><em>n</em></span> (<span class=
+          "emphasis"><em>n</em></span>=1, 2, ...). To switch back to the X
+          session, normally started at vt7, use Ctrl-Alt-F7. The vt where the
+          command <span class="command"><strong>startx</strong></span> was
+          executed will display many messages, including X starting messages,
+          applications automatically started with the session, and
+          eventually, some warning and error messages. You may prefer to
+          redirect those messages to a log file, which not only will keep the
+          initial vt uncluttered, but can also be used for debugging
+          purposes. This can be done starting X with:
+        </p>
+        <pre class="userinput">
+<kbd class="command">startx &amp;&gt; ~/x-session-errors</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            You may wish to drop consolekit and/or dbus-launch, e.g., just
+            using startkde in ~/.xinitrc. However some capabilities such as
+            mounting or umounting file systems from a file manager will not
+            be possible, or the reboot option may be absent or inoperative,
+            among other problems.
+          </p>
+        </div>
+        <p>
+          When shutting down or rebooting, the shutdown messages appear on
+          the vt where X was running. If you wish to see those messages,
+          simultaneously press keys Alt-F7 (assuming that X was running on
+          vt7).
+        </p>
+        <p>
+          If you intend to start <span class="application">Plasma</span>
+          using a display manager such as <a class="xref" href=
+          "../x/lightdm.html" title="lightdm-1.24.0">lightdm-1.24.0</a>,
+          there will be two entries for <span class=
+          "application">Plasma</span>, one for use with <span class=
+          "application">Xorg</span>, and another for <span class=
+          "application">Wayland</span>. Modify the <span class=
+          "application">Xorg</span> entry with the following command, as the
+          <code class="systemitem">root</code> user, so that you can
+          differentiate between the two:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">sed '/^Name=/s/Plasma/Plasma on Xorg/' -i /usr/share/xsessions/plasma.desktop</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">There are too many plasma programs (50 in
+              /opt/kf5/bin) to list separately here.</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">There are too many plasma libraries (39
+              in /opt/kf5/lib) to list separately here.</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">There are too many plasma directories
+              (over 1000 in /opt/kf5) to list separately here.</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2015-09-24 16:44:04 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="plasma5.html" title="KDE Plasma 5">Prev</a>
+          <p>
+            KDE Plasma 5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../gnome/gnome.html" title=
+          "Selected GNOME Applications  ">Next</a>
+          <p>
+            Selected GNOME Applications
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="plasma5.html" title=
+          "Chapter&nbsp;32.&nbsp;KDE Plasma 5">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 8.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

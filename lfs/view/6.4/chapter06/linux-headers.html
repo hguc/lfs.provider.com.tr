@@ -1,0 +1,162 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.7.&nbsp;Linux-2.6.27.4 API Headers
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="lfs" id="lfs-6.4">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 6.4
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="createfiles.html" title=
+          "Creating Essential Files and Symlinks">Prev</a>
+          <p>
+            Creating Essential Files and Symlinks
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="man-pages.html" title=
+          "Man-pages-3.11">Next</a>
+          <p>
+            Man-pages-3.11
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.4">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-linux-headers" name=
+        "ch-system-linux-headers"></a>6.7. Linux-2.6.27.4 API Headers
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Linux API Headers expose the kernel's API for use by Glibc.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.1 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">341 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.7.1. Installation of Linux API Headers
+        </h2>
+        <p>
+          The Linux kernel needs to expose an Application Programming
+          Interface (API) for the system's C library (Glibc in LFS) to use.
+          This is done by way of sanitizing various C header files that are
+          shipped in the Linux kernel source tarball.
+        </p>
+        <p>
+          First, make sure there are no stale files and dependencies lying
+          around from previous activity:
+        </p>
+        <pre class="userinput"><kbd class="command">make mrproper</kbd></pre>
+        <p>
+          Now test and extract the user-visible kernel headers from the
+          source. They are placed in an intermediate local directory and
+          copied to the needed location because the extraction process
+          removes any existing files in the target directory.
+        </p>
+        <pre class="userinput"><kbd class="command">make headers_check
+make INSTALL_HDR_PATH=dest headers_install
+cp -rv dest/include/* /usr/include</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-linux-headers" name=
+          "contents-linux-headers"></a>6.7.2. Contents of Linux API Headers
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed headers:</strong>
+              <span class=
+              "segbody">/usr/include/{asm{,-generic},linux,mtd,rdma,sound,video}/*.h</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="linux-headers" name=
+                    "linux-headers"></a><span class="term"><code class=
+                    "filename">/usr/include/{asm{,-generic},linux,mtd,rdma,sound}/*.h</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    The Linux API headers
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="createfiles.html" title=
+          "Creating Essential Files and Symlinks">Prev</a>
+          <p>
+            Creating Essential Files and Symlinks
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="man-pages.html" title=
+          "Man-pages-3.11">Next</a>
+          <p>
+            Man-pages-3.11
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.4">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

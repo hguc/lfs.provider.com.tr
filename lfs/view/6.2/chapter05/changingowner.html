@@ -1,0 +1,129 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.32.&nbsp;Changing Ownership
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="lfs" class="6.2">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Linux From Scratch - Version 6.2
+        </h4>
+        <h3>
+          Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="stripping.html" title="Stripping">Prev</a>
+          <p>
+            Stripping
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../part3.html" title=
+          "Building the LFS System">Next</a>
+          <p>
+            Building the LFS System
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          5.32. Changing Ownership
+        </h1>
+      </div>
+      <div class="note">
+        <div class="admonhead">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3 class="admontitle">
+            Note
+          </h3>
+        </div>
+        <div class="admonbody">
+          <p>
+            The commands in the remainder of this book must be performed
+            while logged in as user <tt class="systemitem">root</tt> and no
+            longer as user <tt class="systemitem">lfs</tt>. Also, double
+            check that <tt class="envar">$LFS</tt> is set in <tt class=
+            "systemitem">root</tt>'s environment.
+          </p>
+        </div>
+      </div>
+      <p>
+        Currently, the <tt class="filename">$LFS/tools</tt> directory is
+        owned by the user <tt class="systemitem">lfs</tt>, a user that exists
+        only on the host system. If the <tt class="filename">$LFS/tools</tt>
+        directory is kept as is, the files are owned by a user ID without a
+        corresponding account. This is dangerous because a user account
+        created later could get this same user ID and would own the
+        <tt class="filename">$LFS/tools</tt> directory and all the files
+        therein, thus exposing these files to possible malicious
+        manipulation.
+      </p>
+      <p>
+        To avoid this issue, you could add the <tt class=
+        "systemitem">lfs</tt> user to the new LFS system later when creating
+        the <tt class="filename">/etc/passwd</tt> file, taking care to assign
+        it the same user and group IDs as on the host system. Better yet,
+        change the ownership of the <tt class="filename">$LFS/tools</tt>
+        directory to user <tt class="systemitem">root</tt> by running the
+        following command:
+      </p>
+      <pre class="userinput"><kbd class=
+      "command">chown -R root:root $LFS/tools</kbd></pre>
+      <p>
+        Although the <tt class="filename">$LFS/tools</tt> directory can be
+        deleted once the LFS system has been finished, it can be retained to
+        build additional LFS systems <span class="emphasis"><em>of the same
+        book version</em></span>. How best to backup <tt class=
+        "filename">$LFS/tools</tt> is a matter of personal preference and is
+        left as an exercise for the reader.
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="stripping.html" title="Stripping">Prev</a>
+          <p>
+            Stripping
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../part3.html" title=
+          "Building the LFS System">Next</a>
+          <p>
+            Building the LFS System
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

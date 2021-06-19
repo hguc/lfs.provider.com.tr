@@ -1,0 +1,255 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.3.&nbsp;General Network Configuration
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
+    media="print" />
+  </head>
+  <body class="lfs" id="lfs-7.5-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 7.5-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;7.&nbsp;Basic System Configuration
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="network-scripts.html" title=
+          "LFS-Network-Scripts-20140214">Prev</a>
+          <p>
+            LFS-Network-Scripts-20140214
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="hosts.html" title=
+          "Customizing the /etc/hosts File">Next</a>
+          <p>
+            Customizing the /etc/hosts File
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;Basic System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 7.5-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-scripts-network" name="ch-scripts-network"></a>7.3. General
+        Network Configuration
+      </h1>
+      <p>
+        This section only applies if a network card is to be configured.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.3.1. Creating Network Interface Configuration Files
+        </h2>
+        <p>
+          Which interfaces are brought up and down by the network script
+          depends on the files in <code class=
+          "filename">/etc/sysconfig/</code>. This directory should contain a
+          file for each interface to be configured, such as <code class=
+          "filename">ifconfig.xyz</code>, where <span class=
+          "quote">&ldquo;<span class="quote">xyz</span>&rdquo;</span> is
+          required to be a Network Card Interface name (e.g. eth0). Inside
+          this file are attributes to this interface, such as its IP
+          address(es), subnet masks, and so forth. It is necessary that the
+          stem of the filename be <span class=
+          "emphasis"><em>ifconfig</em></span>.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Udev may assign random Network Card Interface names for some
+            network cards such as enp2s1. If you are not sure what your
+            Network Card Interface name is, you can always run <span class=
+            "command"><strong>ip l</strong></span> after you have booted your
+            system. Again, it is important that <code class=
+            "filename">ifconfig.xyz</code> is named after correct Network
+            Card Interface name (e.g. <code class=
+            "filename">ifconfig.enp2s1</code> or <code class=
+            "filename">ifconfig.eth0</code>) or Systemd will fail to bring up
+            your network interface.
+          </p>
+        </div>
+        <p>
+          The following command creates a sample file for the <span class=
+          "emphasis"><em>eth0</em></span> device with a static IP address:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cd /etc/sysconfig/
+cat &gt; ifconfig.eth0 &lt;&lt; "EOF"
+<code class="literal">IFACE=eth0
+SERVICE=ipv4-static
+IP=192.168.1.1
+GATEWAY=192.168.1.2
+PREFIX=24
+BROADCAST=192.168.1.255</code>
+EOF</kbd>
+</pre>
+        <p>
+          The values of these variables must be changed in every file to
+          match the proper setup.
+        </p>
+        <p>
+          The <code class="envar">IFACE</code> variable defines the interface
+          name, for example, eth0. It is required for all network device
+          configuration files.
+        </p>
+        <p>
+          The <code class="envar">SERVICE</code> variable defines the method
+          used for obtaining the IP address. The LFS-Network-Scripts package
+          has a modular IP assignment format, and creating additional files
+          in the <code class="filename">/lib/services/</code> directory
+          allows other IP assignment methods. This is commonly used for
+          Dynamic Host Configuration Protocol (DHCP), which is addressed in
+          the BLFS book.
+        </p>
+        <p>
+          The <code class="envar">GATEWAY</code> variable should contain the
+          default gateway IP address, if one is present. If not, then comment
+          out the variable entirely.
+        </p>
+        <p>
+          The <code class="envar">PREFIX</code> variable contains the number
+          of bits used in the subnet. Each octet in an IP address is 8 bits.
+          If the subnet's netmask is 255.255.255.0, then it is using the
+          first three octets (24 bits) to specify the network number. If the
+          netmask is 255.255.255.240, it would be using the first 28 bits.
+          Prefixes longer than 24 bits are commonly used by DSL and
+          cable-based Internet Service Providers (ISPs). In this example
+          (PREFIX=24), the netmask is 255.255.255.0. Adjust the <code class=
+          "envar">PREFIX</code> variable according to your specific subnet.
+          If omitted, the PREFIX defaults to 24.
+        </p>
+        <p>
+          For more information see the <span class=
+          "command"><strong>ifup</strong></span> man page.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          7.3.2. Configuring the Network Interface Card at boot
+        </h2>
+        <p>
+          Enabling of the Network Interface Card configuration is done per
+          interface. To enable Network Interface Card configuration at boot,
+          run:
+        </p>
+        <pre class="userinput">
+<kbd class="command">systemctl enable ifupdown@eth0</kbd>
+</pre>
+        <p>
+          To disable previously enabled Network Interface Card configuration
+          at boot, run:
+        </p>
+        <pre class="userinput">
+<kbd class="command">systemctl disable ifupdown@eth0</kbd>
+</pre>
+        <p>
+          To manually start the Network Interface Card configuration, run:
+        </p>
+        <pre class="userinput">
+<kbd class="command">systemctl start ifupdown@eth0</kbd>
+</pre>
+        <p>
+          Replace eth0 with the correct Network Interface Card name as
+          described on the beginning of this page.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="resolv.conf" name="resolv.conf"></a>7.3.3. Creating the
+          /etc/resolv.conf File
+        </h2>
+        <p>
+          If the system is going to be connected to the Internet, it will
+          need some means of Domain Name Service (DNS) name resolution to
+          resolve Internet domain names to IP addresses, and vice versa. This
+          is best achieved by placing the IP address of the DNS server,
+          available from the ISP or network administrator, into <code class=
+          "filename">/etc/resolv.conf</code>. Create the file by running the
+          following:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; /etc/resolv.conf &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/resolv.conf
+
+domain <em class="replaceable"><code>&lt;Your Domain Name&gt;</code></em>
+nameserver <em class=
+"replaceable"><code>&lt;IP address of your primary nameserver&gt;</code></em>
+nameserver <em class=
+"replaceable"><code>&lt;IP address of your secondary nameserver&gt;</code></em>
+
+# End /etc/resolv.conf</code>
+EOF</kbd>
+</pre>
+        <p>
+          The <code class="varname">domain</code> statement can be omitted or
+          replaced with a <code class="varname">search</code> statement. See
+          the man page for resolv.conf for more details.
+        </p>
+        <p>
+          Replace <em class="replaceable"><code>&lt;IP address of the
+          nameserver&gt;</code></em> with the IP address of the DNS most
+          appropriate for the setup. There will often be more than one entry
+          (requirements demand secondary servers for fallback capability). If
+          you only need or want one DNS server, remove the second
+          <span class="emphasis"><em>nameserver</em></span> line from the
+          file. The IP address may also be a router on the local network.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The Google Public IPv4 DNS addresses are 8.8.8.8 and 8.8.4.4.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="network-scripts.html" title=
+          "LFS-Network-Scripts-20140214">Prev</a>
+          <p>
+            LFS-Network-Scripts-20140214
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="hosts.html" title=
+          "Customizing the /etc/hosts File">Next</a>
+          <p>
+            Customizing the /etc/hosts File
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;Basic System Configuration">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 7.5-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

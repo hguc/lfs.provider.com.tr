@@ -1,0 +1,474 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Cyrus SASL-2.1.21
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;4.&nbsp;Security
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="mitkrb.html" title=
+          "MIT Kerberos V5-1.6">Prev</a>
+          <p>
+            MIT Kerberos V5-1.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="stunnel.html" title="Stunnel-4.15">Next</a>
+          <p>
+            Stunnel-4.15
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="cyrus-sasl" name="cyrus-sasl"></a>
+        <h1 class="sect1">
+          Cyrus SASL-2.1.21
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Cyrus SASL
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Cyrus SASL</span> package contains a
+          Simple Authentication and Security Layer, a method for adding
+          authentication support to connection-based protocols. To use SASL,
+          a protocol includes a command for identifying and authenticating a
+          user to a server and for optionally negotiating protection of
+          subsequent protocol interactions. If its use is negotiated, a
+          security layer is inserted between the protocol and the connection.
+        </p>
+        <h3>
+          <a id="id2601495" name="id2601495"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://ftp.andrew.cmu.edu/pub/cyrus-mail/cyrus-sasl-2.1.21.tar.gz">
+                <span class=
+                "url">http://ftp.andrew.cmu.edu/pub/cyrus-mail/cyrus-sasl-2.1.21.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/cyrus-sasl-2.1.21.tar.gz">
+                <span class=
+                "url">ftp://ftp.andrew.cmu.edu/pub/cyrus-mail/cyrus-sasl-2.1.21.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: dde02db234dea892bee298390890502e
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 16 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.3 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2622259" name="id2622259"></a>Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Required patch: <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/cyrus-sasl-2.1.21-openldap23-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/cyrus-sasl-2.1.21-openldap23-1.patch</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Required patch: <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/cyrus-sasl-2.1.21-openssl98-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/cyrus-sasl-2.1.21-openssl98-1.patch</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2628778" name="id2628778"></a>Cyrus SASL Dependencies
+        </h3>
+        <h4>
+          <a id="id2673620" name="id2673620"></a>Required
+        </h4>
+        <p class="required">
+          <a href="security.html#openssl">OpenSSL-0.9.8d</a>
+        </p>
+        <h4>
+          <a id="id2555417" name="id2555417"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="linux-pam.html">Linux-PAM-0.99.4.0</a>, <a href=
+          "../server/openldap.html">OpenLDAP-2.3.27</a>, <a href=
+          "heimdal.html">Heimdal-0.7.2</a> or <a href="mitkrb.html">MIT
+          Kerberos V5-1.6</a>, <a href=
+          "../general/jdk.html">JDK-1.5.0_10</a>, <a href=
+          "../server/mysql.html">MySQL-5.0.21</a>, <a href=
+          "../server/postgresql.html">PostgreSQL-8.1.3</a>, <a href=
+          "../general/gdbm.html">GDBM-1.8.3</a>, <a href=
+          "http://www.pdc.kth.se/kth-krb/"><span class="url">krb4</span></a>,
+          <a href="http://sqlite.org/"><span class="url">SQLite</span></a>,
+          and <a href="http://dmalloc.com/"><span class=
+          "url">Dmalloc</span></a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/cyrus-sasl"><span class="url">
+          http://wiki.linuxfromscratch.org/blfs/wiki/cyrus-sasl</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Cyrus SASL
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Cyrus SASL</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../cyrus-sasl-2.1.21-openldap23-1.patch &amp;&amp;
+patch -Np1 -i ../cyrus-sasl-2.1.21-openssl98-1.patch &amp;&amp;
+sed -i '/sasl_global/s/^static //' lib/client.c &amp;&amp;
+sed -i 's/cat8/man8/' saslauthd/Makefile.in &amp;&amp;
+./configure --prefix=/usr --sysconfdir=/etc \
+            --with-dbpath=/var/lib/sasl/sasldb2 \
+            --with-saslauthd=/var/run &amp;&amp;
+make</kbd></pre>
+        <p>
+          This package does not come with a test suite. If you are planning
+          on using the GSSAPI authentication mechanism, it is recommended to
+          test it after installing the package using the sample server and
+          client programs which were built in the preceding step.
+          Instructions for performing the tests can be found at <a href=
+          "http://www.linuxfromscratch.org/hints/downloads/files/cyrus-sasl.txt">
+          <span class=
+          "url">http://www.linuxfromscratch.org/hints/downloads/files/cyrus-sasl.txt</span></a>.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+install -v -m755 -d /usr/share/doc/cyrus-sasl-2.1.21 &amp;&amp;
+install -v -m644 doc/{*.{html,txt,fig},ONEWS,TODO} \
+    saslauthd/LDAP_SASLAUTHD /usr/share/doc/cyrus-sasl-2.1.21 &amp;&amp;
+install -v -m700 -d /var/lib/sasl</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">sed ... lib/client.c</strong></span>:
+          This command fixes an issue when compiling <span class=
+          "application">Cyrus SASL</span> with <span class=
+          "application">GCC-4</span>.
+        </p>
+        <p>
+          <span><strong class="command">sed 's/cat8/man8/'
+          ...</strong></span>: This command puts the <span><strong class=
+          "command">saslauthd</strong></span> man page in a more standard
+          location.
+        </p>
+        <p>
+          <em class=
+          "parameter"><tt>--with-dbpath=/var/lib/sasl/sasldb2</tt></em>: This
+          parameter forces the <span><strong class=
+          "command">saslauthd</strong></span> database to be created in
+          <tt class="filename">/var/lib/sasl</tt> instead of <tt class=
+          "filename">/etc</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-saslauthd=/var/run</tt></em>: This
+          parameter forces <span><strong class=
+          "command">saslauthd</strong></span> to use the FHS compliant
+          directory <tt class="filename">/var/run</tt> for variable run-time
+          data.
+        </p>
+        <p>
+          <tt class="option">--with-ldap</tt>: This parameter enables use
+          with <span class="application">OpenLDAP</span>.
+        </p>
+        <p>
+          <tt class="option">--enable-ldapdb</tt>: This parameter enables the
+          LDAPDB authentication backend. There is a circular dependency with
+          this parameter. See <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/cyrus-sasl"><span class="url">
+          http://wiki.linuxfromscratch.org/blfs/wiki/cyrus-sasl</span></a>
+          for a solution to this problem.
+        </p>
+        <p>
+          <span><strong class="command">install -v -m644 ...</strong></span>:
+          These commands install documentation which is not installed by the
+          <span><strong class="command">make install</strong></span> command.
+        </p>
+        <p>
+          <span><strong class="command">install -v -m700 -d
+          /var/lib/sasl</strong></span>: This directory must exist when
+          starting <span><strong class="command">saslauthd</strong></span>.
+          If you're not going to be running the daemon, you may omit the
+          creation of this directory.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Cyrus SASL
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="cyrus-sasl-config" name=
+                  "cyrus-sasl-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/saslauthd.conf</tt> (for
+            <span><strong class="command">saslauthd</strong></span> LDAP
+            configuration) and <tt class=
+            "filename">/usr/lib/sasl2/Appname.conf</tt> (where "Appname" is
+            the application defined name of the application)
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2724380" name="id2724380"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            See <a href=
+            "file:///usr/share/doc/cyrus-sasl-2.1.21/sysadmin.html"><span class="url">
+            file:///usr/share/doc/cyrus-sasl-2.1.21/sysadmin.html</span></a>
+            for information on what to include in the application
+            configuration files. See <a href=
+            "file:///usr/share/doc/cyrus-sasl-2.1.21/LDAP_SASLAUTHD"><span class="url">
+            file:///usr/share/doc/cyrus-sasl-2.1.21/LDAP_SASLAUTHD</span></a>
+            for configuring <span><strong class=
+            "command">saslauthd</strong></span> with <span class=
+            "application">OpenLDAP</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="cyrus-sasl-init" name="cyrus-sasl-init"></a>Init
+                  Script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            If you need to run the <span><strong class=
+            "command">saslauthd</strong></span> daemon at system startup,
+            install the <tt class="filename">/etc/rc.d/init.d/cyrus-sasl</tt>
+            init script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-20060910</a>
+            package.
+          </p>
+          <pre class="root"><kbd class=
+          "command">make install-cyrus-sasl</kbd></pre>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                You'll need to modify the init script and replace the
+                <tt class="option"><em class=
+                "replaceable"><tt>&lt;authmech&gt;</tt></em></tt> parameter
+                to the <tt class="option">-a</tt> switch with your desired
+                authentication mechanism.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">saslauthd,
+              sasldblistusers2, and saslpasswd2</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libjavasasl.so,
+              libsasl2.so, and numerous SASL plugins and Java classes</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/include/sasl, /usr/lib/java/classes/sasl,
+              /usr/lib/sasl2, /usr/share/doc/cyrus-sasl-2.1.21, and
+              /var/lib/sasl</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2618096" name="id2618096"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="saslauthd" name="saslauthd"></a><span class=
+                  "term"><span><strong class=
+                  "command">saslauthd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the SASL authentication server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="sasldblistusers2" name=
+                  "sasldblistusers2"></a><span class=
+                  "term"><span><strong class=
+                  "command">sasldblistusers2</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to list the users in the SASL password database
+                    <tt class="filename">sasldb2</tt>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="saslpasswd2" name="saslpasswd2"></a><span class=
+                  "term"><span><strong class=
+                  "command">saslpasswd2</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to set and delete a user's SASL password and
+                    mechanism specific secrets in the SASL password database
+                    <tt class="filename">sasldb2</tt>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libsasl2" name="libsasl2"></a><span class=
+                  "term"><tt class="filename">libsasl2.so</tt></span>
+                </td>
+                <td>
+                  <p>
+                    is a general purpose authentication library for server
+                    and client applications.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2006-06-21 11:26:07 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="mitkrb.html" title=
+          "MIT Kerberos V5-1.6">Prev</a>
+          <p>
+            MIT Kerberos V5-1.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="stunnel.html" title="Stunnel-4.15">Next</a>
+          <p>
+            Stunnel-4.15
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

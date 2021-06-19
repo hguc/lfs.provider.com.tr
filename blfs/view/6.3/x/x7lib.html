@@ -1,0 +1,1014 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Xorg Libraries
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;23.&nbsp;X Window System Environment
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libxcb.html" title="libxcb-1.0">Prev</a>
+          <p>
+            libxcb-1.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xbitmaps.html" title=
+          "Xbitmaps-1.0.1">Next</a>
+          <p>
+            Xbitmaps-1.0.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;23.&nbsp;X Window System Environment">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="xorg7-lib" name="xorg7-lib"></a>Xorg Libraries
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Xorg Libraries
+        </h2>
+        <p>
+          The <span class="application">Xorg</span> libraries provide library
+          routines that are used within all X Window applications.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://xorg.freedesktop.org/releases/individual/lib/">http://xorg.freedesktop.org/releases/individual/lib/</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.x.org/pub/individual/lib/">ftp://ftp.x.org/pub/individual/lib/</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: <a class="ulink" href=
+                "http://anduin.linuxfromscratch.org/files/BLFS/6.3/xorg/lib-7.2.md5">
+                http://anduin.linuxfromscratch.org/files/BLFS/6.3/xorg/lib-7.2.md5</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 11.4 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 186 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 6.6 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Required download list: <a class="ulink" href=
+                "http://anduin.linuxfromscratch.org/files/BLFS/6.3/xorg/lib-7.2.wget">
+                http://anduin.linuxfromscratch.org/files/BLFS/6.3/xorg/lib-7.2.wget</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Required patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/libX11-1.1.2-badargs-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/libX11-1.1.2-badargs-1.patch</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Required patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/libXfont-1.2.8-pcf_parser-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/libXfont-1.2.8-pcf_parser-1.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Xorg Libraries Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="../postlfs/ed.html" title=
+          "Ed-0.8">Ed-0.8</a>, <a class="xref" href=
+          "../general/fontconfig.html" title=
+          "Fontconfig-2.4.2">Fontconfig-2.4.2</a>, <a class="xref" href=
+          "../general/pkgconfig.html" title=
+          "pkg-config-0.22">pkg-config-0.22</a>, <a class="xref" href=
+          "x7proto.html" title="Xorg Protocol Headers">Xorg Protocol
+          Headers</a>, and <a class="xref" href="libXdmcp.html" title=
+          "libXdmcp-1.0.2">libXdmcp-1.0.2</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="libxcb.html" title=
+          "libxcb-1.0">libxcb-1.0</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/Xorg7Libraries">http://wiki.linuxfromscratch.org/blfs/wiki/Xorg7Libraries</a>
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Downloading Xorg Libraries
+        </h2>
+        <p>
+          To download the needed files using <span class=
+          "application">wget</span>, use the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir lib &amp;&amp;
+cd lib &amp;&amp;
+grep -v '^#' ../lib-7.2.wget | wget -i- -c \
+    -B http://xorg.freedesktop.org/releases/individual/lib/ &amp;&amp;
+md5sum -c ../lib-7.2.md5</kbd>
+</pre>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Xorg Libraries
+        </h2>
+        <p>
+          Install the libraries by running the following commands for each
+          package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">case $(basename "$PWD") in
+libX11-1.1.2 )
+    patch -Np1 -i ../../libX11-1.1.2-badargs-1.patch &amp;&amp;
+    sed -i 's/_XGet/XGet/' modules/im/ximcp/imDefLkup.c
+    ;;
+libXfont-1.2.8 )
+    patch -Np1 -i ../../libXfont-1.2.8-pcf_parser-1.patch &amp;&amp;
+    sed -i 's/(ft_isdigit/(isdigit/' src/FreeType/fttools.c
+    ;;
+esac &amp;&amp;
+./configure $XORG_CONFIG &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          These packages do not provide test suites.
+        </p>
+        <p>
+          Now as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+ldconfig</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--without-xcb</code></em>: By default,
+          <span class="application">libX11</span> will use <a class="xref"
+          href="libxcb.html" title="libxcb-1.0">libxcb-1.0</a> for its
+          transport layer. This parameter is necessary in the <span class=
+          "command"><strong>./configure</strong></span> command if <a class=
+          "xref" href="libxcb.html" title="libxcb-1.0">libxcb-1.0</a> is not
+          installed.
+        </p>
+        <p>
+          <span class="command"><strong>patch -Np1 -i
+          ../libX11-1.1.2-badargs-1.patch</strong></span>: This patch fixes
+          an error with argument ordering in one of the functions in
+          <span class="application">libX11</span>.
+        </p>
+        <p>
+          <span class="command"><strong>sed -i 's/_XGet/XGet/'
+          modules/im/ximcp/imDefLkup.c</strong></span>: This command fixes a
+          locking bug in <span class="application">libX11</span>.
+        </p>
+        <p>
+          <span class="command"><strong>patch -Np1 -i
+          ../libXfont-1.2.8-pcf_parser-1.patch</strong></span>: This patch
+          fixes a <a class="ulink" href=
+          "http://wiki.x.org/wiki/Development/Security">security
+          vulnerability</a> in the PCF font parser in <span class=
+          "application">libXfont</span>.
+        </p>
+        <p>
+          <span class="command"><strong>sed -i 's/(ft_isdigit/(isdigit/'
+          src/FreeType/fttools.c</strong></span>: In newer versions of
+          <span class="application">Freetype2</span>, the ft_isdigit macro
+          has been removed. This command replaces it with the compatible
+          isdigit macro.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuration of Xorg Libraries
+        </h2>
+        <p>
+          If you've chosen to install <span class="application">Xorg</span>
+          into <code class="filename">/usr</code>, then no further
+          configuration is necessary and you can skip the rest of this
+          section. If you've opted for an alternate prefix, you should create
+          two symlinks to satisfy the expected environment of several
+          packages. Execute the following commands as the root user:
+        </p>
+        <pre class="root">
+<kbd class="command">ln -sv $XORG_PREFIX/lib/X11 /usr/lib/X11 &amp;&amp;
+ln -sv $XORG_PREFIX/include/X11 /usr/include/X11</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">cxpm, makestrs, sxpm, xft-config</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libAppleWM.{so,a}, libdmx.{so,a},
+              libfontenc.{so,a}, libFS.{so,a}, libICE.{so,a}, liboldX.{so,a},
+              libSM.{so,a}, libWindowsWM.{so,a}, libX11.{so,a},
+              libXaw6.{so,a}, libXaw7.{so,a}, libXaw8.{so,a}, libXaw.{so,a},
+              libXcomposite.{so,a}, libXcursor.{so,a}, libXdamage.{so,a},
+              libXevie.{so,a}, libXext.{so,a}, libXfixes.{so,a},
+              libXfontcache.{so,a}, libXfont.{so,a}, libXft.{so,a},
+              libXinerama.{so,a}, libXi.{so,a}, libxkbfile.{so,a},
+              libxkbui.{so,a}, libXmu.{so,a}, libXmuu.{so,a}, libXpm.{so,a},
+              libXprintAppUtil.{so,a}, libXprintUtil.{so,a}, libXp.{so,a},
+              libXrandr.{so,a}, libXrender.{so,a}, libXRes.{so,a},
+              libXss.{so,a}, libXTrap.{so,a}, libXt.{so,a}, libXtst.{so,a},
+              libXvMC.{so,a}, libXvMCW.{so,a}, libXv.{so,a},
+              libXxf86dga.{so,a}, libXxf86misc.{so,a}, and
+              libXxf86vm.{so,a}</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cxpm-x7" name="cxpm-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cxpm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    checks the format of an XPM file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="makestrs-x7" name="makestrs-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>makestrs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    makes string table C source and header(s).
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="sxpm-x7" name="sxpm-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>sxpm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    shows an XPM file and/or converts XPM 1 or 2 files to XPM
+                    3.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xft-config-x7" name=
+                    "xft-config-x7"></a><span class="term"><span class=
+                    "command"><strong>xft-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    reports Xft version, compiler, linker, and/or
+                    installation directory information.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libAppleWM-x7" name=
+                    "libAppleWM-x7"></a><span class="term"><code class=
+                    "filename">libAppleWM.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the Apple rootless window management extension.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libdmx-x7" name="libdmx-x7"></a><span class=
+                    "term"><code class="filename">libdmx.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Window System DMX (Distributed Multihead X)
+                    extension library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libfontenc-x7" name=
+                    "libfontenc-x7"></a><span class="term"><code class=
+                    "filename">libfontenc.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X11 font encoding library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libFS-x7" name="libFS-x7"></a><span class=
+                    "term"><code class="filename">libFS.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the library interface to the X Font Server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libICE-x7" name="libICE-x7"></a><span class=
+                    "term"><code class="filename">libICE.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Inter Client Exchange Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="liboldX-x7" name="liboldX-x7"></a><span class=
+                    "term"><code class=
+                    "filename">liboldX.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the interface library to X10 routines.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libSM-x7" name="libSM-x7"></a><span class=
+                    "term"><code class="filename">libSM.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Session Management Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libWindowsWM-x7" name=
+                    "libWindowsWM-x7"></a><span class="term"><code class=
+                    "filename">libWindowsWM.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the WindowsWM Library based on AppleWM.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libX11-x7" name="libX11-x7"></a><span class=
+                    "term"><code class="filename">libX11.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the Xlib Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXaw6-x7" name="libXaw6-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXaw6.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Athena Widgets Library, version 6.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXaw7-x7" name="libXaw7-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXaw7.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Athena Widgets Library, version 7.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXaw8-x7" name="libXaw8-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXaw8.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Athena Widgets Library, version 8.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXaw-x7" name="libXaw-x7"></a><span class=
+                    "term"><code class="filename">libXaw.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    are symbolic links to the current X Athena Widgets
+                    Library, version 8.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXcomposite-x7" name=
+                    "libXcomposite-x7"></a><span class="term"><code class=
+                    "filename">libXcomposite.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Composite Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXcursor-x7" name=
+                    "libXcursor-x7"></a><span class="term"><code class=
+                    "filename">libXcursor.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Cursor management library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXdamage-x7" name=
+                    "libXdamage-x7"></a><span class="term"><code class=
+                    "filename">libXdamage.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Damage Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXevie-x7" name="libXevie-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXevie.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Event Interception Extension (XEvIE) Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXext-x7" name="libXext-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXext.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the Misc X Extension Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXfixes-x7" name="libXfixes-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXfixes.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    a library to provide augmented versions of core protocol
+                    requests.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXfontcache-x7" name=
+                    "libXfontcache-x7"></a><span class="term"><code class=
+                    "filename">libXfontcache.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X-TrueType font cache extension client library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXfont-x7" name="libXfont-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXfont.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X font library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXft-x7" name="libXft-x7"></a><span class=
+                    "term"><code class="filename">libXft.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X FreeType interface library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXinerama-x7" name=
+                    "libXinerama-x7"></a><span class="term"><code class=
+                    "filename">libXinerama.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the Xinerama Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXi-x7" name="libXi-x7"></a><span class=
+                    "term"><code class="filename">libXi.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Input Extension Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libxkbfile-x7" name=
+                    "libxkbfile-x7"></a><span class="term"><code class=
+                    "filename">libxkbfile.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the xkbfile Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libxkbui-x7" name="libxkbui-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libxkbui.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the xkbui Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXmu-x7" name="libXmu-x7"></a><span class=
+                    "term"><code class="filename">libXmu.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X interface library for miscellaneous utilities
+                    not part of the Xlib standard.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXmuu-x7" name="libXmuu-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXmuu.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the Mini Xmu Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXpm-x7" name="libXpm-x7"></a><span class=
+                    "term"><code class="filename">libXpm.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Pixmap Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXprintAppUtil-x7" name=
+                    "libXprintAppUtil-x7"></a><span class="term"><code class=
+                    "filename">libXprintAppUtil.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the XprintAppUtil Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXprintUtil-x7" name=
+                    "libXprintUtil-x7"></a><span class="term"><code class=
+                    "filename">libXprintUtil.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the XprintUtil Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXp-x7" name="libXp-x7"></a><span class=
+                    "term"><code class="filename">libXp.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Print Client Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXrandr-x7" name="libXrandr-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXrandr.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Resize, Rotate and Reflection extension library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXrender-x7" name=
+                    "libXrender-x7"></a><span class="term"><code class=
+                    "filename">libXrender.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Render Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXRes-x7" name="libXRes-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXRes.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X-Resource extension client library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXss-x7" name="libXss-x7"></a><span class=
+                    "term"><code class="filename">libXss.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X11 Screen Saver extension client library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXTrap-x7" name="libXTrap-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXTrap.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Trap Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXt-x7" name="libXt-x7"></a><span class=
+                    "term"><code class="filename">libXt.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Toolkit Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXtst-x7" name="libXtst-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXtst.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the Xtst Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXvMC-x7" name="libXvMC-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXvMC.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X-Video Motion Compensation Library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXvMCW-x7" name="libXvMCW-x7"></a><span class=
+                    "term"><code class=
+                    "filename">libXvMCW.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the XvMC Wrapper including the Nonstandard VLD
+                    extension.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXv-x7" name="libXv-x7"></a><span class=
+                    "term"><code class="filename">libXv.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X Window System video extension library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXxf86dga-x7" name=
+                    "libXxf86dga-x7"></a><span class="term"><code class=
+                    "filename">libXxf86dga.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the client library for the XFree86-DGA extension.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXxf86misc-x7" name=
+                    "libXxf86misc-x7"></a><span class="term"><code class=
+                    "filename">libXxf86misc.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the client library for the XFree86-Misc X extension.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXxf86vm-x7" name=
+                    "libXxf86vm-x7"></a><span class="term"><code class=
+                    "filename">libXxf86vm.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the client library for the XFree86-VidMode X
+                    extension.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-06-19 19:28:34 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libxcb.html" title="libxcb-1.0">Prev</a>
+          <p>
+            libxcb-1.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xbitmaps.html" title=
+          "Xbitmaps-1.0.1">Next</a>
+          <p>
+            Xbitmaps-1.0.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;23.&nbsp;X Window System Environment">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

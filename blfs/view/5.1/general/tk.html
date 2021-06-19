@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Tk-8.4.6
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;12.&nbsp;Programming</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="tcl.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="gcc2.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Tk-8.4.6
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Tk
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Tk</span> package contains
+          <span class="acronym">TCL</span> <span class="acronym">GUI</span>
+          Toolkit.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2727351" name="id2727351"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/tcl/tk8.4.6-src.tar.gz">
+                  http://prdownloads.sourceforge.net/tcl/tk8.4.6-src.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.us.xemacs.org/pub/tcl/tcl8_4/tk8.4.6-src.tar.gz">
+                  ftp://ftp.us.xemacs.org/pub/tcl/tcl8_4/tk8.4.6-src.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 3.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 17.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.41 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2727402" name="id2727402"></a><span class=
+                  "application">Tk</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2727396" name="id2727396"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              X (<a href="../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.7.0</a>) and <a href=
+              "tcl.html">Tcl-8.4.6</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Tk
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Tk</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">VERSION=8.4.6 &amp;&amp;
+V=`echo $VERSION | cut -d "." -f 1,2` &amp;&amp;
+DIR=$PWD &amp;&amp;
+cd unix &amp;&amp;
+./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+sed -i "s:${DIR}/unix:/usr/lib:" tkConfig.sh &amp;&amp;
+sed -i "s:${DIR}:/usr/include/tk${V}:" tkConfig.sh &amp;&amp;
+make install &amp;&amp;
+install -d /usr/include/tk${V}/unix &amp;&amp;
+install -m644 *.h /usr/include/tk${V}/unix/ &amp;&amp;
+install -d /usr/include/tk${V}/generic &amp;&amp;
+install -m644 ../generic/*.h /usr/include/tk${V}/generic/ &amp;&amp;
+rm -f /usr/include/tk${V}/generic/{tk,tkDecls,tkPlatDecls}.h &amp;&amp;
+ln -nsf /usr/include/tk${V} /usr/lib/tk${V}/include &amp;&amp;
+ln -sf libtk${V}.so /usr/lib/libtk.so &amp;&amp;
+ln -sf wish${V} /usr/bin/wish</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">sed -i ...</b></span>: The <span class=
+          "application">Tk</span> package assumes that the source that is
+          used to build <span class="application">Tk</span> is always kept
+          around for compiling packages that depend on <span class=
+          "application">Tk</span>. These <span><b class=
+          "command">sed</b></span>'s remove the reference to the build
+          directory and replace them by saner system wide locations.
+        </p>
+        <p>
+          <span><b class="command">install ...</b></span>: These commands
+          install the internal headers into a system-wide location.
+        </p>
+        <p>
+          <span><b class="command">ln -sf ...</b></span>: These commands
+          create compatibility symbolic links.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="tcl.html">Prev</a><br />
+        Tcl-8.4.6
+      </div>
+      <div class="next">
+        <a accesskey="n" href="gcc2.html">Next</a><br />
+        GCC-2.95.3
+      </div>
+      <div class="up">
+        <a accesskey="u" href="prog.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,570 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Firefox-48.0.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.10">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 7.10
+      </h4>
+      <h3>
+        Chapter&nbsp;42.&nbsp;Graphical Web Browsers
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="seamonkey.html" title=
+          "SeaMonkey-2.40">Prev</a>
+          <p>
+            SeaMonkey-2.40
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="other.html" title=
+          "Other X-based Programs">Next</a>
+          <p>
+            Other X-based Programs
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphweb.html" title=
+          "Chapter&nbsp;42.&nbsp;Graphical Web Browsers">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="firefox" name="firefox"></a>Firefox-48.0.2
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Firefox
+        </h2>
+        <p>
+          <span class="application">Firefox</span> is a stand-alone browser
+          based on the <span class="application">Mozilla</span> codebase.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.10
+          platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/48.0.2/source/firefox-48.0.2.source.tar.xz">
+                https://ftp.mozilla.org/pub/mozilla.org/firefox/releases/48.0.2/source/firefox-48.0.2.source.tar.xz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: bd6410592a8c608c0f771c056351493c
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 180 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 5.3 GB (84 MB installed)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 12 SBU (with parallelism=4 on a recent
+                intel i7, much longer on lesser CPUs)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Required patch if using gtk+-3.20 or later (do not use with
+                earlier versions) <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/7.10/firefox-48.0.2-gtk320-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/7.10/firefox-48.0.2-gtk320-1.patch</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Optional patch to allow system versions of <a class="xref"
+                href="../general/graphite2.html" title=
+                "Graphite2-1.3.8">Graphite2-1.3.8</a> and <a class="xref"
+                href="../general/harfbuzz.html" title=
+                "HarfBuzz-1.3.0">HarfBuzz-1.3.0</a> - this should be regarded
+                as experimental <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/7.10/firefox-48.0.2-system_graphite2_harfbuzz-2.patch">
+                http://www.linuxfromscratch.org/patches/blfs/7.10/firefox-48.0.2-system_graphite2_harfbuzz-2.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The tarball <span class=
+            "emphasis"><em>firefox-48.0.2.source.tar.xz</em></span> will
+            untar to <span class="emphasis"><em>firefox-48.0.2</em></span>
+            directory. However, if you do this in a directory where the
+            sticky bit is set, such as <code class="filename">/tmp</code> it
+            will end with error messages:
+          </p>
+          <div class="literallayout">
+            <p>
+              tar:&nbsp;.:&nbsp;Cannot&nbsp;utime:&nbsp;Operation&nbsp;not&nbsp;permitted<br />
+
+              tar:&nbsp;.:&nbsp;Cannot&nbsp;change&nbsp;mode&nbsp;to&nbsp;rwxr-xr-t:&nbsp;Operation&nbsp;not&nbsp;permitted<br />
+
+              tar:&nbsp;Exiting&nbsp;with&nbsp;failure&nbsp;status&nbsp;due&nbsp;to&nbsp;previous&nbsp;errors<br />
+              </p>
+          </div>
+          <p>
+            This does finish with non-zero status, but it does <span class=
+            "emphasis"><em>NOT</em></span> mean there is a real problem. Do
+            not untar as the <code class="systemitem">root</code> user in a
+            directory where the sticky bit is set - that will unset it.
+          </p>
+        </div>
+        <h3>
+          Firefox Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="../multimedia/alsa-lib.html" title=
+          "alsa-lib-1.1.2">alsa-lib-1.1.2</a>, <a class="xref" href=
+          "../general/autoconf213.html" title=
+          "Autoconf-2.13">Autoconf-2.13</a>, <a class="xref" href=
+          "../x/gtk3.html" title="GTK+-3.20.9">GTK+-3.20.9</a> (or <a class=
+          "xref" href="../x/gtk2.html" title="GTK+-2.24.30">GTK+-2.24.30</a>
+          if you change the mozconfig where indicated), <a class="xref" href=
+          "../postlfs/nss.html" title="NSS-3.26">NSS-3.26</a>, <a class=
+          "xref" href="../general/unzip.html" title=
+          "UnZip-6.0">UnZip-6.0</a>, <a class="xref" href=
+          "../general/yasm.html" title="yasm-1.3.0">yasm-1.3.0</a>, and
+          <a class="xref" href="../general/zip.html" title=
+          "Zip-3.0">Zip-3.0</a>
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="../general/icu.html" title=
+          "ICU-57.1">ICU-57.1</a>, <a class="xref" href=
+          "../basicnet/libevent.html" title=
+          "libevent-2.0.22">libevent-2.0.22</a>, <a class="xref" href=
+          "../multimedia/libvpx.html" title="libvpx-1.6.0">libvpx-1.6.0</a>,
+          and <a class="xref" href="../server/sqlite.html" title=
+          "SQLite-3.14.1">SQLite-3.14.1</a>
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            If you don't install recommended dependencies, then internal
+            copies of those packages will be used. They might be tested to
+            work, but they can be out of date or contain security holes.
+          </p>
+        </div>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            With <span class="application">Firefox-31.0</span> and later
+            versions, you must have installed <span class=
+            "application">Openssl</span> before <span class=
+            "application">Python 2</span> or the build system will quickly
+            fail with output including "ImportError: cannot import name
+            HTTPSHandler". If you are in any doubt about this (e.g. upgrading
+            from an older version of Firefox), check if <code class=
+            "filename">/usr/lib/python2.7/lib-dynload/_ssl.so</code> exists.
+            If it does not, reinstall <a class="xref" href=
+            "../general/python2.html" title="Python-2.7.12">Python-2.7.12</a>
+            (after installing <a class="xref" href="../postlfs/openssl.html"
+            title="OpenSSL-1.0.2h">OpenSSL-1.0.2h</a>). The latest version of
+            any <span class="emphasis"><em>currently maintained</em></span>
+            version of Openssl should be satisfactory if already installed.
+          </p>
+        </div>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../basicnet/curl.html" title=
+          "cURL-7.50.1">cURL-7.50.1</a>, <a class="xref" href=
+          "../general/dbus-glib.html" title=
+          "dbus-glib-0.106">dbus-glib-0.106</a>, <a class="xref" href=
+          "../general/doxygen.html" title=
+          "Doxygen-1.8.11">Doxygen-1.8.11</a>, <a class="xref" href=
+          "../gnome/GConf.html" title="GConf-3.2.6">GConf-3.2.6</a>,
+          <a class="xref" href="../multimedia/ffmpeg.html" title=
+          "FFmpeg-3.1.3">FFmpeg-3.1.3</a> (runtime), <a class="xref" href=
+          "../general/libwebp.html" title="libwebp-0.5.1">libwebp-0.5.1</a>,
+          <a class="xref" href="../general/openjdk.html" title=
+          "OpenJDK-1.8.0.102">OpenJDK-1.8.0.102</a>, <a class="xref" href=
+          "../multimedia/pulseaudio.html" title=
+          "PulseAudio-9.0">PulseAudio-9.0</a>, <a class="xref" href=
+          "../x/startup-notification.html" title=
+          "startup-notification-0.12">startup-notification-0.12</a>,
+          <a class="xref" href="../general/valgrind.html" title=
+          "Valgrind-3.11.0">Valgrind-3.11.0</a>, <a class="xref" href=
+          "../basicnet/wget.html" title="Wget-1.18">Wget-1.18</a>, <a class=
+          "xref" href="../basicnet/wireless_tools.html" title=
+          "Wireless Tools-29">Wireless Tools-29</a>, <a class="ulink" href=
+          "https://hunspell.github.io/">Hunspell</a>, <a class="ulink" href=
+          "http://sourceforge.net/projects/liboauth/files/">liboauth</a>, and
+          <a class="ulink" href=
+          "https://github.com/libproxy/libproxy">libproxy</a>, <a class=
+          "ulink" href="https://www.rust-lang.org/">Rust</a>, and (with the
+          patch) <a class="xref" href="../general/graphite2.html" title=
+          "Graphite2-1.3.8">Graphite2-1.3.8</a> and <a class="xref" href=
+          "../general/harfbuzz.html" title=
+          "HarfBuzz-1.3.0">HarfBuzz-1.3.0</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/firefox">http://wiki.linuxfromscratch.org/blfs/wiki/firefox</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Firefox
+        </h2>
+        <p>
+          The configuration of <span class="application">Firefox</span> is
+          accomplished by creating a <code class="filename">mozconfig</code>
+          file containing the desired configuration options. A default
+          <code class="filename">mozconfig</code> is created below. To see
+          the entire list of available configuration options (and an
+          abbreviated description of each one), issue <span class=
+          "command"><strong>./configure --help</strong></span>. You may also
+          wish to review the entire file and uncomment any other desired
+          options. Create the file by issuing the following command:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; mozconfig &lt;&lt; "EOF"
+<code class=
+"literal"># If you have a multicore machine, all cores will be used by default.
+# If desired, you can reduce the number of cores used, e.g. to 1, by
+# uncommenting the next line and setting a valid number of CPU cores.
+#mk_add_options MOZ_MAKE_FLAGS="-j1"
+
+# If you have installed DBus-Glib comment out this line:
+ac_add_options --disable-dbus
+
+# If you have installed dbus-glib, and you have installed (or will install)
+# wireless-tools, and you wish to use geolocation web services, comment out
+# this line
+ac_add_options --disable-necko-wifi
+
+# Uncomment this option if you wish to build with gtk+-2
+#ac_add_options --enable-default-toolkit=cairo-gtk2
+
+# Uncomment these lines if you have installed optional dependencies:
+#ac_add_options --enable-system-hunspell
+#ac_add_options --enable-startup-notification
+
+# Comment out following option if you have PulseAudio installed
+ac_add_options --disable-pulseaudio
+
+# If you have installed GConf, comment out this line
+ac_add_options --disable-gconf
+
+# Comment out following options if you have not installed
+# recommended dependencies:
+ac_add_options --enable-system-sqlite
+ac_add_options --with-system-libevent
+ac_add_options --with-system-libvpx
+ac_add_options --with-system-nspr
+ac_add_options --with-system-nss
+ac_add_options --with-system-icu
+
+# If you are going to apply the patch for system graphite
+# and system harfbuzz, uncomment these lines:
+#ac_add_options --with-system-graphite2
+#ac_add_options --with-system-harfbuzz
+
+# Stripping is now enabled by default.
+# Uncomment these lines if you need to run a debugger:
+#ac_add_options --disable-strip
+#ac_add_options --disable-install-strip
+
+# The BLFS editors recommend not changing anything below this line:
+ac_add_options --prefix=/usr
+ac_add_options --enable-application=browser
+
+ac_add_options --disable-crashreporter
+ac_add_options --disable-updater
+ac_add_options --disable-tests
+
+ac_add_options --enable-optimize
+
+ac_add_options --enable-gio
+ac_add_options --enable-official-branding
+ac_add_options --enable-safe-browsing
+ac_add_options --enable-url-classifier
+
+# From firefox-40, using system cairo causes firefox to crash
+# frequently when it is doing background rendering in a tab.
+#ac_add_options --enable-system-cairo
+ac_add_options --enable-system-ffi
+ac_add_options --enable-system-pixman
+
+ac_add_options --with-pthreads
+
+ac_add_options --with-system-bz2
+ac_add_options --with-system-jpeg
+ac_add_options --with-system-png
+ac_add_options --with-system-zlib
+
+mk_add_options MOZ_OBJDIR=@TOPSRCDIR@/firefox-build-dir</code>
+EOF</kbd>
+</pre>
+        <p>
+          Compile <span class="application">Firefox</span> by issuing the
+          following commands:
+        </p>
+        <p>
+          If you are using gtk+-3.20 or later, apply a patch to restore the
+          slider on scrollbars:
+        </p>
+        <pre class="userinput">
+<kbd class="command">patch -Np1 -i ../firefox-48.0.2-gtk320-1.patch</kbd>
+</pre>
+        <p>
+          If you have installed system versions of graphite2 and harfbuzz and
+          wish firefox to use those instead of its shipped versions, apply
+          the patch and uncomment the appropriate entries in the <code class=
+          "filename">mozconfig</code> file:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">patch -Np1 -i ../firefox-48.0.2-system_graphite2_harfbuzz-2.patch</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            If you are compiling <span class="application">Firefox</span> in
+            chroot, make sure you have <code class="envar">$SHELL</code>
+            environment variable set or prepend <code class=
+            "envar">SHELL=/bin/sh</code>.
+          </p>
+        </div>
+        <pre class="userinput">
+<kbd class="command">export CFLAGS_HOLD=$CFLAGS &amp;&amp;
+export CXXFLAGS_HOLD=$CXXFLAGS &amp;&amp;
+export CFLAGS+=" -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-schedule-insns2" &amp;&amp;
+export CXXFLAGS+=" -fno-delete-null-pointer-checks -fno-lifetime-dse -fno-schedule-insns2" &amp;&amp;
+
+make -f client.mk</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make -f client.mk install INSTALL_SDK= &amp;&amp;
+chown -R 0:0 /usr/lib/firefox-48.0.2   &amp;&amp;
+
+mkdir -pv    /usr/lib/mozilla/plugins  &amp;&amp;
+ln    -sfv   ../../mozilla/plugins /usr/lib/firefox-48.0.2/browser</kbd>
+</pre>
+        <p>
+          Set environment variables back to their values:
+        </p>
+        <pre class="userinput">
+<kbd class="command">export CFLAGS=$CFLAGS_HOLD     &amp;&amp;
+export CXXFLAGS=$CXXFLAGS_HOLD &amp;&amp;
+unset CFLAGS_HOLD CXXFLAGS_HOLD</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>CFLAGS= ... CXXFLAGS=
+          ...</strong></span>: These settings work around code which gcc6
+          would otherwise regard as out-of-specification and allow it to
+          produce a working program.
+        </p>
+        <p>
+          <span class="command"><strong>make -f client.mk
+          ...</strong></span>: Mozilla products are packaged to allow the use
+          of a configuration file which can be used to pass the configuration
+          settings to the <span class=
+          "command"><strong>configure</strong></span> command. <span class=
+          "command"><strong>make</strong></span> uses the <code class=
+          "filename">client.mk</code> file to get initial configuration and
+          setup parameters.
+        </p>
+        <p>
+          <span class="command"><strong>mkdir -p
+          /usr/lib/mozilla/plugins</strong></span>: This checks that
+          <code class="filename">/usr/lib/mozilla/plugins</code> exists.
+        </p>
+        <p>
+          <span class="command"><strong>ln -sv ...
+          /usr/lib/firefox-48.0.2/browser</strong></span>: This command
+          creates a symbolic link to <code class=
+          "filename">/usr/lib/mozilla/plugins</code>. It's not really needed,
+          as <span class="application">Firefox</span> checks <code class=
+          "filename">/usr/lib/mozilla/plugins</code> by default, but the
+          symbolic link is made to keep all the plugins installed in one
+          folder.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring Firefox
+        </h2>
+        <p>
+          If you use a desktop environment like <span class=
+          "application">Gnome</span> or <span class="application">KDE</span>
+          you may like to create a <code class=
+          "filename">firefox.desktop</code> file so that <span class=
+          "application">Firefox</span> appears in the panel's menus. If you
+          didn't enable startup-notification in your mozconfig change the
+          StartupNotify line to false. As the <code class=
+          "systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">mkdir -pv /usr/share/applications &amp;&amp;
+mkdir -pv /usr/share/pixmaps &amp;&amp;
+
+cat &gt; /usr/share/applications/firefox.desktop &lt;&lt; "EOF" &amp;&amp;
+<code class="literal">[Desktop Entry]
+Encoding=UTF-8
+Name=Firefox Web Browser
+Comment=Browse the World Wide Web
+GenericName=Web Browser
+Exec=firefox %u
+Terminal=false
+Type=Application
+Icon=firefox
+Categories=GNOME;GTK;Network;WebBrowser;
+MimeType=application/xhtml+xml;text/xml;application/xhtml+xml;application/vnd.mozilla.xul+xml;text/mml;x-scheme-handler/http;x-scheme-handler/https;
+StartupNotify=true</code>
+EOF
+
+ln -sfv /usr/lib/firefox-48.0.2/browser/icons/mozicon128.png \
+        /usr/share/pixmaps/firefox.png</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">firefox</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">Numerous libraries, browser components,
+              plugins, extensions, and helper modules installed in
+              /usr/lib/firefox-48.0.2</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/lib/firefox-48.0.2</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="firefox-prog" name="firefox-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>firefox</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a <span class="application">GTK+ 3</span> internet
+                    browser that uses the Mozilla Gecko rendering engine.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2016-09-02 01:57:33 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="seamonkey.html" title=
+          "SeaMonkey-2.40">Prev</a>
+          <p>
+            SeaMonkey-2.40
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="other.html" title=
+          "Other X-based Programs">Next</a>
+          <p>
+            Other X-based Programs
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphweb.html" title=
+          "Chapter&nbsp;42.&nbsp;Graphical Web Browsers">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

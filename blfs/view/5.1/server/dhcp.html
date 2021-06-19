@@ -1,0 +1,327 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      DHCP-3.0pl2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;22.&nbsp;Other Server Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="cvsserver.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="leafnode.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          DHCP-3.0pl2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to DHCP
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">DHCP</span></span> package contains both the client and
+          server programs for <span class="acronym">DHCP</span>.
+          <span><b class="command">dhclient</b></span> (the client) is useful
+          for connecting your computer to a network which uses <span class=
+          "acronym">DHCP</span> to assign network addresses. <span><b class=
+          "command">dhcpd</b></span> (the server) is useful for assigning
+          network addresses on your private network.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2850667" name="id2850667"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/infosys/servers/isc/dhcp/dhcp-3.0pl2.tar.gz">
+                  http://gd.tuwien.ac.at/infosys/servers/isc/dhcp/dhcp-3.0pl2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.isc.org/isc/dhcp/dhcp-3.0pl2.tar.gz">ftp://ftp.isc.org/isc/dhcp/dhcp-3.0pl2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 852 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 29.6 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.23 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of DHCP
+          </h3>
+        </div>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              You must have Packet Socket support compiled in the kernel and
+              Socket Filtering either compiled in or as a kernel module.
+            </p>
+          </div>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">DHCP</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">./configure &amp;&amp;
+make &amp;&amp;
+make LIBDIR=/usr/lib INCDIR=/usr/include install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>LIBDIR=/usr/lib
+          INCDIR=/usr/include</tt></i>: This command installs the library and
+          include files in <tt class="filename">/usr</tt> instead of
+          <tt class="filename">/usr/local</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring DHCP
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2851147" name="id2851147"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/dhclient.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2851159" name="id2851159"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Information on configuring the <span class="acronym">DHCP</span>
+            client can be found in <a href="../connect/dhcp.html" title=
+            "Chapter&nbsp;14.&nbsp;DHCP Clients">Chapter&nbsp;14, <i>DHCP
+            Clients</i></a>.
+          </p>
+          <p>
+            Note that you only need the <span class="acronym">DHCP</span>
+            server if you want to issue <span class="acronym">LAN</span>
+            addresses over your network. The <span class=
+            "acronym">DHCP</span> client doesn't need this script to be used.
+            Also note that this script is coded for the <span class=
+            "strong">eth1</span> interface, which may need to be modified for
+            your hardware configuration.
+          </p>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/dhcp</tt> init
+            script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-dhcp</b></span></tt>
+</pre>
+          <p>
+            The lease file must exist on startup. The following command will
+            satisfy that requirement:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">touch /var/state/dhcp/dhcpd.leases</b></span></tt>
+</pre>
+          <p>
+            The following commands will create a base configuration file for
+            a <span class="acronym">DHCP</span> server. There are several
+            options that you may want to add (information that is passed back
+            to the <span class="acronym">DHCP</span> client) and those are
+            covered in the man pages for <tt class="filename">dhcp.conf</tt>.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /etc/dhcpd.conf &lt;&lt; "EOF"</b></span>
+default-lease-time 72000;
+max-lease-time 144000;
+ddns-update-style ad-hoc;
+
+subnet <i class="replaceable"><tt>[192.168.5.0]</tt></i> netmask <i class=
+"replaceable"><tt>[255.255.255.0]</tt></i> {
+  range <i class="replaceable"><tt>[192.168.5.10] [192.168.5.240]</tt></i>;
+  option broadcast-address <i class=
+"replaceable"><tt>[195.168.5.255]</tt></i>;
+  option routers <i class="replaceable"><tt>[192.168.5.1]</tt></i>;
+}
+<span><b class="command">EOF</b></span></tt>
+</pre>
+          <p>
+            All addresses should be changed to meet your circumstance.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">DHCP</span></span> package contains <span><b class=
+          "command">dhclient</b></span>, <span><b class=
+          "command">dhcpd</b></span> and <span><b class=
+          "command">dhcrelay</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2851640" name="id2851640"></a>dhclient
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">dhclient</b></span> is the
+            implementation of the <span class="acronym">DHCP</span> client.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2851983" name="id2851983"></a>dhcpd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">dhcpd</b></span> implements Dynamic Host
+            Configuration Protocol (<span class="acronym">DHCP</span>) and
+            Internet Bootstrap Protocol (<span class="acronym">BOOTP</span>)
+            requests for network addresses.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2852004" name="id2852004"></a>dhcrelay
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">dhcrelay</b></span> provides a means to
+            accept <span class="acronym">DHCP</span> and <span class=
+            "acronym">BOOTP</span> requests on a subnet without a
+            <span class="acronym">DHCP</span> server and relay them to a
+            <span class="acronym">DHCP</span> server on another subnet.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="cvsserver.html">Prev</a><br />
+        Running a CVS server
+      </div>
+      <div class="next">
+        <a accesskey="n" href="leafnode.html">Next</a><br />
+        Leafnode-1.9.43
+      </div>
+      <div class="up">
+        <a accesskey="u" href="other.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

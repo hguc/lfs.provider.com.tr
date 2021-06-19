@@ -1,0 +1,233 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      PCRE-4.5
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;8.&nbsp;General Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="genlib.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="popt.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          PCRE-4.5
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to PCRE
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">PCRE</span></span> package contains <span class=
+          "application">Perl</span> Compatible Regular Expression libraries.
+          These are useful for implementing regular expression pattern
+          matching using the same syntax and semantics as <span class=
+          "application">Perl</span> 5.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2649428" name="id2649428"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-4.5.tar.bz2">
+                  ftp://ftp.csx.cam.ac.uk/pub/software/programming/pcre/pcre-4.5.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 344 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 3.5 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.08 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of PCRE
+          </h3>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">PCRE</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --enable-utf8 &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <p>
+          If you reinstall <span class="application">grep</span> after
+          installing <span class="application">pcre</span>, <span class=
+          "application">grep</span> will get linked against <span class=
+          "application">pcre</span> and may cause problems if <tt class=
+          "filename">/usr</tt> is a separate mount point. To avoid this,
+          either pass the option <span class=
+          "emphasis"><em>--disable-perl-regexp</em></span> when executing
+          <span><b class="command">./configure</b></span> for <span class=
+          "application">grep</span> or move <tt class="filename">libpcre</tt>
+          to <tt class="filename">/lib</tt> as follows.
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">mv /usr/lib/libpcre.so.* /lib/ &amp;&amp;
+ln -sf ../../lib/libpcre.so.0 /usr/lib/libpcre.so</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--enable-utf8</tt></i>: This switch
+          includes the code for handling <span class="acronym">UTF</span>-8
+          character strings in the library.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">PCRE</span></span> package contains the <tt class=
+          "filename">libpcre</tt> libraries, <span><b class=
+          "command">pcregrep</b></span>, <span><b class=
+          "command">pcretest</b></span> and <span><b class=
+          "command">pcre-config</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2651847" name="id2651847"></a>pcregrep
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pcregrep</b></span> is a <span><b class=
+            "command">grep</b></span> that understands <span class=
+            "application">Perl</span> compatible regular expressions.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2651892" name="id2651892"></a>pcretest
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pcretest</b></span> can test your
+            <span class="application">Perl</span> compatible regular
+            expression.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2652415" name="id2652415"></a>pcre-config
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pcre-config</b></span> is used during
+            the compile process of programs linking to this library.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="genlib.html">Prev</a><br />
+        Chapter&nbsp;8.&nbsp;General Libraries
+      </div>
+      <div class="next">
+        <a accesskey="n" href="popt.html">Next</a><br />
+        popt-1.7
+      </div>
+      <div class="up">
+        <a accesskey="u" href="genlib.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

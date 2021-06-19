@@ -1,0 +1,98 @@
+Tue Feb 26 00:09:08 CST 2019
+
+KB: 4338280	/
+
+patching file src/Makefile
+make[1]: Entering directory '/sources/sysvinit-2.93'
+make VERSION=2.93 -C src all
+make[2]: Entering directory '/sources/sysvinit-2.93/src'
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o init.o init.c
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"  -DINIT_MAIN -c -o init_utmp.o utmp.c
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o runlevellog.o runlevellog.c
+cc   init.o init_utmp.o runlevellog.o    -o init
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o halt.o halt.c
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o ifdown.o ifdown.c
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o hddown.o hddown.c
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o utmp.o utmp.c
+cc   halt.o ifdown.o hddown.o utmp.o runlevellog.o   -o halt
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o shutdown.o shutdown.c
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o dowall.o dowall.c
+dowall.c: In function 'wall':
+dowall.c:204:35: warning: '%s' directive output may be truncated writing up to 64 bytes into a region of size between 24 and 55 [-Wformat-truncation=]
+    "\r\nBroadcast message from %s@%s %s(%s):\r\n\r\n",
+                                   ^~
+    user, hostname, tty, date);
+          ~~~~~~~~                  
+In file included from /usr/include/stdio.h:867,
+                 from dowall.c:33:
+/usr/include/bits/stdio2.h:67:10: note: '__builtin___snprintf_chk' output 35 or more bytes (assuming 165) into a destination of size 81
+   return __builtin___snprintf_chk (__s, __n, __USE_FORTIFY_LEVEL - 1,
+          ^~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+        __bos (__s), __fmt, __va_arg_pack ());
+        ~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~
+cc   shutdown.o dowall.o utmp.o   -o shutdown
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o runlevel.o runlevel.c
+cc   runlevel.o runlevellog.o   -o runlevel
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"     killall5.c   -o killall5
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o fstab-decode.o fstab-decode.c
+cc   fstab-decode.o   -o fstab-decode
+cc -O2 -ansi -fomit-frame-pointer -fstack-protector-strong -W -Wall -Wunreachable-code -Wformat -Werror=format-security -D_FORTIFY_SOURCE=2 -D_XOPEN_SOURCE -D_GNU_SOURCE -DVERSION=\"2.93\"    -c -o bootlogd.o bootlogd.c
+cc   bootlogd.o bootlogd.h  -lutil  -o bootlogd
+make[2]: Leaving directory '/sources/sysvinit-2.93/src'
+make[1]: Leaving directory '/sources/sysvinit-2.93'
+make[1]: Entering directory '/sources/sysvinit-2.93'
+make VERSION=2.93 -C src install
+make[2]: Entering directory '/sources/sysvinit-2.93/src'
+install -m 755 -d /bin/ /sbin/
+install -m 755 -d /usr/bin/
+for i in ; do \
+		install -o root -g root -m 755 $i /bin/ ; \
+	done
+for i in init halt shutdown runlevel killall5 fstab-decode bootlogd; do \
+		install -o root -g root -m 755 $i /sbin/ ; \
+	done
+for i in ; do \
+		install -o root -g root -m 755 $i /usr/bin/ ; \
+	done
+# install -m 755 -d /etc/
+# install -o root -g root -m 755 ../doc/initscript.sample /etc/
+ln -sf halt /sbin/reboot
+ln -sf halt /sbin/poweroff
+ln -sf init /sbin/telinit
+#ln -sf /sbin/killall5 /bin/pidof
+#if [ ! -f /usr/bin/lastb ]; then \
+	#	ln -sf last /usr/bin/lastb; \
+	#fi
+install -m 755 -d /usr/include/
+install -o root -g root -m 644 initreq.h /usr/include/
+install -m 755 -d /usr/share/man/man1/
+install -m 755 -d /usr/share/man/man5/
+install -m 755 -d /usr/share/man/man8/
+for man in ; do \
+		install -o root -g root -m 644 ../man/$man /usr/share/man/man1/; \
+		sed -i "1{ s@^\('\\\\\"\)[^\*-]*-\*- coding: [^[:blank:]]\+ -\*-@\1@; }" /usr/share/man/man1/$man ; \
+	done
+for man in initscript.5 inittab.5 initctl.5; do \
+		install -o root -g root -m 644 ../man/$man /usr/share/man/man5/; \
+		sed -i "1{ s@^\('\\\\\"\)[^\*-]*-\*- coding: [^[:blank:]]\+ -\*-@\1@; }" /usr/share/man/man5/$man ; \
+	done
+for man in halt.8 init.8 killall5.8         poweroff.8 reboot.8 runlevel.8 shutdown.8 telinit.8 fstab-decode.8 bootlogd.8; do \
+		install -o root -g root -m 644 ../man/$man /usr/share/man/man8/; \
+		sed -i "1{ s@^\('\\\\\"\)[^\*-]*-\*- coding: [^[:blank:]]\+ -\*-@\1@; }" /usr/share/man/man8/$man ; \
+	done
+#
+# This part is skipped on Debian systems, the
+# debian.preinst script takes care of it.
+#@if [ ! -p /run/initctl ]; then \
+	# echo "Creating /run/initctl"; \
+	# rm -f /run/initctl; \
+	# mknod -m 600 /run/initctl p; fi
+make[2]: Leaving directory '/sources/sysvinit-2.93/src'
+make[1]: Leaving directory '/sources/sysvinit-2.93'
+
+
+Totalseconds: 2
+
+
+KB: 4339632	/
+

@@ -1,0 +1,862 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;25.&nbsp;X Window Environment
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;VIII.&nbsp;X + Window Managers</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="x.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="xfree86.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          X Window Environment
+        </h1>
+      </div>
+      <p>
+        This chapter contains a graphical user environment.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="xorg" name="xorg"></a>
+          <h2 class="sect1">
+            Xorg-6.7.0
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to Xorg
+            </h3>
+          </div>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                There are two packages in BLFS that implement the
+                <span class="application">X</span> Window System:
+                <span class="application">Xorg</span> and <span class=
+                "application">XFree86</span>. These packages are quite
+                similar. In fact, the base system of <span class=
+                "application">Xorg</span> is <span class=
+                "application">XFree86</span>-RC2. The primary difference as
+                of this writing is the license provisions of the packages.
+                For someone building a package for their own use, these
+                issues are not significant. Most large commercial
+                distributions have decided to use the <span class=
+                "application">Xorg</span> package, but several still use
+                <span class="application">XFree86</span>.
+              </p>
+              <p>
+                A second reason for the forking of X packages is the stated
+                goals of the developers. Some developers were unhappy with
+                the administration and progress of <span class=
+                "application">XFree86</span>. Xorg's future plans include
+                significant improvements to the internals of the system and
+                more frequent releases.
+              </p>
+              <p>
+                <span class="application">XFree86</span> continues to be a
+                solid, conservative application with excellent driver
+                support.
+              </p>
+              <p>
+                Both <span class="application">Xorg</span> and <span class=
+                "application">XFree86</span> can be installed in the same
+                way, but this section will provide a slightly different and
+                more current variation for installation.
+              </p>
+            </div>
+          </div>
+          <p>
+            <span class="application">Xorg</span> is a freely redistributable
+            open-source implementation of the <span class=
+            "application">X</span> Window System. This application provides a
+            client/server interface between display hardware (the mouse,
+            keyboard, and video displays) and the desktop environment, while
+            also providing both the windowing infrastructure and a
+            standardized application interface (<span class=
+            "acronym">API</span>).
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2909617" name="id2909617"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://freedesktop.org/~xorg/X11R6.7.0/src/">http://freedesktop.org/~xorg/X11R6.7.0/src/</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=""></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 70.3 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 645 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 17.1 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2909650" name="id2909650"></a><span class=
+                    "application">Xorg</span> Dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2909661" name="id2909661"></a>Required
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../general/libpng.html">libpng-1.2.5</a>, <a href=
+                "../general/expat.html">expat-1.95.7</a>, <a href=
+                "../general/freetype2.html">FreeType-2.1.7</a> and <a href=
+                "../general/fontconfig.html">Fontconfig-2.2.2</a>.
+              </p>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2909703" name="id2909703"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../postlfs/linux_pam.html">Linux-PAM-0.77</a>.
+              </p>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2909717" name="id2909717"></a>Download
+                    Instructions
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              There are several files that need to be fetched from the
+              download location:
+            </p>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    <tt class="filename">X11R6.7.0-src1.tar.gz</tt>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <tt class="filename">X11R6.7.0-src2.tar.gz</tt>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <tt class="filename">X11R6.7.0-src3.tar.gz</tt>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <tt class="filename">X11R6.7.0-src4.tar.gz</tt>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <tt class="filename">X11R6.7.0-src5.tar.gz</tt>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <tt class="filename">X11R6.7.0-src6.tar.gz</tt>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    <tt class="filename">X11R6.7.0-src7.tar.gz</tt>
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <p>
+              The first package contains the <span class=
+              "application">Xorg</span> libraries and support programs, the
+              second contains standard X programs, the third contains the X
+              server, the fourth and fifth are fonts, the sixth is normal
+              documentation, and the seventh is hardcopy documentation.
+            </p>
+            <p>
+              To check your downloads for integrity, download the <tt class=
+              "filename">md5sums</tt> file. Then:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">md5sum -c md5sums</b></span></tt>
+</pre>
+            <p>
+              All seven packages should give an OK status.
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of Xorg
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2909842" name="id2909842"></a>Kernel Compilation
+                    Settings
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              If you have an Intel P6 (Pentium Pro, Pentium II and later), it
+              is recommended that you compile <span class=
+              "acronym">MTRR</span> (Memory Type Range Registers) support
+              into the kernel. The kernel can map Cyrix and AMD <span class=
+              "acronym">CPU</span>s to the <span class="acronym">MTRR</span>
+              interface, so selecting this option is useful for those
+              processors also. This option is found in the "Processor type
+              and features" menu. It can increase performance of image write
+              operations 2.5 times or more on <span class=
+              "acronym">PCI</span> or <span class="acronym">AGP</span> video
+              cards.
+            </p>
+            <p>
+              In the "Character Devices" section, enable <span class=
+              "acronym">AGP</span> Support and select the chipset support on
+              your motherboard. If you do not know the chipset, you may
+              select all the chip types at the expense of extra kernel size.
+              You can usually determine your motherboard's chipset by doing:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">cat /proc/pci</b></span></tt>
+</pre>
+            <p>
+              In the "Character Devices" section, <span class=
+              "emphasis"><em>disable</em></span> Direct Rendering Manager
+              unless you have a Direct Rendering Infrastructure (<span class=
+              "acronym">DRI</span>) supported video card. A complete list of
+              <span class="acronym">DRI</span> supported video cards can be
+              found at <a href=
+              "http://dri.sourceforge.net">http://dri.sourceforge.net</a> in
+              the Status section. Currently, supported cards include those
+              from 3dfx (Voodoo, Banshee), 3Dlabs, ATI (Rage Pro, Rage 128,
+              Radeon 7X00, Radeon 2), Intel (i810, i815), and Matrox (G200,
+              G400, G450). If you do enable <span class="acronym">DRI</span>
+              here, make sure you select the video card(s) you want to
+              support as a <span class="emphasis"><em>module</em></span>.
+            </p>
+            <p>
+              Additionally NVidia provides their own closed source binary
+              drivers, which do not make use of <span class=
+              "acronym">DRI</span>. If you intend to use these drivers, do
+              not enable <span class="acronym">DRI</span>.
+            </p>
+            <p>
+              If you made any changes to the kernel configuration, recompile
+              the kernel.
+            </p>
+            <p>
+              Copy the <tt class="filename">arch/i386/boot/bzImage</tt> and
+              <tt class="filename">System.map</tt> from the kernel build
+              directory to <tt class="filename">/boot</tt>. Edit <tt class=
+              "filename">/boot/grub/grub.conf</tt> and add the new kernel to
+              the boot menu. (If you use lilo, edit <tt class=
+              "filename">/etc/lilo.conf</tt> and run <tt class=
+              "filename">lilo</tt>.)
+            </p>
+            <div class="admonition">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="note">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  If you build <span class="application">Xorg</span> in a
+                  chroot environment, make sure the kernel version of the
+                  base system and the target system are the same. This is
+                  especially important if you enabled <span class=
+                  "acronym">DRI</span> support as a module as instructed
+                  above.
+                </p>
+              </div>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2910009" name="id2910009"></a>Setting Up a
+                    Shadow Directory
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              When building <span class="application">Xorg</span>, you should
+              create a shadow directory of symbolic links for the compiled
+              code. To do that, we first make the <span class=
+              "application">lndir</span>. Starting from the <tt class=
+              "filename">xc</tt> directory:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">pushd config/util &amp;&amp;
+make -f Makefile.ini lndir &amp;&amp;
+cp lndir /usr/bin/ &amp;&amp;
+popd</b></span></tt>
+</pre>
+            <p>
+              Now create the shadow tree:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">mkdir ../xcbuild &amp;&amp;
+cd ../xcbuild &amp;&amp;
+lndir ../xc</b></span></tt>
+</pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2910073" name="id2910073"></a>Creating
+                    <tt class="filename">host.def</tt>
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The next step is to create the <tt class=
+              "filename">config/cf/host.def</tt> file. The documentation for
+              <span class="application">Xorg</span> indicates that the
+              application will build without a <tt class=
+              "filename">host.def</tt> file, but the included libraries for
+              <span class="application">fontconfig</span> and <span class=
+              "application">freetype2</span> do not build properly on a base
+              LFS system. Therefore, you must specify that these libraries,
+              as well as others, should be imported from the system.
+            </p>
+            <div class="admonition">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="note">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  <tt class="filename">config/cf/host.def</tt> is a C file,
+                  not a shell script. Ensure the comments delimited by /* ...
+                  */ are balanced when modifying the file.
+                </p>
+              </div>
+            </div>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; config/cf/host.def &lt;&lt; "EOF"</b></span>
+/* Begin Xorg host.def file */
+ 
+/* System Related Information.  If you read and configure only one
+ * section then it should be this one.  The Intel architecture defaults are
+ * set for a i686 and higher.  Axp is for the Alpha architecture and Ppc is
+ * for the Power PC.  AMD64 is for the Opteron processor. Note that there have 
+ * been reports that the Ppc optimization line causes segmentation faults during 
+ * build.  If that happens, try building without the DefaultGcc2PpcOpt line.  ***********/
+ 
+/* #define DefaultGcc2i386Opt -O2 -fno-strength-reduce -fno-strict-aliasing -march=i686 */
+/* #define DefaultGccAMD64Opt -O2 -fno-strength-reduce -fno-strict-aliasing */
+/* #define DefaultGcc2AxpOpt  -O2 -mcpu=ev6 */
+/* #define DefaultGcc2PpcOpt  -O2 -mcpu=750 */
+
+#define HasFreetype2             YES
+#define HasFontconfig            YES
+#define HasExpat                 YES
+#define HasLibpng                YES
+#define HasZlib                  YES
+
+/*
+ * Which drivers to build.  When building a static server, each of these
+ * will be included in it.  When building the loadable server each of these
+ * modules will be built.
+ *
+#define XF86CardDrivers         mga glint nv tga s3virge sis rendition \
+                                neomagic i740 tdfx savage \
+                                cirrus vmware tseng trident chips apm \
+                                GlideDriver fbdev i128 \
+                                ati AgpGartDrivers DevelDrivers ark cyrix \
+                                siliconmotion \
+                                vesa vga XF86OSCardDrivers XF86ExtraCardDrivers
+*/
+
+/*
+ * Select the XInput devices you want by uncommenting this.
+ *
+#define XInputDrivers           mouse keyboard acecad calcomp citron \
+                                digitaledge dmc dynapro elographics \
+                                microtouch mutouch penmount spaceorb summa \
+                                wacom void magictouch aiptek
+ */
+
+/* Most installs will only need this */
+
+#define XInputDrivers           mouse keyboard
+
+
+/* End Xorg host.def file */
+<span><b class="command">EOF</b></span></tt>
+</pre>
+            <p>
+              There are several other options that you may want to consider.
+              A well documented example file is <tt class=
+              "filename">config/cf/xorgsite.cf</tt>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2910198" name="id2910198"></a>Build Commands
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              Install <span class="application">Xorg</span> by running the
+              following commands:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">( make World 2&gt;&amp;1 | tee xorg-compile.log &amp;&amp; exit $PIPESTATUS ) &amp;&amp;
+make install &amp;&amp;
+make install.man &amp;&amp;
+ln -sf ../X11R6/bin /usr/bin/X11 &amp;&amp;
+ln -sf ../X11R6/lib/X11 /usr/lib/X11 &amp;&amp;
+ln -sf ../X11R6/include/X11 /usr/include/X11</b></span></tt>
+</pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2910232" name="id2910232"></a>Updating Direct
+                    Rendering Infrastructure (<span class=
+                    "acronym">DRI</span>)
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              If you have one of the supported <span class=
+              "acronym">DRI</span> cards and have enabled <span class=
+              "acronym">DRI</span> kernel modules as explained above, you now
+              need to update the kernel modules to ensure they are compatible
+              with the current version of <span class=
+              "application">Xorg</span>. To do this, perform the following:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cd programs/Xserver/hw/xfree86/os-support/linux/drm/kernel &amp;&amp;
+make  CC=/opt/gcc-2.95.3/bin/gcc -f Makefile.linux  &amp;&amp;
+mkdir -p /lib/modules/`uname -r`/kernel/drivers/char/drm/  &amp;&amp;
+cp gamma.o radeon.o sis.o r128.o i810.o i830.o mga.o tdfx.o \
+    /lib/modules/`uname -r`/kernel/drivers/char/drm/  &amp;&amp;
+depmod -a</b></span></tt>
+</pre>
+            <div class="admonition">
+              <div class="admonhead">
+                <img alt="[Warning]" src="../images/warning.png" />
+                <h3 class="warning">
+                  Warning
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  If you recompile or upgrade your kernel, you will need to
+                  re-copy the appropriate driver module(s) to the kernel
+                  module library and rerun the <span><b class=
+                  "command">depmod -a</b></span> command.
+                </p>
+              </div>
+            </div>
+            <div class="admonition">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="note">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  If you created <span class="acronym">AGP</span> support as
+                  a module when compiling the kernel, you may have to add a
+                  line to <tt class="filename">/etc/modules.conf</tt> to
+                  ensure the agpgart module is loaded. For instance, the
+                  <span class="acronym">AGP</span> version of the Radeon
+                  video card will use the <tt class="filename">radeon.o</tt>
+                  driver. It will need to have the line
+                </p>
+                <pre class="screen">
+below radeon agpgart
+</pre>
+                <p>
+                  in <tt class="filename">/etc/modules.conf</tt> to enable
+                  <span class="acronym">DRI</span> support.
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Command explanations
+            </h3>
+          </div>
+          <p>
+            <span><b class="command">( make World 2&gt;&amp;1 | tee
+            xorg-compile.log &amp;&amp; exit $PIPESTATUS )</b></span>: This
+            command runs multiple makefiles to completely rebuild the system.
+            <i class="parameter"><tt>2&gt;&amp;1</tt></i> redirects error
+            messages to the same location as standard output. The
+            <span><b class="command">tee</b></span> command allows viewing of
+            the output while logging the results to a file. The parentheses
+            around the command runs the entire comand in a subshell and
+            finally the <span><b class="command">exit $PIPESTATUS</b></span>
+            ensures the result of the <span><b class=
+            "command">make</b></span> is returned as the result and not the
+            result of the <span><b class="command">tee</b></span> command.
+          </p>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                When rebuilding <span class="application">Xorg</span>, a
+                separate command that may be used if only minor changes are
+                made to the sources is <span><b class="command">make
+                Everything</b></span>. This does not automatically remove
+                generated files and only rebuilds those files or programs
+                that are out of date.
+              </p>
+            </div>
+          </div>
+          <pre class="screen">
+<span><b class="command">ln -sf ../X11R6/bin /usr/bin/X11
+ln -sf ../X11R6/lib/X11 /usr/lib/X11
+ln -sf ../X11R6/include/X11 /usr/include/X11</b></span>
+</pre>
+          <p>
+            These commands are present to enable other (broken) packages to
+            build against <span class="application">Xorg</span>. We do this
+            even though the Filesystem Hierarchy Standard says: "In general,
+            software must not be installed or managed via the above symbolic
+            links. They are intended for utilization by users only."
+          </p>
+          <p>
+            <span><b class="command">make CC=/opt/gcc-2.95.3/bin/gcc -f
+            Makefile.linux</b></span>: This builds the <span class=
+            "application">Xorg</span> compatible kernel modules using the
+            same compiler used to compile the kernel.
+          </p>
+          <p>
+            <span><b class="command">cp gamma.o radeon.o sis.o r128.o i810.o
+            i830.o mga.o tdfx.o /lib/modules/`uname
+            -r`/kernel/drivers/char/drm/</b></span>: Put the kernel module(s)
+            where the kernel can find them. You only need to copy the driver
+            you need to support your video card.
+          </p>
+          <p>
+            <span><b class="command">depmod -a</b></span>: Update the
+            modules.dep file for module management.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring Xorg
+            </h3>
+          </div>
+          <p>
+            Edit <tt class="filename">/etc/ld.so.conf</tt> and add <tt class=
+            "filename">/usr/X11R6/lib</tt>. Run:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">ldconfig</b></span></tt>
+</pre>
+          <p>
+            Ensure <tt class="filename">/usr/X11R6/bin</tt> is added to your
+            <tt class="envar">PATH</tt> environment variable. Instructions
+            for doing this are described in the section "<a href=
+            "../postlfs/profile.html">The Bash Shell Startup Files</a>."
+          </p>
+          <p>
+            Expand the <tt class="envar">PKG_CONFIG_PATH</tt> so that other
+            packages can find <span class="application">X</span> libraries.
+            Procedures for this are also described in the section "<a href=
+            "../postlfs/profile.html">The Bash Shell Startup Files</a>."
+          </p>
+          <p>
+            Set up your mouse:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">ln -s psaux /dev/mouse</b></span></tt>
+</pre>
+          <p>
+            Adjust the symbolic link as necessary for other types of mice.
+            For instance, a serial mouse on the first serial port would be
+            linked to ttyS1.
+          </p>
+          <p>
+            Create the <tt class="filename">xorg.conf</tt> file with:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">cd ~
+Xorg -configure</b></span></tt>
+</pre>
+          <p>
+            The screen will go black and you may hear some clicking of the
+            monitor. This command will create a file, <tt class=
+            "filename">xorg.conf.new</tt> in your home directory.
+          </p>
+          <p>
+            Edit <tt class="filename">xorg.conf.new</tt> to suit your system.
+            The details of the file are located in the man page
+            <span><b class="command">man xorg.conf</b></span>. Some things
+            you may want to do are:
+          </p>
+          <div class="itemizedlist">
+            <ul>
+              <li>
+                <p>
+                  Section "Files". Change the order of the font paths
+                  searched. You may want to put 100dpi fonts ahead of 75dpi
+                  fonts if your system normally comes up closer to 100 dots
+                  per inch. You may want to remove some font directories
+                  completely.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Section "Monitor". Specify the <i class=
+                  "parameter"><tt>VertRefresh</tt></i> and <i class=
+                  "parameter"><tt>HorizSync</tt></i> values if the system
+                  does not automatically detect the monitor and its values.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Section "InputDevice". You may want to change the keyboard
+                  autorepeat rate by adding <i class="parameter"><tt>Option
+                  "Autorepeat" "250 30"</tt></i>.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Section "Device". You may want to set some of the options
+                  available for your selected video driver. A description of
+                  the driver parameters is in the man page for your driver.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Section "Screen". Add a DefaultDepth statement such as:
+                  <i class="parameter"><tt>DefaultDepth 16</tt></i>. In the
+                  SubSection for your default depth, add a modes line such
+                  as: <i class="parameter"><tt>Modes "1280x1024"
+                  "1024x768"</tt></i>. The first mode listed will normally be
+                  the starting resolution.
+                </p>
+              </li>
+            </ul>
+          </div>
+          <p>
+            Test the system with:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">X -xf86config ~/xorg.conf.new</b></span></tt>
+</pre>
+          <p>
+            You will only get a gray background with an X-shaped mouse
+            cursor, but it confirms the system is working. Exit with
+            Control-Alt-Backspace. If the system does not work, take a look
+            at <tt class="filename">/var/log/Xorg.0.log</tt> to see what went
+            wrong.
+          </p>
+          <p>
+            Move the configuration file to its final location:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">mv ~/xorg.conf.new /etc/X11/xorg.conf</b></span></tt>
+</pre>
+          <p>
+            Create <tt class="filename">.xinitrc</tt>:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; ~/.xinitrc &lt;&lt; "EOF"</b></span>
+# Begin .xinitrc file
+xterm  -g 80x40+0+0   &amp;
+xclock -g 100x100-0+0 &amp;
+twm
+<span><b class="command">EOF</b></span></tt>
+</pre>
+          <p>
+            This provides an initial screen with an xterm and a clock that is
+            managed by a simple window manager, Tab Window Manager. For
+            details of twm, see the man page.
+          </p>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                When needed, <span class="application">Xorg</span> creates
+                the directory <tt class="filename">/tmp/.ICE-unix</tt> if it
+                does not exist. If this directory is not owned by root,
+                <span class="application">Xorg</span> delays startup by a few
+                seconds and also appends a warning to the logfile. This also
+                affects startup of other applications. To improve
+                performance, it is advisable to manually create the directory
+                before Xorg uses it. Add the file creation to <tt class=
+                "filename">/etc/sysconfig/createfiles</tt> that is sourced by
+                the <tt class="filename">/etc/rc.d/init.d/cleanfs</tt>
+                startup script.
+              </p>
+              <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/sysconfig/createfiles &lt;&lt; "EOF"</b></span>
+/tmp/.ICE-unix dir 1777 root root
+<span><b class="command">EOF</b></span></tt>
+</pre>
+            </div>
+          </div>
+          <p>
+            Start <span class="application">X</span> with:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">startx</b></span></tt>
+</pre>
+          <p>
+            to get a basic functional <span class="application">X</span>
+            Window System.
+          </p>
+          <p>
+            At this point, you should check out the X Window Components at
+            <a href="xfree86-setup.html" title="X Window Components">the
+            section called &ldquo;X Window Components&rdquo;</a>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="x.html">Prev</a><br />
+        Part&nbsp;VIII.&nbsp;X + Window Managers
+      </div>
+      <div class="next">
+        <a accesskey="n" href="xfree86.html">Next</a><br />
+        XFree86-4.4.0
+      </div>
+      <div class="up">
+        <a accesskey="u" href="x.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

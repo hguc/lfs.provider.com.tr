@@ -1,0 +1,320 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;45.&nbsp;PostScript
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;XIII.&nbsp;Printing, Scanning and Typesetting</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="docbook-xsl.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="enscript.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          PostScript
+        </h1>
+      </div>
+      <p>
+        This chapter includes applications that create, manipulate or view
+        PostScript files and view Portable Document Format <span class=
+        "acronym">PDF</span> files.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="a2ps" name="a2ps"></a>
+          <h2 class="sect1">
+            a2ps-4.13b
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to a2ps
+            </h3>
+          </div>
+          <p>
+            <span class="application">a2ps</span> is a filter utilitized
+            mainly in the background and primarily by printing scripts to
+            convert almost every input format into PostScript output. The
+            application's name expands appropriately to "all to PostScript".
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3254280" name="id3254280"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://ftp.gnu.org/gnu/a2ps/a2ps-4.13b.tar.gz">http://ftp.gnu.org/gnu/a2ps/a2ps-4.13b.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.gnu.org/gnu/a2ps/a2ps-4.13b.tar.gz">ftp://ftp.gnu.org/gnu/a2ps/a2ps-4.13b.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 1.9 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 19.2 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.26 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3254889" name="id3254889"></a>Additional
+                    downloads
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    International fonts: <a href=
+                    "ftp://ftp.enst.fr/pub/unix/a2ps/i18n-fonts-0.1.tar.gz">ftp://ftp.enst.fr/pub/unix/a2ps/i18n-fonts-0.1.tar.gz</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3254907" name="id3254907"></a><span class=
+                    "application">a2ps</span> dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id3254916" name="id3254916"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="psutils.html">PSUtils-p17</a> and <a href=
+                "gs.html">AFPL Ghostscript-8.14</a> or <a href=
+                "espgs.html">ESP Ghostscript-7.07.1</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of a2ps
+            </h3>
+          </div>
+          <p>
+            Install <span class="application">a2ps</span> by running the
+            following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">cd contrib &amp;&amp;
+cp Makefile.in Makefile.in.orig &amp;&amp;
+sed -e "s:emacs::" Makefile.in.orig &gt; Makefile.in &amp;&amp;
+cd .. &amp;&amp;
+cp configure{,.orig} &amp;&amp;
+sed -e 's|/usr/local/share/ghostscript|/usr/share/ghostscript|g' \
+    configure.orig &gt; configure &amp;&amp;
+./configure --prefix=/usr \
+    --sysconfdir=/etc/a2ps --localstatedir=/var \
+    --with-medium=letter &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Command explanations
+            </h3>
+          </div>
+          <pre class="screen">
+<span><b class="command">cd contrib &amp;&amp;
+cp Makefile.in Makefile.in.orig &amp;&amp;
+sed -e "s:emacs::" Makefile.in.orig &gt; Makefile.in &amp;&amp;
+cd .. &amp;&amp;</b></span>
+</pre>
+          <p>
+            These commands eliminate the compiling and installing of the
+            <span class="application">Emacs</span> script files. If you have
+            substituted <span class="application">Emacs</span> for
+            <span class="application">Vi</span> as your primary editor, you
+            would want to skip these instructions.
+          </p>
+          <pre class="screen">
+<span><b class="command">cp configure{,.orig} &amp;&amp;
+sed -e 's|/usr/local/share/ghostscript|/usr/share/ghostscript|g' \
+    configure.orig &gt; configure</b></span>
+</pre>
+          <p>
+            This command modifies the configure script to search for
+            <span class="application">Ghostscript</span> fonts at the
+            location where they were installed by the <span class=
+            "acronym">BLFS</span> instructions.
+          </p>
+          <p>
+            <i class="parameter"><tt>--sysconfdir=/etc/a2ps</tt></i>:
+            Configuration data goes to <tt class="filename">/etc/a2ps</tt>
+            instead of <tt class="filename">/usr/etc</tt>.
+          </p>
+          <p>
+            <i class="parameter"><tt>--with-medium=letter</tt></i>: This
+            switch changes the default paper format of A4 to letter.
+            Installations that utilize A4 would eliminate this switch.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring a2ps
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3255428" name="id3255428"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/a2ps/a2ps.cfg</tt>, <tt class=
+              "filename">/etc/a2ps/a2ps-site.cfg</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3255167" name="id3255167"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              Information about configuring <span class=
+              "application">a2ps</span> can be found in the comments
+              contained in the above files, and also by running
+              <span><b class="command">info a2ps</b></span>.
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application">a2ps</span> package contains
+            <span><b class="command">a2ps</b></span> and filter data.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3255401" name="id3255401"></a>a2ps
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">a2ps</b></span> is a filter, utilized
+              primarily by printing scripts, that converts standard input or
+              supported files to PostScript.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="docbook-xsl.html">Prev</a><br />
+        DocBook XSL Stylesheets-1.65.1
+      </div>
+      <div class="next">
+        <a accesskey="n" href="enscript.html">Next</a><br />
+        enscript-1.6.1
+      </div>
+      <div class="up">
+        <a accesskey="u" href="pst.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

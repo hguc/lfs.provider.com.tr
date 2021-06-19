@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      GNOME Print-0.37
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;32.&nbsp;GNOME 1.4 Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="gdkpixbuf.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="bonobo14.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          GNOME Print-0.37
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to GNOME Print
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class="acronym">GNOME</span>
+          Print</span> package contains the <span class=
+          "application"><span class="acronym">GNOME</span></span> Printing
+          Architecture, for <span class="application"><span class=
+          "acronym">GNOME</span></span> 1.4.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3083464" name="id3083464"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.linux.org.uk/mirrors/ftp.gnome.org/sources/gnome-print/0.37/gnome-print-0.37.tar.bz2">
+                  http://ftp.linux.org.uk/mirrors/ftp.gnome.org/sources/gnome-print/0.37/gnome-print-0.37.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnome.org/pub/GNOME/sources/gnome-print/0.37/gnome-print-0.37.tar.bz2">
+                  ftp://ftp.gnome.org/pub/GNOME/sources/gnome-print/0.37/gnome-print-0.37.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 756 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 33.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.66
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3084532" name="id3084532"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/gnome-print-0.37-ft217-fixes.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/gnome-print-0.37-ft217-fixes.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3084567" name="id3084567"></a><span class=
+                  "application"><span class="acronym">GNOME</span>
+                  Print</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3084580" name="id3084580"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="gdkpixbuf.html">GDK Pixel Buffer-0.22.0</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of GNOME Print
+          </h3>
+        </div>
+        <p>
+          The <span><b class="command">configure</b></span> script does not
+          correctly interpret that <span class=
+          "application">libxml</span>-1.8.17 is newer than <span class=
+          "application">libxml</span>-1.8.8. This can be solved by building
+          <tt class="filename">xmlConf.sh</tt> with this command:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /opt/gnome/lib/xmlConf.sh &lt;&lt; EOF</b></span>
+XML_LIBDIR="-L/usr/lib"
+XML_LIBS="-lxml"
+XML_INCLUDEDIR="-I/usr/include/gnome-xml"
+MODULE_VERSION=xml-1.8.17
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">GNOME</span> Print</span> by running the following
+          commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../gnome-print-0.37-ft217-fixes.patch &amp;&amp;
+./configure --prefix=/opt/gnome --with-zlib=/usr &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--with-zlib=/usr</tt></i>: Configure
+          <span class="application"><span class="acronym">GNOME</span>
+          Print</span> to use the system installed <span class=
+          "application">zlib</span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class="acronym">GNOME</span>
+          Print</span> package contains the <span class=
+          "application"><span class="acronym">GNOME</span></span> 1.4
+          printing libraries.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="gdkpixbuf.html">Prev</a><br />
+        GDK Pixel Buffer-0.22.0
+      </div>
+      <div class="next">
+        <a accesskey="n" href="bonobo14.html">Next</a><br />
+        Bonobo-1.0.22
+      </div>
+      <div class="up">
+        <a accesskey="u" href="otherlibs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

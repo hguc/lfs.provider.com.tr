@@ -1,0 +1,417 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      GDM-2.6.0.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;31.&nbsp;GNOME Additional Packages</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="gnome2-user-docs.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="otherlibs.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          GDM-2.6.0.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to GDM
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">GDM</span></span> package contains <span class=
+          "application"><span class="acronym">GNOME</span></span>'s Display
+          Manager daemon. This is useful for allowing configurable graphical
+          logins.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3066278" name="id3066278"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.gnome.org/pub/GNOME/sources/gdm/2.6/gdm-2.6.0.2.tar.bz2">
+                  http://ftp.gnome.org/pub/GNOME/sources/gdm/2.6/gdm-2.6.0.2.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnome.org/pub/GNOME/sources/gdm/2.6/gdm-2.6.0.2.tar.bz2">
+                  ftp://ftp.gnome.org/pub/GNOME/sources/gdm/2.6/gdm-2.6.0.2.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.9 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 54 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.65 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3067366" name="id3067366"></a><span class=
+                  "application"><span class="acronym">GDM</span></span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3067384" name="id3067384"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="libgnomeui.html">libgnomeui-2.6.1.1</a>, <a href=
+              "scrollkeeper.html">ScrollKeeper-0.3.14</a> and <a href=
+              "librsvg.html">librsvg-2.6.5</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3067410" name="id3067410"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/linux_pam.html">Linux-PAM-0.77</a>,
+              <a href="../basicnet/tcpwrappers.html">tcpwrappers-7.6</a> and
+              <a href="http://www.nsa.gov/selinux/">SELinux</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of GDM
+          </h3>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">GDM</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">groupadd gdm &amp;&amp;
+useradd -c gdm -d /dev/null -g gdm -s /bin/bash gdm &amp;&amp;
+./configure --prefix=`pkg-config --variable=prefix ORBit-2.0` \
+    --libexecdir=`pkg-config --variable=prefix ORBit-2.0`/sbin \
+    --sysconfdir=/etc/gnome --localstatedir=/var/lib \
+    --with-pam-prefix=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc/gnome</tt></i>: This
+          command puts configuration files in <tt class=
+          "filename">/etc/gnome</tt> instead of <tt class=
+          "filename">/opt/gnome2/etc</tt>.
+        </p>
+        <p>
+          <i class="parameter"><tt>--localstatedir=/var/lib</tt></i>: This
+          command puts files in <tt class="filename">/var/lib</tt> instead of
+          <tt class="filename">/opt/gnome2/var</tt>.
+        </p>
+        <p>
+          <i class="parameter"><tt>--with-pam-prefix=/etc</tt></i>: This
+          command puts <span class="application"><span class=
+          "acronym">PAM</span></span> configuration files in <tt class=
+          "filename">/etc/pam.d</tt> instead of <tt class=
+          "filename">/etc/gnome</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring GDM
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3067134" name="id3067134"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">gdm.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3067150" name="id3067150"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The <span class="application">GDM</span> <span class=
+            "application">PAM</span> config files contain modules not present
+            in a <span class="acronym">BLFS</span> installation. The
+            following commands will replace those files:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /etc/pam.d/gdm &lt;&lt; "EOF"</b></span>
+auth        required    pam_unix.so
+auth        required    pam_nologin.so
+account     required    pam_unix.so
+password    required    pam_unix.so
+session     required    pam_unix.so
+<span><b class="command">EOF
+cat &gt; /etc/pam.d/gdm-autologin &lt;&lt; "EOF"</b></span>
+auth        required    pam_env.so
+auth        required    pam_nologin.so
+auth        required    pam_permit.so
+account     required    pam_unix.so
+password    required    pam_unix.so
+session     required    pam_unix.so
+<span><b class="command">EOF</b></span></tt>
+</pre>
+          <p>
+            <span><b class="command">gdm</b></span> can be tested by
+            executing it from a root console.
+          </p>
+          <p>
+            To start a graphical login at boot, install the <tt class=
+            "filename">/etc/rc.d/init.d/gdm</tt> init script included in the
+            <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-gdm</b></span></tt>
+</pre>
+          <p>
+            To autostart with a graphical login, edit <tt class=
+            "filename">/etc/inittab</tt> so that the line containing:
+          </p>
+          <pre class="screen">
+id:3:initdefault:
+</pre>
+          <p>
+            is changed to:
+          </p>
+          <pre class="screen">
+id:5:initdefault:
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">GDM</span></span> package contains <span><b class=
+          "command">gdm</b></span>, <span><b class=
+          "command">gdm-binary</b></span>, <span><b class=
+          "command">gdmXnest</b></span>, <span><b class=
+          "command">gdmXnestchooser</b></span>, <span><b class=
+          "command">gdmchooser</b></span>, <span><b class=
+          "command">gdmflexiserver</b></span>, <span><b class=
+          "command">gdmgreeter</b></span>, <span><b class=
+          "command">gdmlogin</b></span>, <span><b class=
+          "command">gdmphotosetup</b></span>, <span><b class=
+          "command">gdmsetup</b></span>, <span><b class=
+          "command">gdmthemetester</b></span>, <span><b class=
+          "command">gdm-restart</b></span>, <span><b class=
+          "command">gdm-safe-restart</b></span>, <span><b class=
+          "command">gdm-stop</b></span>, <span><b class=
+          "command">gdmconfig</b></span>, <span><b class=
+          "command">gdmopen</b></span> and <span><b class=
+          "command">gdmtranslate</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3068302" name="id3068302"></a>gdm
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gdm</b></span> is a wrapper script to
+            execute the <span class="application"><span class=
+            "acronym">GDM</span></span> binary, the configurable <span class=
+            "application"><span class="acronym">GNOME</span></span> based
+            login prompt.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3068328" name="id3068328"></a>gdmchooser
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gdmchooser</b></span> is an application
+            for selecting <span class="acronym">XDMCP</span> enabled hosts on
+            the local network.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3068346" name="id3068346"></a>gdmsetup
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gdmsetup</b></span> is a graphical
+            interface to edit the <tt class="filename">gdm.conf</tt>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3068365" name="id3068365"></a>gdm-restart and
+                  gdm-safe-restart
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gdm-restart</b></span> sends the
+            <span class="acronym">HUP</span> signal and <span><b class=
+            "command">gdm-safe-restart</b></span> sends the <span class=
+            "acronym">USR</span>1 signal to the <span class=
+            "application"><span class="acronym">GDM</span></span>daemon so
+            that it restarts. They are used after the config file is edited.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3068399" name="id3068399"></a>gdmconfig
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gdmconfig</b></span> is an application
+            for managing the configuration of the entire <span class=
+            "application">GDM</span> applications suite. It handles look and
+            feel, security, <span class="acronym">XDMCP</span>, GDMchooser
+            and more.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="gnome2-user-docs.html">Prev</a><br />
+        GNOME2 User Docs-2.6.0.1
+      </div>
+      <div class="next">
+        <a accesskey="n" href="otherlibs.html">Next</a><br />
+        Chapter&nbsp;32.&nbsp;GNOME 1.4 Libraries
+      </div>
+      <div class="up">
+        <a accesskey="u" href="add.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,486 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      OpenSP-1.5.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;43.&nbsp;Standard Generalized Markup Language (SGML)
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="sgml-dtd.html" title=
+          "DocBook SGML DTD-4.4">Prev</a>
+          <p>
+            DocBook SGML DTD-4.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="openjade.html" title=
+          "OpenJade-1.3.2">Next</a>
+          <p>
+            OpenJade-1.3.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sgml.html" title=
+          "Chapter&nbsp;43.&nbsp;Standard Generalized Markup Language (SGML)">
+          Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="opensp" name="opensp"></a>
+        <h1 class="sect1">
+          OpenSP-1.5.1
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to OpenSP
+          </h2>
+        </div>
+        <p>
+          The <span class="application">OpenSP</span> package contains a
+          <span class="application">C++</span> library for using SGML/XML
+          files. This is useful for validating, parsing and manipulating SGML
+          and XML documents.
+        </p>
+        <h3>
+          <a id="id2971473" name="id2971473"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://download.sourceforge.net/openjade/OpenSP-1.5.1.tar.gz">
+                <span class=
+                "url">http://download.sourceforge.net/openjade/OpenSP-1.5.1.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/OpenSP-1.5.1.tar.gz">
+                <span class=
+                "url">ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/OpenSP-1.5.1.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: f46fe0a04b76a4454ec27b7fcc84ec54
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.4 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 43 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.97 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2957918" name="id2957918"></a>Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Required Patch (removes some annoying messages that can
+                appear while running <span><strong class=
+                "command">openjade</strong></span>): <a href=
+                "http://www.linuxfromscratch.org/blfs/downloads/6.1/OpenSP-1.5.1-LITLEN-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/blfs/downloads/6.1/OpenSP-1.5.1-LITLEN-1.patch</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Required Patch: <a href=
+                "http://www.linuxfromscratch.org/blfs/downloads/6.1/OpenSP-1.5.1-gcc34-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/blfs/downloads/6.1/OpenSP-1.5.1-gcc34-1.patch</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2815634" name="id2815634"></a>OpenSP Dependencies
+        </h3>
+        <h4>
+          <a id="id2552317" name="id2552317"></a>Required
+        </h4>
+        <p>
+          <a href="sgml.html#sgml-common">SGML Common-0.6.3</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of OpenSP
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">OpenSP</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../OpenSP-1.5.1-LITLEN-1.patch &amp;&amp;
+patch -Np1 -i ../OpenSP-1.5.1-gcc34-1.patch &amp;&amp;
+./configure --prefix=/usr --disable-static --enable-http \
+    --enable-default-catalog=/etc/sgml/catalog \
+    --enable-default-search-path=/usr/share/sgml &amp;&amp;
+make pkgdatadir=/usr/share/sgml/OpenSP-1.5.1</kbd></pre>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">make pkgdatadir=/usr/share/sgml/OpenSP-1.5.1 install &amp;&amp;
+ln -v -sf onsgmls /usr/bin/nsgmls &amp;&amp;
+ln -v -sf osgmlnorm /usr/bin/sgmlnorm &amp;&amp;
+ln -v -sf ospam /usr/bin/spam &amp;&amp;
+ln -v -sf ospcat /usr/bin/spcat &amp;&amp;
+ln -v -sf ospent /usr/bin/spent &amp;&amp;
+ln -v -sf osx /usr/bin/sx &amp;&amp;
+ln -v -sf osx /usr/bin/sgml2xml &amp;&amp;
+ln -v -sf libosp.so /usr/lib/libsp.so</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--disable-static</tt></em>: This switch
+          prevents the building of the static library.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-http</tt></em>: This switch adds
+          support for HTTP.
+        </p>
+        <p>
+          <em class=
+          "parameter"><tt>--enable-default-catalog=/etc/sgml/catalog</tt></em>:
+          This switch sets the path to the centralized catalog.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-default-search-path</tt></em>:
+          This switch sets the default value of <tt class=
+          "envar">SGML_SEARCH_PATH</tt>.
+        </p>
+        <p>
+          <tt class="option">--enable-xml-messages</tt>: This switch adds
+          support for XML Formatted Messages.
+        </p>
+        <p>
+          <span><strong class="command">make
+          pkgdatadir=/usr/share/sgml/OpenSP-1.5.1</strong></span>: This sets
+          the pkgdatadir variable in the <tt class="filename">Makefile</tt>
+          from <tt class="filename">/usr/share/OpenSP</tt> to <tt class=
+          "filename">/usr/share/sgml/OpenSP-1.5.1</tt>.
+        </p>
+        <p>
+          <span><strong class="command">ln -v -sf ...</strong></span>: These
+          commands create the <span class="application">SP</span> equivalents
+          of <span class="application">OpenSP</span> executables and
+          libraries.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">onsgmls, osgmlnorm,
+              ospam, ospcat, ospent, osx, and the <span class=
+              "application">SP</span> equivalent symlinks: nsgmls, sgml2xml,
+              sgmlnorm, spam, spcat, spent, and sx</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Library:</span></strong> <span class="seg">libosp.so and the
+              <span class="application">SP</span> equivalent symlink:
+              libsp.so</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/include/OpenSP, /usr/share/doc/OpenSP, and
+              /usr/share/sgml/OpenSP-1.5.1</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2873051" name="id2873051"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="onsgmls" name="onsgmls"></a><span class=
+                  "term"><span><strong class=
+                  "command">onsgmls</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to process SGML files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="osgmlnorm" name="osgmlnorm"></a><span class=
+                  "term"><span><strong class=
+                  "command">osgmlnorm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints on the standard output a normalized document
+                    instance for the SGML document contained in the
+                    concatenation of the entities with system identifiers .nf
+                    and .fi.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ospam" name="ospam"></a><span class=
+                  "term"><span><strong class=
+                  "command">ospam</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a markup stream editor.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ospcat" name="ospcat"></a><span class=
+                  "term"><span><strong class=
+                  "command">ospcat</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints effective system identifiers found in the
+                    catalogs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ospent" name="ospent"></a><span class=
+                  "term"><span><strong class=
+                  "command">ospent</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    provides access to <span class=
+                    "application">OpenSP</span>'s entity manager.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="osx" name="osx"></a><span class=
+                  "term"><span><strong class=
+                  "command">osx</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an SGML normalizer or used to convert SGML files to
+                    XML files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="nsgmls" name="nsgmls"></a><span class=
+                  "term"><span><strong class=
+                  "command">nsgmls</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span><strong class=
+                    "command">onsgmls</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="sgml2xml" name="sgml2xml"></a><span class=
+                  "term"><span><strong class=
+                  "command">sgml2xml</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span><strong class=
+                    "command">osx</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="sgmlnorm" name="sgmlnorm"></a><span class=
+                  "term"><span><strong class=
+                  "command">sgmlnorm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span><strong class=
+                    "command">osgmlnorm</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="spam" name="spam"></a><span class=
+                  "term"><span><strong class=
+                  "command">spam</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span><strong class=
+                    "command">ospam</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="spcat" name="spcat"></a><span class=
+                  "term"><span><strong class=
+                  "command">spcat</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span><strong class=
+                    "command">ospcat</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="spent" name="spent"></a><span class=
+                  "term"><span><strong class=
+                  "command">spent</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span><strong class=
+                    "command">ospent</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="sx" name="sx"></a><span class=
+                  "term"><span><strong class=
+                  "command">sx</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span><strong class=
+                    "command">osx</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libosp" name="libosp"></a><span class=
+                  "term"><tt class="filename">libosp.so</tt></span>
+                </td>
+                <td>
+                  <p>
+                    contains functions required by the <span class=
+                    "application">OpenSP</span> programs to parse, validate
+                    and manipulate SGML and XML files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libsp" name="libsp"></a><span class=
+                  "term"><tt class="filename">libsp.so</tt></span>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <tt class="filename">libosp.so</tt>.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sgml-dtd.html" title=
+          "DocBook SGML DTD-4.4">Prev</a>
+          <p>
+            DocBook SGML DTD-4.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="openjade.html" title=
+          "OpenJade-1.3.2">Next</a>
+          <p>
+            OpenJade-1.3.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sgml.html" title=
+          "Chapter&nbsp;43.&nbsp;Standard Generalized Markup Language (SGML)">
+          Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

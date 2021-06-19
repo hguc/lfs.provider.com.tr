@@ -1,0 +1,357 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      ImageMagick-5.5.7-16
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;10.&nbsp;General Utilities</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="compface.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="hd2u.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          ImageMagick-5.5.7-16
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to ImageMagick
+          </h3>
+        </div>
+        <p>
+          <span class="application">ImageMagick</span> is a collection of
+          tools and libraries to read, write, and manipulate an image in
+          various image formats. Image processing operations are available
+          from the command line. Bindings to various programming languages
+          are also available.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2697753" name="id2697753"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/imagemagick/ImageMagick-5.5.7-16.tar.bz2">
+                  http://prdownloads.sourceforge.net/imagemagick/ImageMagick-5.5.7-16.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 4.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 107 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 3.80 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2698625" name="id2698625"></a><span class=
+                  "application">ImageMagick</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2698622" name="id2698622"></a>Recommended
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              X (<a href="../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.7.0</a>) and <a href=
+              "../pst/espgs.html">ESP Ghostscript-7.07.1</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2698659" name="id2698659"></a>Optional (Install
+                    based on the format support needed)
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="lcms.html">lcms-1.12</a>, <a href=
+              "graphlib.html#libjpeg">libjpeg-6b</a>, <a href=
+              "libpng.html">libpng-1.2.5</a>, <a href=
+              "libtiff.html">libtiff-3.6.1</a>, <a href=
+              "libxml2.html">libxml2-2.6.9</a>, <a href=
+              "http://wvware.sourceforge.net/">libwmf</a>, <a href=
+              "http://sourceforge.net/projects/libexif/">libexif</a>,
+              <a href="http://www.i3a.org/i_flashpix.html">FlashPIX</a>,
+              <a href="http://www.cl.cam.ac.uk/~mgk25/jbigkit/">JBIG</a>,
+              <a href="http://www.ece.uvic.ca/~mdadams/jasper/">Jasper</a>
+              and <a href="http://corefonts.sourceforge.net/">corefonts</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Imagemagick
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Imagemagick</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --enable-shared --with-modules &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Additional Configure Options
+          </h3>
+        </div>
+        <p>
+          There are additional switches that can be passed to <span class=
+          "application">ImageMagick</span> to customize the installation to
+          your need. Check out the <span class=
+          "application">ImageMagick</span> installation instructions at
+          <a href=
+          "http://www.imagemagick.org/www/Install-unix.html">http://www.imagemagick.org/www/Install-unix.html</a>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          <span class="application">ImageMagick</span> contains
+          <span><b class="command">animate</b></span>, <span><b class=
+          "command">composite</b></span>, <span><b class=
+          "command">conjure</b></span>, <span><b class=
+          "command">convert</b></span>, <span><b class=
+          "command">display</b></span>, <span><b class=
+          "command">identify</b></span>, <span><b class=
+          "command">import</b></span>, <span><b class=
+          "command">mogrify</b></span>, <span><b class=
+          "command">montage</b></span>, and the <tt class=
+          "filename">libMagick</tt> and <tt class="filename">libMagick++</tt>
+          libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2698453" name="id2698453"></a>animate
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Animates a sequence of images.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2698460" name="id2698460"></a>composite
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Composites various images into the given base image.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2698469" name="id2698469"></a>conjure
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Processes a Magick Scripting Language (MSL) script to create an
+            image.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2698478" name="id2698478"></a>convert
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Convert image(s) from one format to another.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2698487" name="id2698487"></a>display
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Display the image.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2698495" name="id2698495"></a>identify
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Describes the format and characteristics of an image file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2699201" name="id2699201"></a>import
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Captures an X window.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2699208" name="id2699208"></a>mogrify
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Transforms an image.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2699216" name="id2699216"></a>montage
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Composites various images into a new image.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="compface.html">Prev</a><br />
+        Compface-1.4
+      </div>
+      <div class="next">
+        <a accesskey="n" href="hd2u.html">Next</a><br />
+        hd2u-0.9.0
+      </div>
+      <div class="up">
+        <a accesskey="u" href="genutils.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

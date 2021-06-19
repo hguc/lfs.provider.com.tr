@@ -1,0 +1,430 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;23.&nbsp;Databases
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;VII.&nbsp;Content Serving</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="content.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="db-3.3.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Databases
+        </h1>
+      </div>
+      <p>
+        This chapter includes databases that range from single-user
+        read/write to industrial database servers with transaction support.
+        Generally, you will be sent here to satisfy dependencies to other
+        applications although building a <span class="acronym">SQL</span>
+        server on a base <span class="acronym">LFS</span> system is entirely
+        possible.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="db" name="db"></a>
+          <h2 class="sect1">
+            Berkeley DB-4.2.52.2
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to Berkeley DB
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Berkeley DB</span> package contains
+            programs and utilities used by many other applications for
+            database related functions.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2885166" name="id2885166"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://www.sleepycat.com/update/snapshot/db-4.2.52.tar.gz">
+                    http://www.sleepycat.com/update/snapshot/db-4.2.52.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=""></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 4 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 43 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 1.22 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2885740" name="id2885740"></a>Additional
+                    downloads
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Required Patch: <a href=
+                    "http://www.sleepycat.com/update/4.2.52/patch.4.2.52.1">http://www.sleepycat.com/update/4.2.52/patch.4.2.52.1</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Required Patch: <a href=
+                    "http://www.sleepycat.com/update/4.2.52/patch.4.2.52.2">http://www.sleepycat.com/update/4.2.52/patch.4.2.52.2</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2885769" name="id2885769"></a><span class=
+                    "application">Berkeley DB</span> dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2885778" name="id2885778"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../general/tcl.html">Tcl-8.4.6</a> and <a href=
+                "../general/j2sdk.html">J2SDK-1.4.2</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of Berkeley DB
+            </h3>
+          </div>
+          <p>
+            Install <span class="application">Berkeley DB</span> by running
+            the following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np0 -i ../patch.4.2.52.1 &amp;&amp;
+patch -Np0 -i ../patch.4.2.52.2 &amp;&amp;
+cd build_unix &amp;&amp;
+../dist/configure --prefix=/usr \
+    --enable-compat185 \
+    --enable-cxx &amp;&amp;
+make &amp;&amp;
+make docdir=/usr/share/doc/db-4.2.52.2 install</b></span></tt>
+</pre>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                If you wish to enable <span class="application">Java</span>
+                support in <span class="application">Berkeley
+                DB</span>-4.2.52.2, add <i class=
+                "parameter"><tt>--enable-java</tt></i> to the configure
+                options. This requires a Java compiler. <span class=
+                "application">Java</span> support is needed if you plan to
+                use system installed <span class="application">Berkeley
+                DB</span> when compiling <a href=
+                "../xsoft/openoffice.html">OpenOffice-1.1.1</a>.
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Command explanations
+            </h3>
+          </div>
+          <p>
+            <span><b class="command">cd build_unix &amp;&amp;
+            ../dist/configure --prefix=/usr --enable-compat185</b></span>:
+            This replaces the normal <span><b class=
+            "command">./configure</b></span> command, as <span class=
+            "application">Berkeley DB</span> comes with various build
+            directories for different platforms.
+          </p>
+          <p>
+            <span><b class="command">make docdir=/usr/share/doc/db-4.2.52.2
+            install</b></span>: This installs the documentation in the
+            correct place.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Berkeley DB</span> package contains
+            <span><b class="command">db_archive</b></span>, <span><b class=
+            "command">db_checkpoint</b></span>, <span><b class=
+            "command">db_deadlock</b></span>, <span><b class=
+            "command">db_dump</b></span>, <span><b class=
+            "command">db_load</b></span>, <span><b class=
+            "command">db_printlog</b></span>, <span><b class=
+            "command">db_recover</b></span>, <span><b class=
+            "command">db_stat</b></span>, <span><b class=
+            "command">db_upgrade</b></span> and <span><b class=
+            "command">db_verify</b></span>.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2885535" name="id2885535"></a>db_archive
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">db_archive</b></span> prints the
+              pathnames of log files that are no longer in use.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2885548" name="id2885548"></a>db_checkpoint
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">db_checkpoint</b></span> is a daemon
+              process used to monitor and checkpoint database logs.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2885562" name="id2885562"></a>db_deadlock
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">db_deadlock</b></span> is used to
+              abort lock requests when deadlocks are detected.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2885576" name="id2885576"></a>db_dump
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">db_dump</b></span> converts database
+              files to a flat file format readable by <span><b class=
+              "command">db_load</b></span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2886328" name="id2886328"></a>db_load
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">db_load</b></span> is used to create
+              database files from flat files created with <span><b class=
+              "command">db_dump</b></span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2886347" name="id2886347"></a>db_printlog
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">db_printlog</b></span> converts
+              database log files to human readable text.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2886361" name="id2886361"></a>db_recover
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">db_recover</b></span> is used to
+              restore a database to a consistent state after a failure.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2886374" name="id2886374"></a>db_stat
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">db_stat</b></span> displays database
+              environment statistics.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2886388" name="id2886388"></a>db_upgrade
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">db_upgrade</b></span> is used to
+              upgrade database files to a newer version of <span class=
+              "application">Berkeley DB</span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2886407" name="id2886407"></a>db_verify
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">db_verify</b></span> is used to run
+              consistency checks on database files.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="content.html">Prev</a><br />
+        Part&nbsp;VII.&nbsp;Content Serving
+      </div>
+      <div class="next">
+        <a accesskey="n" href="db-3.3.html">Next</a><br />
+        Berkeley DB-3.3.11
+      </div>
+      <div class="up">
+        <a accesskey="u" href="content.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

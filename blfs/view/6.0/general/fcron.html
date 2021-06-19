@@ -1,0 +1,404 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Fcron-2.9.5.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;11.&nbsp;System Utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="sysutils.html" title=
+          "System Utilities">Prev</a>
+          <p>
+            System Utilities
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="hdparm.html" title="hdparm-5.8">Next</a>
+          <p>
+            hdparm-5.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;11.&nbsp;System Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="fcron" name="fcron"></a>
+        <h1 class="sect1">
+          Fcron-2.9.5.1
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Fcron
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Fcron</span> package contains a
+          periodical command scheduler which aims at replacing <span class=
+          "application">Vixie Cron</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2720655" name="id2720655"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://fcron.free.fr/archives/fcron-2.9.5.1.src.tar.gz"><span class="url">
+                  http://fcron.free.fr/archives/fcron-2.9.5.1.src.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.seul.org/pub/fcron/fcron-2.9.5.1.src.tar.gz"><span class="url">
+                  ftp://ftp.seul.org/pub/fcron/fcron-2.9.5.1.src.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: bf39dcef6d0c452f167f5a31a1231e4e
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 390 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 3.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.10 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2686809" name="id2686809"></a><span class=
+                  "application">Fcron</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2731945" name="id2731945"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../server/mail.html"><span class="url">MTA</span></a>,
+              <a href="../postlfs/linux_pam.html">Linux-PAM-0.78</a>,
+              <a href="http://www.nsa.gov/selinux/"><span class=
+              "url">SELinux</span></a>, <a href=
+              "../pst/docbook-utils.html">DocBook-utils-0.6.14</a> and
+              <a href="../postlfs/editors.html"><span class="url">a text
+              editor</span></a> (default is <a href=
+              "../postlfs/editors.html#vim">Vim-6.3</a>)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Fcron
+          </h2>
+        </div>
+        <p>
+          <a id="fcron-syslog" name="fcron-syslog"></a><span class=
+          "application">Fcron</span> uses the cron facility of
+          <span><strong class="command">syslog</strong></span> to log all
+          messages. Since <span class="acronym">LFS</span> does not set up
+          this facility in <tt class="filename">/etc/syslog.conf</tt>, it
+          needs to be done prior to installing <span class=
+          "application">Fcron</span>. This command will append the necessary
+          line to the current <tt class="filename">/etc/syslog.conf</tt>:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">cat &gt;&gt; /etc/syslog.conf &lt;&lt; "EOF"
+# Begin fcron addition to /etc/syslog.conf
+
+cron.* -/var/log/cron.log
+
+# End fcron addition
+EOF</strong></span></kbd></pre>
+        <p>
+          The configuration file has been modified, so reloading the
+          <span><strong class="command">sysklogd</strong></span> daemon will
+          activate the changes.
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">/etc/rc.d/init.d/sysklogd reload</strong></span></kbd></pre>
+        <p>
+          For security reasons, an unprivileged user and group for
+          <span class="application">Fcron</span> should be created:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">groupadd fcron &amp;&amp;
+useradd -d /dev/null -c "Fcron User" -g fcron -s /bin/false fcron</strong></span></kbd></pre>
+        <p>
+          Install <span class="application">Fcron</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --without-sendmail --with-answer-all=no &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--without-sendmail</tt></em>:
+          <span class="application">Fcron</span> will use an installed
+          <span class="acronym">MTA</span> to email you the results of the
+          <span><strong class="command">fcron</strong></span> script. Omit
+          the switch and use <em class=
+          "parameter"><tt>--with-sendmail=<em class=
+          "replaceable"><tt>[/path/to/MTA]</tt></em></tt></em> if you wish to
+          utilize this feature.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-answer-all=no</tt></em>: After the
+          files are installed, the <span><strong class="command">make
+          install</strong></span> script enters into a configuration routine.
+          The first test will be whether to install a boot script in the
+          <tt class="filename">/etc/rc.d/init.d</tt> directory with the
+          appropriate symbolic links in run levels 2, 3, 4, and 5. The second
+          is to stop any current <span><strong class=
+          "command">fcron</strong></span> processes and start a new one.
+          Since this is probably your first install and a boot script based
+          upon the <span class="acronym">BLFS</span> template is desired,
+          answer 'n' to both tests.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Fcron
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="fcron-config" name="fcron-config"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/fcron.conf</tt>, <tt class=
+            "filename">/etc/fcron.allow</tt> and <tt class=
+            "filename">/etc/fcron.deny</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2759279" name="id2759279"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            There are no required changes in any of the config files.
+            Configuration information can be found in the man page for
+            <tt class="filename">fcron.conf</tt>.
+          </p>
+          <p>
+            <span><strong class="command">fcron</strong></span> scripts are
+            written using <span><strong class=
+            "command">fcrontab</strong></span>. Refer to the
+            <span><strong class="command">fcrontab</strong></span> man page
+            for proper parameters to address your situation.
+          </p>
+          <p>
+            <a id="fcron-init" name="fcron-init"></a>Install the <tt class=
+            "filename">/etc/rc.d/init.d/fcron</tt> init script from the
+            <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-6.0</a>
+            package.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make install-fcron</strong></span></kbd></pre>
+          <p>
+            <a id="fcron-pam" name="fcron-pam"></a>If <span class=
+            "application">Linux-<span class="acronym">PAM</span></span> is
+            installed, two <span class="acronym">PAM</span> configuration
+            files are installed in <tt class="filename">/etc/pam.d</tt>.
+            Alternatively if <tt class="filename">/etc/pam.d</tt> is not
+            used, the installation will append two configuration sections to
+            the existing <tt class="filename">/etc/pam.conf</tt> file. You
+            should ensure the files match your preferences. Modify them as
+            required to suit your needs.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">fcron, fcrondyn,
+              fcronsighup and fcrontab</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/share/doc/fcron-2.9.5.1 and /var/spool/fcron</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2611296" name="id2611296"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="fcron-prog" name="fcron-prog"></a><span class=
+              "term"><span><strong class=
+              "command">fcron</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is the scheduling daemon.
+              </p>
+            </dd>
+            <dt>
+              <a id="fcrondyn" name="fcrondyn"></a><span class=
+              "term"><span><strong class=
+              "command">fcrondyn</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a user tool intended to interact with a running
+                <span><strong class="command">fcron</strong></span> daemon.
+              </p>
+            </dd>
+            <dt>
+              <a id="fcronsighup" name="fcronsighup"></a><span class=
+              "term"><span><strong class=
+              "command">fcronsighup</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                instructs <span><strong class="command">fcron</strong></span>
+                to reread the <span class="application">Fcron</span> tables.
+              </p>
+            </dd>
+            <dt>
+              <a id="fcrontab" name="fcrontab"></a><span class=
+              "term"><span><strong class=
+              "command">fcrontab</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a program used to install, edit, list and remove the
+                tables used by <span><strong class=
+                "command">fcron</strong></span>.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-03-20 20:20:06 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sysutils.html" title=
+          "System Utilities">Prev</a>
+          <p>
+            System Utilities
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="hdparm.html" title="hdparm-5.8">Next</a>
+          <p>
+            hdparm-5.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;11.&nbsp;System Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,683 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      giflib-4.1.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;9.&nbsp;Graphics and Font Libraries
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="libungif.html" title=
+          "libungif-4.1.3">Prev</a>
+          <p>
+            libungif-4.1.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lcms.html" title="lcms-1.14">Next</a>
+          <p>
+            lcms-1.14
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;9.&nbsp;Graphics and Font Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="giflib" name="giflib"></a>
+        <h1 class="sect1">
+          giflib-4.1.3
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to giflib
+          </h2>
+        </div>
+        <p>
+          The <span class="application">giflib</span> package contains
+          libraries for reading and writing <span class="acronym">GIF</span>s
+          as well as programs for converting and working with <span class=
+          "acronym">GIF</span> files. The libraries are useful for any
+          graphics program wishing to deal with <span class=
+          "acronym">GIF</span> files while the programs are useful for
+          conversion purposes as well as cleaning up images.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2792738" name="id2792738"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/libungif/giflib-4.1.3.tar.bz2">
+                  <span class=
+                  "url">http://prdownloads.sourceforge.net/libungif/giflib-4.1.3.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 22efc9599ccf91d288374dcf0679abf1
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 431 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 5.8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.11 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2792691" name="id2792691"></a><span class=
+                  "application">giflib</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2792684" name="id2792684"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              X (<a href="../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.8.2</a>)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of giflib
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">giflib</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The giflib package contains <span><strong class=
+          "command">gif2epsn</strong></span>, <span><strong class=
+          "command">gif2ps</strong></span>, <span><strong class=
+          "command">gif2rgb</strong></span>, <span><strong class=
+          "command">gif2x11</strong></span>, <span><strong class=
+          "command">gifasm</strong></span>, <span><strong class=
+          "command">gifbg</strong></span>, <span><strong class=
+          "command">gifburst</strong></span>, <span><strong class=
+          "command">gifclip</strong></span>, <span><strong class=
+          "command">gifclrmp</strong></span>, <span><strong class=
+          "command">gifcolor</strong></span>, <span><strong class=
+          "command">gifcomb</strong></span>, <span><strong class=
+          "command">gifcompose</strong></span>, <span><strong class=
+          "command">giffiltr</strong></span>, <span><strong class=
+          "command">giffix</strong></span>, <span><strong class=
+          "command">gifflip</strong></span>, <span><strong class=
+          "command">gifhisto</strong></span>, <span><strong class=
+          "command">gifinfo</strong></span>, <span><strong class=
+          "command">gifinter</strong></span>, <span><strong class=
+          "command">gifinto</strong></span>, <span><strong class=
+          "command">gifovly</strong></span>, <span><strong class=
+          "command">gifpos</strong></span>, <span><strong class=
+          "command">gifrotat</strong></span>, <span><strong class=
+          "command">gifrsize</strong></span>, <span><strong class=
+          "command">gifspnge</strong></span>, <span><strong class=
+          "command">giftext</strong></span>, <span><strong class=
+          "command">gifwedge</strong></span>, <span><strong class=
+          "command">icon2gif</strong></span>, <span><strong class=
+          "command">raw2gif</strong></span>, <span><strong class=
+          "command">rgb2gif</strong></span>, <span><strong class=
+          "command">text2gif</strong></span> and <tt class=
+          "filename">libgif</tt> libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775811" name="id2775811"></a>gif2epsn
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Dumps images saved as <span class="acronym">GIF</span> files on
+            Epson type printers.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775805" name="id2775805"></a>gif2ps
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Print <span class="acronym">GIF</span> files on laser printers
+            supporting PostScript.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775785" name="id2775785"></a>gif2rgb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Convert images saved as <span class="acronym">GIF</span> to
+            24-bit <span class="acronym">RGB</span> image(s).
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775749" name="id2775749"></a>gif2x11
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Display images saved as <span class="acronym">GIF</span> files
+            under X Window System.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775771" name="id2775771"></a>gifasm
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Assemble multiple <span class="acronym">GIF</span>s into one, or
+            burst a multiple-image <span class="acronym">GIF</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775748" name="id2775748"></a>gifbg
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Generate a single-color test pattern <span class=
+            "acronym">GIF</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775735" name="id2775735"></a>gifburst
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Burst a <span class="acronym">GIF</span> image into
+            subrectangles.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775720" name="id2775720"></a>gifclip
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Clip or crop a <span class="acronym">GIF</span> image.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775716" name="id2775716"></a>gifclrmp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Modify <span class="acronym">GIF</span> image colormaps.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775700" name="id2775700"></a>gifcolor
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Generate color test patterns.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775689" name="id2775689"></a>gifcomb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Combine 2 <span class="acronym">GIF</span> images of exactly the
+            same size into one.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775672" name="id2775672"></a>gifcompose
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Use (un)giflib tools to compose images.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803784" name="id2803784"></a>giffiltr
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Template code for filtering a <span class="acronym">GIF</span>
+            sequentially.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803782" name="id2803782"></a>giffix
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Clumsily attempts to fix truncated <span class=
+            "acronym">GIF</span> images.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803755" name="id2803755"></a>gifflip
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Flip <span class="acronym">GIF</span> image along X or Y axis or
+            rotate by 90 degrees.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803737" name="id2803737"></a>gifhisto
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Generate color-frequency histogram from a <span class=
+            "acronym">GIF</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803720" name="id2803720"></a>gifinfo
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Gives information on a <span class="acronym">GIF</span> file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803700" name="id2803700"></a>gifinter
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Convert between interlaced and non-interlaced images.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803682" name="id2803682"></a>gifinto
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            End-of-pipe fitting for <span class=
+            "acronym">GIF</span>-processing pipelines.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803635" name="id2803635"></a>gifovly
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Generate one composite <span class="acronym">GIF</span> from a
+            multiple-image <span class="acronym">GIF</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803659" name="id2803659"></a>gifpos
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Change a <span class="acronym">GIF</span>'s screen size or
+            recondition it.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803653" name="id2803653"></a>gifrotat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Rotate a <span class="acronym">GIF</span> through any desired
+            angle.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803625" name="id2803625"></a>gifrsize
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Resize a <span class="acronym">GIF</span> by deletion or
+            duplication of bits.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803611" name="id2803611"></a>gifspnge
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Template code for filtering a <span class="acronym">GIF</span>
+            with in-core operations.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803605" name="id2803605"></a>giftext
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Print (text only) general information about a <span class=
+            "acronym">GIF</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829644" name="id2829644"></a>gifwedge
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Create a test <span class="acronym">GIF</span> image resembling a
+            color monitor test pattern.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829628" name="id2829628"></a>icon2gif
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Converter/deconverter to/from an editable text format.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829610" name="id2829610"></a>raw2gif
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Convert raw 8-bit image data into <span class=
+            "acronym">GIF</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829606" name="id2829606"></a>rgb2gif
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Convert 24 bit images to a <span class="acronym">GIF</span> image
+            using color quantization.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829590" name="id2829590"></a>text2gif
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Generate <span class="acronym">GIF</span> images out of regular
+            text in 8x8 font.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-07 14:16:21 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libungif.html" title=
+          "libungif-4.1.3">Prev</a>
+          <p>
+            libungif-4.1.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lcms.html" title="lcms-1.14">Next</a>
+          <p>
+            lcms-1.14
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;9.&nbsp;Graphics and Font Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

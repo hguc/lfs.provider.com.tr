@@ -1,0 +1,1304 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Courier-0.47
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;21.&nbsp;Mail Server Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="qpopper.html" title="Qpopper-4.0.5">Prev</a>
+          <p>
+            Qpopper-4.0.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="other.html" title=
+          "Other Server Software">Next</a>
+          <p>
+            Other Server Software
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mail.html" title=
+          "Chapter&nbsp;21.&nbsp;Mail Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="courier" name="courier"></a>
+        <h1 class="sect1">
+          Courier-0.47
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Courier
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Courier</span> package contains a
+          Mail Transport Agent (<span class="acronym">MTA</span>). This is
+          useful for sending email to other users of your host machine. It
+          can also be configured to be a central mail server for your domain
+          or a mail relay agent. The <span class="application">Courier</span>
+          packages also includes a web-based email interface, <span class=
+          "acronym">IMAP</span>, <span class=
+          "acronym">IMAP</span>-<span class="acronym">SSL</span>,
+          <span class="acronym">POP</span>3, and <span class=
+          "acronym">POP</span>3-<span class="acronym">SSL</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2804891" name="id2804891"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/courier/courier-0.47.tar.bz2">
+                  <span class=
+                  "url">http://prdownloads.sourceforge.net/courier/courier-0.47.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 639bb3b236914e3b86f287ce3f55264e
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 4.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 102 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 2.62 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2722060" name="id2722060"></a><span class=
+                  "application">Courier</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2779264" name="id2779264"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/gdbm.html">GDBM-1.8.3</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2566351" name="id2566351"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../content/mysql.html">MySQL-4.1.8a</a> or <a href=
+              "../content/postgresql.html">PostgreSQL-7.4.6</a>, <a href=
+              "../postlfs/linux_pam.html">Linux-PAM-0.78</a>, <a href=
+              "../postlfs/security.html#openssl">OpenSSL-0.9.7e</a>, <a href=
+              "../general/fam.html">FAM-2.7.0</a>, <a href=
+              "openldap.html">OpenLDAP-2.2.20</a>, <a href=
+              "../content/web.html#apache">Apache-2.0.53</a>, <a href=
+              "../general/ispell.html">ispell-3.2.06.epa7</a> or <a href=
+              "../general/aspell.html">Aspell-0.60</a>, <a href=
+              "../postlfs/gnupg.html">GnuPG-1.4.0</a>, <a href=
+              "../general/expect.html">Expect-5.42.1</a>, <a href=
+              "../pst/gs.html">AFPL Ghostscript-8.14</a> or <a href=
+              "../pst/espgs.html">ESP Ghostscript-7.07.1</a>, <a href=
+              "http://netpbm.sourceforge.net/"><span class=
+              "url">Netpbm</span></a> and <a href=
+              "http://alpha.greenie.net/mgetty/"><span class=
+              "url">Mgetty+Sendfax</span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Courier
+          </h2>
+        </div>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              <span class="application">Courier's</span> tarball must be
+              extacted as an unprivileged user or the configure script will
+              fail.
+            </p>
+          </div>
+        </div>
+        <p>
+          Before you compile the program, you need to create the courier user
+          and group that is expected to be in place when the install script
+          executes. As the root user, add the courier user and group with the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">groupadd courier &amp;&amp;
+useradd -c 'Courier Mail Server' -d /dev/null \
+        -g courier -s /bin/false courier</strong></span></kbd></pre>
+        <p>
+          The install script also expects a bin user. If you already have a
+          user named bin, this step can be safely ignored.
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">useradd -c 'bin' -d /dev/null -g bin -u 1 bin</strong></span></kbd></pre>
+        <p>
+          <span class="application">Courierfilter</span> requires the
+          directory <tt class="filename">/var/run/courier</tt> to store all
+          the <span class="application">Courier</span> pid and lockfiles.
+          <tt class="filename">/var/lock/subsys</tt> also must exist for the
+          master lock file for <span class="application">Courier</span>.
+          Issue the following commands to create these directories:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">install -d /var/run/courier -o courier -g courier -m755 &amp;&amp;
+install -d /var/lock/subsys -o root -g root -m755</strong></span></kbd></pre>
+        <p>
+          Build <span class="application">Courier</span> as an unprivileged
+          user with the following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr --libexecdir=/usr/lib/courier \
+    --datadir=/usr/share/courier --sysconfdir=/etc/courier \
+    --localstatedir=/var/lib/courier --with-piddir=/var/run/courier \
+    --with-paranoid-smtpext --disable-autorenamesent \
+    --enable-workarounds-for-imap-client-bugs --with-db=gdbm &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Once again, become the root user and install <span class=
+          "application">Courier</span> with the following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install &amp;&amp;
+make install-configure</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--libexecdir=/usr/lib/courier</tt></em>:
+          Specifies the directory which contains programs and libraries that
+          cannot be directly executed from the command-line.
+        </p>
+        <p>
+          <em class="parameter"><tt>--datadir=/usr/share/courier</tt></em>:
+          Specifies the directory where miscellaneous shell scripts,
+          <span class="application">Perl</span> scripts, and data files will
+          be installed.
+        </p>
+        <p>
+          <em class=
+          "parameter"><tt>--localstatedir=/var/spool/courier</tt></em>:
+          Specifies the directory that will hold the mail queue, and other
+          temporary data.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-piddir=/var/run/courier</tt></em>:
+          Specifies the directory where <span class=
+          "application">Courier</span>'s <tt class="filename">PID</tt> files
+          are stored when <span class="application">Courier</span> is active.
+        </p>
+        <p>
+          <tt class="option">--with-paranoid-smtpext</tt>: Be paranoid when
+          negotiating Courier-specific <span class="acronym">ESMTP</span>
+          extensions with remote servers. The <span class=
+          "application">Courier</span> mail server defines and implements
+          certain experimental <span class="acronym">ESMTP</span> extensions:
+          XVERP and XEXDATA. Problems may result in the event that someone
+          else uses the same name to implement some other extension. If this
+          option is specified, <span class="application">Courier's</span>
+          <span class="acronym">ESMTP</span> server will also advertise a
+          dummy <span class="acronym">ESMTP</span> capability called
+          XCOURIEREXTENSIONS, and will not recognize any Courier-specific
+          extensions unless the remote mail server also advertises this dummy
+          <span class="acronym">ESMTP</span> capability.
+        </p>
+        <p>
+          <tt class="option">--disable-autorenamesent</tt>: Do not rename the
+          Sent folder every month. This option can also be controlled by the
+          <tt class="envar">SQWEBMAIL_AUTORENAMESENT</tt> environment
+          variable.
+        </p>
+        <p>
+          <tt class="option">--enable-workarounds-for-imap-client-bugs</tt>:
+          There are several confirmed bugs in some <span class=
+          "acronym">IMAP</span> clients that do not properly implement the
+          <span class="acronym">IMAP</span>4rev1 protocol. This option
+          enables some workarounds for those buggy <span class=
+          "acronym">IMAP</span> clients. NOTE: <span><strong class=
+          "command">make check</strong></span> will fail if this option is
+          used. You should first configure without this option, and if all
+          post-configuration tests succeed, rerun configure with this option
+          and recompile.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-db=gdbm</tt></em>: <span class=
+          "application">Courier</span> requires either the <span class=
+          "application"><span class="acronym">GDBM</span></span> or the
+          <span class="application">DB</span> database library. <span class=
+          "application"><span class="acronym">GDBM</span></span> is used if
+          both are present. This option forces the selection of <span class=
+          "application">GDBM</span> as courier is currently broken when used
+          with <span class="application">DB</span>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-ispell=/usr/bin/aspell</tt></em>:
+          <span class="application">Courier</span>'s webmail server can use
+          spell checking, if <span><strong class=
+          "command">configure</strong></span> finds <span class=
+          "application">ispell</span> or if you explicitly set the location
+          of <span class="application">aspell</span>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-mimetypes=<em class=
+          "replaceable"><tt>[location of mime.types
+          file]</tt></em></tt></em>: Use this switch if you receive an error
+          saying that the <tt class="filename">mime.types</tt> file could not
+          be found.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="etc-courier-star" name="etc-courier-star"></a>
+          <h2 class="sect2">
+            Configuring Courier
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2747501" name="id2747501"></a>Configuration Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/courier/*</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2559471" name="id2559471"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            While still as root, you will need to create the following files
+            with the contents specified.
+          </p>
+          <p>
+            <tt class="filename">/etc/courier/defaultdomain</tt>
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/courier/defaultdomain &lt;&lt; "EOF"</strong></span>
+<em class="replaceable"><tt>[yourdomain]</tt></em>
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            <tt class="filename">/etc/courier/me</tt>
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/courier/me &lt;&lt; "EOF"</strong></span>
+<em class="replaceable"><tt>[servername.yourdomain]</tt></em>
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            <tt class="filename">/etc/courier/locals</tt>
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/courier/locals &lt;&lt; "EOF"</strong></span>
+localhost
+<em class="replaceable"><tt>[yourdomain]</tt></em>
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            <tt class=
+            "filename">/etc/courier/esmtpacceptmailfor.dir/system</tt>
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/courier/esmtpacceptmailfor.dir/system &lt;&lt; "EOF"</strong></span>
+localhost
+<em class="replaceable"><tt>[yourdomain]</tt></em>
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            You will also need to edit the <tt class=
+            "filename">/etc/courier/aliases/system</tt> file and change the
+            following entry.
+          </p>
+          <pre class="userinput"><kbd class="command">postmaster: <em class=
+          "replaceable"><tt>[your administrator email]</tt></em></kbd></pre>
+          <p>
+            If you want to deny access from some hosts from sending mail, you
+            will need to edit the <tt class=
+            "filename">/etc/courier/smtpaccess/default</tt> file.
+          </p>
+          <p>
+            If you wish to host mail for non local domains including virtual
+            domains, you must add them to <tt class=
+            "filename">/etc/courier/hosteddomains</tt>. This file should
+            exist whether you need a hosted domain list or not:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">touch /etc/courier/hosteddomains</strong></span></kbd></pre>
+          <p>
+            After the above steps are completed you will need to run the
+            following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">makesmtpaccess &amp;&amp;
+makehosteddomains &amp;&amp;
+makealiases</strong></span></kbd></pre>
+          <p>
+            For each user, you will need to create a <tt class=
+            "filename">Maildir</tt> directory:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cd /home/<em class=
+          "replaceable"><tt>[username]</tt></em> &amp;&amp;
+maildirmake Maildir &amp;&amp;
+chown <em class="replaceable"><tt>[username]</tt></em>.<em class=
+"replaceable"><tt>[username]</tt></em> Maildir -R</strong></span></kbd></pre>
+          <p>
+            If you wish to use <span class="acronym">SSL</span> with
+            <span class="application">Courier</span>, you should obtain
+            certificates and store them in <tt class=
+            "filename">/usr/share/courier</tt>. You can optionally create
+            self-signed, test certificates with the following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">mkesmtpdcert &amp;&amp;
+mkimapdcert &amp;&amp;
+mkpop3dcert</strong></span></kbd></pre>
+          <p>
+            All of <span class="application">Courier</span>'s configuration
+            files reside in the directory <tt class=
+            "filename">/etc/courier/</tt>. For each service <span class=
+            "acronym">SMTP</span>, <span class="acronym">POP3</span> and
+            <span class="acronym">IMAP</span>, you will have a standard
+            config file, and an <span class="acronym">SSL</span> config file.
+            For each service that you wish to utilize, you will need to edit
+            the configuration file, and change the <em class=
+            "replaceable"><tt>[DAEMON]</tt></em>START variable from 'NO' to
+            'YES'. For example, to use <span class="acronym">SMTP</span> with
+            <span class="acronym">SSL</span>, you'll need to edit <tt class=
+            "filename">/etc/courier/esmtpd-ssl</tt> and change the value of
+            'ESMTPDSSLSTART' to 'YES'. Make the same change for each service
+            configuration that you wish to use with <span class=
+            "application">Courier</span>.
+          </p>
+          <p>
+            If you wish to use <span class="acronym">LDAP</span>, an
+            <span class="acronym">LDAP</span> configuration file should be
+            created:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">echo "LDAPALIASDSTART=YES" &gt; /etc/courier/ldapaliasd</strong></span></kbd></pre>
+          <p>
+            Similarly, if you wish to use webmail, you should create the
+            webmail configuration file:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">echo "WEBMAILDSTART=YES" &gt; /etc/courier/webmaild</strong></span></kbd></pre>
+          <p>
+            You will also need to copy the <tt class="filename">webmail</tt>
+            file from <tt class=
+            "filename">/usr/lib/courier/courier/webmail</tt> to the
+            <tt class="filename">cgi-bin</tt> directory of your <span class=
+            "application">Apache</span> server.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cp -a /usr/lib/courier/courier/webmail/webmail /srv/www/cgi-bin</strong></span></kbd></pre>
+          <p>
+            You will then need to copy the images to a directory under your
+            <tt class="filename">htdocs</tt> directory of your <span class=
+            "application">Apache</span> server. The directory needs to be
+            named <tt class="filename">webmail</tt> or you need to specify it
+            during the configure phase with <em class=
+            "parameter"><tt>--enable-imageurl=<em class=
+            "replaceable"><tt>[URL]</tt></em></tt></em>.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cp -a /usr/share/courier/sqwebmail/images /srv/www/htdocs/webmail</strong></span></kbd></pre>
+          <p>
+            If you wish to utilze the webadmin utility, you will need to copy
+            the <tt class="filename">webadmin</tt> file from <tt class=
+            "filename">/usr/lib/courier/courier/webmail</tt> to your
+            <tt class="filename">cgi-bin</tt> directory of your <span class=
+            "application">Apache</span> server.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cp -a /usr/lib/courier/courier/webmail/webadmin /srv/www/cgi-bin</strong></span></kbd></pre>
+          <p>
+            You also need to put the password into the file <tt class=
+            "filename">/etc/courier/webadmin/password</tt>:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/courier/webadmin/password &lt;&lt; "EOF"</strong></span>
+<em class="replaceable"><tt>[password]</tt></em>
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            If you are not using <span class="acronym">SSL</span> on your
+            <span class="application">Apache</span> server, you will also
+            need to add <tt class=
+            "filename">/etc/courier/webadmin/unsecureok</tt>, so you will be
+            able to use your web based administration tool.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">touch /etc/courier/webadmin/unsecureok</strong></span></kbd></pre>
+          <p>
+            If you use <span class="application">Linux-PAM</span> on your
+            system, you will need to create the <span class=
+            "acronym">PAM</span> configuration files:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/pam.d/esmtp &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/esmtp
+
+auth            required                pam_unix.so try_first_pass
+account         required                pam_unix.so
+session         required                pam_unix.so
+
+# End /etc/pam.d/esmtp
+<span><strong class="command">EOF
+cat &gt; /etc/pam.d/pop3 &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/pop3
+
+auth            required                pam_unix.so try_first_pass
+account         required                pam_unix.so
+session         required                pam_unix.so
+
+# End /etc/pam.d/pop3
+<span><strong class="command">EOF
+cat &gt; /etc/pam.d/imap &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/imap
+
+auth            required                pam_unix.so try_first_pass
+account         required                pam_unix.so
+session         required                pam_unix.so
+
+# End /etc/pam.d/imap
+<span><strong class="command">EOF
+cat &gt; /etc/pam.d/webmail &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/webmail
+
+auth            required                pam_unix.so try_first_pass
+account         required                pam_unix.so
+session         required                pam_unix.so
+
+# End /etc/pam.d/webmail
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            <a id="courier-init" name="courier-init"></a>Finally, if you wish
+            to start the <span class="application">Courier</span> server at
+            boot, install the <tt class=
+            "filename">/etc/rc.d/init.d/courier</tt> bootscript included in
+            the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-6.0</a>
+            package.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make install-courier</strong></span></kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2841053" name="id2841053"></a>Configuring for
+                  virtual users
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            These instructions will configure <span class=
+            "application">Courier</span> to lookup virtual users in a
+            <span class="application">MySQL</span> database. Begin by making
+            the following changes to <tt class=
+            "filename">/etc/courier/authmysqlrc</tt>:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">MYSQL_SERVER            localhost
+MYSQL_USERNAME          courier
+MYSQL_PASSWORD          <em class="replaceable"><tt>[your choice]</tt></em>
+MYSQL_SOCKET            /var/run/mysql/mysql.sock
+MYSQL_PORT              3306
+MYSQL_DATABASE          courier_mail
+MYSQL_USER_TABLE        users
+MYSQL_CLEAR_PWFIELD     clear
+DEFAULT DOMAIN          <em class="replaceable"><tt>[your domain]</tt></em>
+MYSQL_QUOTA_FIELD       quota</kbd></pre>
+          <p>
+            Connect to <span class="application">MySQL</span>:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">mysql -p</strong></span></kbd></pre>
+          <p>
+            Create the <tt class="filename">courier_mail</tt> database and
+            setup the users table:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">CREATE DATABASE courier_mail;
+USE courier_mail
+CREATE TABLE users (
+id                    char(128) DEFAULT '' NOT NULL,
+crypt                 char(128) DEFAULT '' NOT NULL,
+clear                 char(128) DEFAULT '' NOT NULL,
+name                  char(128) DEFAULT '' NOT NULL,
+uid                   int(10) unsigned DEFAULT '65534' NOT NULL,
+gid                   int(10) unsigned DEFAULT '65534' NOT NULL,
+home                  char(255) DEFAULT '' NOT NULL,
+quota                 char(255) DEFAULT '' NOT NULL,
+KEY id (id(128))
+);</strong></span></kbd></pre>
+          <p>
+            Grant all priveledges to the courier user created earlier:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">GRANT ALL PRIVILEGES ON *.* TO courier@localhost \
+    IDENTIFIED BY '<em class=
+"replaceable"><tt>[password]</tt></em>' WITH GRANT OPTION;
+QUIT</strong></span></kbd></pre>
+          <p>
+            Create a virtual mailman user and group:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">groupadd -g 9000 vmailman &amp;&amp;
+useradd -c 'Virtual Mailman' -g vmailman -m -k /dev/null -u 9000 vmailman</strong></span></kbd></pre>
+          <p>
+            Create a mail directory for a new virtual user:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cd /home/vmailman &amp;&amp;
+mkdir <em class="replaceable"><tt>[virtual_user]</tt></em> &amp;&amp;
+cd <em class="replaceable"><tt>[virtual_user]</tt></em> &amp;&amp;
+maildirmake Maildir &amp;&amp;
+chown vmailman.vmailman Maildir -R</strong></span></kbd></pre>
+          <p>
+            Now, connect the the <span class="application">MySQL</span>
+            database as the courier user:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">mysql -u courier -p</strong></span></kbd></pre>
+          <p>
+            To add the virtual user you need to enter at least one version of
+            the password either clear text or encrypted.
+          </p>
+          <p>
+            Add the first virtual user with the following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">USE courier_mail
+INSERT INTO users VALUES (
+'<em class="replaceable"><tt>[virtual_users]</tt></em>@<em class=
+"replaceable"><tt>[domain.com]</tt></em>,
+'<em class="replaceable"><tt>[encrypted password or blank]</tt></em>',
+'<em class="replaceable"><tt>[clear text password or blank]</tt></em>',
+'<em class="replaceable"><tt>[User's Name]</tt></em>',
+9000,
+9000,
+'<em class="replaceable"><tt>[location of Maildir]</tt></em>',
+'<em class="replaceable"><tt>[Quota in Bytes']</tt></em>
+);
+QUIT</strong></span></kbd></pre>
+          <p>
+            For example:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">INSERT INTO users VALUES (
+'blfsuser@linuxfromscratch.org',
+'',
+'password',
+'BLFS User',
+9000,
+9000,
+'/home/vmailman/blfsuser',
+''
+);</strong></span></kbd></pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">addcr,
+              authenumerate, cancelmsg, courier, courier-config,
+              courieresmtpd, courierfilter, courierlogger, couriermlm,
+              couriertcpd, couriertls, deliverquota, dotforward, esmtpd,
+              esmtpd-msa, esmtpd-ssl, filterctl, imapd, imapd-ssl, lockmail,
+              mailbot, maildiracl, maildirkw, maildirmake, maildrop, mailq,
+              makeacceptmailfor, makealiases, makedat, makehosteddomains,
+              makemime, makepercentrelay, makesmtpaccess, makesmtpaccess-msa,
+              makeuserdb, makeuucpneighbors, mimegpg, mkesmtpdcert,
+              mkimapdcert, mkpop3dcert, pop3d, pop3d-ssl, preline, pw2userdb,
+              reformail, reformime, rmail, sendmail, sharedindexinstall,
+              sharedindexsplit, showconfig, showmodules, testmxlookup,
+              userdb, userdbpw, vchkpw2userdb, webgpg, webmaild</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/etc/courier,
+              /usr/lib/courier, /usr/share/courier, /var/lib/courier,
+              /var/lock/subsys, /var/run/courier and
+              /var/spool/courier</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2791041" name="id2791041"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="cancelmsg" name="cancelmsg"></a><span class=
+              "term"><span><strong class=
+              "command">cancelmsg</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                removes a message from the mail queue.
+              </p>
+            </dd>
+            <dt>
+              <a id="courier-prog" name="courier-prog"></a><span class=
+              "term"><span><strong class=
+              "command">courier</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is an administrative command used to control the <span class=
+                "application">Courier</span> scheduling engine.
+              </p>
+            </dd>
+            <dt>
+              <a id="courierfax" name="courierfax"></a><span class=
+              "term"><span><strong class=
+              "command">courierfax</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                sends email messages by fax.
+              </p>
+            </dd>
+            <dt>
+              <a id="courierfilter" name="courierfilter"></a><span class=
+              "term"><span><strong class=
+              "command">courierfilter</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                starts and stops all mail filters installed by
+                <span><strong class="command">filterctl</strong></span>.
+              </p>
+            </dd>
+            <dt>
+              <a id="courierldapaliasd" name=
+              "courierldapaliasd"></a><span class="term"><span><strong class=
+              "command">courierldapaliasd</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                supports mail address aliasing using an LDAP directory.
+              </p>
+            </dd>
+            <dt>
+              <a id="courierlogger" name="courierlogger"></a><span class=
+              "term"><span><strong class=
+              "command">courierlogger</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                captures error messages from other <span class=
+                "application">Courier</span> applications and forwards them
+                to the system logger.
+              </p>
+            </dd>
+            <dt>
+              <a id="couriermlm" name="couriermlm"></a><span class=
+              "term"><span><strong class=
+              "command">couriermlm</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                sets up, maintains, and manages mailing lists.
+              </p>
+            </dd>
+            <dt>
+              <a id="courierperlfilter" name=
+              "courierperlfilter"></a><span class="term"><span><strong class=
+              "command">courierperlfilter</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a sample filter written in <span class=
+                "application">Perl</span>.
+              </p>
+            </dd>
+            <dt>
+              <a id="courierpop3d" name="courierpop3d"></a><span class=
+              "term"><span><strong class=
+              "command">courierpop3d</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a <span class="application">Courier</span> <span class=
+                "acronym">POP</span>3 server.
+              </p>
+            </dd>
+            <dt>
+              <a id="courierpop3login" name=
+              "courierpop3login"></a><span class="term"><span><strong class=
+              "command">courierpop3login</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                reads the <span class="acronym">POP</span>3 userid and
+                password and passes them to the authentication modules.
+              </p>
+            </dd>
+            <dt>
+              <a id="couriertcpd" name="couriertcpd"></a><span class=
+              "term"><span><strong class=
+              "command">couriertcpd</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                accepts incoming network connections, and runs other
+                <span class="application">Courier</span> programs after
+                establishing each network connection.
+              </p>
+            </dd>
+            <dt>
+              <a id="couriertls" name="couriertls"></a><span class=
+              "term"><span><strong class=
+              "command">couriertls</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is used by applications to encrypt a network connection using
+                <span class="acronym">SSL</span>/<span class=
+                "acronym">TLS</span>.
+              </p>
+            </dd>
+            <dt>
+              <a id="dotforward" name="dotforward"></a><span class=
+              "term"><span><strong class=
+              "command">dotforward</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a compatibility module that reads forwarding instructions
+                in <tt class="filename">$HOME/.forward</tt>.
+              </p>
+            </dd>
+            <dt>
+              <a id="dupfilter" name="dupfilter"></a><span class=
+              "term"><span><strong class=
+              "command">dupfilter</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a threaded filter that tries to block junk E-mail by
+                attempting to detect multiple copies of the same message,
+                which are rejected.
+              </p>
+            </dd>
+            <dt>
+              <a id="esmtpd" name="esmtpd"></a><span class=
+              "term"><span><strong class=
+              "command">esmtpd</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a control script for courieresmtpd.
+              </p>
+            </dd>
+            <dt>
+              <a id="esmtpd-msa" name="esmtpd-msa"></a><span class=
+              "term"><span><strong class=
+              "command">esmtpd-msa</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a control script for courieresmtpd, but adds message
+                submission port 587 for the <span class="acronym">MSA</span>
+                protocol.
+              </p>
+            </dd>
+            <dt>
+              <a id="filterctl" name="filterctl"></a><span class=
+              "term"><span><strong class=
+              "command">filterctl</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                installs or uninstalls global mail filters.
+              </p>
+            </dd>
+            <dt>
+              <a id="imapd" name="imapd"></a><span class=
+              "term"><span><strong class=
+              "command">imapd</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is the <span class="application">Courier</span>-<span class=
+                "acronym">IMAP</span> server.
+              </p>
+            </dd>
+            <dt>
+              <a id="lockmail" name="lockmail"></a><span class=
+              "term"><span><strong class=
+              "command">lockmail</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a helper utility for locking mailbox files.
+              </p>
+            </dd>
+            <dt>
+              <a id="mailbot" name="mailbot"></a><span class=
+              "term"><span><strong class=
+              "command">mailbot</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a <span class="acronym">MIME</span>-aware autoresponder
+                utility.
+              </p>
+            </dd>
+            <dt>
+              <a id="maildiracl" name="maildiracl"></a><span class=
+              "term"><span><strong class=
+              "command">maildiracl</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                manages access control lists.
+              </p>
+            </dd>
+            <dt>
+              <a id="maildirkw" name="maildirkw"></a><span class=
+              "term"><span><strong class=
+              "command">maildirkw</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                modifies <span class=
+                "application">Courier</span>-<span class="acronym">IMAP</span>
+                compatible maildir message keywords.
+              </p>
+            </dd>
+            <dt>
+              <a id="maildirmake" name="maildirmake"></a><span class=
+              "term"><span><strong class=
+              "command">maildirmake</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                creates maildirs, and maildir folders.
+              </p>
+            </dd>
+            <dt>
+              <a id="maildrop" name="maildrop"></a><span class=
+              "term"><span><strong class=
+              "command">maildrop</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a replacement local mail delivery agent that includes a
+                mail filtering language.
+              </p>
+            </dd>
+            <dt>
+              <a id="mailq-courier" name="mailq-courier"></a><span class=
+              "term"><span><strong class=
+              "command">mailq</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                displays a list of all messages that have not been delivered
+                yet.
+              </p>
+            </dd>
+            <dt>
+              <a id="makeacceptmailfor" name=
+              "makeacceptmailfor"></a><span class="term"><span><strong class=
+              "command">makeacceptmailfor</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                builds a list of domains to accept mail for, from the
+                <tt class="filename">/etc/courier/esmtpacceptmailfor.dir</tt>
+                directory.
+              </p>
+            </dd>
+            <dt>
+              <a id="makealiases" name="makealiases"></a><span class=
+              "term"><span><strong class=
+              "command">makealiases</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                builds an alias database from one or more plain text source
+                files.
+              </p>
+            </dd>
+            <dt>
+              <a id="makedat" name="makedat"></a><span class=
+              "term"><span><strong class=
+              "command">makedat</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a utility to create <span class="application">GDBM</span>
+                or <span class="application">DB</span> files from plain text
+                files.
+              </p>
+            </dd>
+            <dt>
+              <a id="makehosteddomains" name=
+              "makehosteddomains"></a><span class="term"><span><strong class=
+              "command">makehosteddomains</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                rebuilds the contents of the hosteddomains database from the
+                contents of <tt class=
+                "filename">/tools/etc/courier/hosteddomains</tt>.
+              </p>
+            </dd>
+            <dt>
+              <a id="makemime" name="makemime"></a><span class=
+              "term"><span><strong class=
+              "command">makemime</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                creates <span class="acronym">MIME</span>-formatted messages
+                from one or more files.
+              </p>
+            </dd>
+            <dt>
+              <a id="makepercentrelay" name=
+              "makepercentrelay"></a><span class="term"><span><strong class=
+              "command">makepercentrelay</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                builds a list of %-relayed domains from the <tt class=
+                "filename">percentrelay.dir</tt> directory.
+              </p>
+            </dd>
+            <dt>
+              <a id="makesmtpaccess" name="makesmtpaccess"></a><span class=
+              "term"><span><strong class=
+              "command">makesmtpaccess</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                builds <span class="acronym">ESMTP</span> server access files
+                from the <tt class="filename">/etc/courier/smtpaccess</tt>
+                directory.
+              </p>
+            </dd>
+            <dt>
+              <a id="makesmtpaccess-msa" name=
+              "makesmtpaccess-msa"></a><span class=
+              "term"><span><strong class="command">makesmtpaccess-msa</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                builds <span class="acronym">ESMTP</span> server access files
+                from the <tt class="filename">/etc/courier/smtpaccess</tt>
+                directory. This esmtp list is for the <span class=
+                "acronym">MSA</span> protocol.
+              </p>
+            </dd>
+            <dt>
+              <a id="makeuserdb" name="makeuserdb"></a><span class=
+              "term"><span><strong class=
+              "command">makeuserdb</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                builds a user/password db from the contents of <tt class=
+                "filename">/tools/etc/courier/userdb</tt>.
+              </p>
+            </dd>
+            <dt>
+              <a id="mimegpg" name="mimegpg"></a><span class=
+              "term"><span><strong class=
+              "command">mimegpg</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                signs, encrypts, or decrypts <span class=
+                "acronym">MIME</span>-formatted email messages using
+                <span class="application">GnuPG</span>.
+              </p>
+            </dd>
+            <dt>
+              <a id="mkesmtpdcert" name="mkesmtpdcert"></a><span class=
+              "term"><span><strong class=
+              "command">mkesmtpdcert</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                creates a secure <span class="acronym">SMTP</span> test
+                certificate.
+              </p>
+            </dd>
+            <dt>
+              <a id="mkimapdcert" name="mkimapdcert"></a><span class=
+              "term"><span><strong class=
+              "command">mkimapdcert</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                creates a secure <span class="acronym">IMAP</span> test
+                certificate.
+              </p>
+            </dd>
+            <dt>
+              <a id="mkpop3dcert" name="mkpop3dcert"></a><span class=
+              "term"><span><strong class=
+              "command">mkpop3dcert</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                creates a secure <span class="acronym">POP3</span> test
+                certificate.
+              </p>
+            </dd>
+            <dt>
+              <a id="pop3d" name="pop3d"></a><span class=
+              "term"><span><strong class=
+              "command">pop3d</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a wrapper script for <span><strong class=
+                "command">couriertcpd</strong></span> to start and stop the
+                <span class="acronym">POP3</span> service.
+              </p>
+            </dd>
+            <dt>
+              <a id="pop3d-ssl" name="pop3d-ssl"></a><span class=
+              "term"><span><strong class=
+              "command">pop3d-ssl</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a wrapper script for <span><strong class=
+                "command">couriertcpd</strong></span> to start and stop the
+                <span class="acronym">POP3</span> over <span class=
+                "acronym">SSL</span> service.
+              </p>
+            </dd>
+            <dt>
+              <a id="preline" name="preline"></a><span class=
+              "term"><span><strong class=
+              "command">preline</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                prepends legacy <tt class="filename">mbox</tt> headers to
+                mail messages.
+              </p>
+            </dd>
+            <dt>
+              <a id="reformail" name="reformail"></a><span class=
+              "term"><span><strong class=
+              "command">reformail</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                reads a message on standard input, reformats it in some way,
+                and writes the message to standard output.
+              </p>
+            </dd>
+            <dt>
+              <a id="reformime" name="reformime"></a><span class=
+              "term"><span><strong class=
+              "command">reformime</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a utility for reformatting <span class=
+                "acronym">MIME</span> messages.
+              </p>
+            </dd>
+            <dt>
+              <a id="sendmail-courier" name=
+              "sendmail-courier"></a><span class="term"><span><strong class=
+              "command">sendmail</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                reads an email message and delivers the message to its
+                recipients.
+              </p>
+            </dd>
+            <dt>
+              <a id="submit" name="submit"></a><span class=
+              "term"><span><strong class=
+              "command">submit</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                submits messages to <span class="application">Courier</span>
+                for processing.
+              </p>
+            </dd>
+            <dt>
+              <a id="testmxlookup" name="testmxlookup"></a><span class=
+              "term"><span><strong class=
+              "command">testmxlookup</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                lists the names and <span class="acronym">IP</span> addresses
+                of mail relays that receive mail for the domain.
+              </p>
+            </dd>
+            <dt>
+              <a id="userdb" name="userdb"></a><span class=
+              "term"><span><strong class=
+              "command">userdb</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a script to individually manipulate entries in <tt class=
+                "filename">/tools/etc/courier/userdb.</tt>
+              </p>
+            </dd>
+            <dt>
+              <a id="userdbpw" name="userdbpw"></a><span class=
+              "term"><span><strong class=
+              "command">userdbpw</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                reads a single line of text on standard input, encrypts it,
+                and prints the encrypted result to standard output.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-03-14 04:10:36 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="qpopper.html" title="Qpopper-4.0.5">Prev</a>
+          <p>
+            Qpopper-4.0.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="other.html" title=
+          "Other Server Software">Next</a>
+          <p>
+            Other Server Software
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mail.html" title=
+          "Chapter&nbsp;21.&nbsp;Mail Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

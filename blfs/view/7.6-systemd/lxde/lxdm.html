@@ -1,0 +1,375 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      LXDM-0.5.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.6-systemd">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch (systemd edition) - Version
+        7.6-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;38.&nbsp;LXDE Applications
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="lxterminal.html" title=
+          "LXTerminal-0.1.11">Prev</a>
+          <p>
+            LXTerminal-0.1.11
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../xsoft/xsoft.html" title=
+          "X Software">Next</a>
+          <p>
+            X Software
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lxde-apps.html" title=
+          "Chapter&nbsp;38.&nbsp;LXDE Applications">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.6-systemd">
+          Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="lxdm" name="lxdm"></a>LXDM-0.5.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to LXDM
+        </h2>
+        <p>
+          The <span class="application">LXDM</span> is a lightweight display
+          manager for the <span class="application">LXDE</span> desktop. It
+          can also be used as an alternative to <span class=
+          "application">GNOME's</span> <span class="application">GDM</span>
+          or <span class="application">KDE's</span> <span class=
+          "application">KDM</span>.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.6
+          systemd platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://distfiles.alpinelinux.org/distfiles/lxdm-0.5.0.tar.xz">
+                http://distfiles.alpinelinux.org/distfiles/lxdm-0.5.0.tar.xz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: a51686720e606ca456d7f56ae4159d1f
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 232 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 4.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: less than 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          LXDM Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="../x/gtk2.html" title=
+          "GTK+-2.24.24">GTK+-2.24.24</a> <a class="xref" href=
+          "../general/iso-codes.html" title="ISO Codes-3.56">ISO
+          Codes-3.56</a> and <a class="xref" href="../general/librsvg.html"
+          title="librsvg-2.40.3">librsvg-2.40.3</a> (runtime, for default
+          theme background)
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="../postlfs/linux-pam.html" title=
+          "Linux-PAM-1.1.8">Linux-PAM-1.1.8</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../x/gtk3.html" title=
+          "GTK+-3.12.2">GTK+-3.12.2</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/lxdm">http://wiki.linuxfromscratch.org/blfs/wiki/lxdm</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of LXDM
+        </h2>
+        <p>
+          The following fixes are needed.
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; pam/lxdm &lt;&lt; "EOF" &amp;&amp;
+<code class="literal">#%PAM-1.0
+auth       substack     system-auth
+auth       optional     pam_gnome_keyring.so
+account    include      system-account
+session    optional     pam_systemd.so
+session    optional     pam_keyinit.so force revoke
+session    include      system-auth
+session    optional     pam_gnome_keyring.so auto_start</code>
+EOF
+
+sed -i 's:sysconfig/i18n:profile.d/i18n.sh:g' data/lxdm.in &amp;&amp;
+sed -i 's:/etc/xprofile:/etc/profile:g' data/Xsession &amp;&amp;
+sed -i 's/^bg/#&amp;/' data/lxdm.conf.in</kbd>
+</pre>
+        <p>
+          Install <span class="application">LXDM</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr \
+--sysconfdir=/etc         \
+--with-pam                \
+--disable-consolekit      \
+--with-systemdsystemunitdir=/lib/systemd/system &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>cat &gt; pam/lxdm &lt;&lt; "EOF"
+          ...</strong></span>: Replace default <code class=
+          "filename">/etc/pam.d/lxdm</code> by another one appropriate for
+          BLFS.
+        </p>
+        <p>
+          <span class="command"><strong>sed -i ...
+          data/lxdm.conf.in</strong></span>: Fix the background to the
+          default one.
+        </p>
+        <p>
+          <span class="command"><strong>sed -i ...
+          data/Xsession</strong></span>: Source <code class=
+          "filename">/etc/profile</code>, instead of other file, according to
+          BLFS standard.
+        </p>
+        <p>
+          <span class="command"><strong>sed -i ...
+          data/lxdm.in</strong></span>: Fix greeter's locale for BLFS
+          specification.
+        </p>
+        <p>
+          <code class="option">--with-pam</code>: This option enables use of
+          pam authentication.
+        </p>
+        <p>
+          <code class="option">--disable-consolekit</code>: This option
+          disables the use of <span class="application">consolekit</span> as
+          it is not used on a <span class="application">systemd</span>
+          system.
+        </p>
+        <p>
+          <code class=
+          "option">--with-systemdsystemunitdir=/lib/systemd/system</code>:
+          This option ensures that the systemd unit file gets installed in
+          the correct location.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring LXDM
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="lxdm-config" name="lxdm-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/lxdm/lxdm.conf</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            The LXDM daemon is configured using the <code class=
+            "filename">/etc/lxdm/lxdm.conf</code> file. Within this file you
+            can set a default session by uncommenting the line:
+            session=/usr/bin/startlxde and replacing startlxde with your
+            session of choice. For <span class="application">GNOME</span>
+            session=/usr/bin/gnome-session. For <span class=
+            "application">OPENBOX</span> session=/usr/bin/openbox-session and
+            for <span class="application">XFCE</span>
+            session=/usr/bin/startxfce4.
+          </p>
+          <p>
+            It is also possible to set the preferred session on a per-user
+            basis by editing the ~/.dmrc file for each user and adding:
+          </p>
+          <pre class="screen">
+<code class="literal">
+        [Desktop]
+        Session=xfce</code>
+</pre>
+          <p>
+            To prevent the possibility of lxdm not cleanly logging out a
+            users session add the following to the <code class=
+            "filename">/etc/lxdm/PostLogout</code> as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">cat &gt; /etc/lxdm/PostLogout &lt;&lt; "EOF"
+# Terminate current user session
+/bin/loginctl terminate-session $XDG_SESSION_ID
+
+# Restart lxdm
+/bin/systemctl restart lxdm.service
+EOF</kbd>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="lxdm-init" name="lxdm-init"></a>Systemd Units
+          </h3>
+          <p>
+            To start the <span class="command"><strong>LXDM</strong></span>
+            daemon at boot, enable the previously installed systemd unit by
+            running the following command as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">systemctl enable lxdm</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">lxdm-config, lxdm and lxdm-binary.</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None.</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/lxdm, /etc/pam.d, and
+              /usr/share/lxdm.</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lxdm-prog" name="lxdm-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lxdm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Is a wrapper script for calling lxdm-binary.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2014-08-31 16:03:10 +1200
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="lxterminal.html" title=
+          "LXTerminal-0.1.11">Prev</a>
+          <p>
+            LXTerminal-0.1.11
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../xsoft/xsoft.html" title=
+          "X Software">Next</a>
+          <p>
+            X Software
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lxde-apps.html" title=
+          "Chapter&nbsp;38.&nbsp;LXDE Applications">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.6-systemd">
+          Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,534 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Exim-4.24
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;21.&nbsp;Mail Server Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="sendmail.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="qpopper.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Exim-4.24
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Exim
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Exim</span> package contains a Mail
+          Transport Agent written by the University of Cambridge, released
+          under the <span class="acronym">GNU</span> Public License.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2826979" name="id2826979"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/infosys/mail/exim/exim4/exim-4.24.tar.bz2">
+                  http://gd.tuwien.ac.at/infosys/mail/exim/exim4/exim-4.24.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.exim.org/pub/exim/exim4/exim-4.24.tar.bz2">ftp://ftp.exim.org/pub/exim/exim4/exim-4.24.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.2 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 11 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.27 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2827016" name="id2827016"></a><span class=
+                  "application">Exim</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2829313" name="id2829313"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../content/databases.html#db">Berkeley DB-4.2.52.2</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2829327" name="id2829327"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              X (<a href="../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.7.0</a>), <a href=
+              "openldap.html">OpenLDAP-2.1.30</a>, <a href=
+              "../content/mysql.html">MySQL-4.0.20</a>, <a href=
+              "../basicnet/tcpwrappers.html">tcpwrappers-7.6</a> and <a href=
+              "../postlfs/linux_pam.html">Linux-PAM-0.77</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Exim
+          </h3>
+        </div>
+        <p>
+          Before building <span class="application">Exim</span>, we need to
+          create the group and user exim which will run the exim daemon:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">groupadd exim &amp;&amp;
+useradd -d /dev/null -g exim -s /bin/false exim</b></span></tt>
+</pre>
+        <p>
+          Install <span class="application">Exim</span> with the following
+          commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">sed -e 's/^BIN_DIR.*$/BIN_DIRECTORY=\/usr\/sbin/' src/EDITME | \
+  sed -e 's/^CONF.*$/CONFIGURE_FILE=\/etc\/exim.conf/' | \
+  sed -e 's/^EXIM_USER.*$/EXIM_USER=exim/' | \
+  sed -e 's/^EXIM_MONITOR/#EXIM_MONITOR/' &gt; Local/Makefile &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+cp doc/exim.8 /usr/share/man/man8 &amp;&amp;
+ln -s exim-4.24-1 /usr/sbin/exim &amp;&amp;
+ln -s exim /usr/sbin/sendmail</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">sed -e ... &gt; Local/Makefile</b></span>:
+          Many of <span class="application">Exim</span>'s configuration
+          options are compiled in. Here, we specify the minimum set of
+          options, <i class="parameter"><tt>BIN_DIRECTORY</tt></i>, <i class=
+          "parameter"><tt>CONFIGURE_FILE</tt></i> and <i class=
+          "parameter"><tt>EXIM_USER</tt></i>. We also defer building the
+          <span class="application">Exim</span> monitor program, which
+          requires the <span class="application">X</span> Window System
+          support, by commenting out the <i class=
+          "parameter"><tt>EXIM_MONITOR</tt></i> line in the <tt class=
+          "filename">Makefile</tt>.
+        </p>
+        <p>
+          <span><b class="command">ln -s exim /usr/sbin/sendmail</b></span>:
+          Create a link to <span><b class="command">sendmail</b></span> for
+          applications which need it. <span class="application">Exim</span>
+          will accept most <span class="application">Sendmail</span>
+          command-line options.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Exim
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829573" name="id2829573"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/exim.conf</tt>, <tt class=
+            "filename">/etc/aliases</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829594" name="id2829594"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Create the Exim configuration files with the following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/aliases &lt;&lt; "EOF"</b></span>
+postmaster: root
+MAILER-DAEMON: root
+<span><b class="command">EOF
+exim -v -bi &amp;&amp;
+/usr/sbin/exim -bd -q1m</b></span></tt>
+</pre>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                To protect an existing <tt class="filename">/etc/aliases</tt>
+                file, we will append these aliases to it if it exists. This
+                file should be checked and duplicate aliases removed, if
+                present.
+              </p>
+            </div>
+          </div>
+          <p>
+            To automate the running of exim at startup, install the
+            <tt class="filename">/etc/rc.d/init.d/exim</tt> init script
+            included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-exim</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Exim</span> package contains
+          <span><b class="command">exim</b></span>, <span><b class=
+          "command">exim_dumpdb</b></span>, <span><b class=
+          "command">exim_fixdb</b></span>, <span><b class=
+          "command">exim_tidydb</b></span>, <span><b class=
+          "command">exinext</b></span>, <span><b class=
+          "command">exiwhat</b></span>, <span><b class=
+          "command">exim_dbmbuild</b></span>, <span><b class=
+          "command">exicyclog</b></span>, <span><b class=
+          "command">exigrep</b></span>, <span><b class=
+          "command">eximstats</b></span>, <span><b class=
+          "command">exiqsumm</b></span>, <span><b class=
+          "command">exiqgrep</b></span>, <span><b class=
+          "command">exim_lock</b></span> and <span><b class=
+          "command">exim_checkaccess</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829844" name="id2829844"></a>exim
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exim</b></span> is the Mail Transport
+            Agent daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829857" name="id2829857"></a>exim_dumpdb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exim_dumpdb</b></span> writes the
+            contents of exim databases to the standard output.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829869" name="id2829869"></a>exim_fixdb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exim_fixdb</b></span> modifies data in
+            exim databases.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830207" name="id2830207"></a>exim_tidydb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exim_tidydb</b></span> removes old
+            records from exim databases.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830220" name="id2830220"></a>exinext
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exinext</b></span> queries remote host
+            retry times.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830233" name="id2830233"></a>exiwhat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exiwhat</b></span> queries running exim
+            processes.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830246" name="id2830246"></a>exim_dbmbuild
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exim_dbmbuild</b></span> creates and
+            rebuilds exim databases.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830259" name="id2830259"></a>exicyclog
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exicyclog</b></span> cycles exim log
+            files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830272" name="id2830272"></a>exigrep
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exigrep</b></span> searches exim log
+            files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830284" name="id2830284"></a>eximstats
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">eximstats</b></span> generates mail
+            statistics from exim log files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830298" name="id2830298"></a>exiqsumm
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exiqsumm</b></span> produces a summary
+            of the messages on the mail queue.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830311" name="id2830311"></a>exiqgrep
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exiqgrep</b></span> is an utility for
+            selective queue listing.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830324" name="id2830324"></a>exim_lock
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exim_lock</b></span> locks a mailbox
+            file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830337" name="id2830337"></a>exim_checkaccess
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exim_checkaccess</b></span> states
+            whether a given recipient address from a given host is acceptable
+            or not.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="sendmail.html">Prev</a><br />
+        Sendmail-8.12.10
+      </div>
+      <div class="next">
+        <a accesskey="n" href="qpopper.html">Next</a><br />
+        Qpopper-4.0.5
+      </div>
+      <div class="up">
+        <a accesskey="u" href="mail.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

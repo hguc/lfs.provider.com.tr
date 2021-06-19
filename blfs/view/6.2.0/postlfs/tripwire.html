@@ -1,0 +1,495 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Tripwire-2.4.0.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;4.&nbsp;Security
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="gnupg.html" title="GnuPG-1.4.3">Prev</a>
+          <p>
+            GnuPG-1.4.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="heimdal.html" title="Heimdal-0.7.2">Next</a>
+          <p>
+            Heimdal-0.7.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="tripwire" name="tripwire"></a>
+        <h1 class="sect1">
+          Tripwire-2.4.0.1
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Tripwire
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Tripwire</span> package contains
+          programs used to verify the integrity of the files on a given
+          system.
+        </p>
+        <h3>
+          <a id="id2674713" name="id2674713"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://downloads.sourceforge.net/tripwire/tripwire-2.4.0.1-src.tar.bz2?download">
+                <span class=
+                "url">http://downloads.sourceforge.net/tripwire/tripwire-2.4.0.1-src.tar.bz2?download</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: b371f79ac23cacc9ad40b1da76b4a0c4
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.2 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 37 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 1.6 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2726578" name="id2726578"></a>Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Required patch: <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/tripwire-2.4.0.1-gcc4_build_fixes-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/tripwire-2.4.0.1-gcc4_build_fixes-1.patch</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2704269" name="id2704269"></a>Tripwire Dependencies
+        </h3>
+        <h4>
+          <a id="id2687377" name="id2687377"></a>Required
+        </h4>
+        <p class="required">
+          <a href="security.html#openssl">OpenSSL-0.9.8d</a>
+        </p>
+        <h4>
+          <a id="id2622264" name="id2622264"></a>Optional
+        </h4>
+        <p class="optional">
+          An <a href="../server/mail.html">MTA</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/tripwire"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/tripwire</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Tripwire
+          </h2>
+        </div>
+        <p>
+          Compile <span class="application">Tripwire</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ln -s contrib install &amp;&amp;
+patch -Np1 -i ../tripwire-2.4.0.1-gcc4_build_fixes-1.patch &amp;&amp;
+sed -i -e 's@TWDB="${prefix}@TWDB="/var@' install/install.cfg &amp;&amp;
+./configure --prefix=/usr --sysconfdir=/etc/tripwire &amp;&amp;
+make</kbd></pre>
+        <div class="warning">
+          <div class="admonhead">
+            <img alt="[Warning]" src="../images/warning.png" />
+            <h3 class="admontitle">
+              Warning
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The default configuration is to use a local MTA. If you don't
+              have an MTA installed and have no wish to install one, modify
+              <tt class="filename">install/install.cfg</tt> to use an SMTP
+              server instead. Otherwise the install will fail.
+            </p>
+          </div>
+        </div>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+cp -v policy/*.txt /usr/share/doc/tripwire</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">ln -s contrib
+          install</strong></span>: This command creates a symbolic link in
+          the build directory needed for installation.
+        </p>
+        <p>
+          <span><strong class="command">sed -i -e
+          's@TWDB="${prefix}@TWDB="/var@'
+          install/install.cfg</strong></span>: This command tells the package
+          to install the program database and reports in <tt class=
+          "filename">/var/lib/tripwire</tt>.
+        </p>
+        <p>
+          <span><strong class="command">make install</strong></span>: This
+          command creates the <span class="application">Tripwire</span>
+          security keys as well as installing the binaries. There are two
+          keys: a site key and a local key which are stored in <tt class=
+          "filename">/etc/tripwire/</tt>.
+        </p>
+        <p>
+          <span><strong class="command">cp -v policy/*.txt
+          /usr/share/doc/tripwire</strong></span>: This command installs the
+          documentation.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Tripwire
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="tripwire-config" name="tripwire-config"></a>Config
+                  Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/tripwire/*</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2642968" name="id2642968"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="application">Tripwire</span> uses a policy file to
+            determine which files are integrity checked. The default policy
+            file (<tt class="filename">/etc/tripwire/twpol.txt</tt>) is for a
+            default Redhat installation and will need to be updated for your
+            system.
+          </p>
+          <p>
+            Policy files should be tailored to each individual distribution
+            and/or installation. Some custom policy files can be found below:
+          </p>
+          <div class="literallayout">
+            <p>
+              <a href=
+              "http://home.iprimus.com.au/glombowski/blfs/twpol-all.txt"><span class="url">
+              http://home.iprimus.com.au/glombowski/blfs/twpol-all.txt</span></a><br />
+
+              Checks&nbsp;integrity&nbsp;of&nbsp;all&nbsp;files<br />
+              <a href=
+              "http://home.iprimus.com.au/glombowski/blfs/twpol-lfs.txt"><span class="url">
+              http://home.iprimus.com.au/glombowski/blfs/twpol-lfs.txt</span></a><br />
+
+              Custom&nbsp;policy&nbsp;file&nbsp;for&nbsp;Base&nbsp;LFS&nbsp;3.0&nbsp;system<br />
+
+              <a href=
+              "http://home.iprimus.com.au/glombowski/blfs/twpol-suse7.2.txt"><span class="url">
+              http://home.iprimus.com.au/glombowski/blfs/twpol-suse7.2.txt</span></a><br />
+
+              Custom&nbsp;policy&nbsp;file&nbsp;for&nbsp;SuSE&nbsp;7.2&nbsp;system
+            </p>
+          </div>
+          <p>
+            Download the custom policy file you'd like to try, copy it into
+            <tt class="filename">/etc/tripwire/</tt>, and use it instead of
+            <tt class="filename">twpol.txt</tt>. It is, however, recommended
+            that you make your own policy file. Get ideas from the examples
+            above and read <tt class=
+            "filename">/usr/share/doc/tripwire/policyguide.txt</tt> for
+            additional information. <tt class="filename">twpol.txt</tt> is a
+            good policy file for beginners as it will note any changes to the
+            file system and can even be used as an annoying way of keeping
+            track of changes for uninstallation of software.
+          </p>
+          <p>
+            After your policy file has been transferred to <tt class=
+            "filename">/etc/tripwire/</tt> you may begin the configuration
+            steps (perform as the <tt class="systemitem">root</tt>):
+          </p>
+          <pre class="root"><kbd class=
+          "command">twadmin --create-polfile --site-keyfile /etc/tripwire/site.key \
+    /etc/tripwire/twpol.txt &amp;&amp;
+tripwire --init</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2664991" name="id2664991"></a>Usage Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To use <span class="application">Tripwire</span> after creating a
+            policy file to run a report, use the following command:
+          </p>
+          <pre class="root"><kbd class=
+          "command">tripwire --check &gt; /etc/tripwire/report.txt</kbd></pre>
+          <p>
+            View the output to check the integrity of your files. An
+            automatic integrity report can be produced by using a cron
+            facility to schedule the runs.
+          </p>
+          <p>
+            Please note that after you run an integrity check, you must
+            examine the report (or email) and then modify the <span class=
+            "application">Tripwire</span> database to reflect the changed
+            files on your system. This is so that <span class=
+            "application">Tripwire</span> will not continually notify you
+            that files you intentionally changed are a security violation. To
+            do this you must first <span><strong class="command">ls -l
+            /var/lib/tripwire/report/</strong></span> and note the name of
+            the newest file which starts with <tt class=
+            "filename">linux-</tt> and ends in <tt class=
+            "filename">.twr</tt>. This encrypted file was created during the
+            last report creation and is needed to update the <span class=
+            "application">Tripwire</span> database of your system. Then, as
+            the <tt class="systemitem">root</tt> user, type in the following
+            command making the appropriate substitutions for <em class=
+            "replaceable"><tt>&lt;?&gt;</tt></em>:
+          </p>
+          <pre class="root"><kbd class="command">tripwire --update -twrfile \
+    /var/lib/tripwire/report/linux-<em class=
+"replaceable"><tt>&lt;???????&gt;</tt></em>-<em class=
+"replaceable"><tt>&lt;??????&gt;</tt></em>.twr</kbd></pre>
+          <p>
+            You will be placed into <span class="application">vim</span> with
+            a copy of the report in front of you. If all the changes were
+            good, then just type <span><strong class=
+            "command">:x</strong></span> and after entering your local key,
+            the database will be updated. If there are files which you still
+            want to be warned about, remove the 'x' before the filename in
+            the report and type <span><strong class=
+            "command">:x</strong></span>.
+          </p>
+          <p>
+            A good summary of tripwire operations can be found at <a href=
+            "http://www.redhat.com/docs/manuals/linux/RHL-9-Manual/ref-guide/ch-tripwire.html">
+            <span class=
+            "url">http://www.redhat.com/docs/manuals/linux/RHL-9-Manual/ref-guide/ch-tripwire.html</span></a>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2634584" name="id2634584"></a>Changing the Policy
+                  File
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            If you are unhappy with your policy file and would like to modify
+            it or use a new one, modify the policy file and then execute the
+            following commands as the <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">twadmin --create-polfile /etc/tripwire/twpol.txt &amp;&amp;
+tripwire --init</kbd></pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">siggen, tripwire,
+              twadmin, and twprint.</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/etc/tripwire,
+              /usr/share/doc/tripwire, and /var/lib/tripwire</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2712340" name="id2712340"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="siggen" name="siggen"></a><span class=
+                  "term"><span><strong class=
+                  "command">siggen</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a signature gathering utility that displays the hash
+                    function values for the specified files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tripwire-program" name=
+                  "tripwire-program"></a><span class=
+                  "term"><span><strong class=
+                  "command">tripwire</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the main file integrity checking program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="twadmin" name="twadmin"></a><span class=
+                  "term"><span><strong class=
+                  "command">twadmin</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    administrative and utility tool used to perform certain
+                    administrative functions related to <span class=
+                    "application">Tripwire</span> files and configuration
+                    options.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="twprint" name="twprint"></a><span class=
+                  "term"><span><strong class=
+                  "command">twprint</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints <span class="application">Tripwire</span> database
+                    and report files in clear text format.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-15 17:25:53 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnupg.html" title="GnuPG-1.4.3">Prev</a>
+          <p>
+            GnuPG-1.4.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="heimdal.html" title="Heimdal-0.7.2">Next</a>
+          <p>
+            Heimdal-0.7.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

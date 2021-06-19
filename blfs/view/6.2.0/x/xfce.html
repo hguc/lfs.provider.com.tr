@@ -1,0 +1,705 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      XFce-4.2.3.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;27.&nbsp;Window Managers
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="metacity.html" title=
+          "Metacity-2.14.5">Prev</a>
+          <p>
+            Metacity-2.14.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="other-wms.html" title=
+          "Other Window Managers">Next</a>
+          <p>
+            Other Window Managers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="wm.html" title=
+          "Chapter&nbsp;27.&nbsp;Window Managers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="xfce" name="xfce"></a>
+        <h1 class="sect1">
+          XFce-4.2.3.2
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to XFce
+          </h2>
+        </div>
+        <p>
+          The <span class="application">XFce</span> package contains a
+          lightweight desktop environment.
+        </p>
+        <h3>
+          <a id="id2695895" name="id2695895"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://downloads.sourceforge.net/xfce/xfce-4.2.3.2-src.tar.bz2">
+                <span class=
+                "url">http://downloads.sourceforge.net/xfce/xfce-4.2.3.2-src.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 44e126e47657969657ff86fb558d54ea
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 25 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 219 MB (to build and install
+                everything without deleting any sources)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 3.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2822730" name="id2822730"></a>XFce Dependencies
+        </h3>
+        <h4>
+          <a id="id2760171" name="id2760171"></a>Required
+        </h4>
+        <p class="required">
+          <a href="gtk2.html">GTK+-2.8.20</a> and <a href=
+          "../general/libxml2.html">libxml2-2.6.26</a>
+        </p>
+        <h4>
+          <a id="id2624010" name="id2624010"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="../gnome/gdm.html">GDM-2.14.10</a>, <a href=
+          "../general/librsvg.html">librsvg-2.14.4</a> (<span class=
+          "application">xffm</span> links to <span class=
+          "application">librsvg</span> automatically if <span class=
+          "application">librsvg</span> is installed), <a href=
+          "../general/libgtkhtml.html">libgtkhtml-2.11.0</a>, <a href=
+          "startup-notification.html">startup-notification-0.8</a>, and
+          <a href="../pst/ps.html#a2ps">a2ps-4.13b</a> (required to build
+          <span class="application">xfprint</span>).
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/xfce"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/xfce</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of XFce
+          </h2>
+        </div>
+        <p>
+          A bare minimum <span class="application">XFce</span> setup requires
+          installation of the following packages:
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                libxfce4util-4.2.3.2.2
+              </p>
+            </li>
+            <li>
+              <p>
+                dbh-1.0.24
+              </p>
+            </li>
+            <li>
+              <p>
+                libxfcegui4-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                libxfce4mcs-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce-mcs-manager-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfwm4-4.2.3.2.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce4-panel-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfdesktop-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce-utils-4.2.3.2
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+          Install the minimum applications by issuing the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make</kbd></pre>
+        <p>
+          If you use <a href="../gnome/gdm.html">GDM-2.14.10</a> as your
+          display manager and would like to be able to log into an
+          <span class="application">XFce</span> session from the login
+          prompt, pass the <em class="parameter"><tt>--enable-gdm</tt></em>
+          option to the <span class="application">xfce-utils</span>-4.2.3.2
+          <span><strong class="command">configure</strong></span> script
+          (requires <a href="../general/which.html">which-2.16</a> to be
+          installed at run time).
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <p>
+          In addition, you may choose to install:
+        </p>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                gtk-xfce-engine-2.2.8
+              </p>
+            </li>
+            <li>
+              <p>
+                xfcalendar-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce-mcs-plugins-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce4-appfinder-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce4-icon-theme-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce4-iconbox-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce4-mixer-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce4-session-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce4-systray-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce4-toys-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfce4-trigger-launcher-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xffm-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfprint-4.2.3.2
+              </p>
+            </li>
+            <li>
+              <p>
+                xfwm4-themes-4.2.3.2
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+          Install the remaining applications using the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --sysconfdir=/etc \
+     --libexecdir=/usr/lib/xfce4 &amp;&amp;
+make</kbd></pre>
+        <p>
+          Also, <span class="application">xfprint</span> can be configured
+          with <em class="parameter"><tt>--enable-cups</tt></em> if you have
+          <a href="../pst/printing.html#cups">CUPS-1.2.7</a> installed.
+        </p>
+        <p>
+          And then as <tt class="systemitem">root</tt>:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <p>
+          As the <tt class="systemitem">root</tt> user, move the help
+          documentation to the standard BLFS location and modify the help
+          script to look for it there:
+        </p>
+        <pre class="root"><kbd class=
+        "command">mv -vf /usr/share/xfce4/doc /usr/share/doc/xfce4 &amp;&amp;
+sed -i 's@xfce4/doc@doc/xfce4@' /usr/bin/xfhelp4</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--sysconfdir=/etc</tt></em>: <span class=
+          "application">libxfce4util</span>, <span class=
+          "application">xfce4-panel</span>, <span class=
+          "application">xfdesktop</span>, <span class=
+          "application">xfce-utils</span> and <span class=
+          "application">xfce4-session</span> require this parameter because
+          the path is built into the library or they install configuration
+          files in <tt class="filename">/etc/xdg</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--libexecdir=/usr/lib/xfce4</tt></em>:
+          <span class="application">xfce4-session</span> requires this
+          parameter to install some utility programs to the correct location.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring XFce
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="xfce-config" name="xfce-config"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="application">XFce</span> will look for the theme
+            index from <a href=
+            "hicolor-icon-theme.html">hicolor-icon-theme-0.9</a> at run-time.
+            Ensure you install the package before launching <span class=
+            "application">XFce</span>.
+          </p>
+          <p>
+            Issue the command below to create an <tt class=
+            "filename">.xinitrc</tt> file which will automatically run the
+            appropriate <span class="application">XFce</span> programs when
+            the <span class="application">X</span> Window system is launched.
+            Be sure to backup your existing <tt class=
+            "filename">.xinitrc</tt> file before proceeding.
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">cat &gt; ~/.xinitrc &lt;&lt; "EOF"
+<tt class="literal">xfce-mcs-manager
+xfwm4 --daemon
+xftaskbar4 &amp;
+xfdesktop &amp;
+exec xfce4-panel</tt>
+EOF</kbd></pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">fgr, scramble,
+              startxfce4, xfbook, xfbook4, xfcalendar, xfce-mcs-manager,
+              xfce-setting-show, xfce4-about, xfce4-appfinder, xfce4-iconbox,
+              xfce4-kiosk-query, xfce4-menueditor, xfce4-mixer, xfce4-panel,
+              xfce4-session, xfce4-session-logout, xfce4-tips, xfdesktop,
+              xfdiff4, xffm, xffrequent, xffrequent4, xffstab, xffstab4,
+              xfglob4, xfhelp4, xflock4, xfmime-edit, xfmountdev4, xfrecent,
+              xfrecent4, xfprint-manager, xfprint4, xfrun4, xfsamba4,
+              xftaskbar4, xfterm4, xftrash4, xftree4, and xfwm4</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class=
+              "seg">libxfce4util.{a,so}, libdbh.{a,so}, libxfcegui4.{a,so},
+              libxfce4mcs.{a,so}, libxffm_actions.so, libxffm_basic.so,
+              libxffm_calls.so, libxffm_cpy.so, libxffm_on_demand.so,
+              libxffm_secondary.so, libxffm_tubo.so,
+              libxfsm-4.2.{a,so}</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/usr/lib/xfce4,
+              /usr/share/doc/xfce4, /usr/share/xfce4, /usr/share/xffm and
+              /usr/share/xfwm4</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2738060" name="id2738060"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="fgr" name="fgr"></a><span class=
+                  "term"><span><strong class=
+                  "command">fgr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a file content search engine for <span><strong class=
+                    "command">xffm</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="startxfce4" name="startxfce4"></a><span class=
+                  "term"><span><strong class=
+                  "command">startxfce4</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a script which starts up the <span class=
+                    "application">XFce</span> Desktop Environment.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfce-mcs-manager" name=
+                  "xfce-mcs-manager"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfce-mcs-manager</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the settings manager for <span class=
+                    "application">XFce</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfce4-about" name="xfce4-about"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfce4-about</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    displays the about box.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfce4-session" name="xfce4-session"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfce4-session</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    saves the state of your desktop and restores it when you
+                    next start <span class="application">XFce</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfce-setting-show" name=
+                  "xfce-setting-show"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfce-setting-show</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    displays the settings for <span class=
+                    "application">XFce</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfce4-panel" name="xfce4-panel"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfce4-panel</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the panel manager for <span class=
+                    "application">XFce</span>. It contains the launcher,
+                    clock, mail check, desktop switcher and separator
+                    programs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfdesktop" name="xfdesktop"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfdesktop</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the desktop manager for <span class=
+                    "application">XFce</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfhelp4" name="xfhelp4"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfhelp4</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is script that launches a HTML browser to display online
+                    documentation. It requires <span><strong class=
+                    "command">which</strong></span> to run.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xflock4" name="xflock4"></a><span class=
+                  "term"><span><strong class=
+                  "command">xflock4</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a script used to lock the current screen during drag
+                    and drop actions.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfmountdev4" name="xfmountdev4"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfmountdev4</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    mounts a device on the specified mount point and launches
+                    <span><strong class="command">xftree4</strong></span>,
+                    then unmounts the device when <span><strong class=
+                    "command">xftree4</strong></span> finishes.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfrun4" name="xfrun4"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfrun4</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the program launcher for <span class=
+                    "application">XFce</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfsamba4" name="xfsamba4"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfsamba4</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">Samba</span> front end
+                    for <span class="application">XFce</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xftaskbar4" name="xftaskbar4"></a><span class=
+                  "term"><span><strong class=
+                  "command">xftaskbar4</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the taskbar manager for <span class=
+                    "application">XFce</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfterm4" name="xfterm4"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfterm4</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a small terminal wrapper to be used as a drag and drop
+                    action for the <span class="application">XFce</span>
+                    front panel. It requires <span><strong class=
+                    "command">which</strong></span> to run.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xftrash4" name="xftrash4"></a><span class=
+                  "term"><span><strong class=
+                  "command">xftrash4</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a small binary to be used as a drag and drop action
+                    for the <span class="application">XFce</span> front
+                    panel.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xffm" name="xffm"></a><span class=
+                  "term"><span><strong class=
+                  "command">xffm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the file manager for <span class=
+                    "application">XFce</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfwm4" name="xfwm4"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfwm4</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an <span class="application">X11</span> window manager
+                    for <span class="application">XFce</span>.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-29 23:25:21 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="metacity.html" title=
+          "Metacity-2.14.5">Prev</a>
+          <p>
+            Metacity-2.14.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="other-wms.html" title=
+          "Other Window Managers">Next</a>
+          <p>
+            Other Window Managers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="wm.html" title=
+          "Chapter&nbsp;27.&nbsp;Window Managers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

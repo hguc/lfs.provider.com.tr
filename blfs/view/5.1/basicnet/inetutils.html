@@ -1,0 +1,521 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Inetutils-1.4.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;18.&nbsp;Basic Networking Programs</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="portmap.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="nfs-utils.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Inetutils-1.4.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Inetutils
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Inetutils</span> package contains
+          network clients and servers.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2784870" name="id2784870"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/gnu/gnusrc/inetutils/inetutils-1.4.2.tar.gz">
+                  http://gd.tuwien.ac.at/gnu/gnusrc/inetutils/inetutils-1.4.2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnu.org/gnu/inetutils/inetutils-1.4.2.tar.gz">ftp://ftp.gnu.org/gnu/inetutils/inetutils-1.4.2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1019 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 13 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.30 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2785459" name="id2785459"></a><span class=
+                  "application">Inetutils</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2785470" name="id2785470"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/linux_pam.html">Linux-PAM-0.77</a>, and
+              <a href="tcpwrappers.html">tcpwrappers-7.6</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Inetutils
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Inetutils</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --disable-syslogd \
+    --libexecdir=/usr/sbin --infodir=/usr/share/info \
+    --sysconfdir=/etc --localstatedir=/var \
+    --mandir=/usr/share/man &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+mv /usr/bin/ping /bin</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <tt class="option">--disable-syslogd</tt>: This switch prevents
+          <span class="application">Inetutils</span> installing a System Log
+          Daemon, which is installed in the <span class="acronym">LFS</span>
+          Book.
+        </p>
+        <p>
+          <tt class="option">--with-wrap</tt>: This switch makes <span class=
+          "application">Inetutils</span> compile against <span class=
+          "application">tcp-wrappers</span>. Add this option if you want to
+          utilize <span class="application">tcp-wrappers</span>.
+        </p>
+        <p>
+          <tt class="option">--disable-whois</tt>: This switch will prevent
+          <span class="application">Inetutils</span> installing a whois
+          client, since the included whois client is out of date. Add this
+          option if you plan on installing <a href=
+          "whois.html">Whois-4.6.14</a>.
+        </p>
+        <p>
+          <tt class="option">--with-pam</tt>: This switch makes <span class=
+          "application">Inetutils</span> link against <span class=
+          "application">Linux-<span class="acronym">PAM</span></span>
+          libraries. Add this option if you want to utilize <span class=
+          "acronym">PAM</span>.
+        </p>
+        <p>
+          <tt class="option">--disable-servers</tt>: Some of the servers
+          included with <span class="application">Inetutils</span> are
+          insecure in nature and in some cases better alternatives exist. You
+          can choose this switch to enable only the servers you need,
+          avoiding the installation of unneeded servers.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Inetutils</span> package contains
+          network clients and servers.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2784973" name="id2784973"></a>ftp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ftp</b></span> is a ARPANET file
+            transfer client.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2784986" name="id2784986"></a>logger
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">logger</b></span> make entries in the
+            system log.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2785272" name="id2785272"></a>ping
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ping</b></span> sends <span class=
+            "acronym">ICMP</span> ECHO_REQUEST packets to network hosts.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2785289" name="id2785289"></a>rcp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rcp</b></span> is a remote file copy
+            client.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2785302" name="id2785302"></a>rlogin
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rlogin</b></span> is a remote login
+            client.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2785314" name="id2785314"></a>rsh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rsh</b></span> is a remote shell client.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2785326" name="id2785326"></a>syslogd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">syslogd</b></span> logs systems
+            messages.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2785339" name="id2785339"></a>talk
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">talk</b></span> allows communication
+            between users.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2785352" name="id2785352"></a>telnet
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">telnet</b></span> is a user interface to
+            the TELNET protocol.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786053" name="id2786053"></a>tftp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tftp</b></span> is an Internet Trivial
+            File Transfer Protocol client.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786067" name="id2786067"></a>whois
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">whois</b></span> is a client for the
+            whois directory service.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786080" name="id2786080"></a>ftpd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ftpd</b></span> is a DARPA Internet File
+            Transfer Protocol server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786093" name="id2786093"></a>inetd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">inetd</b></span> is a Internet
+            super-server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786106" name="id2786106"></a>rexecd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rexcd</b></span> is a remote execution
+            server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786119" name="id2786119"></a>rlogind
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rlogind</b></span> is a remote login
+            server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786132" name="id2786132"></a>rshd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rshd</b></span> is a remote shell
+            server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786145" name="id2786145"></a>talkd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">talkd</b></span> is a remote user
+            communication server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786158" name="id2786158"></a>telnetd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">telnetd</b></span> is a DARPA TELNET
+            protocol server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786172" name="id2786172"></a>tftpd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tftpd</b></span> is an Internet Trivial
+            File Transfer Protocol server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786185" name="id2786185"></a>uucpd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">uucpd</b></span> is the server for
+            supporting <span class="acronym">UUCP</span> connections over
+            networks.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="portmap.html">Prev</a><br />
+        portmap-5beta
+      </div>
+      <div class="next">
+        <a accesskey="n" href="nfs-utils.html">Next</a><br />
+        NFS Utilities-1.0.6
+      </div>
+      <div class="up">
+        <a accesskey="u" href="netprogs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

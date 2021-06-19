@@ -1,0 +1,439 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      NTP-4.2.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;18.&nbsp;Basic Networking Programs
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="net-tools.html" title=
+          "Net-tools-1.60">Prev</a>
+          <p>
+            Net-tools-1.60
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="openssh.html" title=
+          "OpenSSH-4.1p1 Client">Next</a>
+          <p>
+            OpenSSH-4.1p1 Client
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="ntp" name="ntp"></a>
+        <h1 class="sect1">
+          NTP-4.2.0
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to NTP
+          </h2>
+        </div>
+        <p>
+          The <span class="application">NTP</span> package contains a client
+          and server to keep the time synchronized between various computers
+          over a network. This package is the official reference
+          implementation of the NTP protocol.
+        </p>
+        <h3>
+          <a id="id2617689" name="id2617689"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2.0.tar.gz">
+                <span class=
+                "url">http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2.0.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.udel.edu/pub/ntp/ntp4/ntp-4.2.0.tar.gz"><span class="url">
+                ftp://ftp.udel.edu/pub/ntp/ntp4/ntp-4.2.0.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 0f8fabe87cf54f409b57c6283f0c0c3d
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 2.4 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 27 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.53 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2816155" name="id2816155"></a>NTP Dependencies
+        </h3>
+        <h4>
+          <a id="id2603011" name="id2603011"></a>Optional
+        </h4>
+        <p>
+          <a href="../postlfs/security.html#openssl">OpenSSL-0.9.7g</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of NTP
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">NTP</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --bindir=/usr/sbin \
+    --sysconfdir=/etc &amp;&amp;
+make</kbd></pre>
+        <p>
+          To test the results, issue: <span><strong class="command">make
+          check</strong></span>.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+install -v -m755 -d /usr/share/doc/ntp-4.2.0 &amp;&amp;
+cp -v -R html /usr/share/doc/ntp-4.2.0/</kbd></pre>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring NTP
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="ntp-config" name="ntp-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/ntp.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2693666" name="id2693666"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The following configuration file defines various NTP stratum 2
+            servers with open access from different continents. It also
+            creates a drift file where <span><strong class=
+            "command">ntpd</strong></span> stores the frequency offset. Since
+            the documentation included with the package is sparse, visit the
+            NTP website at <a href="http://www.ntp.org/"><span class=
+            "url">http://www.ntp.org/</span></a> for more information.
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/ntp.conf &lt;&lt; "EOF"
+<tt class="literal"># Africa
+server tock.nml.csir.co.za
+
+# Asia
+server ntp.shim.org
+
+# Australia
+server ntp.saard.net
+
+# Europe
+server ntp.tuxfamily.net
+
+# North America
+server clock.psu.edu
+
+driftfile /var/cache/ntp.drift</tt>
+EOF</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="ntp-init" name="ntp-init"></a>Synchronizing the Time
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            There are two options. Option one is to run <span><strong class=
+            "command">ntpd</strong></span> continuously and allow it to
+            synchronize the time in a gradual manner. The other option is to
+            run <span><strong class="command">ntpd</strong></span>
+            periodically (using cron) and update the time each time
+            <span><strong class="command">ntpd</strong></span> is scheduled.
+          </p>
+          <p>
+            If you choose Option one, then install the <tt class=
+            "filename">/etc/rc.d/init.d/ntp</tt> init script included in the
+            <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-6.1</a>
+            package.
+          </p>
+          <pre class="root"><kbd class="command">make install-ntp</kbd></pre>
+          <p>
+            If you prefer to run <span><strong class=
+            "command">ntpd</strong></span> periodically, add the following
+            command to <tt class="systemitem">root</tt>'s <tt class=
+            "filename">crontab</tt>:
+          </p>
+          <pre class="screen"><tt class="literal">ntpd -q</tt></pre>
+          <p>
+            Execute the following command if you would like to set the
+            hardware clock to the current system time at shutdown and reboot:
+          </p>
+          <pre class="root"><kbd class=
+          "command">ln -v -sf ../init.d/setclock /etc/rc.d/rc0.d/K46setclock &amp;&amp;
+ln -v -sf ../init.d/setclock /etc/rc.d/rc6.d/K46setclock</kbd></pre>
+          <p>
+            The other way around is already set up by LFS.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">ntp-keygen,
+              ntp-wait, ntpd, ntpdate, ntpdc, ntpq, ntptime, ntptrace, and
+              tickadj</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directory:</span></strong> <span class=
+              "seg">/usr/share/doc/ntp-4.2.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2697184" name="id2697184"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="ntp-keygen" name="ntp-keygen"></a><span class=
+                  "term"><span><strong class=
+                  "command">ntp-keygen</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generates cryptographic data files used by the NTPv4
+                    authentication and identification schemes.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ntp-wait" name="ntp-wait"></a><span class=
+                  "term"><span><strong class=
+                  "command">ntp-wait</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is useful at boot time, to delay the boot sequence until
+                    <span><strong class="command">ntpd</strong></span> has
+                    set the time.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ntpd" name="ntpd"></a><span class=
+                  "term"><span><strong class=
+                  "command">ntpd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a NTP daemon that runs in the background and keeps the
+                    date and time synchronized based on response from
+                    configured NTP servers. It also functions as a NTP
+                    server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ntpdate" name="ntpdate"></a><span class=
+                  "term"><span><strong class=
+                  "command">ntpdate</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a client program that sets the date and time based on
+                    the response from an NTP server. This command is
+                    deprecated.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ntpdc" name="ntpdc"></a><span class=
+                  "term"><span><strong class=
+                  "command">ntpdc</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to query the NTP daemon about its current state
+                    and to request changes in that state.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ntpq" name="ntpq"></a><span class=
+                  "term"><span><strong class=
+                  "command">ntpq</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an utility program used to monitor
+                    <span><strong class="command">ntpd</strong></span>
+                    operations and determine performance.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ntptime" name="ntptime"></a><span class=
+                  "term"><span><strong class=
+                  "command">ntptime</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    reads and displays time-related kernel variables.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ntptrace" name="ntptrace"></a><span class=
+                  "term"><span><strong class=
+                  "command">ntptrace</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    traces a chain of NTP servers back to the primary source.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tickadj" name="tickadj"></a><span class=
+                  "term"><span><strong class=
+                  "command">tickadj</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    reads, and optionally modifies, several
+                    timekeeping-related variables in older kernels that do
+                    not have support for precision timekeeping.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="net-tools.html" title=
+          "Net-tools-1.60">Prev</a>
+          <p>
+            Net-tools-1.60
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="openssh.html" title=
+          "OpenSSH-4.1p1 Client">Next</a>
+          <p>
+            OpenSSH-4.1p1 Client
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

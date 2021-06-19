@@ -1,0 +1,43 @@
+#!/bin/bash
+set +h
+set -e
+
+cd $PKGDIR
+sed -i 's/install_to_$(INSTALL_DEST) //' libiberty/Makefile.in
+sed -i 's/BUILD_INFO=info/BUILD_INFO=/' gcc/configure
+case `uname -m` in
+  i?86) sed -i 's/^T_CFLAGS =$/& -fomit-frame-pointer/' gcc/Makefile.in ;;
+esac
+sed -i -e /autogen/d -e /check.sh/d fixincludes/Makefile.in
+mkdir -v ../gcc-build
+cd ../gcc-build
+../gcc-4.7.2/configure --prefix=/usr            \
+                       --libexecdir=/usr/lib    \
+                       --enable-shared          \
+                       --enable-threads=posix   \
+                       --enable-__cxa_atexit    \
+                       --enable-clocale=gnu     \
+                       --enable-languages=c,c++ \
+                       --disable-multilib       \
+                       --disable-bootstrap      \
+                       --with-system-zlib
+make
+ulimit -s 32768 >> $TEST_LOG 2>&1
+make -k check >> $TEST_LOG 2>&1 || true
+../gcc-4.7.2/contrib/test_summary >> $TEST_LOG 2>&1
+make install
+ln -sv ../usr/bin/cpp /lib
+ln -sv gcc /usr/bin/cc
+mkdir -pv /usr/share/gdb/auto-load/usr/lib
+mv -v /usr/lib/*gdb.py /usr/share/gdb/auto-load/usr/lib
+echo 'main(){}' > dummy.c
+cc dummy.c -v -Wl,--verbose &> dummy.log
+readelf -l a.out | grep ': /lib'
+grep -o '/usr/lib.*/crt[1in].*succeeded' dummy.log
+grep -B4 '^ /usr/include' dummy.log
+grep 'SEARCH.*/usr/lib' dummy.log |sed 's|; |\n|g'
+grep "/lib.*/libc.so.6 " dummy.log
+grep found dummy.log
+rm -v dummy.c a.out dummy.log
+echo -e "\n\nTotalseconds: $SECONDS\n"
+exit

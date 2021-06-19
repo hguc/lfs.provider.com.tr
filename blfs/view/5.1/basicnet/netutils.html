@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;19.&nbsp;Basic Networking Utilities
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;V.&nbsp;Basic Networking</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="ntp.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="nmap.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Basic Networking Utilities
+        </h1>
+      </div>
+      <p>
+        This chapter contains some tools that come in handy when the network
+        needs investigating.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="traceroute" name="traceroute"></a>
+          <h2 class="sect1">
+            Traceroute-1.4a12
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to Traceroute
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Traceroute</span> package contains
+            a program which is used to display the network route that packets
+            take to reach a specified host. This is a standard network
+            troubleshooting tool. If you find yourself unable to connect to
+            another system, traceroute can help pinpoint the problem.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2797821" name="id2797821"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://gd.tuwien.ac.at/platform/sun/packages/solaris/freeware/SOURCES/traceroute-1.4a12.tar.gz">
+                    http://gd.tuwien.ac.at/platform/sun/packages/solaris/freeware/SOURCES/traceroute-1.4a12.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.ee.lbl.gov/traceroute-1.4a12.tar.gz">ftp://ftp.ee.lbl.gov/traceroute-1.4a12.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 73 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 464 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.02 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of Traceroute
+            </h3>
+          </div>
+          <p>
+            Install <span class="application">Traceroute</span> by running
+            the following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">mv Makefile.in Makefile.in.bak &amp;&amp;
+sed 's/-o bin/-o root/' Makefile.in.bak &gt; Makefile.in &amp;&amp;
+./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+make install-man</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Command explanations
+            </h3>
+          </div>
+          <pre class="screen">
+<span><b class="command">sed 's/-o bin/-o root/'...</b></span>
+</pre>
+          <p>
+            Adjusts the <tt class="filename">Makefile</tt> so that the
+            program is installed with user root instead of user bin (which
+            doesn't exist on a default <span class="acronym">LFS</span>
+            system).
+          </p>
+          <p>
+            <span><b class="command">make install</b></span>: Installs
+            <span><b class="command">traceroute</b></span> with <span class=
+            "acronym">SUID</span> set to root in the <tt class=
+            "filename">/usr/sbin</tt> directory. This makes it possible for
+            all users to execute <span><b class=
+            "command">traceroute</b></span>. For absolute security, turn off
+            the <span class="acronym">SUID</span> bit in <span><b class=
+            "command">traceroute</b></span>'s file permissions with the
+            command:
+          </p>
+          <pre class="screen">
+<span><b class="command">chmod 0755 /usr/sbin/traceroute</b></span>
+</pre>
+          <p>
+            The risk is that if a security problem such as a buffer overflow
+            was ever found in the <span class="application">Traceroute</span>
+            code, a regular user on your system could gain root access if the
+            program is <span class="acronym">SUID</span> root. Of course,
+            removing the <span class="acronym">SUID</span> permission also
+            makes it impossible for users other than root to utilize
+            <span><b class="command">traceroute</b></span>, so decide what's
+            right for your individual situation.
+          </p>
+          <p>
+            Our aim is to be completely <span class="acronym">FHS</span>
+            compliant, so if you do leave the <span><b class=
+            "command">traceroute</b></span> binary <span class=
+            "acronym">SUID</span> root, then you should move <tt class=
+            "filename">traceroute</tt> to <tt class="filename">/usr/bin</tt>
+            with the following command:
+          </p>
+          <pre class="screen">
+<span><b class="command">mv /usr/sbin/traceroute /usr/bin</b></span>
+</pre>
+          <p>
+            This ensures that the binary is in the path for non-root users.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Traceroute</span> package contains
+            <tt class="userinput">traceroute</tt>.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2797900" name="id2797900"></a>traceroute
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">traceroute</b></span> does basically
+              what it says: it traces the route your packets take from the
+              host you are working on to another host on a network, showing
+              all the intermediate steps (gateways) along the way.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="ntp.html">Prev</a><br />
+        NTP-4.2.0
+      </div>
+      <div class="next">
+        <a accesskey="n" href="nmap.html">Next</a><br />
+        Nmap-3.50
+      </div>
+      <div class="up">
+        <a accesskey="u" href="basicnet.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

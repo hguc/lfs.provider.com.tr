@@ -1,0 +1,241 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Notes on Building Software
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;2.&nbsp;Important Information
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="important.html" title=
+          "Important Information">Prev</a>
+          <p>
+            Important Information
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="position.html" title=
+          "The /usr Versus /usr/local Debate">Next</a>
+          <p>
+            The /usr Versus /usr/local Debate
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="important.html" title=
+          "Chapter&nbsp;2.&nbsp;Important Information">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="intro-important-unpacking" name=
+        "intro-important-unpacking"></a>
+        <h1 class="sect1">
+          Notes on Building Software
+        </h1>
+      </div>
+      <p>
+        Those people who have built an LFS system will be aware of the
+        general principles of downloading and unpacking software. We will
+        however repeat some of that information here for those new to
+        building their own software.
+      </p>
+      <p>
+        Each set of installation instructions contains a URL from which you
+        can download the package. We do however keep a selection of patches
+        available via HTTP. These are referenced as needed in the
+        installation instructions.
+      </p>
+      <p>
+        While you can keep the source files anywhere you like, we assume that
+        you have unpacked them and unzipped any required patches into
+        <tt class="filename">/usr/src</tt>.
+      </p>
+      <p>
+        We can not emphasize strongly enough that you should start from a
+        <span class="emphasis"><em>clean source tree</em></span> each time.
+        This means that if you have had an error, it's usually best to delete
+        the source tree and re-unpack it <span class=
+        "emphasis"><em>before</em></span> trying again. This obviously
+        doesn't apply if you're an advanced user used to hacking <tt class=
+        "filename">Makefile</tt>s and C code, but if in doubt, start from a
+        clean tree.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Building Software as an Unprivileged (non-root) User
+          </h2>
+        </div>
+        <p>
+          The golden rule of Unix System Administration is to use your
+          superpowers only when necessary. Hence, BLFS recommends that you
+          build software as an unprivileged user and only become the
+          <tt class="systemitem">root</tt> user when installing the software.
+          This philosophy is followed in all the packages in this book.
+          Unless otherwise specified, all instructions should be executed as
+          an unprivileged user. The book will advise you on instructions that
+          need <tt class="systemitem">root</tt> privileges.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Unpacking the Software
+          </h2>
+        </div>
+        <p>
+          If a file is in <tt class="filename">.tar</tt> format and
+          compressed, it is unpacked by running one of the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class="command">tar -xvf filename.tar.gz
+tar -xvf filename.tgz
+tar -xvf filename.tar.Z
+tar -xvf filename.tar.bz2</kbd></pre>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              You may omit using the <tt class="option">v</tt> parameter in
+              the commands shown above and below if you wish to suppress the
+              verbose listing of all the files in the archive as they are
+              extracted. This can help speed up the extraction as well as
+              make any errors produced during the extraction more obvious to
+              you.
+            </p>
+          </div>
+        </div>
+        <p>
+          You can also use a slightly different method:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">bzcat filename.tar.bz2 | tar -xv</kbd></pre>
+        <p>
+          Finally, you sometimes need to be able to unpack patches which are
+          generally not in <tt class="filename">.tar</tt> format. The best
+          way to do this is to copy the patch file to <tt class=
+          "filename">/usr/src</tt> and then run one of the following commands
+          depending on whether the file is a <tt class="filename">.gz</tt> or
+          <tt class="filename">.bz2</tt> file:
+        </p>
+        <pre class="userinput"><kbd class="command">gunzip -v patchname.gz
+bunzip2 -v patchname.bz2</kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Verifying File Integrity Using 'md5sum'
+          </h2>
+        </div>
+        <p>
+          Generally, to verify that the downloaded file is genuine and
+          complete, many package maintainers also distribute md5sums of the
+          files. To verify the md5sum of the downloaded files, download both
+          the file and the corresponding md5sum file to the same directory
+          (preferably from different on-line locations), and (assuming
+          <tt class="filename">file.md5sum</tt> is the md5sum file
+          downloaded) run the following command:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">md5sum -c file.md5sum</kbd></pre>
+        <p>
+          If there are any errors, they will be reported. Note that the BLFS
+          book includes md5sums for all the source files also. To use the
+          BLFS supplied md5sums, you can create a <tt class=
+          "filename">file.md5sum</tt> (place the md5sum data and the exact
+          name of the downloaded file on the same line of a file, separated
+          by white space) and run the command shown above. Alternately,
+          simply run the command shown below and compare the output to the
+          md5sum data shown in the BLFS book.
+        </p>
+        <pre class="userinput"><kbd class="command">md5sum <em class=
+        "replaceable"><tt>[name_of_downloaded_file]</tt></em></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Creating Log Files During Installation
+          </h2>
+        </div>
+        <p>
+          For larger packages, it is convenient to create log files instead
+          of staring at the screen hoping to catch a particular error or
+          warning. Log files are also useful for debugging and keeping
+          records. The following command allows you to create an installation
+          log. Replace <em class="replaceable"><tt>[command]</tt></em> with
+          the command you intend to execute.
+        </p>
+        <pre class="userinput"><kbd class="command">( <em class=
+        "replaceable"><tt>[command]</tt></em> 2&gt;&amp;1 | tee compile.log &amp;&amp; exit $PIPESTATUS )</kbd></pre>
+        <p>
+          <tt class="option">2&gt;&amp;1</tt> redirects error messages to the
+          same location as standard output. The <span><strong class=
+          "command">tee</strong></span> command allows viewing of the output
+          while logging the results to a file. The parentheses around the
+          command run the entire command in a subshell and finally the
+          <span><strong class="command">exit $PIPESTATUS</strong></span>
+          command ensures the result of the <em class=
+          "replaceable"><tt>[command]</tt></em> is returned as the result and
+          not the result of the <span><strong class=
+          "command">tee</strong></span> command.
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="important.html" title=
+          "Important Information">Prev</a>
+          <p>
+            Important Information
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="position.html" title=
+          "The /usr Versus /usr/local Debate">Next</a>
+          <p>
+            The /usr Versus /usr/local Debate
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="important.html" title=
+          "Chapter&nbsp;2.&nbsp;Important Information">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

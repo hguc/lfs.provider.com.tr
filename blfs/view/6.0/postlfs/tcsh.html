@@ -1,0 +1,257 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Tcsh-6.13.00
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;7.&nbsp;Shells
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="shells.html" title="Shells">Prev</a>
+          <p>
+            Shells
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="zsh.html" title="ZSH-4.2.4">Next</a>
+          <p>
+            ZSH-4.2.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="shells.html" title=
+          "Chapter&nbsp;7.&nbsp;Shells">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="tcsh" name="tcsh"></a>
+        <h1 class="sect1">
+          Tcsh-6.13.00
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Tcsh
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Tcsh</span> package contains "an
+          enhanced but completely compatible version of the Berkeley Unix C
+          shell (csh)". This is useful as an alternative shell for those who
+          prefer C syntax to that of the bash shell, and also because some
+          programs require the C shell in order to install.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2759347" name="id2759347"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/utils/shells/tcsh/tcsh-6.13.00.tar.gz">
+                  <span class=
+                  "url">http://gd.tuwien.ac.at/utils/shells/tcsh/tcsh-6.13.00.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.fu-berlin.de/unix/shells/tcsh/tcsh-6.13.00.tar.gz">
+                  <span class=
+                  "url">ftp://ftp.fu-berlin.de/unix/shells/tcsh/tcsh-6.13.00.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 11c0c9c9148652dc01270c4880d1cc6e
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 804 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 9.0 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.16 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Tcsh
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Tcsh</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install &amp;&amp;
+make install.man &amp;&amp;
+ln -sf /usr/bin/tcsh /bin/csh</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">ln -sf /usr/bin/tcsh
+          /bin/csh</strong></span>: The <span class="acronym">FHS</span>
+          states that if there is a <span class="application">C</span> shell
+          installed, there should be a symlink from <tt class=
+          "filename">/bin/csh</tt> to it. This creates that symlink.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Tcsh
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="tcsh-config" name="tcsh-config"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            There are numerous configuration files for the C shell. Examples
+            of these are <tt class="filename">/etc/csh.cshrc</tt>, <tt class=
+            "filename">/etc/csh.login</tt>, <tt class=
+            "filename">/etc/csh.logout</tt>, <tt class=
+            "filename">~/.tcshrc</tt>, <tt class="filename">~/.cshrc</tt>,
+            <tt class="filename">~/.history</tt>, <tt class=
+            "filename">~/.cshdirs</tt>, <tt class="filename">~/.login</tt>,
+            <tt class="filename">~/.logout</tt>. More information on these
+            files can be found in the <tt class="filename">tcsh(1)</tt> man
+            page.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Program:</span></strong> <span class="seg">tcsh</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2550816" name="id2550816"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="tcsh-prog" name="tcsh-prog"></a><span class=
+              "term"><span><strong class=
+              "command">tcsh</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is an enhanced but completely compatible version of the
+                Berkeley Unix C shell, <span><strong class=
+                "command">csh</strong></span>. It is usable as both an
+                interactive shell and a script processor.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-01-30 16:01:56 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="shells.html" title="Shells">Prev</a>
+          <p>
+            Shells
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="zsh.html" title="ZSH-4.2.4">Next</a>
+          <p>
+            ZSH-4.2.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="shells.html" title=
+          "Chapter&nbsp;7.&nbsp;Shells">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

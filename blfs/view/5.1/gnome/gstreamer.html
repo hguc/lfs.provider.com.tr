@@ -1,0 +1,221 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      GStreamer-0.8.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;30.&nbsp;GNOME Core Packages</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="gail.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="gst-plugins.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          GStreamer-0.8.1
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to GStreamer
+          </h3>
+        </div>
+        <p>
+          The <span class="application">GStreamer</span> package contains a
+          framework for streaming media. This is useful for interfacing with
+          binary <span class="acronym">CODEC</span>s.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3017731" name="id3017731"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.gnome.org/pub/GNOME/sources/gstreamer/0.8/gstreamer-0.8.1.tar.bz2">
+                  http://ftp.gnome.org/pub/GNOME/sources/gstreamer/0.8/gstreamer-0.8.1.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnome.org/pub/GNOME/sources/gstreamer/0.8/gstreamer-0.8.1.tar.bz2">
+                  ftp://ftp.gnome.org/pub/GNOME/sources/gstreamer/0.8/gstreamer-0.8.1.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.2 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 86 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 1.31 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3017793" name="id3017793"></a><span class=
+                  "application">GStreamer</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3017773" name="id3017773"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="libgnomeui.html">libgnomeui-2.6.1.1</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3018637" name="id3018637"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/prog.html#Python">Python-2.3.3</a>,
+              <a href="gtk-doc.html">GTK-Doc-1.2</a>, <a href=
+              "../pst/typesetting.html#pst-typesetting-tex">TeX-2.0.2</a>,
+              <a href="../pst/gs.html">AFPL Ghostscript-8.14</a> or <a href=
+              "../pst/espgs.html">ESP Ghostscript-7.07.1</a>, <a href=
+              "http://sources.redhat.com/docbook-tools/">docbook-utils</a>,
+              <a href="http://epb.lbl.gov/xfig/">TransFig</a>, <a href=
+              "http://netpbm.sourceforge.net/">Netpbm</a> and <a href=
+              "http://valgrind.kde.org/">Valgrind</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of GStreamer
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">GStreamer</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=`pkg-config --variable=prefix ORBit-2.0` \
+    --localstatedir=/var/lib --sysconfdir=/etc/gnome \
+    --disable-docs-build &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+gst-register</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--localstatedir=/var/lib</tt></i>: This
+          switch puts <span class="application">gst-register</span>'s cache
+          in <tt class="filename">/var/lib/cache</tt> instead of <tt class=
+          "filename">$GNOME_PREFIX/var/cache</tt>.
+        </p>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc/gnome</tt></i>: This
+          switch puts configuration files in <tt class=
+          "filename">/etc/gnome</tt> instead of <tt class=
+          "filename">$GNOME_PREFIX/etc</tt>.
+        </p>
+        <p>
+          <tt class="option">--disable-docs-build</tt>: This switch prevents
+          the rebuilding of documentation during the <span><b class=
+          "command">make</b></span> command.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">GStreamer</span> package contains
+          <tt class="filename">libgstreamer</tt> libraries and <tt class=
+          "filename">libgst</tt> libraries.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="gail.html">Prev</a><br />
+        GAIL-1.6.3
+      </div>
+      <div class="next">
+        <a accesskey="n" href="gst-plugins.html">Next</a><br />
+        gst-plugins-0.8.1
+      </div>
+      <div class="up">
+        <a accesskey="u" href="core.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

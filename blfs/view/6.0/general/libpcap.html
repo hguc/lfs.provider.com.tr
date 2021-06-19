@@ -1,0 +1,239 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      libpcap-0.8.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;8.&nbsp;General Libraries
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="LZO.html" title="LZO-1.08">Prev</a>
+          <p>
+            LZO-1.08
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libusb.html" title="libusb-0.1.8">Next</a>
+          <p>
+            libusb-0.1.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;8.&nbsp;General Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="libpcap" name="libpcap"></a>
+        <h1 class="sect1">
+          libpcap-0.8.3
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to libpcap
+          </h2>
+        </div>
+        <p>
+          <span class="application">libpcap</span> provides functions for
+          user-level packet capture, used in low-level network monitoring.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2767303" name="id2767303"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.tcpdump.org/release/libpcap-0.8.3.tar.gz"><span class="url">
+                  http://www.tcpdump.org/release/libpcap-0.8.3.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.sunfreeware.com/pub/freeware/SOURCES/libpcap-0.8.3.tar.gz">
+                  <span class=
+                  "url">ftp://ftp.sunfreeware.com/pub/freeware/SOURCES/libpcap-0.8.3.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 56a9d4615d8354fcfe8cff8c8443c77b
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 299 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 2.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.05 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2767253" name="id2767253"></a><span class=
+                  "application">libpcap</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2767247" name="id2767247"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="http://www.endace.com/"><span class=
+              "url">DAG</span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of libpcap
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">libpcap</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</strong></span></kbd></pre>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              Some applications, including <a href=
+              "http://www.tcpdump.org/"><span class="url">tcpdump</span></a>,
+              require <tt class="option">--enable-yydebug</tt> passed to
+              <span><strong class="command">configure</strong></span> when
+              building <span class="application">libpcap</span> to enable the
+              parser debugging code. <span class="application">tcpdump</span>
+              will fail to build if you don't pass this parameter.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">libpcap</span> package provides the
+          <tt class="filename">libpcap</tt> library.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2798184" name="id2798184"></a>libpcap
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libpcap</tt> is a library used for
+            user-level packet capture.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-11 18:16:58 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="LZO.html" title="LZO-1.08">Prev</a>
+          <p>
+            LZO-1.08
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libusb.html" title="libusb-0.1.8">Next</a>
+          <p>
+            libusb-0.1.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;8.&nbsp;General Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

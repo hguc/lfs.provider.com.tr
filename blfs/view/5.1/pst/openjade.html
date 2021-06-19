@@ -1,0 +1,284 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      OpenJade-1.3.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;43.&nbsp;Standard Generalized Markup Language
+          (SGML)</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="opensp.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="docbook-dsssl.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          OpenJade-1.3.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to OpenJade
+          </h3>
+        </div>
+        <p>
+          The <span class="application">OpenJade</span> package contains a
+          <span class="acronym">DSSSL</span> engine. This is useful for
+          <span class="acronym">SGML</span> and <span class=
+          "acronym">XML</span> transformations into <span class=
+          "acronym">RTF</span>, TeX, <span class="acronym">SGML</span> and
+          <span class="acronym">XML</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3244117" name="id3244117"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz">
+                  http://prdownloads.sourceforge.net/openjade/openjade-1.3.2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.freestandards.org/pub/lsb/app-battery/packages/openjade-1.3.2.tar.gz">
+                  ftp://ftp.freestandards.org/pub/lsb/app-battery/packages/openjade-1.3.2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 880 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 14.5 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 1.51 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3247116" name="id3247116"></a><span class=
+                  "application">OpenJade</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3247127" name="id3247127"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="opensp.html">OpenSP-1.5.1</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of OpenJade
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">OpenJade</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --enable-http --disable-static \
+    --enable-default-catalog=/etc/sgml/catalog \
+    --enable-default-search-path=/usr/share/sgml \
+    --datadir=/usr/share/sgml/openjade-1.3.2 &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+ln -sf openjade /usr/bin/jade &amp;&amp;
+ln -sf libogrove.so /usr/lib/libgrove.so &amp;&amp;
+ln -sf libospgrove.so /usr/lib/libspgrove.so &amp;&amp;
+ln -sf libostyle.so /usr/lib/libstyle.so &amp;&amp;
+install -m644 dsssl/catalog /usr/share/sgml/openjade-1.3.2/ &amp;&amp;
+install -m644 dsssl/*.dtd dsssl/*.dsl dsssl/*.sgm \
+    /usr/share/sgml/openjade-1.3.2 &amp;&amp;
+install-catalog --add /etc/sgml/openjade-1.3.2.cat \
+    /usr/share/sgml/openjade-1.3.2/catalog &amp;&amp;
+install-catalog --add /etc/sgml/sgml-docbook.cat \
+    /etc/sgml/openjade-1.3.2.cat</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <tt class="option">--disable-static</tt>: This switch prevents the
+          building of the static library.
+        </p>
+        <p>
+          <tt class="option">--enable-http</tt>: This switch adds support for
+          <span class="acronym">HTTP</span>.
+        </p>
+        <p>
+          <i class=
+          "parameter"><tt>--enable-default-catalog=/etc/sgml/catalog</tt></i>:
+          This switch sets the path to the centralized catalog.
+        </p>
+        <p>
+          <tt class="option">--enable-default-search-path</tt>: This switch
+          sets the default value of <tt class="envar">SGML_SEARCH_PATH</tt>.
+        </p>
+        <p>
+          <i class=
+          "parameter"><tt>--datadir=/usr/share/sgml/openjade-1.3.2</tt></i>:
+          This switch puts data files in <tt class=
+          "filename">/usr/share/sgml/openjade-1.3.2</tt> instead of
+          <tt class="filename">/usr/share</tt>.
+        </p>
+        <pre class="screen">
+<span><b class="command">ln -sf openjade /usr/bin/jade
+ln -sf libogrove.so /usr/lib/libgrove.so
+ln -sf libospgrove.so /usr/lib/libspgrove.so
+ln -sf libostyle.so /usr/lib/libstyle.so</b></span>
+</pre>
+        <p>
+          These commands create the Jade equivalents of OpenJade executables
+          and libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring OpenJade
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3247425" name="id3247425"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">echo "SYSTEM \"http://www.oasis-open.org/docbook/xml/4.3/docbookx.dtd\" \
+    \"/usr/share/xml/docbook/xml-dtd-4.3/docbookx.dtd\"" &gt;&gt; \
+    /usr/share/sgml/openjade-1.3.2/catalog</b></span></tt>
+</pre>
+          <p>
+            This configuration is only necessary if you intend to use
+            <span class="application">OpenJade</span> to process the
+            <span class="acronym">BLFS</span> <span class=
+            "acronym">XML</span> files through <span class=
+            "acronym">DSSSL</span> Stylesheets.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">OpenJade</span> package contains
+          <span><b class="command">openjade</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3247508" name="id3247508"></a>openjade
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">openjade</b></span> is a <span class=
+            "acronym">DSSSL</span> engine used for transformations.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="opensp.html">Prev</a><br />
+        OpenSP-1.5.1
+      </div>
+      <div class="next">
+        <a accesskey="n" href="docbook-dsssl.html">Next</a><br />
+        DocBook DSSSL Stylesheets-1.78
+      </div>
+      <div class="up">
+        <a accesskey="u" href="sgml.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

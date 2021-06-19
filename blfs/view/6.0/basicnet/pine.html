@@ -1,0 +1,488 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Pine-4.60
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;20.&nbsp;Mail/News Clients
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="mutt.html" title="Mutt-1.4.2.1i">Prev</a>
+          <p>
+            Mutt-1.4.2.1i
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="slrn.html" title="slrn-0.9.8.1">Next</a>
+          <p>
+            slrn-0.9.8.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mailnews.html" title=
+          "Chapter&nbsp;20.&nbsp;Mail/News Clients">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="pine" name="pine"></a>
+        <h1 class="sect1">
+          Pine-4.60
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Pine
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Pine</span> package contains the
+          <span class="application">Pine</span> Mail User Agent and several
+          server daemons for various mail protocols, in addition to some nice
+          file and directory editing/browsing programs.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2829919" name="id2829919"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://mirror.sit.wisc.edu/pub/net/mail/pine/pine4.60.tar.bz2">
+                  <span class=
+                  "url">http://mirror.sit.wisc.edu/pub/net/mail/pine/pine4.60.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/pine4.60.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/pine4.60.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: aece91c8a857605994829ffa91d98c9f
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.9 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 50 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.95 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2817471" name="id2817471"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Recommended Patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/pine-4.60-fhs-3.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/pine-4.60-fhs-3.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2650435" name="id2650435"></a><span class=
+                  "application">Pine</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2661195" name="id2661195"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/security.html#openssl">OpenSSL-0.9.7e</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2479540" name="id2479540"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../server/openldap.html">OpenLDAP-2.2.20</a> and
+              <a href="../postlfs/mitkrb.html">MIT krb5-1.4</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Pine
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Pine</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">patch -Np1 -i ../pine-4.60-fhs-3.patch &amp;&amp;
+./build DEBUG=-O MAILSPOOL=/var/mail \
+    SSLDIR=/usr SSLCERTS=/etc/ssl/certs slx &amp;&amp;
+cp doc/*.1 /usr/share/man/man1 &amp;&amp;    
+cd bin &amp;&amp;
+install -m755 pine imapd ipop2d ipop3d mailutil mtest pico \
+    pilot rpdump rpload /usr/bin</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">patch -Np1 -i
+          ../pine-4.60-fhs.patch</strong></span>: This patch will make
+          <span class="application">Pine</span> use <tt class=
+          "filename">/etc</tt> for configuration files.
+        </p>
+        <p>
+          The build procedure for <span class="application">Pine</span> is
+          somewhat unusual, in that options usually passed as
+          <span><strong class="command">./configure</strong></span> options
+          or housed in $<tt class="envar">CFLAGS</tt> must all be passed on
+          the command line to the <span><strong class=
+          "command">./build</strong></span> script.
+        </p>
+        <p>
+          <span><strong class="command">./build slx</strong></span>:
+          <span class="application">Pine</span> offers quite a few target
+          platforms, slx specifies Linux using -lcrypt to get the crypt
+          function. See the <tt class="filename">doc/pine-ports</tt> file for
+          more information and other authentication options.
+        </p>
+        <p>
+          <span><strong class="command">DEBUG=-O</strong></span>: This flag
+          compiles an optimized version of <span><strong class=
+          "command">pine</strong></span> and <span><strong class=
+          "command">pico</strong></span> that produces no debug files.
+        </p>
+        <p>
+          <span><strong class="command">MAILSPOOL=/var/mail</strong></span>:
+          Location of mail spool files, <tt class="filename">/var/mail.</tt>
+        </p>
+        <p>
+          <span><strong class="command">SSLDIR=/usr
+          SSLCERTS=/etc/ssl/certs</strong></span>: Location of <span class=
+          "application">Open<span class="acronym">SSL</span></span> files.
+        </p>
+        <pre class="screen"><span><strong class="command">cd bin &amp;&amp;
+install -m755 pine imapd ipop2d ipop3d mailutil mtest pico \
+    pilot rpdump rpload /usr/bin</strong></span></pre>
+        <p>
+          This installs the <span class="application">Pine</span> programs.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Pine
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2748730" name="id2748730"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.pinerc</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2764735" name="id2764735"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The <span><strong class="command">pine</strong></span> executable
+            needs no global configuration to use. Users set <span class=
+            "application">Pine</span> options in <tt class=
+            "filename">~/.pinerc</tt> using an internal configuration menu.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Pine</span> package contains
+          <span><strong class="command">pine</strong></span>,
+          <span><strong class="command">pico</strong></span>,
+          <span><strong class="command">pilot</strong></span>,
+          <span><strong class="command">imapd</strong></span>,
+          <span><strong class="command">ipop2d</strong></span>,
+          <span><strong class="command">ipop3d</strong></span>,
+          <span><strong class="command">mtest</strong></span>,
+          <span><strong class="command">rpload</strong></span> and
+          <span><strong class="command">rpdump</strong></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2721529" name="id2721529"></a>pine
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">pine</strong></span> is the
+            <span class="application">Pine</span> mail user agent.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2501269" name="id2501269"></a>pico
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">pico</strong></span> is a
+            stand-alone editor, similar to the <span class=
+            "application">Pine</span> internal message composer.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2614142" name="id2614142"></a>pilot
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">pilot</strong></span> is a file and
+            directory navigator and browser.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2799304" name="id2799304"></a>imapd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">imapd</strong></span> is the
+            <span class="acronym">IMAP</span> server daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2838980" name="id2838980"></a>ipop2d
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">ipop2d</strong></span> is an
+            <span class="acronym">IMAP</span> to <span class=
+            "acronym">POP</span>2 conversion server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2683719" name="id2683719"></a>ipop3d
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">ipop3d</strong></span> is an
+            <span class="acronym">IMAP</span> to <span class=
+            "acronym">POP</span>3 conversion server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2710676" name="id2710676"></a>mtest
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">mtest</strong></span> is a minimal
+            <span class="acronym">IMAP</span> mail user agent, used for
+            debugging.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2575755" name="id2575755"></a>rpload
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">rpload</strong></span> is the
+            <span class="application">Pine</span> remote data utility, used
+            to convert local <span class="application">Pine</span>
+            configuration files or address books into remote configurations
+            or address books.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2678340" name="id2678340"></a>rpdump
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">rpdump</strong></span> is used to
+            copy data from remote <span class="application">Pine</span>
+            configuration files or address books into a local file.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-11 15:17:38 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="mutt.html" title="Mutt-1.4.2.1i">Prev</a>
+          <p>
+            Mutt-1.4.2.1i
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="slrn.html" title="slrn-0.9.8.1">Next</a>
+          <p>
+            slrn-0.9.8.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mailnews.html" title=
+          "Chapter&nbsp;20.&nbsp;Mail/News Clients">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

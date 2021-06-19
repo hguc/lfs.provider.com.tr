@@ -1,0 +1,877 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      MPlayer-1.0rc1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;37.&nbsp;Video Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="avifile.html" title=
+          "Avifile-0.7.45">Prev</a>
+          <p>
+            Avifile-0.7.45
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xine-ui.html" title=
+          "Xine User Interface-0.99.5">Next</a>
+          <p>
+            Xine User Interface-0.99.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="videoutils.html" title=
+          "Chapter&nbsp;37.&nbsp;Video Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="mplayer" name="mplayer"></a>MPlayer-1.0rc1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to MPlayer
+        </h2>
+        <p>
+          The <span class="application">MPlayer</span> package contains an
+          audio/video player controlled via the command line or graphical
+          interface which is able to play almost every popular audio and
+          video file format and CODEC (COder/DECoder, also
+          COmpressor/DECompressor). With supported video hardware and
+          additional drivers, <span class="application">MPlayer</span> can
+          play video files without an <span class="application">X Window
+          System</span> installed.
+        </p>
+        <p>
+          For <span class="application">MPlayer</span> general information
+          and available features, including a full list of file formats,
+          CODECs and output devices supported by <span class=
+          "application">MPlayer</span>, visit the <a class="ulink" href=
+          "http://www1.mplayerhq.hu/homepage/design7/info.html"><span class=
+          "application">MPlayer</span> web site</a>.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.0rc1.tar.bz2">
+                http://www.mplayerhq.hu/MPlayer/releases/MPlayer-1.0rc1.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp1.mplayerhq.hu/MPlayer/releases/MPlayer-1.0rc1.tar.bz2">
+                ftp://ftp1.mplayerhq.hu/MPlayer/releases/MPlayer-1.0rc1.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 18c05d88e22c3b815a43ca8d7152ccdc
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 8.3 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 133-250 MB (additional 22 MB
+                for essential CODECs)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 1.2-2.5 SBU (depends on how FFmpeg is
+                linked in)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <p class="title">
+            <b>Patches</b>
+          </p>
+          <ul class="compact">
+            <li>
+              <p>
+                Required Patch: <a class="ulink" href=
+                "http://www.mplayerhq.hu/MPlayer/patches/asmrules_fix_20061231.diff">
+                http://www.mplayerhq.hu/MPlayer/patches/asmrules_fix_20061231.diff</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Required Patch: <a class="ulink" href=
+                "http://www.mplayerhq.hu/MPlayer/patches/cddb_fix_20070605.diff">
+                http://www.mplayerhq.hu/MPlayer/patches/cddb_fix_20070605.diff</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Required Patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/MPlayer-1.0rc1-ext_ffmpeg-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/MPlayer-1.0rc1-ext_ffmpeg-1.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="itemizedlist">
+          <p class="title">
+            <b>CODECs</b>
+          </p>
+          <ul class="compact">
+            <li>
+              <p>
+                Proprietary CODECs: <a class="ulink" href=
+                "http://www.mplayerhq.hu/MPlayer/releases/codecs/essential-20061022.tar.bz2">
+                http://www.mplayerhq.hu/MPlayer/releases/codecs/essential-20061022.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: abcf4a3abc16cf88c9df7e0a77e9b941
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 10.0 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Alternate CODECs (provides additional functionality and is a
+                larger file): <a class="ulink" href=
+                "http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20061022.tar.bz2">
+                http://www.mplayerhq.hu/MPlayer/releases/codecs/all-20061022.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Additional CODECs: <a class="ulink" href=
+                "http://www.mplayerhq.hu/MPlayer/releases/codecs/">http://www.mplayerhq.hu/MPlayer/releases/codecs/</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="itemizedlist">
+          <p class="title">
+            <b>Skins</b>
+          </p>
+          <ul class="compact">
+            <li>
+              <p>
+                Default GUI skin: <a class="ulink" href=
+                "http://www.mplayerhq.hu/MPlayer/skins/Blue-1.7.tar.bz2">http://www.mplayerhq.hu/MPlayer/skins/Blue-1.7.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: e4e2020d11b681aac898103b3ba723c4
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 222 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Additional skins: <a class="ulink" href=
+                "http://www1.mplayerhq.hu/MPlayer/skins/">http://www1.mplayerhq.hu/MPlayer/skins/</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="itemizedlist">
+          <p class="title">
+            <b>Fonts</b>
+          </p>
+          <ul class="compact">
+            <li>
+              <p>
+                Prerendered fonts: <a class="ulink" href=
+                "http://www1.mplayerhq.hu/MPlayer/releases/fonts/font-arial-iso-8859-1.tar.bz2">
+                http://www1.mplayerhq.hu/MPlayer/releases/fonts/font-arial-iso-8859-1.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 1ecd31d17b51f16332b1fcc7da36b312
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 234 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Additional fonts: <a class="ulink" href=
+                "http://www1.mplayerhq.hu/MPlayer/releases/fonts/">http://www1.mplayerhq.hu/MPlayer/releases/fonts/</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+          The CODECs, skins and fonts are not required to build and use
+          <span class="application">MPlayer</span>.
+        </p>
+        <h3>
+          MPlayer Dependencies
+        </h3>
+        <h4>
+          Optional Input Drivers and Libraries
+        </h4>
+        <p class="optional">
+          <a class="xref" href="cdparanoia.html" title=
+          "CDParanoia-III-9.8">CDParanoia-III-9.8</a>, <a class="ulink" href=
+          "http://www.metzlerbros.org/dvb/">DVB</a>, <a class="ulink" href=
+          "http://www.linuxtv.org/">DVB drivers</a>, <a class="ulink" href=
+          "http://www.gnu.org/software/libcdio/">libcdio</a>, <a class="xref"
+          href="libdv.html" title="Libdv-1.0.0">libdv-1.0.0</a>, <a class=
+          "xref" href="libdvdread.html" title=
+          "Libdvdread-0.9.7">libdvdread-0.9.7</a>, <a class="ulink" href=
+          "http://www.live555.com/mplayer/">LIVE555 Streaming Media</a>,
+          <a class="xref" href="../server/samba3.html" title=
+          "Samba-3.0.30">Samba-3.0.30</a>, and <a class="ulink" href=
+          "http://armory.nicewarrior.org/projects/vstream-client/">TiVo
+          vstream client</a>
+        </p>
+        <h4>
+          Optional Audio Output Drivers and Libraries
+        </h4>
+        <p class="optional">
+          <a class="xref" href="alsa.html" title=
+          "ALSA-1.0.13">ALSA-1.0.13</a>, <a class="xref" href="arts.html"
+          title="aRts-1.5.9">aRts-1.5.9</a>, <a class="xref" href=
+          "esound.html" title="EsounD-0.2.37">EsounD-0.2.37</a>, <a class=
+          "ulink" href="http://jackit.sourceforge.net/">JACK</a>, <a class=
+          "ulink" href="http://www.ladspa.org/">LADSPA</a>, <a class="xref"
+          href="nas.html" title="NAS-1.9">NAS-1.9</a>, <a class="ulink" href=
+          "http://openal.org/">OpenAL</a>, <a class="ulink" href=
+          "http://pulseaudio.org/">PulseAudio</a>, <a class="xref" href=
+          "sdl.html" title="SDL-1.2.11">SDL-1.2.11</a> (also used for video
+          output), and <a class="xref" href="xmms.html" title=
+          "XMMS-1.2.10">XMMS-1.2.10</a>
+        </p>
+        <h4>
+          Optional Video Output Drivers and Libraries
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/aalib.html" title=
+          "AAlib-1.4rc5">AAlib-1.4rc5</a>, <a class="ulink" href=
+          "http://www.directfb.org/">DirectFB</a>, <a class="ulink" href=
+          "http://trific.ath.cx/software/enca/">Enca</a>, <a class="xref"
+          href="../general/fontconfig.html" title=
+          "Fontconfig-2.4.2">Fontconfig-2.4.2</a>, <a class="xref" href=
+          "../general/freetype2.html" title=
+          "FreeType-2.3.7">FreeType-2.3.7</a>, <a class="xref" href=
+          "../general/fribidi.html" title=
+          "FriBidi-0.10.8">FriBidi-0.10.8</a>, <a class="ulink" href=
+          "http://www.ggi-project.org/">GGI</a>, <a class="xref" href=
+          "../general/giflib.html" title="giflib-4.1.4">giflib-4.1.4</a>,
+          <a class="xref" href="../x/gtk2.html" title=
+          "GTK+-2.10.13">GTK+-2.10.13</a> or <a class="xref" href=
+          "../x/GTK.html" title="GTK+-1.2.10">GTK+-1.2.10</a>, <a class=
+          "ulink" href="http://sam.zoy.org/projects/libcaca/">libcaca</a>,
+          <a class="xref" href="../general/libjpeg.html" title=
+          "libjpeg-6b">libjpeg-6b</a>, <a class="xref" href=
+          "../general/libpng.html" title="libpng-1.2.29">libpng-1.2.29</a>,
+          <a class="ulink" href="http://maemo.org/">maemo</a>, <a class=
+          "ulink" href="http://vidix.sourceforge.net/">VIDIX</a>, and
+          <a class="xref" href="../x/installing.html" title=
+          "Chapter&nbsp;23.&nbsp;X Window System Environment">X Window
+          System</a>
+        </p>
+        <h4>
+          Optional CODECs
+        </h4>
+        <p class="optional">
+          <a class="ulink" href=
+          "http://www.3gpp.org/ftp/Specs/latest/Rel-7/26_series/26104-700.zip">
+          AMR narrowband (floating point)</a> or <a class="ulink" href=
+          "http://www.3gpp.org/ftp/Specs/latest/Rel-7/26_series/26073-700.zip">
+          AMR naarrowband (fixed point)</a>, <a class="ulink" href=
+          "http://www.3gpp.org/ftp/Specs/latest/Rel-7/26_series/26204-710.zip">
+          AMR wideband</a>, <a class="xref" href="faac.html" title=
+          "FAAC-1.26">FAAC-1.26</a>, <a class="xref" href="faad2.html" title=
+          "FAAD2-2.6.1">FAAD2-2.6.1</a> (must disable the internal version),
+          <a class="xref" href="ffmpeg.html" title=
+          "FFmpeg-svn_20070606">FFmpeg-svn_20070606</a>, <a class="xref"
+          href="lame.html" title="LAME-3.97">LAME-3.97</a>, <a class="ulink"
+          href="http://www.videolan.org/developers/libdca.html">libdca</a>,
+          <a class="xref" href="libfame.html" title=
+          "libFAME-0.9.1">libFAME-0.9.1</a>, <a class="xref" href=
+          "libmad.html" title="libmad-0.15.1b">libmad-0.15.1b</a>, <a class=
+          "ulink" href="http://www.musepack.net/">libmpcdec</a>, <a class=
+          "ulink" href="http://svn.mplayerhq.hu/nut/src/trunk/">libnut</a>
+          (SVN checkout), <a class="xref" href="libvorbis.html" title=
+          "libvorbis-1.2.0">libvorbis-1.2.0</a>, <a class="ulink" href=
+          "http://www.lirc.org/">LIRC</a>, <a class="ulink" href=
+          "http://www.dolda2000.cjb.net/~fredrik/lirccd/">lirccd</a>,
+          <a class="xref" href="../general/LZO.html" title=
+          "LZO-2.02">LZO-2.02</a> (requires <a class="ulink" href=
+          "http://www.oberhumer.com/opensource/lzo/download/LZO-v1/lzo-1.08.tar.gz">
+          Version 1</a>), <a class="ulink" href=
+          "http://www.svgalib.org/">SVGAlib</a>, <a class="ulink" href=
+          "http://www.theora.org/">Theora</a>, <a class="ulink" href=
+          "ftp://ftp.videolan.org/pub/videolan/vlc/0.8.2/contrib/toolame-02m-beta8.tar.bz2">
+          tooLAME</a>, <a class="ulink" href=
+          "http://sourceforge.net/projects/twolame/">TwoLAME</a>, <a class=
+          "ulink" href="http://www.xiph.org/vorbis/">Tremor</a> (requires
+          <a class="xref" href="libvorbis.html" title=
+          "libvorbis-1.2.0">libvorbis-1.2.0</a> and you must disable the
+          internal version), <a class="ulink" href=
+          "http://www.videolan.org/developers/x264.html">x264</a>, and
+          <a class="xref" href="xvid.html" title="XviD-1.1.3">XviD-1.1.3</a>
+        </p>
+        <h4>
+          Optional Hardware Specific Options
+        </h4>
+        <p>
+          There is hardware specific packages (or vendor supplied software)
+          you can install to improve the performance of your video card when
+          using <span class="application">MPlayer</span>. Some of the
+          packages and/or vendor supplied software and the <span class=
+          "application">MPlayer</span> specific driver created if it is found
+          is shown here.
+        </p>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                mga: Matrox G200/G400/G450/G550 hardware YUV overlay via the
+                mga_vid device
+              </p>
+            </li>
+            <li>
+              <p>
+                xmga: Matrox G200/G400/G450/G550 overlay (mga_vid) in X11
+                window
+              </p>
+            </li>
+            <li>
+              <p>
+                syncfb: Matrox G400 YUV support on framebuffer
+              </p>
+            </li>
+            <li>
+              <p>
+                3dfx: Voodoo 3/Banshee hardware YUV support (/dev/3dfx)
+              </p>
+            </li>
+            <li>
+              <p>
+                tdfxfb: Voodoo 3/Banshee hardware YUV support on tdfx
+                framebuffer
+              </p>
+            </li>
+            <li>
+              <p>
+                mpegpes: support for Siemens DVB hardware MPEG-1/2 decoder
+                boards (or MPEG-PES file output)
+              </p>
+            </li>
+            <li>
+              <p>
+                dxr2: support for DXR2 hardware MPEG-1/2 decoder boards
+                <a class="ulink" href="http://dxr2.sourceforge.net/">Dxr2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                dxr3: support for DXR3/Hollywood+ hardware MPEG-1/2 decoder
+                boards <a class="ulink" href=
+                "http://dxr3.sourceforge.net/">libdxr3</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                zr: support for Zoran360[56]7 based hardware MJPEG cards
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/mplayer">http://wiki.linuxfromscratch.org/blfs/wiki/mplayer</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of MPlayer
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            CODEC Installation (Optional)
+          </h3>
+          <p>
+            If you downloaded any proprietary CODECs (which can provide
+            support for additional audio and video formats such as Real,
+            Indeo and QuickTime), extract them to <code class=
+            "filename">/usr/lib/mplayer/codecs</code> using the following
+            commands as the <code class="systemitem">root</code> user
+            (substitute and/or add different CODEC filenames, if necessary):
+          </p>
+          <pre class="root">
+<kbd class="command">install -v -d -m755 /usr/lib/mplayer/codecs &amp;&amp;
+tar -xvf ../essential-20061022.tar.bz2 \
+    -C /usr/lib/mplayer/codecs --strip-components=1 &amp;&amp;
+chown -v -R root:root /usr/lib/mplayer/codecs</kbd>
+</pre>
+          <p>
+            If you installed any CODECs, ensure you add <code class=
+            "option">--with-codecsdir=/usr/lib/mplayer/codecs</code> to the
+            <span class="command"><strong>configure</strong></span> script.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            GUI Installation (Optional)
+          </h3>
+          <p>
+            To enable building the GUI version of <span class=
+            "application">MPlayer</span> (requires <a class="xref" href=
+            "../x/gtk2.html" title="GTK+-2.10.13">GTK+-2.10.13</a> or
+            <a class="xref" href="../x/GTK.html" title=
+            "GTK+-1.2.10">GTK+-1.2.10</a>), add <code class=
+            "option">--enable-gui</code> to the <span class=
+            "command"><strong>configure</strong></span> script. You'll also
+            need to extract at least one skin. Extract the desired skin and
+            create the default location (as the <code class=
+            "systemitem">root</code> user):
+          </p>
+          <pre class="root">
+<kbd class="command">install -v -d -m755 /usr/share/mplayer/Skin &amp;&amp;
+tar -xvf ../Blue-1.7.tar.bz2 \
+    -C /usr/share/mplayer/Skin &amp;&amp;
+chown -v -R root:root /usr/share/mplayer/Skin/Blue &amp;&amp;
+chmod -v 755 /usr/share/mplayer/Skin/Blue{,/icons} &amp;&amp;
+ln -sfv Blue /usr/share/mplayer/Skin/default</kbd>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Installing OSD and Subtitles Support (Optional)
+          </h3>
+          <p>
+            To enable OSD (On Screen Display) and subtitles support, add
+            <code class="option">--enable-menu</code> to the <span class=
+            "command"><strong>configure</strong></span> script. You'll also
+            need to set up at least one font (see font installation
+            instructions a little later).
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Main MPlayer Installation
+          </h3>
+          <div class="admon note">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3>
+              Note
+            </h3>
+            <p>
+              The package maintainers recommend building without any
+              optimizations.
+            </p>
+          </div>
+          <p>
+            This package (unfortunately) expects the <span class=
+            "application">X Window</span> system to be installed in the
+            <code class="filename">/usr/X11R6</code> directory. If you're
+            using a recent version of <span class="application">Xorg</span>
+            and it is installed in any other location, ensure you have
+            followed the instructions in the <a class="xref" href=
+            "../x/x-setup.html#X11R6-compat-symlink" title=
+            "Creating an X11R6 Compatibility Symlink">Creating an X11R6
+            Compatibility Symlink</a> section.
+          </p>
+          <p>
+            <span class="application">MPlayer</span> can build a shared
+            post-processing library from the internal <span class=
+            "application">FFmpeg</span> package which other packages can link
+            to. This requires <span class="application">MPlayer</span> to
+            link dynamically to this library instead of the default
+            statically linked method. If you desire to build the shared
+            library, add <code class="option">--enable-shared-pp</code> to
+            the <span class="command"><strong>configure</strong></span>
+            script. Note that the <span class="application">FFmpeg</span>
+            package can also build this library (which <span class=
+            "application">MPlayer</span> can link to instead of building it),
+            ensure you don't overwrite an existing one.
+          </p>
+          <p>
+            You may wish to examine the output from <span class=
+            "command"><strong>./configure --help</strong></span> to find out
+            what additional parameters to <span class=
+            "command"><strong>configure</strong></span> are needed to include
+            the dependencies you have installed on your system. To link in
+            existing <span class="application">FFmpeg</span> libraries (and
+            <span class="application">MPlayer</span> won't have to build
+            them), you must pass a total of nine additional options to the
+            <span class="command"><strong>configure</strong></span> script.
+            Four to disable building the static <span class=
+            "application">FFmpeg</span> libraries, four to enable using the
+            system-installed shared libraries and <code class=
+            "option">--with-extraincdir=/usr/include/ffmpeg</code> so the
+            build can locate the <span class="application">FFmpeg</span>
+            interface headers.
+          </p>
+          <p>
+            Install <span class="application">MPlayer</span> by running the
+            following commands:
+          </p>
+          <pre class="userinput">
+<kbd class="command">patch -Np0 -i ../asmrules_fix_20061231.diff &amp;&amp;
+patch -Np0 -i ../cddb_fix_20070605.diff &amp;&amp;
+patch -Np1 -i ../MPlayer-1.0rc1-ext_ffmpeg-1.patch &amp;&amp;
+
+./configure --prefix=/usr \
+            --confdir=/etc/mplayer \
+            --enable-largefiles \
+            --enable-dynamic-plugins &amp;&amp;
+make</kbd>
+</pre>
+          <p>
+            This package does not come with a test suite.
+          </p>
+          <p>
+            Now, as the <code class="systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">make install &amp;&amp;
+
+install -v -m755 -d /usr/share/doc/mplayer-1.0rc1 &amp;&amp;
+cp -v -R DOCS/*     /usr/share/doc/mplayer-1.0rc1</kbd>
+</pre>
+          <p>
+            Passing certain parameters to <span class=
+            "command"><strong>configure</strong></span> may result in the
+            creation of <code class="filename">libdha.so.1.0</code>. If so,
+            you may wish to create a symlink to this library in case other
+            packages link to <code class="filename">libdha.so</code>. Use the
+            following command as the <code class="systemitem">root</code>
+            user to create the symbolic link:
+          </p>
+          <pre class="root">
+<kbd class="command">ln -v -s libdha.so.1.0 /usr/lib/libdha.so</kbd>
+</pre>
+          <p>
+            You will need <code class="filename">codecs.conf</code> only if
+            you want to change its properties, as the main binary contains an
+            internal copy of it. Ensure any changes you make to <code class=
+            "filename">codecs.conf</code> achieve the desired results, as
+            incorrect entries in this file have been known to cause errors
+            and render the player unusable. If necessary, create the file
+            using the following command.
+          </p>
+          <pre class="root">
+<kbd class="command">install -m644 etc/codecs.conf /etc/mplayer</kbd>
+</pre>
+          <p>
+            You may also want to copy all the default configuration files to
+            <code class="filename">/etc/mplayer</code> for future reference
+            or more customization ability.
+          </p>
+          <pre class="root">
+<kbd class="command">install -m644 etc/*.conf /etc/mplayer</kbd>
+</pre>
+          <p>
+            <span class="application">MPlayer</span> requires that the RTC
+            run at a frequency of 1024 Hz. Make this setting change at
+            boot-time by adding a line to <code class=
+            "filename">/etc/sysctl.conf</code>:
+          </p>
+          <pre class="root">
+<kbd class=
+"command">echo "dev.rtc.max-user-freq=1024" &gt;&gt; /etc/sysctl.conf</kbd>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            OSD and Subtitles Font Installation (Required if '--enable-menu'
+            Was Passed to 'configure')
+          </h3>
+          <p>
+            The recommended method to set up a font for <span class=
+            "application">MPlayer</span> is to link a TTF file to your
+            <code class="filename">~/.mplayer</code> directory. A link should
+            be created in each user's home directory who may use <span class=
+            "application">MPlayer</span>. For example:
+          </p>
+          <pre class="userinput">
+<kbd class="command">install -v -m750 -d ~/.mplayer &amp;&amp;
+ln -v -sf /usr/share/fonts/X11-TTF/luxisri.ttf \
+    ~/.mplayer/subfont.ttf</kbd>
+</pre>
+          <p>
+            There are several other ways to set up a font package. To use a
+            prerendered <span class="application">MPlayer</span> font
+            package, extract and link one of the font tarballs using the
+            following commands:
+          </p>
+          <pre class="root">
+<kbd class="command">tar -xvf ../font-arial-iso-8859-1.tar.bz2 \
+    -C /usr/share/mplayer/font &amp;&amp;
+chown -v -R root:root /usr/share/mplayer/font &amp;&amp;
+cd /usr/share/mplayer/font &amp;&amp;
+ln -v -sf font-arial-iso-8859-1/font-arial-<em class=
+"replaceable"><code>&lt;font size&gt;</code></em>-iso-8859-1/* .</kbd>
+</pre>
+          <p>
+            Available font sizes are 14, 18, 24 or 28.
+          </p>
+          <p>
+            Additional information as well as additional methods to set up an
+            <span class="application">MPlayer</span> font package can be
+            found at <a class="ulink" href=
+            "http://www.mplayerhq.hu/DOCS/HTML/en/subosd.html#mpsub-install">http://www.mplayerhq.hu/DOCS/HTML/en/subosd.html#mpsub-install</a>.
+          </p>
+        </div>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring MPlayer
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="mplayer-config" name="mplayer-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/mplayer/*</code> and <code class=
+            "filename">~/.mplayer/*</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            Typically, there's no configuration required for the system-wide
+            files in <code class="filename">/etc/mplayer</code> (in fact,
+            this directory is empty unless you copied the default files as
+            mentioned above). Configuration can be accomplished by choosing
+            the configuration button located on the <span class=
+            "application">MPlayer</span> GUI. Any configuration changes made
+            here will be copied to the user's <code class=
+            "filename">~/.mplayer</code> directory.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">gmplayer, mplayer, and mencoder</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libdha.so and optionally,
+              libpostproc.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">~/.mplayer, /etc/mplayer,
+              /usr/include/postproc, /usr/lib/mplayer, /usr/share/mplayer,
+              and /usr/share/doc/mplayer-1.0rc1</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gmplayer" name="gmplayer"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gmplayer</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span class=
+                    "command"><strong>mplayer</strong></span> which brings up
+                    the graphical user interface component of <span class=
+                    "application">MPlayer</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mplayer-prog" name="mplayer-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mplayer</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    manages the input formats, the CODECs and the output
+                    formats to play video files, DVDs, (S)VCDs or network
+                    streams containing audio and/or video information on your
+                    system.
+                  </p>
+                  <p>
+                    Examples:
+                  </p>
+                  <pre class="userinput">
+<kbd class="command">mplayer -fs blfs.avi
+mplayer -vo fbdev -fb /dev/fb0 dvd://1 \
+    -aid 128 -sub en -framedrop
+mplayer -fs vcd://1    # works both for VCDs and SVCDs
+mplayer http://fredrik.hubbe.net/plugger/test.mpg</kbd>
+</pre>
+                  <p>
+                    For further information, look at the very good
+                    documentation included with the package in the source
+                    tree subdirectory <code class="filename">DOCS</code>
+                    (also installed at <code class=
+                    "filename">/usr/share/doc/mplayer-1.0rc1</code>).
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mencoder" name="mencoder"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mencoder</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to encode any <span class=
+                    "application">MPlayer</span> playable movie to DivX4,
+                    <span class="application">XviD</span> or any CODEC in
+                    <code class="filename">libavcodec</code> with
+                    PCM/MP3/VBRMP3 audio.
+                  </p>
+                  <p>
+                    Example:
+                  </p>
+                  <pre class="userinput">
+<kbd class="command">rm frameno.avi
+mencoder -dvd 1 -aid 128 -ovc frameno -oac mp3lame \
+-lameopts vbr=3 -o frameno.avi
+
+<code class="literal"># mencoder should output bitrates for average encodings
+# now, choose one you like best! In the following lines,
+# replace &lt;bitrate&gt; and &lt;name.avi&gt; with statements of your
+# personal liking.</code>
+
+mencoder -dvd 1 -aid 128 -oac copy -ovc lavc \
+    -lavcopts vcodec=mpeg4:vpass=1:vhq:vbitrate=&lt;bitrate&gt; \
+    -o &lt;name.avi&gt;
+mencoder -dvd 1 -aid 128 -oac copy -ovc lavc \
+    -lavcopts vcodec=mpeg4:vpass=2:vhq:vbitrate=&lt;bitrate&gt; \
+    -o &lt;name.avi&gt;
+mencoder -forceidx &lt;name.avi&gt;</kbd>
+</pre>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libdha" name="libdha"></a><span class=
+                    "term"><code class="filename">libdha.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains functions used by the <span class=
+                    "application">MPlayer</span> programs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libpostproc" name="libpostproc"></a><span class=
+                    "term"><code class=
+                    "filename">libpostproc.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a post-processing filter library used by the
+                    <span class="application">MPlayer</span> programs and
+                    other packages.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-05-10 18:53:20 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="avifile.html" title=
+          "Avifile-0.7.45">Prev</a>
+          <p>
+            Avifile-0.7.45
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xine-ui.html" title=
+          "Xine User Interface-0.99.5">Next</a>
+          <p>
+            Xine User Interface-0.99.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="videoutils.html" title=
+          "Chapter&nbsp;37.&nbsp;Video Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

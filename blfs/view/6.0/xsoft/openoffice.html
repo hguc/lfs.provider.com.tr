@@ -1,0 +1,756 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      OpenOffice-1.1.4
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;34.&nbsp;Office Suites
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="suites.html" title="Office Suites">Prev</a>
+          <p>
+            Office Suites
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="graphweb.html" title=
+          "Graphical Web Browsers">Next</a>
+          <p>
+            Graphical Web Browsers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="suites.html" title=
+          "Chapter&nbsp;34.&nbsp;Office Suites">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="openoffice" name="openoffice"></a>
+        <h1 class="sect1">
+          OpenOffice-1.1.4
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to OpenOffice
+          </h2>
+        </div>
+        <p>
+          <span class="application">OpenOffice</span> is an office suite, the
+          open source sibling of <span class="application">StarOffice</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677492" name="id2677492"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download Mirrors (HTTP): <a href=
+                  "http://download.openoffice.org/1.1.4/source.html"><span class="url">
+                  http://download.openoffice.org/1.1.4/source.html</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.ussg.iu.edu/pub/openoffice/stable/1.1.4/OOo_1.1.4_source.tar.gz">
+                  <span class=
+                  "url">ftp://ftp.ussg.iu.edu/pub/openoffice/stable/1.1.4/OOo_1.1.4_source.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 20c10db97865ae4c51dc827d668b8939
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 214 MB (additional 11-13 MB for localized
+                  help content file)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 3.1 GB (more if using
+                  localized help content)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 75 SBU (longer if using localized
+                  help content)
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2589895" name="id2589895"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required patch for gcc-3.3.4: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-gcc33-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-gcc33-1.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required patch for use with NPTL: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-nptl-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-nptl-1.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required patch if compiling with <span class=
+                  "acronym">J2SDK</span>-1.4.2: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-jdk_1.4.2_fix-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-jdk_1.4.2_fix-1.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required patch (Executable <span><strong class=
+                  "command">test</strong></span> is in <tt class=
+                  "filename">/bin</tt>, not in <tt class=
+                  "filename">/usr/bin</tt>): <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-test_bin_loc-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-test_bin_loc-1.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Optional patch if you wish to use the system freetype:
+                  <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-freetype-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-freetype-1.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Optional patch if Linux-<span class=
+                  "acronym">PAM</span>-0.78 is not installed: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-no_pam-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/OOo_1.1.4-no_pam-1.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  General Polygon Clipper Library (Optional if
+                  libart_lgpl-2.3.16 is used): <a href=
+                  "ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z"><span class="url">
+                  ftp://ftp.cs.man.ac.uk/pub/toby/gpc/gpc231.tar.Z</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  The source <span class="acronym">TAR</span> ball only
+                  contains English language help. A localized help content
+                  file may be available at: <a href=
+                  "http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/helpcontent/">
+                  <span class=
+                  "url">http://ftp.services.openoffice.org/pub/OpenOffice.org/contrib/helpcontent/</span></a>.
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2733585" name="id2733585"></a><span class=
+                  "application">OpenOffice</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2800038" name="id2800038"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              X (<a href="../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.8.2</a>), <a href=
+              "../general/zip.html">Zip-2.31</a>, <a href=
+              "../general/unzip.html">UnZip-5.51</a>, <a href=
+              "../postlfs/tcsh.html">Tcsh-6.13.00</a>, <a href=
+              "../general/which.html">which-2.16</a> and <a href=
+              "../general/gcc3.html">GCC-3.3.4</a>.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2585063" name="id2585063"></a>Recommended
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/j2sdk.html">J2SDK-1.4.2</a>, <a href=
+              "../general/freetype2.html">FreeType-2.1.9</a>, <a href=
+              "../general/pkgconfig.html">pkgconfig-0.15.0</a>, <a href=
+              "../x/startup-notification.html">startup-notification-0.8</a>
+              and <a href=
+              "../general/desktop-file-utils.html">desktop-file-utils-0.10</a>.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2577644" name="id2577644"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/linux_pam.html">Linux-PAM-0.78</a>,
+              <a href="../general/libart_lgpl.html">libart_lgpl-2.3.16</a>,
+              <a href="../general/apache-ant.html">Apache Ant-1.6.2</a> and
+              <a href="../basicnet/netlibs.html#curl">cURL-7.13.1</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of OpenOffice
+          </h2>
+        </div>
+        <p>
+          <span class="application">OpenOffice</span> does not create a
+          directory when you extract the <span class="acronym">TAR</span>
+          ball. Create a build directory and extract the source with the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">mkdir OOo-build &amp;&amp;
+cd OOo-build &amp;&amp;
+tar -zxf ../OOo_1.1.4_source.tar.gz</strong></span></kbd></pre>
+        <p>
+          Optionally, untar and move the gpc files, and apply the downloaded
+          patches:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">tar -zxf ../gpc231.tar.Z &amp;&amp;
+mv gpc231/* external/gpc &amp;&amp;
+rmdir gpc231 &amp;&amp;
+for patch in ../OOo_1.1.4-*.patch
+  do patch -Np1 -i $patch
+  done</strong></span></kbd></pre>
+        <p>
+          STLport looks for the c++ headers in the wrong location. Put a
+          temporary symlink in place to satisfy STLport:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">ln -sf /opt/gcc-3.3.4/include/c++/3.3.4 /usr/g++-v3</strong></span></kbd></pre>
+        <p>
+          OpenOffice fails to build with gcc-3.4.1. Set your path to include
+          gcc-3.3.4:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">export PATH_HOLD=$PATH &amp;&amp;
+export PATH=/opt/gcc-3.3.4/bin:$PATH</strong></span></kbd></pre>
+        <p>
+          If you want to optimize the build, edit <tt class=
+          "filename">solenv/inc/unxlngi4.mk</tt> and add the desired
+          optimization flags to the <tt class="envar">CFLAGSOPT</tt>
+          variable. Some users have reported problems with <em class=
+          "parameter"><tt>-fomit-frame-pointer</tt></em>. The best option is
+          to not use any custom optimizations. The following command removes
+          an incorrect <em class="parameter"><tt>-mcpu</tt></em> option in
+          the above file:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">sed -i "s:\-mcpu=pentiumpro::" \
+    solenv/inc/unxlngi4.mk</strong></span></kbd></pre>
+        <p>
+          Configure <span class="application">OpenOffice</span> using the
+          following commands. You may build install sets for specific
+          languages based on your preferences. Supply a comma separated list
+          to the <tt class="envar">--with-lang=</tt> switch. If a particular
+          component is not available in the language of your choice, the
+          default will be US English. If you need other languages, be sure to
+          add <em class="parameter"><tt>ENUS</tt></em> to the list; otherwise
+          the build will fail:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">cd config_office/ &amp;&amp;
+./configure --with-lang=ENUS \
+    --with-dict=ENUS --without-fonts \
+    --enable-libsn --with-system-zlib \
+    --with-system-freetype &amp;&amp;
+cd ..</strong></span></kbd></pre>
+        <p>
+          <span class="application">OpenOffice</span> fails to compile if
+          <span><strong class="command">umask</strong></span> is set to
+          something exotic. The build can also fail if the <tt class=
+          "envar">LANG</tt> or <tt class="envar">LC_ALL</tt> environment
+          variables are set. Use the following commands to change your
+          environment accordingly:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">umask 0022 &amp;&amp;
+unset LANG LC_ALL</strong></span></kbd></pre>
+        <p>
+          Compile <span class="application">OpenOffice</span> using the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./bootstrap &amp;&amp;
+bash -c "source LinuxIntelEnv.Set.sh; dmake"</strong></span></kbd></pre>
+        <p>
+          If you have downloaded localized help content <tt class=
+          "filename">tgz</tt> files, you will need to untar them to the
+          appropriate directory as shown below and then recreate the
+          installation set:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">for i in ../helpcontent_*_unix.tgz
+  do tar -C solver/645/unxlngi4.pro/pck -zxf $i
+  done &amp;&amp;
+rm -rf instsetoo/unxlngi4.pro &amp;&amp;
+bash -c "source LinuxIntelEnv.Set.sh ; dmake"</strong></span></kbd></pre>
+        <p>
+          Install <span class="application">OpenOffice</span> using the
+          following commands to install the US English language set. To
+          install a localized version, replace the 01 with the international
+          telephone country code for your country:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">cd instsetoo/unxlngi4.pro/01/normal &amp;&amp;
+sed -i "s:^oo_home=.*:oo_home=openoffice:" install &amp;&amp;
+./install --prefix=/opt &amp;&amp;
+for appl in sagenda scalc sdraw sfax simpress slabel sletter \
+    smaster smath smemo soffice spadmin svcard sweb swriter
+  do ln -sf /opt/openoffice/program/$appl /usr/bin/$appl
+  done</strong></span></kbd></pre>
+        <p>
+          If you have installed <a href=
+          "../general/desktop-file-utils.html">desktop-file-utils-0.10</a>
+          and use <span class="application">KDE</span>, there is no furthur
+          configuration necessary. If you use <span class=
+          "application">Gnome</span>, you should copy the <tt class=
+          "filename">*.desktop</tt> files to <tt class=
+          "filename">/usr/share/applications</tt> with the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">install -d /usr/share/applications -m 755 &amp;&amp;
+cp /opt/openoffice/share/gnome/net/ooo645*.desktop \
+    /usr/share/applications/ &amp;&amp;
+rename ooo645 ooo /usr/share/applications/ooo645*.desktop</strong></span></kbd></pre>
+        <p>
+          Finally, return your environment to it's original state:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">export PATH=$PATH_HOLD &amp;&amp;
+rm -f /usr/g++-v3</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">mv ../gpc231/gpc.*
+          external/gpc</strong></span>: Copy the gpc files to the appropriate
+          location.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-lang=ENUS</tt></em>: Make install
+          set for the US English language.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-dict=ENUS</tt></em>: Install
+          dictionaries for the US English language.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-libart</tt></em>: Use libart
+          instead of gpc for polygon clipping.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-libsn</tt></em>: Use <span class=
+          "application">startup-notification</span>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--disable-java</tt></em>: Do not build
+          components that need java.
+        </p>
+        <p>
+          <em class="parameter"><tt>--without-gpc</tt></em>: Do not use gpc.
+          Removes polygon clipping capability.
+        </p>
+        <p>
+          <em class="parameter"><tt>--without-fonts</tt></em>: Do not install
+          Bitstream Vera fonts since they are already bundled with
+          <span class="application">X</span>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-system-curl</tt></em>: Use the
+          system installed curl.
+        </p>
+        <p>
+          <span><strong class="command">./bootstrap</strong></span>: Create
+          packages required to bootstrap the build.
+        </p>
+        <p>
+          <span><strong class="command">dmake</strong></span>: Compile the
+          package.
+        </p>
+        <p>
+          <span><strong class="command">sed -i
+          "s:^oo_home=...</strong></span>: Remove version specific
+          installation directory.
+        </p>
+        <p>
+          <span><strong class="command">for appl in sagenda scalc sdraw sfax
+          ...; do ...</strong></span>: Create links so that the package can
+          be started from the command-line without changes to the existing
+          path.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">OpenOffice</span> package contains
+          <span><strong class="command">sagenda</strong></span>,
+          <span><strong class="command">scalc</strong></span>,
+          <span><strong class="command">sdraw</strong></span>,
+          <span><strong class="command">sfax</strong></span>,
+          <span><strong class="command">simpress</strong></span>,
+          <span><strong class="command">slabel</strong></span>,
+          <span><strong class="command">sletter</strong></span>,
+          <span><strong class="command">smaster</strong></span>,
+          <span><strong class="command">smath</strong></span>,
+          <span><strong class="command">smemo</strong></span>,
+          <span><strong class="command">soffice</strong></span>,
+          <span><strong class="command">spadmin</strong></span>,
+          <span><strong class="command">svcard</strong></span>,
+          <span><strong class="command">sweb</strong></span>,
+          <span><strong class="command">swriter</strong></span>, <span class=
+          "application">OpenOffice</span> libraries and support utilities.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2700836" name="id2700836"></a>sagenda
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Create an agenda template and start <span><strong class=
+            "command">swriter</strong></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2552191" name="id2552191"></a>scalc
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Spreadsheet application.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2479954" name="id2479954"></a>sdraw
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Drawing application.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2632504" name="id2632504"></a>sfax
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Create a fax template and start <span><strong class=
+            "command">swriter</strong></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2819893" name="id2819893"></a>simpress
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Presentation application.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2572343" name="id2572343"></a>slabel
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Create a label template and start <span><strong class=
+            "command">swriter</strong></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2580313" name="id2580313"></a>sletter
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Create a letter template and start <span><strong class=
+            "command">swriter</strong></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2648627" name="id2648627"></a>smaster
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Creates a new master document.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2787205" name="id2787205"></a>smath
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Mathematical formula editor.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2801528" name="id2801528"></a>smemo
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Create a memo template and start <span><strong class=
+            "command">swriter</strong></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2640378" name="id2640378"></a>soffice
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Opens a base window with access to all <span class=
+            "application">OpenOffice</span> applications.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2718972" name="id2718972"></a>spadmin
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="application">OpenOffice</span> Printer
+            Configuration. You may need to run this if you are having any
+            printing problems.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2821336" name="id2821336"></a>svcard
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Business card application.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2791521" name="id2791521"></a>sweb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            An <span class="acronym">HTML</span> editor.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2810815" name="id2810815"></a>swriter
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Word processing application.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-03-09 22:37:19 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="suites.html" title="Office Suites">Prev</a>
+          <p>
+            Office Suites
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="graphweb.html" title=
+          "Graphical Web Browsers">Next</a>
+          <p>
+            Graphical Web Browsers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="suites.html" title=
+          "Chapter&nbsp;34.&nbsp;Office Suites">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

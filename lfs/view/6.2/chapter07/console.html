@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      7.6.&nbsp;Configuring the Linux Console
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="lfs" class="6.2">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Linux From Scratch - Version 6.2
+        </h4>
+        <h3>
+          Chapter&nbsp;7.&nbsp;Setting Up System Bootscripts
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="setclock.html" title=
+          "Configuring the setclock Script">Prev</a>
+          <p>
+            Configuring the setclock Script
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="sysklogd.html" title=
+          "Configuring the sysklogd script">Next</a>
+          <p>
+            Configuring the sysklogd script
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;Setting Up System Bootscripts">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          7.6. Configuring the Linux Console
+        </h1>
+      </div>
+      <p>
+        This section discusses how to configure the <span><strong class=
+        "command">console</strong></span> bootscript that sets up the
+        keyboard map and the console font. If non-ASCII characters (e.g., the
+        copyright sign, the British pound sign and Euro symbol) will not be
+        used and the keyboard is a U.S. one, skip this section. Without the
+        configuration file, the <span><strong class=
+        "command">console</strong></span> bootscript will do nothing.
+      </p>
+      <p>
+        The <span><strong class="command">console</strong></span> script
+        reads the <tt class="filename">/etc/sysconfig/console</tt> file for
+        configuration information. Decide which keymap and screen font will
+        be used. Various language-specific HOWTOs can also help with this,
+        see <a href=
+        "http://www.tldp.org/HOWTO/HOWTO-INDEX/other-lang.html"><i>http://www.tldp.org/HOWTO/HOWTO-INDEX/other-lang.html</i></a>.
+        If still in doubt, look in the <tt class=
+        "filename">/usr/share/kbd</tt> directory for valid keymaps and screen
+        fonts. Read <tt class="filename">loadkeys(1)</tt> and <tt class=
+        "filename">setfont(8)</tt> manual pages to determine the correct
+        arguments for these programs.
+      </p>
+      <p>
+        The <tt class="filename">/etc/sysconfig/console</tt> file should
+        contain lines of the form: VARIABLE="value". The following variables
+        are recognized:
+      </p>
+      <div class="variablelist">
+        <dl>
+          <dt>
+            <span class="term">KEYMAP</span>
+          </dt>
+          <dd>
+            <p>
+              This variable specifies the arguments for the
+              <span><strong class="command">loadkeys</strong></span> program,
+              typically, the name of keymap to load, e.g.,
+              &ldquo;<span class="quote">es</span>&rdquo;. If this variable
+              is not set, the bootscript will not run the
+              <span><strong class="command">loadkeys</strong></span> program,
+              and the default kernel keymap will be used.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">KEYMAP_CORRECTIONS</span>
+          </dt>
+          <dd>
+            <p>
+              This (rarely used) variable specifies the arguments for the
+              second call to the <span><strong class=
+              "command">loadkeys</strong></span> program. This is useful if
+              the stock keymap is not completely satisfactory and a small
+              adjustment has to be made. E.g., to include the Euro sign into
+              a keymap that normally doesn't have it, set this variable to
+              &ldquo;<span class="quote">euro2</span>&rdquo;.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">FONT</span>
+          </dt>
+          <dd>
+            <p>
+              This variable specifies the arguments for the
+              <span><strong class="command">setfont</strong></span> program.
+              Typically, this includes the font name, &ldquo;<span class=
+              "quote">-m</span>&rdquo;, and the name of the application
+              character map to load. E.g., in order to load the
+              &ldquo;<span class="quote">lat1-16</span>&rdquo; font together
+              with the &ldquo;<span class="quote">8859-1</span>&rdquo;
+              application character map (as it is appropriate in the USA),
+              set this variable to &ldquo;<span class="quote">lat1-16 -m
+              8859-1</span>&rdquo;. If this variable is not set, the
+              bootscript will not run the <span><strong class=
+              "command">setfont</strong></span> program, and the default VGA
+              font will be used together with the default application
+              character map.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">UNICODE</span>
+          </dt>
+          <dd>
+            <p>
+              Set this variable to &ldquo;<span class=
+              "quote">1</span>&rdquo;, &ldquo;<span class=
+              "quote">yes</span>&rdquo; or &ldquo;<span class=
+              "quote">true</span>&rdquo; in order to put the console into
+              UTF-8 mode. This is useful in UTF-8 based locales and harmful
+              otherwise.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">LEGACY_CHARSET</span>
+          </dt>
+          <dd>
+            <p>
+              For many keyboard layouts, there is no stock Unicode keymap in
+              the Kbd package. The <span><strong class=
+              "command">console</strong></span> bootscript will convert an
+              available keymap to UTF-8 on the fly if this variable is set to
+              the encoding of the available non-UTF-8 keymap. Note, however,
+              that dead keys (i.e., keys that don't produce a character by
+              themselves, but put an accent onto a character procuced by the
+              next key; there are no dead keys on the standard US keyboard)
+              and composing (i.e., pressing Ctrl+. A E in order to produce
+              the Æ character) will not work in UTF-8 mode without the
+              special kernel patch. This variable is useful only in UTF-8
+              mode.
+            </p>
+          </dd>
+          <dt>
+            <span class="term">BROKEN_COMPOSE</span>
+          </dt>
+          <dd>
+            <p>
+              Set this to &ldquo;<span class="quote">0</span>&rdquo; if you
+              are going to apply the kernel patch in Chapter 8. Note that you
+              also have to add the character set expected by composition
+              rules in your keymap to the FONT variable after the
+              &ldquo;<span class="quote">-m</span>&rdquo; switch. This
+              variable is useful only in UTF-8 mode.
+            </p>
+          </dd>
+        </dl>
+      </div>
+      <p>
+        Support for compiling the keymap directly into the kernel has been
+        removed because there were reports that it leads to incorrect
+        results.
+      </p>
+      <p>
+        Some examples:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li>
+            <p>
+              For a non-Unicode setup, only the KEYMAP and FONT variables are
+              generally needed. E.g., for a Polish setup, one would use:
+            </p>
+            <pre class="userinput"><kbd class=
+            "command">cat &gt; /etc/sysconfig/console &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/sysconfig/console
+
+KEYMAP="pl2"
+FONT="lat2a-16 -m 8859-2"
+
+# End /etc/sysconfig/console</tt>
+EOF</kbd></pre>
+          </li>
+          <li>
+            <p>
+              As mentioned above, it is sometimes necessary to adjust a stock
+              keymap slightly. The following example adds the Euro symbol to
+              the German keymap:
+            </p>
+            <pre class="userinput"><kbd class=
+            "command">cat &gt; /etc/sysconfig/console &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/sysconfig/console
+
+KEYMAP="de-latin1"
+KEYMAP_CORRECTIONS="euro2"
+FONT="lat0-16 -m 8859-15"
+
+# End /etc/sysconfig/console</tt>
+EOF</kbd></pre>
+          </li>
+          <li>
+            <p>
+              The following is a Unicode-enabled example for Bulgarian, where
+              a stock UTF-8 keymap exists and defines no dead keys or
+              composition rules:
+            </p>
+            <pre class="userinput"><kbd class=
+            "command">cat &gt; /etc/sysconfig/console &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/sysconfig/console
+
+UNICODE="1"
+KEYMAP="bg_bds-utf8"
+FONT="LatArCyrHeb-16"
+
+# End /etc/sysconfig/console</tt>
+EOF</kbd></pre>
+          </li>
+          <li>
+            <p>
+              Due to the use of a 512-glyph LatArCyrHeb-16 font in the
+              previous example, bright colors are no longer available on the
+              Linux console unless a framebuffer is used. If one wants to
+              have bright colors without framebuffer and can live without
+              characters not belonging to his language, it is still possible
+              to use a language-specific 256-glyph font, as illustrated
+              below.
+            </p>
+            <pre class="userinput"><kbd class=
+            "command">cat &gt; /etc/sysconfig/console &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/sysconfig/console
+
+UNICODE="1"
+KEYMAP="bg_bds-utf8"
+FONT="cyr-sun16"
+
+# End /etc/sysconfig/console</tt>
+EOF</kbd></pre>
+          </li>
+          <li>
+            <p>
+              The following example illustrates keymap autoconversion from
+              ISO-8859-15 to UTF-8 and enabling dead keys in Unicode mode:
+            </p>
+            <pre class="userinput"><kbd class=
+            "command">cat &gt; /etc/sysconfig/console &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/sysconfig/console
+
+UNICODE="1"
+KEYMAP="de-latin1"
+KEYMAP_CORRECTIONS="euro2"
+LEGACY_CHARSET="iso-8859-15"
+BROKEN_COMPOSE="0"
+FONT="LatArCyrHeb-16 -m 8859-15"
+
+# End /etc/sysconfig/console</tt>
+EOF</kbd></pre>
+          </li>
+          <li>
+            <p>
+              For Chinese, Japanese, Korean and some other languages, the
+              Linux console cannot be configured to display the needed
+              characters. Users who need such languages should install the X
+              Window System, fonts that cover the necessary character ranges,
+              and the proper input method (e.g., SCIM, it supports a wide
+              variety of languages).
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="note">
+        <div class="admonhead">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3 class="admontitle">
+            Note
+          </h3>
+        </div>
+        <div class="admonbody">
+          <p>
+            The <tt class="filename">/etc/sysconfig/console</tt> file only
+            controls the Linux text console localization. It has nothing to
+            do with setting the proper keyboard layout and terminal fonts in
+            the X Window System, with ssh sessions or with a serial console.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="setclock.html" title=
+          "Configuring the setclock Script">Prev</a>
+          <p>
+            Configuring the setclock Script
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="sysklogd.html" title=
+          "Configuring the sysklogd script">Next</a>
+          <p>
+            Configuring the sysklogd script
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter07.html" title=
+          "Chapter&nbsp;7.&nbsp;Setting Up System Bootscripts">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

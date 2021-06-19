@@ -1,0 +1,626 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;21.&nbsp;Mail Server Software
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;VI.&nbsp;Server Networking</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="server.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="sendmail.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Mail Server Software
+        </h1>
+      </div>
+      <p>
+        <span class="acronym">MTA</span>s are the programs which transport
+        mail from one machine to the other. The traditional <span class=
+        "acronym">MTA</span> is <span class="application">Sendmail</span>,
+        however there are several other choices.
+      </p>
+      <p>
+        As well as <span class="acronym">SMTP</span> servers there is a
+        <span class="acronym">POP</span> server (qpopper) and an <span class=
+        "acronym">IMAP</span> server (Courier-<span class=
+        "acronym">IMAP</span>).
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h1 class="sect1">
+            Postfix-2.1.1
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to Postfix
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Postfix</span> package contains a
+            Mail Transport Agent (<span class="acronym">MTA</span>). This is
+            useful for sending email to other users of your host machine. It
+            can also be configured to be a central mail server for your
+            domain, a mail relay agent or simply a mail delivery agent to
+            your local Internet Service Provider (<span class=
+            "acronym">ISP</span>).
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2823824" name="id2823824"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://ftp.uni-koeln.de/mail/postfix-2.1.1.tar.gz">http://ftp.uni-koeln.de/mail/postfix-2.1.1.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-2.1.1.tar.gz">
+                    ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-2.1.1.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 1.9 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 82 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.29 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2824421" name="id2824421"></a><span class=
+                    "application">Postfix</span> dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2824428" name="id2824428"></a>Required
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../content/databases.html#db">Berkeley
+                DB-4.2.52.2</a>
+              </p>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2824439" name="id2824439"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="http://asg.web.cmu.edu/sasl/">Cyrus SASL</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of Postfix
+            </h3>
+          </div>
+          <p>
+            Before you compile the program, you need to create users and
+            groups that will be expected to be in place when the install
+            script executes. Add the users and groups with the following
+            commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">groupadd postfix &amp;&amp;
+groupadd postdrop &amp;&amp;
+groupadd -g 65534 nogroup &amp;&amp;
+useradd -c postfix -d /dev/null -g postfix -s /bin/false postfix &amp;&amp;
+useradd -c nobody -d /home -g nogroup -s /bin/bash -u 65534 nobody &amp;&amp;
+chown postfix:postfix /var/mail</b></span></tt>
+</pre>
+          <p>
+            Install <span class="application">postfix</span> by running the
+            following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">make &amp;&amp;
+sh postfix-install daemon_directory=/usr/sbin \
+                   manpage_directory=/usr/share/man \
+                   sample_directory=/usr/share/doc/postfix \
+                   -non-interactive</b></span></tt>
+</pre>
+          <p>
+            The final installation step is to install the program's
+            documentation with this command:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">install -d /usr/share/doc/postfix &amp;&amp;
+cp -rf html/* /usr/share/doc/postfix</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Command explanations
+            </h3>
+          </div>
+          <p>
+            <span><b class="command">sh postfix-install ...
+            -non-interactive</b></span> : We don't want the install script to
+            ask any questions so we call it with a non-interactive switch and
+            accept default destination directories in all but three cases.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring Postfix
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2824171" name="id2824171"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/aliases</tt>, <tt class=
+              "filename">/etc/postfix/main.cf</tt> and <tt class=
+              "filename">/etc/postfix/master.cf</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2824215" name="id2824215"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/aliases &lt;&lt; "EOF"</b></span>
+# Begin /etc/aliases
+
+MAILER-DAEMON:    postmaster
+postmaster:       root
+
+root:             LOGIN
+# End /etc/aliases
+<span><b class="command">EOF</b></span></tt>
+</pre>
+            <div class="admonition">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="note">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  To protect an existing <tt class=
+                  "filename">/etc/aliases</tt> file, we will append these
+                  aliases to it if it exists. This file should be checked and
+                  duplicate aliases removed, if present.
+                </p>
+              </div>
+            </div>
+            <p>
+              The <tt class="filename">/etc/aliases</tt> file that was just
+              created or appended, the <tt class="filename">main.cf</tt> and
+              the <tt class="filename">master.cf</tt> must be personalized
+              for your system. The <tt class="filename">aliases</tt> file
+              needs your non-root login identity so mail addressed to root
+              can be forwarded to you at the user level. The <tt class=
+              "filename">main.cf</tt> file needs your fully qualified
+              hostname. All of these edits can be done with sed commands
+              entered into the console with appropriate substitutions of your
+              non-root login name for <i class=
+              "replaceable"><tt>[user]</tt></i> and your fully qualified
+              hostname for <i class=
+              "replaceable"><tt>[localhost.localdomain]</tt></i>. You will
+              find the <tt class="filename">main.cf</tt> file is self
+              documenting, so load it into your editor to make the changes
+              you need for your situation.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cp /etc/aliases /etc/aliases.bak &amp;&amp;
+cp /etc/postfix/main.cf /etc/postfix/main.cf.bak &amp;&amp;
+sed "s/LOGIN/<i class=
+"replaceable"><tt>[user]</tt></i>/" /etc/aliases.bak &gt; /etc/aliases &amp;&amp;
+sed "s/#myhostname = host.domain.tld/myhostname = \ 
+        <i class="replaceable"><tt>[localhost.localdomain]</tt></i>/" \
+        /etc/postfix/main.cf.bak &gt; /etc/postfix/main.cf &amp;&amp;
+/usr/bin/newaliases &amp;&amp;
+/usr/sbin/postfix start</b></span></tt>
+</pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2824943" name="id2824943"></a>Postfix init.d
+                    script
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              To automate the running of Postfix at startup, install the
+              <tt class="filename">/etc/rc.d/init.d/postfix</tt> init script
+              included in the <a href=
+              "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+              package.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-postfix</b></span></tt>
+</pre>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Postfix</span> package contains
+            <tt class="filename">bounce</tt> , <tt class=
+            "filename">cleanup</tt>, <tt class="filename">error</tt>,
+            <tt class="filename">flush</tt>, <tt class="filename">lmtp</tt>,
+            <tt class="filename">local</tt>, <tt class="filename">mailq</tt>,
+            <tt class="filename">master</tt>, <tt class=
+            "filename">newaliases</tt>, <tt class="filename">nqmgr</tt>,
+            <tt class="filename">pickup</tt>, <tt class="filename">pipe</tt>,
+            <span><b class="command">postalias</b></span>, <span><b class=
+            "command">postcat</b></span>, <span><b class=
+            "command">postconf</b></span>, <span><b class=
+            "command">postdrop</b></span>, <span><b class=
+            "command">postfix</b></span>, <span><b class=
+            "command">postkick</b></span>, <span><b class=
+            "command">postlock</b></span>, <span><b class=
+            "command">postlog</b></span>, <span><b class=
+            "command">postmap</b></span>, <span><b class=
+            "command">postqueue</b></span>, <span><b class=
+            "command">postsuper</b></span>, <tt class="filename">qmgr</tt>,
+            <tt class="filename">qmqpd</tt>, <span><b class=
+            "command">sendmail</b></span>, <span><b class=
+            "command">showq</b></span>, <tt class="filename">smtp</tt>,
+            <tt class="filename">smtpd</tt>, <tt class="filename">spawn</tt>,
+            <tt class="filename">trivial-rewrite</tt>, and <tt class=
+            "filename">virtual</tt>.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825401" name="id2825401"></a>postfix
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postfix</b></span> is the program that
+              starts and stops the mail delivery system.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825415" name="id2825415"></a>master
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">master</tt> is the resident process that
+              runs <tt class="filename">bounce</tt>, <tt class=
+              "filename">cleanup</tt>, <tt class="filename">error</tt>,
+              <tt class="filename">flush</tt>, <tt class=
+              "filename">lmtp</tt>, <tt class="filename">local</tt>,
+              <tt class="filename">nqmgr</tt>, <tt class=
+              "filename">pickup</tt>, <tt class="filename">pipe</tt>,
+              <tt class="filename">qmgr</tt>, <tt class=
+              "filename">qmqpd</tt>, <tt class="filename">showq</tt>,
+              <tt class="filename">smtp</tt>, <tt class=
+              "filename">smtpd</tt>, <tt class="filename">spawn</tt>,
+              <tt class="filename">trivial-rewrite</tt> and <tt class=
+              "filename">virtual</tt> on demand. These programs are not
+              designed to work as user commands.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825527" name="id2825527"></a>postqueue
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postqueue</b></span> implements the
+              <span class="application">Postfix</span> user interface for
+              queue management. It implements all the operations that are
+              traditionally available via the <span><b class=
+              "command">sendmail</b></span> command.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825554" name="id2825554"></a>sendmail
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">sendmail</b></span> implements the
+              <span class="application">Postfix</span> to <span class=
+              "application">Sendmail</span> compatibility interface.
+              <tt class="filename">mailq</tt> and <tt class=
+              "filename">newaliases</tt> are symlinks to <span><b class=
+              "command">sendmail</b></span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825601" name="id2825601"></a>showq
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">showq</b></span> will emulate the
+              <tt class="filename">mailq</tt> command when the <span class=
+              "application">Postfix</span> mail system is not running.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825629" name="id2825629"></a>postsuper
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postsuper</b></span> does maintenance
+              jobs on the <span class="application">Postfix</span> queue.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825648" name="id2825648"></a>postalias
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postalias</b></span> creates, queries
+              or updates <span class="application">Postfix</span> alias
+              databases.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825667" name="id2825667"></a>postcat
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postcat</b></span> prints the contents
+              of a <span class="application">Postfix</span> queue file in
+              human-readable form.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825686" name="id2825686"></a>postconf
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postconf</b></span> prints or changes
+              the value of configuration parameters.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825699" name="id2825699"></a>postdrop
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postdrop</b></span> creates a file in
+              the maildrop directory and copies its standard input to the
+              file.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825713" name="id2825713"></a>postkick
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postkick</b></span> makes the mail
+              system private <span class="acronym">IPC</span> accessible for
+              use in shell scripts.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825730" name="id2825730"></a>postlock
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postlock</b></span> locks a file for
+              exclusive access and executes a command on that file.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825744" name="id2825744"></a>postlog
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postlog</b></span> implements a
+              logging interface for use in shell scripts.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2825758" name="id2825758"></a>postmap
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">postmap</b></span> creates, queries or
+              updates <span class="application">Postfix</span> lookup tables.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="server.html">Prev</a><br />
+        Part&nbsp;VI.&nbsp;Server Networking
+      </div>
+      <div class="next">
+        <a accesskey="n" href="sendmail.html">Next</a><br />
+        Sendmail-8.12.10
+      </div>
+      <div class="up">
+        <a accesskey="u" href="server.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

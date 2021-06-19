@@ -1,0 +1,405 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      gnome-menus-2.18.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;29.&nbsp;GNOME Core Packages
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnome-backgrounds.html" title=
+          "gnome-backgrounds-2.18.3">Prev</a>
+          <p>
+            gnome-backgrounds-2.18.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gnome-panel.html" title=
+          "GNOME Panel-2.18.3">Next</a>
+          <p>
+            GNOME Panel-2.18.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;29.&nbsp;GNOME Core Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="gnome-menus" name="gnome-menus"></a>gnome-menus-2.18.3
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to gnome-menus
+        </h2>
+        <p>
+          The <span class="application">gnome-menus</span> package contains
+          an implementation of the draft &ldquo;<span class="quote">Desktop
+          Menu Specification</span>&rdquo; from freedesktop.org (<a class=
+          "ulink" href=
+          "http://www.freedesktop.org/Standards/menu-spec">http://www.freedesktop.org/Standards/menu-spec</a>).
+          Also contained are the <span class="application">GNOME</span> menu
+          layout configuration files, <code class=
+          "filename">.directory</code> files and a menu related utility
+          program.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://ftp.gnome.org/pub/gnome/sources/gnome-menus/2.18/gnome-menus-2.18.3.tar.bz2">
+                http://ftp.gnome.org/pub/gnome/sources/gnome-menus/2.18/gnome-menus-2.18.3.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.gnome.org/pub/gnome/sources/gnome-menus/2.18/gnome-menus-2.18.3.tar.bz2">
+                ftp://ftp.gnome.org/pub/gnome/sources/gnome-menus/2.18/gnome-menus-2.18.3.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: e2b97b01b33b9744baf26982a8ad588a
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 437 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 8 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.2 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          gnome-menus Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="../general/glib2.html" title=
+          "GLib-2.12.12">GLib-2.12.12</a> and <a class="xref" href=
+          "../general/perl-modules.html#perl-xml-parser" title=
+          "XML::Parser-2.34">XML::Parser-2.34</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/python.html" title=
+          "Python-2.5.2">Python-2.5.2</a>, <a class="xref" href=
+          "../general/gamin.html" title="Gamin-0.1.9">Gamin-0.1.9</a>, and
+          <a class="xref" href="../general/intltool.html" title=
+          "Intltool-0.35.5">intltool-0.35.5</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/gnome-menus">http://wiki.linuxfromscratch.org/blfs/wiki/gnome-menus</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of gnome-menus
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The instructions below are based on installing the package into a
+            GNOME-2 environment. If, for whatever reason, you're installing
+            this package without having <span class=
+            "application">ORBit2</span> and the core GNOME-2 libraries
+            installed, you'll need to modify the <code class=
+            "option">--prefix=</code> parameter on the <span class=
+            "command"><strong>configure</strong></span> script to point to
+            your desired installation path (e.g., <code class=
+            "option">--prefix=/usr</code>).
+          </p>
+        </div>
+        <p>
+          Install <span class="application">gnome-menus</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">./configure --prefix=$(pkg-config --variable=prefix ORBit-2.0) \
+            --sysconfdir=/etc/gnome/2.18.3 \
+            --enable-inotify &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--prefix=$(pkg-config --variable=prefix
+          ORBit-2.0)</code></em>: Setting the prefix using this parameter
+          instead of with <code class="envar">$GNOME_PREFIX</code> will
+          ensure that the prefix is consistent with the installation
+          environment and the package will be installed in the correct
+          location.
+        </p>
+        <p>
+          <em class=
+          "parameter"><code>--sysconfdir=/etc/gnome/2.18.3</code></em>: This
+          parameter causes the configuration files to be installed in
+          <code class="filename">/etc/gnome/2.18.3</code> instead of
+          <code class="filename">$GNOME_PREFIX/etc</code>. Additionally (if
+          applicable), the parameter ensures that the <span class=
+          "application">GConf</span>-2 database is correctly updated.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-inotify</code></em>: This
+          parameter is used so that file polling is accomplished using the
+          kernel inotify calls, instead of using other polling methods.
+          Remove this parameter if you wish to fall back to <span class=
+          "application">Gamin</span> as the file polling method.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring gnome-menus
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2823566" name="id2823566"></a>XDG_CONFIG_DIRS
+                    Variable
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              So that <span class="application">GNOME</span> can find the
+              desktop configuration files, ensure you set the <code class=
+              "envar">XDG_CONFIG_DIRS</code> environment variable in the
+              system profile, or in individual user's profiles as shown below
+              (you may add additional directories, separated with colons, if
+              desired):
+            </p>
+            <pre class="screen">
+<code class=
+"literal">export XDG_CONFIG_DIRS=/etc/gnome/2.18.3/xdg:/etc/xdg</code>
+</pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2823600" name="id2823600"></a>XDG_DATA_DIRS
+                    Variable
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              So that <span class="application">GNOME</span> can find the
+              data to populate the menus, ensure you set the <code class=
+              "envar">XDG_DATA_DIRS</code> environment variable in the system
+              profile, or in individual user's profiles as shown below (you
+              may add additional directories, separated with colons, if
+              desired):
+            </p>
+            <pre class="screen">
+<code class=
+"literal">export XDG_DATA_DIRS=$GNOME_PREFIX/share:/usr/share</code>
+</pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2823635" name="id2823635"></a>PYTHONPATH
+                    Variable
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              If your GNOME-2 installation prefix is anything other than
+              <code class="filename">/usr</code> and you have <span class=
+              "application">Python</span> installed, you need to update the
+              <code class="envar">PYTHONPATH</code> environment variable so
+              that the <code class="filename">gmenu</code> module can be
+              located by <span class="application">Python</span>. Set the
+              variable in the system profile, or in individual user's
+              profiles as shown below:
+            </p>
+            <pre class="screen">
+<code class=
+"literal">export PYTHONPATH=$PYTHONPATH:$(pkg-config --variable=prefix \
+       ORBit-2.0)/lib/python2.5/site-packages:$(pkg-config \
+       --variable=prefix \
+       ORBit-2.0)/lib/python2.5/site-packages/GMenuSimpleEditor</code>
+</pre>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">gmenu-simple-editor and
+              gnome-menu-spec-test</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">libgnome-menu.{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/gnome/2.18.3/xdg and the following
+              subdirectories of <code class="envar">$GNOME_PREFIX</code>/:
+              include/gnome-menus,
+              lib/python2.5/site-packages/GMenuSimpleEditor,
+              share/{desktop-directories, gnome-menus}</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gmenu-simple-editor" name=
+                    "gmenu-simple-editor"></a><span class="term"><span class=
+                    "command"><strong>gmenu-simple-editor</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a simple front-end script to the <span class=
+                    "application">Python</span> Gmenu Simple Editor module
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gnome-menu-spec-test" name=
+                    "gnome-menu-spec-test"></a><span class=
+                    "term"><span class="command"><strong>gnome-menu-spec-test</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to test GNOME's implementation of the Desktop
+                    Menu Specification.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgnome-menu" name=
+                    "libgnome-menu"></a><span class="term"><code class=
+                    "filename">libgnome-menu.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains functions required to support GNOME's
+                    implementation of the Desktop Menu Specification.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-03-17 13:11:35 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnome-backgrounds.html" title=
+          "gnome-backgrounds-2.18.3">Prev</a>
+          <p>
+            gnome-backgrounds-2.18.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gnome-panel.html" title=
+          "GNOME Panel-2.18.3">Next</a>
+          <p>
+            GNOME Panel-2.18.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;29.&nbsp;GNOME Core Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

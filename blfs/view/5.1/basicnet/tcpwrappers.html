@@ -1,0 +1,322 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      tcpwrappers-7.6
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;18.&nbsp;Basic Networking Programs</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="wget.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="portmap.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          tcpwrappers-7.6
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to tcpwrappers
+          </h3>
+        </div>
+        <p>
+          The <span class="application">tcpwrappers</span> package provides
+          daemon wrapper programs that report the name of the client
+          requesting network services and the requested service.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2780509" name="id2780509"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://files.ichilton.co.uk/nfs/tcp_wrappers_7.6.tar.gz">http://files.ichilton.co.uk/nfs/tcp_wrappers_7.6.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.porcupine.org/pub/security/tcp_wrappers_7.6.tar.gz">
+                  ftp://ftp.porcupine.org/pub/security/tcp_wrappers_7.6.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 100 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 720 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.16 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2780541" name="id2780541"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required patch (Fixes some build issues and adds building
+                  of a shared library): <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/tcp_wrappers-7.6-shared-lib-plus-plus.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/tcp_wrappers-7.6-shared-lib-plus-plus.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of tcpwrappers
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">tcpwrappers</span> with the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../tcp_wrappers-7.6-shared-lib-plus-plus.patch &amp;&amp;
+make REAL_DAEMON_DIR=/usr/sbin STYLE=-DPROCESS_OPTIONS linux &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring tcpwrappers
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2782991" name="id2782991"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/hosts.allow</tt>, <tt class=
+            "filename">/etc/hosts.deny</tt>
+          </p>
+          <p>
+            File protections: the wrapper, all files used by the wrapper, and
+            all directories in the path leading to those files, should be
+            accessible but not writable for unprivileged users (mode 755 or
+            mode 555). Do not install the wrapper set-uid.
+          </p>
+          <p>
+            Then perform the following edits on the <tt class=
+            "filename">/etc/inetd.conf</tt> configuration file:
+          </p>
+          <pre class="screen">
+<tt class=
+"userinput">finger stream tcp nowait nobody /usr/sbin/in.fingerd in.fingerd</tt>
+</pre>
+          <p>
+            becomes:
+          </p>
+          <pre class="screen">
+<tt class=
+"userinput">finger stream tcp nowait nobody /usr/sbin/tcpd in.fingerd</tt>
+</pre>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                The finger server is used as an example here.
+              </p>
+            </div>
+          </div>
+          <p>
+            Similar changes must be made if xinetd is used, with the emphasis
+            being on calling <span><b class=
+            "command">/usr/sbin/tcpd</b></span> instead of calling the
+            service daemon directly, and passing the name of the service
+            daemon to tcpd.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">tcpwrappers</span> package contains
+          <span><b class="command">tcpd</b></span>, <span><b class=
+          "command">tcpdchk</b></span>, <span><b class=
+          "command">tcpdmatch</b></span>, <span><b class=
+          "command">try-from</b></span> and <span><b class=
+          "command">safe_finger</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2783498" name="id2783498"></a>tcpd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcpd</b></span> is the main access
+            control daemon for all Internet services, which <span><b class=
+            "command">inetd</b></span> or <span><b class=
+            "command">xinetd</b></span> will run instead of running the
+            requested service daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2783524" name="id2783524"></a>tcpdchk
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcpdchk</b></span> is a tool to examine
+            a tcpd wrapper configuration and report problems with it.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2783538" name="id2783538"></a>tcpdmatch
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcpdmatch</b></span> is used to predict
+            how the tcp wrapper would handle a specific request for a
+            service.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2783552" name="id2783552"></a>try-from
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">try-from</b></span> can be called via a
+            remote shell command to find out if the host name and address are
+            properly recognized.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2783566" name="id2783566"></a>safe_finger
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">safe_finger</b></span> is a wrapper for
+            the <span><b class="command">finger</b></span> utility, to
+            provide automatic reverse name lookups.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="wget.html">Prev</a><br />
+        Wget-1.9.1
+      </div>
+      <div class="next">
+        <a accesskey="n" href="portmap.html">Next</a><br />
+        portmap-5beta
+      </div>
+      <div class="up">
+        <a accesskey="u" href="netprogs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

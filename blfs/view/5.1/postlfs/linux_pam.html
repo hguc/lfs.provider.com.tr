@@ -1,0 +1,348 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Linux-PAM-0.77
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;4.&nbsp;Security</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="security.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="shadow.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Linux-PAM-0.77
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Linux-PAM
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Linux-<span class=
+          "acronym">PAM</span></span> package contains Pluggable
+          Authentication Modules. This is useful to enable the local system
+          administrator to choose how applications authenticate users.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2585658" name="id2585658"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.77.tar.bz2">
+                  http://www.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.77.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.77.tar.bz2">
+                  ftp://ftp.kernel.org/pub/linux/libs/pam/pre/library/Linux-PAM-0.77.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 332 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 4.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.07 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2587320" name="id2587320"></a>Additional download
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/Linux-PAM-0.77-linkage-3.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/Linux-PAM-0.77-linkage-3.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2587350" name="id2587350"></a><span class=
+                  "application">Linux-<span class="acronym">PAM</span></span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2587361" name="id2587361"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="security.html#cracklib">cracklib-2.7</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Linux-PAM
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Linux-<span class=
+          "acronym">PAM</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../Linux-PAM-0.77-linkage-3.patch &amp;&amp;
+autoconf &amp;&amp;
+./configure --enable-static-libpam --with-mailspool=/var/mail \
+    --enable-read-both-confs --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+mv /lib/libpam.a /lib/libpam_misc.a /lib/libpamc.a /usr/lib &amp;&amp;
+ln -sf ../../lib/libpam.so.0.77 /usr/lib/libpam.so &amp;&amp;
+ln -sf ../../lib/libpam_misc.so.0.77 /usr/lib/libpam_misc.so &amp;&amp;
+ln -sf ../../lib/libpamc.so.0.77 /usr/lib/libpamc.so</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">autoconf</b></span>: This is necessary as
+          in the patch, we change where <span class="acronym">PAM</span>
+          looks for the cracklib libs. This requires that the configure
+          script be recreated.
+        </p>
+        <p>
+          <tt class="option">--enable-static-libpam</tt>: This switch builds
+          static <span class="acronym">PAM</span> libraries as well as the
+          dynamic libraries.
+        </p>
+        <p>
+          <i class="parameter"><tt>--with-mailspool=/var/mail</tt></i>: This
+          switch makes the mailspool directory <span class=
+          "acronym">FHS</span> compliant.
+        </p>
+        <p>
+          <tt class="option">--enable-read-both-confs</tt>: This switch lets
+          the local administrator choose which configuration file setup to
+          use.
+        </p>
+        <p>
+          <span><b class="command">mv /lib/libpam.a /lib/libpam_misc.a
+          /lib/libpamc.a /usr/lib</b></span>: This command moves the static
+          libraries to <tt class="filename">/usr/lib</tt> to comply with
+          <span class="acronym">FHS</span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Linux-PAM
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2587623" name="id2587623"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/pam.d</tt> or <tt class=
+            "filename">/etc/pam.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2587574" name="id2587574"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Configuration information is placed in <tt class=
+            "filename">/etc/pam.d</tt> or <tt class=
+            "filename">/etc/pam.conf</tt> depending on user preference. Below
+            are example files of each type:
+          </p>
+          <pre class="screen">
+# Begin /etc/pam.d/other
+
+auth            required        pam_unix.so     nullok
+account         required        pam_unix.so
+session         required        pam_unix.so
+password        required        pam_unix.so     nullok
+
+# End /etc/pam.d/other
+
+# Begin /etc/pam.conf
+
+other           auth            required        pam_unix.so     nullok
+other           account         required        pam_unix.so
+other           session         required        pam_unix.so
+other           password        required        pam_unix.so     nullok
+
+# End /etc/pam.conf
+</pre>
+          <p>
+            The <span class="application"><span class=
+            "acronym">PAM</span></span> man page (<span><b class=
+            "command">man pam</b></span>) provides a good starting point for
+            descriptions of fields and allowable entries. The <a href=
+            "http://www.kernel.org/pub/linux/libs/pam/Linux-PAM-html/pam.html">
+            Linux-PAM guide for system administrators</a> is recommended for
+            further reading.
+          </p>
+          <p>
+            Refer to <a href=
+            "http://www.kernel.org/pub/linux/libs/pam/modules.html">http://www.kernel.org/pub/linux/libs/pam/modules.html</a>
+            for a list of various modules available.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Linux-<span class=
+          "acronym">PAM</span></span> package contains <span><b class=
+          "command">unix-chkpwd</b></span> and <tt class=
+          "filename">libpam</tt> libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2587795" name="id2587795"></a>unix-chkpwd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            No description available.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2587803" name="id2587803"></a>libpam libraries
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libpam</tt> libraries provide the interfaces
+            between applications and the modules included with <span class=
+            "acronym">PAM</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="security.html">Prev</a><br />
+        Chapter&nbsp;4.&nbsp;Security
+      </div>
+      <div class="next">
+        <a accesskey="n" href="shadow.html">Next</a><br />
+        Shadow-4.0.4.1
+      </div>
+      <div class="up">
+        <a accesskey="u" href="security.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

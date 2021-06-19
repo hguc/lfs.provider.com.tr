@@ -1,0 +1,283 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;4.&nbsp;Security
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;II.&nbsp;Post LFS Configuration and Extra Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="netfs.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="linux_pam.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Security
+        </h1>
+      </div>
+      <p>
+        Security takes many forms in a computing environment. This chapter
+        gives examples of three different types of security: access,
+        prevention and detection.
+      </p>
+      <p>
+        Access for users is usually handled by <span><b class=
+        "command">login</b></span> or an application designed to handle the
+        login function. In this chapter, we show how to enhance
+        <span><b class="command">login</b></span> by setting policies with
+        <span class="application"><span class="acronym">PAM</span></span>
+        modules. Access via networks can also be secured by policies set by
+        <span class="application">iptables</span>, commonly referred to as a
+        firewall.
+      </p>
+      <p>
+        Prevention of breaches, like a trojan, are assisted by applications
+        like <span class="application">GnuPG</span>, specifically the ability
+        to confirm signed packages, which recognizes modifications of the
+        <span class="acronym">TAR</span> ball after the packager creates it.
+      </p>
+      <p>
+        Finally, we touch on detection with a package that stores
+        "signatures" of critical files (defined by the administrator) and
+        then regenerates those "signatures" and compares for files that have
+        been changed.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h1 class="sect1">
+            cracklib-2.7
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to cracklib
+            </h3>
+          </div>
+          <p>
+            The cracklib package contains a library used to enforce strong
+            passwords by comparing user selected passwords to words in a
+            chosen wordlist.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2585732" name="id2585732"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://www.crypticide.com/users/alecm/security/cracklib,2.7.tar.gz">
+                    http://www.crypticide.com/users/alecm/security/cracklib,2.7.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.cerias.purdue.edu/pub/tools/unix/libs/cracklib/cracklib.2.7.tar.gz">
+                    ftp://ftp.cerias.purdue.edu/pub/tools/unix/libs/cracklib/cracklib.2.7.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 21 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required (with cracklib wordlist):
+                    17 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.10 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2586303" name="id2586303"></a>Additional
+                    downloads
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Required patch: <a href=
+                    "http://www.linuxfromscratch.org/patches/blfs/5.1/cracklib,2.7-blfs-1.patch">
+                    http://www.linuxfromscratch.org/patches/blfs/5.1/cracklib,2.7-blfs-1.patch</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Recommended patch: <a href=
+                    "http://www.linuxfromscratch.org/patches/blfs/5.1/cracklib,2.7-heimdal-1.patch">
+                    http://www.linuxfromscratch.org/patches/blfs/5.1/cracklib,2.7-heimdal-1.patch</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <p>
+              You will also need to download a wordlist for use with
+              cracklib. There are two wordlists to choose from at the
+              following location. Use the <tt class="filename">cracklib</tt>
+              word list for good security, or opt for the <tt class=
+              "filename">allwords</tt> word list for lightweight machines
+              short on <span class="acronym">RAM</span>. You can of course
+              choose any other word list that you have at your disposal.
+            </p>
+            <p>
+              cracklib (15.6MB): <a href=
+              "http://www.cotse.com/wordlists/cracklib">http://www.cotse.com/wordlists/cracklib</a>
+            </p>
+            <p>
+              allwords (466KB): <a href=
+              "http://www.cotse.com/wordlists/allwords">http://www.cotse.com/wordlists/allwords</a>
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of cracklib
+            </h3>
+          </div>
+          <p>
+            First, we need to install the chosen word list for cracklib:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">install -d -m755 /usr/share/dict &amp;&amp;
+install -m644 <i class=
+"replaceable"><tt>[wordlist]</tt></i> /usr/share/dict &amp;&amp;
+ln -sf <i class=
+"replaceable"><tt>[wordlist]</tt></i> /usr/share/dict/words &amp;&amp;
+echo $(hostname) &gt;&gt; /usr/share/dict/extra.words</b></span></tt>
+</pre>
+          <p>
+            Our wordlist is linked to <tt class=
+            "filename">/usr/share/dict/words</tt> as historically, <tt class=
+            "filename">words</tt> is the primary wordlist in the <tt class=
+            "filename">/usr/share/dict</tt> directory. We also echo the value
+            of hostname to a file called extra.words. This extra file is
+            intened to be a site specific list which includes easy to guess
+            passwords such as company or department name, user's names,
+            product names, computer name, domain name, etc.
+          </p>
+          <p>
+            Now apply BLFS patch:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../cracklib,2.7-blfs-1.patch</b></span></tt>
+</pre>
+          <p>
+            If necessary, apply the heimdal patch:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cp -R cracklib cracklib_krb5 &amp;&amp;
+patch -Np1 -i ../cracklib,2.7-heimdal-1.patch</b></span></tt>
+</pre>
+          <p>
+            Finally install the package:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">make install</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application">cracklib</span> package contains
+            the <tt class="filename">libcrack</tt> library.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2585832" name="id2585832"></a>libcrack library
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The <tt class="filename">libcrack</tt> library provides a fast
+              dictionary lookup method for strong password enforcement.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="netfs.html">Prev</a><br />
+        Configuring for Network Filesystems
+      </div>
+      <div class="next">
+        <a accesskey="n" href="linux_pam.html">Next</a><br />
+        Linux-PAM-0.77
+      </div>
+      <div class="up">
+        <a accesskey="u" href="postlfs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

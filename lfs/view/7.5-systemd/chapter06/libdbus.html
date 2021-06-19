@@ -1,0 +1,200 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.63.&nbsp;Libdbus-1.8.0
+    </title>
+    <link rel="stylesheet" type="text/css" href="../stylesheets/lfs.css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.78.1" />
+    <link rel="stylesheet" href="stylesheets/lfs-print.css" type="text/css"
+    media="print" />
+  </head>
+  <body class="lfs" id="lfs-7.5-systemd">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 7.5-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="patch.html" title="Patch-2.7.1">Prev</a>
+          <p>
+            Patch-2.7.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="systemd.html" title="Systemd-208">Next</a>
+          <p>
+            Systemd-208
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 7.5-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-libdbus" name="ch-system-libdbus"></a>6.63.
+        Libdbus-1.8.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          Libdbus package provides a library to communicate with D-Bus
+          messagebus daemon. It is only installed to satisfy circular
+          dependency between Systemd and D-Bus.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">less than 0.4 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">35 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.63.1. Installation of Libdbus
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            <span class="application">Libdbus</span> is part of the D-Bus
+            sources. You should first unpack the D-Bus tarball and change to
+            the <code class="filename">dbus-1.8.0</code> directory.
+          </p>
+        </div>
+        <p>
+          Prepare Libdbus for compilation:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr     \
+            --sysconfdir=/etc \
+            --localstatedir=/var</kbd>
+</pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -C dbus libdbus-1.la</kbd>
+</pre>
+        <p>
+          This package does come with a testsuite, but it is not possible to
+          run it because only part of the package was built.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make -C dbus lib_LTLIBRARIES=libdbus-1.la \
+     install-libLTLIBRARIES \
+     install-dbusincludeHEADERS \
+     install-nodist_dbusarchincludeHEADERS
+make install-pkgconfigDATA</kbd>
+</pre>
+        <p>
+          The shared library needs to be moved to <code class=
+          "filename">/lib</code>, and as a result the <code class=
+          "filename">.so</code> file in <code class=
+          "filename">/usr/lib</code> will need to be recreated:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mv -v /usr/lib/libdbus-1.so.* /lib
+ln -sfv ../../lib/$(readlink /usr/lib/libdbus-1.so) /usr/lib/libdbus-1.so</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-libdbus" name="contents-libdbus"></a>6.63.2.
+          Contents of Libdbus
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">none</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed libraries:</strong>
+              <span class="segbody">libdbus-1.{a,so}</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed directories:</strong>
+              <span class="segbody">/usr/include/dbus-1.0,
+              /usr/lib/dbus-1.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0" class="variablelist">
+            <colgroup>
+              <col align="left" valign="top" />
+              <col />
+            </colgroup>
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libdbus-1" name="libdbus-1"></a><span class=
+                    "term"><code class="filename">libdbus-1</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Contains API functions used to communicate with the D-Bus
+                    message bus.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="patch.html" title="Patch-2.7.1">Prev</a>
+          <p>
+            Patch-2.7.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="systemd.html" title="Systemd-208">Next</a>
+          <p>
+            Systemd-208
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 7.5-systemd">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      libdv-0.103
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="libdvdread.html" title=
+          "libdvdread-0.9.4">Prev</a>
+          <p>
+            libdvdread-0.9.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="liba52.html" title="liba52-0.7.4">Next</a>
+          <p>
+            liba52-0.7.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="libdriv.html" title=
+          "Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="libdv" name="libdv"></a>
+        <h1 class="sect1">
+          libdv-0.103
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to libdv
+          </h2>
+        </div>
+        <p>
+          <span class="application">libdv</span> (Quasar <span class=
+          "acronym">DV</span>) is a software <span class=
+          "acronym">CODEC</span> for <span class="acronym">DV</span> video,
+          the encoding format used by most digital camcorders.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2583164" name="id2583164"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/libdv/libdv-0.103.tar.gz">
+                  <span class=
+                  "url">http://prdownloads.sourceforge.net/libdv/libdv-0.103.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: b5c7d0db672a76528e100828dd866a79
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 520 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 9.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.21 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2747753" name="id2747753"></a><span class=
+                  "application">libdv</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2841539" name="id2841539"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/popt.html">popt-1.7-5</a>, <a href=
+              "../general/pkgconfig.html">pkgconfig-0.15.0</a>, <a href=
+              "sdl.html">SDL-1.2.8</a>, <a href=
+              "../x/gtk.html">GTK+-1.2.10</a> and X (<a href=
+              "../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.8.2</a>)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of libdv
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">libdv</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</strong></span></kbd></pre>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The configure check for <span class="application">GTK+</span>
+              is broken. If <span class="application">GTK+</span> is not
+              installed, also pass <tt class="option">--disable-gtk</tt> to
+              the configure script.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">libdv</span> package contains
+          <span><strong class="command">dubdv</strong></span>,
+          <span><strong class="command">dvconnect</strong></span>,
+          <span><strong class="command">encodedv</strong></span>,
+          <span><strong class="command">playdv</strong></span> and <tt class=
+          "filename">libdv</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2917646" name="id2917646"></a>dubdv
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">dubdv</strong></span> inserts audio
+            into a digital video stream.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2695416" name="id2695416"></a>dvconnect
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">dvconnect</strong></span> is a
+            small utility to send or capture raw data from and to the
+            camcorder.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2569099" name="id2569099"></a>encodedv
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">encodedv</strong></span> encodes a
+            series of images to a digital video stream.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2830739" name="id2830739"></a>playdv
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">playdv</strong></span> displays
+            digital video streams on the screen.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2695914" name="id2695914"></a>libdv
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libdv</tt> provides functions for programs
+            interacting with the Quasar <span class="acronym">DV</span>
+            <span class="acronym">CODEC</span>.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-14 08:12:36 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libdvdread.html" title=
+          "libdvdread-0.9.4">Prev</a>
+          <p>
+            libdvdread-0.9.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="liba52.html" title="liba52-0.7.4">Next</a>
+          <p>
+            liba52-0.7.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="libdriv.html" title=
+          "Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

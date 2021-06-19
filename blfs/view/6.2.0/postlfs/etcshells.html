@@ -1,0 +1,117 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      The /etc/shells File
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;3.&nbsp;After LFS Configuration Issues
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="logon.html" title=
+          "Customizing your Logon with /etc/issue">Prev</a>
+          <p>
+            Customizing your Logon with /etc/issue
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="random.html" title=
+          "Random Number Generation">Next</a>
+          <p>
+            Random Number Generation
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="postlfs-config-shells" name="postlfs-config-shells"></a>
+        <h1 class="sect1">
+          The /etc/shells File
+        </h1>
+      </div>
+      <p>
+        The <tt class="filename">shells</tt> file contains a list of login
+        shells on the system. Applications use this file to determine whether
+        a shell is valid. For each shell a single line should be present,
+        consisting of the shell's path, relative to the root of the directory
+        structure (/).
+      </p>
+      <p>
+        For example, this file is consulted by <span><strong class=
+        "command">chsh</strong></span> to determine whether an unprivileged
+        user may change the login shell for her own account. If the command
+        name is not listed, the user will be denied of change.
+      </p>
+      <p>
+        It is a requirement for applications such as <span class=
+        "application">GDM</span> which does not populate the face browser if
+        it can't find <tt class="filename">/etc/shells</tt>, or FTP daemons
+        which traditionally disallow access to users with shells not included
+        in this file.
+      </p>
+      <pre class="root"><kbd class=
+      "command">cat &gt; /etc/shells &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/shells
+
+/bin/sh
+/bin/bash
+
+# End /etc/shells</tt>
+EOF</kbd></pre>
+      <p class="updated">
+        Last updated on 2005-08-01 14:29:19 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="logon.html" title=
+          "Customizing your Logon with /etc/issue">Prev</a>
+          <p>
+            Customizing your Logon with /etc/issue
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="random.html" title=
+          "Random Number Generation">Next</a>
+          <p>
+            Random Number Generation
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

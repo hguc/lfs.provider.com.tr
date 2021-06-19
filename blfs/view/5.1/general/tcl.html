@@ -1,0 +1,192 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Tcl-8.4.6
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;12.&nbsp;Programming</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="gcc.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="tk.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Tcl-8.4.6
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Tcl
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Tcl</span> package contains Tool
+          Command Language.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2727470" name="id2727470"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/tcl/tcl8.4.6-src.tar.gz">
+                  http://prdownloads.sourceforge.net/tcl/tcl8.4.6-src.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.us.xemacs.org/pub/tcl/tcl8_4/tcl8.4.6-src.tar.gz">
+                  ftp://ftp.us.xemacs.org/pub/tcl/tcl8_4/tcl8.4.6-src.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 3.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 17.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.27 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Tcl
+          </h3>
+        </div>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              This package is also installed in <span class=
+              "acronym">LFS</span> during the bootstrap phase. The
+              significant difference between the two installations (other
+              than installing to <tt class="filename">/usr</tt>) is to
+              install the package in such a way that there is no need to keep
+              the build directory around after installation.
+            </p>
+          </div>
+        </div>
+        <p>
+          Install <span class="application">Tcl</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">VERSION=8.4.6 &amp;&amp;
+V=`echo $VERSION | cut -d "." -f 1,2` &amp;&amp;
+DIR=$PWD &amp;&amp;
+cd unix &amp;&amp;
+./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+sed -i "s:${DIR}/unix:/usr/lib:" tclConfig.sh &amp;&amp;
+sed -i "s:${DIR}:/usr/include/tcl${V}:" tclConfig.sh &amp;&amp;
+sed -i "s,^TCL_LIB_FILE='libtcl${V}..TCL_DBGX..so',TCL_LIB_FILE=\"libtcl${V}\$\{TCL_DBGX\}.so\"," \
+    tclConfig.sh &amp;&amp;
+mv ../doc/{,Tcl_}Thread.3 &amp;&amp;
+sed -i 's/ Thread.3/ Tcl_Thread.3/' mkLinks &amp;&amp;
+make install &amp;&amp;
+install -d /usr/include/tcl${V}/unix &amp;&amp;
+install -m644 *.h /usr/include/tcl${V}/unix/ &amp;&amp;
+install -d /usr/include/tcl${V}/generic &amp;&amp;
+install -c -m644 ../generic/*.h /usr/include/tcl${V}/generic/ &amp;&amp;
+rm -f /usr/include/tcl${V}/generic/{tcl,tclDecls,tclPlatDecls}.h &amp;&amp;
+ln -nsf /usr/include/tcl${V} /usr/lib/tcl${V}/include &amp;&amp;
+ln -sf libtcl${V}.so /usr/lib/libtcl.so &amp;&amp;
+ln -sf tclsh${V} /usr/bin/tclsh</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">sed -i ...</b></span>: The <span class=
+          "application">Tcl</span> package assumes that the source that is
+          used to build <span class="application">Tcl</span> is always kept
+          around for compiling packages that depend on <span class=
+          "application">Tcl</span>. These <span><b class=
+          "command">sed</b></span>'s remove the reference to the build
+          directory and replace them by saner system wide locations.
+        </p>
+        <p>
+          <span><b class="command">install ...</b></span>: These commands
+          install the internal headers into a system-wide location.
+        </p>
+        <p>
+          <span><b class="command">ln -sf ...</b></span>: These commands
+          create compatibility symbolic links.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="gcc.html">Prev</a><br />
+        GCC-3.3.3
+      </div>
+      <div class="next">
+        <a accesskey="n" href="tk.html">Next</a><br />
+        Tk-8.4.6
+      </div>
+      <div class="up">
+        <a accesskey="u" href="prog.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

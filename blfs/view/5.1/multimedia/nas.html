@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      NAS-1.6
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="libvorbis.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="libmpeg3.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          NAS-1.6
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to NAS
+          </h3>
+        </div>
+        <p>
+          The Network Audio System is a network transparent, client/server
+          audio transport system. It can be described as the audio equivalent
+          of an <span class="application">X</span> server.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3166730" name="id3166730"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://nas.codebrilliance.com/nas/nas-1.6.src.tar.gz">http://nas.codebrilliance.com/nas/nas-1.6.src.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.us.xemacs.org/pub/xemacs/aux/nas-1.6.src.tar.gz">
+                  ftp://ftp.us.xemacs.org/pub/xemacs/aux/nas-1.6.src.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.0 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 13 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.30 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3166767" name="id3166767"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/nas-1.6-bison-fix.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/nas-1.6-bison-fix.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3166797" name="id3166797"></a><span class=
+                  "application">NAS</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3166805" name="id3166805"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              X (<a href="../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.7.0</a>)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of NAS
+          </h3>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">NAS</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../nas-1.6-bison-fix.patch &amp;&amp;
+xmkmf &amp;&amp;
+make Makefiles &amp;&amp;
+make includes &amp;&amp;
+make depend &amp;&amp;
+make &amp;&amp;
+make install install.man</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">xmkmf...</b></span>: These commands use
+          the standard for compiling <span class="application">X</span> based
+          applications.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring NAS
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3167052" name="id3167052"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            As with most libraries, there is no configuration to do, save
+            that the library directory i.e., <tt class=
+            "filename">/opt/lib</tt> or <tt class=
+            "filename">/usr/local/lib</tt> should appear in <tt class=
+            "filename">/etc/ld.so.conf</tt> so that <span><b class=
+            "command">ldd</b></span> can find the shared libraries. After
+            checking that this is the case, <span><b class=
+            "command">/sbin/ldconfig</b></span> should be run while logged in
+            as root.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">NAS</span></span> package contains <span class=
+          "acronym">NAS</span> utilities, headers and libraries.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="libvorbis.html">Prev</a><br />
+        libvorbis-1.0.1
+      </div>
+      <div class="next">
+        <a accesskey="n" href="libmpeg3.html">Next</a><br />
+        libmpeg3-1.5.4
+      </div>
+      <div class="up">
+        <a accesskey="u" href="libdriv.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

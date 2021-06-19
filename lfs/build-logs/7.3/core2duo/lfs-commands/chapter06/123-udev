@@ -1,0 +1,12 @@
+#!/bin/bash
+set +h
+set -e
+
+cd $PKGDIR
+tar -xvf ../udev-lfs-197-2.tar.bz2
+make -f udev-lfs-197-2/Makefile.lfs
+make -f udev-lfs-197-2/Makefile.lfs install
+build/udevadm hwdb --update
+bash udev-lfs-197-2/init-net-rules.sh
+echo -e "\n\nTotalseconds: $SECONDS\n"
+exit

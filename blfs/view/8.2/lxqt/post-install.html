@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      LXQt Desktop Final Instructions
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-8.2">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 8.2
+      </h4>
+      <h3>
+        Chapter&nbsp;39.&nbsp;LXQt Desktop
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="lxqt-runner.html" title=
+          "lxqt-runner-0.12.0">Prev</a>
+          <p>
+            lxqt-runner-0.12.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lxqt-apps.html" title=
+          "LXQt Applications">Next</a>
+          <p>
+            LXQt Applications
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lxqt-desktop.html" title=
+          "Chapter&nbsp;39.&nbsp;LXQt Desktop">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 8.2">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="lxqt-post-install" name="lxqt-post-install"></a>LXQt Desktop
+        Final Instructions
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Post-Install Instructions
+        </h2>
+        <p>
+          Final steps, before starting <span class="application">LXQt</span>.
+        </p>
+        <h3>
+          Dependencies to Start LXQt
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="../x/openbox.html" title=
+          "openbox-3.6.1">openbox-3.6.1</a>, or another window manager, such
+          as <a class="xref" href="../xfce/xfwm4.html" title=
+          "Xfwm4-4.12.4">Xfwm4-4.12.4</a>, or kwin from <a class="xref" href=
+          "../kde/plasma-all.html" title=
+          "Building Plasma 5">Plasma-5.12.1</a>. Note that <a class="xref"
+          href="../x/icewm.html" title="IceWM-1.4.2">IceWM-1.4.2</a> is not
+          suitable for LXQt
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <span><a class="xref" href="../postlfs/consolekit.html" title=
+          "ConsoleKit2-1.0.2">ConsoleKit2-1.0.2</a> with <a class="xref"
+          href="../general/pm-utils.html" title=
+          "pm-utils-1.4.1">pm-utils-1.4.1</a>,</span> <a class="xref" href=
+          "../x/lightdm.html" title="lightdm-1.24.0">lightdm-1.24.0</a> or
+          another Display Manager, e.g. <a class="xref" href="../x/lxdm.html"
+          title="lxdm-0.5.3">lxdm-0.5.3</a>, <a class="xref" href=
+          "../general/desktop-file-utils.html" title=
+          "desktop-file-utils-0.23">desktop-file-utils-0.23</a>, <a class=
+          "xref" href="../general/shared-mime-info.html" title=
+          "shared-mime-info-1.9">shared-mime-info-1.9</a>, <a class="xref"
+          href="../xsoft/xdg-utils.html" title=
+          "xdg-utils-1.1.2">xdg-utils-1.1.2</a>, and <a class="xref" href=
+          "../xsoft/xscreensaver.html" title=
+          "XScreenSaver-5.38">XScreenSaver-5.38</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/post-install">http://wiki.linuxfromscratch.org/blfs/wiki/post-install</a>
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Final Configuration
+        </h2>
+        <p>
+          If <span class="application">LXQt</span> is installed in
+          <code class="filename">/usr</code>, jump directly to <a class=
+          "xref" href="post-install.html#lxqt-final-updates" title=
+          "LXQt Final Updates">LXQt Final Updates</a>, otherwise run the
+          commands in the next section.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration needed only if installing into /opt
+          </h3>
+          <p>
+            If <span class="application">LXQt</span> is installed into
+            <code class="filename">/opt</code>, some files have to be copied
+            to <code class="filename">/usr/share</code>, so that the system
+            can find them. Run the following commands, as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class=
+"command">ln -svfn $LXQT_PREFIX/share/lxqt /usr/share/lxqt &amp;&amp;
+
+cp -v {$LXQT_PREFIX,/usr}/share/xsessions/lxqt.desktop &amp;&amp;
+
+for i in $LXQT_PREFIX/share/applications/*
+do
+  ln -svf $i /usr/share/applications/
+done
+
+for i in $LXQT_PREFIX/share/desktop-directories/*
+do
+  ln -svf $i /usr/share/desktop-directories/
+done
+
+unset i
+
+ldconfig</kbd>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="lxqt-final-updates" name="lxqt-final-updates"></a>LXQt
+            Final Updates
+          </h3>
+          <p>
+            The desktop databases have to be created or updated at this
+            point. Run the following commands as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">update-mime-database /usr/share/mime          &amp;&amp;
+xdg-icon-resource forceupdate --theme hicolor &amp;&amp;
+update-desktop-database -q</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="starting" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Starting LXQt
+        </h2>
+        <p>
+          You can start <span class="application">LXQt</span> from runlevel
+          3, using <a class="xref" href="../x/xinit.html" title=
+          "xinit-1.3.4">xinit-1.3.4</a>, or from runlevel 5, using a Display
+          Manager, such as <a class="xref" href="../x/lightdm.html" title=
+          "lightdm-1.24.0">lightdm-1.24.0</a>.
+        </p>
+        <p>
+          To start <span class="application">LXQt</span> using <a class=
+          "xref" href="../x/xinit.html" title="xinit-1.3.4">xinit-1.3.4</a>,
+          run the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; ~/.xinitrc &lt;&lt; "EOF"
+<code class=
+"literal">ck-launch-session dbus-launch --exit-with-session startlxqt</code>
+EOF
+
+startx</kbd>
+</pre>
+        <p>
+          The X session starts on the first unused virtual terminal, normally
+          vt7. You can switch to another vt<span class=
+          "emphasis"><em>n</em></span> simultaneously pressing the keys
+          Ctrl-Alt-F<span class="emphasis"><em>n</em></span> (<span class=
+          "emphasis"><em>n</em></span>=1, 2, ...). To switch back to the X
+          session, normally started at vt7, use Ctrl-Alt-F7. The vt where the
+          command <span class="command"><strong>startx</strong></span> was
+          executed will display many messages, including X starting messages,
+          applications automatically started with the session, and
+          eventually, some warning and error messages. You may prefer to
+          redirect those messages to a log file, which not only will keep the
+          initial vt uncluttered, but can also be used for debug purposes.
+          This can be done starting X with:
+        </p>
+        <pre class="userinput">
+<kbd class="command">startx &amp;&gt; ~/.x-session-errors</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            You may wish to drop consolekit and/or dbus-launch, e.g., just
+            using startlxqt in ~/.xinitrc. However some capabilities such as
+            mounting or umounting file systems from a file manager will not
+            be possible, or the reboot option will be absent or inoperative,
+            among other problems.
+          </p>
+        </div>
+        <p>
+          When shutting down or rebooting, the shutdown messages appear on
+          the vt where X was running. If you wish to see those messages,
+          simultaneously press keys Alt-F7 (assuming that X was running on
+          vt7).
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2018-01-05 14:14:37 -0800
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="lxqt-runner.html" title=
+          "lxqt-runner-0.12.0">Prev</a>
+          <p>
+            lxqt-runner-0.12.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lxqt-apps.html" title=
+          "LXQt Applications">Next</a>
+          <p>
+            LXQt Applications
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lxqt-desktop.html" title=
+          "Chapter&nbsp;39.&nbsp;LXQt Desktop">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 8.2">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,154 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Configuring the JAVA environment
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.10">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch <span>(systemd edition)</span>
+        - Version 7.10
+      </h4>
+      <h3>
+        Chapter&nbsp;13.&nbsp;Programming
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="openjdk.html" title=
+          "OpenJDK-1.8.0.102">Prev</a>
+          <p>
+            OpenJDK-1.8.0.102
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="apache-ant.html" title=
+          "apache-ant-1.9.7">Next</a>
+          <p>
+            apache-ant-1.9.7
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;13.&nbsp;Programming">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ojdk-conf" name="ojdk-conf"></a>Configuring the JAVA
+        environment
+      </h1>
+      <p>
+        After the package installation is complete, the next step is to make
+        sure that the system can properly find the files. If you set up your
+        login scripts as recommended in <a class="xref" href=
+        "../postlfs/profile.html" title="The Bash Shell Startup Files">The
+        Bash Shell Startup Files</a>, update the environment by creating the
+        <code class="filename">openjdk.sh</code> script, as the <code class=
+        "systemitem">root</code> user:
+      </p>
+      <pre class="root">
+<kbd class="command">cat &gt; /etc/profile.d/openjdk.sh &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/profile.d/openjdk.sh
+
+# Set JAVA_HOME directory
+JAVA_HOME=/opt/jdk
+
+# Adjust PATH
+pathappend $JAVA_HOME/bin
+
+# Add to MANPATH
+pathappend $JAVA_HOME/man MANPATH
+
+# Auto Java CLASSPATH: Copy jar files to, or create symlinks in, the
+# /usr/share/java directory. Note that having gcj jars with OpenJDK 8
+# may lead to errors.
+
+AUTO_CLASSPATH_DIR=/usr/share/java
+
+pathprepend . CLASSPATH
+
+for dir in `find ${AUTO_CLASSPATH_DIR} -type d 2&gt;/dev/null`; do
+    pathappend $dir CLASSPATH
+done
+
+for jar in `find ${AUTO_CLASSPATH_DIR} -name "*.jar" 2&gt;/dev/null`; do
+    pathappend $jar CLASSPATH
+done
+
+export JAVA_HOME
+unset AUTO_CLASSPATH_DIR dir jar
+
+# End /etc/profile.d/openjdk.sh</code>
+EOF</kbd>
+</pre>
+      <p>
+        For allowing <span class="command"><strong>mandb</strong></span> to
+        include the OpenJDK man pages in its database, issue, as the
+        <code class="systemitem">root</code> user:
+      </p>
+      <pre class="root">
+<kbd class="command">cat &gt;&gt; /etc/man_db.conf &lt;&lt; "EOF" &amp;&amp;
+<code class="literal"># Begin Java addition
+MANDATORY_MANPATH     /opt/jdk/man
+MANPATH_MAP           /opt/jdk/bin     /opt/jdk/man
+MANDB_MAP             /opt/jdk/man     /var/cache/man/jdk
+# End Java addition</code>
+EOF
+
+mkdir -p /var/cache/man
+mandb -c /opt/jdk/man</kbd>
+</pre>
+      <p>
+        The installation of the JRE Certificate Authority Certificates
+        (cacerts) is described in the <a class="xref" href=
+        "openjdk.html#ojdk-certs" title=
+        "Install or update the JRE Certificate Authority Certificates (cacerts) file">
+        JRE Certificate Authority Certificates</a> section. If you are using
+        the binary version, those certificates may already be installed.
+      </p>
+      <p class="updated">
+        Last updated on 2016-08-28 02:28:15 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="openjdk.html" title=
+          "OpenJDK-1.8.0.102">Prev</a>
+          <p>
+            OpenJDK-1.8.0.102
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="apache-ant.html" title=
+          "apache-ant-1.9.7">Next</a>
+          <p>
+            apache-ant-1.9.7
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;13.&nbsp;Programming">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

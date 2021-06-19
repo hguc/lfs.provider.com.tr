@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      XScreenSaver-5.03
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;10.&nbsp;General Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="desktop-file-utils.html" title=
+          "desktop-file-utils-0.13">Prev</a>
+          <p>
+            desktop-file-utils-0.13
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="pilot-link.html" title=
+          "pilot-link-0.12.2">Next</a>
+          <p>
+            pilot-link-0.12.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genutils.html" title=
+          "Chapter&nbsp;10.&nbsp;General Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="xscreensaver" name="xscreensaver"></a>XScreenSaver-5.03
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to XScreenSaver
+        </h2>
+        <p>
+          The <span class="application">XScreenSaver</span> is a modular
+          screen saver and locker for the X Window System. It is highly
+          customizable and allows the use of any program that can draw on the
+          root window as a display mode. The purpose of <span class=
+          "application">XScreenSaver</span> is to display pretty pictures on
+          your screen when it is not in use, in keeping with the philosophy
+          that unattended monitors should always be doing something
+          interesting, just like they do in the movies. However, <span class=
+          "application">XScreenSaver</span> can also be used as a screen
+          locker, to prevent others from using your terminal while you are
+          away.
+        </p>
+        <p>
+          There may be a more recent release available from the <span class=
+          "application">XScreenSaver</span> home page. You can check
+          <a class="ulink" href=
+          "http://www.jwz.org/xscreensaver/">http://www.jwz.org/xscreensaver/</a>
+          and probably use the existing BLFS instructions. Note that versions
+          other than the one shown in the download URLs have not been tested
+          in a BLFS environment.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://anduin.linuxfromscratch.org/sources/BLFS/6.3/x/xscreensaver-5.03.tar.gz">
+                http://anduin.linuxfromscratch.org/sources/BLFS/6.3/x/xscreensaver-5.03.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://anduin.linuxfromscratch.org/BLFS/6.3/x/xscreensaver-5.03.tar.gz">
+                ftp://anduin.linuxfromscratch.org/BLFS/6.3/x/xscreensaver-5.03.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 367b0397132102faf43e71e27bbdc181
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 5.4 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 129 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 1.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          XScreenSaver Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="bc.html" title="Bc-1.06">bc-1.06</a> and
+          <a class="xref" href="libglade.html" title=
+          "libglade-2.6.1">libglade-2.6.1</a> (alternatively <a class="xref"
+          href="../x/lesstif.html" title="LessTif-0.95.0">LessTif-0.95.0</a>
+          but not recommended)
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="libjpeg.html" title=
+          "libjpeg-6b">libjpeg-6b</a>, <a class="xref" href=
+          "../gnome/libgnome.html" title=
+          "libgnome-2.18.0">libgnome-2.18.0</a>, <a class="ulink" href=
+          "http://linas.org/gle/">GLE</a>, <a class="ulink" href=
+          "http://netpbm.sourceforge.net/">Netpbm</a>, <a class="ulink" href=
+          "http://www.jwz.org/xdaliclock/">XDaliClock</a>, <a class="xref"
+          href="../postlfs/linux-pam.html" title=
+          "Linux-PAM-0.99.10.0">Linux-PAM-0.99.10.0</a>, <a class="xref"
+          href="../postlfs/mitkrb.html" title="MIT Kerberos V5-1.6">MIT
+          Kerberos V5-1.6</a> (built with Kerberos V4 backwards
+          compatibility), and <a class="ulink" href=
+          "http://www.pdc.kth.se/kth-krb/">krb4</a> and <a class="xref" href=
+          "../postlfs/heimdal.html" title="Heimdal-1.1">Heimdal-1.1</a>
+          (Kerberos authentication requires having Kerberos V4 and V5 on the
+          system)
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/xscreensaver">http://wiki.linuxfromscratch.org/blfs/wiki/xscreensaver</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of XScreenSaver
+        </h2>
+        <p>
+          Install <span class="application">XScreenSaver</span> by running
+          the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">./configure --prefix=/usr --libexecdir=/usr/lib &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <code class="option">--with-setuid-hacks</code>: This switch allows
+          some demos to be installed setuid <code class=
+          "systemitem">root</code> which is needed in order to ping other
+          hosts.
+        </p>
+        <p>
+          <code class="option">--enable-locking</code>: This switch provides
+          support for locking the display.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring XScreenSaver
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="xscreensaver-config" name="xscreensaver-config"></a>Config
+            Files
+          </h3>
+          <p>
+            <code class="filename">/etc/X11/app-defaults/XScreenSaver</code>,
+            <code class="filename">~/.xscreensaver</code> and <code class=
+            "filename">/etc/pam.d/xscreensaver</code> or <code class=
+            "filename">/etc/pam.conf</code>
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">xscreensaver, xscreensaver-command,
+              xscreensaver-demo, xscreensaver-getimage,
+              xscreensaver-getimage-file, xscreensaver-getimage-video,
+              xscreensaver-gl-helper, and xscreensaver-text</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/lib/xscreensaver and
+              /usr/share/xscreensaver</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xscreensaver-prog" name=
+                    "xscreensaver-prog"></a><span class="term"><span class=
+                    "command"><strong>xscreensaver</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a screen saver and locker daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xscreensaver-command" name=
+                    "xscreensaver-command"></a><span class=
+                    "term"><span class="command"><strong>xscreensaver-command</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    controls a running <span class=
+                    "command"><strong>xscreensaver</strong></span> process by
+                    sending it client messages.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xscreensaver-demo" name=
+                    "xscreensaver-demo"></a><span class="term"><span class=
+                    "command"><strong>xscreensaver-demo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a graphical front-end for setting the parameters used
+                    by the background <span class=
+                    "command"><strong>xscreensaver</strong></span> daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xscreensaver-getimage" name=
+                    "xscreensaver-getimage"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xscreensaver-getimage</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a helper program for the <span class=
+                    "command"><strong>xscreensaver</strong></span> modules
+                    that manipulate images.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xscreensaver-getimage-file" name=
+                    "xscreensaver-getimage-file"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xscreensaver-getimage-file</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a helper program for the <span class=
+                    "command"><strong>xscreensaver</strong></span> modules
+                    that manipulate images.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xscreensaver-getimage-video" name=
+                    "xscreensaver-getimage-video"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xscreensaver-getimage-video</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a helper program for the <span class=
+                    "command"><strong>xscreensaver</strong></span> modules
+                    that manipulate images.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xscreensaver-gl-helper" name=
+                    "xscreensaver-gl-helper"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xscreensaver-gl-helper</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a helper program for the <span class=
+                    "command"><strong>xscreensaver</strong></span> OpenGL
+                    modules.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xscreensaver-text" name=
+                    "xscreensaver-text"></a><span class="term"><span class=
+                    "command"><strong>xscreensaver-text</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    prints some text to stdout, for use by screen savers.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-05-10 18:53:20 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="desktop-file-utils.html" title=
+          "desktop-file-utils-0.13">Prev</a>
+          <p>
+            desktop-file-utils-0.13
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="pilot-link.html" title=
+          "pilot-link-0.12.2">Next</a>
+          <p>
+            pilot-link-0.12.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genutils.html" title=
+          "Chapter&nbsp;10.&nbsp;General Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

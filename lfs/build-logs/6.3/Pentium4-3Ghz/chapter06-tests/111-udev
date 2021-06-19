@@ -1,0 +1,799 @@
+Wed Aug 29 23:49:01 GMT 2007
+make[1]: Entering directory `/sources/udev-113'
+
+udev-test will run 147 tests:
+
+TEST 1: label test of scsi disc (old key names)
+device '/block/sda' expecting node 'boot_disk'
+add:         ok
+remove:      ok
+
+TEST 2: label test of scsi disc (old key names)
+device '/block/sda' expecting node 'boot_disk'
+add:         ok
+remove:      ok
+
+TEST 3: label test of scsi disc
+device '/block/sda' expecting node 'boot_disk'
+add:         ok
+remove:      ok
+
+TEST 4: label test of scsi partition
+device '/block/sda/sda1' expecting node 'boot_disk1'
+add:         ok
+remove:      ok
+
+TEST 5: label test of pattern match
+device '/block/sda/sda1' expecting node 'boot_disk1'
+add:         ok
+remove:      ok
+
+TEST 6: label test of multiple sysfs files
+device '/block/sda/sda1' expecting node 'boot_disk1'
+add:         ok
+remove:      ok
+
+TEST 7: label test of max sysfs files
+device '/block/sda/sda1' expecting node 'boot_disk1'
+add:         ok
+remove:      ok
+
+TEST 8: catch device by *
+device '/class/tty/ttyUSB0' expecting node 'visor/0'
+add:         ok
+remove:      ok
+
+TEST 9: catch device by * - take 2
+device '/class/tty/ttyUSB0' expecting node 'visor/0'
+add:         ok
+remove:      ok
+
+TEST 10: catch device by ?
+device '/class/tty/ttyUSB0' expecting node 'visor/0'
+add:         ok
+remove:      ok
+
+TEST 11: catch device by character class
+device '/class/tty/ttyUSB0' expecting node 'visor/0'
+add:         ok
+remove:      ok
+
+TEST 12: replace kernel name
+device '/class/tty/ttyUSB0' expecting node 'visor'
+add:         ok
+remove:      ok
+
+TEST 13: Handle comment lines in config file (and replace kernel name)
+device '/class/tty/ttyUSB0' expecting node 'visor'
+add:         ok
+remove:      ok
+
+TEST 14: Handle comment lines in config file with whitespace (and replace kernel name)
+device '/class/tty/ttyUSB0' expecting node 'visor'
+add:         ok
+remove:      ok
+
+TEST 15: Handle whitespace only lines (and replace kernel name)
+device '/class/tty/ttyUSB0' expecting node 'whitespace'
+add:         ok
+remove:      ok
+
+TEST 16: Handle empty lines in config file (and replace kernel name)
+device '/class/tty/ttyUSB0' expecting node 'visor'
+add:         ok
+remove:      ok
+
+TEST 17: Handle backslashed multi lines in config file (and replace kernel name)
+device '/class/tty/ttyUSB0' expecting node 'visor'
+add:         ok
+remove:      ok
+
+TEST 18: preserve backslashes, if they are not for a newline
+device '/class/tty/ttyUSB0' expecting node 'aaa'
+add:         ok
+remove:      ok
+
+TEST 19: Handle stupid backslashed multi lines in config file (and replace kernel name)
+device '/class/tty/ttyUSB0' expecting node 'visor'
+add:         ok
+remove:      ok
+
+TEST 20: subdirectory handling
+device '/class/tty/ttyUSB0' expecting node 'sub/direct/ory/visor'
+add:         ok
+remove:      ok
+
+TEST 21: parent device name match of scsi partition
+device '/block/sda/sda3' expecting node 'first_disk3'
+add:         ok
+remove:      ok
+
+TEST 22: test substitution chars (old key names)
+device '/block/sda/sda3' expecting node 'Major:8:minor:3:kernelnumber:3:id:0:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 23: test substitution chars
+device '/block/sda/sda3' expecting node 'Major:8:minor:3:kernelnumber:3:id:0:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 24: test substitution chars (with length limit)
+device '/block/sda/sda3' expecting node 'M8-m3-n3-b0:0-sIBM'
+add:         ok
+remove:      ok
+
+TEST 25: import of shell-value file
+device '/block/sda' expecting node 'subdir/info/node'
+add:         ok
+remove:      ok
+
+TEST 26: import of shell-value returned from program
+device '/block/sda' expecting node 'node12345678'
+add:         ok
+remove:      ok
+
+TEST 27: sustitution of sysfs value (%s{file})
+device '/block/sda' expecting node 'disk-IBM-ESXS-sda'
+add:         ok
+remove:      ok
+
+TEST 28: program result substitution
+device '/block/sda/sda3' expecting node 'special-device-3'
+add:         ok
+remove:      ok
+
+TEST 29: program result substitution (newline removal)
+device '/block/sda/sda3' expecting node 'newline_removed'
+add:         ok
+remove:      ok
+
+TEST 30: program result substitution
+device '/block/sda/sda3' expecting node 'test-0:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 31: program with escaped format char (tricky: callout returns format char!)
+device '/block/sda/sda3' expecting node 'escape-3'
+add:         ok
+remove:      ok
+
+TEST 32: program with lots of arguments
+device '/block/sda/sda3' expecting node 'foo9'
+add:         ok
+remove:      ok
+
+TEST 33: program with subshell
+device '/block/sda/sda3' expecting node 'bar9'
+add:         ok
+remove:      ok
+
+TEST 34: program arguments combined with apostrophes
+device '/block/sda/sda3' expecting node 'foo7'
+add:         ok
+remove:      ok
+
+TEST 35: characters before the %c{N} substitution
+device '/block/sda/sda3' expecting node 'my-foo9'
+add:         ok
+remove:      ok
+
+TEST 36: substitute the second to last argument
+device '/block/sda/sda3' expecting node 'my-foo8'
+add:         ok
+remove:      ok
+
+TEST 37: test substitution by variable name
+device '/block/sda/sda3' expecting node 'Major:8-minor:3-kernelnumber:3-id:0:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 38: test substitution by variable name 2
+device '/block/sda/sda3' expecting node 'Major:8-minor:3-kernelnumber:3-id:0:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 39: test substitution by variable name 3
+device '/block/sda/sda3' expecting node '830:0:0:03'
+add:         ok
+remove:      ok
+
+TEST 40: test substitution by variable name 4
+device '/block/sda/sda3' expecting node '833'
+add:         ok
+remove:      ok
+
+TEST 41: test substitution by variable name 5
+device '/block/sda/sda3' expecting node '8330:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 42: non matching SUBSYSTEMS for device with no parent
+device '/class/tty/console' expecting node 'TTY'
+add:         ok
+remove:      ok
+
+TEST 43: non matching SUBSYSTEMS
+device '/class/tty/console' expecting node 'TTY'
+add:         ok
+remove:      ok
+
+TEST 44: ATTRS match
+device '/class/tty/console' expecting node 'foo'
+add:         ok
+remove:      ok
+
+TEST 45: program and bus type match
+device '/block/sda' expecting node 'scsi-0:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 46: create all possible partitions
+device '/block/sda' expecting node 'boot_disk15'
+major:minor: ok
+add:         ok
+remove:      ok
+
+TEST 47: sysfs parent hierarchy
+device '/class/tty/ttyUSB0' expecting node 'visor'
+add:         ok
+remove:      ok
+
+TEST 48: name test with ! in the name
+device '/block/rd!c0d0' expecting node 'rd/c0d0'
+add:         ok
+remove:      ok
+
+TEST 49: name test with ! in the name, but no matching rule
+device '/block/rd!c0d0' expecting node 'rd/c0d0'
+add:         ok
+remove:      ok
+
+TEST 50: name test with ! in the name for a partition
+device '/block/cciss!c0d0/cciss!c0d0p1' expecting node 'cciss/c0d0p1'
+add:         ok
+remove:      ok
+
+TEST 51: KERNELS rule
+device '/block/sda' expecting node 'scsi-0:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 52: KERNELS wildcard all
+device '/block/sda' expecting node 'scsi-0:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 53: KERNELS wildcard partial
+device '/block/sda' expecting node 'scsi-0:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 54: KERNELS wildcard partial 2
+device '/block/sda' expecting node 'scsi-0:0:0:0'
+add:         ok
+remove:      ok
+
+TEST 55: substitute attr with link target value (first match)
+device '/block/sda' expecting node 'driver-is-sd'
+add:         ok
+remove:      ok
+
+TEST 56: substitute attr with link target value (currently selected device)
+device '/block/sda' expecting node 'driver-is-aic7xxx'
+add:         ok
+remove:      ok
+
+TEST 57: ignore ATTRS attribute whitespace
+device '/block/sda' expecting node 'ignored'
+add:         ok
+remove:      ok
+
+TEST 58: do not ignore ATTRS attribute whitespace
+device '/block/sda' expecting node 'matched-with-space'
+add:         ok
+remove:      ok
+
+TEST 59: permissions USER=bad GROUP=name
+device '/class/tty/tty33' expecting node 'tty33'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 60: permissions OWNER=5000
+device '/block/sda' expecting node 'node'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 61: permissions GROUP=100
+device '/block/sda' expecting node 'node'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 62: textual user id
+device '/block/sda' expecting node 'node'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 63: textual group id
+device '/block/sda' expecting node 'node'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 64: textual user/group id
+device '/block/sda' expecting node 'node'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 65: permissions MODE=0777
+device '/block/sda' expecting node 'node'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 66: permissions OWNER=5000 GROUP=100 MODE=0777
+device '/block/sda' expecting node 'node'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 67: permissions OWNER to 5000
+device '/class/tty/ttyUSB0' expecting node 'ttyUSB0'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 68: permissions GROUP to 100
+device '/class/tty/ttyUSB0' expecting node 'ttyUSB0'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 69: permissions MODE to 0060
+device '/class/tty/ttyUSB0' expecting node 'ttyUSB0'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 70: permissions OWNER, GROUP, MODE
+device '/class/tty/ttyUSB0' expecting node 'ttyUSB0'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 71: permissions only rule
+device '/class/tty/ttyUSB0' expecting node 'ttyUSB0'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 72: multiple permissions only rule
+device '/class/tty/ttyUSB0' expecting node 'ttyUSB0'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 73: permissions only rule with override at NAME rule
+device '/class/tty/ttyUSB0' expecting node 'ttyUSB0'
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 74: major/minor number test
+device '/block/sda' expecting node 'node'
+major:minor: ok
+add:         ok
+remove:      ok
+
+TEST 75: big minor number test
+device '/class/i2c-dev/i2c-300' expecting node 'node'
+major:minor: ok
+add:         ok
+remove:      ok
+
+TEST 76: big major number test
+device '/class/i2c-dev/i2c-fake1' expecting node 'node'
+major:minor: ok
+add:         ok
+remove:      ok
+
+TEST 77: big major and big minor number test
+device '/class/i2c-dev/i2c-fake2' expecting node 'node'
+major:minor: ok
+add:         ok
+remove:      ok
+
+TEST 78: multiple symlinks with format char
+device '/class/tty/ttyUSB0' expecting symlink 'symlink2-ttyUSB0' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 79: multiple symlinks with a lot of s p a c e s
+device '/class/tty/ttyUSB0' expecting symlink 'one' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 80: symlink creation (same directory)
+device '/class/tty/ttyUSB0' expecting symlink 'visor0' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 81: symlink creation (relative link forward)
+device '/block/sda/sda2' expecting symlink '1/2/symlink' to node 'a/b/node'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 82: symlink creation (relative link back and forward)
+device '/block/sda/sda2' expecting symlink '1/2/c/d/symlink' to node '../../a/b/node'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 83: multiple symlinks
+device '/class/tty/ttyUSB0' expecting symlink 'second-0' to node 'visor'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 84: symlink only rule
+device '/block/sda' expecting symlink 'symlink-only2' to node 'link'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 85: symlink name '.'
+device '/block/sda' expecting symlink '.' to node 'link'
+  expected symlink from: '.' to 'link'
+symlink:     not created as expected
+add:         ok
+remove:      error as expected
+
+TEST 86: symlink node to itself
+device '/class/tty/tty0' expecting symlink 'link' to node 'link'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 87: symlink %n substitution
+device '/class/tty/ttyUSB0' expecting symlink 'symlink0' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 88: symlink %k substitution
+device '/class/tty/ttyUSB0' expecting symlink 'symlink-ttyUSB0' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 89: symlink %M:%m substitution
+device '/class/tty/ttyUSB0' expecting symlink 'major-188:0' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 90: symlink %b substitution
+device '/block/sda' expecting symlink 'symlink-0:0:0:0' to node 'node'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 91: symlink %c substitution
+device '/class/tty/ttyUSB0' expecting symlink 'test' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 92: symlink %c{N} substitution
+device '/class/tty/ttyUSB0' expecting symlink 'test' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 93: symlink %c{N+} substitution
+device '/class/tty/ttyUSB0' expecting symlink 'this' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 94: symlink only rule with %c{N+}
+device '/block/sda' expecting symlink 'test' to node 'link'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 95: symlink %s{filename} substitution
+device '/class/tty/ttyUSB0' expecting symlink '188:0' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 96: symlink %Ns{filename} substitution
+device '/class/tty/ttyUSB0' expecting symlink '188' to node 'ttyUSB0'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 97: program result substitution (numbered part of)
+device '/block/sda/sda3' expecting symlink 'link1' to node 'node'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 98: program result substitution (numbered part of+)
+device '/block/sda/sda3' expecting symlink 'link4' to node 'node'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 99: ignore rule test
+device '/block/sda' expecting node 'nothing'
+add:         error as expected
+remove:      ok
+
+TEST 100: all_partitions, option-only rule
+device '/block/sda' expecting node 'node6'
+add:         ok
+remove:      ok
+
+TEST 101: all_partitions, option-only rule (fail on partition)
+device '/block/sda/sda1' expecting node 'node6'
+add:         error as expected
+remove:      ok
+
+TEST 102: ignore remove event test
+device '/block/sda' expecting node 'node'
+add:         ok
+remove:      error as expected
+
+TEST 103: ignore remove event test (with all partitions)
+device '/block/sda' expecting node 'node14'
+add:         ok
+remove:      error as expected
+
+TEST 104: SUBSYSTEM match test
+device '/block/sda' expecting node 'node'
+add:         ok
+remove:      ok
+
+TEST 105: DRIVERS match test
+device '/block/sda' expecting node 'node'
+add:         ok
+remove:      ok
+
+TEST 106: temporary node creation test
+device '/block/sda' expecting node 'node'
+add:         ok
+remove:      ok
+
+TEST 107: devpath substitution test
+device '/block/sda' expecting node 'sda'
+add:         ok
+remove:      ok
+
+TEST 108: parent node name substitution test sequence 1/2 (keep)
+device '/block/sda' expecting node 'main_device'
+add:         ok
+
+
+TEST 109: parent node name substitution test sequence 2/2 (clean)
+device '/block/sda/sda1' expecting node 'main_device-part-1'
+add:         ok
+remove:      ok
+
+TEST 110: udev_root substitution
+device '/block/sda/sda1' expecting node 'start-udev-root-end'
+add:         ok
+remove:      ok
+
+TEST 111: last_rule option
+device '/block/sda/sda1' expecting node 'last'
+add:         ok
+remove:      ok
+
+TEST 112: negation KERNEL!=
+device '/block/sda/sda1' expecting node 'match'
+add:         ok
+remove:      ok
+
+TEST 113: negation SUBSYSTEM!=
+device '/block/sda/sda1' expecting node 'not-anything'
+add:         ok
+remove:      ok
+
+TEST 114: negation PROGRAM!= exit code
+device '/block/sda/sda1' expecting node 'nonzero-program'
+add:         ok
+remove:      ok
+
+TEST 115: test for whitespace between the operator
+device '/block/sda/sda1' expecting node 'true'
+add:         ok
+remove:      ok
+
+TEST 116: ENV{} test
+device '/block/sda/sda1' expecting node 'true'
+add:         ok
+remove:      ok
+
+TEST 117: ENV{} test
+device '/block/sda/sda1' expecting node 'true'
+add:         ok
+remove:      ok
+
+TEST 118: ENV{} test (assign)
+device '/block/sda/sda1' expecting node 'true'
+add:         ok
+remove:      ok
+
+TEST 119: ENV{} test (assign 2 times)
+device '/block/sda/sda1' expecting node 'true'
+add:         ok
+remove:      ok
+
+TEST 120: ENV{} test (assign2)
+device '/block/sda/sda1' expecting node 'part'
+add:         ok
+remove:      ok
+
+TEST 121: untrusted string sanitize
+device '/block/sda/sda1' expecting node 'sane'
+add:         ok
+remove:      ok
+
+TEST 122: untrusted string sanitize (don't replace utf8)
+device '/block/sda/sda1' expecting node 'uber'
+add:         ok
+remove:      ok
+
+TEST 123: untrusted string sanitize (replace invalid utf8)
+device '/block/sda/sda1' expecting node 'replaced'
+add:         ok
+remove:      ok
+
+TEST 124: read sysfs value from device down in the chain
+device '/class/tty/ttyUSB0' expecting node 'serial-0000:00:09.0'
+add:         ok
+remove:      ok
+
+TEST 125: match against empty key string
+device '/block/sda' expecting node 'ok'
+add:         ok
+remove:      ok
+
+TEST 126: check ACTION value
+device '/block/sda' expecting node 'ok'
+add:         ok
+remove:      ok
+
+TEST 127: apply NAME only once
+device '/block/sda' expecting symlink 'link' to node 'ok'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 128: test RUN key
+device '/block/sda' expecting symlink 'testsymlink' to node 'ok'
+symlink:     ok
+add:         ok
+remove:      error as expected
+
+TEST 129: test RUN key and DEVNAME
+device '/block/sda' expecting symlink 'testsymlink' to node 'ok'
+symlink:     ok
+add:         ok
+remove:      error as expected
+
+TEST 130: test RUN key remove
+device '/block/sda' expecting symlink 'testsymlink2' to node 'ok2'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 131: final assignment
+device '/block/sda' expecting node 'ok'
+Argument "nobody" isn't numeric in numeric ne (!=) at ./udev-test.pl line 1618.
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 132: final assignment
+device '/block/sda' expecting node 'ok'
+Argument "nobody" isn't numeric in numeric ne (!=) at ./udev-test.pl line 1618.
+permissions: ok
+add:         ok
+remove:      ok
+
+TEST 133: env substitution
+device '/block/sda' expecting node 'node-add-me'
+add:         ok
+remove:      ok
+
+TEST 134: reset list to current value
+device '/class/tty/ttyUSB0' expecting symlink 'three' to node 'node'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 135: test empty NAME
+device '/class/tty/ttyUSB0' expecting node 'node'
+add:         error as expected
+remove:      ok
+
+TEST 136: test empty NAME 2
+device '/class/tty/ttyUSB0' expecting node 'right'
+add:         ok
+remove:      ok
+
+TEST 137: test multi matches
+device '/class/tty/ttyUSB0' expecting node 'right'
+add:         ok
+remove:      ok
+
+TEST 138: test multi matches 2
+device '/class/tty/ttyUSB0' expecting node 'right'
+add:         ok
+remove:      ok
+
+TEST 139: IMPORT parent test sequence 1/2 (keep)
+device '/block/sda' expecting node 'parent'
+add:         ok
+
+
+TEST 140: IMPORT parent test sequence 2/2 (keep)
+device '/block/sda/sda1' expecting node 'parentenv-parent_right'
+add:         ok
+remove:      ok
+
+TEST 141: GOTO test
+device '/block/sda/sda1' expecting node 'right'
+add:         ok
+remove:      ok
+
+TEST 142: NAME compare test
+device '/block/sda/sda1' expecting symlink 'link' to node 'node'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 143: NAME compare test 2
+device '/block/sda/sda1' expecting symlink 'link2' to node 'sda1'
+symlink:     ok
+add:         ok
+remove:      ok
+
+TEST 144: invalid key operation
+device '/block/sda/sda1' expecting node 'yes'
+add:         ok
+remove:      ok
+
+TEST 145: operator chars in attribute
+device '/block/sda' expecting node 'yes'
+add:         ok
+remove:      ok
+
+TEST 146: overlong comment line
+device '/block/sda/sda1' expecting node 'yes'
+add:         ok
+remove:      ok
+
+TEST 147: magic subsys/kernel lookup
+device '/block/sda' expecting node '00:e0:00:fb:04:e1'
+add:         ok
+remove:      ok
+
+0 errors occured
+
+block devices: 10/10
+char devices: 91/91
+
+make[1]: Leaving directory `/sources/udev-113'

@@ -1,0 +1,621 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Libungif-4.1.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;9.&nbsp;Graphics and Font Libraries
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="libtiff.html" title="Libtiff-3.7.3">Prev</a>
+          <p>
+            Libtiff-3.7.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="giflib.html" title="Giflib-4.1.3">Next</a>
+          <p>
+            Giflib-4.1.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;9.&nbsp;Graphics and Font Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="libungif" name="libungif"></a>
+        <h1 class="sect1">
+          Libungif-4.1.3
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Libungif
+          </h2>
+        </div>
+        <p>
+          The <span class="application">libungif</span> package contains
+          libraries for reading all GIFs and writing non-compressed ones as
+          well as programs for converting and working with GIF files. The
+          libraries are useful for any graphics program wishing to deal with
+          GIF files while the programs are useful for conversion purposes as
+          well as cleaning up images.
+        </p>
+        <p>
+          The reason <span class="application">libungif</span> only writes
+          non-compressed GIFs is due to a legal issue with LZW compression
+          (which Unisys claimed a patent on). Reading GIFs is not a problem
+          as the decompression routines do not seem to be limited in this
+          way. Note that this has in the past been disputed. The best way to
+          avoid this whole mess is to simply use <span class=
+          "application">libungif</span> for looking at GIF images on the web,
+          while in any pages which you design, use the open source PNG format
+          instead (which uses, not surprisingly, the <span class=
+          "application">libpng</span> library) which has no patent issues at
+          all.
+        </p>
+        <h3>
+          <a id="id2858068" name="id2858068"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://prdownloads.sourceforge.net/libungif/libungif-4.1.3.tar.bz2">
+                <span class=
+                "url">http://prdownloads.sourceforge.net/libungif/libungif-4.1.3.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 8c198831cc0495596c78134b8849e9ad
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 430 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 6.2 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.16 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2789771" name="id2789771"></a>Libungif Dependencies
+        </h3>
+        <h4>
+          <a id="id2856726" name="id2856726"></a>Optional
+        </h4>
+        <p>
+          X (<a href="../x/xfree86.html">XFree86-4.5.0</a> or <a href=
+          "../x/installing.html#xorg">X.org-6.8.2</a>)
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Libungif
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">libungif</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+install -v -m755 -d /usr/share/doc/libungif-4.1.3/html &amp;&amp;
+install -v -m644 doc/*.{png,html} \
+    /usr/share/doc/libungif-4.1.3/html &amp;&amp;
+install -v -m644 doc/*.txt \
+    /usr/share/doc/libungif-4.1.3</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">gif2epsn, gif2ps,
+              gif2rgb, gif2x11, gifasm, gifbg, gifburst, gifclip, gifclrmp,
+              gifcolor, gifcomb, gifcompose, giffiltr, giffix, gifflip,
+              gifhisto, gifinfo, gifinter, gifinto, gifovly, gifpos,
+              gifrotat, gifrsize, gifspnge, giftext, gifwedge, icon2gif,
+              raw2gif, rgb2gif, and text2gif</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Library:</span></strong> <span class=
+              "seg">libungif.[so,a]</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directory:</span></strong> <span class=
+              "seg">/usr/share/doc/libungif-4.1.3</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2807876" name="id2807876"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="gif2epsn-libungif" name=
+                  "gif2epsn-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gif2epsn</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    dumps images saved as GIF files on Epson type printers.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gif2ps-libungif" name=
+                  "gif2ps-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gif2ps</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    print GIF files on laser printers supporting PostScript.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gif2rgb-libungif" name=
+                  "gif2rgb-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gif2rgb</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    convert images saved as GIF to 24-bit RGB image(s).
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gif2x11-libungif" name=
+                  "gif2x11-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gif2x11</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    display images saved as GIF files under X Window System.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifasm-libungif" name=
+                  "gifasm-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifasm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    assemble multiple GIFs into one, or burst a
+                    multiple-image GIF.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifbg-libungif" name=
+                  "gifbg-libungif"></a><span class=
+                  "term"><span><strong class="command">gifbg</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generate a single-color test pattern GIF.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifburst-libungif" name=
+                  "gifburst-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifburst</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    burst a GIF image into subrectangles.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifclip-libungif" name=
+                  "gifclip-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifclip</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    clip or crop a GIF image.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifclrmp-libungif" name=
+                  "gifclrmp-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifclrmp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    modify GIF image colormaps.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifcolor-libungif" name=
+                  "gifcolor-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifcolor</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generate color test patterns.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifcomb-libungif" name=
+                  "gifcomb-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifcomb</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    combine 2 GIF images of exactly the same size into one.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifcompose-libungif" name=
+                  "gifcompose-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifcompose</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    use (un)giflib tools to compose images.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="giffiltr-libungif" name=
+                  "giffiltr-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">giffiltr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    template code for filtering a GIF sequentially.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="giffix-libungif" name=
+                  "giffix-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">giffix</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    clumsily attempts to fix truncated GIF images.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifflip-libungif" name=
+                  "gifflip-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifflip</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    flip GIF image along X or Y axis or rotate by 90 degrees.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifhisto-libungif" name=
+                  "gifhisto-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifhisto</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generate color-frequency histogram from a GIF.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifinfo-libungif" name=
+                  "gifinfo-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifinfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    gives information on a GIF file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifinter-libungif" name=
+                  "gifinter-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifinter</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    convert between interlaced and non-interlaced images.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifinto-libungif" name=
+                  "gifinto-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifinto</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    end-of-pipe fitting for GIF-processing pipelines.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifovly-libungif" name=
+                  "gifovly-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifo-libungifvly</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generate one composite GIF from a multiple-image GIF.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifpos-libungif" name=
+                  "gifpos-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifpos</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    change a GIF's screen size or recondition it.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifrotat-libungif" name=
+                  "gifrotat-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifrotat</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    rotate a GIF through any desired angle.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifrsize-libungif" name=
+                  "gifrsize-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifrsize</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    resize a GIF by deletion or duplication of bits.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifspnge-libungif" name=
+                  "gifspnge-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifspnge</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    template code for filtering a GIF with in-core
+                    operations.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="giftext-libungif" name=
+                  "giftext-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">giftext</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    print (text only) general information about a GIF.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gifwedge-libungif" name=
+                  "gifwedge-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">gifwedge</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    create a test GIF image resembling a color monitor test
+                    pattern.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="icon2gif-libungif" name=
+                  "icon2gif-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">icon2gif</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converter/deconverter to/from an editable text format.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="raw2gif-libungif" name=
+                  "raw2gif-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">raw2gif</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    convert raw 8-bit image data into GIF files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rgb2gif-libungif" name=
+                  "rgb2gif-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">rgb2gif</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    convert 24 bit images to a GIF image using color
+                    quantization.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="text2gif-libungif" name=
+                  "text2gif-libungif"></a><span class=
+                  "term"><span><strong class=
+                  "command">text2gif</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generate GIF images out of regular text in 8x8 font.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libtiff.html" title="Libtiff-3.7.3">Prev</a>
+          <p>
+            Libtiff-3.7.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="giflib.html" title="Giflib-4.1.3">Next</a>
+          <p>
+            Giflib-4.1.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;9.&nbsp;Graphics and Font Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

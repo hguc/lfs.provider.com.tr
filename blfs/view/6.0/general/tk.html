@@ -1,0 +1,299 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Tk-8.4.9
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;12.&nbsp;Programming
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="tcl.html" title="Tcl-8.4.9">Prev</a>
+          <p>
+            Tcl-8.4.9
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="expect.html" title="Expect-5.42.1">Next</a>
+          <p>
+            Expect-5.42.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="tk" name="tk"></a>
+        <h1 class="sect1">
+          Tk-8.4.9
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Tk
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Tk</span> package contains a
+          <span class="acronym">TCL</span> <span class="acronym">GUI</span>
+          Toolkit.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2617526" name="id2617526"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/tcl/tk8.4.9-src.tar.gz">
+                  <span class=
+                  "url">http://prdownloads.sourceforge.net/tcl/tk8.4.9-src.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.us.xemacs.org/pub/tcl/tcl8_4/tk8.4.9-src.tar.gz">
+                  <span class=
+                  "url">ftp://ftp.us.xemacs.org/pub/tcl/tcl8_4/tk8.4.9-src.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 1b64258abaf258e9a86f331d8de17a71
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 3.2 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 26 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.40 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2799158" name="id2799158"></a><span class=
+                  "application">Tk</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2688965" name="id2688965"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              X (<a href="../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.8.2</a>) and <a href=
+              "tcl.html">Tcl-8.4.9</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Tk
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Tk</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">export VERSION=8.4.9 &amp;&amp;
+export V=`echo $VERSION | cut -d "." -f 1,2` &amp;&amp;
+export DIR=$PWD &amp;&amp;
+cd unix &amp;&amp;
+./configure --prefix=/usr --enable-threads &amp;&amp;
+make &amp;&amp;
+sed -i "s:${DIR}/unix:/usr/lib:" tkConfig.sh &amp;&amp;
+sed -i "s:${DIR}:/usr/include/tk${V}:" tkConfig.sh</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install &amp;&amp;
+install -d /usr/include/tk${V}/unix &amp;&amp;
+install -m644 *.h /usr/include/tk${V}/unix/ &amp;&amp;
+install -d /usr/include/tk${V}/generic &amp;&amp;
+install -m644 ../generic/*.h /usr/include/tk${V}/generic/ &amp;&amp;
+rm -f /usr/include/tk${V}/generic/{tk,tkDecls,tkPlatDecls}.h &amp;&amp;
+ln -nsf ../../include/tk${V} /usr/lib/tk${V}/include &amp;&amp;
+ln -sf libtk${V}.so /usr/lib/libtk.so &amp;&amp;
+ln -sf wish${V} /usr/bin/wish</strong></span></kbd></pre>
+        <p>
+          Clean up the unprivileged user's environment using the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">unset VERSION &amp;&amp;
+unset V &amp;&amp;
+unset DIR</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--enable-threads</tt></em>: This switch
+          forces the package to build with thread support.
+        </p>
+        <p>
+          <span><strong class="command">sed -i ...</strong></span>: The
+          <span class="application">Tk</span> package assumes that the source
+          that is used to build <span class="application">Tk</span> is always
+          kept around for compiling packages that depend on <span class=
+          "application">Tk</span>. These <span><strong class=
+          "command">sed</strong></span>'s remove the reference to the build
+          directory and replace them by saner system wide locations.
+        </p>
+        <p>
+          <span><strong class="command">install ...</strong></span>: These
+          commands install the internal headers into a system-wide location.
+        </p>
+        <p>
+          <span><strong class="command">ln -sf ...</strong></span>: These
+          commands create compatibility symbolic links.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Program:</span></strong> <span class="seg">wish</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libtk.so and
+              libtkstub8.4.a</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/usr/lib/tk8.4
+              and /usr/include/tk8.4</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2687449" name="id2687449"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="wish" name="wish"></a><span class=
+              "term"><span><strong class=
+              "command">wish</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a simple shell containing the <span class=
+                "application">Tk</span> toolkit that creates a main window
+                and then processes <span class="application">Tcl</span>
+                commands.
+              </p>
+            </dd>
+            <dt>
+              <a id="libtk" name="libtk"></a><span class="term"><tt class=
+              "filename">libtk.so</tt></span>
+            </dt>
+            <dd>
+              <p>
+                contains the <span class="acronym">API</span> functions
+                required by <span class="application">Tk</span>.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-08 19:52:39 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="tcl.html" title="Tcl-8.4.9">Prev</a>
+          <p>
+            Tcl-8.4.9
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="expect.html" title="Expect-5.42.1">Next</a>
+          <p>
+            Expect-5.42.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

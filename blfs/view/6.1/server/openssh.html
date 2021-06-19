@@ -1,0 +1,508 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      OpenSSH-4.1p1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;21.&nbsp;Major Servers
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="nfs-utils.html" title=
+          "NFS Utilities-1.0.7">Prev</a>
+          <p>
+            NFS Utilities-1.0.7
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="proftpd.html" title=
+          "ProFTPD-1.2.10">Next</a>
+          <p>
+            ProFTPD-1.2.10
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="majorservers.html" title=
+          "Chapter&nbsp;21.&nbsp;Major Servers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="openssh" name="openssh"></a>
+        <h1 class="sect1">
+          OpenSSH-4.1p1
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to OpenSSH
+          </h2>
+        </div>
+        <p>
+          The <span class="application">OpenSSH</span> package contains
+          <span><strong class="command">ssh</strong></span> clients and the
+          <span><strong class="command">sshd</strong></span> daemon. This is
+          useful for encrypting authentication and subsequent traffic over a
+          network.
+        </p>
+        <h3>
+          <a id="id2745199" name="id2745199"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://sunsite.ualberta.ca/pub/OpenBSD/OpenSSH/portable/openssh-4.1p1.tar.gz">
+                <span class=
+                "url">http://sunsite.ualberta.ca/pub/OpenBSD/OpenSSH/portable/openssh-4.1p1.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-4.1p1.tar.gz">
+                <span class=
+                "url">ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-4.1p1.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 959c663e709c981f07a3315bfd64f3d0
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 894 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 15 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.4 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2633497" name="id2633497"></a>OpenSSH Dependencies
+        </h3>
+        <h4>
+          <a id="id2717344" name="id2717344"></a>Required
+        </h4>
+        <p>
+          <a href="../postlfs/security.html#openssl">OpenSSL-0.9.7g</a>
+        </p>
+        <h4>
+          <a id="id2716693" name="id2716693"></a>Optional
+        </h4>
+        <p>
+          <a href="../postlfs/linux_pam.html">Linux-PAM-0.80</a>, <a href=
+          "../basicnet/tcpwrappers.html">tcpwrappers-7.6</a>, X (<a href=
+          "../x/xfree86.html">XFree86-4.5.0</a> or <a href=
+          "../x/installing.html#xorg">X.org-6.8.2</a>), <a href=
+          "../postlfs/mitkrb.html">MIT krb5-1.4.1</a> or <a href=
+          "../postlfs/heimdal.html">Heimdal-0.7</a>, <a href=
+          "../general/jdk.html">JDK-1.5.0</a>, <a href=
+          "../basicnet/net-tools.html">Net-tools-1.60</a>, <a href=
+          "../general/sysstat.html">Sysstat-6.0.0</a>, <a href=
+          "http://www.opensc.org/"><span class="url">OpenSC</span></a> and
+          <a href="http://sourceforge.net/projects/libedit/"><span class=
+          "url">libedit</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of OpenSSH
+          </h2>
+        </div>
+        <p>
+          <span class="application">OpenSSH</span> runs as two processes when
+          connecting to other computers. The first process is a privileged
+          process and controls the issuance of privileges as necessary. The
+          second process communicates with the network. Additional
+          installation steps are necessary to set up the proper environment,
+          which are performed by the following commands:
+        </p>
+        <pre class="root"><kbd class=
+        "command">install -v -d -m700 /var/lib/sshd &amp;&amp;
+chown root:sys /var/lib/sshd &amp;&amp;
+groupadd -g 50 sshd &amp;&amp;
+useradd -c 'sshd PrivSep' -d /var/lib/sshd -g sshd \
+    -s /bin/false -u 50 sshd</kbd></pre>
+        <p>
+          <span class="application">OpenSSH</span> is very sensitive to
+          changes in the linked <span class="application">OpenSSL</span>
+          libraries. If you recompile <span class=
+          "application">OpenSSL</span>, <span class=
+          "application">OpenSSH</span> may fail to startup. An alternative is
+          to link against the static <span class="application">OpenSSL</span>
+          library. To link against the static library, execute the following
+          command:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i "s:-lcrypto:/usr/lib/libcrypto.a:g" configure</kbd></pre>
+        <p>
+          Install <span class="application">OpenSSH</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --sysconfdir=/etc/ssh \
+    --libexecdir=/usr/sbin --with-md5-passwords \
+    --with-privsep-path=/var/lib/sshd</kbd></pre>
+        <p>
+          If you use <span class="application">Heimdal</span> as your
+          Kerberos5 implementation and you linked the <span class=
+          "application">Heimdal</span> libraries into the build using the
+          <tt class="option">--with-kerberos5</tt> parameter, you'll need to
+          modify the <tt class="filename">Makefile</tt> or the build will
+          fail. Use the following command:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i -e "s/lkrb5 -ldes/lkrb5/" Makefile</kbd></pre>
+        <p>
+          Continue the build:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          If you linked <span class="application">tcp_wrappers</span> into
+          the build using the <tt class="option">--with-tcp-wrappers</tt>
+          parameter, ensure you add 127.0.0.1 to the sshd line in <tt class=
+          "filename">/etc/hosts.allow</tt> if you have a restrictive
+          <tt class="filename">/etc/hosts.deny</tt> file, or the testsuite
+          will fail. To run the testsuite, issue: <span><strong class=
+          "command">make -k tests</strong></span>.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--sysconfdir=/etc/ssh</tt></em>: This
+          prevents the configuration files from being installed in <tt class=
+          "filename">/usr/etc</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-md5-passwords</tt></em>: This is
+          required if you made the changes recommended by the
+          shadowpasswd_plus LFS hint on your SSH server when you installed
+          the Shadow Password Suite or if you access a SSH server that
+          authenticates by user passwords encrypted with md5.
+        </p>
+        <p>
+          <em class="parameter"><tt>--libexecdir=/usr/sbin</tt></em>: This
+          parameter changes the installation path of some programs to
+          <tt class="filename">/usr/sbin</tt> instead of <tt class=
+          "filename">/usr/libexec</tt>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring OpenSSH
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="openssh-config" name="openssh-config"></a>Config
+                  Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.ssh/*</tt>, <tt class=
+            "filename">/etc/ssh/ssh_config</tt>, and <tt class=
+            "filename">/etc/ssh/sshd_config</tt>
+          </p>
+          <p>
+            There are no required changes to any of these files. However, you
+            may wish to view the <tt class="filename">/etc/ssh/</tt> files
+            and make any changes appropriate for the security of your system.
+            One recommended change is that you disable <tt class=
+            "systemitem">root</tt> login via <span><strong class=
+            "command">ssh</strong></span>. Execute the following command as
+            the <tt class="systemitem">root</tt> user to disable <tt class=
+            "systemitem">root</tt> login via <span><strong class=
+            "command">ssh</strong></span>:
+          </p>
+          <pre class="root"><kbd class=
+          "command">echo "PermitRootLogin no" &gt;&gt; /etc/ssh/sshd_config</kbd></pre>
+          <p>
+            Additional configuration information can be found in the man
+            pages for <span><strong class="command">sshd</strong></span>,
+            <span><strong class="command">ssh</strong></span> and
+            <span><strong class="command">ssh-agent</strong></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="openssh-init" name="openssh-init"></a>Boot Script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To start the SSH server at system boot, install the <tt class=
+            "filename">/etc/rc.d/init.d/sshd</tt> init script included in the
+            <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-6.1</a>
+            package.
+          </p>
+          <pre class="root"><kbd class=
+          "command">make install-sshd</kbd></pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">scp, sftp,
+              sftp-server, slogin, ssh, sshd, ssh-add, ssh-agent, ssh-keygen,
+              ssh-keyscan, and ssh-keysign</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/etc/ssh and
+              /var/lib/sshd</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2655303" name="id2655303"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="scp" name="scp"></a><span class=
+                  "term"><span><strong class=
+                  "command">scp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a file copy program that acts like
+                    <span><strong class="command">rcp</strong></span> except
+                    it uses an encrypted protocol.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="sftp" name="sftp"></a><span class=
+                  "term"><span><strong class=
+                  "command">sftp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an FTP-like program that works over SSH1 and SSH2
+                    protocols.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="sftp-server" name="sftp-server"></a><span class=
+                  "term"><span><strong class=
+                  "command">sftp-server</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an SFTP server subsystem.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="slogin" name="slogin"></a><span class=
+                  "term"><span><strong class=
+                  "command">slogin</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span><strong class=
+                    "command">ssh</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ssh" name="ssh"></a><span class=
+                  "term"><span><strong class=
+                  "command">ssh</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an <span><strong class=
+                    "command">rlogin</strong></span>/<span><strong class=
+                    "command">rsh</strong></span>-like client program except
+                    it uses an encrypted protocol.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="sshd" name="sshd"></a><span class=
+                  "term"><span><strong class=
+                  "command">sshd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a daemon that listens for <span><strong class=
+                    "command">ssh</strong></span> login requests.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ssh-add" name="ssh-add"></a><span class=
+                  "term"><span><strong class=
+                  "command">ssh-add</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a tool which adds keys to the <span><strong class=
+                    "command">ssh-agent</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ssh-agent" name="ssh-agent"></a><span class=
+                  "term"><span><strong class=
+                  "command">ssh-agent</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an authentication agent that can store private keys.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ssh-keygen" name="ssh-keygen"></a><span class=
+                  "term"><span><strong class=
+                  "command">ssh-keygen</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a key generation tool.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ssh-keyscan" name="ssh-keyscan"></a><span class=
+                  "term"><span><strong class=
+                  "command">ssh-keyscan</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a utility for gathering public host keys from a number
+                    of hosts.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ssh-keysign" name="ssh-keysign"></a><span class=
+                  "term"><span><strong class=
+                  "command">ssh-keysign</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used by <span><strong class=
+                    "command">ssh</strong></span> to access the local host
+                    keys and generate the digital signature required during
+                    hostbased authentication with SSH protocol version 2.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="nfs-utils.html" title=
+          "NFS Utilities-1.0.7">Prev</a>
+          <p>
+            NFS Utilities-1.0.7
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="proftpd.html" title=
+          "ProFTPD-1.2.10">Next</a>
+          <p>
+            ProFTPD-1.2.10
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="majorservers.html" title=
+          "Chapter&nbsp;21.&nbsp;Major Servers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

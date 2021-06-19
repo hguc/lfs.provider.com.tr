@@ -1,0 +1,297 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      WvStreams-3.70
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;16.&nbsp;Networking Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="netlibs.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="gnet.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          WvStreams-3.70
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to WvStreams
+          </h3>
+        </div>
+        <p>
+          The <span class="application">WvStreams</span> package contains the
+          network programming libraries required to compile wvdial.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2769868" name="id2769868"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://open.nit.ca/download/wvstreams-3.70.tar.gz">http://open.nit.ca/download/wvstreams-3.70.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.ing-steen.se/pub/unix/unsort/wvstreams-3.70.tar.gz">
+                  ftp://ftp.ing-steen.se/pub/unix/unsort/wvstreams-3.70.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 178 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 11.5 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.17 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2771518" name="id2771518"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/wvstreams-3.70-wvcrypto.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/wvstreams-3.70-wvcrypto.patch</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/wvstreams-3.70-wvresolver.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/wvstreams-3.70-wvresolver.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2771545" name="id2771545"></a><span class=
+                  "application">WvStreams</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2771554" name="id2771554"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of WvStreams
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">WvStreams</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../wvstreams-3.70-wvcrypto.patch &amp;&amp;
+patch -Np1 -i ../wvstreams-3.70-wvresolver.patch &amp;&amp;
+make PREFIX=/usr LDFLAGS="-lcrypt" &amp;&amp;
+make PREFIX=/usr install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>make PREFIX=/usr
+          LDFLAGS="-lcrypt"</tt></i>: This fixes <tt class=
+          "filename">libwvstreams</tt>' issues with <span class=
+          "application">Open<span class="acronym">SSL</span></span>'s crypto
+          library.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring WvStreams
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2771022" name="id2771022"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            As with most libraries, there is no configuration to do, save
+            that the library directory i.e., <tt class=
+            "filename">/opt/lib</tt> or <tt class=
+            "filename">/usr/local/lib</tt> should appear in <tt class=
+            "filename">/etc/ld.so.conf</tt> so that <span><b class=
+            "command">ldd</b></span> can find the shared libraries. After
+            checking that this is the case, <span><b class=
+            "command">/sbin/ldconfig</b></span> should be run while logged in
+            as root.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">WvStreams</span> package contains the
+          <tt class="filename">libwvcrypto</tt>, <tt class=
+          "filename">libwvstreams</tt> and <tt class=
+          "filename">libwvutils</tt> libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2771101" name="id2771101"></a>libwvcrypto
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libwvcrypto</tt> defines streams with
+            built-in cryptography.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2771273" name="id2771273"></a>libwvstreams
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libwvstreams</tt> defines the basic
+            properties of a stream.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2771289" name="id2771289"></a>libwvutils
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libwvutils</tt> contains fundamental support
+            utilities.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="netlibs.html">Prev</a><br />
+        Chapter&nbsp;16.&nbsp;Networking Libraries
+      </div>
+      <div class="next">
+        <a accesskey="n" href="gnet.html">Next</a><br />
+        GNet-2.0.5
+      </div>
+      <div class="up">
+        <a accesskey="u" href="netlibs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

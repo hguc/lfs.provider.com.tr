@@ -1,0 +1,341 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      GNOME Libraries-1.4.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;32.&nbsp;GNOME 1.4 Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="oaf.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="gdkpixbuf.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          GNOME Libraries-1.4.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to GNOME Libraries
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class="acronym">GNOME</span>
+          Libraries</span> package contains the <span class=
+          "application"><span class="acronym">GNOME</span></span> libraries.
+          This is useful as a foundation for the <span class=
+          "application"><span class="acronym">GNOME</span></span> Desktop and
+          applications.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3081272" name="id3081272"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.gnome.org/pub/GNOME/sources/gnome-libs/1.4/gnome-libs-1.4.2.tar.bz2">
+                  http://ftp.gnome.org/pub/GNOME/sources/gnome-libs/1.4/gnome-libs-1.4.2.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnome.org/pub/GNOME/sources/gnome-libs/1.4/gnome-libs-1.4.2.tar.bz2">
+                  ftp://ftp.gnome.org/pub/GNOME/sources/gnome-libs/1.4/gnome-libs-1.4.2.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 112.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 1.95 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3081326" name="id3081326"></a><span class=
+                  "application"><span class="acronym">GNOME</span>
+                  Libraries</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3081314" name="id3081314"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="ORBit.html">ORBit-0.5.17</a>, <a href=
+              "../x/gtk.html">GTK+-1.2.10</a>, <a href=
+              "../general/imlib.html">Imlib-1.9.14</a> and <a href=
+              "../content/db-3.3.html">Berkeley DB-3.3.11</a> or <a href=
+              "../content/databases.html#db">Berkeley DB-4.2.52.2</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3082216" name="id3082216"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../multimedia/audiofile.html">Audio File-0.2.6</a>,
+              <a href="../multimedia/esound.html">EsounD-0.2.34</a> and
+              <a href="gtk-doc.html">GTK-Doc-1.2</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of GNOME Libraries
+          </h3>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">GNOME</span> Libraries</span> by running the following
+          commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/opt/gnome --disable-gtk-doc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring GNOME Libraries
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3082005" name="id3082005"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/opt/gnome/etc/mime-magic</tt>, <tt class=
+            "filename">/opt/gnome/etc/paper.config</tt>, <tt class=
+            "filename">/opt/gnome/etc/sound/events/gnome.soundlist</tt> and
+            <tt class=
+            "filename">/opt/gnome/etc/sound/events/gtk-events.soundlist</tt>
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class="acronym">GNOME</span>
+          Libraries</span> package contains <tt class=
+          "filename">libgnome</tt>, <tt class="filename">libgnomeui</tt>,
+          <tt class="filename">libgnomesupport</tt>, <tt class=
+          "filename">libart_lgpl</tt>, <tt class=
+          "filename">libgtk-xmhtml</tt>, <tt class=
+          "filename">libgnorbagtk</tt> and <tt class="filename">libzvt</tt>
+          libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3082675" name="id3082675"></a>libgnome
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libgnome</tt> library is the
+            non-<span class="acronym">GUI</span> part of the <span class=
+            "application"><span class="acronym">GNOME</span></span> library.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3082700" name="id3082700"></a>libgnomeui
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libgnomeui</tt> is the <span class=
+            "acronym">GUI</span> part of the <span class=
+            "application"><span class="acronym">GNOME</span></span> library.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3082726" name="id3082726"></a>libgnomesupport
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            No description available.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3082734" name="id3082734"></a>libart_lgpl
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libart_lgpl</tt> library is the <span class=
+            "acronym">LGPL</span> component of libart.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3082754" name="id3082754"></a>libgtk-xmhtml
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            No description available.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3082762" name="id3082762"></a>libgnorbagtk
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libgnorbagtk</tt> is the <span class=
+            "application"><span class="acronym">GNOME</span></span>
+            <span class="acronym">CORBA</span> <span class=
+            "acronym">GTK</span> framework.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3082791" name="id3082791"></a>libzvt
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libzvt</tt> library provides the functions
+            necessary to emulate <span><b class="command">xterm</b></span>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="oaf.html">Prev</a><br />
+        OAF-0.6.10
+      </div>
+      <div class="next">
+        <a accesskey="n" href="gdkpixbuf.html">Next</a><br />
+        GDK Pixel Buffer-0.22.0
+      </div>
+      <div class="up">
+        <a accesskey="u" href="otherlibs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Exiv2-0.25
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.10">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 7.10
+      </h4>
+      <h3>
+        Chapter&nbsp;10.&nbsp;Graphics and Font Libraries
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="babl.html" title="babl-0.1.18">Prev</a>
+          <p>
+            babl-0.1.18
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="freetype2.html" title=
+          "FreeType-2.6.5">Next</a>
+          <p>
+            FreeType-2.6.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;10.&nbsp;Graphics and Font Libraries">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="exiv2" name="exiv2"></a>Exiv2-0.25
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Exiv2
+        </h2>
+        <p>
+          <span class="application">Exiv2</span> is a C++ library and a
+          command line utility for managing image and video metadata.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.10
+          platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://www.exiv2.org/exiv2-0.25.tar.gz">http://www.exiv2.org/exiv2-0.25.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 258d4831b30f75a01e0234065c6c2806
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 5.2 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 46 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Exiv2 dependencies
+        </h3>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="../basicnet/curl.html" title=
+          "cURL-7.50.1">cURL-7.50.1</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="ulink" href="http://www.libssh.org/">libssh</a>
+        </p>
+        <h4>
+          Optional for documentation
+        </h4>
+        <p class="optional">
+          <a class="xref" href="doxygen.html" title=
+          "Doxygen-1.8.11">Doxygen-1.8.11</a>, <a class="xref" href=
+          "graphviz.html" title="Graphviz-2.38.0">Graphviz-2.38.0</a>,
+          <a class="xref" href="python3.html" title=
+          "Python-3.5.2">Python-3.5.2</a>, and <a class="xref" href=
+          "libxslt.html" title="libxslt-1.1.29">libxslt-1.1.29</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/exiv2">http://wiki.linuxfromscratch.org/blfs/wiki/exiv2</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Exiv2
+        </h2>
+        <p>
+          Install <span class="application">Exiv2</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr     \
+            --enable-video    \
+            --enable-webready \
+            --without-ssh     \
+            --disable-static  &amp;&amp;
+
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+chmod -v 755 /usr/lib/libexiv2.so</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--enable-video</code></em>: This switch
+          enables managing video metadata.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-webready</code></em>: This
+          switch enables managing web image metadata.
+        </p>
+        <p>
+          <em class="parameter"><code>--without-ssh</code></em>: This switch
+          is necessary when webready is enabled and <a class="ulink" href=
+          "http://www.libssh.org/">libssh</a> is not installed. Libssh is
+          required for ssh.
+        </p>
+        <p>
+          <em class="parameter"><code>--disable-static</code></em>: This
+          switch prevents installation of static versions of the libraries.
+        </p>
+        <p>
+          <code class="option">--without-curl</code>: This switch is
+          necessary when webready is enabled and <a class="xref" href=
+          "../basicnet/curl.html" title="cURL-7.50.1">cURL-7.50.1</a> is not
+          installed. Libcurl is required for http.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">exiv2</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">libexiv2.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/include/exiv2</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="exiv2-prog" name="exiv2-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>exiv2</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a utility used to dump Exif data.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2016-08-29 20:28:42 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="babl.html" title="babl-0.1.18">Prev</a>
+          <p>
+            babl-0.1.18
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="freetype2.html" title=
+          "FreeType-2.6.5">Next</a>
+          <p>
+            FreeType-2.6.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;10.&nbsp;Graphics and Font Libraries">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

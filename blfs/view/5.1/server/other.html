@@ -1,0 +1,710 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;22.&nbsp;Other Server Software
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;VI.&nbsp;Server Networking</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="courier.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="cvsserver.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Other Server Software
+        </h1>
+      </div>
+      <p>
+        Here you will find many ways to share your machine with the rest of
+        the world or your local network. Before installing any packages in
+        this chapter, you need to be sure you understand what the package
+        does and how to set it up correctly. It might also be helpful to
+        learn about the consequences of an improper setup so that you can
+        analyze the risks.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="bind" name="bind"></a>
+          <h2 class="sect1">
+            BIND-9.2.3
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to BIND
+            </h3>
+          </div>
+          <p>
+            The <span class="application"><span class=
+            "acronym">BIND</span></span> package provides a <span class=
+            "acronym">DNS</span> server and client utilities. If you are only
+            interested in the utilities, refer to the <a href=
+            "../basicnet/bind-utils.html">BIND Utilities-9.2.3</a>.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2846062" name="id2846062"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://gd.tuwien.ac.at/infosys/servers/isc/bind9/9.2.3/bind-9.2.3.tar.gz">
+                    http://gd.tuwien.ac.at/infosys/servers/isc/bind9/9.2.3/bind-9.2.3.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.isc.org/isc/bind9/9.2.3/bind-9.2.3.tar.gz">ftp://ftp.isc.org/isc/bind9/9.2.3/bind-9.2.3.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 4.4 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 88 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.89 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2846101" name="id2846101"></a><span class=
+                    "application"><span class="acronym">BIND</span></span>
+                    dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2846117" name="id2846117"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a>
+                and <a href="../pst/openjade.html">OpenJade-1.3.2</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of BIND
+            </h3>
+          </div>
+          <p>
+            Install <span class="application"><span class=
+            "acronym">BIND</span></span> by running the following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring BIND
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2845999" name="id2845999"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">named.conf</tt>, <tt class=
+              "filename">root.hints</tt>, <tt class="filename">127.0.0</tt>,
+              <tt class="filename">rndc.conf</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2845573" name="id2845573"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              We will configure <span class="application"><span class=
+              "acronym">BIND</span></span> to run in a chroot jail as an
+              unprivileged user (named). This configuration is more secure in
+              that a <span class="acronym">DNS</span> compromise can only
+              affect a few files in the named user's <tt class=
+              "envar">HOME</tt> directory.
+            </p>
+            <p>
+              First we create the unprivileged user and group named:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">groupadd named &amp;&amp;
+useradd -m -g named -s /bin/false named</b></span></tt>
+</pre>
+            <p>
+              Then we set up some files, directories and devices needed by
+              <span class="application"><span class=
+              "acronym">BIND</span></span>:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class="command">cd /home/named &amp;&amp;
+mkdir -p dev etc/namedb/slave var/run &amp;&amp;
+mknod /home/named/dev/null c 1 3 &amp;&amp;
+mknod /home/named/dev/random c 1 8 &amp;&amp;
+chmod 666 /home/named/dev/{null,random} &amp;&amp;
+mkdir /home/named/etc/namedb/pz &amp;&amp;
+cp /etc/localtime /home/named/etc</b></span></tt>
+</pre>
+            <p>
+              Create the <tt class="filename">named.conf</tt> file from which
+              named will read the location of zone files, root name servers
+              and secure <span class="acronym">DNS</span> keys:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /home/named/etc/named.conf &lt;&lt; "EOF"</b></span>
+ options {
+     directory "/etc/namedb";
+    pid-file "/var/run/named.pid";
+    statistics-file "/var/run/named.stats";
+       
+ };
+ controls {
+     inet 127.0.0.1 allow { localhost; } keys { rndc_key; };
+ };
+ key "rndc_key" {
+     algorithm hmac-md5;
+     secret "<i class=
+"replaceable"><tt>[c3Ryb25nIGVub3VnaCBmb3IgYSBtYW4gYnV0IG1hZGUgZm9yIGEgd29tYW4K]</tt></i>";
+ };
+ zone "." {
+     type hint;
+     file "root.hints";
+ };
+ zone "0.0.127.in-addr.arpa" {
+     type master;
+     file "pz/127.0.0";
+ };
+<span><b class="command">EOF</b></span></tt>
+</pre>
+            <p>
+              Create a zone file with the following contents:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /home/named/etc/namedb/pz/127.0.0 &lt;&lt; "EOF"</b></span>
+$TTL 3D
+@      IN      SOA     ns.local.domain. hostmaster.local.domain. (
+                        1       ; Serial
+                        8H      ; Refresh
+                        2H      ; Retry
+                        4W      ; Expire
+                        1D)     ; Minimum TTL
+                NS      ns.local.domain.
+1               PTR     localhost.
+<span><b class="command">EOF</b></span></tt>
+</pre>
+            <p>
+              Create the <tt class="filename">root.hints</tt> file with the
+              following commands:
+            </p>
+            <div class="admonition">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="note">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  Caution must be used to ensure no leading spaces in this
+                  file.
+                </p>
+              </div>
+            </div>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /home/named/etc/namedb/root.hints &lt;&lt; "EOF"</b></span>
+.                       6D  IN      NS      A.ROOT-SERVERS.NET.
+.                       6D  IN      NS      B.ROOT-SERVERS.NET.
+.                       6D  IN      NS      C.ROOT-SERVERS.NET.
+.                       6D  IN      NS      D.ROOT-SERVERS.NET.
+.                       6D  IN      NS      E.ROOT-SERVERS.NET.
+.                       6D  IN      NS      F.ROOT-SERVERS.NET.
+.                       6D  IN      NS      G.ROOT-SERVERS.NET.
+.                       6D  IN      NS      H.ROOT-SERVERS.NET.
+.                       6D  IN      NS      I.ROOT-SERVERS.NET.
+.                       6D  IN      NS      J.ROOT-SERVERS.NET.
+.                       6D  IN      NS      K.ROOT-SERVERS.NET.
+.                       6D  IN      NS      L.ROOT-SERVERS.NET.
+.                       6D  IN      NS      M.ROOT-SERVERS.NET.
+A.ROOT-SERVERS.NET.     6D  IN      A       198.41.0.4
+B.ROOT-SERVERS.NET.     6D  IN      A       128.9.0.107
+C.ROOT-SERVERS.NET.     6D  IN      A       192.33.4.12
+D.ROOT-SERVERS.NET.     6D  IN      A       128.8.10.90
+E.ROOT-SERVERS.NET.     6D  IN      A       192.203.230.10
+F.ROOT-SERVERS.NET.     6D  IN      A       192.5.5.241
+G.ROOT-SERVERS.NET.     6D  IN      A       192.112.36.4
+H.ROOT-SERVERS.NET.     6D  IN      A       128.63.2.53
+I.ROOT-SERVERS.NET.     6D  IN      A       192.36.148.17
+J.ROOT-SERVERS.NET.     6D  IN      A       192.58.128.30
+K.ROOT-SERVERS.NET.     6D  IN      A       193.0.14.129
+L.ROOT-SERVERS.NET.     6D  IN      A       198.32.64.12
+M.ROOT-SERVERS.NET.     6D  IN      A       202.12.27.33
+<span><b class="command">EOF</b></span></tt>
+</pre>
+            <p>
+              The <tt class="filename">root.hints</tt> file is a list of root
+              name servers. This file must be updated periodically with the
+              <span><b class="command">dig</b></span> utility. Consult the
+              <a href="http://www.bind9.net/Bv9ARM.html"><span class=
+              "application"><span class="acronym">BIND</span></span> 9
+              Administrator Reference Manual</a> for details.
+            </p>
+            <p>
+              Create the <tt class="filename">rndc.conf</tt> with the
+              following commands:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /etc/rndc.conf &lt;&lt; "EOF"</b></span>
+key rndc_key {
+algorithm "hmac-md5";
+    secret
+    "<i class=
+"replaceable"><tt>[c3Ryb25nIGVub3VnaCBmb3IgYSBtYW4gYnV0IG1hZGUgZm9yIGEgd29tYW4K]</tt></i>";
+    };
+options {
+    default-server localhost;
+    default-key    rndc_key;
+};
+<span><b class="command">EOF</b></span></tt>
+</pre>
+            <p>
+              The <tt class="filename">rndc.conf</tt> file contains
+              information for controlling named operations with the
+              <span><b class="command">rndc</b></span> utility.
+            </p>
+            <p>
+              Create or modify <tt class="filename">resolv.conf</tt> to use
+              the new name server with the following commands:
+            </p>
+            <div class="admonition">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="note">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  Replace yourdomain.com with your own valid domain name.
+                </p>
+              </div>
+            </div>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cp /etc/resolv.conf /etc/resolv.conf.bak &amp;&amp;
+cat &gt; /etc/resolv.conf &lt;&lt; "EOF"</b></span>
+search <i class="replaceable"><tt>[yourdomain.com]</tt></i>
+nameserver 127.0.0.1
+<span><b class="command">EOF</b></span></tt>
+</pre>
+            <p>
+              Set permissions on the chroot jail with the following command:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">chown -R named.named /home/named</b></span></tt>
+</pre>
+            <p>
+              To start the DNS server at boot, install the <tt class=
+              "filename">/etc/rc.d/init.d/bind</tt> init script included in
+              the <a href=
+              "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+              package.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-bind</b></span></tt>
+</pre>
+            <p>
+              Now start <span class="application"><span class=
+              "acronym">BIND</span></span> with the new boot script:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">/etc/rc.d/init.d/bind start</b></span></tt>
+</pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2846808" name="id2846808"></a>Testing
+                    <span class="application"><span class=
+                    "acronym">BIND</span></span>
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              Test out the new <span class="application"><span class=
+              "acronym">BIND</span></span> 9 installation. First query the
+              local host address with <span><b class=
+              "command">dig</b></span>:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">dig -x 127.0.0.1</b></span></tt>
+</pre>
+            <p>
+              Now try an external name lookup, taking note of the speed
+              difference in repeated lookups due to the caching. Run the dig
+              command twice on the same address:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">dig beyond.linuxfromscratch.org &amp;&amp;
+dig beyond.linuxfromscratch.org</b></span></tt>
+</pre>
+            <p>
+              You can see almost instantaneous results with the named caching
+              lookups. Consult <tt class=
+              "filename">bind-9.2.3/doc/arm/Bv9ARM.html</tt>, the
+              <span class="application"><span class=
+              "acronym">BIND</span></span> Administrator Reference Manual for
+              further configuration options.
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application"><span class=
+            "acronym">BIND</span></span> package contains <span><b class=
+            "command">dig</b></span>, <span><b class=
+            "command">host</b></span>, <span><b class=
+            "command">isc-config.sh</b></span>, <span><b class=
+            "command">nslookup</b></span>, <span><b class=
+            "command">rndc</b></span>, <span><b class=
+            "command">rndc-confgen</b></span>, <span><b class=
+            "command">named-checkconf</b></span>, <span><b class=
+            "command">named-checkzone</b></span>, <span><b class=
+            "command">lwresd</b></span>, <span><b class=
+            "command">named</b></span>, <span><b class=
+            "command">dnssec-signzone</b></span>, <span><b class=
+            "command">dnssec-signkey</b></span>, <span><b class=
+            "command">dnssec-keygen</b></span>, <span><b class=
+            "command">dnssec-makekeyset</b></span> and <span><b class=
+            "command">nsupdate</b></span>.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847576" name="id2847576"></a>dig
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">dig</b></span> interrogates
+              <span class="acronym">DNS</span> servers.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847591" name="id2847591"></a>host
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">host</b></span> is a utility for
+              <span class="acronym">DNS</span> lookups.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847608" name="id2847608"></a>nslookup
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">nslookup</b></span> is a program used
+              to query Internet domain nameservers.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847621" name="id2847621"></a>rndc
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">rndc</b></span> controls the operation
+              of <span class="application"><span class=
+              "acronym">BIND</span></span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847640" name="id2847640"></a>rndc-confgen
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">rndc-confgen</b></span> generates
+              <tt class="filename">rndc.conf</tt> files.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847659" name="id2847659"></a>named-checkconf
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">named-checkconf</b></span> checks the
+              syntax of <tt class="filename">named.conf</tt> files.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847678" name="id2847678"></a>named-checkzone
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">named-checkzone</b></span> checks zone
+              file validity.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847692" name="id2847692"></a>lwresd
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lwresd</b></span> is a caching-only
+              name server for local process use.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847705" name="id2847705"></a>named
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">named</b></span> is the name server
+              daemon.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847718" name="id2847718"></a>dnssec-signzone
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">dnssec-signzone</b></span> generates
+              signed versions of zone files.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847732" name="id2847732"></a>dnssec-signkey
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">dnssec-signkey</b></span> signs zone
+              file key sets.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847745" name="id2847745"></a>dnssec-keygen
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">dnssec-keygen</b></span> is a key
+              generator for secure <span class="acronym">DNS</span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847761" name="id2847761"></a>dnssec-makekeyset
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">dnssec-makekeyset</b></span> generates
+              a key set from one or more keys created by dnssec-keygen.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847775" name="id2847775"></a>nsupdate
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">nsupdate</b></span> is used to submit
+              <span class="acronym">DNS</span> update requests.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="courier.html">Prev</a><br />
+        Courier-0.45.5
+      </div>
+      <div class="next">
+        <a accesskey="n" href="cvsserver.html">Next</a><br />
+        Running a CVS server
+      </div>
+      <div class="up">
+        <a accesskey="u" href="server.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

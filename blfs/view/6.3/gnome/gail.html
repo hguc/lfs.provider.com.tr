@@ -1,0 +1,287 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      GAIL-1.18.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;29.&nbsp;GNOME Core Packages
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libgnomeui.html" title=
+          "libgnomeui-2.18.1">Prev</a>
+          <p>
+            libgnomeui-2.18.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gtk-engines.html" title=
+          "GTK Engines-2.10.2">Next</a>
+          <p>
+            GTK Engines-2.10.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;29.&nbsp;GNOME Core Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="gail" name="gail"></a>GAIL-1.18.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to GAIL
+        </h2>
+        <p>
+          The <span class="application">GAIL</span> package provides
+          accessibility support for <span class="application">GTK+</span> and
+          <span class="application">libgnomecanvas</span> by implementing
+          AtkObjects for widgets in <span class="application">GTK+</span> and
+          <span class="application">libgnomecanvas</span>. The <span class=
+          "application">GAIL</span> library is a <span class=
+          "application">GTK+</span> module. This module is normally used with
+          the atk-bridge <span class="application">GTK+</span> module from
+          <span class="application">AT-SPI</span> to allow an assistive
+          technology, e.g., a screenreader, to query or drive the program.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://ftp.gnome.org/pub/gnome/sources/gail/1.18/gail-1.18.0.tar.bz2">
+                http://ftp.gnome.org/pub/gnome/sources/gail/1.18/gail-1.18.0.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.gnome.org/pub/gnome/sources/gail/1.18/gail-1.18.0.tar.bz2">
+                ftp://ftp.gnome.org/pub/gnome/sources/gail/1.18/gail-1.18.0.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: d58ad8cc79d3cb6778bc015ef69fb499
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 610 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 21 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.6 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          GAIL Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="libgnomecanvas.html" title=
+          "libgnomecanvas-2.14.0">libgnomecanvas-2.14.0</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/gtk-doc.html" title=
+          "GTK-Doc-1.8">GTK-Doc-1.8</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/gail">http://wiki.linuxfromscratch.org/blfs/wiki/gail</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of GAIL
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The instructions below are based on installing the package into a
+            GNOME-2 environment. If, for whatever reason, you're installing
+            this package without having <span class=
+            "application">ORBit2</span> and the core GNOME-2 libraries
+            installed, you'll need to modify the <code class=
+            "option">--prefix=</code> parameter on the <span class=
+            "command"><strong>configure</strong></span> script to point to
+            your desired installation path (e.g., <code class=
+            "option">--prefix=/usr</code>).
+          </p>
+        </div>
+        <p>
+          Install <span class="application">GAIL</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">./configure --prefix=$(pkg-config --variable=prefix ORBit-2.0) &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+
+if [ $(pkg-config --variable=prefix ORBit-2.0) != "/usr" ]; then
+    ln -v -s $(pkg-config --variable=prefix \
+             ORBit-2.0)/lib/gtk-2.0/modules \
+         /usr/lib/gtk-2.0
+fi</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--prefix=$(pkg-config --variable=prefix
+          ORBit-2.0)</code></em>: Setting the prefix using this parameter
+          instead of with <code class="envar">$GNOME_PREFIX</code> will
+          ensure that the prefix is consistent with the installation
+          environment and the package will be installed in the correct
+          location.
+        </p>
+        <p>
+          <code class="option">--enable-gtk-doc</code>: Use this parameter if
+          <span class="application">GTK-Doc</span> is installed and you wish
+          to rebuild the API documentation.
+        </p>
+        <p>
+          <span class="command"><strong>if [ ... != "/usr" ]; then ...;
+          fi</strong></span>: <span class="application">GTK+</span> will look
+          for the <span class="application">GAIL</span> modules in
+          <code class="filename">/usr/lib</code> even if <code class=
+          "envar">$GNOME_PREFIX</code> is NOT <code class=
+          "filename">/usr</code>. This command creates a symbolic link to
+          satisfy this requirement.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libgailutil.so and <span class=
+              "application">GAIL</span> <span class="application">GTK+</span>
+              modules</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">The following subdirectories of
+              <code class="envar">$GNOME_PREFIX</code>/: include/gail-1.0,
+              lib/gtk-2.0/modules and
+              share/gtk-doc/html/gail-libgail-util</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgailutil" name="libgailutil"></a><span class=
+                    "term"><code class=
+                    "filename">libgailutil.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides the functions that solve accessibility problems
+                    in a consistent manner across <span class=
+                    "application">GNOME</span>.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-08-08 09:57:59 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libgnomeui.html" title=
+          "libgnomeui-2.18.1">Prev</a>
+          <p>
+            libgnomeui-2.18.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gtk-engines.html" title=
+          "GTK Engines-2.10.2">Next</a>
+          <p>
+            GTK Engines-2.10.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;29.&nbsp;GNOME Core Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

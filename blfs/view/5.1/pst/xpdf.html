@@ -1,0 +1,418 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Xpdf-3.00
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;45.&nbsp;PostScript</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="gsview.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="otherps.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Xpdf-3.00
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Xpdf
+          </h3>
+        </div>
+        <p>
+          <span class="application">Xpdf</span> is a viewer for Adobe's free
+          Portable Document Format (<span class="acronym">PDF</span>) which
+          is both fast and small and comes with some useful command-line
+          utilities.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3257637" name="id3257637"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/publishing/xpdf/xpdf-3.00.tar.gz">http://gd.tuwien.ac.at/publishing/xpdf/xpdf-3.00.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.foolabs.com/pub/xpdf/xpdf-3.00.tar.gz">ftp://ftp.foolabs.com/pub/xpdf/xpdf-3.00.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 490 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 21 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.41 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3257676" name="id3257676"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/xpdf-3.00-freetype-2.1.7-hack.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/xpdf-3.00-freetype-2.1.7-hack.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3257698" name="id3257698"></a><span class=
+                  "application">Xpdf</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3257707" name="id3257707"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../x/lesstif.html">LessTif-0.93.94</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3259522" name="id3259522"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href=
+              "http://gd.tuwien.ac.at/visual/ibiblio/libs/graphics/t1lib-5.0.2.tar.gz">
+              t1lib</a> and <a href="gs.html">AFPL Ghostscript-8.14</a> or
+              <a href="espgs.html">ESP Ghostscript-7.07.1</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Xpdf
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Xpdf</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../xpdf-3.00-freetype-3.1.7-hack.patch &amp;&amp;
+./configure --prefix=/usr --sysconfdir=/etc \
+    --with-freetype2-includes=/usr/include/freetype2 &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation command explanations
+          </h3>
+        </div>
+        <p>
+          <tt class="option">--enable-a4-paper</tt>: This switch must be
+          added to set <span class="acronym">DIN</span> A4 as the standard
+          paper format.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Xpdf
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3259351" name="id3259351"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/xpdfrc</tt>, <tt class=
+            "filename">~/.xpdfrc</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3259187" name="id3259187"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            In the <tt class="filename">etc</tt> directory you will find a
+            sample <tt class="filename">xpdfrc</tt> that can be either copied
+            to <tt class="filename">~/.xpdfrc</tt> or taken as an example to
+            write your own configuration file.
+          </p>
+          <pre class="screen">
+<tt class="userinput"># Example .xpdfrc
+displayFontT1 Times-Roman               /usr/share/ghostscript/fonts/n021003l.pfb
+displayFontT1 Times-Italic              /usr/share/ghostscript/fonts/n021023l.pfb
+displayFontT1 Times-Bold                /usr/share/ghostscript/fonts/n021004l.pfb
+displayFontT1 Times-BoldItalic          /usr/share/ghostscript/fonts/n021024l.pfb
+displayFontT1 Helvetica                 /usr/share/ghostscript/fonts/n019003l.pfb
+displayFontT1 Helvetica-Oblique         /usr/share/ghostscript/fonts/n019023l.pfb
+displayFontT1 Helvetica-Bold            /usr/share/ghostscript/fonts/n019004l.pfb
+displayFontT1 Helvetica-BoldOblique     /usr/share/ghostscript/fonts/n019024l.pfb
+displayFontT1 Courier                   /usr/share/ghostscript/fonts/n022003l.pfb
+displayFontT1 Courier-Oblique           /usr/share/ghostscript/fonts/n022023l.pfb
+displayFontT1 Courier-Bold              /usr/share/ghostscript/fonts/n022004l.pfb
+displayFontT1 Courier-BoldOblique       /usr/share/ghostscript/fonts/n022024l.pfb
+displayFontT1 Symbol                    /usr/share/ghostscript/fonts/s050000l.pfb
+displayFontT1 ZapfDingbats              /usr/share/ghostscript/fonts/d050000l.pfb
+
+fontDir                 /usr/X11R6/lib/X11/fonts/TTF
+
+psFile                  "|lpr"
+psPaperSize             letter
+textEOL                 unix
+
+enableT1lib             yes
+enableFreeType          yes
+antialias               yes
+
+urlCommand              "links -g %s"</tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Xpdf</span> package contains
+          <span><b class="command">xpdf</b></span>, <span><b class=
+          "command">pdftops</b></span>, <span><b class=
+          "command">pdftotext</b></span>, <span><b class=
+          "command">pdftoppm</b></span>, <span><b class=
+          "command">pdffonts</b></span>, <span><b class=
+          "command">pdfimages</b></span> and <span><b class=
+          "command">pdfinfo</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3259282" name="id3259282"></a>xpdf
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">xpdf</b></span> displays files in
+            <span class="acronym">PDF</span> format.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3260088" name="id3260088"></a>pdftops
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pdftops</b></span> converts <span class=
+            "acronym">PDF</span> files to <span class="acronym">PS</span>
+            format.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3260107" name="id3260107"></a>pdftotext
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pdftotext</b></span> parses <span class=
+            "acronym">ASCII</span> text from <span class="acronym">PDF</span>
+            files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3260127" name="id3260127"></a>pdftoppm
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pdftoppm</b></span> converts
+            <span class="acronym">PDF</span> files to <span class=
+            "acronym">PBM</span>, <span class="acronym">PGM</span>,
+            <span class="acronym">PPM</span> formats.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3260154" name="id3260154"></a>pdffonts
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pdffonts</b></span> lists the fonts used
+            in a <span class="acronym">PDF</span> file along with various
+            information for each font.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3260170" name="id3260170"></a>pdfimages
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pdfimages</b></span> saves images from a
+            <span class="acronym">PDF</span> file as <span class=
+            "acronym">PPM</span>, <span class="acronym">PBM</span>, or
+            <span class="acronym">JPEG</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3260197" name="id3260197"></a>pdfinfo
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pdfinfo</b></span> prints the contents
+            of the 'Info' dictionary (plus some other useful information)
+            from a <span class="acronym">PDF</span> file.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="gsview.html">Prev</a><br />
+        GSview-4.6
+      </div>
+      <div class="next">
+        <a accesskey="n" href="otherps.html">Next</a><br />
+        Other PostScript programs
+      </div>
+      <div class="up">
+        <a accesskey="u" href="ps.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

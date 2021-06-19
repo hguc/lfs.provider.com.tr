@@ -1,0 +1,814 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Samba-2.2.8a
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version CVS-20040508
+        </p>
+        <p>
+          <b>Chapter&nbsp;22.&nbsp;Other Server Software</b>
+        </p>
+      </div>
+      <ul class="headerlinks">
+        <li>
+          <a accesskey="p" href="openldap.html">Prev</a>
+        </li>
+        <li>
+          <a accesskey="h" href="../index.html">Home</a>
+        </li>
+        <li>
+          <a accesskey="n" href="xinetd.html">Next</a>
+        </li>
+      </ul>
+    </div>
+    <hr />
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Samba-2.2.8a
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Samba
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Samba</span> package provides file
+          and print services to <span class="acronym">SMB</span>/<span class=
+          "acronym">CIFS</span> clients.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2852917" name="id2852917"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://us1.samba.org/samba/ftp/old-versions/samba-2.2.8a.tar.bz2">
+                  http://us1.samba.org/samba/ftp/old-versions/samba-2.2.8a.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 4.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 43 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 5.40 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Samba
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Samba</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<kbd class="command">cd source &amp;&amp;
+mkdir -p /etc/samba/private &amp;&amp;
+mkdir -p /var/cache/samba &amp;&amp;
+./configure \
+   --prefix=/usr \
+   --sysconfdir=/etc \
+   --localstatedir=/var \
+   --with-piddir=/var/run \
+   --with-fhs \
+   --with-smbmount &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+
+rm -rf /usr/private &amp;&amp;
+echo "swat 901/tcp" &gt;&gt; /etc/services &amp;&amp;
+echo "swat stream tcp nowait.400 root /usr/sbin/swat swat" &gt;&gt; \
+   /etc/inetd.conf</kbd>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation command explanations
+          </h3>
+        </div>
+        <pre class="screen">
+<span><b class="command">mkdir -p /etc/samba/private
+mkdir -p /var/cache/samba</b></span>
+</pre>
+        <p>
+          Directories needed for proper operation of the <span><b class=
+          "command">smbd</b></span> and <span><b class=
+          "command">nmbd</b></span> daemons.
+        </p>
+        <p>
+          <i class="parameter"><tt>--prefix=/usr</tt></i>: Sets the prefix
+          for almost all the file paths to <tt class="filename">/usr</tt>.
+        </p>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc</tt></i>: Sets the
+          configuration file directory to avoid the default of <tt class=
+          "filename">/usr/etc</tt>.
+        </p>
+        <p>
+          <i class="parameter"><tt>--localstatedir=/var</tt></i>: Sets the
+          variable data directory to avoid the default of <tt class=
+          "filename">/usr/var</tt>.
+        </p>
+        <p>
+          <tt class="option">--with-fhs</tt>: Assigns all other file paths in
+          a manner compliant with the Filesystem Hierarchy Standard
+          (<span class="acronym">FHS</span>).
+        </p>
+        <p>
+          <tt class="option">--with-smbmount</tt>: Orders the creation of an
+          extra binary for use by the <span><b class=
+          "command">mount</b></span> command so that mounting remote
+          <span class="acronym">SMB</span> (windows) shares becomes no more
+          complex than mounting remote <span class="acronym">NFS</span>
+          shares.
+        </p>
+        <p>
+          <span><b class="command">rm -rf /usr/private</b></span>: Removes a
+          directory erroneously created by <tt class=
+          "filename">source/scripts/installbin.sh</tt> during the make
+          install.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Samba
+          </h3>
+        </div>
+        <p>
+          We will configure one <span class="application">Samba</span> server
+          (SAMBABOX) to act as a primary domain controller, as well as
+          configure one domain client running Windows 2000 Server(WIN2KBOX)
+          and acting as a member server of the domain. Detailed instructions
+          will be given for adding WIN2KBOX to the domain due to the extra
+          steps necessary. Instructions for adding Windows 95/98/XP clients
+          can be found in the newly installed documentation by pointing a web
+          browser to:
+        </p>
+        <pre class="screen">
+<kbd class=
+"command">file:///usr/share/samba/swat/using_samba/ch03_01.html#ch03-55770.</kbd>
+</pre>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2852988" name="id2852988"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/samba/smb.conf</tt>, <tt class=
+            "filename">/etc/rc.d/init.d/samba</tt>
+          </p>
+          <p>
+            First we set up some directories needed by <span class=
+            "application">Samba</span> :
+          </p>
+          <pre class="screen">
+<kbd class="command">mkdir /var/lib/samba &amp;&amp;
+mkdir /var/lib/samba/netlogon &amp;&amp;
+mkdir /var/lib/samba/ntprofile &amp;&amp;
+mkdir /var/lib/samba/profiles &amp;&amp;
+chmod -R 1777 /var/lib/samba</kbd>
+</pre>
+          <p>
+            And the <span class="application">Samba</span> configuration
+            file:
+          </p>
+          <pre class="screen">
+<kbd class="command">cat &gt; /etc/samba/smb.conf &lt;&lt; "EOF"
+[global]
+    netbios name = SAMBABOX
+    workgroup = DOMAIN01
+    os level = 64
+    preferred master = yes
+    domain master = yes
+    local master = yes
+    security = user
+    encrypt passwords = yes
+    domain logons = yes
+    log file = /var/log/log.%m
+    log level = 1
+    logon path = \\%N\home\%u\windows
+    logon drive = H:
+    logon home = \\homeserver\%u\windows
+    logon script = logon.cmd
+[netlogon]
+      path = /var/lib/samba/netlogon
+      read only = yes
+      write list = ntadmin
+[profiles]
+      path = /var/lib/samba/ntprofile
+      read only = no
+      create mask = 0600
+      directory mask = 0700
+; World writable share for testing
+[tmp]
+comment = Temporary file space
+        path = /tmp
+        read only = no
+        public = yes
+[home]
+comment = Users' home directories
+        path = /home
+        read only = no
+        public = no
+EOF</kbd>
+</pre>
+          <p>
+            Now add the machine trust account for WIN2KBOX:
+          </p>
+          <pre class="screen">
+<kbd class="command">/usr/sbin/useradd -g 100 -d /dev/null -c \
+    "machine nickname" -s /bin/false win2kbox$ &amp;&amp;
+passwd -l win2kbox$ &amp;&amp;
+smbpasswd -a -m win2kbox</kbd>
+</pre>
+          <p>
+            Install <tt class="filename">/etc/rc.d/init.d/samba</tt> init
+            script included in the <a href=
+            "../introduction/bootscripts.html">lfs-bootscripts</a> package.
+          </p>
+          <pre class="screen">
+<kbd class="command">make install-samba</kbd>
+</pre>
+          <p>
+            Now, we'll use our new boot script to start <span class=
+            "application">Samba</span> :
+          </p>
+          <pre class="screen">
+<kbd class="command">/etc/rc.d/init.d/samba start</kbd>
+</pre>
+          <p>
+            We have to add the SAMBABOX root account to the <span class=
+            "application">Samba</span> user list first in order to join
+            WIN2KBOX to the DOMAIN01 domain:
+          </p>
+          <pre class="screen">
+<kbd class="command">smbpasswd -a root</kbd>
+</pre>
+          <p>
+            After starting <span class="application">Samba</span> and adding
+            root to the <span class="application">Samba</span> user list, the
+            first machine we'll join to DOMAIN01 will be WIN2KBOX, the
+            Windows 2000 Server box we created the machine trust account for.
+            On WIN2KBOX:
+          </p>
+          <pre class="screen">
+<kbd class="command">1.  Right click on My Computer.
+2.  Click on Properties.
+3.  Click on the Network Identification notebook tab.
+4.  Click on the Properties button.
+5.  In the Computer Name: edit field enter WIN2KBOX.
+6.  Click on the Domain: radio button and enter DOMAIN01 in the edit
+    field and click OK.
+7.  When presented with the Domain Username And Password dialog box,
+    enter root and root's password on SAMBABOX and click OK.
+8.  After the machine trust is negotiated, click the OK button in the
+    dialog box welcoming you to the DOMAIN01 domain.
+9.  Click OK in the reboot reminder dialog box.
+10. Click OK to close the System Properties window.
+11. Click Yes to reboot WIN2KBOX.</kbd>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2854230" name="id2854230"></a>Add a new user to
+                  the DOMAIN01 domain.
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Before logging on to WIN2KBOX, we will create a new user with the
+            following commands:
+          </p>
+          <pre class="screen">
+<kbd class="command">useradd -m win2kuser01 &amp;&amp;
+passwd win2kuser01 &amp;&amp;
+smbpasswd -a win2kuser01</kbd>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2854255" name="id2854255"></a>Logging on to
+                  DOMAIN01.
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Now we will log on the domain as our newly created user as
+            follows:
+          </p>
+          <pre class="screen">
+<kbd class=
+"command">1. Press Ctrl-Alt-Del to bring up the Log On to Windows dialog box.
+2. Enter the win2kuser01 name and password.
+3. Select DOMAIN01 from the Log on to: combination box and click OK.</kbd>
+</pre>
+          <p>
+            Add the swat entry to <tt class="filename">/etc/services</tt>with
+            the following command:
+          </p>
+          <pre class="screen">
+<kbd class=
+"command">echo "swat            901/tcp" &gt;&gt; /etc/services</kbd>
+</pre>
+          <p>
+            If <span><b class="command">inetd</b></span> is used, the
+            following command will add the swat entry to <tt class=
+            "filename">/etc/inetd.conf</tt>:
+          </p>
+          <pre class="screen">
+<kbd class=
+"command">echo "swat stream tcp nowait.400 root /usr/sbin/swat swat" \
+    &gt;&gt; /etc/inetd.conf</kbd>
+</pre>
+          <p>
+            If xinetd is used, the following command will add the swat entry
+            to <tt class="filename">/etc/xinetd.conf</tt>:
+          </p>
+          <pre class="screen">
+<kbd class="command">cat &gt;&gt; /etc/xinetd.conf &lt;&lt; "EOF"
+service swat
+{
+    port            = 901
+    socket_type     = stream
+    wait            = no
+    only_from       = 127.0.0.1
+    user            = root
+    server          = /usr/sbin/swat
+    log_on_failure  += USERID
+}
+EOF</kbd>
+</pre>
+          <p>
+            The Samba Web Administration Tool, <span class=
+            "acronym">SWAT</span>, can be launched with the following command
+            on SAMBABOX:
+          </p>
+          <pre class="screen">
+<kbd class="command">lynx http://localhost:901</kbd>
+</pre>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                Be sure <span><b class="command">inetd</b></span> is running,
+                and issue a <span><b class="command">killall -HUP
+                inetd</b></span> before starting <span class=
+                "acronym">SWAT</span>.
+              </p>
+            </div>
+          </div>
+          <p>
+            The <span class="application">Lynx</span> browser is used in this
+            demonstration, but is not necessary.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuration command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">cat &gt; /etc/samba/smb.conf &lt;&lt;
+          "EOF"</b></span> : Create a default <span class=
+          "application">Samba</span> configuration file. This configuration
+          will allow <span class="application">Samba</span> to act as a
+          Primary Domain Controller for a Microsoft Windows based network. If
+          this is not desired, a simpler default <tt class=
+          "filename">smb.conf</tt> file is bundled with the Samba
+          distribution. See the <tt class=
+          "filename">samba2.2.8a/examples/smb.conf.default</tt> file. Primary
+          Domain Controller configuration is slightly more complicated than
+          ordinary member server configuration, so instructions for
+          <span class="acronym">PDC</span> configuration will be given here.
+        </p>
+        <p>
+          <span><b class="command">cat &gt; /etc/rc.d/init.d/samba &lt;&lt;
+          "EOF"</b></span>: Create the <span class="application">Samba</span>
+          boot script, used to start and stop <span class=
+          "application">Samba</span> automatically on machine startup and
+          shutdown.
+        </p>
+        <pre class="screen">
+<span><b class="command">/usr/sbin/useradd -g 100 -d /dev/null -c \
+    "Win2k Server" -s /bin/false win2kbox$</b></span>
+</pre>
+        <p>
+          This command creates a machine trust account, necessary only for
+          Windows 2000/NT servers to authenticate to our new <span class=
+          "acronym">PDC</span>. Machine trust accounts are not necessary for
+          Win95/98 clients.
+        </p>
+        <p>
+          <span><b class="command">echo "swat 901/tcp" &gt;&gt;
+          /etc/services</b></span>: Register the swat service to run on port
+          901.
+        </p>
+        <p>
+          <span><b class="command">echo "swat stream tcp nowait.400 root
+          /usr/sbin/swat swat" &gt;&gt; /etc/inetd.conf</b></span>: Instruct
+          <span><b class="command">inetd</b></span> where to find and how to
+          run swat.
+        </p>
+        <p>
+          <span><b class="command">ln -s /etc/rc.d/init.d/samba
+          /etc/rc.d/rc3.d/S600samba</b></span> etc.: Create the <span class=
+          "application">Samba</span> boot scripts, used to start and stop
+          <span class="application">Samba</span> automatically on machine
+          startup and shutdown.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Samba</span> package contains
+          <span><b class="command">make_smbcodepage</b></span>,
+          <span><b class="command">make_unicodemap</b></span>,
+          <span><b class="command">mount.smbfs</b></span>, <span><b class=
+          "command">nmbd</b></span>, <span><b class=
+          "command">nmblookup</b></span>, <span><b class=
+          "command">rpcclient</b></span>, <span><b class=
+          "command">smbcacls</b></span>, <span><b class=
+          "command">smbclient</b></span>, <span><b class=
+          "command">smbcontrol</b></span>, <span><b class=
+          "command">smbd</b></span>, <span><b class=
+          "command">smbpasswd</b></span>, <span><b class=
+          "command">smbspool</b></span>, <span><b class=
+          "command">smbstatus</b></span>, <span><b class=
+          "command">swat</b></span>, <span><b class=
+          "command">testparm</b></span>, <span><b class=
+          "command">testprns</b></span>, <span><b class=
+          "command">wbinfo</b></span> and <span><b class=
+          "command">winbindd.</b></span>
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855328" name="id2855328"></a>make_smbcodepage
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">make_smbcodepage</b></span> converts
+            text descriptions of code pages to binary code page files and
+            vice versa.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855343" name="id2855343"></a>make_unicodemap
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">make_unicodemap</b></span> converts text
+            Unicode map files to binary, for use in mapping characters to 16
+            bit Unicode.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855357" name="id2855357"></a>mount.smbfs
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mount.smbfs</b></span> provides
+            <span><b class="command">/bin/mount</b></span> with a way to
+            mount remote windows (or samba) fileshares.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855376" name="id2855376"></a>nmbd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">nmbd</b></span> is the Samba
+            Net<span class="acronym">BIOS</span> name server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855393" name="id2855393"></a>nmblookup
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">nmblookup</b></span> is used to query
+            Net<span class="acronym">BIOS</span> names and map them to
+            <span class="acronym">IP</span> addresses.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855413" name="id2855413"></a>rpcclient
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rpcclient</b></span> is used to execute
+            MS-<span class="acronym">RPC</span> client side functions.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855430" name="id2855430"></a>smbcacls
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbcacls</b></span> is used to
+            manipulate NT access control lists.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855443" name="id2855443"></a>smbclient
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbclient</b></span> is a <span class=
+            "acronym">SMB</span>/<span class="acronym">CIFS</span> access
+            utility, similar to <span class="acronym">FTP</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855466" name="id2855466"></a>smbcontrol
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbcontrol</b></span> is used to control
+            running <span><b class="command">smbd</b></span> ,
+            <span><b class="command">nmbd</b></span> and <span><b class=
+            "command">winbindd</b></span> daemons.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855497" name="id2855497"></a>smbd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbd</b></span> is the main <span class=
+            "application">Samba</span> daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855516" name="id2855516"></a>smbpasswd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbpasswd</b></span> changes a user's
+            <span class="application">Samba</span> password.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855535" name="id2855535"></a>smbspool
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbspool</b></span> sends a print job to
+            an <span class="acronym">SMB</span> printer.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855551" name="id2855551"></a>smbstatus
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbstatus</b></span> reports current
+            <span class="application">Samba</span> connections.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855570" name="id2855570"></a>swat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">swat</b></span> is the Samba Web
+            Administration Tool.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855584" name="id2855584"></a>testparm
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">testparm</b></span> checks an <tt class=
+            "filename">smb.conf</tt> file for proper syntax.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855603" name="id2855603"></a>testprns
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">testprns</b></span> tests printer names.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855616" name="id2855616"></a>wbinfo
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">wbinfo</b></span> queries a running
+            <span><b class="command">winbindd</b></span> daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855635" name="id2855635"></a>winbindd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">winbindd</b></span> resolves names from
+            NT servers.
+          </p>
+        </div>
+      </div>
+    </div>
+    <hr />
+    <div class="navfooter">
+      <ul>
+        <li>
+          <a accesskey="p" href="openldap.html">Prev</a> OpenLDAP-2.1.29
+        </li>
+        <li>
+          <a accesskey="u" href="other.html">Up</a>
+        </li>
+        <li>
+          <a accesskey="h" href="../index.html">Home</a>
+        </li>
+        <li>
+          <a accesskey="n" href="xinetd.html">Next</a> xinetd-2.3.13
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

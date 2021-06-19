@@ -1,0 +1,13 @@
+#!/bin/bash
+set +h
+set -e
+
+cd $PKGDIR
+./configure --prefix=/usr --bindir=/bin --htmldir=/usr/share/doc/sed-4.2.2
+make
+make html
+make -k check >> $TEST_LOG 2>&1 || true
+make install
+make -C doc install-html
+echo -e "\n\nTotalseconds: $SECONDS\n"
+exit

@@ -1,0 +1,61 @@
+Sun Sep 19 12:31:39 GMT 2010
+make[1]: Entering directory `/sources/gzip-1.4'
+Making check in lib
+make[2]: Entering directory `/sources/gzip-1.4/lib'
+make  check-recursive
+make[3]: Entering directory `/sources/gzip-1.4/lib'
+make[4]: Entering directory `/sources/gzip-1.4/lib'
+make[4]: Nothing to be done for `check-am'.
+make[4]: Leaving directory `/sources/gzip-1.4/lib'
+make[3]: Leaving directory `/sources/gzip-1.4/lib'
+make[2]: Leaving directory `/sources/gzip-1.4/lib'
+Making check in doc
+make[2]: Entering directory `/sources/gzip-1.4/doc'
+make[2]: Nothing to be done for `check'.
+make[2]: Leaving directory `/sources/gzip-1.4/doc'
+make[2]: Entering directory `/sources/gzip-1.4'
+make  check-TESTS check-local
+make[3]: Entering directory `/sources/gzip-1.4'
+make[4]: Entering directory `/sources/gzip-1.4'
+PASS: tests/helin-segv
+PASS: tests/memcpy-abuse
+PASS: tests/trailing-nul
+PASS: tests/zdiff
+PASS: tests/zgrep-f
+==================
+All 5 tests passed
+==================
+make[4]: Leaving directory `/sources/gzip-1.4'
+  GEN      gzip.doc.gz
+{ test '.' != . || ./zdiff --__bindir . -c gzip.doc.gz; }
+./zdiff --__bindir . -c ./gzip.doc ./gzip.doc
+./zdiff --__bindir . ./gzip.doc gzip.doc.gz
+./zdiff --__bindir . -c - ./gzip.doc <gzip.doc.gz
+./zdiff --__bindir . -c gzip.doc.gz gzip.doc.gz
+./zgrep --__bindir . -iV >/dev/null
+for file in gunzip gzexe zcat zcmp zdiff zegrep zfgrep zforce zgrep zless zmore znew ./ChangeLog ./configure ./gzip.c; do \
+  ./gzip -cv -- "$file" | ./gzip -d | cmp - "$file" || exit 1; \
+done
+gunzip:	 50.2%
+gzexe:	 60.6%
+zcat:	 49.1%
+zcmp:	 48.1%
+zdiff:	 58.1%
+zegrep:	 20.2%
+zfgrep:	 20.2%
+zforce:	 48.9%
+zgrep:	 58.1%
+zless:	 45.1%
+zmore:	 50.4%
+znew:	 59.5%
+./ChangeLog:	 62.7%
+./configure:	 81.0%
+./gzip.c:	 69.2%
+./gzip -dc ./tests/hufts-segv.gz > /dev/null 2>&1; \
+  test $? = 1
+k=in-$$; printf a | ./gzip > $k && \
+  test "`cat $k | ./gzip -dc $k - $k`" = aaa && rm $k
+Test succeeded.
+make[3]: Leaving directory `/sources/gzip-1.4'
+make[2]: Leaving directory `/sources/gzip-1.4'
+make[1]: Leaving directory `/sources/gzip-1.4'

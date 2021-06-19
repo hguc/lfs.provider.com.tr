@@ -1,0 +1,288 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Tcl-8.4.9
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;12.&nbsp;Programming
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="ruby.html" title="Ruby-1.8.2">Prev</a>
+          <p>
+            Ruby-1.8.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="tk.html" title="Tk-8.4.9">Next</a>
+          <p>
+            Tk-8.4.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="tcl" name="tcl"></a>
+        <h1 class="sect1">
+          Tcl-8.4.9
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Tcl
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Tcl</span> package contains the Tool
+          Command Language, a robust general-purpose scripting language.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2661778" name="id2661778"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/tcl/tcl8.4.9-src.tar.gz">
+                  <span class=
+                  "url">http://prdownloads.sourceforge.net/tcl/tcl8.4.9-src.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.us.xemacs.org/pub/tcl/tcl8_4/tcl8.4.9-src.tar.gz">
+                  <span class=
+                  "url">ftp://ftp.us.xemacs.org/pub/tcl/tcl8_4/tcl8.4.9-src.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 7e01b409925e4eb59ad44a4c12b9c681
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 3.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 34 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.33 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Tcl
+          </h2>
+        </div>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              This package is also installed in <span class=
+              "acronym">LFS</span> during the bootstrap phase. The
+              significant difference between the two installations (other
+              than installing to <tt class="filename">/usr</tt>) is the
+              package is installed in such a way that there is no need to
+              keep the build directory around after installation.
+            </p>
+          </div>
+        </div>
+        <p>
+          Install <span class="application">Tcl</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">export VERSION=8.4.9 &amp;&amp;
+export V=`echo $VERSION | cut -d "." -f 1,2` &amp;&amp;
+export DIR=$PWD &amp;&amp;
+cd unix &amp;&amp;
+./configure --prefix=/usr --enable-threads &amp;&amp;
+make &amp;&amp;
+sed -i "s:${DIR}/unix:/usr/lib:" tclConfig.sh &amp;&amp;
+sed -i "s:${DIR}:/usr/include/tcl${V}:" tclConfig.sh &amp;&amp;
+sed -i "s,^TCL_LIB_FILE='libtcl${V}..TCL_DBGX..so',\
+TCL_LIB_FILE=\"libtcl${V}\$\{TCL_DBGX\}.so\"," tclConfig.sh</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install &amp;&amp;
+install -d /usr/include/tcl${V}/unix &amp;&amp;
+install -m644 *.h /usr/include/tcl${V}/unix/ &amp;&amp;
+install -d /usr/include/tcl${V}/generic &amp;&amp;
+install -c -m644 ../generic/*.h /usr/include/tcl${V}/generic/ &amp;&amp;
+rm -f /usr/include/tcl${V}/generic/{tcl,tclDecls,tclPlatDecls}.h &amp;&amp;
+ln -nsf ../../include/tcl${V} /usr/lib/tcl${V}/include &amp;&amp;
+ln -sf libtcl${V}.so /usr/lib/libtcl.so &amp;&amp;
+ln -sf tclsh${V} /usr/bin/tclsh</strong></span></kbd></pre>
+        <p>
+          Clean up the unprivileged user's environment using the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">unset VERSION &amp;&amp;
+unset V &amp;&amp;
+unset DIR</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--enable-threads</tt></em>: This switch
+          forces the package to build with thread support.
+        </p>
+        <p>
+          <span><strong class="command">sed -i ...</strong></span>: The
+          <span class="application">Tcl</span> package assumes that the
+          source that is used to build <span class="application">Tcl</span>
+          is always kept around for compiling packages that depend on
+          <span class="application">Tcl</span>. These <span><strong class=
+          "command">sed</strong></span>s remove the reference to the build
+          directory and replace them by saner system wide locations.
+        </p>
+        <p>
+          <span><strong class="command">install ...</strong></span>: These
+          commands install the internal headers into a system-wide location.
+        </p>
+        <p>
+          <span><strong class="command">ln -sf ...</strong></span>: These
+          commands create compatibility symbolic links.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Program:</span></strong> <span class="seg">tclsh</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libtcl.so and
+              libtclstub8.4.a</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/usr/lib/tcl8.4
+              and /usr/include/tcl8.4</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2629667" name="id2629667"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="tclsh" name="tclsh"></a><span class=
+              "term"><span><strong class=
+              "command">tclsh</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a simple shell containing the <span class=
+                "application">Tcl</span> interpreter.
+              </p>
+            </dd>
+            <dt>
+              <a id="libtcl" name="libtcl"></a><span class="term"><tt class=
+              "filename">libtcl.so</tt></span>
+            </dt>
+            <dd>
+              <p>
+                contains the <span class="acronym">API</span> functions
+                required by <span class="application">Tcl</span>.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-08 19:52:39 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="ruby.html" title="Ruby-1.8.2">Prev</a>
+          <p>
+            Ruby-1.8.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="tk.html" title="Tk-8.4.9">Next</a>
+          <p>
+            Tk-8.4.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

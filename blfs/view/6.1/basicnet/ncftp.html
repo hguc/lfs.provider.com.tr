@@ -1,0 +1,383 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      NcFTP-3.1.9
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;18.&nbsp;Basic Networking Programs
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="inetutils.html" title=
+          "Inetutils-1.4.2">Prev</a>
+          <p>
+            Inetutils-1.4.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ncpfs.html" title="NCPFS-2.2.4">Next</a>
+          <p>
+            NCPFS-2.2.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="ncftp" name="ncftp"></a>
+        <h1 class="sect1">
+          NcFTP-3.1.9
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to NcFTP
+          </h2>
+        </div>
+        <p>
+          The <span class="application">NcFTP</span> package contains a
+          powerful and flexible interface to the Internet standard File
+          Transfer Protocol. It is intended to replace or supplement the
+          stock <span><strong class="command">ftp</strong></span> program.
+        </p>
+        <h3>
+          <a id="id2754064" name="id2754064"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://gd.tuwien.ac.at/infosys/clients/ftp/ncftp/ncftp-3.1.9-src.tar.bz2">
+                <span class=
+                "url">http://gd.tuwien.ac.at/infosys/clients/ftp/ncftp/ncftp-3.1.9-src.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.ncftp.com/ncftp/ncftp-3.1.9-src.tar.bz2"><span class="url">
+                ftp://ftp.ncftp.com/ncftp/ncftp-3.1.9-src.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 66cf8dacec848eb11a70632fe9f21807
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 401 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 9.9 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.3 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of NcFTP
+          </h2>
+        </div>
+        <p>
+          There are two ways to build <span class="application">NcFTP</span>.
+          The first (and optimal) way builds most of the functionality as a
+          shared library and then builds and installs the program linked
+          against this library. The second method simply links all of the
+          functionality into the binary statically. This doesn't make the
+          dynamic library available for linking by other applications. You
+          need to choose which method best suits you. Note that the second
+          method does <span class="emphasis"><em>not</em></span> create an
+          entirely statically linked binary; only the <tt class=
+          "filename">libncftp</tt> parts are statically linked in, in this
+          case. Be aware that building and using the shared library is
+          covered by the Clarified Artistic License; however, developing
+          applications that utilize the shared library is subject to a
+          different license.
+        </p>
+        <p>
+          To install <span class="application">NcFTP</span> using the first
+          (and optimal) method, run the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make -C libncftp shared</kbd></pre>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">make -C libncftp soinstall</kbd></pre>
+        <p>
+          Again, as an unprivileged user:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Again, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <p>
+          To install <span class="application">NcFTP</span> using the second
+          method (with the <tt class="filename">libncftp</tt> functionality
+          linked in statically) run the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make</kbd></pre>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">make -C ... &amp;&amp; make -C
+          ...</strong></span>: These commands make and install the dynamic
+          library <tt class="filename">libncftp</tt> which is then used to
+          link against when compiling the main program.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring NcFTP
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="ncftp-config" name="ncftp-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.ncftp/*</tt>; especially <tt class=
+            "filename">~/.ncftp/prefs_v3</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2644919" name="id2644919"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Most <span class="application">NcFTP</span> configuration is done
+            while in the program, and the configuration files are dealt with
+            automatically. One exception to this is <tt class=
+            "filename">~/.ncftp/prefs_v3</tt>. There are various options to
+            alter in there, including:
+          </p>
+          <pre class="screen"><tt class=
+          "literal">yes-i-know-about-NcFTPd=yes</tt></pre>
+          <p>
+            This disables the splash screen advertising the <span class=
+            "application">NcFTPd</span> server.
+          </p>
+          <p>
+            There are other options in the <tt class="filename">prefs_v3</tt>
+            file. Most of these are self-explanatory.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">ncftp, ncftpbatch,
+              ncftpbookmarks, ncftpget, ncftpls, ncftpput, and
+              ncftpspooler</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Library:</span></strong> <span class="seg">libncftp.so</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2737017" name="id2737017"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="ncftp-prog" name="ncftp-prog"></a><span class=
+                  "term"><span><strong class=
+                  "command">ncftp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a browser program for File Transfer Protocol.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ncftpbatch" name="ncftpbatch"></a><span class=
+                  "term"><span><strong class=
+                  "command">ncftpbatch</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an individual batch FTP job processor.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ncftpbookmarks" name=
+                  "ncftpbookmarks"></a><span class=
+                  "term"><span><strong class="command">ncftpbookmarks</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">NcFTP</span> Bookmark
+                    Editor (<span class="application">NCurses</span>-based).
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ncftpget" name="ncftpget"></a><span class=
+                  "term"><span><strong class=
+                  "command">ncftpget</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an internet file transfer program for scripts used to
+                    retrieve files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ncftpls" name="ncftpls"></a><span class=
+                  "term"><span><strong class=
+                  "command">ncftpls</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an internet file transfer program for scripts used to
+                    list files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ncftpput" name="ncftpput"></a><span class=
+                  "term"><span><strong class=
+                  "command">ncftpput</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an internet file transfer program for scripts used to
+                    transfer files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ncftpspooler" name="ncftpspooler"></a><span class=
+                  "term"><span><strong class=
+                  "command">ncftpspooler</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a global batch FTP job processor daemon.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="inetutils.html" title=
+          "Inetutils-1.4.2">Prev</a>
+          <p>
+            Inetutils-1.4.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ncpfs.html" title="NCPFS-2.2.4">Next</a>
+          <p>
+            NCPFS-2.2.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

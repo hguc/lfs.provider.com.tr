@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      NFS Utilities-1.0.6
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;18.&nbsp;Basic Networking Programs</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="inetutils.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="ncpfs.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          NFS Utilities-1.0.6
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to nfs-utils
+          </h3>
+        </div>
+        <p>
+          The <span class="application">nfs-utils</span> package contains the
+          userspace server and client tools necessary to use the kernel's
+          nfs-abilities. <span class="acronym">NFS</span> is a protocol that
+          allows sharing file systems over the network.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2786651" name="id2786651"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.kernel.org/pub/linux/utils/nfs/nfs-utils-1.0.6.tar.gz">
+                  http://ftp.kernel.org/pub/linux/utils/nfs/nfs-utils-1.0.6.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.kernel.org/pub/linux/utils/nfs/nfs-utils-1.0.6.tar.gz">
+                  ftp://ftp.kernel.org/pub/linux/utils/nfs/nfs-utils-1.0.6.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 336 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time:
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2787242" name="id2787242"></a><span class=
+                  "application">nfs-utils</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2787254" name="id2787254"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="portmap.html">portmap-5beta</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Kernel Configuration
+          </h3>
+        </div>
+        <p>
+          Enable the following options in the kernel configuration and
+          recompile the kernel if neccessary:
+        </p>
+        <pre class="screen">
+File systems:
+  Network File Systems:
+    NFS File System Support: M or Y
+    NFS Server Support: M or Y
+</pre>
+        <p>
+          Select the appropriate sub-options that appear when the above
+          options are selected.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of nfs-utils
+          </h3>
+        </div>
+        <p>
+          Before you compile the program, you need to be sure the "nobody"
+          user and "nogroup" group are available. You can add these with the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">groupadd -g 65534 nogroup &amp;&amp;
+useradd -c nobody -d /home -g nogroup -s /bin/bash -u 65534 nobody</b></span></tt>
+</pre>
+        <p>
+          Install nfs-utils by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              If your <tt class="filename">/usr</tt> directory is NFS
+              mounted, you should install the executables in <tt class=
+              "filename">/sbin</tt> by passing an additional parameter
+              <span><b class="command">--sbindir=/sbin</b></span> to the
+              above <span><b class="command">./configure</b></span> command.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring nfs-utils
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2787623" name="id2787623"></a>Server Configutation
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/exports</tt> contains the exported
+            directories on NFS servers. Refer to the exports manual page for
+            the syntax of this file. Also refer to the NFS HowTo available at
+            <a href=
+            "http://nfs.sourceforge.net/nfs-howto/">http://nfs.sourceforge.net/nfs-howto/</a>
+            on how to configure the servers and clients in a secure manner.
+            For example, for sharing the <tt class="filename">/home</tt>
+            directory over the local network, the following line may be
+            added:
+          </p>
+          <pre class="screen">
+<tt class="userinput">/home 192.168.0.0/255.255.0.0(rw)</tt>
+</pre>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/nfs-server</tt>
+            init script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package to start the server at boot.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-nfs-server</b></span></tt>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2787663" name="id2787663"></a>Client Configutation
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/fstab</tt> contains the directories
+            that are to be mounted on the client. Alternately the partitions
+            can be mounted by using the <span><b class=
+            "command">mount</b></span> command with the proper options. To
+            mount the <tt class="filename">/home</tt> partition, add the
+            following to the <tt class="filename">/etc/fstab</tt>:
+          </p>
+          <pre class="screen">
+<tt class="userinput">&lt;server-name&gt;:/home /home nfs rw 0 0</tt>
+</pre>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/nfs-client</tt>
+            init script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package to start the client services at boot.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-nfs-client</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The nfs-utils package contains <span><b class=
+          "command">getiversion</b></span>, <span><b class=
+          "command">getkversion</b></span>, <span><b class=
+          "command">locktest</b></span>, <span><b class=
+          "command">nlmtest</b></span>, <span><b class=
+          "command">rpcdebug</b></span>, <span><b class=
+          "command">rpcgen</b></span>, <span><b class=
+          "command">exportfs</b></span>, <span><b class=
+          "command">lockd</b></span>, <span><b class=
+          "command">mountd</b></span>, <span><b class=
+          "command">nfsd</b></span>, <span><b class=
+          "command">nfsstat</b></span>, <span><b class=
+          "command">nhfsstone</b></span>, <span><b class=
+          "command">rquotad</b></span>, <span><b class=
+          "command">showmount</b></span>, <span><b class=
+          "command">statd</b></span>
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788008" name="id2788008"></a>getiversion
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            No description available.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788014" name="id2788014"></a>getkversion
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            No description available.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788022" name="id2788022"></a>locktest
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            No description available.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788029" name="id2788029"></a>nlmtest
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            No description available.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788036" name="id2788036"></a>rpcdebug
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            No description available.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788043" name="id2788043"></a>rpcgen
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            No description available.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788050" name="id2788050"></a>exportfs
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">exportfs</b></span> maintains a list of
+            <span class="acronym">NFS</span> exported directories.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788066" name="id2788066"></a>lockd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lockd</b></span> is the <span class=
+            "acronym">NFS</span> lock manager.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788081" name="id2788081"></a>mountd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mountd</b></span> is the <span class=
+            "acronym">NFS</span> mount daemon which checks
+            client-permissions.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788097" name="id2788097"></a>nfsd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">nfsd</b></span> is the user-space daemon
+            of the <span class="acronym">NFS</span> service.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788112" name="id2788112"></a>nfsstat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">nfsstat</b></span> prints <span class=
+            "acronym">NFS</span> statistics.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788127" name="id2788127"></a>nhfsstone
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">nhfsstone</b></span> is the <span class=
+            "acronym">NFS</span> benchmark program.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788142" name="id2788142"></a>rquotad
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rquotad</b></span> is the remote quota
+            server communicating with the <span><b class=
+            "command">quota</b></span> client.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788161" name="id2788161"></a>showmount
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">showmount</b></span> shows mount
+            information for an <span class="acronym">NFS</span> server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2788176" name="id2788176"></a>statd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">statd</b></span> is the <span class=
+            "acronym">NFS</span> status monitor which implements the
+            <span class="acronym">NSM</span> (Network Status Monitor)
+            <span class="acronym">RPC</span> protocol.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="inetutils.html">Prev</a><br />
+        Inetutils-1.4.2
+      </div>
+      <div class="next">
+        <a accesskey="n" href="ncpfs.html">Next</a><br />
+        NCPFS-2.2.4
+      </div>
+      <div class="up">
+        <a accesskey="u" href="netprogs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,216 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Starting KDE4
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.9">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 7.9
+      </h4>
+      <h3>
+        Chapter&nbsp;30.&nbsp;The KDE4 Core
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="kde-workspace.html" title=
+          "Kde-workspace-4.11.21">Prev</a>
+          <p>
+            Kde-workspace-4.11.21
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="add.html" title=
+          "KDE4 Additional Packages">Next</a>
+          <p>
+            KDE4 Additional Packages
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;30.&nbsp;The KDE4 Core">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.9">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="kde-core-config" name="kde-core-config"></a>Starting KDE4
+      </h1>
+      <h3>
+        KDE4 Startup Dependencies
+      </h3>
+      <h4>
+        Recommended Runtime Dependencies
+      </h4>
+      <p class="recommended">
+        <a class="xref" href="../postlfs/consolekit.html" title=
+        "ConsoleKit2-1.0.1">ConsoleKit2-1.0.1</a> and <a class="xref" href=
+        "../general/dbus.html" title="D-Bus-1.10.6">D-Bus-1.10.6</a>
+      </p>
+      <p>
+        After <span class="application">Kde-workspace</span> has been
+        installed, the first important milestone has been reached. Now you
+        need to configure your system to start KDE4.
+      </p>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Starting KDE4 from the command prompt
+        </h2>
+        <p>
+          You can start <span class="application">KDE4</span> from runlevel
+          3, using <a class="xref" href="../x/xinit.html" title=
+          "xinit-1.3.4">xinit-1.3.4</a>, or from runlevel 5, using a Display
+          Manager, such as <a class="xref" href="../x/sddm.html" title=
+          "sddm-0.13.0">sddm-0.13.0</a>.
+        </p>
+        <p>
+          To start <span class="application">KDE4</span> using <a class=
+          "xref" href="../x/xinit.html" title="xinit-1.3.4">xinit-1.3.4</a>,
+          run the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; ~/.xinitrc &lt;&lt; "EOF"
+<code class=
+"literal">ck-launch-session dbus-launch --exit-with-session startkde</code>
+EOF
+
+startx</kbd>
+</pre>
+        <p>
+          The X session starts on the first unused virtual terminal, normally
+          vt7. You can switch to another vt<span class=
+          "emphasis"><em>n</em></span> simultaneously pressing the keys
+          Ctrl-Alt-F<span class="emphasis"><em>n</em></span> (<span class=
+          "emphasis"><em>n</em></span>=1, 2, ...). To switch back to the X
+          session, normally started at vt7, use Ctrl-Alt-F7. The vt where the
+          command <span class="command"><strong>startx</strong></span> was
+          executed will display many messages, including X starting messages,
+          applications automatically started with the session, and
+          eventually, some warning and error messages. You may prefer to
+          redirect those messages to a log file, which not only will keep the
+          initial vt uncluttered, but can also be used for debug purposes.
+          This can be done starting X with:
+        </p>
+        <pre class="userinput">
+<kbd class="command">startx &amp;&gt; ~/.x-session-errors</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            You may wish to drop consolekit and/or dbus-launch, e.g., just
+            using startkde in ~/.xinitrc. However some capabilities such as
+            mounting or umounting file systems from a file manager will not
+            be possible, or the reboot option will be absent or inoperative,
+            among other problems.
+          </p>
+        </div>
+        <p>
+          When shutting down or rebooting, the shutdown messages appear on
+          the vt where X was running. If you wish to see those messages,
+          simultaneously press keys Alt-F7 (assuming that X was running on
+          vt7).
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Starting KDE4 at boot
+        </h2>
+        <p>
+          KDE4 comes with a graphical login interface called KDM (the KDE4
+          Display Manager), which provides a customizable graphical login at
+          boot. To use KDM, you need to edit your <code class=
+          "filename">/etc/inittab</code> file (as the <code class=
+          "systemitem">root</code> user). First, setup run-level 5 to start
+          KDM (adjust the path to kdm according to your system):
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt;&gt; /etc/inittab &lt;&lt; EOF
+<code class="literal">kd:5:respawn:/opt/kde/bin/kdm</code>
+EOF</kbd>
+</pre>
+        <p>
+          Additionally, you need to change the default run-level from 3 to 5:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">sed -i 's#id:3:initdefault:#id:5:initdefault:#' /etc/inittab</kbd>
+</pre>
+        <p>
+          You can now restart your system and see the KDE4 login screen.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installing further languages (l10n)
+        </h2>
+        <p>
+          You may want to install support for your locale language. The l10n
+          packages can be found at <a class="ulink" href=
+          "http://download.kde.org/stable/applications/15.12.1/src/kde-l10n/">
+          http://download.kde.org/stable/applications/15.12.1/src/kde-l10n/</a>.
+          See <a class="xref" href="add-pkgs.html" title=
+          "Further KDE4 packages">Further KDE4 packages</a> for build
+          instructions. If you are in a KDE4 session when installing a new
+          language and configure KDE4 to use it, the session needs to be
+          restarted, in order to see the effects.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installing further KDE4 packages
+        </h2>
+        <p>
+          Every subsequent package can be built while having <span class=
+          "application">KDE4</span> up and running, but remember to keep
+          <code class="envar">$KDE_PREFIX</code> and <code class=
+          "envar">$QT4DIR</code> set.
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2015-09-29 14:49:19 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="kde-workspace.html" title=
+          "Kde-workspace-4.11.21">Prev</a>
+          <p>
+            Kde-workspace-4.11.21
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="add.html" title=
+          "KDE4 Additional Packages">Next</a>
+          <p>
+            KDE4 Additional Packages
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;30.&nbsp;The KDE4 Core">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.9">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

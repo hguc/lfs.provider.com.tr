@@ -1,0 +1,440 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      EsounD-0.2.35
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="audiofile.html" title=
+          "Audio File-0.2.6">Prev</a>
+          <p>
+            Audio File-0.2.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="sdl.html" title="SDL-1.2.8">Next</a>
+          <p>
+            SDL-1.2.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="libdriv.html" title=
+          "Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="esound" name="esound"></a>
+        <h1 class="sect1">
+          EsounD-0.2.35
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to EsounD
+          </h2>
+        </div>
+        <p>
+          The <span class="application">EsounD</span> package contains the
+          Enlightened Sound Daemon. This is useful for mixing together
+          several digitized audio streams for playback by a single device.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2797076" name="id2797076"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.gnome.org/pub/GNOME/sources/esound/0.2/esound-0.2.35.tar.bz2">
+                  <span class=
+                  "url">http://ftp.gnome.org/pub/GNOME/sources/esound/0.2/esound-0.2.35.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnome.org/pub/GNOME/sources/esound/0.2/esound-0.2.35.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.gnome.org/pub/GNOME/sources/esound/0.2/esound-0.2.35.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 Sum: 1566344f80a8909b5e6e4d6b6520c2c1
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 376 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 3.8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.16 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2621983" name="id2621983"></a><span class=
+                  "application">EsounD</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2864561" name="id2864561"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="audiofile.html">Audio File-0.2.6</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2804851" name="id2804851"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="libdriv.html#alsa">ALSA-1.0.7</a>, <a href=
+              "../basicnet/tcpwrappers.html">tcpwrappers-7.6</a> and <a href=
+              "../pst/docbook-utils.html">DocBook-utils-0.6.14</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of EsounD
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">EsounD</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</strong></span></kbd></pre>
+        <p>
+          If you wish to install the package documentation (man pages have
+          been already installed), copy the <tt class=
+          "filename">docs/esound.ps</tt> file and <tt class=
+          "filename">docs/html</tt> directory to a desired location on your
+          system.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--sysconfdir=/etc</tt></em>: This switch
+          puts configuration files in <tt class="filename">/etc</tt> instead
+          of <tt class="filename">/usr/etc</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring EsounD
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2831716" name="id2831716"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/esd.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2874780" name="id2874780"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Instructions and information about the configuration file is
+            located in the <tt class="filename">TIPS</tt> file in the
+            <span class="application">EsounD</span> source directory.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">EsounD</span> package contains
+          <span><strong class="command">esd</strong></span>,
+          <span><strong class="command">esdcat</strong></span>,
+          <span><strong class="command">esdctl</strong></span>,
+          <span><strong class="command">esdfilt</strong></span>,
+          <span><strong class="command">esdloop</strong></span>,
+          <span><strong class="command">esdmon</strong></span>,
+          <span><strong class="command">esdplay</strong></span>
+          <span><strong class="command">esdrec</strong></span>,
+          <span><strong class="command">esdsample</strong></span> and
+          <tt class="filename">libesd</tt> libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2714172" name="id2714172"></a>esd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">esd</strong></span> is the
+            Enlightened Sound Daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2903645" name="id2903645"></a>esdcat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">esdcat</strong></span> plays a
+            <tt class="filename">RAW</tt> audio stream through the daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2601263" name="id2601263"></a>esdctl
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">esdctl</strong></span> controls
+            certain aspects of the sound daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2822286" name="id2822286"></a>esdfilt
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">esfilt</strong></span> is an
+            <span class="application">EsoundD</span> filter.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2774717" name="id2774717"></a>esdloop
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">esdloop</strong></span> is test
+            scaffolding for sample cache, loop, and free.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2584899" name="id2584899"></a>esdmon
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">esdmon</strong></span> outputs the
+            mixed stream from the daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775057" name="id2775057"></a>esdplay
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">esdplay</strong></span> plays the
+            named file on <span class="application">EsoundD</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2573267" name="id2573267"></a>esdrec
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">esdrec</strong></span> outputs from
+            the sound device's current input.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2768320" name="id2768320"></a>esdsample
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">esdsample</strong></span> is test
+            scaffolding for sample cache, play back, and free.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2814092" name="id2814092"></a>esd libraries
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libesd</tt> libraries contain the functions
+            used by <span><strong class="command">esd</strong></span>.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2004-11-09 17:42:57 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="audiofile.html" title=
+          "Audio File-0.2.6">Prev</a>
+          <p>
+            Audio File-0.2.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="sdl.html" title="SDL-1.2.8">Next</a>
+          <p>
+            SDL-1.2.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="libdriv.html" title=
+          "Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

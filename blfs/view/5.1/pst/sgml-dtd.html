@@ -1,0 +1,296 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      DocBook SGML DTD-4.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;43.&nbsp;Standard Generalized Markup Language
+          (SGML)</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="sgml-dtd-3.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="opensp.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          DocBook SGML DTD-4.3
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to DocBook SGML DTD
+          </h3>
+        </div>
+        <p>
+          The <span class="application">DocBook <span class=
+          "acronym">SGML</span> <span class="acronym">DTD</span></span>
+          package contains document type definitions for verification of
+          <span class="acronym">SGML</span> data files against the DocBook
+          rule set. These are useful for structuring books and software
+          documentation to a standard allowing you to utilize transformations
+          already written for that standard.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3243696" name="id3243696"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.docbook.org/sgml/4.3/docbook-4.3.zip">http://www.docbook.org/sgml/4.3/docbook-4.3.zip</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 76 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 389 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.01 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3241196" name="id3241196"></a><span class=
+                  "application">DocBook <span class="acronym">SGML</span>
+                  <span class="acronym">DTD</span></span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3241168" name="id3241168"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="sgml.html#sgml-common">SGML Common-0.6.3</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of DocBook SGML DTD
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">DocBook <span class=
+          "acronym">SGML</span> <span class="acronym">DTD</span></span> by
+          running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cp docbook.cat docbook.cat.orig &amp;&amp;
+sed -e '/ISO 8879/d' docbook.cat.orig &gt; docbook.cat &amp;&amp;
+cp docbook.cat docbook.cat.orig &amp;&amp;
+sed -e '/gml/d' docbook.cat.orig &gt; docbook.cat &amp;&amp;
+install -d /usr/share/sgml/docbook/sgml-dtd-4.3 &amp;&amp;
+chown -R root:root . &amp;&amp;
+chmod -R 755 . &amp;&amp;
+install docbook.cat /usr/share/sgml/docbook/sgml-dtd-4.3/catalog &amp;&amp;
+cp -af *.dtd *.mod *.dcl /usr/share/sgml/docbook/sgml-dtd-4.3 &amp;&amp;
+install-catalog --add /etc/sgml/sgml-docbook-dtd-4.3.cat \
+    /usr/share/sgml/docbook/sgml-dtd-4.3/catalog &amp;&amp;
+install-catalog --add /etc/sgml/sgml-docbook-dtd-4.3.cat \
+    /etc/sgml/sgml-docbook.cat</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <pre class="screen">
+<span><b class="command">cp docbook.cat docbook.cat.orig
+sed -e '/ISO 8879/d' docbook.cat.orig &gt; docbook.cat
+cp docbook.cat docbook.cat.orig
+sed -e '/gml/d' docbook.cat.orig &gt; docbook.cat</b></span>
+</pre>
+        <p>
+          These commands remove the ENT definitions from the catalog file.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring DocBook SGML DTD
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3244063" name="id3244063"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/sgml/catalog</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3244076" name="id3244076"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The above installation script updates the catalog.
+          </p>
+          <p>
+            Using only the most current 4.x version of <span class=
+            "application">DocBook <span class="acronym">SGML</span>
+            <span class="acronym">DTD</span></span> requires the following:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /usr/share/sgml/docbook/sgml-dtd-4.3/catalog &lt;&lt; "EOF"</b></span>
+  -- Begin Single Major Version catalog changes --
+
+PUBLIC "-//OASIS//DTD DocBook V4.2//EN" "docbook.dtd"
+PUBLIC "-//OASIS//DTD DocBook V4.1//EN" "docbook.dtd"
+PUBLIC "-//OASIS//DTD DocBook V4.0//EN" "docbook.dtd"
+
+  -- End Single Major Version catalog changes --
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">DocBook <span class=
+          "acronym">SGML</span> <span class="acronym">DTD</span></span>
+          package contains <tt class="filename">DTD</tt> files and <tt class=
+          "filename">MOD</tt> files.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3244689" name="id3244689"></a>DTD files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">DTD</tt> files contain a document type
+            definition which defines the element types and the attribute
+            lists that can be used in the corresponding <span class=
+            "acronym">SGML</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3244915" name="id3244915"></a>MOD files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">MOD</tt> files contain components of the
+            document type definition that are sourced into the <tt class=
+            "filename">DTD</tt> files.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="sgml-dtd-3.html">Prev</a><br />
+        DocBook SGML DTD-3.1
+      </div>
+      <div class="next">
+        <a accesskey="n" href="opensp.html">Next</a><br />
+        OpenSP-1.5.1
+      </div>
+      <div class="up">
+        <a accesskey="u" href="sgml.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

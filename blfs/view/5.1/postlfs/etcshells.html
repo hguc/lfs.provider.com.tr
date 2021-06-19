@@ -1,0 +1,91 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      /etc/shells
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;3.&nbsp;After LFS Configuration Issues</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="logon.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="random.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          /etc/shells
+        </h1>
+      </div>
+      <p>
+        The <tt class="filename">shells</tt> file contains a list of login
+        shells on the system. Applications use this file to determine whether
+        a shell is valid. For each shell a single line should be present,
+        consisting of the shell's path, relative to root.
+      </p>
+      <p>
+        For example, this file is consulted by <span><b class=
+        "command">chsh</b></span> to determine whether a normal user may
+        change the login shell for her own account. If the command name is
+        not listed, the user will be denied of change.
+      </p>
+      <p>
+        It is a requirement for applications such as <span class=
+        "acronym">GDM</span> which does not populate the face browser if it
+        can't find <tt class="filename">/etc/shells</tt> or <span class=
+        "acronym">FTP</span> daemons which traditionally disallow access to
+        users with shells not included in this file.
+      </p>
+      <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /etc/shells &lt;&lt; "EOF"</b></span>
+# Begin /etc/shells
+
+/bin/sh
+/bin/bash
+
+# End /etc/shells
+<span><b class="command">EOF</b></span></tt>
+</pre>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="logon.html">Prev</a><br />
+        /etc/issue (Customizing your logon)
+      </div>
+      <div class="next">
+        <a accesskey="n" href="random.html">Next</a><br />
+        Random number generation
+      </div>
+      <div class="up">
+        <a accesskey="u" href="config.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

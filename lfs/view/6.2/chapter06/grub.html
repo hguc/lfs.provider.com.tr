@@ -1,0 +1,253 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.34.&nbsp;GRUB-0.97
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="lfs" class="6.2">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Linux From Scratch - Version 6.2
+        </h4>
+        <h3>
+          Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="flex.html" title="Flex-2.5.33">Prev</a>
+          <p>
+            Flex-2.5.33
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gawk.html" title="Gawk-3.1.5">Next</a>
+          <p>
+            Gawk-3.1.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          6.34. GRUB-0.97
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The GRUB package contains the GRand Unified Bootloader.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Approximate build
+              time:</span></strong> <span class="seg">0.2 SBU</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Required disk
+              space:</span></strong> <span class="seg">10.2 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            6.34.1. Installation of GRUB
+          </h2>
+        </div>
+        <p>
+          This package is known to have issues when its default optimization
+          flags (including the <em class="parameter"><tt>-march</tt></em> and
+          <em class="parameter"><tt>-mcpu</tt></em> options) are changed. If
+          any environment variables that override default optimizations have
+          been defined, such as <tt class="envar">CFLAGS</tt> and <tt class=
+          "envar">CXXFLAGS</tt>, unset them when building GRUB.
+        </p>
+        <p>
+          Start by applying the following patch to allow for better drive
+          detection, fix some <span class="application">GCC 4.x</span>
+          issues, and provide better SATA support for some disk controllers:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../grub-0.97-disk_geometry-1.patch</kbd></pre>
+        <p>
+          Prepare GRUB for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr</kbd></pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          To test the results, issue: <strong class="userinput"><tt>make
+          check</tt></strong>.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install
+mkdir -v /boot/grub
+cp -v /usr/lib/grub/i386-pc/stage{1,2} /boot/grub</kbd></pre>
+        <p>
+          Replace <tt class="filename">i386-pc</tt> with whatever directory
+          is appropriate for the hardware in use.
+        </p>
+        <p>
+          The <tt class="filename">i386-pc</tt> directory contains a number
+          of <tt class="filename">*stage1_5</tt> files, different ones for
+          different file systems. Review the files available and copy the
+          appropriate ones to the <tt class="filename">/boot/grub</tt>
+          directory. Most users will copy the <tt class=
+          "filename">e2fs_stage1_5</tt> and/or <tt class=
+          "filename">reiserfs_stage1_5</tt> files.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="contents-gRUB" name="contents-gRUB"></a>
+          <h2 class="sect2">
+            6.34.2. Contents of GRUB
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              programs:</span></strong> <span class="seg">grub, grub-install,
+              grub-md5-crypt, grub-set-default, grub-terminfo, and
+              mbchk</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id3687303" name="id3687303"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="grub" name="grub"></a><span class=
+                  "term"><span><strong class=
+                  "command">grub</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    The Grand Unified Bootloader's command shell
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="grub-install" name="grub-install"></a><span class=
+                  "term"><span><strong class=
+                  "command">grub-install</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Installs GRUB on the given device
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="grub-md5-crypt" name=
+                  "grub-md5-crypt"></a><span class=
+                  "term"><span><strong class="command">grub-md5-crypt</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Encrypts a password in MD5 format
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="grub-set-default" name=
+                  "grub-set-default"></a><span class=
+                  "term"><span><strong class=
+                  "command">grub-set-default</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Sets the default boot entry for GRUB
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="grub-terminfo" name="grub-terminfo"></a><span class=
+                  "term"><span><strong class=
+                  "command">grub-terminfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Generates a terminfo command from a terminfo name; it can
+                    be employed if an unknown terminal is being used
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="mbchk" name="mbchk"></a><span class=
+                  "term"><span><strong class=
+                  "command">mbchk</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Checks the format of a multi-boot kernel
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="flex.html" title="Flex-2.5.33">Prev</a>
+          <p>
+            Flex-2.5.33
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gawk.html" title="Gawk-3.1.5">Next</a>
+          <p>
+            Gawk-3.1.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

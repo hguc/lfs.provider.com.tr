@@ -1,0 +1,716 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      PostgreSQL-7.4.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;23.&nbsp;Databases</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="mysql.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="web.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          PostgreSQL-7.4.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to PostgreSQL
+          </h3>
+        </div>
+        <p>
+          <span class="application">Postgre<span class=
+          "acronym">SQL</span></span> is an advanced object-relational
+          database management system (<span class="acronym">ORDBMS</span>),
+          derived from the Berkeley Postgres database management system.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2890658" name="id2890658"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/db/postgresql/v7.4.2/postgresql-7.4.2.tar.bz2">
+                  http://gd.tuwien.ac.at/db/postgresql/v7.4.2/postgresql-7.4.2.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.fr.postgresql.org/v7.4.2/postgresql-7.4.2.tar.bz2">
+                  ftp://ftp.fr.postgresql.org/v7.4.2/postgresql-7.4.2.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 9.7 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 80 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 1.21 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2891257" name="id2891257"></a><span class=
+                  "application">Postgre<span class=
+                  "acronym">SQL</span></span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2891273" name="id2891273"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/readline.html">readline-4.3</a>, <a href=
+              "../general/prog.html#Python">Python-2.3.3</a>, <a href=
+              "../general/tcl.html">Tcl-8.4.6</a>, <a href=
+              "../general/tk.html">Tk-8.4.6</a>, <a href=
+              "../general/genlib.html#openssl">OpenSSL-0.9.7d</a>, <a href=
+              "../postlfs/linux_pam.html">Linux-PAM-0.77</a>, <a href=
+              "http://www.pdc.kth.se/kth-krb/">krb4</a>, <a href=
+              "../postlfs/mitkrb.html">MIT krb5-1.3.3</a> or <a href=
+              "../postlfs/heimdal.html">Heimdal-0.6.2</a>, <a href=
+              "http://ant.apache.org/">Ant</a> and <a href=
+              "http://rendezvous.sourceforge.net/">Rendezvous</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of PostgreSQL
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Postgre<span class=
+          "acronym">SQL</span></span> with the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              If you are upgrading an existing system and are going to
+              install the new files over the old ones, then you should back
+              up your data, shut down the old server and follow the
+              instructions in <a href=
+              "http://www.postgresql.org/docs/7.4/static/install-upgrading.html">
+              the official <span class="application">Postgre<span class=
+              "acronym">SQL</span></span> documentation</a>.
+            </p>
+          </div>
+        </div>
+        <p>
+          Initialize a database cluster with the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">mkdir -p /var/pgsql/data &amp;&amp;
+useradd -d /var/pgsql/data postgres &amp;&amp;
+chown postgres /var/pgsql/data &amp;&amp;
+su - postgres -c '/usr/bin/initdb -D /var/pgsql/data'</b></span></tt>
+</pre>
+        <p>
+          Start the database server with the following command:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">su - postgres -c '/usr/bin/postmaster -D /var/pgsql/data &gt; \
+    /var/pgsql/data/logfile 2&gt;&amp;1 &amp;'</b></span></tt>
+</pre>
+        <p>
+          Create a database and verify the installation:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">su - postgres -c '/usr/bin/createdb test' &amp;&amp;
+echo "create table t1 ( name varchar(20), state_province varchar(20) );" \
+    | (su - postgres -c '/usr/bin/psql test ') &amp;&amp;
+echo "insert into t1 values ('Billy', 'NewYork');" \
+    | (su - postgres -c '/usr/bin/psql test ') &amp;&amp;
+echo "insert into t1 values ('Evanidus', 'Quebec');" \
+    | (su - postgres -c '/usr/bin/psql test ') &amp;&amp;
+echo "insert into t1 values ('Jesse', 'Ontario');" \
+    | (su - postgres -c '/usr/bin/psql test ') &amp;&amp;
+echo "select * from t1;" | (su - postgres -c '/usr/bin/psql test')</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">useradd -d /var/pgsql/data
+          postgres</b></span>: Add an unprivileged user to run the database
+          server.
+        </p>
+        <p>
+          <span><b class="command">createdb test, create table t1 , insert
+          into t1 values..., select * from t1</b></span>: Create a database,
+          add a table to it, insert some rows into the table and select them
+          to verify that the installation is working properly.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring PostgreSQL
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2891175" name="id2891175"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">$PGDATA/pg_ident.con</tt>, <tt class=
+            "filename">$PGDATA/pg_hba.conf</tt>, <tt class=
+            "filename">$PGDATA/postgresql.conf</tt>
+          </p>
+          <p>
+            The <tt class="envar">PGDATA</tt> environment variable is used to
+            distinguish database clusters from one another by setting it to
+            the value of the directory which contains the cluster desired.
+            The three configuration files exist in every <tt class=
+            "filename">PGDATA/</tt> directory. Details on the format of the
+            files and the options that can be set in each can be found in
+            <a href=
+            "file:///usr/share/doc/postgresql/html/index.html">file:///usr/share/doc/postgresql/html/index.html</a>.
+          </p>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/postgresql</tt>
+            init script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-postgresql</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Postgre<span class=
+          "acronym">SQL</span></span> package contains <span><b class=
+          "command">clusterdb</b></span>, <span><b class=
+          "command">createdb</b></span>, <span><b class=
+          "command">createlang</b></span>, <span><b class=
+          "command">createuser</b></span>, <span><b class=
+          "command">dropdb</b></span>, <span><b class=
+          "command">droplang</b></span>, <span><b class=
+          "command">dropuser</b></span>, <span><b class=
+          "command">ecpg</b></span>, <span><b class=
+          "command">initdb</b></span>, <span><b class=
+          "command">initlocation</b></span>, <span><b class=
+          "command">ipcclean</b></span>, <span><b class=
+          "command">pg_config</b></span>, <span><b class=
+          "command">pg_controldata</b></span>, <span><b class=
+          "command">pg_ctl</b></span>, <span><b class=
+          "command">pg_dump</b></span>, <span><b class=
+          "command">pg_dumpall</b></span>, <span><b class=
+          "command">pg_encoding</b></span>, <span><b class=
+          "command">pg_id</b></span>, <span><b class=
+          "command">pg_resetxlog</b></span>, <span><b class=
+          "command">pg_restore</b></span>, <span><b class=
+          "command">pgtclsh</b></span>, <span><b class=
+          "command">pgtksh</b></span>, <span><b class=
+          "command">pltcl_delmod</b></span>, <span><b class=
+          "command">pltcl_listmod</b></span>, <span><b class=
+          "command">pltcl_loadmod</b></span>, <span><b class=
+          "command">postgres</b></span>, <span><b class=
+          "command">postmaster</b></span>, <span><b class=
+          "command">psql</b></span>, <span><b class=
+          "command">vacuumdb</b></span>, <tt class="filename">libecpg</tt>,
+          <tt class="filename">libpgtcl</tt>, <tt class=
+          "filename">libpgtypes</tt>, <tt class="filename">libpq</tt> and
+          various charset modules.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892279" name="id2892279"></a>clusterdb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">clusterdb</b></span> is a utility for
+            reclustering tables in a <span class=
+            "application">Postgre<span class="acronym">SQL</span></span>
+            database.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892300" name="id2892300"></a>createdb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">createdb</b></span> creates a new
+            <span class="application">Postgre<span class=
+            "acronym">SQL</span></span> database.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892321" name="id2892321"></a>createlang
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">createlang</b></span> defines a new
+            <span class="application">Postgre<span class=
+            "acronym">SQL</span></span> procedural language.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892342" name="id2892342"></a>createuser
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">createuser</b></span> defines a new
+            <span class="application">Postgre<span class=
+            "acronym">SQL</span></span> user account.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892363" name="id2892363"></a>dropdb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">dropdb</b></span> removes a <span class=
+            "application">Postgre<span class="acronym">SQL</span></span>
+            database.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892384" name="id2892384"></a>droplang
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">droplang</b></span> removes a
+            <span class="application">Postgre<span class=
+            "acronym">SQL</span></span> procedural language.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892405" name="id2892405"></a>dropuser
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">dropuser</b></span> removes a
+            <span class="application">Postgre<span class=
+            "acronym">SQL</span></span> user account.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892426" name="id2892426"></a>ecpg
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ecpg</b></span> is the embedded
+            <span class="acronym">SQL</span> preprocessor.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892442" name="id2892442"></a>initdb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">initdb</b></span> create a new database
+            cluster.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892455" name="id2892455"></a>initlocation
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">initlocation</b></span> creates a
+            secondary database storage area.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892469" name="id2892469"></a>ipcclean
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ipcclean</b></span> removes shared
+            memory and semaphores left over by an aborted database server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892483" name="id2892483"></a>pg_config
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pg_config</b></span> retrieves
+            <span class="application">Postgre<span class=
+            "acronym">SQL</span></span> version information.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892504" name="id2892504"></a>pg_controldata
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pg_controldata</b></span> returns
+            information initialized during <span><b class=
+            "command">initdb</b></span>, such as the catalog version and
+            server locale.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892524" name="id2892524"></a>pg_ctl
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pg_ctl</b></span> controls stopping and
+            starting the database server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892537" name="id2892537"></a>pg_dump
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pg_dump</b></span> dumps database data
+            and metadata into scripts which are used to recreate the
+            database.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892551" name="id2892551"></a>pg_dumpall
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pg_dumpall</b></span> recursively calls
+            <span><b class="command">pg_dump</b></span> for each database in
+            a cluster.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892570" name="id2892570"></a>pg_resetxlog
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pg_resetxlog</b></span> clears the
+            write-ahead log and optionally resets some fields in the
+            <tt class="filename">pg_control</tt> file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892590" name="id2892590"></a>pg_restore
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pg_restore</b></span> creates databases
+            from dump files created by <span><b class=
+            "command">pg_dump</b></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892610" name="id2892610"></a>pgtclsh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pgtclsh</b></span> is a <span class=
+            "application">Tcl</span> shell interface extended with
+            <span class="application">Postgre<span class=
+            "acronym">SQL</span></span> database access functions.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892637" name="id2892637"></a>pgtksh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pgtksh</b></span> is a <span class=
+            "application">Tcl</span>/<span class="application">Tk</span>
+            shell interface extended with <span class=
+            "application">Postgre<span class="acronym">SQL</span></span>
+            database access functions.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892669" name="id2892669"></a>postgres
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">postgres</b></span> is a single user
+            database server, generally used for debugging.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892683" name="id2892683"></a>postmaster
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">postmaster</b></span> is the multi-user
+            database daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892696" name="id2892696"></a>psql
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">psql</b></span> is a console based
+            database shell.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2892709" name="id2892709"></a>vacuumdb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">vacuumdb</b></span> compacts databases
+            and generates statistics for the query analyzer.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="mysql.html">Prev</a><br />
+        MySQL-4.0.20
+      </div>
+      <div class="next">
+        <a accesskey="n" href="web.html">Next</a><br />
+        Chapter&nbsp;24.&nbsp;Web serving
+      </div>
+      <div class="up">
+        <a accesskey="u" href="databases.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

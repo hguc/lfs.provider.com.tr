@@ -1,0 +1,1600 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Heimdal-1.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;4.&nbsp;Security
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="tripwire.html" title=
+          "Tripwire-2.4.1.2">Prev</a>
+          <p>
+            Tripwire-2.4.1.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="mitkrb.html" title=
+          "MIT Kerberos V5-1.6">Next</a>
+          <p>
+            MIT Kerberos V5-1.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="heimdal" name="heimdal"></a>Heimdal-1.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Heimdal
+        </h2>
+        <p>
+          <span class="application">Heimdal</span> is a free implementation
+          of Kerberos 5 that aims to be compatible with MIT Kerberos 5 and is
+          backward compatible with Kerberos 4. Kerberos is a network
+          authentication protocol. Basically it preserves the integrity of
+          passwords in any untrusted network (like the Internet). Kerberized
+          applications work hand-in-hand with sites that support Kerberos to
+          ensure that passwords cannot be stolen or compromised. A Kerberos
+          installation will make changes to the authentication mechanisms on
+          your network and will overwrite several programs and daemons from
+          the <span class="application">Shadow</span>, <span class=
+          "application">Inetutils</span> and <span class=
+          "application">Qpopper</span> packages. See <a class="ulink" href=
+          "http://anduin.linuxfromscratch.org/files/BLFS/6.3/heimdal-overwrites">
+          http://anduin.linuxfromscratch.org/files/BLFS/6.3/heimdal-overwrites</a>
+          for a complete list of all the files and commands to rename each of
+          them.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://www.h5l.org/dist/src/heimdal-1.1.tar.gz">http://www.h5l.org/dist/src/heimdal-1.1.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.pdc.kth.se/pub/heimdal/src/heimdal-1.1.tar.gz">ftp://ftp.pdc.kth.se/pub/heimdal/src/heimdal-1.1.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 7892e97b346534cc9afeeee461fe3bab
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 3.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 136 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 4.0 SBU (additional 1.5 SBU to run the
+                test suite)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Required Patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/heimdal-1.1-blfs_docs-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/heimdal-1.1-blfs_docs-1.patch</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Required Patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/heimdal-1.1-libss-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/heimdal-1.1-libss-1.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Heimdal Dependencies
+        </h3>
+        <h4>
+          Required to Build the Server-Side Tools
+        </h4>
+        <p class="required">
+          <a class="xref" href="../server/db.html" title=
+          "Berkeley DB-4.5.20">Berkeley DB-4.5.20</a> is recommended
+          (installed in LFS) or <a class="xref" href="../general/gdbm.html"
+          title="GDBM-1.8.3">GDBM-1.8.3</a>
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="openssl.html" title=
+          "OpenSSL-0.9.8g">OpenSSL-0.9.8g</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="linux-pam.html" title=
+          "Linux-PAM-0.99.10.0">Linux-PAM-0.99.10.0</a>, <a class="xref"
+          href="../server/openldap.html" title=
+          "OpenLDAP-2.3.39">OpenLDAP-2.3.39</a>, <a class="xref" href=
+          "../x/installing.html" title=
+          "Chapter&nbsp;23.&nbsp;X Window System Environment">X Window
+          System</a>, and <a class="ulink" href=
+          "http://packages.debian.org/stable/source/libcap">libcap</a>
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Some sort of time synchronization facility on your system (like
+            <a class="xref" href="../basicnet/ntp.html" title=
+            "NTP-4.2.4p0">NTP-4.2.4p0</a>) is required since Kerberos won't
+            authenticate if the time differential between a kerberized client
+            and the KDC server is more than 5 minutes.
+          </p>
+        </div>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/heimdal">http://wiki.linuxfromscratch.org/blfs/wiki/heimdal</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Heimdal
+        </h2>
+        <div class="admon warning">
+          <img alt="[Warning]" src="../images/warning.png" />
+          <h3>
+            Warning
+          </h3>
+          <p>
+            Ensure you really need a Kerberos installation before you decide
+            to install this package. Failure to install and configure the
+            package correctly can alter your system so that users cannot log
+            in.
+          </p>
+        </div>
+        <p>
+          Install <span class="application">Heimdal</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">patch -Np1 -i ../heimdal-1.1-blfs_docs-1.patch &amp;&amp;
+patch -Np1 -i ../heimdal-1.1-libss-1.patch &amp;&amp;
+
+./configure --prefix=/usr \
+            --sysconfdir=/etc/heimdal \
+            --libexecdir=/usr/sbin \
+            --localstatedir=/var/lib/heimdal \
+            --datadir=/var/lib/heimdal \
+            --with-hdbdir=/var/lib/heimdal \
+            --with-readline=/usr \
+            --enable-kcm &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          If you have <a class="xref" href="../pst/tetex.html" title=
+          "teTeX-3.0">teTeX-3.0</a> installed and wish to create alternate
+          forms of the documentation, change into the <code class=
+          "filename">doc</code> directory and issue any or all of the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">pushd doc                                        &amp;&amp;
+
+make html                                        &amp;&amp;
+
+texi2pdf                            heimdal.texi &amp;&amp;
+texi2dvi                            heimdal.texi &amp;&amp;
+dvips                -o heimdal.ps  heimdal.dvi  &amp;&amp;
+makeinfo --plaintext -o heimdal.txt heimdal.texi &amp;&amp;
+
+texi2pdf                            hx509.texi   &amp;&amp;
+texi2dvi                            hx509.texi   &amp;&amp;
+dvips                -o hx509.ps    hx509.dvi    &amp;&amp;
+makeinfo --plaintext -o hx509.txt   hx509.texi   &amp;&amp;
+
+popd</kbd>
+</pre>
+        <p>
+          To test the results, issue: <span class="command"><strong>make -k
+          check</strong></span>. The <span class=
+          "command"><strong>ipropd</strong></span> test is known to fail but
+          all others should pass.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+
+install -v -m755 -d /usr/share/doc/heimdal-1.1 &amp;&amp;
+install -v -m644    doc/{init-creds,layman.asc} \
+                    /usr/share/doc/heimdal-1.1 &amp;&amp;
+
+ln -sfv         mech.5 /usr/share/man/man5/qop.5  &amp;&amp;
+ln -sfv ../man5/mech.5 /usr/share/man/cat5/qop.5  &amp;&amp;
+ln -sfv ../man5/mech.5 /usr/share/man/cat5        &amp;&amp;
+
+mv -v /bin/login          /bin/login.SHADOW &amp;&amp;
+mv -v /bin/su             /bin/su.SHADOW    &amp;&amp;
+mv -v /usr/bin/{login,su} /bin              &amp;&amp;
+ln -v -sf ../../bin/login /usr/bin          &amp;&amp;
+
+for LINK in   lib{otp,kafs,krb5,hx509,asn1,roken,crypto}; do
+    mv -v     /usr/lib/${LINK}.so.* /lib &amp;&amp;
+    ln -v -sf ../../lib/$(readlink  /usr/lib/${LINK}.so) \
+              /usr/lib/${LINK}.so
+done &amp;&amp;
+
+mv -v     /usr/lib/$(readlink /usr/lib/libdb.so) \
+          /usr/lib/libdb-?.so \
+          /lib &amp;&amp;
+ln -v -sf ../../lib/$(readlink /usr/lib/libdb.so) \
+          /usr/lib/libdb.so &amp;&amp;
+
+ldconfig</kbd>
+</pre>
+        <p>
+          If you built any of the alternate forms of documentation, install
+          it using the following commands as the <code class=
+          "systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class=
+"command">install -v -m644 doc/{heimdal,hx509}.{dvi,ps,pdf,html,txt} \
+                 /usr/share/doc/heimdal-1.1</kbd>
+</pre>
+        <p>
+          If you wish to use the <a class="xref" href="cracklib.html" title=
+          "CrackLib-2.8.12">CrackLib-2.8.12</a> library to enforce strong
+          passwords in the KDC database, issue the following commands as the
+          <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">sed -e 's|/usr/pkg|/usr|' \
+    -e 's|/usr/lib/cracklib_dict|/lib/cracklib/pw_dict|' \
+    -e 's|/var/heimdal|/var/lib/heimdal|' \
+        lib/kadm5/check-cracklib.pl \
+    &gt; /bin/krb5-check-cracklib.pl &amp;&amp;
+
+chmod -v 755 /bin/krb5-check-cracklib.pl</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--libexecdir=/usr/sbin</code></em>:
+          This switch causes the daemon programs to be installed into
+          <code class="filename">/usr/sbin</code>.
+        </p>
+        <div class="admon tip">
+          <img alt="[Tip]" src="../images/tip.png" />
+          <h3>
+            Tip
+          </h3>
+          <p>
+            If you want to preserve all your existing <span class=
+            "application">Inetutils</span> package daemons, install the
+            <span class="application">Heimdal</span> daemons into
+            <code class="filename">/usr/sbin/heimdal</code> (or wherever you
+            want). Since these programs will be called from <span class=
+            "command"><strong>(x)inetd</strong></span> or <code class=
+            "filename">rc</code> scripts, it really doesn't matter where they
+            are installed, as long as they are correctly specified in the
+            <code class="filename">/etc/(x)inetd.conf</code> file and
+            <code class="filename">rc</code> scripts. If you choose something
+            other than <code class="filename">/usr/sbin</code>, you may want
+            to move some of the user programs (such as <span class=
+            "command"><strong>kadmin</strong></span>) to <code class=
+            "filename">/usr/sbin</code> manually so they'll be in the
+            privileged user's default <code class="envar">PATH</code>.
+          </p>
+        </div>
+        <p>
+          <em class=
+          "parameter"><code>--localstatedir=/var/lib/heimdal</code></em>,
+          <em class="parameter"><code>--datadir=/var/lib/heimdal</code></em>
+          and <em class=
+          "parameter"><code>--with-hdbdir=/var/lib/heimdal</code></em>: These
+          parameters are used so that the KDC database and associated files
+          will all reside in <code class="filename">/var/lib/heimdal</code>.
+        </p>
+        <p>
+          <em class="parameter"><code>--with-readline=/usr</code></em>: This
+          parameter must be used so that the <span class=
+          "command"><strong>configure</strong></span> script properly locates
+          the installed <span class="application">Readline</span> package.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-kcm</code></em>: This
+          parameter enables building the Kerberos Credentials Manager.
+        </p>
+        <p>
+          <span class="command"><strong>ln -sfv .../mech.5
+          /usr/share/man/...</strong></span>: These commands are used to fix
+          some broken symbolic links.
+        </p>
+        <p>
+          <span class="command"><strong>mv ... ...SHADOW</strong></span>,
+          <span class="command"><strong>mv ... /bin</strong></span> and
+          <span class="command"><strong>ln ... /usr/bin</strong></span>: The
+          <span class="command"><strong>login</strong></span> and
+          <span class="command"><strong>su</strong></span> programs installed
+          by <span class="application">Heimdal</span> belong in the
+          <code class="filename">/bin</code> directory. The <span class=
+          "command"><strong>login</strong></span> program is symlinked
+          because <span class="application">Heimdal</span> is expecting to
+          find it in <code class="filename">/usr/bin</code>. The old
+          executables from the <span class="application">Shadow</span>
+          package are preserved before the move so that they can be restored
+          if you experience problems logging into the system after the
+          <span class="application">Heimdal</span> package is installed and
+          configured.
+        </p>
+        <p>
+          <span class="command"><strong>for LINK in ...; do ...;
+          done</strong></span>, <span class="command"><strong>mv ...
+          /lib</strong></span> and <span class="command"><strong>ln ...
+          /usr/lib/libdb.so</strong></span>: The <span class=
+          "command"><strong>login</strong></span> and <span class=
+          "command"><strong>su</strong></span> programs previously moved into
+          the <code class="filename">/lib</code> directory link against
+          <span class="application">Heimdal</span> libraries as well as
+          libraries provided by the <span class="application">OpenSSL</span>
+          and <span class="application">Berkeley DB</span> packages. These
+          libraries are also moved to <code class="filename">/lib</code> so
+          they are FHS compliant and also in case <code class=
+          "filename">/usr</code> is located on a separate partition which may
+          not always be mounted.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring Heimdal
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="heimdal-config" name="heimdal-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/heimdal/*</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <div class="admon note">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3>
+              Note
+            </h3>
+            <p>
+              All the configuration steps shown below must be accomplished by
+              the <code class="systemitem">root</code> user unless otherwise
+              noted.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2618388" name="id2618388"></a>Master KDC Server
+                    Configuration
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              Many of the commands below use <em class=
+              "replaceable"><code>&lt;replaceable&gt;</code></em> tags to
+              identify places where you need to substitute information
+              specific to your network. Ensure you replace everything in
+              these tags (there will be no angle brackets when you are done)
+              with your site-specific information.
+            </p>
+            <p>
+              Create the Kerberos configuration file with the following
+              commands:
+            </p>
+            <pre class="root">
+<kbd class="command">install -v -m755 -d /etc/heimdal &amp;&amp;
+cat &gt; /etc/heimdal/krb5.conf &lt;&lt; "EOF" &amp;&amp;
+<code class="literal"># Begin /etc/heimdal/krb5.conf
+
+[libdefaults]
+    default_realm = <em class=
+"replaceable"><code>&lt;EXAMPLE.COM&gt;</code></em>
+    encrypt = true
+
+[realms]
+    <em class="replaceable"><code>&lt;EXAMPLE.COM&gt;</code></em> = {
+        kdc = <em class=
+"replaceable"><code>&lt;hostname.example.com&gt;</code></em>
+        admin_server = <em class=
+"replaceable"><code>&lt;hostname.example.com&gt;</code></em>
+        kpasswd_server = <em class=
+"replaceable"><code>&lt;hostname.example.com&gt;</code></em>
+    }
+
+[domain_realm]
+    .<em class=
+"replaceable"><code>&lt;example.com&gt;</code></em> = <em class=
+"replaceable"><code>&lt;EXAMPLE.COM&gt;</code></em>
+
+[logging]
+    kdc = FILE:/var/log/kdc.log
+    admin_server = FILE:/var/log/kadmin.log
+    default = FILE:/var/log/krb.log
+
+# End /etc/heimdal/krb5.conf</code>
+EOF
+chmod -v 644 /etc/heimdal/krb5.conf</kbd>
+</pre>
+            <p>
+              You will need to substitute your domain and proper hostname for
+              the occurrences of the <em class=
+              "replaceable"><code>&lt;hostname&gt;</code></em> and <em class=
+              "replaceable"><code>&lt;EXAMPLE.COM&gt;</code></em> names.
+            </p>
+            <p>
+              <code class="option">default_realm</code> should be the name of
+              your domain changed to ALL CAPS. This isn't required, but both
+              <span class="application">Heimdal</span> and <span class=
+              "application">MIT Kerberos</span> recommend it.
+            </p>
+            <p>
+              <code class="option">encrypt = true</code> provides encryption
+              of all traffic between kerberized clients and servers. It's not
+              necessary and can be left off. If you leave it off, you can
+              encrypt all traffic from the client to the server using a
+              switch on the client program instead. The <code class=
+              "option">[realms]</code> parameters tell the client programs
+              where to look for the KDC authentication services. The
+              <code class="option">[domain_realm]</code> section maps a
+              domain to a realm.
+            </p>
+            <p>
+              Store the master password in a key file using the following
+              commands:
+            </p>
+            <pre class="root">
+<kbd class="command">install -v -m755 -d /var/lib/heimdal &amp;&amp;
+kstash</kbd>
+</pre>
+            <p>
+              Create the KDC database:
+            </p>
+            <pre class="root">
+<kbd class="command">kadmin -l</kbd>
+</pre>
+            <p>
+              The commands below will prompt you for information about the
+              principles. Choose the defaults for now unless you know what
+              you are doing and need to specify different values. You can go
+              in later and change the defaults, should you feel the need. You
+              may use the up and down arrow keys to use the history feature
+              of <span class="command"><strong>kadmin</strong></span> in a
+              similar manner as the <span class=
+              "command"><strong>bash</strong></span> history feature.
+            </p>
+            <p>
+              At the <code class="prompt">kadmin&gt;</code> prompt, issue the
+              following statement:
+            </p>
+            <pre class="root">
+<kbd class="command">init <em class=
+"replaceable"><code>&lt;EXAMPLE.COM&gt;</code></em></kbd>
+</pre>
+            <p>
+              The database must now be populated with at least one principle
+              (user). For now, just use your regular login name or root. You
+              may create as few, or as many principles as you wish using the
+              following statement:
+            </p>
+            <pre class="root">
+<kbd class="command">add <em class=
+"replaceable"><code>&lt;loginname&gt;</code></em></kbd>
+</pre>
+            <p>
+              The KDC server and any machine running kerberized server
+              daemons must have a host key installed:
+            </p>
+            <pre class="root">
+<kbd class="command">add --random-key host/<em class=
+"replaceable"><code>&lt;hostname.example.com&gt;</code></em></kbd>
+</pre>
+            <p>
+              After choosing the defaults when prompted, you will have to
+              export the data to a keytab file:
+            </p>
+            <pre class="root">
+<kbd class="command">ext host/<em class=
+"replaceable"><code>&lt;hostname.example.com&gt;</code></em></kbd>
+</pre>
+            <p>
+              This should have created two files in <code class=
+              "filename">/etc/heimdal</code>: <code class=
+              "filename">krb5.keytab</code> (Kerberos 5) and <code class=
+              "filename">srvtab</code> (Kerberos 4). Both files should have
+              600 (root rw only) permissions. Keeping the keytab files from
+              public access is crucial to the overall security of the
+              Kerberos installation.
+            </p>
+            <p>
+              Eventually, you'll want to add server daemon principles to the
+              database and extract them to the keytab file. You do this in
+              the same way you created the host principles. Below is an
+              example:
+            </p>
+            <pre class="root">
+<kbd class="command">add --random-key ftp/<em class=
+"replaceable"><code>&lt;hostname.example.com&gt;</code></em></kbd>
+</pre>
+            <p>
+              (choose the defaults)
+            </p>
+            <pre class="root">
+<kbd class="command">ext ftp/<em class=
+"replaceable"><code>&lt;hostname.example.com&gt;</code></em></kbd>
+</pre>
+            <p>
+              Exit the <span class="command"><strong>kadmin</strong></span>
+              program (use <span class="command"><strong>quit</strong></span>
+              or <span class="command"><strong>exit</strong></span>) and
+              return back to the shell prompt. Start the KDC daemon manually,
+              just to test out the installation:
+            </p>
+            <pre class="root">
+<kbd class="command">/usr/sbin/kdc &amp;</kbd>
+</pre>
+            <p>
+              Attempt to get a TGT (ticket granting ticket) with the
+              following command:
+            </p>
+            <pre class="userinput">
+<kbd class="command">kinit <em class=
+"replaceable"><code>&lt;loginname&gt;</code></em></kbd>
+</pre>
+            <p>
+              You will be prompted for the password you created. After you
+              get your ticket, you should list it with the following command:
+            </p>
+            <pre class="userinput">
+<kbd class="command">klist</kbd>
+</pre>
+            <p>
+              Information about the ticket should be displayed on the screen.
+            </p>
+            <p>
+              To test the functionality of the <code class=
+              "filename">keytab</code> file, issue the following command:
+            </p>
+            <pre class="userinput">
+<kbd class="command">ktutil list</kbd>
+</pre>
+            <p>
+              This should dump a list of the host principals, along with the
+              encryption methods used to access the principals.
+            </p>
+            <p>
+              At this point, if everything has been successful so far, you
+              can feel fairly confident in the installation, setup and
+              configuration of your new <span class=
+              "application">Heimdal</span> Kerberos 5 installation.
+            </p>
+            <p>
+              If you wish to use the <a class="xref" href="cracklib.html"
+              title="CrackLib-2.8.12">CrackLib-2.8.12</a> library to enforce
+              strong passwords in the KDC database, you must do two things.
+              First, add the following lines to the <code class=
+              "filename">/etc/heimdal/krb5.conf</code> configuration file:
+            </p>
+            <pre class="screen">
+<code class="literal">[password_quality]
+    policies = builtin:external-check
+    external_program = /bin/krb5-check-cracklib.pl</code>
+</pre>
+            <p>
+              Next you must install the <span class=
+              "application">Crypt::Cracklib</span> <span class=
+              "application">Perl</span> module. Download it from the CPAN
+              site. The URL at the time of this writing is <a class="ulink"
+              href=
+              "http://cpan.org/authors/id/D/DA/DANIEL/Crypt-Cracklib-1.2.tar.gz">
+              http://cpan.org/authors/id/D/DA/DANIEL/Crypt-Cracklib-1.2.tar.gz</a>.
+              After unpacking the tarball and changing into the newly created
+              directory, issue the following command to add the BLFS
+              <span class="application">Cracklib</span> dictionary location
+              to one of the source files:
+            </p>
+            <pre class="userinput">
+<kbd class=
+"command">sed -i 's|pw_dict|&amp;\n\t\t/lib/cracklib/pw_dict|' Cracklib.pm</kbd>
+</pre>
+            <p>
+              Then use the standard <span class="command"><strong>perl
+              Makefile.PL</strong></span>; <span class=
+              "command"><strong>make</strong></span>; <span class=
+              "command"><strong>make test</strong></span>; <span class=
+              "command"><strong>make install</strong></span> commands. Note
+              that one test fails due to an unknown reason.
+            </p>
+            <p>
+              <a id="heimdal-init" name="heimdal-init"></a>Install the
+              <code class="filename">/etc/rc.d/init.d/heimdal</code> init
+              script included in the <a class="xref" href=
+              "../introduction/bootscripts.html" title=
+              "BLFS Boot Scripts">blfs-bootscripts-20080816</a> package:
+            </p>
+            <pre class="root">
+<kbd class="command">make install-heimdal</kbd>
+</pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2618984" name="id2618984"></a>Using Kerberized
+                    Client Programs
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              To use the kerberized client programs (<span class=
+              "command"><strong>telnet</strong></span>, <span class=
+              "command"><strong>ftp</strong></span>, <span class=
+              "command"><strong>rsh</strong></span>, <span class=
+              "command"><strong>rxterm</strong></span>, <span class=
+              "command"><strong>rxtelnet</strong></span>, <span class=
+              "command"><strong>rcp</strong></span>, <span class=
+              "command"><strong>xnlock</strong></span>), you first must get a
+              TGT. Use the <span class=
+              "command"><strong>kinit</strong></span> program to get the
+              ticket. After you've acquired the ticket, you can use the
+              kerberized programs to connect to any kerberized server on the
+              network. You will not be prompted for authentication until your
+              ticket expires (default is one day), unless you specify a
+              different user as a command line argument to the program.
+            </p>
+            <p>
+              The kerberized programs will connect to non-kerberized daemons,
+              warning you that authentication is not encrypted.
+            </p>
+            <p>
+              In order to use the <span class="application">Heimdal</span>
+              <span class="application">X</span> programs, you'll need to add
+              a service port entry to the <code class=
+              "filename">/etc/services</code> file for the <span class=
+              "command"><strong>kxd</strong></span> server. There is no
+              'standardized port number' for the 'kx' service in the IANA
+              database, so you'll have to pick an unused port number. Add an
+              entry to the <code class="filename">services</code> file
+              similar to the entry below (substitute your chosen port number
+              for <em class="replaceable"><code>&lt;49150&gt;</code></em>):
+            </p>
+            <pre class="screen">
+<code class="literal">kx              <em class=
+"replaceable"><code>&lt;49150&gt;</code></em>/tcp   # Heimdal kerberos X
+kx              <em class=
+"replaceable"><code>&lt;49150&gt;</code></em>/udp   # Heimdal kerberos X</code>
+</pre>
+            <p>
+              For additional information consult <a class="ulink" href=
+              "http://www.linuxfromscratch.org/hints/downloads/files/heimdal.txt">
+              the Heimdal hint</a> on which the above instructions are based.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">afslog, ftp, ftpd, gss, hprop, hpropd,
+              hxtool, iprop-log, ipropd-master, ipropd-slave, kadmin,
+              kadmind, kauth, kcm, kdc, kdestroy, kdigest, kf, kfd, kgetcred,
+              kimpersonate, kinit, klist, kpasswd, kpasswdd,
+              krb5-check-cracklib.pl, krb5-config, kstash, ktutil, kx, kxd,
+              login, mk_cmds-krb5, otp, otpprint, pagsh, pfrom, popper, push,
+              rcp, rsh, rshd, rxtelnet, rxterm, string2key, su, telnet,
+              telnetd, tenletxr, verify_krb5_conf and xnlock</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">hdb_ldap.{so,a}, libasn1.{so,a},
+              libeditline.{so,a}, libgssapi.{so,a}, libhdb.{so,a},
+              libheimntlm.{so,a}, libhx509.{so,a}, libkadm5clnt.{so,a},
+              libkadm5srv.{so,a}, libkafs.{so,a}, libkdc.{so,a},
+              libkrb5.{so,a}, libotp.{so,a}, libroken.{so,a}, libsl.{so,a},
+              libss-krb5.{so,a} and windc.{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/heimdal, /usr/include/gssapi,
+              /usr/include/kadm5, /usr/include/krb5, /usr/include/roken,
+              /usr/include/ss, /usr/share/doc/heimdal-1.1 and
+              /var/lib/heimdal</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="afslog" name="afslog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>afslog</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    obtains AFS tokens for a number of cells.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ftp" name="ftp"></a><span class=
+                    "term"><span class="command"><strong>ftp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized FTP client.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ftpd" name="ftpd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ftpd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized FTP daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hprop" name="hprop"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hprop</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    takes a principal database in a specified format and
+                    converts it into a stream of <span class=
+                    "application">Heimdal</span> database records.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hpropd" name="hpropd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hpropd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a server that receives a database sent by <span class=
+                    "command"><strong>hprop</strong></span> and writes it as
+                    a local database.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="iprop-log" name="iprop-log"></a><span class=
+                    "term"><span class=
+                    "command"><strong>iprop-log</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to maintain the iprop log file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ipropd-master" name=
+                    "ipropd-master"></a><span class="term"><span class=
+                    "command"><strong>ipropd-master</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a daemon which runs on the master KDC server which
+                    incrementally propagates changes to the KDC database to
+                    the slave KDC servers.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ipropd-slave" name="ipropd-slave"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ipropd-slave</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a daemon which runs on the slave KDC servers which
+                    incrementally propagates changes to the KDC database from
+                    the master KDC server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kadmin" name="kadmin"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kadmin</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a utility used to make modifications to the Kerberos
+                    database.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kadmind" name="kadmind"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kadmind</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a server for administrative access to the Kerberos
+                    database.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kauth" name="kauth"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kauth</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to the <span class=
+                    "command"><strong>kinit</strong></span> program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kcm" name="kcm"></a><span class=
+                    "term"><span class="command"><strong>kcm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a process based credential cache for Kerberos tickets.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kdc" name="kdc"></a><span class=
+                    "term"><span class="command"><strong>kdc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a Kerberos 5 server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kdestroy" name="kdestroy"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kdestroy</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    removes a principle's current set of tickets.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kf" name="kf"></a><span class="term"><span class=
+                    "command"><strong>kf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a program which forwards tickets to a remote host
+                    through an authenticated and encrypted stream.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kfd" name="kfd"></a><span class=
+                    "term"><span class="command"><strong>kfd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a server used to receive forwarded tickets.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kgetcred" name="kgetcred"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kgetcred</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    obtains a ticket for a service.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kinit" name="kinit"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kinit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to authenticate to the Kerberos server as a
+                    principal and acquire a ticket granting ticket that can
+                    later be used to obtain tickets for other services.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="klist" name="klist"></a><span class=
+                    "term"><span class=
+                    "command"><strong>klist</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    reads and displays the current tickets in the credential
+                    cache.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kpasswd" name="kpasswd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kpasswd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a program for changing Kerberos 5 passwords.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kpasswdd" name="kpasswdd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kpasswdd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a Kerberos 5 password changing server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="krb5-config-prog" name=
+                    "krb5-config-prog"></a><span class="term"><span class=
+                    "command"><strong>krb5-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    gives information on how to link programs against
+                    <span class="application">Heimdal</span> libraries.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kstash" name="kstash"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kstash</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    stores the KDC master password in a file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ktutil" name="ktutil"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ktutil</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a program for managing Kerberos keytabs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kx" name="kx"></a><span class="term"><span class=
+                    "command"><strong>kx</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a program which securely forwards <span class=
+                    "application">X</span> connections.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kxd" name="kxd"></a><span class=
+                    "term"><span class="command"><strong>kxd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the daemon for <span class=
+                    "command"><strong>kx</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="login" name="login"></a><span class=
+                    "term"><span class=
+                    "command"><strong>login</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized login program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="otp" name="otp"></a><span class=
+                    "term"><span class="command"><strong>otp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    manages one-time passwords.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="otpprint" name="otpprint"></a><span class=
+                    "term"><span class=
+                    "command"><strong>otpprint</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    prints lists of one-time passwords.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pfrom" name="pfrom"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pfrom</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a script that runs <span class="command"><strong>push
+                    --from</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="popper" name="popper"></a><span class=
+                    "term"><span class=
+                    "command"><strong>popper</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized POP-3 server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="push" name="push"></a><span class=
+                    "term"><span class=
+                    "command"><strong>push</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized POP mail retrieval client.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rcp" name="rcp"></a><span class=
+                    "term"><span class="command"><strong>rcp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized rcp client program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rsh" name="rsh"></a><span class=
+                    "term"><span class="command"><strong>rsh</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized rsh client program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rshd" name="rshd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rshd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized rsh server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rxtelnet" name="rxtelnet"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rxtelnet</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    starts a secure <span class=
+                    "command"><strong>xterm</strong></span> window with a
+                    <span class="command"><strong>telnet</strong></span> to a
+                    given host and forwards <span class=
+                    "application">X</span> connections.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rxterm" name="rxterm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rxterm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    starts a secure remote <span class=
+                    "command"><strong>xterm</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="string2key" name="string2key"></a><span class=
+                    "term"><span class=
+                    "command"><strong>string2key</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    maps a password into a key.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="su" name="su"></a><span class="term"><span class=
+                    "command"><strong>su</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized su client program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="telnet" name="telnet"></a><span class=
+                    "term"><span class=
+                    "command"><strong>telnet</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized telnet client program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="telnetd" name="telnetd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>telnetd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a kerberized telnet server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tenletxr" name="tenletxr"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tenletxr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    forwards <span class="application">X</span> connections
+                    backwards.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="verify_krb5_conf" name=
+                    "verify_krb5_conf"></a><span class="term"><span class=
+                    "command"><strong>verify_krb5_conf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    checks <code class="filename">krb5.conf</code> file for
+                    obvious errors.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xnlock" name="xnlock"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xnlock</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a program that acts as a secure screen saver for
+                    workstations running <span class="application">X</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libasn1" name="libasn1"></a><span class=
+                    "term"><code class=
+                    "filename">libasn1.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides the ASN.1 and DER functions to encode and decode
+                    the Kerberos TGTs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libeditline" name="libeditline"></a><span class=
+                    "term"><code class="filename">libeditline.a</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command-line editing library with history.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgssapi" name="libgssapi"></a><span class=
+                    "term"><code class=
+                    "filename">libgssapi.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contain the Generic Security Service Application
+                    Programming Interface (GSSAPI) functions which provides
+                    security services to callers in a generic fashion,
+                    supportable with a range of underlying mechanisms and
+                    technologies and hence allowing source-level portability
+                    of applications to different environments.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libhdb" name="libhdb"></a><span class=
+                    "term"><code class="filename">libhdb.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a <span class="application">Heimdal</span> Kerberos 5
+                    authentication/authorization database access library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libkadm5clnt" name="libkadm5clnt"></a><span class=
+                    "term"><code class=
+                    "filename">libkadm5clnt.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the administrative authentication and password
+                    checking functions required by Kerberos 5 client-side
+                    programs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libkadm5srv" name="libkadm5srv"></a><span class=
+                    "term"><code class=
+                    "filename">libkadm5srv.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contain the administrative authentication and password
+                    checking functions required by Kerberos 5 servers.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libkafs" name="libkafs"></a><span class=
+                    "term"><code class=
+                    "filename">libkafs.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the functions required to authenticated to AFS.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libkrb5" name="libkrb5"></a><span class=
+                    "term"><code class=
+                    "filename">libkrb5.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an all-purpose Kerberos 5 library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libotp" name="libotp"></a><span class=
+                    "term"><code class="filename">libotp.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the functions required to handle authenticating
+                    one time passwords.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libroken" name="libroken"></a><span class=
+                    "term"><code class=
+                    "filename">libroken.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a library containing Kerberos 5 compatibility
+                    functions.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-05-09 08:00:42 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="tripwire.html" title=
+          "Tripwire-2.4.1.2">Prev</a>
+          <p>
+            Tripwire-2.4.1.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="mitkrb.html" title=
+          "MIT Kerberos V5-1.6">Next</a>
+          <p>
+            MIT Kerberos V5-1.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

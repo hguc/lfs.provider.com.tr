@@ -1,0 +1,421 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      TIN-1.8.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;18.&nbsp;Mail/News Clients
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="pine.html" title="Pine-4.64">Prev</a>
+          <p>
+            Pine-4.64
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="othermn.html" title=
+          "Other Mail and News Programs">Next</a>
+          <p>
+            Other Mail and News Programs
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mailnews.html" title=
+          "Chapter&nbsp;18.&nbsp;Mail/News Clients">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="tin" name="tin"></a>TIN-1.8.3
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to TIN
+        </h2>
+        <p>
+          <span class="application">TIN</span> is a threaded NNTP and spool
+          based console-mode UseNet newsreader. It supports threading,
+          scoring, different charsets, and many other useful things. It has
+          also support for different languages.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://gd.tuwien.ac.at/infosys/newsreaders/tin/v1.8/tin-1.8.3.tar.bz2">
+                http://gd.tuwien.ac.at/infosys/newsreaders/tin/v1.8/tin-1.8.3.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.tin.org/pub/news/clients/tin/v1.8/tin-1.8.3.tar.bz2">
+                ftp://ftp.tin.org/pub/news/clients/tin/v1.8/tin-1.8.3.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: e6ed45205020665c097556822b0d575b
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.4 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 12.4 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.4 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          TIN Dependencies
+        </h3>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/pcre.html" title=
+          "PCRE-7.6">PCRE-7.6</a>, <a class="xref" href=
+          "../general/libidn.html" title="Libidn-0.6.14">libidn-0.6.14</a>,
+          an <a class="xref" href="../server/mail.html" title=
+          "Chapter&nbsp;20.&nbsp;Mail Server Software">MTA</a> that provides
+          the <span class="command"><strong>sendmail</strong></span> command
+          or <a class="xref" href="mailx.html" title=
+          "Heirloom mailx-12.2">Heirloom mailx-12.2</a>, <a class="xref"
+          href="../postlfs/gnupg.html" title="GnuPG-1.4.7">GnuPG-1.4.7</a>,
+          <a class="xref" href="../general/aspell.html" title=
+          "Aspell-0.60.5">Aspell-0.60.5</a>, <a class="ulink" href=
+          "http://www.isc.org/index.pl?/sw/inn/">INN</a>, <a class="ulink"
+          href="http://www.fpx.de/fp/Software/UUDeview/">UUDeview</a>,
+          <a class="ulink" href="http://www.inet.no/dante/">Socks</a>,
+          <a class="ulink" href=
+          "http://ftp4.de.freesbie.org/pub/misc/metamail/mm2.7.tar.Z">Metamail</a>,
+          and <a class="ulink" href="http://dmalloc.com/">Dmalloc</a> or
+          <a class="ulink" href=
+          "ftp://invisible-island.net/dbmalloc/">dbmalloc</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/Tin">http://wiki.linuxfromscratch.org/blfs/wiki/Tin</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of TIN
+        </h2>
+        <p>
+          Install <span class="application">TIN</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr --with-screen=ncursesw \
+    --enable-nntp-only --disable-printing &amp;&amp;
+make build</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+make install_sysdefs &amp;&amp;
+rm -vf doc/*.? &amp;&amp;
+install -v -m755 -d /usr/share/doc/tin-1.8.3 &amp;&amp;
+install -v -m644 doc/* /usr/share/doc/tin-1.8.3</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--with-screen=ncursesw</code></em>:
+          This switch forces the use of wide-character functions from the
+          ncursesw library (for UTF-8 and Asian languages support).
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-nntp-only</code></em>: Reading
+          news from a local spool is disabled with this switch. Don't use
+          this if you have installed INN and want to use its spool.
+        </p>
+        <p>
+          <em class="parameter"><code>--disable-printing</code></em>: This
+          switch disables printing since <span class="application">TIN</span>
+          cannot send non-ASCII text to the printer correctly. Remove this
+          switch if you can tolerate this limitation.
+        </p>
+        <p>
+          <em class="parameter"><code>--with-editor</code></em>: This switch
+          sets the default editor used by <span class=
+          "application">TIN</span>. The default is <span class=
+          "command"><strong>vi</strong></span>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring TIN
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="tin-config" name="tin-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/tin/tinrc</code>, <code class=
+            "filename">~/.tin/tinrc</code>, <code class=
+            "filename">~/.newsrc</code>, <code class=
+            "filename">/etc/tin/tin.defaults</code>, <code class=
+            "filename">/etc/tin/mime.types</code>, <code class=
+            "filename">/etc/tin/keymap</code> and <code class=
+            "filename">/etc/mailcap</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            Set some global defaults for <span class="application">TIN</span>
+            by running the following commands as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">cat &gt; /etc/tin/tinrc &lt;&lt; "EOF"
+use_mouse=ON
+getart_limit=100
+translit=ON
+EOF</kbd>
+</pre>
+          <p>
+            Now, as an unprivileged user, subscribe to some newsgroups,
+            specify the news server, and run <span class=
+            "command"><strong>tin</strong></span>:
+          </p>
+          <pre class="userinput">
+<kbd class="command">cat &gt;&gt; ~/.newsrc &lt;&lt; "EOF"
+gmane.linux.lfs.devel:
+gmane.linux.lfs.beyond.devel:
+EOF
+export NNTPSERVER=news.gmane.org
+tin -Q</kbd>
+</pre>
+          <p>
+            For printing, <span class="application">TIN</span> executes the
+            <span class="command"><strong>lpr</strong></span> command. This
+            can be provided by <a class="xref" href="../pst/cups.html" title=
+            "CUPS-1.2.12">CUPS-1.2.12</a> or <a class="xref" href=
+            "../pst/LPRng.html" title="LPRng-3.8.28">LPRng-3.8.28</a>.
+          </p>
+          <p>
+            If you do not have the <span class=
+            "command"><strong>metamail</strong></span> program, <span class=
+            "application">TIN</span> will use an internal parser for
+            multipart MIME articles. Alternatively, you can use <span class=
+            "application">Mutt</span> for MIME parsing through the
+            <span class="command"><strong>metamutt</strong></span> shell
+            script. This requires both the <a class="xref" href="mutt.html"
+            title="Mutt-1.5.17">Mutt-1.5.17</a> and <a class="xref" href=
+            "procmail.html" title="Procmail-3.22">Procmail-3.22</a> programs.
+            To use <span class="command"><strong>metamutt</strong></span>,
+            set <code class="option">metamail_prog=metamutt</code> in
+            <span class="command"><strong>tin</strong></span>.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">tin, rtin, tinews.pl, metamutt,
+              opt-case.pl, w2r.pl, and url_handler.sh</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/etc/tin</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tin-prog" name="tin-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tin</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a UseNet news reader.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rtin" name="rtin"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rtin</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to <span class=
+                    "command"><strong>tin</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tinews.pl" name="tinews.pl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tinews.pl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    posts and signs an article via NNTP.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="metamutt" name="metamutt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>metamutt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a replacement of <span class=
+                    "command"><strong>metamail</strong></span> using
+                    <span class="application">Mutt</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="opt-case.pl" name="opt-case.pl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>opt-case.pl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    optimizes case insensitive regexp filters for tin.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="w2r.pl" name="w2r.pl"></a><span class=
+                    "term"><span class=
+                    "command"><strong>w2r.pl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    converts tin wildmat filters to tin regexp filters.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="url_handler.sh" name=
+                    "url_handler.sh"></a><span class="term"><span class=
+                    "command"><strong>url_handler.sh</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    calls a web browser for viewing hyperlinks.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-03-11 11:31:08 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="pine.html" title="Pine-4.64">Prev</a>
+          <p>
+            Pine-4.64
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="othermn.html" title=
+          "Other Mail and News Programs">Next</a>
+          <p>
+            Other Mail and News Programs
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mailnews.html" title=
+          "Chapter&nbsp;18.&nbsp;Mail/News Clients">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

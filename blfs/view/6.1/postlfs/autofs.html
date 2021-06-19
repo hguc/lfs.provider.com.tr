@@ -1,0 +1,391 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Automate Mounting of File Systems
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;3.&nbsp;After LFS Configuration Issues
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="compressdoc.html" title=
+          "Compressing Man and Info Pages">Prev</a>
+          <p>
+            Compressing Man and Info Pages
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="netfs.html" title=
+          "Configuring for Network Filesystems">Next</a>
+          <p>
+            Configuring for Network Filesystems
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="autofs" name="autofs"></a>
+        <h1 class="sect1">
+          Automate Mounting of File Systems
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Autofs
+          </h2>
+        </div>
+        <p>
+          The <span class="application">autofs</span> package contains
+          userspace tools that work with the kernel to mount and un-mount
+          removable file systems. This is useful for allowing users to mount
+          floppies, cdroms and other removable storage devices without
+          requiring the system administrator to mount the devices. This may
+          not be ideal for all installations, so be aware of the risks before
+          implementing this feature.
+        </p>
+        <h3>
+          <a id="id2751737" name="id2751737"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://ftp.kernel.org/pub/linux/daemons/autofs/v4/autofs-4.1.4.tar.bz2">
+                <span class=
+                "url">http://ftp.kernel.org/pub/linux/daemons/autofs/v4/autofs-4.1.4.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.kernel.org/pub/linux/daemons/autofs/v4/autofs-4.1.4.tar.bz2">
+                <span class=
+                "url">ftp://ftp.kernel.org/pub/linux/daemons/autofs/v4/autofs-4.1.4.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 7e3949114c00665b4636f0c318179657
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 168 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 2.3 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: less than 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2568968" name="id2568968"></a>Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Recommended Patch: <a href=
+                "http://ftp.kernel.org/pub/linux/daemons/autofs/v4/autofs-4.1.4-misc-fixes.patch">
+                <span class=
+                "url">http://ftp.kernel.org/pub/linux/daemons/autofs/v4/autofs-4.1.4-misc-fixes.patch</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Recommended Patch: <a href=
+                "http://ftp.kernel.org/pub/linux/daemons/autofs/v4/autofs-4.1.4-multi-parse-fix.patch">
+                <span class=
+                "url">http://ftp.kernel.org/pub/linux/daemons/autofs/v4/autofs-4.1.4-multi-parse-fix.patch</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Recommended Patch: <a href=
+                "http://ftp.kernel.org/pub/linux/daemons/autofs/v4/autofs-4.1.4-non-replicated-ping.patch">
+                <span class=
+                "url">http://ftp.kernel.org/pub/linux/daemons/autofs/v4/autofs-4.1.4-non-replicated-ping.patch</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <div class="kernel" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="autofs-kernel" name="autofs-kernel"></a>
+          <h2 class="sect2">
+            Kernel Configuration
+          </h2>
+        </div>
+        <p>
+          Verify that kernel support has been compiled in or built as modules
+          in the following areas:
+        </p>
+        <pre class="screen"><tt class="literal">File systems
+    Kernel automounter version 4 support        Y or M
+Network File Systems
+    NFS file system support                     Y or M
+    SMB file system support                     Y or M</tt></pre>
+        <p>
+          Recompile and install the new kernel, if necessary.
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Autofs
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">autofs</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../autofs-4.1.4-misc-fixes.patch &amp;&amp;
+patch -Np1 -i ../autofs-4.1.4-multi-parse-fix.patch &amp;&amp;
+patch -Np1 -i ../autofs-4.1.4-non-replicated-ping.patch &amp;&amp;
+./configure --prefix=/ --mandir=/usr/share/man &amp;&amp;
+make</kbd></pre>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+rm /etc/rc.d/init.d/autofs</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">rm
+          /etc/rc.d/init.d/autofs</strong></span>: This command removes the
+          installed script which only works on specific distributions.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Autofs
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="autofs-config" name="autofs-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/sysconfig/autofs.conf</tt>, <tt class=
+            "filename">/etc/auto.master</tt>, <tt class=
+            "filename">/etc/auto.misc</tt>, and <tt class=
+            "filename">/etc/auto.net</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2754388" name="id2754388"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The installation process creates <tt class=
+            "filename">auto.master</tt>, <tt class="filename">auto.misc</tt>
+            and <tt class="filename">auto.net</tt>. You will replace the
+            <tt class="filename">auto.master</tt> with the following
+            commands:
+          </p>
+          <pre class="root"><kbd class=
+          "command">mv /etc/auto.master /etc/auto.master.bak &amp;&amp;
+cat &gt; /etc/auto.master &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/auto.master
+
+/media  /etc/auto.misc
+
+# End /etc/auto.master</tt>
+EOF</kbd></pre>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                This file mounts a new media directory over the one created
+                by LFS and will therefore hide any mounts made by the
+                <tt class="filename">fstab</tt> file into that directory.
+              </p>
+            </div>
+          </div>
+          <p>
+            While this package could be used to mount NFS shares and SMB
+            shares, that feature is not configured in these instructions. NFS
+            shares are covered on the next page.
+          </p>
+          <p>
+            The <tt class="filename">auto.misc</tt> must be configured to
+            your working hardware. The loaded configuration file should load
+            your cdrom if <tt class="filename">/dev/cdrom</tt> is active or
+            it can be edited to match your device setup and examples for
+            floppies are available in the file and easily activated.
+            Documentation for this file is available using the
+            <span><strong class="command">man 5 autofs</strong></span>
+            command.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="autofs-init" name="autofs-init"></a>Boot Script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/autofs</tt>
+            mount script and <tt class=
+            "filename">/etc/sysconfig/autofs.conf</tt> support file included
+            with the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-6.1</a>
+            package.
+          </p>
+          <pre class="root"><kbd class=
+          "command">make install-autofs</kbd></pre>
+          <p>
+            The time-out variable is set in <tt class=
+            "filename">/etc/sysconfig/autofs.conf</tt>. The installed file
+            sets a default of 60 seconds of inactivity before unmounting the
+            device. A much shorter time may be necessary to protect buffer
+            writing to a floppy if users tend to remove the media prior to
+            the timeout setting.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Program:</span></strong> <span class="seg">automount</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">autofs
+              modules</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/lib/autofs and
+              /var/run/autofs</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2638264" name="id2638264"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="automount" name="automount"></a><span class=
+                  "term"><span><strong class=
+                  "command">automount</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the daemon that performs the mounting when a request
+                    is made for the device.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-09 19:50:01 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="compressdoc.html" title=
+          "Compressing Man and Info Pages">Prev</a>
+          <p>
+            Compressing Man and Info Pages
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="netfs.html" title=
+          "Configuring for Network Filesystems">Next</a>
+          <p>
+            Configuring for Network Filesystems
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,356 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      at-3.1.20
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.10">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch <span>(systemd edition)</span>
+        - Version 7.10
+      </h4>
+      <h3>
+        Chapter&nbsp;12.&nbsp;System Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="acpid.html" title="acpid-2.0.27">Prev</a>
+          <p>
+            acpid-2.0.27
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="autofs.html" title="autofs-5.1.2">Next</a>
+          <p>
+            autofs-5.1.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;12.&nbsp;System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="at" name="at"></a>at-3.1.20
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to at
+        </h2>
+        <p>
+          The <span class="application">at</span> package provide delayed job
+          execution and batch processing. It is required for Linux Standards
+          Base (LSB) conformance.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.10
+          platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://ftp.de.debian.org/debian/pool/main/a/at/at_3.1.20.orig.tar.gz">
+                http://ftp.de.debian.org/debian/pool/main/a/at/at_3.1.20.orig.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.de.debian.org/debian/pool/main/a/at/at_3.1.20.orig.tar.gz">
+                ftp://ftp.de.debian.org/debian/pool/main/a/at/at_3.1.20.orig.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: e7bd7b785b2cbb17e133d6bdc0fb099e
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 128 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 1.8 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: less than 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          at Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          An <a class="xref" href="../server/mail.html" title=
+          "Chapter&nbsp;21.&nbsp;Mail Server Software">MTA</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../postlfs/linux-pam.html" title=
+          "Linux-PAM-1.3.0">Linux-PAM-1.3.0</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/at">http://wiki.linuxfromscratch.org/blfs/wiki/at</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of at
+        </h2>
+        <p>
+          Before building <span class="application">at</span>, as the
+          <code class="systemitem">root</code> user you should create the
+          group and user <code class="systemitem">atd</code> which will run
+          the <span class="command"><strong>atd</strong></span> daemon. Also
+          ensure the working directory for the daemon exists:
+        </p>
+        <pre class="root">
+<kbd class=
+"command">groupadd -g 17 atd                                                  &amp;&amp;
+useradd -d /dev/null -c "atd daemon" -g atd -s /bin/false -u 17 atd &amp;&amp;
+mkdir -p /var/spool/cron</kbd>
+</pre>
+        <p>
+          Fix <code class="filename">Makefile.in</code> so that the
+          documentation directory is installed in the specified docdir:
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i '/docdir/s/=.*/= @docdir@/' Makefile.in</kbd>
+</pre>
+        <p>
+          Regenerate the build files to be consistent with this package
+          version:
+        </p>
+        <pre class="userinput">
+<kbd class="command">autoreconf</kbd>
+</pre>
+        <p>
+          Install <span class="application">at</span> with the following
+          commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --with-daemon_username=atd        \
+            --with-daemon_groupname=atd       \
+            SENDMAIL=/usr/sbin/sendmail       \
+            --with-systemdsystemunitdir=/lib/systemd/system &amp;&amp;
+
+make -j1</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install \
+        docdir=/usr/share/doc/at-3.1.20 \
+      atdocdir=/usr/share/doc/at-3.1.20 </kbd>
+</pre>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring at
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="at-config" name="at-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/at.allow</code> and <code class=
+            "filename">/etc/at.deny</code> determines who can submit jobs via
+            at or batch.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="at-init" name="at-init"></a> Systemd Unit
+          </h3>
+          <p>
+            To start the <span class="command"><strong>atd</strong></span>
+            daemon at boot, enable the previously installed systemd unit by
+            running the following command as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">systemctl enable atd</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">at, atd, atq (symlink), atrm (symlink),
+              atrun, and batch</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/var/spool/cron/at{jobs,spool} and
+              /usr/share/doc/at-3.1.20</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="at-prog" name="at-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>at</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    queues, examines or deletes jobs for later execution.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="atd" name="atd"></a><span class=
+                    "term"><span class="command"><strong>atd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the daemon that runs jobs queued for later execution.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="atq" name="atq"></a><span class=
+                    "term"><span class="command"><strong>atq</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    lists the user's pending jobs, or all jobs, if superuser.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="atrm" name="atrm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>atrm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    deletes jobs, identified by their job number.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="atrun" name="atrun"></a><span class=
+                    "term"><span class=
+                    "command"><strong>atrun</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    runs jobs queued for later execution.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="batch" name="batch"></a><span class=
+                    "term"><span class=
+                    "command"><strong>batch</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a script that executes commands when system load
+                    levels permit.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2016-08-27 12:04:03 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="acpid.html" title="acpid-2.0.27">Prev</a>
+          <p>
+            acpid-2.0.27
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="autofs.html" title="autofs-5.1.2">Next</a>
+          <p>
+            autofs-5.1.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;12.&nbsp;System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

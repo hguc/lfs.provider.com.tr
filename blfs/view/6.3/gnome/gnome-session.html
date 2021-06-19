@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      GNOME Session-2.18.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;29.&nbsp;GNOME Core Packages
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnome-applets.html" title=
+          "GNOME Applets-2.18.0">Prev</a>
+          <p>
+            GNOME Applets-2.18.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="yelp.html" title="Yelp-2.18.1">Next</a>
+          <p>
+            Yelp-2.18.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;29.&nbsp;GNOME Core Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="gnome-session" name="gnome-session"></a>GNOME Session-2.18.3
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to GNOME Session
+        </h2>
+        <p>
+          The <span class="application">GNOME Session</span> package contains
+          the <span class="application">GNOME</span> session manager.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.18/gnome-session-2.18.3.tar.bz2">
+                http://ftp.gnome.org/pub/gnome/sources/gnome-session/2.18/gnome-session-2.18.3.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.gnome.org/pub/gnome/sources/gnome-session/2.18/gnome-session-2.18.3.tar.bz2">
+                ftp://ftp.gnome.org/pub/gnome/sources/gnome-session/2.18/gnome-session-2.18.3.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 59b6809ed1d8e39c1550217e665c75df
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 716 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 14 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.3 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          GNOME Session Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="gnome-desktop.html" title=
+          "GNOME Desktop-2.18.3">GNOME Desktop-2.18.3</a> and <a class="xref"
+          href="control-center.html" title="Control Center-2.18.1">Control
+          Center-2.18.1</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../basicnet/tcpwrappers.html" title=
+          "TCP Wrapper-7.6">TCP Wrapper-7.6</a> and <a class="ulink" href=
+          "http://www.galago-project.org/news/index.php">libnotify</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/gnome-session">http://wiki.linuxfromscratch.org/blfs/wiki/gnome-session</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of GNOME Session
+        </h2>
+        <p>
+          Install <span class="application">GNOME Session</span> by running
+          the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">./configure --prefix=$(pkg-config --variable=prefix ORBit-2.0) \
+            --sysconfdir=/etc/gnome/2.18.3 \
+            --mandir=$(pkg-config \
+                --variable=prefix ORBit-2.0)/share/man \
+            --with-at-spi-registryd-directory=$(pkg-config \
+               --variable=prefix ORBit-2.0)/lib/at-spi
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--prefix=$(pkg-config --variable=prefix
+          ORBit-2.0)</code></em>: Setting the prefix using this parameter
+          instead of with <code class="envar">$GNOME_PREFIX</code> will
+          ensure that the prefix is consistent with the installation
+          environment and the package will be installed in the correct
+          location.
+        </p>
+        <p>
+          <em class=
+          "parameter"><code>--sysconfdir=/etc/gnome/2.18.3</code></em>: This
+          parameter causes the configuration files to be installed in
+          <code class="filename">/etc/gnome/2.18.3</code> instead of
+          <code class="filename">$GNOME_PREFIX/etc</code>. Additionally (if
+          applicable), the parameter ensures that the <span class=
+          "application">GConf</span>-2 database is correctly updated.
+        </p>
+        <p>
+          <em class="parameter"><code>--mandir=$(pkg-config --variable=prefix
+          ORBit-2.0)/share/man</code></em>: This parameter causes the
+          <code class="filename">man.(X)</code> files to be installed in
+          <code class="filename">$GNOME_PREFIX/share/man/man(X)</code>
+          instead of <code class="filename">$GNOME_PREFIX/man/man(X)</code>.
+        </p>
+        <p>
+          <em class=
+          "parameter"><code>--with-at-spi-registryd-directory=...</code></em>:
+          This parameter is used to identify where the AT-SPI Registry daemon
+          is located, as the default is <code class=
+          "envar">$GNOME_PREFIX</code>/libexec.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">gnome-session, gnome-session-properties,
+              gnome-session-remove, gnome-session-save, and gnome-wm</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody"><code class=
+              "envar">$GNOME_PREFIX</code>/share/pixmaps/splash</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gnome-session-prog" name=
+                    "gnome-session-prog"></a><span class="term"><span class=
+                    "command"><strong>gnome-session</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    starts up the <span class="application">GNOME</span>
+                    desktop.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gnome-session-utils" name=
+                    "gnome-session-utils"></a><span class="term"><span class=
+                    "command"><strong>gnome-session-*</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    session utilities includes a configuration program and
+                    other session management related utilities.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gnome-wm" name="gnome-wm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gnome-wm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    uses the <code class="envar">$WINDOW_MANAGER</code>
+                    environment variable to allow a user to define a window
+                    manager of choice. If no <code class=
+                    "envar">$WINDOW_MANAGER</code> is defined, <span class=
+                    "command"><strong>gnome-wm</strong></span> defaults to
+                    <span class="command"><strong>metacity</strong></span> as
+                    the default window manager.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-08-24 21:22:20 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnome-applets.html" title=
+          "GNOME Applets-2.18.0">Prev</a>
+          <p>
+            GNOME Applets-2.18.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="yelp.html" title="Yelp-2.18.1">Next</a>
+          <p>
+            Yelp-2.18.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;29.&nbsp;GNOME Core Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

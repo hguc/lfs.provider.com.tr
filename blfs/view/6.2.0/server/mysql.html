@@ -1,0 +1,450 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      MySQL-5.0.21
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;23.&nbsp;Databases
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="databases.html" title="Databases">Prev</a>
+          <p>
+            Databases
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="postgresql.html" title=
+          "PostgreSQL-8.1.3">Next</a>
+          <p>
+            PostgreSQL-8.1.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="databases.html" title=
+          "Chapter&nbsp;23.&nbsp;Databases">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="mysql" name="mysql"></a>
+        <h1 class="sect1">
+          MySQL-5.0.21
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to MySQL
+          </h2>
+        </div>
+        <p>
+          <span class="application">MySQL</span> is a widely used and fast
+          SQL database server. It is a client/server implementation that
+          consists of a server daemon and many different client programs and
+          libraries.
+        </p>
+        <h3>
+          <a id="id2689507" name="id2689507"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://downloads.mysql.com/archives/mysql-5.0/mysql-5.0.21.tar.gz">
+                <span class=
+                "url">http://downloads.mysql.com/archives/mysql-5.0/mysql-5.0.21.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/mysql-5.0.21.tar.gz">
+                <span class=
+                "url">ftp://ftp.freebsd.org/pub/FreeBSD/ports/distfiles/mysql-5.0.21.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: c3165204c42e1db6fc3a95a4fd2cd22f
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 18.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 244 MB (additional 194 MB to
+                run the test suite)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 4.5 SBU (Test suite is an additional 48
+                minutes, only partially CPU dependent)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2694654" name="id2694654"></a>MySQL Dependencies
+        </h3>
+        <h4>
+          <a id="id2624077" name="id2624077"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="../postlfs/security.html#openssl">OpenSSL-0.9.8d</a> and
+          <a href="../basicnet/tcpwrappers.html">TCP Wrapper-7.6</a>.
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/mysql"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/mysql</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of MySQL
+          </h2>
+        </div>
+        <p>
+          For security reasons, running the server as an unprivileged user
+          and group is strongly encouraged:
+        </p>
+        <pre class="root"><kbd class=
+        "command">groupadd -g 40 mysql &amp;&amp;
+useradd -c "MySQL Server" -d /dev/null -g mysql -s /bin/false \
+        -u 40 mysql</kbd></pre>
+        <p>
+          Build and install <span class="application">MySQL</span> by running
+          the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">C_EXTRA_FLAGS=-fno-strict-aliasing \
+./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --libexecdir=/usr/sbin \
+            --localstatedir=/srv/mysql \
+            --enable-thread-safe-client \
+            --enable-assembler \
+            --enable-local-infile \
+            --with-unix-socket-path=/var/run/mysql/mysql.sock \
+            --without-debug \
+            --without-bench \
+            --without-readline \
+            --with-berkeley-db \
+            --with-extra-charsets=all &amp;&amp;
+make testdir=/tmp/mysql</kbd></pre>
+        <p>
+          To test the results, issue: <span><strong class="command">make
+          test</strong></span>. Note that if you have a restrictive
+          <tt class="filename">/etc/hosts.deny</tt> file, you will need to
+          add an appropriate entry to the <tt class=
+          "filename">/etc/hosts.allow</tt> file for the <span><strong class=
+          "command">mysqld</strong></span> daemon, else many of the tests
+          will fail.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">make testdir=/tmp/mysql install &amp;&amp;
+rm -rf /tmp/mysql &amp;&amp;
+cd /usr/lib &amp;&amp;
+ln -v -sf mysql/libmysqlclient{,_r}.so* .</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class=
+          "parameter"><tt>C_EXTRA_FLAGS=-fno-strict-aliasing</tt></em>: This
+          environment variable adjusts the compiler optimization to avoid
+          failures in the testsuite and other operations.
+        </p>
+        <p>
+          <em class="parameter"><tt>--libexecdir=/usr/sbin</tt></em>: This
+          switch installs the <span><strong class=
+          "command">mysqld</strong></span> daemon and the
+          <span><strong class="command">mysqlmanager</strong></span> program
+          in an appropriate location.
+        </p>
+        <p>
+          <em class="parameter"><tt>--localstatedir=/srv/mysql</tt></em>:
+          This switch forces <span class="application">MySQL</span> to use
+          <tt class="filename">/srv/mysql</tt> for database files and other
+          variable data.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-thread-safe-client</tt></em>:
+          This switch compiles a thread-safe <span class=
+          "application">MySQL</span> client library.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-assembler</tt></em>: This switch
+          allows using assembler versions of some string functions.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-local-infile</tt></em>: This
+          switch enables the &ldquo;<span class="quote">LOAD DATA
+          INFILE</span>&rdquo; SQL statement.
+        </p>
+        <p>
+          <em class=
+          "parameter"><tt>--with-unix-socket-path=/var/run/mysql</tt></em>:
+          This switch puts the unix-domain socket into the <tt class=
+          "filename">/var/run/mysql</tt> directory instead of the default
+          <tt class="filename">/tmp</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--without-bench</tt></em>: This switch
+          skips building the benchmark suite.
+        </p>
+        <p>
+          <em class="parameter"><tt>--without-readline</tt></em>: This switch
+          forces the build to use the system copy of <span class=
+          "application">readline</span> instead of the bundled copy.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-berkeley-db</tt></em>: This switch
+          enables using <span class="application">Berkeley DB</span> tables
+          as a back end.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-extra-charsets=all</tt></em>: This
+          switch enables international character sets within the suite.
+        </p>
+        <p>
+          <span><strong class="command">make testdir=...</strong></span>:
+          This installs the test suite in <tt class=
+          "filename">/tmp/mysql</tt>. The test suite is not required, nor
+          does it function properly on an installed version of <span class=
+          "application">MySQL</span>, so it is removed in the next step.
+        </p>
+        <p>
+          <span><strong class="command">ln -v -sf
+          mysql/libmysqlclient{,_r}.so* .</strong></span>: This command makes
+          the <span class="application">MySQL</span> shared libraries
+          available to other packages at run-time.
+        </p>
+        <p>
+          <tt class="option">--with-openssl</tt>: This switch adds OpenSSL
+          support to <span class="application">MySQL</span>.
+        </p>
+        <p>
+          <tt class="option">--with-libwrap</tt>: This switch adds
+          tcpwrappers support to <span class="application">MySQL</span>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring MySQL
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="mysql-config" name="mysql-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/my.cnf</tt> and <tt class=
+            "filename">~/.my.cnf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2754571" name="id2754571"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            There are several default configuration files available in
+            <tt class="filename">/usr/share/mysql</tt> which you can use.
+            Create <tt class="filename">/etc/my.cnf</tt> using the following
+            command as the <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">install -v -m644 /usr/share/mysql/my-medium.cnf /etc/my.cnf</kbd></pre>
+          <p>
+            You can now install a database and change the ownership to the
+            unprivileged user and group (perform as the <tt class=
+            "systemitem">root</tt> user):
+          </p>
+          <pre class="root"><kbd class=
+          "command">mysql_install_db --user=mysql &amp;&amp;
+chgrp -v mysql /srv/mysql{,/test,/mysql}</kbd></pre>
+          <p>
+            Further configuration requires that the <span class=
+            "application">MySQL</span> server is running. Start the server
+            using the following commands as the <tt class=
+            "systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">install -v -m755 -o mysql -g mysql -d /var/run/mysql &amp;&amp;
+mysqld_safe --user=mysql 2&gt;&amp;1 &gt;/dev/null &amp;</kbd></pre>
+          <p>
+            A default installation does not set up a password for the
+            administrator, so use the following command as the <tt class=
+            "systemitem">root</tt> user to set one. Replace <em class=
+            "replaceable"><tt>&lt;new-password&gt;</tt></em> with your own.
+          </p>
+          <pre class="root"><kbd class=
+          "command">mysqladmin -u root password <em class=
+          "replaceable"><tt>&lt;new-password&gt;</tt></em></kbd></pre>
+          <p>
+            Configuration of the server is now finished. Shut the server down
+            using the following command as the <tt class=
+            "systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">mysqladmin -p shutdown</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="mysql-init" name="mysql-init"></a>Boot Script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/mysql</tt> init
+            script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-20060910</a>
+            package as the <tt class="systemitem">root</tt> user to start the
+            <span class="application">MySQL</span> server during system
+            boot-up.
+          </p>
+          <pre class="root"><kbd class=
+          "command">make install-mysql</kbd></pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">comp_err,
+              innochecksum, msql2mysql, my_print_defaults, myisam_ftdump,
+              myisamchk, myisamlog, myisampack, mysql, mysql_client_test,
+              mysql_config, mysql_convert_table_format,
+              mysql_create_system_tables, mysql_explain_log, mysql_find_rows,
+              mysql_fix_extensions, mysql_fix_privilege_tables,
+              mysql_install_db, mysql_secure_installation,
+              mysql_setpermission, mysql_tableinfo, mysql_tzinfo_to_sql,
+              mysql_waitpid, mysql_zap, mysqlaccess, mysqladmin, mysqlbinlog,
+              mysqlbug, mysqlcheck, mysqld, mysqld_multi, mysqld_safe,
+              mysqldump, mysqldumpslow, mysqlhotcopy, mysqlimport,
+              mysqlmanager, mysqlshow, mysqltest, mysqltestmanager,
+              mysqltestmanager-pwgen, mysqltestmanagerc, perror, replace,
+              resolve_stack_dump, and resolveip</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libdbug.a,
+              libheap.a, libmyisam.a, libmyisammrg.a, libmysqlclient.{so,a},
+              libmysqlclient_r.{so,a}, libmystrings.a, libmysys.a, and
+              libvio.a</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/srv/mysql,
+              /usr/include/mysql, /usr/lib/mysql, /usr/share/mysql, and
+              /var/run/mysql</span>
+            </div>
+          </div>
+        </div>
+        <h3>
+          <a id="id2622783" name="id2622783"></a>Short Descriptions
+        </h3>
+        <p>
+          Descriptions of all the programs and libraries would be several
+          pages long. Instead, consult the <tt class=
+          "filename">mysql.info</tt> documentation or the on-line reference
+          manual at <a href=
+          "http://dev.mysql.com/doc/refman/5.0/en/index.html"><span class=
+          "url">http://dev.mysql.com/doc/refman/5.0/en/index.html</span></a>.
+        </p>
+        <p>
+          The <span class="application">Perl</span> DBI modules must be
+          installed for some of the <span class="application">MySQL</span>
+          support programs to function properly.
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-27 11:36:13 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="databases.html" title="Databases">Prev</a>
+          <p>
+            Databases
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="postgresql.html" title=
+          "PostgreSQL-8.1.3">Next</a>
+          <p>
+            PostgreSQL-8.1.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="databases.html" title=
+          "Chapter&nbsp;23.&nbsp;Databases">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

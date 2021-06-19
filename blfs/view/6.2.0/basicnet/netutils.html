@@ -1,0 +1,286 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;19.&nbsp;Basic Networking Utilities
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Part&nbsp;V.&nbsp;Basic Networking
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="othernetprogs.html" title=
+          "Other Networking Programs">Prev</a>
+          <p>
+            Other Networking Programs
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="nmap.html" title="Nmap-4.03">Next</a>
+          <p>
+            Nmap-4.03
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="basicnet.html" title=
+          "Part&nbsp;V.&nbsp;Basic Networking">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="basicnet-netutils" name="basicnet-netutils"></a>
+        <h1 class="chapter">
+          Basic Networking Utilities
+        </h1>
+      </div>
+      <p>
+        This chapter contains some tools that come in handy when the network
+        needs investigating.
+      </p>
+      <p class="usernotes">
+        User Notes: <a href=
+        "http://wiki.linuxfromscratch.org/blfs/wiki/basicnetworkingutilities">
+        <span class=
+        "url">http://wiki.linuxfromscratch.org/blfs/wiki/basicnetworkingutilities</span></a>
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="traceroute" name="traceroute"></a>
+          <h1 class="sect1">
+            Traceroute-1.4a12
+          </h1>
+        </div>
+        <div class="package" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to Traceroute
+            </h2>
+          </div>
+          <p>
+            The <span class="application">Traceroute</span> package contains
+            a program which is used to display the network route that packets
+            take to reach a specified host. This is a standard network
+            troubleshooting tool. If you find yourself unable to connect to
+            another system, traceroute can help pinpoint the problem.
+          </p>
+          <h3>
+            <a id="id2790967" name="id2790967"></a>Package Information
+          </h3>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/platform/sun/packages/solaris/freeware/SOURCES/traceroute-1.4a12.tar.gz">
+                  <span class=
+                  "url">http://gd.tuwien.ac.at/platform/sun/packages/solaris/freeware/SOURCES/traceroute-1.4a12.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.ee.lbl.gov/traceroute-1.4a12.tar.gz"><span class="url">
+                  ftp://ftp.ee.lbl.gov/traceroute-1.4a12.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 964d599ef696efccdeebe7721cd4828d
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 74 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 540 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.01 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+          <p class="usernotes">
+            User Notes: <a href=
+            "http://wiki.linuxfromscratch.org/blfs/wiki/traceroute"><span class="url">
+            http://wiki.linuxfromscratch.org/blfs/wiki/traceroute</span></a>
+          </p>
+        </div>
+        <div class="installation" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of Traceroute
+            </h2>
+          </div>
+          <p>
+            Install <span class="application">Traceroute</span> by running
+            the following commands:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">sed -i -e 's/-o bin/-o root/' Makefile.in &amp;&amp;
+./configure --prefix=/usr &amp;&amp;
+make</kbd></pre>
+          <p>
+            Now, as the <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class="command">make install &amp;&amp;
+make install-man</kbd></pre>
+        </div>
+        <div class="commands" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command Explanations
+            </h2>
+          </div>
+          <p>
+            <span><strong class="command">sed 's/-o bin/-o root/'
+            Makefile.in</strong></span>: Adjusts the <tt class=
+            "filename">Makefile</tt> so that the program is installed with
+            user <tt class="systemitem">root</tt> owning the files instead of
+            user <tt class="systemitem">bin</tt> (which doesn't exist on a
+            default LFS system).
+          </p>
+          <p>
+            <span><strong class="command">make install</strong></span>:
+            Installs <span><strong class="command">traceroute</strong></span>
+            with SUID set to <tt class="systemitem">root</tt> in the
+            <tt class="filename">/usr/sbin</tt> directory. This makes it
+            possible for all users to execute <span><strong class=
+            "command">traceroute</strong></span>. For absolute security, turn
+            off the SUID bit in <span><strong class=
+            "command">traceroute</strong></span>'s file permissions with the
+            command:
+          </p>
+          <pre class="root"><kbd class=
+          "command">chmod -v 0755 /usr/sbin/traceroute</kbd></pre>
+          <p>
+            The risk is that if a security problem such as a buffer overflow
+            was ever found in the <span class="application">Traceroute</span>
+            code, a regular user on your system could gain <tt class=
+            "systemitem">root</tt> access if the program is SUID <tt class=
+            "systemitem">root</tt>. Of course, removing the SUID permission
+            also makes it impossible for users other than <tt class=
+            "systemitem">root</tt> to utilize <span><strong class=
+            "command">traceroute</strong></span>, so decide what's right for
+            your individual situation.
+          </p>
+          <p>
+            The goal of BLFS is to be completely FHS compliant, so if you do
+            leave the <span><strong class=
+            "command">traceroute</strong></span> binary SUID <tt class=
+            "systemitem">root</tt>, then you should move <tt class=
+            "filename">traceroute</tt> to <tt class="filename">/usr/bin</tt>
+            with the following command:
+          </p>
+          <pre class="root"><kbd class=
+          "command">mv -v /usr/sbin/traceroute /usr/bin</kbd></pre>
+          <p>
+            This ensures that the binary is in the path for non-root users.
+          </p>
+        </div>
+        <div class="content" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <div class="segmentedlist">
+            <div class="seglistitem">
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Program:</span></strong> <span class="seg">traceroute</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Libraries:</span></strong> <span class="seg">None</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Directories:</span></strong> <span class="seg">None</span>
+              </div>
+            </div>
+          </div>
+          <div class="variablelist">
+            <h3>
+              <a id="id2704868" name="id2704868"></a>Short Descriptions
+            </h3>
+            <table border="0">
+              <col align="left" valign="top" />
+              <tbody>
+                <tr>
+                  <td>
+                    <a id="traceroute-prog" name=
+                    "traceroute-prog"></a><span class=
+                    "term"><span><strong class=
+                    "command">traceroute</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      does basically what it says: it traces the route your
+                      packets take from the host you are working on to
+                      another host on a network, showing all the intermediate
+                      hops (gateways) along the way.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2006-06-21 11:26:07 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="othernetprogs.html" title=
+          "Other Networking Programs">Prev</a>
+          <p>
+            Other Networking Programs
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="nmap.html" title="Nmap-4.03">Next</a>
+          <p>
+            Nmap-4.03
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="basicnet.html" title=
+          "Part&nbsp;V.&nbsp;Basic Networking">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,280 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      iptables-1.2.9
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;4.&nbsp;Security</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="shadow.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="firewall.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          iptables-1.2.9
+        </h1>
+      </div>
+      <p>
+        The next part of this chapter deals with firewalls. The principle
+        firewall tool for Linux, as of the 2.4 kernel series, is <span class=
+        "application">iptables</span>. It replaces <span class=
+        "application">ipchains</span> from the 2.2 series and <span class=
+        "application">ipfwadm</span> from the 2.0 series. You will need to
+        install <span class="application">iptables</span> if you intend on
+        using any form of a firewall.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to iptables
+          </h3>
+        </div>
+        <p>
+          To use a firewall, as well as installing <span class=
+          "application">iptables</span>, you will need to configure the
+          relevant options into your kernel. This is discussed in the next
+          part of this chapter - <a href=
+          "firewall.html#postlfs-security-fw-kernel">getting a
+          firewalling-enabled Kernel</a>.
+        </p>
+        <p>
+          If you intend to use <span class="acronym">IP</span>v6 you might
+          consider extending the kernel by running <span><b class=
+          "command">make patch-o-matic</b></span> in the top-level directory
+          of the sources of <span class="application">iptables</span>. If you
+          are going to do this, on a freshly untarred kernel, you need to run
+          <span><b class="command">yes "" | make config &amp;&amp; make
+          dep</b></span> first because otherwise the patch-o-matic command is
+          likely to fail while setting up some dependencies.
+        </p>
+        <p>
+          If you are going to patch the kernel, you need to do it before you
+          compile <span class="application">iptables</span>, because during
+          the compilation, the kernel source tree is checked (if it is
+          available at <tt class="filename">/usr/src/linux-<i class=
+          "replaceable"><tt>[version]</tt></i></tt> ) to see which features
+          are available. Support will only be compiled into <span class=
+          "application">iptables</span> for the features recognized at
+          compile-time. Applying a kernel patch may result in errors, often
+          because the hooks for the patches have changed or because the runme
+          script doesn't recognize that a patch has already been
+          incorporated.
+        </p>
+        <p>
+          Note that for most people, patching the kernel is unnecessary. With
+          the later 2.4.x kernels, most functionality is already available
+          and those who need to patch it are generally those who need a
+          specific feature; if you don't know why you need to patch the
+          kernel, you're unlikely to need to!
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2590083" name="id2590083"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.iptables.org/files/iptables-1.2.9.tar.bz2">http://www.iptables.org/files/iptables-1.2.9.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.netfilter.org/pub/iptables/iptables-1.2.9.tar.bz2">
+                  ftp://ftp.netfilter.org/pub/iptables/iptables-1.2.9.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 183 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 3.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.13 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of iptables
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">iptables</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make PREFIX=/usr LIBDIR=/lib BINDIR=/sbin &amp;&amp;
+make PREFIX=/usr LIBDIR=/lib BINDIR=/sbin install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>PREFIX=/usr LIBDIR=/lib
+          BINDIR=/sbin</tt></i>: Compiles and installs <span class=
+          "application">iptables</span> libraries into <tt class=
+          "filename">/lib</tt>, binaries into <tt class="filename">/sbin</tt>
+          and the remainder into the <tt class="filename">/usr</tt> hierarchy
+          instead of <tt class="filename">/usr/local</tt>. Firewalls are
+          generally set during the boot process and <tt class=
+          "filename">/usr</tt> may not be mounted at that time.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">iptables</span> package contains
+          <span><b class="command">iptables</b></span>, <span><b class=
+          "command">iptables-restore</b></span>, <span><b class=
+          "command">iptables-save</b></span>, <span><b class=
+          "command">ip6tables</b></span> and some libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2590371" name="id2590371"></a>iptables
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">iptables</b></span> is used to set up,
+            maintain, and inspect the tables of <span class=
+            "acronym">IP</span> packet filter rules in the Linux kernel.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2590389" name="id2590389"></a>iptables-restore,
+                  iptables-save
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            These are used to save and to restore your elaborated set of
+            chains and rules. Until <span class=
+            "application">iptables</span>-1.2.5, they were declared
+            experimental.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="ip6tables" name="ip6tables"></a>ip6tables
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This is the same as <span><b class="command">iptables</b></span>
+            but for use with <span class="acronym">IP</span>v6. As of v1.2.5,
+            it is not as complete as the standard <span class=
+            "acronym">IP</span>v4 version, especially with regard to some of
+            the modules.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2590618" name="id2590618"></a>libip*.so
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            These are various modules (implemented as dynamic libraries)
+            which extend the core functionality of <span><b class=
+            "command">iptables</b></span>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="shadow.html">Prev</a><br />
+        Shadow-4.0.4.1
+      </div>
+      <div class="next">
+        <a accesskey="n" href="firewall.html">Next</a><br />
+        Setting up a network firewall
+      </div>
+      <div class="up">
+        <a accesskey="u" href="security.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

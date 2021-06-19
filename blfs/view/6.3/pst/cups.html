@@ -1,0 +1,655 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      CUPS-1.2.12
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;39.&nbsp;Printing
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="printing.html" title="Printing">Prev</a>
+          <p>
+            Printing
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="LPRng.html" title="LPRng-3.8.28">Next</a>
+          <p>
+            LPRng-3.8.28
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="printing.html" title=
+          "Chapter&nbsp;39.&nbsp;Printing">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="cups" name="cups"></a>CUPS-1.2.12
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to CUPS
+        </h2>
+        <p>
+          The Common Unix Printing System (CUPS) is a print spooler and
+          associated utilities. It is based on the "Internet Printing
+          Protocol" and provides printing services to most PostScript and
+          raster printers.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://ftp.easysw.com/pub/cups/1.2.12/cups-1.2.12-source.tar.bz2">
+                http://ftp.easysw.com/pub/cups/1.2.12/cups-1.2.12-source.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.easysw.com/pub/cups/1.2.12/cups-1.2.12-source.tar.bz2">
+                ftp://ftp.easysw.com/pub/cups/1.2.12/cups-1.2.12-source.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: d410658468384b5ba5d04a808f6157fe
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 3.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 62 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.6 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Required patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/cups-1.2.12-security_fixes-2.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/cups-1.2.12-security_fixes-2.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          CUPS Dependencies
+        </h3>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="../general/libjpeg.html" title=
+          "libjpeg-6b">libjpeg-6b</a>, <a class="xref" href=
+          "../general/libpng.html" title="libpng-1.2.29">libpng-1.2.29</a>,
+          and <a class="xref" href="../general/libtiff.html" title=
+          "LibTIFF-3.8.2">LibTIFF-3.8.2</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/pkgconfig.html" title=
+          "pkg-config-0.22">pkg-config-0.22</a>, <a class="xref" href=
+          "../general/dbus.html" title="D-BUS-1.0.2">D-BUS-1.0.2</a>,
+          <a class="xref" href="../server/openldap.html" title=
+          "OpenLDAP-2.3.39">OpenLDAP-2.3.39</a>, <a class="xref" href=
+          "../postlfs/openssl.html" title="OpenSSL-0.9.8g">OpenSSL-0.9.8g</a>
+          or <a class="xref" href="../postlfs/gnutls.html" title=
+          "GnuTLS-1.6.3">GnuTLS-1.6.3</a>, <a class="xref" href=
+          "../postlfs/linux-pam.html" title=
+          "Linux-PAM-0.99.10.0">Linux-PAM-0.99.10.0</a>, <a class="xref"
+          href="../general/php.html" title="PHP-5.2.3">PHP-5.2.3</a>,
+          <a class="xref" href="../general/python.html" title=
+          "Python-2.5.2">Python-2.5.2</a>, <a class="xref" href=
+          "../general/jdk.html" title="JDK-6 Update 5">JDK-6 Update 5</a>,
+          <a class="ulink" href="http://www.openslp.org/">OpenSLP</a>,
+          <a class="ulink" href=
+          "http://packages.debian.org/unstable/source/libpaper">libpaper</a>,
+          <a class="ulink" href=
+          "ftp://oss.sgi.com/projects/xfs/cmd_tars/">libacl</a> (requires
+          <a class="ulink" href=
+          "ftp://oss.sgi.com/projects/xfs/cmd_tars/">libattr</a>), <a class=
+          "ulink" href="http://www.easysw.com/htmldoc/">HTMLDOC</a>, and
+          <a class="ulink" href="http://valgrind.org/">Valgrind</a>
+          (optionally used if running the test suites)
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/cups">http://wiki.linuxfromscratch.org/blfs/wiki/cups</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of CUPS
+        </h2>
+        <p>
+          Create an <code class="systemitem">lp</code> user, as <span class=
+          "application">CUPS</span> will create some files owned by this
+          user. (The <code class="systemitem">lp</code> user is the default
+          used by <span class="application">CUPS</span>, but may be changed
+          to a different user by passing a parameter to the <span class=
+          "command"><strong>configure</strong></span> script.) Use the
+          following command as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class=
+"command">useradd -c "Print Service User" -d /dev/null -g lp -s /bin/false -u 9 lp</kbd>
+</pre>
+        <p>
+          Install <span class="application">CUPS</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">patch -Np1 -i ../cups-1.2.12-security_fixes-2.patch &amp;&amp;
+./configure &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          To test the results, issue: <span class="command"><strong>make
+          check</strong></span>. This will run a basic test suite without any
+          load testing. If you wish to run the tests specifying non-default
+          parameters, issue: <span class="command"><strong>make
+          test</strong></span>. Note that the &ldquo;<span class=
+          "quote">torture load testing</span>&rdquo; test uses more resources
+          than those displayed in the prompt.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          The <span class="application">man</span> files are installed in
+          compressed (<code class="filename">.gz</code>) format. If desired,
+          use the following commands to uncompress them:
+        </p>
+        <pre class="root">
+<kbd class="command">gunzip -v /usr/share/man/man{\
+1/{cancel,cups{-config,test{dsc,ppd}},\
+lp{,options,passwd,q,rm,r,stat}}.1,\
+5/{{classes,client,cups-snmp,cupsd,printers,subscriptions,mailto}.conf,\
+mime.{convs,types}}.5,\
+7/{backend,filter}.7,\
+8/{accept,cups{d,addsmb,enable,-{deviced,driverd,lpd,polld}},\
+lp{admin,info,move,c}}.8}.gz &amp;&amp;
+
+rm -v /usr/share/man/man8/{reject,cupsdisable}.8.gz &amp;&amp;
+
+ln -v -s accept.8 /usr/share/man/man8/reject.8 &amp;&amp;
+ln -v -s cupsenable.8 /usr/share/man/man8/cupsdisable.8</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          The basic default behavior of the installation is appropriate for
+          LFS systems. <span class="application">CUPS</span> files are placed
+          in <code class="filename">/usr/bin</code>, <code class=
+          "filename">/usr/sbin</code>, <code class="filename">/var</code> and
+          <code class="filename">/etc/cups</code>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring CUPS
+        </h2>
+        <p>
+          Configuration of <span class="application">CUPS</span> is dependent
+          on the type of printer and can be complex. Generally, PostScript
+          printers are easier. For detailed instructions on configuration and
+          use of <span class="application">CUPS</span>, see <a class="ulink"
+          href=
+          "http://www.cups.org/documentation.php">http://www.cups.org/documentation.php</a>.
+          The Software Administrators Manual and Software Users Manual are
+          particularly useful.
+        </p>
+        <p>
+          For non-PostScript printers to print with <span class=
+          "application">CUPS</span>, you need to install <a class="xref"
+          href="espgs.html" title="ESP Ghostscript-8.15.4">ESP
+          Ghostscript-8.15.4</a> to convert PostScript to raster images and a
+          driver (e.g., from <a class="xref" href="gutenprint.html" title=
+          "Gutenprint-5.0.1">Gutenprint-5.0.1</a>) to convert the resulting
+          raster images to a form that the printer understands. <a class=
+          "ulink" href=
+          "http://www.linuxprinting.org/foomatic.html">Foomatic</a> drivers
+          use Ghostscript to convert PostScript to a printable form directly,
+          but this is considered to be a hack by <span class=
+          "application">CUPS</span> developers.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="cups-kernel" name="cups-kernel"></a>Kernel Configuration
+          </h3>
+          <p>
+            To use your printer you will likely need the appropriate drivers
+            enabled in the kernel &mdash; for example, &ldquo;<span class=
+            "quote">Parallel printer support</span>&rdquo; if you have a
+            parallel port printer, or &ldquo;<span class="quote">USB Printer
+            support</span>&rdquo; for a USB printer.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="cups-init" name="cups-init"></a>Boot Script
+          </h3>
+          <p>
+            During the installation, <span class="application">CUPS</span>
+            added startup files in <code class="filename">/etc/rc.d</code>.
+            These scripts will work in most cases, but will fail if you
+            provide printers to <span class="application">Samba</span>
+            clients. Additionally, they are not consistent with standard LFS
+            style scripts. Replace the installed scripts with the scripts and
+            symlinks included in the <a class="xref" href=
+            "../introduction/bootscripts.html" title=
+            "BLFS Boot Scripts">blfs-bootscripts-20080816</a> package:
+          </p>
+          <pre class="root">
+<kbd class="command">make install-cups</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">accept, cancel, cups-config, cupsaddsmb,
+              cupsd, cupstestppd, disable, enable, lp, lpadmin, lpc, lpinfo,
+              lpmove, lpoptions, lppasswd, lpq, lpr, lprm, lpstat, and
+              reject</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libcups.{so,a}, libcupsimage.{so,a}, and
+              various filters and backend drivers</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/cups, /usr/include/cups,
+              /usr/lib/cups, /usr/share/cups, /usr/share/doc/cups-1.2.12,
+              /var/cache/cups, /var/log/cups, and /var/spool/cups</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="accept" name="accept"></a><span class=
+                    "term"><span class=
+                    "command"><strong>accept</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    instructs the printing system to accept print jobs to the
+                    specified destinations.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cancel-cups" name="cancel-cups"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cancel</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    cancels existing print jobs from the print queues.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cups-config" name="cups-config"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cups-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a <span class="application">CUPS</span> program
+                    configuration utility.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cupsaddsmb" name="cupsaddsmb"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cupsaddsmb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    exports printers to the <span class=
+                    "application">Samba</span> software for use with Windows
+                    clients.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cupsd" name="cupsd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cupsd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the scheduler for the Common Unix Printing System.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cupstestppd" name="cupstestppd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cupstestppd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    tests the conformance of PPD files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="disable" name="disable"></a><span class=
+                    "term"><span class=
+                    "command"><strong>disable</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    stops the named printers or classes.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="enable" name="enable"></a><span class=
+                    "term"><span class=
+                    "command"><strong>enable</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    starts the named printers or classes.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lp-cups" name="lp-cups"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    submits files for printing or alters a pending job.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpadmin" name="lpadmin"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lpadmin</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    configures printer and class queues provided by
+                    <span class="application">CUPS</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpc-cups" name="lpc-cups"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lpc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides limited control over printer and class queues
+                    provided by <span class="application">CUPS</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpinfo" name="lpinfo"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lpinfo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    lists the available devices or drivers known to the
+                    <span class="application">CUPS</span> server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpmove" name="lpmove"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lpmove</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    moves the specified job to a new destination.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpoptions" name="lpoptions"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lpoptions</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    displays or sets printer options and defaults.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lppasswd" name="lppasswd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lppasswd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    adds, changes or deletes passwords in the <span class=
+                    "application">CUPS</span> digest password file
+                    <code class="filename">passwd.md5</code>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpq-cups" name="lpq-cups"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lpq</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    shows the current print queue status on the named
+                    printer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpr-cups" name="lpr-cups"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lpr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    submits files for printing.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lprm-cups" name="lprm-cups"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lprm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    cancels print jobs that have been queued for printing.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpstat-cups" name="lpstat-cups"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lpstat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    displays status information about the current classes,
+                    jobs, and printers.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="reject" name="reject"></a><span class=
+                    "term"><span class=
+                    "command"><strong>reject</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    instructs the printing system to reject print jobs to the
+                    specified destinations.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-05-09 07:42:27 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="printing.html" title="Printing">Prev</a>
+          <p>
+            Printing
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="LPRng.html" title="LPRng-3.8.28">Next</a>
+          <p>
+            LPRng-3.8.28
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="printing.html" title=
+          "Chapter&nbsp;39.&nbsp;Printing">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

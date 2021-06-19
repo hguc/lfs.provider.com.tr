@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      GCC-3.3.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;12.&nbsp;Programming</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="ruby.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="tcl.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          GCC-3.3.3
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to GCC
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">GCC</span></span> package contains <span class=
+          "acronym">GNU</span> compilers. This is useful for compiling
+          programs written in <span class="application">Ada</span>,
+          <span class="application">C</span>, <span class=
+          "application">C++</span>, <span class="application">Fortran</span>,
+          <span class="application">Java</span> and <span class=
+          "application">Objective C</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2722746" name="id2722746"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://mirrors.rcn.net/pub/sourceware/gcc/releases/gcc-3.3.3/gcc-3.3.3.tar.bz2">
+                  http://mirrors.rcn.net/pub/sourceware/gcc/releases/gcc-3.3.3/gcc-3.3.3.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://mirrors.rcn.net/pub/sourceware/gcc/releases/gcc-3.3.3/gcc-3.3.3.tar.bz2">
+                  ftp://mirrors.rcn.net/pub/sourceware/gcc/releases/gcc-3.3.3/gcc-3.3.3.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 23 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 889 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 29.3 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2722786" name="id2722786"></a>Additional Downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/gcc-3.3.3-no_fixincludes-1.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/gcc-3.3.3-no_fixincludes-1.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of GCC
+          </h3>
+        </div>
+        <p>
+          If you plan to compile Ada, you will need to install <span class=
+          "application"><span class="acronym">GNAT</span></span> temporarily
+          to satisfy the circular dependency when you recompile <span class=
+          "application"><span class="acronym">GCC</span></span> to include
+          <span class="application">Ada</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2724041" name="id2724041"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://cs.nyu.edu/pub/gnat/3.15p/gnat-3.15p-i686-pc-redhat71-gnu-bin.tar.gz">
+                  ftp://cs.nyu.edu/pub/gnat/3.15p/gnat-3.15p-i686-pc-redhat71-gnu-bin.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 13.2 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 48.9 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.01 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2724080" name="id2724080"></a><span class=
+                  "application"><span class="acronym">GNAT</span></span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2724098" name="id2724098"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/tcsh.html">Tcsh-6.13.00</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of GNAT
+          </h3>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">GNAT</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">./doconfig</b></span></tt>
+</pre>
+        <p>
+          The above script will ask you how and where you would like to
+          install <span class="application"><span class=
+          "acronym">GNAT</span></span>. To avoid conflicts with the system
+          <span><b class="command">gcc</b></span>, the package will be
+          installed in a separate directory, that can later be removed from
+          the system.
+        </p>
+        <p>
+          In response to the questions asked by the <span><b class=
+          "command">doconfig</b></span> script, enter <tt class=
+          "userinput">3</tt> in response to the first question and <tt class=
+          "userinput">/opt/gnat</tt> in response to the second question.
+        </p>
+        <p>
+          To finish the install, run:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">./doinstall</b></span></tt>
+</pre>
+        <p>
+          The <span class="application"><span class=
+          "acronym">GNAT</span></span> compiler can be invoked by executing
+          the <span><b class="command">gcc</b></span> binary installed by the
+          above script.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Return to Installation of GCC
+          </h3>
+        </div>
+        <p>
+          Patch the source files with the following command:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../gcc-3.3.3-no_fixincludes-1.patch &amp;&amp;
+sed -i 's/install_to_$(INSTALL_DEST) //' libiberty/Makefile.in</b></span></tt>
+</pre>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">GCC</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">PATH_HOLD=$PATH &amp;&amp;
+export PATH=/opt/gnat/bin:$PATH &amp;&amp;
+cd gcc/ada &amp;&amp;
+touch treeprs.ads [es]info.h nmake.ad[bs] &amp;&amp;
+cd ../.. &amp;&amp;
+mkdir ../gcc-build &amp;&amp;
+cd ../gcc-build &amp;&amp;
+CC=/usr/bin/gcc ../gcc-3.3.3/configure --prefix=/usr --enable-shared \
+    --enable-languages=c,c++,objc,f77,ada,java --enable-threads=posix \
+    --enable-__cxa_atexit --enable-clocale=gnu &amp;&amp;
+make bootstrap &amp;&amp;
+make -C gcc gnatlib_and_tools &amp;&amp;
+make -k check &amp;&amp;
+make install &amp;&amp;
+ln -sf ../usr/bin/cpp /lib &amp;&amp;
+ln -sf gcc /usr/bin/cc &amp;&amp;
+ln -sf g77 /usr/bin/f77 &amp;&amp;
+export PATH=$PATH_HOLD</b></span></tt>
+</pre>
+        <p>
+          You may remove the <span class="application"><span class=
+          "acronym">GNAT</span></span> installation:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">rm -rf /opt/gnat</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">PATH_HOLD=$PATH</b></span>: This command
+          stores your current path before it's modified so that it can be
+          restored after installation.
+        </p>
+        <p>
+          <span><b class="command">export
+          PATH=/opt/gnat/bin:$PATH</b></span>: This command allows the build
+          to find <span class="application"><span class=
+          "acronym">GNAT</span></span>'s <span class="application">Ada</span>
+          compiler to build <span class="application">Ada</span>.
+        </p>
+        <p>
+          <span><b class="command">touch treeprs.ads [es]info.h
+          nmake.ad[bs]</b></span>: This command creates necessary files for
+          the <span class="application">Ada</span> build. This step may be
+          skipped if you don't want to compile the <span class=
+          "application">Ada</span> front end.
+        </p>
+        <p>
+          <i class="parameter"><tt>CC=/usr/bin/gcc</tt></i>: This command
+          works around the new <tt class="envar">PATH</tt> which puts
+          <span class="application"><span class="acronym">GNAT</span></span>
+          's <span><b class="command">gcc</b></span> as the primary compiler.
+        </p>
+        <p>
+          <i class=
+          "parameter"><tt>--enable-languages=c,c++,objc,f77,ada,java</tt></i>:
+          This command builds all available languages in the <span class=
+          "application"><span class="acronym">GCC</span></span> package. You
+          may modify this command to remove unwanted languages.
+        </p>
+        <p>
+          <i class="parameter"><tt>--enable-shared --enable-threads=posix
+          --enable-__cxa_atexit</tt></i>: These commands are required to
+          build the <span class="application">C++</span> libraries to
+          published standards.
+        </p>
+        <p>
+          <i class="parameter"><tt>--enable-clocale=gnu</tt></i>: This
+          command is a failsafe for incomplete locale data.
+        </p>
+        <p>
+          <span><b class="command">make gnatlib_and tools</b></span>: This
+          command completes the <span class="application">Ada</span> build
+          process. Skip this step if you have not enabled <span class=
+          "application">Ada</span> as one of the languages.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">GCC</span></span> package contains <span><b class=
+          "command">c++</b></span>, <span><b class=
+          "command">c++filt</b></span>, <span><b class=
+          "command">cpp</b></span>, <span><b class="command">g++</b></span>,
+          <span><b class="command">g77</b></span>, <span><b class=
+          "command">gcc</b></span>, <span><b class=
+          "command">gccbug</b></span>, <span><b class=
+          "command">gcov</b></span>, <span><b class=
+          "command">glob</b></span>, <span><b class=
+          "command">gnat</b></span>, <span><b class=
+          "command">gnatbind</b></span>, <span><b class=
+          "command">gnatbl</b></span>, <span><b class=
+          "command">gnatchop</b></span>, <span><b class=
+          "command">gnatfind</b></span>, <span><b class=
+          "command">gnatkr</b></span>, <span><b class=
+          "command">gnatlink</b></span>, <span><b class=
+          "command">gnatls</b></span>, <span><b class=
+          "command">gnatmake</b></span>, <span><b class=
+          "command">gnatprep</b></span>, <span><b class=
+          "command">gnatpsta</b></span>, <span><b class=
+          "command">gnatpsys</b></span>, <span><b class=
+          "command">gnatxref</b></span> and <span class=
+          "application"><span class="acronym">GCC</span></span> libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <p>
+          The programs and libraries whose descriptions are missing here have
+          been described in the <span class="acronym">LFS</span> <span class=
+          "acronym">GCC</span>-3.3.3 page.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725660" name="id2725660"></a>g77
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">g77</b></span> is the <span class=
+            "application">Fortran</span> compiler invoked by <span><b class=
+            "command">gcc</b></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725683" name="id2725683"></a>add2line
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">add2line</b></span> converts the
+            <span class="acronym">ASCII</span> form of the 2-line orbital
+            elements in a file to binary form and appends them to the orbdata
+            files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725701" name="id2725701"></a>gcov
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gcov</b></span> is a test coverage
+            program.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725714" name="id2725714"></a>gdb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gdb</b></span> is the <span class=
+            "application"><span class="acronym">GNAT</span></span> debugger.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725734" name="id2725734"></a>gnatbind
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatbind</b></span> is used to bind
+            compiled objects.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725748" name="id2725748"></a>gnatbl
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatbl</b></span> is the <span class=
+            "application">Ada</span> linker.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725766" name="id2725766"></a>gnatchop
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatchop</b></span> is useful for
+            renaming files to meet the standard <span class=
+            "application">Ada</span> default file naming conventions.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725787" name="id2725787"></a>gnatelim
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatelim</b></span> is used to detect
+            and eliminate unused subprograms in an <span class=
+            "application">Ada</span> partition.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725806" name="id2725806"></a>gnatfind
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatfind</b></span> is the <span class=
+            "application"><span class="acronym">GNAT</span></span>
+            definition/use finder.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725827" name="id2725827"></a>gnatgcc
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatgcc</b></span> is the compiler.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725840" name="id2725840"></a>gnathtml.pl
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnathtml.pl</b></span> converts
+            <span class="application">Ada</span> source files to <span class=
+            "acronym">HTML</span> for viewing in Web browsers.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725862" name="id2725862"></a>gnatkr
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatkr</b></span> is used to determine
+            the crunched name for a given file, when crunched to a specified
+            maximum length.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725877" name="id2725877"></a>gnatlink
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatlink</b></span> is used to link
+            programs and build an executable file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725890" name="id2725890"></a>gnatls
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatls</b></span> is the compiled unit
+            browser.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725903" name="id2725903"></a>gnatemake
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatmake</b></span> is an automatic make
+            facility.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725916" name="id2725916"></a>gnatmem
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatmem</b></span> is the <span class=
+            "application"><span class="acronym">GNAT</span></span> utility
+            that monitors dynamic allocation and deallocation activity in a
+            program.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725938" name="id2725938"></a>gnatprep
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatprep</b></span> is the <span class=
+            "application"><span class="acronym">GNAT</span></span> external
+            preprocessor.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725959" name="id2725959"></a>gnatpsta
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatpsta</b></span> determines the
+            values of all the relevant parameters in Standard and outputs to
+            stdout.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725973" name="id2725973"></a>gnatpsys
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatpsys</b></span> determines the
+            values of all the relevant parameters in System and outputs to
+            stdout.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2725987" name="id2725987"></a>gnatstub
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatstub</b></span> is a generator of
+            body stubs.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2726000" name="id2726000"></a>gnatxref
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gnatxref</b></span> is the <span class=
+            "application"><span class="acronym">GNAT</span></span>
+            cross-referencer.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2726020" name="id2726020"></a>gvd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gvd</b></span> is the <span class=
+            "acronym">GNU</span> Visual Debugger.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="ruby.html">Prev</a><br />
+        Ruby-1.8.1
+      </div>
+      <div class="next">
+        <a accesskey="n" href="tcl.html">Next</a><br />
+        Tcl-8.4.6
+      </div>
+      <div class="up">
+        <a accesskey="u" href="prog.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,342 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      UDFtools-1.0.0b2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;40.&nbsp;CD-Writing utilities</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="cdrdao.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="../pst/pst.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          UDFtools-1.0.0b2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to UDFtools
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">UDF</span>tools</span> package contains utilities for
+          creating and mounting <span class="acronym">CD</span>-<span class=
+          "acronym">RW</span> disks with <span class="acronym">UDF</span>
+          file systems for both reading and writing. <span class=
+          "acronym">UDF</span> files systems are used on both <span class=
+          "acronym">CD</span>-<span class="acronym">RW</span> media and on
+          <span class="acronym">DVD</span>. For more details of the
+          <span class="acronym">UDF</span> file system standard see: <a href=
+          "http://www.osta.org">http://www.osta.org</a> and <a href=
+          "http://www.ecma-international.org">http://www.ecma-international.org</a>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3210275" name="id3210275"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/linux-udf/udftools-1.0.0b2.tar.gz">
+                  http://prdownloads.sourceforge.net/linux-udf/udftools-1.0.0b2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 236 Kb
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 2.7 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time:
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3210318" name="id3210318"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/linux-2.4.26-packet.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/linux-2.4.26-packet.patch</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Patches for other kernel versions: <a href=
+                  "http://w1.894.telia.com/~u89404340/patches/packet/">http://w1.894.telia.com/~u89404340/patches/packet/</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of the kernel patch
+          </h3>
+        </div>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Warning]" src="../images/warning.png" />
+            <h3 class="warning">
+              Warning
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              Note that this patch can permanently damage your <span class=
+              "acronym">CD</span> drive if it is from one of the few
+              mentioned at <a href=
+              "http://slashdot.org/article.pl?sid=03/10/25/1737244">http://slashdot.org/article.pl?sid=03/10/25/1737244</a>.
+              Do not apply the patch without first checking out the article.
+            </p>
+          </div>
+        </div>
+        <p>
+          Install the kernel patch by running the following commands from the
+          kernel source directory:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../linux-2.4.26-packet.patch</b></span></tt>
+</pre>
+        <p>
+          In the kernel configuration, check your setting with those listed
+          here:
+        </p>
+        <pre class="screen">
+Block devices
+   Packet writing on CD/DVD media:       Y or M
+File Systems
+   UDF filesystems support (read only):  Y
+     UDF write support (DANGEROUS)       Y
+</pre>
+        <p>
+          If necessary, recompile the kernel with:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make CC=/opt/gcc-2.95.3/bin/gcc dep &amp;&amp;
+make CC=/opt/gcc-2.95.3/bin/gcc bzImage &amp;&amp;
+make CC=/opt/gcc-2.95.3/bin/gcc modules &amp;&amp;
+make CC=/opt/gcc-2.95.3/bin/gcc modules_install</b></span></tt>
+</pre>
+        <p>
+          Copy <tt class=
+          "filename">/usr/src/linux/arch/i386/boot/bzImage</tt> and
+          <tt class="filename">/usr/src/linux/System.map</tt> to <tt class=
+          "filename">/boot</tt>. If you utilize <span class=
+          "application">LILO</span>, edit <tt class=
+          "filename">/etc/lilo.conf</tt> appropriately and run
+          <span><b class="command">lilo</b></span>.
+        </p>
+        <p>
+          If you built packet writer as a module, add the following to
+          <tt class="filename">/etc/modules.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput">alias block-major-97 pktcdvd</tt>
+</pre>
+        <p>
+          Finally, create the packet driver device nodes in <tt class=
+          "filename">/dev</tt>, add one node for every <span class=
+          "acronym">CD</span>-<span class="acronym">RW</span> drive you want
+          to support:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">mknod /dev/pktcdvd0 b 97 0
+mknod /dev/pktcdvd1 b 97 1</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of UDFtools
+          </h3>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">UDF</span>tools</span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">UDF</span>tools</span> package contains <span><b class=
+          "command">pktsetup</b></span>, <span><b class=
+          "command">cdrwtool</b></span>, and <span><b class=
+          "command">mkudffs</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3209879" name="id3209879"></a>pktsetup
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pktsetup</b></span> is used to establish
+            and break down associations between the kernel packet driver and
+            a physical drive.
+          </p>
+          <p>
+            Example:
+          </p>
+          <pre class="screen">
+<span><b class="command">pktsetup /dev/pktcdvd0 /dev/scd0
+mount /dev/pktcdvd0 /mnt/cdrom -t udf -o rw,noatime</b></span>
+</pre>
+          <p>
+            associates the physical device <tt class=
+            "filename">/dev/scd0</tt> with the kernel packet driver
+            <tt class="filename">/dev/pktcdvd0</tt>, then mounts a
+            <span class="acronym">UDF</span> formatted <span class=
+            "acronym">CD-RW</span> for read/write access.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3210084" name="id3210084"></a>cdrwtool
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">cdrwtool</b></span> provides facilities
+            to manage <span class="acronym">CD</span>-RW drives, including
+            formatting new disks, setting the read and write speeds, etc.
+          </p>
+          <p>
+            Example:
+          </p>
+          <pre class="screen">
+<span><b class="command">cdrwtool -d /dev/scd0 -q</b></span>
+</pre>
+          <p>
+            prepares a new <span class="acronym">CD</span>-<span class=
+            "acronym">RW</span> for use and formats it with a <span class=
+            "acronym">UDF</span> file system.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3210126" name="id3210126"></a>mkudffs
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mkudffs</b></span> is used to create new
+            <span class="acronym">UDF</span> file systems, it can be used on
+            hard disks and <span class="acronym">CD</span>-R as well as
+            <span class="acronym">CD</span>-<span class="acronym">RW</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="cdrdao.html">Prev</a><br />
+        Cdrdao-1.1.8
+      </div>
+      <div class="next">
+        <a accesskey="n" href="../pst/pst.html">Next</a><br />
+        Part&nbsp;XIII.&nbsp;Printing, Scanning and Typesetting
+      </div>
+      <div class="up">
+        <a accesskey="u" href="cdwriteutils.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

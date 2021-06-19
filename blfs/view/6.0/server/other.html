@@ -1,0 +1,836 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;22.&nbsp;Other Server Software
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Part&nbsp;VI.&nbsp;Server Networking
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="courier.html" title="Courier-0.47">Prev</a>
+          <p>
+            Courier-0.47
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cvsserver.html" title=
+          "Running a CVS server">Next</a>
+          <p>
+            Running a CVS server
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="server.html" title=
+          "Part&nbsp;VI.&nbsp;Server Networking">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="server-other" name="server-other"></a>
+        <h1 class="chapter">
+          Other Server Software
+        </h1>
+      </div>
+      <p>
+        Here you will find many ways to share your machine with the rest of
+        the world or your local network. Before installing any packages in
+        this chapter, you need to be sure you understand what the package
+        does and how to set it up correctly. It might also be helpful to
+        learn about the consequences of an improper setup so that you can
+        analyze the risks.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="bind" name="bind"></a>
+          <h1 class="sect1">
+            BIND-9.3.0p1
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to BIND
+            </h2>
+          </div>
+          <p>
+            The <span class="application"><span class=
+            "acronym">BIND</span></span> package provides a <span class=
+            "acronym">DNS</span> server and client utilities. If you are only
+            interested in the utilities, refer to the <a href=
+            "../basicnet/bind-utils.html">BIND Utilities-9.3.0p1</a>.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2679694" name="id2679694"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://gd.tuwien.ac.at/infosys/servers/isc/bind9/9.3.0/bind-9.3.0.tar.gz">
+                    <span class=
+                    "url">http://gd.tuwien.ac.at/infosys/servers/isc/bind9/9.3.0/bind-9.3.0.tar.gz</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.isc.org/isc/bind9/9.3.0/bind-9.3.0.tar.gz"><span class="url">
+                    ftp://ftp.isc.org/isc/bind9/9.3.0/bind-9.3.0.tar.gz</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download MD5 sum: fdb42fff7e345372ac52a4493b77b694
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 4.6 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated disk space required: 87 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 1.87 SBU (additional 4.14 SBU to
+                    run the complete test suite)
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2596994" name="id2596994"></a>Additional
+                    downloads
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    <a href=
+                    "ftp://ftp.isc.org/isc/bind9/9.3.0/9.3.0-patch1"><span class="url">
+                    ftp://ftp.isc.org/isc/bind9/9.3.0/9.3.0-patch1</span></a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2572350" name="id2572350"></a><span class=
+                    "application"><span class="acronym">BIND</span></span>
+                    dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2770062" name="id2770062"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../postlfs/security.html#openssl">OpenSSL-0.9.7e</a>
+              </p>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2792975" name="id2792975"></a>Optional (to run
+                      the full test suite)
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../basicnet/net-tools.html">Net-tools-1.60</a> (for
+                <span><strong class="command">ifconfig</strong></span>) and
+                <a href="../general/perl-modules.html">Perl modules</a>:
+                Net-DNS
+              </p>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2563562" name="id2563562"></a>Optional (to
+                      [re]build documentation)
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../pst/openjade.html">OpenJade-1.3.2</a>, <a href=
+                "../pst/jadetex.html">JadeTeX-3.13</a>, <a href=
+                "../pst/docbook-dsssl.html">DocBook DSSSL
+                Stylesheets-1.78</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of BIND
+            </h2>
+          </div>
+          <p>
+            Install <span class="application"><span class=
+            "acronym">BIND</span></span> by running the following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">patch -Np1 -i ../9.3.0-patch1 &amp;&amp;
+sed -i -e "s/dsssl-stylesheets/&amp;-1.78/g" configure &amp;&amp;
+./configure --prefix=/usr --sysconfdir=/etc \
+    --enable-threads --with-libtool &amp;&amp;
+make</strong></span></kbd></pre>
+          <p>
+            Now, as the root user:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make install &amp;&amp;
+chmod 755 \
+    /usr/lib/{lib{bind9,isc{,cc,cfg},lwres}.so.?.?.?,libdns.so.20.0.0} &amp;&amp;
+mv /usr/share/man/man8/named.conf.5 /usr/share/man/man5 &amp;&amp;
+cd doc &amp;&amp;
+install -d -m755 /usr/share/doc/bind-9.3.0/{arm,draft,misc,rfc} &amp;&amp;
+install -m644 arm/*.html \
+    /usr/share/doc/bind-9.3.0/arm &amp;&amp;
+install -m644 draft/*.txt \
+    /usr/share/doc/bind-9.3.0/draft &amp;&amp;
+install -m644 rfc/* \
+    /usr/share/doc/bind-9.3.0/rfc &amp;&amp;
+install -m644 \
+    misc/{dnssec,ipv6,migrat*,options,rfc-compliance,roadmap,sdb} \
+    /usr/share/doc/bind-9.3.0/misc</strong></span></kbd></pre>
+          <p>
+            In order to run the complete test suite before installing the
+            package, you need to set up some dummy interfaces (requires
+            <span><strong class="command">ifconfig</strong></span>). Issue
+            the following commands to run the complete suite of tests (you
+            will have to be the root user to issue the <span><strong class=
+            "command">ifconfig</strong></span> commands):
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">bin/tests/system/ifconfig.sh up &amp;&amp;
+make check &gt;check.log 2&gt;&amp;1 &amp;&amp;
+bin/tests/system/ifconfig.sh down</strong></span></kbd></pre>
+          <p>
+            If desired, issue the following command to ensure all 145 tests
+            ran successfully:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">grep "R:PASS" check.log | wc -l</strong></span></kbd></pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command explanations
+            </h2>
+          </div>
+          <p>
+            <span><strong class="command">patch -Np1 -i
+            ../9.3.0-patch1</strong></span>: There's a vulnerability in the
+            <span class="acronym">DNS</span><span class="acronym">SEC</span>
+            code. See <a href=
+            "http://www.kb.cert.org/vuls/id/938617"><span class=
+            "url">http://www.kb.cert.org/vuls/id/938617</span></a>. The patch
+            fixes the bug.
+          </p>
+          <p>
+            <span><strong class="command">sed -i -e ...
+            configure</strong></span>: This command forces
+            <span><strong class="command">configure</strong></span> to look
+            for the <span class="acronym">DSSSL</span> stylesheets in the
+            standard <span class="acronym">BLFS</span> location.
+          </p>
+          <p>
+            <em class="parameter"><tt>--sysconfdir=/etc</tt></em>: This
+            parameter forces <span class="application"><span class=
+            "acronym">BIND</span></span> to look for configuration files in
+            <tt class="filename">/etc</tt> instead of <tt class=
+            "filename">/usr/etc</tt>.
+          </p>
+          <p>
+            <em class="parameter"><tt>--enable-threads</tt></em>: This
+            parameter enables multi-threading capability.
+          </p>
+          <p>
+            <em class="parameter"><tt>--with-libtool</tt></em>: This
+            parameter forces the building of dynamic libraries and links the
+            installed binaries to these libraries.
+          </p>
+          <p>
+            <span><strong class="command">cd doc; install
+            ...</strong></span>: These commands install the additional
+            package documentation. Optionally, omit any or all of these
+            commands.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Configuring BIND
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="bind-config" name="bind-config"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">named.conf</tt>, <tt class=
+              "filename">root.hints</tt>, <tt class="filename">127.0.0</tt>,
+              <tt class="filename">rndc.conf</tt> and <tt class=
+              "filename">resolv.conf</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2571132" name="id2571132"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span class="application"><span class=
+              "acronym">BIND</span></span> will be configured to run in a
+              <span><strong class="command">chroot</strong></span> jail as an
+              unprivileged user (named). This configuration is more secure in
+              that a <span class="acronym">DNS</span> compromise can only
+              affect a few files in the named user's <tt class=
+              "envar">HOME</tt> directory.
+            </p>
+            <p>
+              Create the unprivileged user and group named:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">groupadd named &amp;&amp;
+useradd -m -c "BIND Owner" -g named -s /bin/false named</strong></span></kbd></pre>
+            <p>
+              Set up some files, directories and devices needed by
+              <span class="application"><span class=
+              "acronym">BIND</span></span>:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">cd /home/named &amp;&amp;
+mkdir -p dev etc/namedb/slave var/run &amp;&amp;
+mknod /home/named/dev/null c 1 3 &amp;&amp;
+mknod /home/named/dev/random c 1 8 &amp;&amp;
+chmod 666 /home/named/dev/{null,random} &amp;&amp;
+mkdir /home/named/etc/namedb/pz &amp;&amp;
+cp /etc/localtime /home/named/etc</strong></span></kbd></pre>
+            <p>
+              Then, generate a key for use in the <tt class=
+              "filename">named.conf</tt> and <tt class=
+              "filename">rdnc.conf</tt> files using the <span><strong class=
+              "command">rndc-confgen</strong></span> command:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">rndc-confgen -b 512 | grep -m 1 "secret" | cut -d '"' -f 2</strong></span></kbd></pre>
+            <p>
+              Create the <tt class="filename">named.conf</tt> file from which
+              named will read the location of zone files, root name servers
+              and secure <span class="acronym">DNS</span> keys:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">cat &gt; /home/named/etc/named.conf &lt;&lt; "EOF"</strong></span>
+ options {
+     directory "/etc/namedb";
+    pid-file "/var/run/named.pid";
+    statistics-file "/var/run/named.stats";
+       
+ };
+ controls {
+     inet 127.0.0.1 allow { localhost; } keys { rndc_key; };
+ };
+ key "rndc_key" {
+     algorithm hmac-md5;
+     secret "<em class=
+"replaceable"><tt>[Insert secret from rndc-confgen's output here]</tt></em>";
+ };
+ zone "." {
+     type hint;
+     file "root.hints";
+ };
+ zone "0.0.127.in-addr.arpa" {
+     type master;
+     file "pz/127.0.0";
+ };
+
+// Bind 9 now logs by default through syslog (except debug).
+// These are the default logging rules.
+
+logging {
+     category default { default_syslog; default_debug; };
+     category unmatched { null; };
+
+  channel default_syslog {
+      syslog daemon;                      // send to syslog's daemon
+                                          // facility
+      severity info;                      // only send priority info
+                                          // and higher
+  };
+
+  channel default_debug {
+      file "named.run";                   // write to named.run in
+                                          // the working directory
+                                          // Note: stderr is used instead
+                                          // of "named.run"
+                                          // if the server is started
+                                          // with the '-f' option.
+      severity dynamic;                   // log at the server's
+                                          // current debug level
+  };
+
+  channel default_stderr {
+      stderr;                             // writes to stderr
+      severity info;                      // only send priority info
+                                          // and higher
+  };
+
+  channel null {
+     null;                                // toss anything sent to
+                                          // this channel
+  };
+};
+
+
+
+<span><strong class="command">EOF</strong></span></kbd></pre>
+            <p>
+              Create the <tt class="filename">rndc.conf</tt> file with the
+              following commands:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">cat &gt; /etc/rndc.conf &lt;&lt; "EOF"</strong></span>
+key rndc_key {
+algorithm "hmac-md5";
+    secret
+    "<em class=
+"replaceable"><tt>[Insert secret from rndc-confgen's output here]</tt></em>";
+    };
+options {
+    default-server localhost;
+    default-key    rndc_key;
+};
+<span><strong class="command">EOF</strong></span></kbd></pre>
+            <p>
+              The <tt class="filename">rndc.conf</tt> file contains
+              information for controlling named operations with the
+              <span><strong class="command">rndc</strong></span> utility.
+            </p>
+            <p>
+              Create a zone file with the following contents:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">cat &gt; /home/named/etc/namedb/pz/127.0.0 &lt;&lt; "EOF"</strong></span>
+$TTL 3D
+@      IN      SOA     ns.local.domain. hostmaster.local.domain. (
+                        1       ; Serial
+                        8H      ; Refresh
+                        2H      ; Retry
+                        4W      ; Expire
+                        1D)     ; Minimum TTL
+                NS      ns.local.domain.
+1               PTR     localhost.
+<span><strong class="command">EOF</strong></span></kbd></pre>
+            <p>
+              Create the <tt class="filename">root.hints</tt> file with the
+              following commands:
+            </p>
+            <div class="note">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="admontitle">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  Caution must be used to ensure there are no leading spaces
+                  in this file.
+                </p>
+              </div>
+            </div>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">cat &gt; /home/named/etc/namedb/root.hints &lt;&lt; "EOF"</strong></span>
+.                       6D  IN      NS      A.ROOT-SERVERS.NET.
+.                       6D  IN      NS      B.ROOT-SERVERS.NET.
+.                       6D  IN      NS      C.ROOT-SERVERS.NET.
+.                       6D  IN      NS      D.ROOT-SERVERS.NET.
+.                       6D  IN      NS      E.ROOT-SERVERS.NET.
+.                       6D  IN      NS      F.ROOT-SERVERS.NET.
+.                       6D  IN      NS      G.ROOT-SERVERS.NET.
+.                       6D  IN      NS      H.ROOT-SERVERS.NET.
+.                       6D  IN      NS      I.ROOT-SERVERS.NET.
+.                       6D  IN      NS      J.ROOT-SERVERS.NET.
+.                       6D  IN      NS      K.ROOT-SERVERS.NET.
+.                       6D  IN      NS      L.ROOT-SERVERS.NET.
+.                       6D  IN      NS      M.ROOT-SERVERS.NET.
+A.ROOT-SERVERS.NET.     6D  IN      A       198.41.0.4
+B.ROOT-SERVERS.NET.     6D  IN      A       192.228.79.201
+C.ROOT-SERVERS.NET.     6D  IN      A       192.33.4.12
+D.ROOT-SERVERS.NET.     6D  IN      A       128.8.10.90
+E.ROOT-SERVERS.NET.     6D  IN      A       192.203.230.10
+F.ROOT-SERVERS.NET.     6D  IN      A       192.5.5.241
+G.ROOT-SERVERS.NET.     6D  IN      A       192.112.36.4
+H.ROOT-SERVERS.NET.     6D  IN      A       128.63.2.53
+I.ROOT-SERVERS.NET.     6D  IN      A       192.36.148.17
+J.ROOT-SERVERS.NET.     6D  IN      A       192.58.128.30
+K.ROOT-SERVERS.NET.     6D  IN      A       193.0.14.129
+L.ROOT-SERVERS.NET.     6D  IN      A       198.32.64.12
+M.ROOT-SERVERS.NET.     6D  IN      A       202.12.27.33
+<span><strong class="command">EOF</strong></span></kbd></pre>
+            <p>
+              The <tt class="filename">root.hints</tt> file is a list of root
+              name servers. This file must be updated periodically with the
+              <span><strong class="command">dig</strong></span> utility. A
+              current copy of root.hints can be obtained from <a href=
+              "ftp://rs.internic.net/domain/named.root"><span class=
+              "url">ftp://rs.internic.net/domain/named.root</span></a>.
+              Consult the <a href=
+              "http://www.bind9.net/Bv9ARM.html"><span class=
+              "url"><span class="application"><span class=
+              "acronym">BIND</span></span> 9 Administrator Reference
+              Manual</span></a> for details.
+            </p>
+            <p>
+              Create or modify <tt class="filename">resolv.conf</tt> to use
+              the new name server with the following commands:
+            </p>
+            <div class="note">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="admontitle">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  Replace <em class=
+                  "replaceable"><tt>[yourdomain.com]</tt></em> with your own
+                  valid domain name.
+                </p>
+              </div>
+            </div>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">cp /etc/resolv.conf /etc/resolv.conf.bak &amp;&amp;
+cat &gt; /etc/resolv.conf &lt;&lt; "EOF"</strong></span>
+search <em class="replaceable"><tt>[yourdomain.com]</tt></em>
+nameserver 127.0.0.1
+<span><strong class="command">EOF</strong></span></kbd></pre>
+            <p>
+              Set permissions on the <span><strong class=
+              "command">chroot</strong></span> jail with the following
+              command:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">chown -R named.named /home/named</strong></span></kbd></pre>
+            <p>
+              <a id="bind-init" name="bind-init"></a>To start the
+              <span class="acronym">DNS</span> server at boot, install the
+              <tt class="filename">/etc/rc.d/init.d/bind</tt> init script
+              included in the <a href=
+              "../introduction/bootscripts.html">blfs-bootscripts-6.0</a>
+              package.
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">make install-bind</strong></span></kbd></pre>
+            <p>
+              Now start <span class="application"><span class=
+              "acronym">BIND</span></span> with the new boot script:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">/etc/rc.d/init.d/bind start</strong></span></kbd></pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2697241" name="id2697241"></a>Testing
+                    <span class="application"><span class=
+                    "acronym">BIND</span></span>
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              Test out the new <span class="application"><span class=
+              "acronym">BIND</span></span> 9 installation. First query the
+              local host address with <span><strong class=
+              "command">dig</strong></span>:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">dig -x 127.0.0.1</strong></span></kbd></pre>
+            <p>
+              Now try an external name lookup, taking note of the speed
+              difference in repeated lookups due to the caching. Run the
+              <span><strong class="command">dig</strong></span> command twice
+              on the same address:
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">dig www.linuxfromscratch.org &amp;&amp;
+dig www.linuxfromscratch.org</strong></span></kbd></pre>
+            <p>
+              You can see almost instantaneous results with the named caching
+              lookups. Consult the <span class="application"><span class=
+              "acronym">BIND</span></span> Administrator Reference Manual
+              located at <tt class="filename">doc/arm/Bv9ARM.html</tt> in the
+              package source tree, for further configuration options.
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <div class="segmentedlist">
+            <div class="seglistitem">
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Programs:</span></strong> <span class="seg">dig,
+                dnssec-keygen, dnssec-signzone, host, isc-config.sh, lwresd,
+                named, named-checkconf, named-checkzone, nslookup, nsupdate,
+                rndc and rndc-confgen</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Libraries:</span></strong> <span class="seg">libbind9.[so,a],
+                libdns.[so,a], libisc.[so,a], libisccc.[so,a],
+                libisccfg.[so,a] and liblwres.[so,a]</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Directories:</span></strong> <span class="seg">/home/named,
+                /usr/include/bind9, /usr/include/dns, /usr/include/dst,
+                /usr/include/isc, /usr/include/isccc, /usr/include/isccfg,
+                /usr/include/lwres and /usr/share/doc/bind-9.3.0</span>
+              </div>
+            </div>
+          </div>
+          <div class="variablelist">
+            <h3>
+              <a id="id2635589" name="id2635589"></a>Short Descriptions
+            </h3>
+            <dl>
+              <dt>
+                <a id="dig" name="dig"></a><span class=
+                "term"><span><strong class=
+                "command">dig</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  interrogates <span class="acronym">DNS</span> servers.
+                </p>
+              </dd>
+              <dt>
+                <a id="dnssec-keygen" name="dnssec-keygen"></a><span class=
+                "term"><span><strong class=
+                "command">dnssec-keygen</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a key generator for secure <span class=
+                  "acronym">DNS</span>.
+                </p>
+              </dd>
+              <dt>
+                <a id="dnssec-signzone" name=
+                "dnssec-signzone"></a><span class="term"><span><strong class=
+                "command">dnssec-signzone</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  generates signed versions of zone files.
+                </p>
+              </dd>
+              <dt>
+                <a id="host" name="host"></a><span class=
+                "term"><span><strong class=
+                "command">host</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a utility for <span class="acronym">DNS</span> lookups.
+                </p>
+              </dd>
+              <dt>
+                <a id="lwresd" name="lwresd"></a><span class=
+                "term"><span><strong class=
+                "command">lwresd</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a caching-only name server for local process use.
+                </p>
+              </dd>
+              <dt>
+                <a id="named" name="named"></a><span class=
+                "term"><span><strong class=
+                "command">named</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is the name server daemon.
+                </p>
+              </dd>
+              <dt>
+                <a id="named-checkconf" name=
+                "named-checkconf"></a><span class="term"><span><strong class=
+                "command">named-checkconf</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  checks the syntax of <tt class="filename">named.conf</tt>
+                  files.
+                </p>
+              </dd>
+              <dt>
+                <a id="named-checkzone" name=
+                "named-checkzone"></a><span class="term"><span><strong class=
+                "command">named-checkzone</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  checks zone file validity.
+                </p>
+              </dd>
+              <dt>
+                <a id="nslookup" name="nslookup"></a><span class=
+                "term"><span><strong class=
+                "command">nslookup</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a program used to query Internet domain nameservers.
+                </p>
+              </dd>
+              <dt>
+                <a id="nsupdate" name="nsupdate"></a><span class=
+                "term"><span><strong class=
+                "command">nsupdate</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is used to submit <span class="acronym">DNS</span> update
+                  requests.
+                </p>
+              </dd>
+              <dt>
+                <a id="rndc" name="rndc"></a><span class=
+                "term"><span><strong class=
+                "command">rndc</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  controls the operation of <span class=
+                  "application"><span class="acronym">BIND</span></span>.
+                </p>
+              </dd>
+              <dt>
+                <a id="rndc-confgen" name="rndc-confgen"></a><span class=
+                "term"><span><strong class=
+                "command">rndc-confgen</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  generates <tt class="filename">rndc.conf</tt> files.
+                </p>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="courier.html" title="Courier-0.47">Prev</a>
+          <p>
+            Courier-0.47
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cvsserver.html" title=
+          "Running a CVS server">Next</a>
+          <p>
+            Running a CVS server
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="server.html" title=
+          "Part&nbsp;VI.&nbsp;Server Networking">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

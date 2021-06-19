@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      libFAME-0.9.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;35.&nbsp;Multimedia Libraries and Drivers
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libquicktime.html" title=
+          "libquicktime-1.0.0">Prev</a>
+          <p>
+            libquicktime-1.0.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="speex.html" title="Speex-1.0.5">Next</a>
+          <p>
+            Speex-1.0.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="libdriv.html" title=
+          "Chapter&nbsp;35.&nbsp;Multimedia Libraries and Drivers">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="libfame" name="libfame"></a>libFAME-0.9.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to libFAME
+        </h2>
+        <p>
+          <span class="application">libFAME</span> is a fast (real-time)
+          MPEG-1 as well as MPEG-4 rectangular and arbitrary shaped video
+          encoding library.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://downloads.sourceforge.net/fame/libfame-0.9.1.tar.gz">http://downloads.sourceforge.net/fame/libfame-0.9.1.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/libfame-0.9.1.tar.gz">
+                ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/libfame-0.9.1.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 880085761e17a3b4fc41f4f6f198fd3b
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 290 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 6.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.2 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Required Patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/libfame-0.9.1-gcc34-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/libfame-0.9.1-gcc34-1.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/libfame">http://wiki.linuxfromscratch.org/blfs/wiki/libfame</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of libFAME
+        </h2>
+        <p>
+          Install <span class="application">libFAME</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">patch -Np1 -i ../libfame-0.9.1-gcc34-1.patch &amp;&amp;
+sed -i 's/$CC --version/$CC -dumpversion/' configure &amp;&amp;
+./configure --prefix=/usr &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>sed -i 's/$CC --version/$CC
+          -dumpversion/' configure</strong></span>: This command causes the
+          <span class="command"><strong>configure</strong></span> script to
+          use a different command to find out the version of the compiler.
+          Without this command, the -fstrict-aliasing flag is not added to
+          the <code class="envar">CFLAGS</code> variable in the various
+          <code class="filename">Makefile</code>s.
+        </p>
+        <p>
+          <code class="option">--enable-sse</code>: This option is off by
+          default and should be set on if your machine has SSE capability.
+          One way to find out if you have SSE is to issue <span class=
+          "command"><strong>cat /proc/cpuinfo</strong></span> and see if
+          <code class="computeroutput">sse</code> is listed in the flags.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">libfame-config</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libfame.{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libfame-config" name=
+                    "libfame-config"></a><span class="term"><span class=
+                    "command"><strong>libfame-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides configuration information for <code class=
+                    "filename">libfame</code>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libfame-lib" name="libfame-lib"></a><span class=
+                    "term"><code class=
+                    "filename">libfame.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    provides functions for the video encoding programs.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-07-14 18:27:07 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libquicktime.html" title=
+          "libquicktime-1.0.0">Prev</a>
+          <p>
+            libquicktime-1.0.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="speex.html" title="Speex-1.0.5">Next</a>
+          <p>
+            Speex-1.0.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="libdriv.html" title=
+          "Chapter&nbsp;35.&nbsp;Multimedia Libraries and Drivers">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,23 @@
+rm -f .tmp
+echo "set objdir" `pwd` > .tmp
+if [ "." = "." ] ; then \
+   echo "set srcdir" `pwd` >> .tmp ; \
+else echo "set srcdir" . >> .tmp ; fi
+echo "cd \${srcdir}/tests" >> .tmp
+echo "source all.tcl" >> .tmp
+rootme=`pwd`; export rootme; \
+srcdir=. ; export srcdir ; \
+if [ -f ./expect ] ; then  \
+   TCL_LIBRARY=/tools/build/tcl8.4.9/library ; \
+   export TCL_LIBRARY ; fi ; \
+LD_LIBRARY_PATH=.:/tools/lib:/tools/lib:$LD_LIBRARY_PATH ./expect -f .tmp
+cat.test
+expect.test
+logfile.test
+via sendvia send_uservia send_stdoutpid.test
+send.test
+spawn.test
+stty.test
+all.tcl:	Total	25	Passed	25	Skipped	0	Failed	0
+Sourced 0 Test Files.
+rm -f .tmp

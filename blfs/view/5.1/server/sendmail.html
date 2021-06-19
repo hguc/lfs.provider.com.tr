@@ -1,0 +1,452 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Sendmail-8.12.10
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;21.&nbsp;Mail Server Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="mail.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="exim.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Sendmail-8.12.10
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Sendmail
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Sendmail</span> package contains a
+          Mail Transport Agent (<span class="acronym">MTA</span>).
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2827076" name="id2827076"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.sendmail.org/ftp/sendmail.8.12.10.tar.gz">http://www.sendmail.org/ftp/sendmail.8.12.10.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.sendmail.org/pub/sendmail/sendmail.8.12.10.tar.gz">
+                  ftp://ftp.sendmail.org/pub/sendmail/sendmail.8.12.10.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 13 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.43 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2827639" name="id2827639"></a><span class=
+                  "application">Sendmail</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2827661" name="id2827661"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../content/databases.html#db">Berkeley DB-4.2.52.2</a>
+              and <a href="../basicnet/procmail.html">Procmail-3.22</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Sendmail
+          </h3>
+        </div>
+        <p>
+          Before building <span class="application">Sendmail</span>, we need
+          to create users, groups and directories that sendmail uses with the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">groupadd smmsp &amp;&amp;
+groupadd mail &amp;&amp;
+useradd -g smmsp -G mail smmsp &amp;&amp;
+chmod 1777 /tmp &amp;&amp;
+chmod 1777 /var/mail &amp;&amp;
+mkdir /var/spool/mqueue</b></span></tt>
+</pre>
+        <p>
+          Install <span class="application">Sendmail</span> with the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; devtools/Site/site.config.m4 &lt;&lt; "EOF"
+define(`confMANGRP',`root')
+define(`confMANOWN',`root')
+define(`confSBINGRP',`root')
+define(`confUBINGRP',`root')
+define(`confUBINOWN',`root')
+EOF
+cd sendmail &amp;&amp;
+sh Build &amp;&amp;
+cd ../cf/cf &amp;&amp;
+cp generic-linux.mc sendmail.mc &amp;&amp;
+mkdir /etc/mail &amp;&amp;
+sh Build sendmail.mc &amp;&amp;
+sh Build install-cf &amp;&amp;
+cd ../../ &amp;&amp;
+sh Build install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Sendmail
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2827578" name="id2827578"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/mail/*</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2827589" name="id2827589"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">echo `hostname` &gt; /etc/mail/local-host-names
+cat &gt; /etc/mail/aliases &lt;&lt; "EOF"
+postmaster: root
+MAILER-DAEMON: root
+EOF
+cp -R cf/* /etc/mail &amp;&amp;
+cp cf/cf/{submit,sendmail}.mc /etc/mail &amp;&amp;
+newaliases -v</b></span></tt>
+</pre>
+          <p>
+            To automate the running of Sendmail at startup, install the
+            <tt class="filename">/etc/rc.d/init.d/sendmail</tt> init script
+            included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-sendmail</b></span></tt>
+</pre>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                The -qNm option to <span><b class=
+                "command">sendmail</b></span>, where N is number of minutes,
+                controls how often Sendmail will process the mail queue. A
+                default of 5 minutes is used in the init script. Individual
+                workstation users may want to set this as low as 1 minute,
+                large installations handling more mail may want to set it
+                higher.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Sendmail</span> package contains
+          <span><b class="command">mail.local</b></span>, <span><b class=
+          "command">rmail</b></span>, <span><b class=
+          "command">smrsh</b></span>, <span><b class=
+          "command">editmap</b></span>, <span><b class=
+          "command">makemap</b></span>, <span><b class=
+          "command">mailq</b></span>, <span><b class=
+          "command">newaliases</b></span>, <span><b class=
+          "command">sendmail</b></span>, <span><b class=
+          "command">vacation</b></span>, <span><b class=
+          "command">praliases</b></span> and <span><b class=
+          "command">mailstats</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828212" name="id2828212"></a>mail.local
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mail.local</b></span> appends its
+            standard input to a user's mail file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828226" name="id2828226"></a>rmail
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rmail</b></span> interprets incoming
+            mail received via <span class="acronym">UUCP</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828242" name="id2828242"></a>smrsh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smrsh</b></span> is a restricted shell
+            for Sendmail.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828256" name="id2828256"></a>editmap
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">editmap</b></span> queries and edits
+            Sendmail map files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828269" name="id2828269"></a>makemap
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">makemap</b></span> creates Sendmail map
+            files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828282" name="id2828282"></a>mailq
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mailq</b></span> prints a summary of
+            waiting mail messages.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828295" name="id2828295"></a>newaliases
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">newaliases</b></span> rebuilds
+            <tt class="filename">/etc/mail/aliases.db</tt>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828313" name="id2828313"></a>sendmail
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">sendmail</b></span> is the Sendmail mail
+            transport agent.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828326" name="id2828326"></a>vacation
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">vacation</b></span> is an email auto
+            responder.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828340" name="id2828340"></a>praliases
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">praliases</b></span> displays current
+            Sendmail aliases.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2828353" name="id2828353"></a>mailstats
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mailstats</b></span> displays Sendmail
+            statistics.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="mail.html">Prev</a><br />
+        Chapter&nbsp;21.&nbsp;Mail Server Software
+      </div>
+      <div class="next">
+        <a accesskey="n" href="exim.html">Next</a><br />
+        Exim-4.24
+      </div>
+      <div class="up">
+        <a accesskey="u" href="mail.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

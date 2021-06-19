@@ -1,0 +1,527 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      LibTIFF-3.8.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;9.&nbsp;Graphics and Font Libraries
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="libpng.html" title="libpng-1.2.12">Prev</a>
+          <p>
+            libpng-1.2.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="giflib.html" title="giflib-4.1.4">Next</a>
+          <p>
+            giflib-4.1.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;9.&nbsp;Graphics and Font Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="libtiff" name="libtiff"></a>
+        <h1 class="sect1">
+          LibTIFF-3.8.2
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to LibTIFF
+          </h2>
+        </div>
+        <p>
+          The <span class="application">LibTIFF</span> package contains the
+          TIFF libraries and associated utilities. The libraries are used by
+          many programs for reading and writing TIFF files and the utilities
+          are useful for general work with TIFF files.
+        </p>
+        <h3>
+          <a id="id2809618" name="id2809618"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://libtiff.maptools.org/dl/tiff-3.8.2.tar.gz"><span class="url">
+                http://libtiff.maptools.org/dl/tiff-3.8.2.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.remotesensing.org/libtiff/tiff-3.8.2.tar.gz"><span class="url">
+                ftp://ftp.remotesensing.org/libtiff/tiff-3.8.2.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: fbb6f446ea4ed18955e2714934e5b698
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.3 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 18.8 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2796557" name="id2796557"></a>LibTIFF Dependencies
+        </h3>
+        <h4>
+          <a id="id2816642" name="id2816642"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="graphlib.html#libjpeg">libjpeg-6b</a>, <a href=
+          "../x/installing.html">X Window System</a>, and <a href=
+          "../x/freeglut.html">freeglut-2.4.0</a>
+        </p>
+        <p>
+          Note that if you installed the optional MesaGLUT package with the
+          <a href="../x/mesalib.html">MesaLib-6.5</a> package during an
+          <span class="application">Xorg7</span> installation, a GLUT library
+          is already installed and you don't need <span class=
+          "application">freeglut</span>.
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/libtiff"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/libtiff</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of LibTIFF
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">LibTIFF</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make</kbd></pre>
+        <p>
+          To test the results, issue: <span><strong class="command">make
+          check</strong></span>.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">bmp2tiff, fax2ps,
+              fax2tiff, gif2tiff, pal2rgb, ppm2tiff, ras2tiff, raw2tiff,
+              rgb2ycbcr, thumbnail, tiff2bw, tiff2pdf, tiff2ps, tiff2rgba,
+              tiffcmp, tiffcp, tiffdither, tiffdump, tiffgt, tiffinfo,
+              tiffmedian, tiffset, and tiffsplit</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libtiff.{so,a} and
+              libtiffxx.{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directory:</span></strong> <span class=
+              "seg">/usr/share/doc/tiff-3.8.2</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2622655" name="id2622655"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="bmp2tiff" name="bmp2tiff"></a><span class=
+                  "term"><span><strong class=
+                  "command">bmp2tiff</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts a Microsoft Windows Device Independent Bitmap
+                    image file to a TIFF image.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="fax2ps" name="fax2ps"></a><span class=
+                  "term"><span><strong class=
+                  "command">fax2ps</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts a TIFF facsimile to compressed PostScript file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="fax2tiff" name="fax2tiff"></a><span class=
+                  "term"><span><strong class=
+                  "command">fax2tiff</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates a TIFF Class F fax file from raw fax data.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gif2tiff" name="gif2tiff"></a><span class=
+                  "term"><span><strong class=
+                  "command">gif2tiff</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates a TIFF file from a GIF87 format image file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="pal2rgb" name="pal2rgb"></a><span class=
+                  "term"><span><strong class=
+                  "command">pal2rgb</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts a palette color TIFF image to a full color
+                    image.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ppm2tiff" name="ppm2tiff"></a><span class=
+                  "term"><span><strong class=
+                  "command">ppm2tiff</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates a TIFF file from a PPM image file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ras2tiff" name="ras2tiff"></a><span class=
+                  "term"><span><strong class=
+                  "command">ras2tiff</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates a TIFF file from a Sun rasterfile.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="raw2tiff" name="raw2tiff"></a><span class=
+                  "term"><span><strong class=
+                  "command">raw2tiff</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts a raw byte sequence into TIFF.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rgb2ycbcr" name="rgb2ycbcr"></a><span class=
+                  "term"><span><strong class=
+                  "command">rgb2ycbcr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts non-YCbCr TIFF images to YCbCr TIFF images.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="thumbnail" name="thumbnail"></a><span class=
+                  "term"><span><strong class=
+                  "command">thumbnail</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates a TIFF file with thumbnail images.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiff2bw" name="tiff2bw"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiff2bw</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts a color TIFF image to grayscale.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiff2pdf" name="tiff2pdf"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiff2pdf</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts a TIFF image to a PDF document.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiff2ps" name="tiff2ps"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiff2ps</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts a TIFF image to a PostScript file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiff2rgba" name="tiff2rgba"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiff2rgba</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts a wide variety of TIFF images into an RGBA TIFF
+                    image.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiffcmp" name="tiffcmp"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiffcmp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    compares two TIFF files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiffcp" name="tiffcp"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiffcp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    copies (and possibly converts) a TIFF file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiffdither" name="tiffdither"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiffdither</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts a grayscale image to bilevel using dithering.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiffdump" name="tiffdump"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiffdump</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints verbatim information about TIFF files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiffgt" name="tiffgt"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiffgt</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    displays an image stored in a TIFF file in an
+                    <span class="application">X</span> window.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiffinfo" name="tiffinfo"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiffinfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints information about TIFF files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiffmedian" name="tiffmedian"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiffmedian</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    applies the median cut algorithm to data in a TIFF file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiffset" name="tiffset"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiffset</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    sets the value of a TIFF header to a specified value.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tiffsplit" name="tiffsplit"></a><span class=
+                  "term"><span><strong class=
+                  "command">tiffsplit</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    splits a multi-image TIFF into single-image TIFF files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libtiff-lib" name="libtiff-lib"></a><span class=
+                  "term"><tt class="filename">libtiff.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    contains the API functions used by the <span class=
+                    "application">libtiff</span> programs as well as other
+                    programs to read and write TIFF files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libtiffxx" name="libtiffxx"></a><span class=
+                  "term"><tt class="filename">libtiffxx.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    contains the C++ API functions used by programs to read
+                    and write TIFF files.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2006-06-21 11:26:07 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="libpng.html" title="libpng-1.2.12">Prev</a>
+          <p>
+            libpng-1.2.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="giflib.html" title="giflib-4.1.4">Next</a>
+          <p>
+            giflib-4.1.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;9.&nbsp;Graphics and Font Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

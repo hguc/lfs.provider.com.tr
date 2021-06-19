@@ -1,0 +1,302 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      CDParanoia-III-9.8
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;38.&nbsp;Audio utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="lame.html" title="LAME-3.96.1">Prev</a>
+          <p>
+            LAME-3.96.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="videoutils.html" title=
+          "Video utilities">Next</a>
+          <p>
+            Video utilities
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="audioutils.html" title=
+          "Chapter&nbsp;38.&nbsp;Audio utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="cdparanoia" name="cdparanoia"></a>
+        <h1 class="sect1">
+          CDParanoia-III-9.8
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to CDParanoia
+          </h2>
+        </div>
+        <p>
+          The <span class="application">CDParanoia</span> package contains a
+          <span class="acronym">CD</span> audio exraction tool. This is
+          useful for extracting <tt class="filename">.wav</tt> files from
+          audio <span class="acronym">CD</span>s. A <span class=
+          "acronym">CDDA</span> capable <span class="acronym">CDROM</span>
+          drive is needed. Practically all drives supported by Linux can be
+          used.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775922" name="id2775922"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.xiph.org/paranoia/download/cdparanoia-III-alpha9.8.src.tgz">
+                  <span class=
+                  "url">http://www.xiph.org/paranoia/download/cdparanoia-III-alpha9.8.src.tgz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.yars.free.net/pub/software/unix/util/cd/cdparanoia-III-alpha9.8.src.tgz">
+                  <span class=
+                  "url">ftp://ftp.yars.free.net/pub/software/unix/util/cd/cdparanoia-III-alpha9.8.src.tgz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 7218e778b5970a86c958e597f952f193
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 114 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 1.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.12 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2916102" name="id2916102"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/cdparanoia-III-alpha9.8-includes-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/cdparanoia-III-alpha9.8-includes-1.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/cdparanoia-III-alpha9.8-gcc34-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/cdparanoia-III-alpha9.8-gcc34-1.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of CDParanoia
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">CDParanoia</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">patch -Np1 -i ../cdparanoia-III-alpha9.8-includes-1.patch &amp;&amp;
+patch -Np1 -i ../cdparanoia-III-alpha9.8-gcc34-1.patch &amp;&amp;
+./configure --prefix=/usr &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install &amp;&amp;
+chmod 755 /usr/lib/libcdda_*.so.0.9.8</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring CDParanoia
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2867958" name="id2867958"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            As with most libraries, there is no configuration to do, save
+            that the library directory i.e., <tt class=
+            "filename">/opt/lib</tt> or <tt class=
+            "filename">/usr/local/lib</tt> should appear in <tt class=
+            "filename">/etc/ld.so.conf</tt> so that <span><strong class=
+            "command">ldd</strong></span> can find the shared libraries.
+            After checking that this is the case, <span><strong class=
+            "command">/sbin/ldconfig</strong></span> should be run while
+            logged in as root.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Program:</span></strong> <span class="seg">cdparanoia</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class=
+              "seg">libcdda_interface.[so,a] and
+              libcdda_paranoia.[so,a]</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2783764" name="id2783764"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="cdparanoia-prog" name="cdparanoia-prog"></a><span class=
+              "term"><span><strong class=
+              "command">cdparanoia</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is used for 'ripping' an audio-cd. Ripping is the process of
+                digitally extracting music from an audio-cd.
+              </p>
+            </dd>
+            <dt>
+              <a id="libcdda_interface" name=
+              "libcdda_interface"></a><span class="term"><tt class=
+              "filename">libcdda_interface.[so,a]</tt></span>
+            </dt>
+            <dd>
+              <p>
+                contains functions used by <span><strong class=
+                "command">cdparanoia</strong></span>, as well as other
+                packages, which can automatically identify if a <span class=
+                "acronym">CD</span> device is <span class=
+                "acronym">CDDA</span> compatible.
+              </p>
+            </dd>
+            <dt>
+              <a id="libcdda_paranoia" name=
+              "libcdda_paranoia"></a><span class="term"><tt class=
+              "filename">libcdda_paranoia.[so,a]</tt></span>
+            </dt>
+            <dd>
+              <p>
+                contains functions used by <span><strong class=
+                "command">cdparanoia</strong></span>, as well as other
+                packages, which provide data verification, synchronization,
+                error handling and scratch reconstruction capability.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-14 10:02:53 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="lame.html" title="LAME-3.96.1">Prev</a>
+          <p>
+            LAME-3.96.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="videoutils.html" title=
+          "Video utilities">Next</a>
+          <p>
+            Video utilities
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="audioutils.html" title=
+          "Chapter&nbsp;38.&nbsp;Audio utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

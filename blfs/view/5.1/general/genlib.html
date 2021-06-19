@@ -1,0 +1,389 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;8.&nbsp;General Libraries
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;III.&nbsp;General Libraries and Utilities</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="general.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="pcre.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          General Libraries
+        </h1>
+      </div>
+      <p>
+        Libraries contain code which is often required by more than one
+        program. This has the advantage that each program doesn't need to
+        duplicate code (and risk introducing bugs), it just has to call
+        functions from the libraries installed on the system. The most
+        obvious example of a set of libraries is <span class=
+        "application">glibc</span> which is installed during the <span class=
+        "acronym">LFS</span> book. This contains all of the <span class=
+        "application">C</span> library functions which programs use.
+      </p>
+      <p>
+        There are two types of libraries: static and shared. Shared libraries
+        (usually <tt class="filename">libXXX.so</tt>) are loaded into memory
+        from the shared copy at runtime (hence the name). Static libraries
+        (<tt class="filename">libXXX.a</tt> ) are actually linked into the
+        program executable file itself, thus making the program file larger.
+        Quite often, you will find both static and shared copies of the same
+        library on your system.
+      </p>
+      <p>
+        Generally, you only need to install libraries when you are installing
+        software that needs the functionality they supply. In the
+        <span class="acronym">BLFS</span> book, each package is presented
+        with a list of (known) dependencies. Thus, you can figure out which
+        libraries you need to have before installing that program. If you are
+        installing something without using <span class="acronym">BLFS</span>
+        instructions, usually the <tt class="filename">README</tt> or
+        <tt class="filename">INSTALL</tt> file will contain details of the
+        program's requirements.
+      </p>
+      <p>
+        There are certain libraries which nearly <span class=
+        "emphasis"><em>everyone</em></span> will need at some point. In this
+        chapter we list these and some others and explain why you may want to
+        install them.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h1 class="sect1">
+            OpenSSL-0.9.7d
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to OpenSSL
+            </h3>
+          </div>
+          <p>
+            The <span class="application">OpenSSL</span> package contains
+            management tools and libraries relating to cryptography. These
+            are useful for providing cryptography functions to other
+            packages, notably <span class="application">OpenSSH</span> and
+            web browsers (for accessing secure https sites).
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2649498" name="id2649498"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://www.openssl.org/source/openssl-0.9.7d.tar.gz">http://www.openssl.org/source/openssl-0.9.7d.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.openssl.org/source/openssl-0.9.7d.tar.gz">ftp://ftp.openssl.org/source/openssl-0.9.7d.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 2.7 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 25 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 1.16 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of OpenSSL
+            </h3>
+          </div>
+          <p>
+            Install <span class="application">OpenSSL</span> by running the
+            following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">sed 's/^passwd/openssl-passwd/' doc/apps/passwd.pod \
+    &gt; doc/apps/openssl-passwd.pod &amp;&amp;
+rm doc/apps/passwd.pod &amp;&amp;
+mv doc/crypto/{,openssl_}threads.pod &amp;&amp;
+sed -i -e 's/-m486/-march=i486/' Configure &amp;&amp;
+./config --openssldir=/etc/ssl --prefix=/usr shared &amp;&amp;
+make MANDIR=/usr/share/man &amp;&amp;
+make MANDIR=/usr/share/man install &amp;&amp;
+cp -r certs /etc/ssl &amp;&amp;
+rmdir /etc/ssl/lib</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Command explanations
+            </h3>
+          </div>
+          <p>
+            <tt class="option">no-rc5 no-idea</tt>: When added to the
+            <span><b class="command">./config</b></span> command, this will
+            eliminate the building of those encryption methods. Patent
+            licenses may be needed for you to utilize either of those methods
+            in your projects.
+          </p>
+          <p>
+            <span><b class="command">rm doc/apps/passwd.pod</b></span>: This
+            command prevents <span class="application">Open<span class=
+            "acronym">SSL</span></span> from installing its passwd man page
+            over an existing man page with the same name.
+          </p>
+          <p>
+            <span><b class="command">mv
+            doc/crypto/{,openssl_}threads.pod</b></span>: This commands
+            prevents <span class="application">Open<span class=
+            "acronym">SSL</span></span> from overwriting an existing man page
+            from <span class="application">Perl</span>.
+          </p>
+          <p>
+            <span><b class="command">sed -i -e 's/-m486/-march=i486/'
+            Configure</b></span>: <span class="application">GCC</span> issues
+            a warning on every compilation because the <span><b class=
+            "command">Configure</b></span> command uses deprecated <i class=
+            "parameter"><tt>-m486</tt></i> instead of <i class=
+            "parameter"><tt>-march=i486</tt></i>.
+          </p>
+          <pre class="screen">
+<span><b class="command">make MANDIR=/usr/share/man
+make MANDIR=/usr/share/man install</b></span>
+</pre>
+          <p>
+            These commands install <span class="application">OpenSSL</span>
+            with the man pages in <tt class="filename">/usr/share/man</tt>
+            instead of the default which is <tt class=
+            "filename">/etc/ssl/man</tt>.
+          </p>
+          <p>
+            <span><b class="command">cp -r certs /etc/ssl</b></span>: The
+            certificates must be copied manually since the install script
+            skips this step.
+          </p>
+          <p>
+            <span><b class="command">rmdir /etc/ssl/lib</b></span>: This is
+            simply a tidy-up command. For some reason, the <span class=
+            "application">openssl</span> install routine creates the
+            <tt class="filename">/etc/ssl/lib</tt> directory even though the
+            libraries have been installed in <tt class=
+            "filename">/usr/lib</tt>. We remove it to keep things nice and
+            tidy!
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring OpenSSL
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2649915" name="id2649915"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/ssl/openssl.cnf</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2649586" name="id2649586"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              Most people who just want to use <span class=
+              "application">openssl</span> for providing functions to other
+              programs such as <span class="application">OpenSSH</span> and
+              web browsers won't need to worry about configuring <span class=
+              "application">OpenSSL</span>. Configuring <span class=
+              "application">OpenSSL</span> is an advanced topic and so those
+              who do would normally be expected to either know how to do it
+              or to be able to find out how to do it.
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Open<span class=
+            "acronym">SSL</span></span> package contains <span><b class=
+            "command">c_rehash</b></span>, <span><b class=
+            "command">openssl</b></span>, <tt class="filename">libcrypto</tt>
+            libraries and <tt class="filename">libssl</tt> libraries.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2650513" name="id2650513"></a>c_rehash
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">c_rehash</b></span> is a <span class=
+              "application">Perl</span> script that scans all files in a
+              directory and adds symbolic links to their hash values.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2650836" name="id2650836"></a>openssl
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The <span><b class="command">openssl</b></span> program is a
+              command-line tool for using the various cryptography functions
+              of <span class="application">Open<span class=
+              "acronym">SSL</span></span>'s crypto library from the shell. It
+              can be used for various functions which are documented in
+              <span><b class="command">man 1 openssl</b></span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2650867" name="id2650867"></a>libcrypto
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The <span class="application">Open<span class=
+              "acronym">SSL</span></span> crypto library implements a wide
+              range of cryptographic algorithms used in various Internet
+              standards. The services provided by this library are used by
+              the <span class="application">Open<span class=
+              "acronym">SSL</span></span> implementations of <span class=
+              "acronym">SSL</span>, <span class="acronym">TLS</span> and
+              <span class="acronym">S/MIME</span>, and they have also been
+              used to implement <span class="application">Open<span class=
+              "acronym">SSH</span></span>, <span class=
+              "application">Open<span class="acronym">PGP</span></span> , and
+              other cryptographic standards.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2650924" name="id2650924"></a>libssl
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The <span class="application">Open<span class=
+              "acronym">SSL</span></span> <span class="acronym">SSL</span>
+              library implements the Secure Sockets Layer (<span class=
+              "acronym">SSL</span> v2/v3) and Transport Layer Security
+              (<span class="acronym">TLS</span> v1) protocols. It provides a
+              rich <span class="acronym">API</span>, documentation on which
+              can be found by running <span><b class="command">man 3
+              ssl</b></span>.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="general.html">Prev</a><br />
+        Part&nbsp;III.&nbsp;General Libraries and Utilities
+      </div>
+      <div class="next">
+        <a accesskey="n" href="pcre.html">Next</a><br />
+        PCRE-4.5
+      </div>
+      <div class="up">
+        <a accesskey="u" href="general.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

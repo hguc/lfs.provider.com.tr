@@ -1,0 +1,179 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Notes on downloading, unpacking and compiling software
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;2.&nbsp;Important Information</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="important.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="position.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="intro-important-unpacking" name=
+        "intro-important-unpacking"></a>
+        <h2 class="sect1">
+          Notes on downloading, unpacking and compiling software
+        </h2>
+      </div>
+      <p>
+        Those people who have built a <span class="acronym">LFS</span> system
+        will be aware of the general principles of downloading and unpacking
+        software. We will however repeat some of that information here for
+        those new to building their own software.
+      </p>
+      <p>
+        Each set of installation instructions contains a <span class=
+        "acronym">URL</span> from which you can download the package. We do
+        however keep a selection of patches available via http. These are
+        referenced as needed in the installation instructions.
+      </p>
+      <p>
+        While you can keep the source <span class="acronym">TAR</span> balls
+        anywhere you like, we assume that you have unpacked them and unzipped
+        any required patches into <tt class="filename">/usr/src</tt>.
+      </p>
+      <p>
+        We can not emphasize strongly enough that you should start from a
+        <span class="emphasis"><em>clean source tree</em></span> each time.
+        This means that if you have had an error, it's usually best to delete
+        the source tree and re-unpack it <span class=
+        "emphasis"><em>before</em></span> trying again. This obviously
+        doesn't apply if you're an advanced user used to hacking Makefiles
+        and C code, but if in doubt, start from a clean tree.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Unpacking the software
+          </h3>
+        </div>
+        <p>
+          If a file is tar'ed and gzip'ed, it is unpacked by running one of
+          the following two commands, depending on the filename:
+        </p>
+        <pre class="screen">
+<span><b class="command">tar -xvzf filename.tar.gz
+tar -xvzf filename.tgz
+tar -xvzf filename.tar.Z</b></span>
+</pre>
+        <p>
+          If a file is tar'ed and bzip2'ed, it can usually be unpacked by
+          running:
+        </p>
+        <pre class="screen">
+<span><b class="command">tar -jxvf filename.tar.bz2</b></span>
+</pre>
+        <p>
+          You can also use a slightly different method:
+        </p>
+        <pre class="screen">
+<span><b class="command">bzcat filename.tar.bz2 | tar -xv</b></span>
+</pre>
+        <p>
+          Finally, you need to be able to unpack patches which are generally
+          not tar'ed. The best way to do this is to copy the patch file to
+          <tt class="filename">/usr/src</tt> and then to run one of the
+          following commands depending on whether the file is .gz or .bz2:
+        </p>
+        <pre class="screen">
+<span><b class="command">gunzip patchname.gz
+bunzip2 patchname.bz2</b></span>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Verifying file integrity using md5sum
+          </h3>
+        </div>
+        <p>
+          Generally, to verify that the downloaded file is genuine and
+          complete, most package maintainers also distribute md5sums of the
+          files. To verify the md5sum of the downloaded files, download both
+          the file and the corresponding md5sum file to the same directory
+          (preferably from different on-line locations), and (assuming
+          file.md5sum is the md5sum file downloaded) run the following
+          command:
+        </p>
+        <pre class="screen">
+<span><b class="command">md5sum -c file.md5sum</b></span>
+</pre>
+        <p>
+          If there are any errors, they will be reported.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Creating Log files during installation
+          </h3>
+        </div>
+        <p>
+          For larger packages, it is convenient to create log files instead
+          of staring at the screen hoping to catch a particular error or
+          warning. Log files are also useful for debugging and keeping
+          records. The following command allows you to create an installation
+          log. Replace &lt;command&gt; with the command you intend to
+          execute.
+        </p>
+        <pre class="screen">
+<span><b class=
+"command">( &lt;command&gt; 2&gt;&amp;1 | tee compile.log &amp;&amp; exit $PIPESTATUS )</b></span>
+</pre>
+        <p>
+          <i class="parameter"><tt>2&gt;&amp;1</tt></i> redirects error
+          messages to the same location as standard output. The
+          <span><b class="command">tee</b></span> command allows viewing of
+          the output while logging the results to a file. The parentheses
+          around the command run the entire command in a subshell and finally
+          the <span><b class="command">exit $PIPESTATUS</b></span> ensures
+          the result of the &lt;command&gt; is returned as the result and not
+          the result of the <span><b class="command">tee</b></span> command.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="important.html">Prev</a><br />
+        Chapter&nbsp;2.&nbsp;Important Information
+      </div>
+      <div class="next">
+        <a accesskey="n" href="position.html">Next</a><br />
+        The /usr versus /usr/local debate
+      </div>
+      <div class="up">
+        <a accesskey="u" href="important.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

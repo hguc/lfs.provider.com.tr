@@ -1,0 +1,1015 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Building KDE Frameworks 5 (KF5)
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.10">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 7.10
+      </h4>
+      <h3>
+        Chapter&nbsp;30.&nbsp;KDE Frameworks 5
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="noto-fonts.html" title="Noto Fonts">Prev</a>
+          <p>
+            Noto Fonts
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="kf5-apps.html" title=
+          "KDE Frameworks 5 Based Applications">Next</a>
+          <p>
+            KDE Frameworks 5 Based Applications
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="kf5.html" title=
+          "Chapter&nbsp;30.&nbsp;KDE Frameworks 5">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="kf5-frameworks" name="kf5-frameworks"></a>Building KDE
+        Frameworks 5 (KF5)
+      </h1>
+      <p>
+        KDE Frameworks 5 is a collection of libraries based on top of Qt5 and
+        QML derived from the monolithic KDE 4 libraries. They can be used
+        independent of the KDE Display Environment (Plasma 5).
+      </p>
+      <p>
+        This package is known to build and work properly using an LFS-7.10
+        platform.
+      </p>
+      <p>
+        The instructions below build all of the KDE Frameworks packages in
+        one step by using a bash script.
+      </p>
+      <h3>
+        Package Information
+      </h3>
+      <div class="itemizedlist">
+        <ul class="compact">
+          <li>
+            <p>
+              Download (HTTP): <a class="ulink" href=
+              "http://download.kde.org/stable/frameworks/5.25">http://download.kde.org/stable/frameworks/5.25</a>
+            </p>
+          </li>
+          <li>
+            <p>
+              Download MD5 sum: See Below
+            </p>
+          </li>
+          <li>
+            <p>
+              Download size: 257 MB
+            </p>
+          </li>
+          <li>
+            <p>
+              Estimated disk space required: 1.5 GB
+            </p>
+          </li>
+          <li>
+            <p>
+              Estimated build time: 38 SBU
+            </p>
+          </li>
+        </ul>
+      </div>
+      <h3>
+        KF5 Dependencies
+      </h3>
+      <h4>
+        Required
+      </h4>
+      <p class="required">
+        <a class="xref" href="../general/boost.html" title=
+        "Boost-1.61.0">Boost-1.61.0</a>, <a class="xref" href=
+        "extra-cmake-modules.html" title=
+        "extra-cmake-modules-5.25.0">extra-cmake-modules-5.25.0</a>,
+        <a class="xref" href="../pst/docbook.html" title=
+        "docbook-xml-4.5">docbook-xml-4.5</a>, <a class="xref" href=
+        "../pst/docbook-xsl.html" title=
+        "docbook-xsl-1.79.1">docbook-xsl-1.79.1</a>, <a class="xref" href=
+        "../general/giflib.html" title="giflib-5.1.4">giflib-5.1.4</a>,
+        <a class="xref" href="../x/libepoxy.html" title=
+        "libepoxy-1.3.1">libepoxy-1.3.1</a>, <a class="xref" href=
+        "../general/libgcrypt.html" title=
+        "libgcrypt-1.7.3">libgcrypt-1.7.3</a>, <a class="xref" href=
+        "../general/libjpeg.html" title=
+        "libjpeg-turbo-1.5.0">libjpeg-turbo-1.5.0</a>, <a class="xref" href=
+        "../general/libpng.html" title="libpng-1.6.24">libpng-1.6.24</a>,
+        <a class="xref" href="../general/libxslt.html" title=
+        "libxslt-1.1.29">libxslt-1.1.29</a>, <a class="xref" href=
+        "../server/lmdb.html" title="lmdb-0.9.18">lmdb-0.9.18</a>, <a class=
+        "xref" href="../x/qtwebkit5.html" title=
+        "QtWebkit-5.7.0">QtWebkit-5.7.0</a>, <a class="xref" href=
+        "phonon.html" title="Phonon-4.9.0">phonon-4.9.0</a>, <a class="xref"
+        href="../general/shared-mime-info.html" title=
+        "shared-mime-info-1.6">shared-mime-info-1.6</a>, <a class="xref"
+        href="../general/perl-modules.html#perl-uri" title=
+        "URI-1.71">URI-1.71</a>, and <a class="xref" href=
+        "../basicnet/wget.html" title="Wget-1.18">Wget-1.18</a> (required to
+        download the packages)
+      </p>
+      <h4>
+        Recommended
+      </h4>
+      <p class="recommended">
+        <a class="xref" href="../general/aspell.html" title=
+        "Aspell-0.60.6.1">Aspell-0.60.6.1</a> (Dictionary backend for
+        Sonnet), <a class="xref" href="../basicnet/avahi.html" title=
+        "Avahi-0.6.32">Avahi-0.6.32</a> (DNS-SD backend for KDNSSD),
+        <a class="xref" href="libdbusmenu-qt.html" title=
+        "libdbusmenu-qt-0.9.3+16.04.20160218">libdbusmenu-qt-0.9.3+16.04.20160218</a>
+        (built with qt5), <a class="xref" href=
+        "../basicnet/networkmanager.html" title=
+        "NetworkManager-1.4.0">NetworkManager-1.4.0</a> (needed to build
+        NetworkManager-Qt), and <a class="xref" href="polkit-qt.html" title=
+        "Polkit-Qt-0.112.0">polkit-qt-0.112.0</a> (Authentication backend for
+        KAuth)
+      </p>
+      <h4>
+        Optional
+      </h4>
+      <p class="optional">
+        <a class="xref" href="../general/bluez.html" title=
+        "BlueZ-5.41">BlueZ-5.41</a> (needed to build Bluez-Qt), <a class=
+        "xref" href="../general/ModemManager.html" title=
+        "ModemManager-1.6.0">ModemManager-1.6.0</a> (needed to build
+        ModemManager-Qt)
+      </p>
+      <h4>
+        Runtime dependency for FrameworkIntegration
+      </h4>
+      <p class="optional">
+        <a class="xref" href="oxygen-fonts.html" title=
+        "Oxygen-fonts-5.4.3">oxygen-fonts-5.4.3</a> and <a class="xref" href=
+        "noto-fonts.html" title="Noto Fonts">noto-fonts</a>
+      </p>
+      <h4>
+        Runtime dependencies for kapidox
+      </h4>
+      <p class="optional">
+        <a class="xref" href="../general/doxygen.html" title=
+        "Doxygen-1.8.11">Doxygen-1.8.11</a>, <span><a class="ulink" href=
+        "https://pypi.python.org/pypi/Jinja2">Jinja2</a></span> , and
+        <span><a class="ulink" href="http://pyyaml.org/">PyYAML</a></span>
+      </p>
+      <h4>
+        Additional image formats support in KImageFormats
+      </h4>
+      <p class="optional">
+        <a class="xref" href="../general/jasper.html" title=
+        "JasPer-1.900.1">JasPer-1.900.1</a> and <a class="ulink" href=
+        "http://www.openexr.com/">OpenEXR</a>
+      </p>
+      <h4>
+        Optional dependencies for KIO
+      </h4>
+      <p class="optional">
+        <a class="xref" href="../postlfs/mitkrb.html" title=
+        "MIT Kerberos V5-1.14.3">MIT Kerberos V5-1.14.3</a>
+      </p>
+      <h4>
+        Optional dependencies for Solid
+      </h4>
+      <p class="optional">
+        <a class="xref" href="../general/udisks2.html" title=
+        "UDisks-2.1.7">UDisks-2.1.7</a>, <a class="xref" href=
+        "../general/upower.html" title="UPower-0.99.4">UPower-0.99.4</a> and
+        <a class="ulink" href=
+        "http://www.freedesktop.org/software/media-player-info/">media-player-info</a>
+        (runtime)
+      </p>
+      <h4>
+        Optional dependency for KWallet
+      </h4>
+      <p class="optional">
+        <a class="ulink" href=
+        "http://download.kde.org/stable/applications/16.08.0/src">gpgmepp</a>
+      </p>
+      <h4>
+        Optional dictionary backends for Sonnet
+      </h4>
+      <p class="optional">
+        <a class="ulink" href="http://hspell.ivrix.org.il/">Hspell</a> and
+        <a class="ulink" href="http://hunspell.sourceforge.net/">Hunspell</a>
+      </p>
+      <p class="usernotes">
+        User Notes: <a class="ulink" href=
+        "http://wiki.linuxfromscratch.org/blfs/wiki/kf5">http://wiki.linuxfromscratch.org/blfs/wiki/kf5</a>
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Downloading KDE Frameworks
+        </h2>
+        <p>
+          The easiest way to get the KDE Frameworks packages is to use a
+          single <span class="command"><strong>wget</strong></span> to fetch
+          them all at once:
+        </p>
+        <pre class="userinput">
+<kbd class="command">url=http://download.kde.org/stable/frameworks/5.25/
+wget -r -nH --cut-dirs=3 -A '*.xz' -np $url</kbd>
+<code class="literal">
+The options used here are:
+  -r            recurse through child directories
+  -nH           disable generation of host-prefixed directories
+  --cut-dirs=3  remove three levels of directories when saving
+  -A '*.xz'     just get the *.xz files
+  -np           don't get parent directories</code>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Setting Package Order
+        </h2>
+        <p>
+          The order of building files is important due to internal
+          dependencies. Create the list of files in the proper order as
+          follows:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; frameworks-5.25.0.md5 &lt;&lt; "EOF"
+<code class="literal">000a8c34e6c4e548f53493c4519c3c1c  attica-5.25.0.tar.xz
+#043c08482bf7cf951e18d32e16238fb4  extra-cmake-modules-5.25.0.tar.xz
+892840e6b323ba1d4687e75678cf9493  kapidox-5.25.0.tar.xz
+7205f46ad213e85a736da5f808b5b8df  karchive-5.25.0.tar.xz
+089c46445618fbc36c11de7eccd61256  kcodecs-5.25.0.tar.xz
+03112534b86d98716cf61865d0ea2497  kconfig-5.25.0.tar.xz
+25a40738d380e465ae5161cbaa2b282c  kcoreaddons-5.25.0.tar.xz
+cd6d6dbfc47cb82a7fb0b81adc24aad7  kdbusaddons-5.25.0.tar.xz
+31c35cb2b97f150d103484501cc55aca  kdnssd-5.25.0.tar.xz
+bfba32b6ee6f1288fef0d7156bf81961  kguiaddons-5.25.0.tar.xz
+051c7cab151f9d361d6da83968fb68d2  ki18n-5.25.0.tar.xz
+aba67367441db87daf4705e5cd0b4449  kidletime-5.25.0.tar.xz
+610989615ba775f55bf07f1b5f5b3bf9  kimageformats-5.25.0.tar.xz
+83b9a034bbfaedf0cc12191157899006  kitemmodels-5.25.0.tar.xz
+324c058163bb418b26d9cba403e5133d  kitemviews-5.25.0.tar.xz
+6906f6da8a6d680cd86d1ee96f80bf2b  kplotting-5.25.0.tar.xz
+c4b6185dac9cecd6af6eea3b56f2271f  kwidgetsaddons-5.25.0.tar.xz
+ae52891201ea66b15d94a4f5a2717a5f  kwindowsystem-5.25.0.tar.xz
+45b8586afc97200ea687996fc5ce2327  networkmanager-qt-5.25.0.tar.xz
+3ca487d5660ee83d0b2165e525ea5795  solid-5.25.0.tar.xz
+1863877132650a61510ee37c894a43c5  sonnet-5.25.0.tar.xz
+6e0e0668f25d508aca4c527f762e7701  threadweaver-5.25.0.tar.xz
+059033f3a41d6733bc92ed6f3fece2ef  kauth-5.25.0.tar.xz
+ce3839d146dc522a3595085833bf10ea  kcompletion-5.25.0.tar.xz
+ecf5dde757c1cf5e3d00d3cfe661474d  kcrash-5.25.0.tar.xz
+9dc819d8f5402b252b71610102685939  kdoctools-5.25.0.tar.xz
+904db48ad9e21de2df42738775261b23  kpty-5.25.0.tar.xz
+e4a9229d95ae7ebaa094d104eb8bc633  kunitconversion-5.25.0.tar.xz
+03bc05f0c72386a143d1b002178f95f6  kconfigwidgets-5.25.0.tar.xz
+3cc65c5082a9bdaa2c93ea01323fb814  kservice-5.25.0.tar.xz
+8b2a252d99308aece33663cf9522c43a  kglobalaccel-5.25.0.tar.xz
+237995199b61f5dd48e862c12fe7779e  kpackage-5.25.0.tar.xz
+f85faafcbdbf994bdb8b4cbcd7c85f03  kdesu-5.25.0.tar.xz
+7a38172342fa120969b73d868e2b4211  kemoticons-5.25.0.tar.xz
+45eb7f6ad57eca1f2f5ad3d58a56bef8  kiconthemes-5.25.0.tar.xz
+edbdaa821afa328331e46e3d959924ca  kjobwidgets-5.25.0.tar.xz
+4ef30449b46b701ddf6482d36378e1ec  knotifications-5.25.0.tar.xz
+b7455b06e270b9e057f1ebe137676687  ktextwidgets-5.25.0.tar.xz
+d64ee5eb63d0490b36a1cc9c0ebf126d  kwallet-5.25.0.tar.xz
+5ca8391964c2743c32e3eb46c975943c  kxmlgui-5.25.0.tar.xz
+73827857016fb3444101929fbd9fcd83  kbookmarks-5.25.0.tar.xz
+0077d90029c34f734fb661912f2213d1  kio-5.25.0.tar.xz
+c76d293ffa8bcae4771b78e553d26f53  kdeclarative-5.25.0.tar.xz
+139af7a01a29e7dbd81f25adae1df9b2  kcmutils-5.25.0.tar.xz
+d63e9454ee42955c44cad1cc78a98d44  frameworkintegration-5.25.0.tar.xz
+0b8fcc6d1ef2ff1775ec23dfa34b5de6  kinit-5.25.0.tar.xz
+2ea7e17162776681193f67d66821182d  knewstuff-5.25.0.tar.xz
+61f5e3d3095a7b0cb87d1693c9b1ad05  knotifyconfig-5.25.0.tar.xz
+52ddaccaa5848bdfb39b241adf32b63a  kparts-5.25.0.tar.xz
+42881c6c06ff8a3015e2519a31a74866  kactivities-5.25.0.tar.xz
+f859f8818fd5f81645bdfb2cf89ee020  kded-5.25.0.tar.xz
+2ca6d2a1377adfe68b3fe2560537616f  kdewebkit-5.25.0.tar.xz
+c34217c409480ac45f48693c72e3ed8a  ktexteditor-5.25.0.tar.xz
+b3f68ae1839994631b1798db5a30385e  kdesignerplugin-5.25.0.tar.xz
+b67b2fc56b005b9fd47a9b64cc39bc40  plasma-framework-5.25.0.tar.xz
+#df3b50fe7df5b7c409d80b83beb0337f  modemmanager-qt-5.25.0.tar.xz
+dc439cc6a4b3093cbee780cac616d1b4  kpeople-5.25.0.tar.xz
+c4295e2ebab459374b5570d2164a8279  kxmlrpcclient-5.25.0.tar.xz
+2e03661752de63494541649158d712fa  bluez-qt-5.25.0.tar.xz
+12517175cb2a93341bea3c60de105d07  kfilemetadata-5.25.0.tar.xz
+3a86a50695f17e5ffca94bf5664c60d7  baloo-5.25.0.tar.xz
+#6f7e0a3d91a18fc31c7b4683f1174358  breeze-icons-5.25.0.tar.xz
+#71119a9c74516fcdbc80e3a8effa1e5a  oxygen-icons5-5.25.0.tar.xz
+fbda904a579120cc23eb6ec9bc660f67  kactivities-stats-5.25.0.tar.xz
+427349a763c831796b3de0be4b17a019  krunner-5.25.0.tar.xz
+d70abca43cbf6e6a6eba9d79830bf1a1  kwayland-5.25.0.tar.xz
+7ffd38082aa627f42a9e4830a739f8c6  portingAids/kjs-5.25.0.tar.xz
+37284190af0a84cdd2a12636b5b71b2e  portingAids/kdelibs4support-5.25.0.tar.xz
+e9b1763b2649d7e21e6cda3e0c5773bf  portingAids/khtml-5.25.0.tar.xz
+f1d0c9a46be19e69a493f75fc8af54e7  portingAids/kjsembed-5.25.0.tar.xz
+a844acb7da10a7b23fa50dade3b523c6  portingAids/kmediaplayer-5.25.0.tar.xz
+bb96fd634617bcac31974f9b63f41252  portingAids/kross-5.25.0.tar.xz</code>
+EOF</kbd>
+</pre>
+        <p>
+          In the above list, notice that some files have been commented out
+          with a hash (#) character. The extra-cmake-modules entry has been
+          commented out because it was built earlier in the <a class="xref"
+          href="introduction.html" title=
+          "Chapter&nbsp;29.&nbsp;Introduction to KDE">Introduction to
+          KDE</a>. The icon packages are covered separately at <a class=
+          "xref" href="../x/breeze-icons.html" title=
+          "breeze-icons-5.25.0">breeze-icons-5.25.0</a> and <a class="xref"
+          href="../x/oxygen-icons5.html" title=
+          "oxygen-icons5-5.25.0">oxygen-icons5-5.25.0</a>. The
+          modemmanager-qt package may be built if its optional dependency has
+          been installed.
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of KDE Frameworks
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            When installing multiple packages in a script, the installation
+            needs to be done as the root user. There are three general
+            options that can be used to do this:
+          </p>
+          <div class="orderedlist">
+            <ol>
+              <li>
+                <p>
+                  Run the entire script as the root user (not recommended).
+                </p>
+              </li>
+              <li>
+                <p>
+                  Use the <span class="command"><strong>sudo</strong></span>
+                  command from the <a class="xref" href=
+                  "../postlfs/sudo.html" title=
+                  "Sudo-1.8.17p1">Sudo-1.8.17p1</a> package.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Use <span class="command"><strong>su -c "command
+                  arguments"</strong></span> (quotes required) which will ask
+                  for the root password for every iteration of the loop.
+                </p>
+              </li>
+            </ol>
+          </div>
+          <p>
+            One way to handle this situation is to create a short
+            <span class="command"><strong>bash</strong></span> function that
+            automatically selects the appropriate method. Once the command is
+            set in the environment, it does not need to be set again.
+          </p>
+          <pre class="userinput">
+<kbd class="command">as_root()
+{
+  if   [ $EUID = 0 ];        then $*
+  elif [ -x /usr/bin/sudo ]; then sudo $*
+  else                            su -c \\"$*\\"
+  fi
+}
+
+export -f as_root</kbd>
+</pre>
+        </div>
+        <div class="admon caution">
+          <img alt="[Caution]" src="../images/caution.png" />
+          <h3>
+            Caution
+          </h3>
+          <p>
+            If inatalling in /opt and there is an existing /opt/kf5 either as
+            a regular directory or a symbolic link, it should be removed (as
+            root):
+          </p>
+          <pre class="userinput">
+<kbd class="command">rm -rf /opt/kf5</kbd>
+</pre>
+        </div>
+        <p>
+          First, start a subshell that will exit on error:
+        </p>
+        <pre class="userinput">
+<kbd class="command">bash -e</kbd>
+</pre>
+        <p>
+          Install all of the packages by running the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">while read -r line; do
+
+    # Get the file name, ignoring comments and blank lines
+    if $(echo $line | grep -E -q '^ *$|^#' ); then continue; fi
+    file=$(echo $line | cut -d" " -f2)
+
+    pkg=$(echo $file|sed 's|^.*/||')          # Remove directory
+    packagedir=$(echo $pkg|sed 's|\.tar.*||') # Package directory
+
+    tar -xf $file
+    pushd $packagedir
+
+      mkdir build
+      cd    build
+
+      cmake -DCMAKE_INSTALL_PREFIX=$KF5_PREFIX \
+            -DCMAKE_PREFIX_PATH=$QT5DIR        \
+            -DCMAKE_BUILD_TYPE=Release         \
+            -DLIB_INSTALL_DIR=lib              \
+            -DBUILD_TESTING=OFF                \
+            -Wno-dev ..
+      make
+      as_root make install
+  popd
+
+
+  as_root rm -rf $packagedir
+  as_root /sbin/ldconfig
+
+done &lt; frameworks-5.25.0.md5
+
+exit</kbd>
+</pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Any modules that have been omitted can be installed later by
+            using the same mkdir build; cd build; cmake; make; make install
+            procedure as above.
+          </p>
+        </div>
+        <p>
+          Sometimes the installation paths are hardcoded into installed
+          files. If the installed directory is not /usr, rename the directory
+          and create a symlink:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mv -v /opt/kf5 /opt/kf5-5.25.0
+ln -sfvn kf5-5.25.0 /opt/kf5</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class=
+          "parameter"><code>-DCMAKE_PREFIX_PATH=$QT5DIR</code></em>: This
+          switch is used to allow cmake to find the proper Qt libraries.
+        </p>
+        <p>
+          <em class="parameter"><code>-DCMAKE_BUILD_TYPE=Release</code></em>:
+          This switch is used to apply higher level of the compiler
+          optimizations.
+        </p>
+        <p>
+          <em class="parameter"><code>-DLIB_INSTALL_DIR=lib</code></em>: This
+          switch is used to get libraries to install to <code class=
+          "filename">$KF5_PREFIX/lib</code> instead of <code class=
+          "filename">$KF5_PREFIX/lib64</code> on a 64 bit system.
+        </p>
+        <p>
+          <em class="parameter"><code>-DBUILD_TESTING=OFF</code></em>: This
+          switch is used to prevent building test programs and libraries that
+          are of no use to an end user.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">There are 53 programs installed in
+              /opt/kf5/bin.</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">There are too many kf5 libraries (79) to
+              list separately.</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/opt/kf5 (symlink to
+              /opt/kf5-5.25.0)</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="checkXML5" name="checkXML5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>checkXML5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to check for syntax errors in KDE DocBook XML
+                    files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="depdiagram-generate" name=
+                    "depdiagram-generate"></a><span class="term"><span class=
+                    "command"><strong>depdiagram-generate</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to generate a dependency diagram.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="depdiagram-generate-all" name=
+                    "depdiagram-generate-all"></a><span class=
+                    "term"><span class=
+                    "command"><strong>depdiagram-generate-all</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to generate a dependency diagram for all
+                    frameworks at once..
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="depdiagram-prepare" name=
+                    "depdiagram-prepare"></a><span class="term"><span class=
+                    "command"><strong>depdiagram-prepare</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to prepare dot files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="desktoptojson" name=
+                    "desktoptojson"></a><span class="term"><span class=
+                    "command"><strong>desktoptojson</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to convert a .desktop file to a .json file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kactivitymanagerd" name=
+                    "kactivitymanagerd"></a><span class="term"><span class=
+                    "command"><strong>kactivitymanagerd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the KDE Plasma Workspace Activity Manager.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kbuildsycoca5" name=
+                    "kbuildsycoca5"></a><span class="term"><span class=
+                    "command"><strong>kbuildsycoca5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    rebuilds the KService desktop file system configuration
+                    cache.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kcookiejar5" name="kcookiejar5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kcookiejar5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command line interface to the HTTP cookie store used
+                    by KDE, a D-BUS service to store/retrieve/clean cookies.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kded5" name="kded5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kded5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    consolidates several small services in one process.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kdeinit5" name="kdeinit5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kdeinit5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a process launcher somewhat similar to the famous init
+                    used for booting UNIX.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kf5-config" name="kf5-config"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kf5-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command line program used to retrieve information
+                    about KDE installation or user paths.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kf5kross" name="kf5kross"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kf5kross</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    executes kross scripts written in KDE Javascript, Python,
+                    Ruby, Java and Falcon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kgenapidox" name="kgenapidox"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kgenapidox</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to generate API documentation in the KDE style.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kgendesignerplugin" name=
+                    "kgendesignerplugin"></a><span class="term"><span class=
+                    "command"><strong>kgendesignerplugin</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    generates widget plugins for Qt(TM) Designer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kglobalaccel5" name=
+                    "kglobalaccel5"></a><span class="term"><span class=
+                    "command"><strong>kglobalaccel5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a daemon use to register the key bindings and for
+                    getting notified when the action triggered.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kjs5" name="kjs5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kjs5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is KDE ECMAScript/JavaScript engine.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kjscmd5" name="kjscmd5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kjscmd5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool for launching KJSEmbed scripts from the command
+                    line.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kjsconsole" name="kjsconsole"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kjsconsole</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a console for <span class=
+                    "command"><strong>kjs5</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kmailservice5" name=
+                    "kmailservice5"></a><span class="term"><span class=
+                    "command"><strong>kmailservice5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a mail service.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kpackagelauncherqml" name=
+                    "kpackagelauncherqml"></a><span class="term"><span class=
+                    "command"><strong>kpackagelauncherqml</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a commandline tool for launching kpackage QML
+                    application
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kpackagetool5" name=
+                    "kpackagetool5"></a><span class="term"><span class=
+                    "command"><strong>kpackagetool5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command line kpackage tool.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kreadconfig5" name="kreadconfig5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kreadconfig5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command line tool to retrieve values from KDE
+                    configuration files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kshell5" name="kshell5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kshell5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    start applications via kdeinit.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ktelnetservice5" name=
+                    "ktelnetservice5"></a><span class="term"><span class=
+                    "command"><strong>ktelnetservice5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a telnet service.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ktrash5" name="ktrash5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ktrash5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a helper program to handle the KDE trash can.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kwalletd5" name="kwalletd5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>kwalletd5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the wallet manager daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="kwriteconfig5" name=
+                    "kwriteconfig5"></a><span class="term"><span class=
+                    "command"><strong>kwriteconfig5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command line tool to write values in KDE
+                    configuration files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="meinproc5" name="meinproc5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>meinproc5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    converts DocBook files to HTML.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="plasmapkg2" name="plasmapkg2"></a><span class=
+                    "term"><span class=
+                    "command"><strong>plasmapkg2</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to install, list, remove Plasma packages
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="preparetips5" name="preparetips5"></a><span class=
+                    "term"><span class=
+                    "command"><strong>preparetips5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a script to extract the text from a tips file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="solid-hardware5" name=
+                    "solid-hardware5"></a><span class="term"><span class=
+                    "command"><strong>solid-hardware5</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command line tool to investigate available devices.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2016-09-04 13:51:37 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="noto-fonts.html" title="Noto Fonts">Prev</a>
+          <p>
+            Noto Fonts
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="kf5-apps.html" title=
+          "KDE Frameworks 5 Based Applications">Next</a>
+          <p>
+            KDE Frameworks 5 Based Applications
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="kf5.html" title=
+          "Chapter&nbsp;30.&nbsp;KDE Frameworks 5">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

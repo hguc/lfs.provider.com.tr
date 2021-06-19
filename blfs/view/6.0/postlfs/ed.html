@@ -1,0 +1,267 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Ed-0.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;6.&nbsp;Editors
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="pico.html" title="Pico">Prev</a>
+          <p>
+            Pico
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="shells.html" title="Shells">Next</a>
+          <p>
+            Shells
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="editors.html" title=
+          "Chapter&nbsp;6.&nbsp;Editors">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="ed" name="ed"></a>
+        <h1 class="sect1">
+          Ed-0.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Ed
+          </h2>
+        </div>
+        <p>
+          <span class="application">Ed</span> is a line-oriented text editor.
+          It is used to create, display, modify and otherwise manipulate text
+          files, both interactively and via shell scripts. Ed isn't something
+          which many people use. It's described here because it can be used
+          by the patch program if you encounter an ed-based patch file. This
+          happens rarely because diff-based patches are preferred these days.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2597742" name="id2597742"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.gnu.org/pub/gnu/ed/ed-0.2.tar.gz"><span class=
+                  "url">http://ftp.gnu.org/pub/gnu/ed/ed-0.2.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnu.org/pub/gnu/ed/ed-0.2.tar.gz"><span class=
+                  "url">ftp://ftp.gnu.org/pub/gnu/ed/ed-0.2.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: ddd57463774cae9b50e70cd51221281b
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 182 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 3.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.10 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2691455" name="id2691455"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/ed-0.2-mkstemp-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/ed-0.2-mkstemp-1.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Ed
+          </h2>
+        </div>
+        <p>
+          <span class="application">Ed</span> normally uses the <span class=
+          "emphasis"><em>mktemp</em></span> function to create temporary
+          files in <tt class="filename">/tmp</tt>, but this function contains
+          a vulnerability (see the section on Temporary Files at <a href=
+          "http://en.tldp.org/HOWTO/Secure-Programs-HOWTO/avoid-race.html"><span class="url">
+          http://en.tldp.org/HOWTO/Secure-Programs-HOWTO/avoid-race.html</span></a>).
+          Apply the following patch to make <span class=
+          "application">Ed</span> use <span class=
+          "emphasis"><em>mkstemp</em></span> instead, a secure way to create
+          temporary files:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">patch -Np1 -i ../ed-0.2-mkstemp-1.patch</strong></span></kbd></pre>
+        <p>
+          Install <span class="application">Ed</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr --exec-prefix="" &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--exec-prefix=""</tt></em>: This forces
+          the programs to be installed into the <tt class=
+          "filename">/bin</tt> directory. Having the programs available there
+          is useful in the event of the <tt class="filename">/usr</tt>
+          partition being unavailable.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">ed and red</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2617670" name="id2617670"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="ed-prog" name="ed-prog"></a><span class=
+              "term"><tt class="filename">ed</tt></span>
+            </dt>
+            <dd>
+              <p>
+                is a line-oriented text editor.
+              </p>
+            </dd>
+            <dt>
+              <a id="red" name="red"></a><span class="term"><tt class=
+              "filename">red</tt></span>
+            </dt>
+            <dd>
+              <p>
+                is a restricted ed&mdash;it can only edit files in the
+                current directory and cannot execute shell commands.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-11 07:07:57 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="pico.html" title="Pico">Prev</a>
+          <p>
+            Pico
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="shells.html" title="Shells">Next</a>
+          <p>
+            Shells
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="editors.html" title=
+          "Chapter&nbsp;6.&nbsp;Editors">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

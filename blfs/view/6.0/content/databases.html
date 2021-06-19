@@ -1,0 +1,444 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;23.&nbsp;Databases
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Part&nbsp;VII.&nbsp;Content Serving
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="content.html" title=
+          "Content Serving">Prev</a>
+          <p>
+            Content Serving
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="mysql.html" title="MySQL-4.1.8a">Next</a>
+          <p>
+            MySQL-4.1.8a
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="content.html" title=
+          "Part&nbsp;VII.&nbsp;Content Serving">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="content-databases" name="content-databases"></a>
+        <h1 class="chapter">
+          Databases
+        </h1>
+      </div>
+      <p>
+        This chapter includes databases that range from single-user
+        read/write to industrial database servers with transaction support.
+        Generally, you will be sent here to satisfy dependencies to other
+        applications although building a <span class="acronym">SQL</span>
+        server on a base <span class="acronym">LFS</span> system is entirely
+        possible.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="db" name="db"></a>
+          <h1 class="sect1">
+            Berkeley DB-4.3.27
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to Berkeley DB
+            </h2>
+          </div>
+          <p>
+            The <span class="application">Berkeley DB</span> package contains
+            programs and utilities used by many other applications for
+            database related functions.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2845668" name="id2845668"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=""></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://sleepycat1.inetu.net/releases/db-4.3.27.tar.gz"><span class="url">
+                    ftp://sleepycat1.inetu.net/releases/db-4.3.27.tar.gz</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download MD5 sum: fcc481d52c3b80e20a328f8c0cb042bd
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 5.7 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated disk space required: 68 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 1.23 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2860604" name="id2860604"></a><span class=
+                    "application">Berkeley DB</span> dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2860607" name="id2860607"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../general/tcl.html">Tcl-8.4.9</a> and <a href=
+                "../general/j2sdk.html">J2SDK-1.4.2</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of Berkeley DB
+            </h2>
+          </div>
+          <p>
+            Install <span class="application">Berkeley DB</span> by running
+            the following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cd build_unix &amp;&amp;
+../dist/configure --prefix=/usr \
+    --enable-compat185 \
+    --enable-cxx &amp;&amp;
+make LIBSO_LIBS="-lpthread" LIBXSO_LIBS="-lpthread" &amp;&amp;
+make docdir=/usr/share/doc/db-4.3.27 install</strong></span></kbd></pre>
+          <p>
+            <span class="emphasis"><em>Note:</em></span> If you build the
+            package as an unprivileged user, then switch to the root user to
+            install the package, <span class="application">Berkeley DB</span>
+            will install the files with ownerships of the user building the
+            package. This is undesireable. Change the ownership of the
+            installed files using the following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">chown root:root /usr/bin/db_* \
+/usr/lib/libdb* /usr/include/db* &amp;&amp;
+chown -R root:root /usr/share/doc/db-4.3.27</strong></span></kbd></pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command explanations
+            </h2>
+          </div>
+          <p>
+            <span><strong class="command">cd build_unix &amp;&amp;
+            ../dist/configure --prefix=/usr...</strong></span>: This replaces
+            the normal <span><strong class=
+            "command">./configure</strong></span> command, as <span class=
+            "application">Berkeley DB</span> comes with various build
+            directories for different platforms.
+          </p>
+          <p>
+            <em class="parameter"><tt>--enable-compat185</tt></em>: This
+            switch enables building DB 1.85 compatibility <span class=
+            "acronym">API</span>.
+          </p>
+          <p>
+            <em class="parameter"><tt>--enable-cxx</tt></em>: This switch
+            enables building C++ <span class="acronym">API</span>.
+          </p>
+          <p>
+            <span><strong class="command">make LIBSO_LIBS="-lpthread"
+            LIBXSO_LIBS="-lpthread"</strong></span>: configure does not
+            correctly handle <span class="acronym">NPTL</span>. These
+            variables force it to properly link against <span class=
+            "acronym">NPTL</span>.
+          </p>
+          <p>
+            <span><strong class="command">make
+            docdir=/usr/share/doc/db-4.3.27 install</strong></span>: This
+            installs the documentation in the correct place.
+          </p>
+          <p>
+            <tt class="option">--enable-tcl --with-tcl=/usr/lib</tt>: enables
+            <span class="application">Tcl</span> support in DB and creates
+            the <tt class="filename">libdb_tcl</tt> libraries.
+          </p>
+          <p>
+            <tt class="option">--enable-java</tt>: enables <span class=
+            "application">Java</span> support in DB and creates the
+            <tt class="filename">libdb_java</tt> libraries.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <p>
+            The <span class="application">Berkeley DB</span> package contains
+            <span><strong class="command">db_archive</strong></span>,
+            <span><strong class="command">db_checkpoint</strong></span>,
+            <span><strong class="command">db_deadlock</strong></span>,
+            <span><strong class="command">db_dump</strong></span>,
+            <span><strong class="command">db_load</strong></span>,
+            <span><strong class="command">db_printlog</strong></span>,
+            <span><strong class="command">db_recover</strong></span>,
+            <span><strong class="command">db_stat</strong></span>,
+            <span><strong class="command">db_upgrade</strong></span>,
+            <span><strong class="command">db_verify</strong></span> and the
+            <tt class="filename">libdb</tt> libraries.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Description
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2777326" name="id2777326"></a>db_archive
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">db_archive</strong></span> prints
+              the pathnames of log files that are no longer in use.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2747842" name="id2747842"></a>db_checkpoint
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">db_checkpoint</strong></span> is
+              a daemon process used to monitor and checkpoint database logs.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2667158" name="id2667158"></a>db_deadlock
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">db_deadlock</strong></span> is
+              used to abort lock requests when deadlocks are detected.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2863549" name="id2863549"></a>db_dump
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">db_dump</strong></span> converts
+              database files to a flat file format readable by
+              <span><strong class="command">db_load</strong></span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2576476" name="id2576476"></a>db_load
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">db_load</strong></span> is used
+              to create database files from flat files created with
+              <span><strong class="command">db_dump</strong></span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2830497" name="id2830497"></a>db_printlog
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">db_printlog</strong></span>
+              converts database log files to human readable text.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2847250" name="id2847250"></a>db_recover
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">db_recover</strong></span> is
+              used to restore a database to a consistent state after a
+              failure.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2743721" name="id2743721"></a>db_stat
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">db_stat</strong></span> displays
+              database environment statistics.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2811022" name="id2811022"></a>db_upgrade
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">db_upgrade</strong></span> is
+              used to upgrade database files to a newer version of
+              <span class="application">Berkeley DB</span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2766627" name="id2766627"></a>db_verify
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><strong class="command">db_verify</strong></span> is used
+              to run consistency checks on database files.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="content.html" title=
+          "Content Serving">Prev</a>
+          <p>
+            Content Serving
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="mysql.html" title="MySQL-4.1.8a">Next</a>
+          <p>
+            MySQL-4.1.8a
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="content.html" title=
+          "Part&nbsp;VII.&nbsp;Content Serving">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

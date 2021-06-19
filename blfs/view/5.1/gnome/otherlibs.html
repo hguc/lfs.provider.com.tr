@@ -1,0 +1,116 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;32.&nbsp;GNOME 1.4 Libraries
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;X.&nbsp;GNOME</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="gdm.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="ORBit.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          GNOME 1.4 Libraries
+        </h1>
+      </div>
+      <p>
+        This section contains additional <span class=
+        "application"><span class="acronym">GNOME</span></span> 1.4
+        libraries, needed by some applications that have not yet been ported
+        to <span class="application"><span class=
+        "acronym">GNOME</span></span> 2.x. None of these libraries are needed
+        for a <span class="application"><span class=
+        "acronym">GNOME</span></span> desktop install.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="gnome-otherlib-config" name="gnome-otherlib-config"></a>
+          <h2 class="sect1">
+            Pre-installation configuration
+          </h2>
+        </div>
+        <p>
+          Add to your system or personal profile:
+        </p>
+        <pre class="screen">
+<span><b class="command">export PATH=$PATH:/opt/gnome/bin
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/gnome/lib/pkgconfig
+export GNOME_LIBCONFIG_PATH=/usr/lib</b></span>
+</pre>
+        <p>
+          Add to your <tt class="filename">/etc/ld.so.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"</b></span>
+# Begin gnome addition to /etc/ld.so.conf
+
+/opt/gnome/lib
+
+# End gnome addition
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        <p>
+          Remember to execute <span><b class="command">ldconfig</b></span>
+          after installation of libraries to update the library cache.
+        </p>
+        <p>
+          Add to your <tt class="filename">/etc/man.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/man.conf &lt;&lt; "EOF"</b></span>
+# Begin gnome addition to man.conf
+
+MANPATH /opt/gnome/man
+
+# END gnome addition to man.conf
+<span><b class="command">EOF</b></span></tt>
+</pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="gdm.html">Prev</a><br />
+        GDM-2.6.0.2
+      </div>
+      <div class="next">
+        <a accesskey="n" href="ORBit.html">Next</a><br />
+        ORBit-0.5.17
+      </div>
+      <div class="up">
+        <a accesskey="u" href="gnome.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,171 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Pre-installation Configuration
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;29.&nbsp;GNOME Core Packages
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="core.html" title=
+          "GNOME Core Packages">Prev</a>
+          <p>
+            GNOME Core Packages
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ORBit2.html" title="ORBit2-2.14.7">Next</a>
+          <p>
+            ORBit2-2.14.7
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;29.&nbsp;GNOME Core Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="gnome-pre-install-config" name=
+        "gnome-pre-install-config"></a>Pre-installation Configuration
+      </h1>
+      <p>
+        Set an environment variable to resolve the prefix destination.
+      </p>
+      <p>
+        If <span class="application">GNOME</span> is your desktop of choice:
+      </p>
+      <pre class="userinput">
+<kbd class="command">export GNOME_PREFIX=/usr</kbd>
+</pre>
+      <p>
+        If you want to try-out <span class="application">GNOME</span>, or
+        install it in an easy-to-remove location:
+      </p>
+      <div class="admon note">
+        <img alt="[Note]" src="../images/note.png" />
+        <h3>
+          Note
+        </h3>
+        <p>
+          You may wish to create a symbolic link to the actual versioned
+          directory using a non-versioned name. This has the advantage of an
+          easier path to type in all the changes below and also makes it easy
+          to point to a different/newer version of GNOME without changing all
+          the edits below. If you wish to use a non-versioned name in the
+          changes below, issue the following commands as the <code class=
+          "systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">install -v -m755 -d /opt/gnome-2.18.3 &amp;&amp;
+ln -v -s gnome-2.18.3 /opt/gnome</kbd>
+</pre>
+      </div>
+      <p>
+        If you created the symbolic link, change all instances of
+        <code class="filename">/opt/gnome-2.18.3</code> to <code class=
+        "filename">/opt/gnome</code> in the instructions below.
+      </p>
+      <pre class="userinput">
+<kbd class="command">export GNOME_PREFIX=/opt/gnome-2.18.3</kbd>
+</pre>
+      <p>
+        The try-out group will also need to make all the following
+        configuration changes:
+      </p>
+      <p>
+        Add to your system or personal profile:
+      </p>
+      <pre class="screen">
+<code class="literal">export PATH=$PATH:/opt/gnome-2.18.3/bin
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/gnome-2.18.3/lib/pkgconfig
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/gnome-2.18.3/share/pkgconfig
+export GNOME_LIBCONFIG_PATH=/usr/lib:/opt/gnome-2.18.3/lib</code>
+</pre>
+      <p>
+        Add to your <code class="filename">/etc/ld.so.conf</code>:
+      </p>
+      <pre class="root">
+<kbd class="command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"
+<code class="literal"># Begin gnome addition to /etc/ld.so.conf
+
+/opt/gnome-2.18.3/lib
+
+# End gnome addition</code>
+EOF</kbd>
+</pre>
+      <p>
+        Add to your <code class="filename">/etc/man_db.conf</code>:
+      </p>
+      <pre class="root">
+<kbd class="command">cat &gt;&gt; /etc/man_db.conf &lt;&lt; "EOF"
+<code class="literal"># Begin gnome addition to man_db.conf
+
+MANDATORY_MANPATH /opt/gnome-2.18.3/share/man
+
+# End gnome addition to man_db.conf</code>
+EOF</kbd>
+</pre>
+      <div class="admon tip">
+        <img alt="[Tip]" src="../images/tip.png" />
+        <h3>
+          Tip
+        </h3>
+        <p>
+          Remember to execute <span class=
+          "command"><strong>ldconfig</strong></span> as the <code class=
+          "systemitem">root</code> user after installation of libraries to
+          update the linker's library cache.
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2007-07-25 09:48:30 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="core.html" title=
+          "GNOME Core Packages">Prev</a>
+          <p>
+            GNOME Core Packages
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ORBit2.html" title="ORBit2-2.14.7">Next</a>
+          <p>
+            ORBit2-2.14.7
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;29.&nbsp;GNOME Core Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,294 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      libpng-1.2.8
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;9.&nbsp;Graphics and Font Libraries
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="graphlib.html" title=
+          "Graphics and Font Libraries">Prev</a>
+          <p>
+            Graphics and Font Libraries
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libtiff.html" title="libtiff-3.7.1">Next</a>
+          <p>
+            libtiff-3.7.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;9.&nbsp;Graphics and Font Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="libpng" name="libpng"></a>
+        <h1 class="sect1">
+          libpng-1.2.8
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to libpng
+          </h2>
+        </div>
+        <p>
+          The <span class="application">libpng</span> package contains
+          libraries used by other programs for reading and writing
+          <span class="acronym">PNG</span> files.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2711780" name="id2711780"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/libpng/libpng-1.2.8.tar.bz2">
+                  <span class=
+                  "url">http://prdownloads.sourceforge.net/libpng/libpng-1.2.8.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 Sum: 00cea4539bea4bd34cbf8b82ff9589cd
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 376 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 5.6 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.14 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2649597" name="id2649597"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required Patch to explicitly link libpng against system
+                  libraries: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/libpng-1.2.8-link_to_proper_libs-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/libpng-1.2.8-link_to_proper_libs-1.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of libpng
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">libpng</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">patch -Np1 -i ../libpng-1.2.8-link_to_proper_libs-1.patch &amp;&amp;
+make prefix=/usr ZLIBINC=/usr/include \
+    ZLIBLIB=/usr/lib -f scripts/makefile.linux &amp;&amp;
+make prefix=/usr install -f scripts/makefile.linux</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>ZLIBINC=/usr/include
+          ZLIBLIB=/usr/lib</tt></em>: This forces <span class=
+          "application">libpng</span> to look for the <span class=
+          "application">zlib</span> includes and libraries where they are
+          installed.
+        </p>
+        <p>
+          <em class="parameter"><tt>-f scripts/makefile.linux</tt></em>: This
+          points <span><strong class="command">make</strong></span> at the
+          <span class="application">Linux</span> version of the <tt class=
+          "filename">Makefile</tt> as <span class="application">libpng</span>
+          doesn't use an <span class="application">autoconf</span> routine.
+          Instead it has various <tt class="filename">Makefile</tt>s for
+          different platforms.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring libpng
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2766409" name="id2766409"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            As with most libraries, there is no configuration to do, save
+            that the library directory i.e., <tt class=
+            "filename">/opt/lib</tt> or <tt class=
+            "filename">/usr/local/lib</tt> should appear in <tt class=
+            "filename">/etc/ld.so.conf</tt> so that <span><strong class=
+            "command">ldd</strong></span> can find the shared libraries.
+            After checking that this is the case, <span><strong class=
+            "command">/sbin/ldconfig</strong></span> should be run while
+            logged in as root.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">libpng</span> package contains
+          <tt class="filename">libpng</tt> libraries and <span><strong class=
+          "command">libpng-config</strong></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2766349" name="id2766349"></a>libpng libraries
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The <tt class="filename">libpng</tt> libraries are a collection
+            of routines used to create and manipulate <span class=
+            "acronym">PNG</span> format graphics files. The <span class=
+            "acronym">PNG</span> format was designed as a replacement for
+            <span class="acronym">GIF</span> and, to a lesser extent,
+            <span class="acronym">TIFF</span>, with many improvements and
+            extensions and lack of patent problems.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2766324" name="id2766324"></a>libpng-config
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">libpng-config</strong></span>
+            provides configuration info for <span class=
+            "application">libpng</span>.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-01-05 07:25:03 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="graphlib.html" title=
+          "Graphics and Font Libraries">Prev</a>
+          <p>
+            Graphics and Font Libraries
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="libtiff.html" title="libtiff-3.7.1">Next</a>
+          <p>
+            libtiff-3.7.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;9.&nbsp;Graphics and Font Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

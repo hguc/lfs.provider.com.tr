@@ -1,0 +1,305 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      slrn-0.9.8.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;20.&nbsp;Mail/News Clients</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="pine.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="othermn.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          slrn-0.9.8.0
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to slrn
+          </h3>
+        </div>
+        <p>
+          <span class="application">slrn</span> is a slang-based news reader,
+          capable of reading local news spools as well as groups from an
+          <span class="acronym">NNTP</span> server. Small local news spools
+          can also be created with the use of the slrnpull program included
+          in the slrn distribution.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2801848" name="id2801848"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/slrn/slrn-0.9.8.0.tar.bz2">
+                  http://prdownloads.sourceforge.net/slrn/slrn-0.9.8.0.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.fh-heilbronn.de/pub/mirrors/slrn/slrn-0.9.8.0.tar.bz2">
+                  ftp://ftp.fh-heilbronn.de/pub/mirrors/slrn/slrn-0.9.8.0.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 972 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 9.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.19 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2809050" name="id2809050"></a><span class=
+                  "application">slrn</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2809046" name="id2809046"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/slang.html">slang-1.4.9</a> and
+              <span class="acronym">MTA</span> (See <a href=
+              "../server/mail.html" title=
+              "Chapter&nbsp;21.&nbsp;Mail Server Software">Chapter&nbsp;21,
+              <i>Mail Server Software</i></a>)
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2809078" name="id2809078"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of slrn
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">slrn</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --sysconfdir=/etc \
+    --with-slrnpull &amp;&amp;
+make LDFLAGS="-ldl" &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">./configure --with-slrnpull</b></span>:
+          Build the slrnpull executable.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring slrn
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2809370" name="id2809370"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/slrn.rc</tt>, <tt class=
+            "filename">~/.slrnrc</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2808957" name="id2808957"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The first time <span><b class="command">slrn</b></span> is run,
+            the <tt class="filename">~/.jnewsrc</tt> file must be created.
+            For this configuration to work, you must have an environmental
+            variable, <tt class="envar">NNTPSERVER</tt>, set. In normal
+            operation it would be exported into the environment by a startup
+            file, like <tt class="filename">/etc/profile</tt> or <tt class=
+            "filename">~/.bashrc</tt>. Here we will just put it into the
+            environment of the configuration step. We will use the
+            <span class="acronym">LFS</span> news server in this example, but
+            you should use whatever server you prefer.
+          </p>
+          <p>
+            Create the <tt class="filename">~/.jnewsrc</tt> file with the
+            following command:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">NNTPSERVER=<i class=
+"replaceable"><tt>news.linuxfromscratch.org</tt></i> \
+    slrn -f ~/.jnewsrc --create</b></span></tt>
+</pre>
+          <p>
+            You will also have to edit one of the configuration files. There
+            is a sample startup <tt class=
+            "filename">/usr/share/doc/slrn/slrn.rc</tt> file that comes with
+            slrn. It is extensively documented but if you need more
+            information, look at <a href=
+            "http://slrn.sourceforge.net/docs/">the slrn website</a>.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">slrn</span> package contains
+          <span><b class="command">slrn</b></span> and <span><b class=
+          "command">slrnpull</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2808838" name="id2808838"></a>slrn
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">slrn</b></span> is the slang-based news
+            reader.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2808851" name="id2808851"></a>slrnpull
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">slrnpull</b></span> is used to pull a
+            small news feed from an <span class="acronym">NNTP</span> server
+            for offline reading.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="pine.html">Prev</a><br />
+        Pine-4.60
+      </div>
+      <div class="next">
+        <a accesskey="n" href="othermn.html">Next</a><br />
+        Other Mail and News programs
+      </div>
+      <div class="up">
+        <a accesskey="u" href="mailnews.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

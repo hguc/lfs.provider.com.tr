@@ -1,0 +1,277 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      ReiserFS-3.6.19
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;5.&nbsp;File Systems
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="filesystems.html" title=
+          "File Systems">Prev</a>
+          <p>
+            File Systems
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xfsfs.html" title="XFS-2.6.25">Next</a>
+          <p>
+            XFS-2.6.25
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="filesystems.html" title=
+          "Chapter&nbsp;5.&nbsp;File Systems">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="reiserfs" name="reiserfs"></a>
+        <h1 class="sect1">
+          ReiserFS-3.6.19
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to ReiserFS
+          </h2>
+        </div>
+        <p>
+          The <span class="application">ReiserFS</span> package contains
+          various utilities for use with the Reiser file system.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687305" name="id2687305"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.namesys.com/pub/reiserfsprogs/reiserfsprogs-3.6.19.tar.gz">
+                  <span class=
+                  "url">http://ftp.namesys.com/pub/reiserfsprogs/reiserfsprogs-3.6.19.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.namesys.com/pub/reiserfsprogs/reiserfsprogs-3.6.19.tar.gz">
+                  <span class=
+                  "url">ftp://ftp.namesys.com/pub/reiserfsprogs/reiserfsprogs-3.6.19.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: b42cf15f6651c3ceff5cb84996c0d539
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 400 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 7.9 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.16 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of ReiserFS
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">ReiserFS</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr --sbindir=/sbin &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install &amp;&amp;
+ln -sf reiserfsck /sbin/fsck.reiserfs &amp;&amp;
+ln -sf mkreiserfs /sbin/mkfs.reiserfs</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--prefix=/usr</tt></em>: This ensures
+          that the manual pages are installed in the correct location while
+          still installing the programs in <tt class="filename">/sbin</tt> as
+          they should be.
+        </p>
+        <p>
+          <em class="parameter"><tt>--sbindir=/sbin</tt></em>: This ensures
+          that the <span class="application">ReiserFS</span> utilities are
+          installed in <tt class="filename">/sbin</tt> as they should be.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">debugreiserfs,
+              mkreiserfs, reiserfsck, reiserfstune and resize_reiserfs</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2695692" name="id2695692"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="debugreiserfs" name="debugreiserfs"></a><span class=
+              "term"><span><strong class=
+              "command">debugreiserfs</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                can sometimes help to solve problems with <span class=
+                "application">ReiserFS</span> file systems. If it is called
+                without options, it prints the super block of any reiserfs
+                file system found on the device.
+              </p>
+            </dd>
+            <dt>
+              <a id="mkreiserfs" name="mkreiserfs"></a><span class=
+              "term"><span><strong class=
+              "command">mkreiserfs</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                creates a <span class="application">ReiserFS</span> file
+                system.
+              </p>
+            </dd>
+            <dt>
+              <a id="reiserfsck" name="reiserfsck"></a><span class=
+              "term"><span><strong class=
+              "command">reiserfsck</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is used to check or repair a <span class=
+                "application">ReiserFS</span> file system.
+              </p>
+            </dd>
+            <dt>
+              <a id="reiserfstune" name="reiserfstune"></a><span class=
+              "term"><span><strong class=
+              "command">reiserfstune</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is used for tuning the <span class=
+                "application">ReiserFS</span> journal. <span class=
+                "emphasis"><em>WARNING</em></span>: Don't use this utility
+                without first reading the man page thoroughly.
+              </p>
+            </dd>
+            <dt>
+              <a id="resize_reiserfs" name="resize_reiserfs"></a><span class=
+              "term"><span><strong class=
+              "command">resize_reiserfs</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is used to resize an unmounted <span class=
+                "application">ReiserFS</span> file system.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-04 12:15:08 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="filesystems.html" title=
+          "File Systems">Prev</a>
+          <p>
+            File Systems
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xfsfs.html" title="XFS-2.6.25">Next</a>
+          <p>
+            XFS-2.6.25
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="filesystems.html" title=
+          "Chapter&nbsp;5.&nbsp;File Systems">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,248 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      5.5.&nbsp;GCC-4.3.2 - Pass 1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="lfs" id="lfs-6.4">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 6.4
+      </h4>
+      <h3>
+        Chapter&nbsp;5.&nbsp;Constructing a Temporary System
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="binutils-pass1.html" title=
+          "Binutils-2.18 - Pass 1">Prev</a>
+          <p>
+            Binutils-2.18 - Pass 1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="linux-headers.html" title=
+          "Linux-2.6.27.4 API Headers">Next</a>
+          <p>
+            Linux-2.6.27.4 API Headers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.4">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-tools-gcc-pass1" name="ch-tools-gcc-pass1"></a>5.5.
+        GCC-4.3.2 - Pass 1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The GCC package contains the GNU compiler collection, which
+          includes the C and C++ compilers.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">22 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">1.1 GB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          5.5.1. Installation of GCC
+        </h2>
+        <p>
+          GCC now requires the GMP and MPFR packages. As these packages may
+          not be included in your host distribution, they will be built with
+          GCC.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">tar -jxf ../mpfr-2.3.2.tar.bz2
+mv mpfr-2.3.2 mpfr
+tar -jxf ../gmp-4.2.4.tar.bz2
+mv gmp-4.2.4 gmp</kbd></pre>
+        <p>
+          The GCC documentation recommends building GCC outside of the source
+          directory in a dedicated build directory:
+        </p>
+        <pre class="userinput"><kbd class="command">mkdir -v ../gcc-build
+cd ../gcc-build</kbd></pre>
+        <p>
+          Prepare GCC for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">CC="gcc -B/usr/bin/" ../gcc-4.3.2/configure --prefix=/tools \
+    --with-local-prefix=/tools --disable-nls --disable-shared --disable-libssp \
+    --enable-languages=c</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <b>The meaning of the configure options:</b>
+          </p>
+          <dl>
+            <dt>
+              <span class="term"><code class="envar">CC="gcc
+              -B/usr/bin/"</code></span>
+            </dt>
+            <dd>
+              <p>
+                This forces <span class="command"><strong>gcc</strong></span>
+                to prefer the linker from the host in <code class=
+                "filename">/usr/bin</code>. This is necessary on some hosts
+                where the new <span class=
+                "command"><strong>ld</strong></span> built in the previous
+                section is not compatible with the host's <span class=
+                "command"><strong>gcc</strong></span>.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-local-prefix=/tools</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                The purpose of this switch is to remove <code class=
+                "filename">/usr/local/include</code> from <span class=
+                "command"><strong>gcc</strong></span>'s include search path.
+                This is not absolutely essential, however, it helps to
+                minimize the influence of the host system.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-shared</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch forces GCC to link its internal libraries
+                statically. We do this to avoid possible issues with the host
+                system.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-libssp</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch prevents a conflict with older versions of glibc
+                which can cause the build to fail.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-languages=c</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option ensures that only the C compiler is built. This
+                is the only language needed now.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          The following command will compile GCC not once, but several times.
+          It uses the programs compiled in a first round to compile itself a
+          second time, and then again a third time. It then compares these
+          second and third compiles to make sure it can reproduce itself
+          flawlessly. This is called &ldquo;<span class=
+          "quote">bootstrapping</span>&rdquo;. Building GCC in this way
+          ensures that it was compiled correctly and is now the default
+          configuration for the released package. Continue with compiling by
+          running:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Compilation is now complete. At this point, the test suite would
+          normally be run, but, as mentioned before, the test suite framework
+          is not in place yet. The benefits of running the tests at this
+          point are minimal since the programs from this first pass will soon
+          be replaced.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+        <p>
+          Using <em class="parameter"><code>--disable-shared</code></em>
+          means that the <code class="filename">libgcc_eh.a</code> file isn't
+          created and installed. The Glibc package depends on this library as
+          it uses <em class="parameter"><code>-lgcc_eh</code></em> within its
+          build system. We can satisfy that dependency by creating a symlink
+          to <code class="filename">libgcc.a</code>, since that file will end
+          up containing the objects normally contained in <code class=
+          "filename">libgcc_eh.a</code>.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ln -vs libgcc.a `gcc -print-libgcc-file-name | \
+    sed 's/libgcc/&amp;_eh/'`</kbd></pre>
+        <p>
+          As a finishing touch, create a symlink. Many programs and scripts
+          run <span class="command"><strong>cc</strong></span> instead of
+          <span class="command"><strong>gcc</strong></span>, which is used to
+          keep programs generic and therefore usable on all kinds of UNIX
+          systems where the GNU C compiler is not always installed. Running
+          <span class="command"><strong>cc</strong></span> leaves the system
+          administrator free to decide which C compiler to install:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ln -vs gcc /tools/bin/cc</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <p>
+          Details on this package are located in <a class="xref" href=
+          "../chapter06/gcc.html#contents-gcc" title=
+          "6.14.2.&nbsp;Contents of GCC">Section&nbsp;6.14.2, &ldquo;Contents
+          of GCC.&rdquo;</a>
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="binutils-pass1.html" title=
+          "Binutils-2.18 - Pass 1">Prev</a>
+          <p>
+            Binutils-2.18 - Pass 1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="linux-headers.html" title=
+          "Linux-2.6.27.4 API Headers">Next</a>
+          <p>
+            Linux-2.6.27.4 API Headers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter05.html" title=
+          "Chapter&nbsp;5.&nbsp;Constructing a Temporary System">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.4">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Mercurial-3.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.7">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 7.7
+      </h4>
+      <h3>
+        Chapter&nbsp;13.&nbsp;Programming
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="lua.html" title="Lua-5.3.0">Prev</a>
+          <p>
+            Lua-5.3.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="nasm.html" title="NASM-2.11.06">Next</a>
+          <p>
+            NASM-2.11.06
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;13.&nbsp;Programming">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.7">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="mercurial" name="mercurial"></a>Mercurial-3.3
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Mercurial
+        </h2>
+        <p>
+          <span class="application">Mercurial</span> is a distributed source
+          control management tool similar to <span class=
+          "application">Git</span> and <span class=
+          "application">Bazaar</span>. <span class=
+          "application">Mercurial</span> is written in <span class=
+          "application">Python</span> and is used by projects such as Mozilla
+          and Vim.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.7
+          platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://mercurial.selenic.com/release/mercurial-3.3.tar.gz">http://mercurial.selenic.com/release/mercurial-3.3.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 9d158d96aef4ad02cc3c15509257d13b
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 4 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 45 MB (additional 276 MB for
+                the tests and 2.3 MB for docs generation)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: less than 0.1 SBU (additional 2.1 SBU
+                for tests, using parallelism=8)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Mercurial Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="python2.html" title=
+          "Python-2.7.9">Python-2.7.9</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="cvs.html" title=
+          "CVS-1.11.23">CVS-1.11.23</a>, <a class="xref" href="git.html"
+          title="Git-2.3.0">git-2.3.0</a>, <a class="xref" href=
+          "../postlfs/gnupg.html" title="GnuPG-2.0.26">GnuPG-2.0.26</a>
+          (<span class="command"><strong>gpg2</strong></span> with Python
+          bindings), <a class="xref" href="subversion.html" title=
+          "Subversion-1.8.11">Subversion-1.8.11</a> (with Python bindings),
+          <a class="ulink" href="https://launchpad.net/bzr">Bazaar</a>,
+          <a class="ulink" href=
+          "http://docutils.sourceforge.net/">Docutils</a> (required to build
+          the documentation), <a class="ulink" href=
+          "http://pypi.python.org/pypi/pyflakes">pyflakes</a>, <a class=
+          "ulink" href="http://pygments.org/">pygments</a>, and <a class=
+          "ulink" href="https://launchpad.net/pyopenssl">pyOpenSSL</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/mercurial">http://wiki.linuxfromscratch.org/blfs/wiki/mercurial</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Mercurial
+        </h2>
+        <p>
+          Build <span class="application">Mercurial</span> by issuing the
+          following command:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make build</kbd>
+</pre>
+        <p>
+          To build the documentation (requires <span class=
+          "application">Docutils</span>), issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">make doc</kbd>
+</pre>
+        <p>
+          Running the test suite is optional. If there are failures, e.g.
+          test-parse-date.t, those tests can be disabled. To test the results
+          in the subdiretory <code class="filename">tests/tmp</code>,
+          skipping failing tests, issue:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt; tests/blacklists/failed-tests &lt;&lt; "EOF"
+<code class="literal"># Test Failures
+  test-parse-date.t</code>
+EOF
+rm -rf tests/tmp &amp;&amp;
+TESTFLAGS="-j<em class=
+"replaceable"><code>&lt;N&gt;</code></em> --tmpdir tmp --blacklist blacklists/failed-tests" \
+make check</kbd>
+</pre>
+        <p>
+          where <em class="replaceable"><code>&lt;N&gt;</code></em> is an
+          integer between one and the number of processor threads, inclusive.
+          In order to investigate a particular apparently failing test, e.g
+          &ldquo;<span class="quote">test-parse-date.t</span>&rdquo;, issue
+          the following commands (notice that omitting <code class=
+          "option">--debug</code> sometimes modifies the result):
+        </p>
+        <pre class="userinput">
+<kbd class="command">pushd tests &amp;&amp;
+rm -rf tmp  &amp;&amp;
+./run-tests.py --debug --tmpdir tmp test-parse-date.t &amp;&amp;
+popd</kbd>
+</pre>
+        <p>
+          Install <span class="application">Mercurial</span> by running the
+          following command (as <code class="systemitem">root</code>):
+        </p>
+        <pre class="root">
+<kbd class="command">make PREFIX=/usr install-bin</kbd>
+</pre>
+        <p>
+          If you built the documentation, install it by running the following
+          command (as <code class="systemitem">root</code>):
+        </p>
+        <pre class="root">
+<kbd class="command">make PREFIX=/usr install-doc</kbd>
+</pre>
+        <p>
+          After installed, two very quick and simple tests should run
+          correctly. First one needs some configuration:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cat &gt;&gt; ~/.hgrc &lt;&lt; "EOF"
+<code class="literal">[ui]
+username = &lt;user_name&gt; &lt;your@mail&gt;</code>
+EOF</kbd>
+</pre>
+        <p>
+          where you must replace &lt;user_name&gt; and &lt;your@mail&gt;
+          (mail is optional and can be omitted). With the user identity
+          defined, run <span class="command"><strong>hg
+          debuginstall</strong></span> and several lines will be displayed,
+          the last one reading "no problems detected". Another quick and
+          simple test is just <span class=
+          "command"><strong>hg</strong></span>, which should output basic
+          commands that can be used with <span class=
+          "command"><strong>hg</strong></span>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring Mercurial
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="mercurial-config" name="mercurial-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/mercurial/hgrc</code>
+          </p>
+          <p>
+            If you have installed the <a class="xref" href=
+            "../postlfs/cacerts.html" title=
+            "Certificate Authority Certificates">Certificate Authority
+            Certificates</a> and you want <span class=
+            "application">Mercurial</span> to use them, as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">install -v -d -m755 /etc/mercurial &amp;&amp;
+cat &gt; /etc/mercurial/hgrc &lt;&lt; "EOF"
+<code class="literal">[web]
+cacerts = /etc/ssl/ca-bundle.crt</code>
+EOF</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">hg</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">several internal modules under
+              /usr/lib/python2.7/site-packages/mercurial</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/mercurial,
+              /usr/lib/python2.7/site-packages/hgext and
+              /usr/lib/python2.7/site-packages/mercurial</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hg" name="hg"></a><span class="term"><span class=
+                    "command"><strong>hg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the program file for mercurial.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2015-02-23 13:51:12 -0800
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="lua.html" title="Lua-5.3.0">Prev</a>
+          <p>
+            Lua-5.3.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="nasm.html" title="NASM-2.11.06">Next</a>
+          <p>
+            NASM-2.11.06
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;13.&nbsp;Programming">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.7">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

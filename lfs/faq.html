@@ -1,0 +1,636 @@
+<!--#set var="pageTitle" value="LFS FAQ" -->
+<!--#include virtual="header.html" -->
+<!--#include virtual="menu.html" -->
+    <div class="main">
+      <h1>LFS Frequently Asked Questions</h1>
+      <p>The FAQ is divided in three documents. The <a
+      href="/faq/index.html">General FAQ</a> has links to all questions and
+      answers. The <a href="/lfs/faq.html">LFS FAQ</a> is a selection of
+      LFS-specific FAQ's and the <a href="/blfs/faq.html">BLFS FAQ</a> is a
+      selection of BLFS-specific FAQ's.</p>
+
+      <a id="lfsfaq"/>
+      <h3><a href="#fre">Frequently Requested Enhancements</a></h3>
+      <ul>
+        <li><a href="#why-not-faq">Why not include the FAQ in the book?</a></li>
+        <li><a href="#why-vim">Why is vim in the book?</a></li>
+        <li><a href="#why-not-package-management">Why isn't some package manager in the book?</a></li>
+        <li><a href="#no-poweroff">How do I make my machine poweroff when shut down?</a></li>
+        <li><a href="#uefi">How do I boot LFS with UEFI?</a></li>
+        <li><a href="#rebuild-ch8">Can I skip a package in Chapter 8 since it's already built in Chapter 6 or 7, and it's functioning properly?</a></li>
+        <li><a href="#get-rid-of-lib64">Can I modify GCC code and get rid of /lib64?</a></li>
+      </ul>
+      <h3><a href="#resources">When reading and building LFS</a></h3>
+      <ul>
+        <li><a href="#what-dist">What distribution should I use to start from?</a></li>
+        <li><a href="#kernel-modules">How do I compile a kernel or set up modules?</a></li>
+        <li><a href="#gcc-warnings">Are compiler warnings from GCC bad?</a></li>
+        <li><a href="#dirty-sources">Do I need to keep the source after installing?</a></li>
+        <li><a href="#really-small">How do I make that really small install the book mentions?</a></li>
+        <li><a href="#procs-lfs">Is there information about building LFS on other processors?</a></li>
+        <li><a href="#cross-compile">How do I cross compile LFS?</a></li>
+        <li><a href="#dos-text">What's a DOS format text file?</a></li>
+        <li><a href="#wget">Is there a way to download all current files at one time?</a></li>
+      </ul>
+      <h3><a href="#generrors">General compilation errors</a></h3>
+      <ul>
+        <li><a href="#optimizations">When using optimization flags (setting CFLAGS)</a></li>
+        <li><a href="#config-ice">Why does GCC reports "Internal Compiler Error" for a "hello world" program?</a></li>
+        <li><a href="#dirty-sources">I didn't delete the source tree after my last attempt. Do I need to?</a></li>
+        <li><a href="#perm-denied">I'm getting `/dev/null: Permission denied'</a></li>
+        <li><a href="#sig11">signal 11 (internal error: Segmentation fault)</a></li>
+        <li><a href="#any-no-such-file">No such file or directory</a></li>
+        <li><a href="#configure-no-such-file">bash: ./configure: No such file or directory</a></li>
+        <li><a href="#bad-interpreter-permission-denied">./configure: bad interpreter: Permission denied</a></li>
+        <li><a href="#conf-guess-fail">configure can't guess my host type.</a></li>
+        <li><a href="#config-not-gnu-c">checking whether we are using GNU C... no</a></li>
+        <li><a href="#no-ptys">The system has no more ptys.  Ask your system administrator to create more.</a></li>
+      </ul>
+      <h3><a href="#packerrors">Package-specific errors</a></h3>
+      <ul>
+        <li><a href="#m4-mb-len-max-wrong">M4: Assumed value of MB_LEN_MAX wrong</a></li>
+        <li><a href="#systemd-user-credentials-esrch">Systemd: systemd-networkd.service: Failed to determine user credentials: No such process</a></li>
+      </ul>
+      <h3><a href="#confboot">Configuration and booting issues</a></h3>
+      <ul>
+        <li><a href="#unable-to-mount-root">Kernel panic - not syncing: VFS: Unable to mount root fs on ...</a></li>
+        <li><a href="#respawning-too-fast">init: Id &quot;1&quot; respawning too fast: disabled for 5 minutes</a></li>
+        <li><a href="#char-major-10-135">modprobe: Can't locate module char-major-10-135</a></li>
+        <li><a href="#no-dev-rtc">modprobe: Can't locate module /dev/rtc</a></li>
+        <li><a href="#eth0-unknown-interface">eth0:unknown interface</a></li>
+        <li><a href="#irq-nobody-cared">IRQ 9: nobody cared (try booting with the "irqpoll" option)</a></li>
+      </ul>
+      <div class="newsItem"></div>
+
+      <h3 id="fre">Frequently Requested Enhancements</h3>
+      <dl>
+        <dt id="why-not-faq">Why not include the FAQ in the book?</dt>
+        <dd>
+          <p>Marc Heerdink may have said it best in a post to lfs-dev:</p>
+          <blockquote><p>The problem is that the FAQ is a dynamic document. The
+          FAQ for a book release is released only after the book version
+          itself, because the FAQ is updated to reflect the Qs asked about the
+          current version of the book. A link is better, since you'll always
+          have the most up-to-date answers handy.</p></blockquote>
+        </dd>
+        <dt id="why-vim">Why is vim in the book?</dt>
+        <dd>
+          <p>This is fairly well discussed in the thread starting at <a
+          href="https://lists.linuxfromscratch.org/sympa/arc/lfs-dev/2002-02/msg00019.html">this post</a>.</p>
+        </dd>
+        <dt id="why-not-package-management">Why isn't some package manager in the book?</dt>
+        <dd>
+          <p>Package management - beyond that provided by tarballs and
+          makefiles - is beyond the scope of the book. If nothing else does,
+          the number of different "solutions" should hint at some of the
+          reasons.</p>
+          <p>Here are a few of the options:</p>
+          <ul>
+            <li>No package management is really necessary. Unless it is
+            desirable to monitor package file placement minutely, any package
+            large enough to warrent removal for disk space reasons can be
+            installed in /opt as detailed by the FHS (perhaps in /opt/foo-x.x
+            with a link from /opt/foo), and new releases can usually be
+            installed over the old, although major upgrades and libraries are
+            generally best done by rebuilding the system from the bottom
+            up.</li>
+            <li>RPM, the Redhat Package Manager, is used by a number of
+            distributions. It is available from <a
+            href="http://www.rpm.org/">http://www.rpm.org/</a>, and there is an
+            <a href="../hints/downloads/files/">RPM Hint</a> to help with
+            installation.</li>
+            <li>There are several implementations of symlink style package management:
+            <ul>
+<!-- site unavailable
+              <li>Epkg is available from <a href="http://www.encap.org/epkg/">http://www.encap.org/epkg/</a>.</li>-->
+              <li>Graft is available from <a href="http://peters.gormand.com.au/Home/tools"  >http://peters.gormand.com.au/Home/tools</a>.</li>
+              <li>GNU Stow is available from <a href="http://www.gnu.org/software/stow/">http://www.gnu.org/software/stow/</a>.</li>
+              <li>And several more are listed in the Graft documentation at <a
+              href="http://peters.gormand.com.au/Home/tools/graft/graft-html#research">http://peters.gormand.com.au/Home/tools/graft/graft-html#research</a>.</li>
+            </ul>
+            </li>
+            <li>The NetBSD package manager, pkgsrc, is available on other
+            systems including Linux. It is at <a
+            href="ftp://ftp.netbsd.org/pub/pkgsrc/stable/">ftp://ftp.netbsd.org/pub/pkgsrc/stable/</a>.</li>
+            <li>Originally based on a script written by LFS' own Gerard
+            Beekmans, install-log records a list of files installed by a
+            package as the package is installed. It is available from <a
+            href="http://install-log.sourceforge.net/">http://install-log.sourceforge.net/</a>.</li>
+            <li>CheckInstall attempts log system calls made by "make install".
+            It is available from <a
+            href="http://asic-linux.com.mx/%7Eizto/checkinstall/">http://asic-linux.com.mx/~izto/checkinstall/</a>.</li>
+            <li>pkgutils, used by the CRUX distribution, is available from <a
+            href="https://crux.nu/Wiki/FaqPkgUtils">https://crux.nu/Wiki/FaqPkgUtils</a>.</li>
+            <li>There are some <a href="../hints/downloads/files/">hints</a> available for package managers.</li>
+          </ul>
+          <p>If you have an addition to the list, please do email its id, URL,
+          and other information, to the FAQ maintainer or an appropriate LFS
+          mailing list so it can be added here.</p>
+        </dd>
+        <dt id="no-poweroff">How do I make my machine poweroff when shut down?</dt>
+        <dd>
+          <p>Power Management is a kernel function, you need to enable it in
+          the kernel. In the 5.11 kernel, you have to enable the options for
+          <code>ACPI (Advanced Configuration and Power Interface</code>
+          under <code>Power managerment and ACPI options</code>.
+          For very old 32-bit x86 machines, you'll probably want the APM
+          options, newer machines often require ACPI. Make sure that either APM
+          or ACPI be enabled in the kernel, but definitely <strong>not</strong>
+          both at the same time - this has been known to cause problems such as
+          neither actually taking effect. Also try disabling SMP if you only
+          have one processor; it's also known to prevent a proper poweroff.
+          Make sure you read the help with each option.</p>
+          <p>After rebooting into the new kernel you should be able to poweroff
+          your machine with the command <code>shutdown -h now</code> or
+          <code>poweroff</code> (also read <code>man shutdown</code> and
+          <code>man halt</code>). If you compiled APM or ACPI as modules, make
+          sure they are loaded before you try to power off.  Some machines
+          require that APM or ACPI is compiled into the kernel because it needs
+          to be initialised at boottime. </p>
+        </dd>
+
+        <dt id="uefi">How do I boot LFS with UEFI?</dt>
+        <dd>
+          <p>GRUB can be built for UEFI, but doing so needs several packages
+          beyond the scope of LFS.  You can consult
+          <a href="/blfs/view/svn/postlfs/grub-efi.html">the BLFS page for it</a>.</p>
+        </dd>
+
+        <dt id="rebuild-ch8">Can I skip a package in Chapter 8 since it's already built in Chapter 6 or 7, and it's functioning properly?</dt>
+        <dd>
+          <p>Short answer: no.</p>
+          <p>Long answer: we want LFS to be "settled down": if some package
+          is rebuilt in the LFS system, the result (libraries and binaries)
+          should be same as the result at the end of the LFS book.  In
+          Chapter 6 the tools are cross compiled, where many tests in
+          the <code>configure</code> script can't be done.  The "guessed"
+          result will be used, unnecessary workarounds are enabled, or
+          optional features are disabled.  The tools in Chapter 7 are built
+          for resolving circular dependencies: many of their optional
+          features depend on packages not built yet and have to be
+          disabled.  So rebuilding them in Chapter 8 is necessary.</p>
+          <p>On the other hand, if you are building Linux for some really
+          tiny platform where you can't build packages in a reasonable time
+          (for example, a 16 MHz ARM), you can cross compile everything in
+          Chapter 6 since Chapter 7 and 8 are not applicable.  Or, you can
+          do Chapter 7 and 8 with an emulator like
+          <a href="/blfs/view/stable/postlfs/qemu.html">QEMU</a>.</p>
+        </dd>
+        <dt id="get-rid-of-lib64">Can I modify GCC code and get rid of /lib64?</dt>
+        <dd>
+          <p>Short answer: no.</p>
+          <p>Long answer: LSB mandates the ELF loader to be at
+          /lib64/ld-linux-x86-64.so.2 on x86-64.</p>
+          <p>Even longer answer: when the kernel is told to execute a
+          dynamic linked ELF executable, it reads the path to the ELF loader
+          hard-coded in the ELF executable, which is
+          /lib64/ld-linux-x86-64.so.2.  So, if it does not exist, LFS won't
+          be able to run any dynamic linked executable compiled elsewhere.
+          For example, executables from commercial software packages
+          (MATLAB or COMSOL) or binaries downloaded from GitHub release
+          page will not run.</p>
+        </dd>
+      </dl>
+      <p><a href="#lfsfaq">Back to the top.</a></p>
+
+      <h3 id="resources">When reading and building LFS</h3>
+      <dl>
+        <dt id="what-dist">What distribution should I use to start from?</dt>
+        <dd>
+          <p>Most relatively recent distributions should be fine.  You could
+          consult
+          <a href="/lfs/view/stable/chapter02/hostreqs.html">the Host System Requirements page</a>.</p>
+          <p>Make sure you have installed and/or updated the development
+          packages. (Look for ones starting in "gcc", "glibc", or "libstdc++"
+          or ending in "-dev" or "-devel".)</p>
+          <p>If you want to use LFS as your
+          main system and you wish to install it without first installing a
+          distribution, It is also possible to use a live image on dvd or
+          usb stick. All major distributions provide one.</p>
+        </dd>
+        <dt id="kernel-modules">How do I compile a kernel or set up modules?</dt>
+        <dd>
+          <p>In /usr/share/doc/linux-x.y.z
+          or wherever you unpacked your kernel source and the help in kernel
+          config tool (make menuconfig), see the Module-HOWTO at <a
+          href="http://www.tldp.org/HOWTO/Module-HOWTO/">http://www.tldp.org/HOWTO/Module-HOWTO/</a>.</p>
+        </dd>
+        <dt id="gcc-warnings">Are compiler warnings from GCC bad?</dt>
+        <dd>
+          <p>Short answer: no.</p>
+          <p>Long answer: probably, but only to someone working on the package
+          you're trying to compile. Mostly, everything will be fine unless make
+          quits with an error.</p>
+          <p>Here's an example:</p>
+          <div class="cmd">
+            <p>sk ~/tmp $ cat &gt; Makefile<br />
+               main:<br />
+               gcc main.c<br />
+               sk ~/tmp $ cat &gt; main.c<br />
+               void main() { exit(0); }<br />
+               sk ~/tmp $ make<br />
+               gcc main.c<br />
+               <strong>main.c: In function `main':</strong><br />
+               <strong>main.c:1: warning: return type of `main' is not `int'</strong><br />
+               sk ~/tmp $ ######## that worked ########<br />
+               sk ~/tmp $<br />
+               sk ~/tmp $ cat &gt; main.c<br />
+               int main() { e<span class="strong">xx</span>it(0) }<br />
+               sk ~/tmp $ make<br />
+               gcc main.c<br />
+               <strong>main.c: In function `main':</strong><br />
+               <strong>main.c:1: parse error before `}'</strong><br />
+               <strong>make: *** [main] Error 1</strong><br />
+               sk ~/tmp $ ######## that failed ########<br />
+               sk ~/tmp $</p>
+          </div>
+          <p>If you can determine that some warning indicates a real bug in
+          the software, report to the maintainer of it.</p>
+        </dd>
+        <dt id="really-small">How do I make that really small install the book mentions?</dt>
+        <dd>
+          <p>Gerard describes the process of making a 5MB LFS install in <a
+          href="https://lists.linuxfromscratch.org/sympa/arc/lfs-support/2001-10/msg00057.html">an
+          email to lfs-support</a>,  and there are links to many resources in
+          <a
+          href="https://lists.linuxfromscratch.org/sympa/arc/lfs-support/2002-06/msg00228.html">a
+          post by Cor Lem</a> and a reply to it.</p>
+        </dd>
+        <dt id="procs-lfs">Is there information about building LFS on other processors?</dt>
+        <dd>
+          <p>For information about building LFS for a wide array of systems,
+          take a look at the <a
+          href="https://trac.clfs.org/wiki/read">Cross-LFS branch</a> of
+          LFS.</p>
+          <p>For 64-bit little-endian MIPS, Xi Ruoyao has done an experiment
+          building LFS on it.
+          <a href="https://bf.mengyan1223.wang/lfs/mips64el">The modified LFS 10.1 book</a>
+          documented the instruction used in the experiment.</p>
+        </dd>
+        <dt id="cross-compile">How do I cross compile LFS?</dt>
+        <dd>
+          <p>It's often useful to compile LFS for one machine on another
+          machine. Say using that fast 1Ghz Athlon to build an install for an
+          old 486. While this is technically not cross compiling, binaries
+          compiled for the Athlon cannot be run on the 486 because binaries
+          compiled for the newer processor use features the older processor
+          doesn't have.</p>
+          <p>The LFS book specifically for cross compiling is the <a
+          href="http://trac.clfs.org/wiki/read">Cross-LFS</a> book.
+          Another source of information would be the <a
+          href="/hints/downloads/files/">cross-compiling hint</a>.</p>
+          <p>The resources provided above are quite outdated.  You can
+          modify the LFS building process after LFS 10.0 (developed
+          by Pierre Labestie) to cross compile LFS: set
+          <span>$LFS_TGT</span> to the triplet of your target platform,
+          and build cross toolchain in Chapter 5 and temporary tools in
+          Chapter 6 as normal.  At the end of Chapter 6, build a kernel and
+          a bootloader for the target.
+          Then copy the temporary system to the target platform, boot it,
+          and continue the building from Chapter 7.</p>
+        </dd>
+        <dt id="dos-text">What's a DOS format text file?</dt>
+        <dd>
+          <p>It has to do with the characters used to end lines.</p>
+          <p>There are two that may be used:</p>
+          <ul>
+            <li>Line Feed: (LF) Octal:012 Decimal:10 Hex:0A C Style Escape:'\n' Moves down one line.</li>
+            <li>Carriage Return: (CR) Octal:015 Decimal:13 Hex:0D C Style Excape:'\r' Move to the left margin.</li>
+          </ul>
+          <p>Unix, DOS, and MacOS each use a different combination to end lines in text files:</p>
+          <ul>
+            <li>Unix: LF only. This is why when a Unix format text file is sent to a printer raw, it prints out<br />
+                &nbsp;&nbsp;like<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;stairs<br />
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;steps.<br /></li>
+            <li>DOS: CRLF both. Which is why if you do "cat -v" on a DOS file
+            you'll see a "^M" (control m is carriage return) at the end of each
+            line. And that is why scripts don't work when written with
+            Microsoft Notepad. The kernel looks for "/bin/sh^M" which doesn't
+            exist. There's a "/bin/sh", but nothing with a "^M" appended.</li>
+            <li>Classic MacOS (before Mac OS X): CR only. Printers probably
+            print every line atop the
+            first, and Unix tools think the whole file is one line with "^M"
+            all through it.  Mac OS X follows Unix convention (LF only).</li>
+          </ul>
+          <p>To change DOS to Unix, use</p>
+          <div class="cmd">
+            <p>cp &lt;fileid&gt; &lt;fileid&gt;.dos &amp;&amp;<br />
+               cat &lt;fileid&gt;.dos | tr -d '\r' &gt; &lt;fileid&gt;</p>
+          </div>
+          <p>Or in <code>vim</code>, you can convert a file with <code>:set
+          ff={unix, dos, mac}</code>. Other conversions will probably require
+          sed or a different use of tr and are left as an exercise for the
+          reader.</p>
+        </dd>
+        <dt id="wget">Is there a way to download all current files at one time?</dt>
+        <dd>
+          <p>Yes. You can download the file LFS-BOOK-x.y-wget-list <a href=
+          "http://www.linuxfromscratch.org/lfs/downloads/stable/wget-list">
+          http://www.linuxfromscratch.org/lfs/downloads/stable/wget-list</a>. To download all the files,
+          use the version of <code>wget</code> on your host distribution to run:</p>
+          
+          <code>wget --input-file=LFS-BOOK-x.y-wget-list</code>
+
+        </dd>
+      </dl>
+      <p><a href="#lfsfaq">Back to the top.</a></p>
+
+      <h3 id="generrors">General compilation errors</h3>
+      <dl>
+        <dt id="optimizations">When using optimization flags (setting CFLAGS)</dt>
+        <dd>
+          <p>If you're getting errors and you're setting CFLAGS or otherwise
+          passing optimization flags to the compiler that may be the
+          problem.</p>
+          <p>If you ask on the list and they can't figure it out immediately,
+          they'll likely suggest trying it without optimization. So if you just
+          retry it without before asking, you'll be one step ahead of them
+          :)</p>
+          <p>Of particular note is that optimizing binutils, gcc, or glibc may
+          cause any other package to fail to compile or run or to otherwise
+          misbehave in strange and mysterious ways. Also, optimization that
+          works for someone else may not work for you. Flags that used to work
+          may mysteriously stop working. Even some small innocent hardware
+          change can make the difference.</p>
+          <p>(If you don't know what optimization flags are, don't worry, you really don't need to.)</p>
+        </dd>
+        <dt id="config-ice">Why does GCC reports "Internal Compiler Error" for a "hello world" program?</dt>
+        <dd>
+          <p>You over optimized gcc.</p>
+        </dd>
+        <dt id="dirty-sources">I didn't delete the source tree after my last attempt. Do I need to?</dt>
+        <dd>
+          <p>Yes. In general <code>make clean</code> or <code>make
+          dist-clean</code> can't be relied upon for clean sources. Especially
+          when you have manually hacked the sources or applied patches to it
+          you should first try again with a fresh unpacked package. The only
+          exception to this rule is the linux kernel, which requires its
+          sources to be present when third-party modules, such as the NVidia
+          drivers, are needed.</p>
+        </dd>
+        <dt id="perm-denied">I'm getting `/dev/null: Permission denied'</dt>
+        <dd>
+          <p>Does /dev/null look like this:</p>
+          <div class="cmd">
+            <p>$ ls -l /dev/null<br />
+               crw-rw-rw- 1 root root 1, 3 Aug  3  2000 /dev/null</p>
+          </div>
+          <p>If not, it should. See the chmod(1), chown(1), and mknod(1) man
+          pages and /usr/src/linux/Documentation/devices.txt if you need help
+          fixing it.</p>
+          <p>If it does look right, the problem is probably your mount options.
+          See the answer to "<a
+          href="#bad-interpreter-permission-denied">./configure: bad
+          interpreter: Permission denied</a>", above.</p>
+        </dd>
+        <dt id="sig11">signal 11 (internal error: Segmentation fault)</dt>
+        <dd>
+          <p>The long answer is at <a
+          href="http://www.bitwizard.nl/sig11/">http://www.bitwizard.nl/sig11/</a>.</p>
+          <p>The short answer is that if restarting make gets a little further
+          every time, you have a hardware problem. (If make, or whatever you're
+          running, fails at the same place every time, then it is not
+          hardware.)</p>
+          <p>Assuming you're not overclocking, the most likely hardware problem
+          is bad memory which you can check with Memtest86 from <a
+          href="http://www.memtest86.com/">http://www.memtest86.com/</a>. If
+          that isn't it, see the long answer.</p>
+        </dd>
+        <dt id="any-no-such-file">No such file or directory</dt>
+        <dd>
+          <p>Examples of this error are:</p>
+          <div class="cmd">
+            <p>/usr/bin/env: /bin/bash: No such file or directory<br />
+               gcc: No such file or directory</p>
+          </div>
+          <p>What happens is that the path to the dynamic linker path
+          embedded inside the executable is /lib64/ld-linux-x86-64.so.2
+          (/lib/ld-linux.so.2 for 32-bit), and
+          when one goes to run the binary inside the chroot where
+          /lib64/ld-linux-x86-64.so.2 does not exist yet, the very unhelpful
+          <code>No such file or directory</code> error message is shown.</p>
+          <p>Check if the symlink /lib64/ld-linux-x86-64.so.2 is broken.
+          For LFS 9.1 or older, it may indicate a typo in GCC Pass 2.</p>
+        </dd>
+        <dt id="configure-no-such-file">bash: ./configure: No such file or directory</dt>
+        <dd>
+          <p>You forgot to <code>cd</code> into the extracted directory of the package after you've extracted it.</p>
+        </dd>
+        <dt id="bad-interpreter-permission-denied">./configure: bad interpreter: Permission denied</dt>
+        <dd>
+          <p>You're most likely getting this while building binutils in Chapter
+          5 of the LFS Book. The problem is most likely your mount options. You
+          probably have a line in /etc/fstab like:</p>
+          <code>/dev/hda10  /mnt/lfs  ext2  user  1  2</code>
+          <p>'user' is the mount flag, and it's the problem. To quote from the mount man page:</p>
+          <cite>user:  Allow  an  ordinary  user to mount the file system. This
+          option  implies  the options noexec, nosuid, and nodev (unless
+          overridden by subsequent options, as in the option line
+          user,exec,dev,suid).</cite>
+          <p>So change the line in /etc/fstab like this:</p>
+          <code>/dev/hda10  /mnt/lfs  ext2  defaults  1  2</code>
+        </dd>
+        <dt id="conf-guess-fail">configure can't guess my host type.</dt>
+        <dd>
+          <p>Typical symptoms look like this:</p>
+          <div class="cmd">
+            <p>sk ~/tmp-0.0 $ ./configure<br />
+               creating cache ./config.cache<br />
+               checking host system type...<br />
+               <strong>configure: error: can not guess host type; you must specify one</strong><br />
+               sk ~/tmp-0.0 $</p>
+          </div>
+          <p>The problem is usually that the script can't run the compiler.
+          Usually it's just a missing /usr/bin/cc symlink. You can fix it like
+          this:</p>
+          <code>cd /usr/bin &amp;&amp; ln -s gcc cc</code>
+          <p>If that doesn't do it, check the file config.log created by
+          configure. Errors are recorded there and may indicate the
+          problem.</p>
+        </dd>
+        <dt id="config-not-gnu-c">checking whether we are using GNU C... no</dt>
+        <dd>
+          <p>If you're getting an error from configure like:</p>
+          <div class="cmd">
+            <p>checking whether we are using GNU C... no<br />
+               configure: error: GNU libc must be compiled using GNU CC</p>
+          </div>
+          <p>It may be because egrep isn't working. Since egrep is a
+          shell-script which calls grep, this actually means there's a problem
+          with grep.</p>
+          <p>To test if egrep is working in the chroot environment,
+          run the following command from <em>inside</em> chroot:</p>
+          <code>egrep root /etc/passwd</code>
+          <p>If it doesn't print root's line from /etc/passwd, again, you have
+          a problem. (This test also works if you encounter the problem after
+          rebooting into the new LFS system.)</p>
+        </dd>
+        <dt id="no-ptys">The system has no more ptys.  Ask your system
+        administrator to create more.</dt>
+        <dd>
+          <p>If you run</p>
+          <div class="cmd">
+            <p>expect -c &quot;spawn ls&quot;</p>
+          </div>
+          <p>and get the following error:</p>
+          <div class="cmd">
+            <p>The system has no more ptys.<br />
+               Ask your system administrator to create more.</p>
+          </div>
+          <p>then your linux distribution is either not setup to use Unix98
+          PTYs or to use the /dev/pts file system.</p>
+          <p>The solution may require recompiling your kernel. First, go to
+          your kernel's source directory and look at the .config file. If you
+          do not have a .config file, and you are running the pre-compiled
+          kernel that was installed with rpm, aptget, or whatever your
+          distribution uses, then you need to seek support from your
+          distribution's support FAQ's, mailing lists or IRC channels.</p>
+          <p>If you do have a .config file, look inside it for the following 2 options:</p>
+          <div class="cmd">
+            <p>CONFIG_UNIX98_PTYS=y<br />
+               CONFIG_DEVPTS_FS=y</p>
+          </div>
+          <p>If either of these has 'n' instead of 'y', then change it and recompile the kernel.</p>
+          <p>If they both have 'y', then you probably will not have to recompile the kernel.</p>
+          <p>Next, we need to ensure that the system is actually using both
+          Unix98 PTYs and the /dev/pts file system.</p>
+          <p>First, look for a device called /dev/ptmx.  If it doesn't exist, create it with:</p>
+          <div class="cmd">
+            <p>mknod /dev/ptmx c 5 2</p>
+          </div>
+          <p>Then, whether it existed or you just created it, run:</p>
+          <div class="cmd">
+            <p>chmod 666 /dev/ptmx</p>
+          </div>
+          <p>Next, ensure that there is a directory called /dev/pts.  The
+          permissions should be 755.  Create it and/or chmod it if needed.</p>
+          <p>The final setup is to add the following line to /etc/fstab:</p>
+          <div class="code">
+            <p>devpts&nbsp;&nbsp;&nbsp;&nbsp;/dev/pts&nbsp;&nbsp;&nbsp;&nbsp;devpts&nbsp;&nbsp;&nbsp;&nbsp;gid=5,mode=620&nbsp;&nbsp;&nbsp;&nbsp;0&nbsp;&nbsp;0</p>
+          </div>
+          <p>NOTE:  Look for the tty group in /etc/group and note the group id
+          number.  Change the gid=5 option to match the group id number of the
+          tty group.  The group id of 5 is just an example and may differ on
+          your system.</p>
+          <p>Now that everything is setup, you have two options.</p>
+          <p>1.  Mount /dev/pts and test it by rerunning the above expect command.</p>
+          <p>2.  Reboot the computer and test it by rerunning the above expect command.</p>
+        </dd>
+      </dl>
+      <p><a href="#lfsfaq">Back to the top.</a></p>
+
+      <h3 id="packerrors">Package-specific errors</h3>
+      <dl>
+        <dt id="m4-mb-len-max-wrong">M4: Assumed value of MB_LEN_MAX wrong</dt>
+        <dd>
+          <p>This error message usually indicates that <code>limits.h</code>
+          provided by GCC isn't including <code>limits.h</code> from Glibc
+          as it should be.  There are two commands as a workaround for
+          <code>limits.h</code> in Chapter 5, one in GCC Pass 1 and another
+          in Glibc.  Forgetting any of them will lead to this issue.  You
+          can rerun the forgotten commands (untar GCC tarball if necessary)
+          and retry to build M4.  Note that if you forgot the command in
+          GCC Pass 1, you'll have to rerun both of these two workarounds,
+          as the workaround in Glibc copies from the file created in the
+          workaround in GCC Pass 1.</p>
+        </dd>
+
+        <dt id="systemd-user-credentials-esrch">Systemd: systemd-networkd.service: Failed to determine user credentials: No such process</dt>
+        <dd>
+          <p>It's likely because <code>/etc/passwd</code> for sysv revision
+          is misused in systemd-based system.  "No such process" is just the
+          "standard" error message for <code>ESRCH</code>, it's not very
+          helpful for diagnosis of this issue.</p>
+        </dd>
+      </dl>
+      <p><a href="#lfsfaq">Back to the top.</a></p>
+
+      <h3 id="confboot">Configuration and booting issues</h3>
+      <dl>
+        <dt id="unable-to-mount-root">Kernel panic - not syncing: VFS: Unable to mount root fs on ...</dt>
+        <dd>
+          <p>There are several reasons why the kernel might be unable to mount the root filesystem.</p>
+          <ul>
+            <li>Did you specify the correct partition in
+            <code>/boot/grub/grub.cfg</code>?</li>
+            <li>Is support for the hard drive enabled in the kernel. For SCSI
+            this means support for the specific SCSI adapter.</li>
+            <li>Is support for the hard drive compiled into the kernel, not
+            just as a module. (Modules are stored on the filesystem. If a
+            driver needed to access the filesystem is stored as a module on
+            that filesystem, well ... you know ... ;)</li>
+            <li>Is support for the filesystem compiled into the kernel. Again,
+            not a module. Support for ext4 is enabled by default, but others
+            like reiser, jfs, and xfs are not.</li>
+          </ul>
+        </dd>
+        <dt id="respawning-too-fast">init: Id "1" respawning too fast: disabled for 5 minutes</dt>
+        <dd>
+          <p>When you see, in your syslogs, this line:</p>
+          <code>init: Id "1" respawning too fast: disabled for 5 minutes</code>
+          <p>It means you have an error in the /etc/inittab line beginning with the given id ("1" in this example).</p>
+        </dd>
+        <dt id="char-major-10-135">modprobe: Can't locate module char-major-10-135</dt>
+        <dd>
+          <p><code>char-major-10-135</code> refers to the character device,
+          major 10, minor 135, which is /dev/rtc. It provides access to the
+          BIOS clock, or RTC, the Real Time Clock. See
+          /usr/src/linux/Documentation/rtc.txt for more information.</p>
+          <p>The error is because something, most likely hwclock, is trying to
+          use /dev/rtc but you haven't configured kernel support for it in your
+          kernel. Either delete /dev/rtc so hwclock won't try to use it or
+          enable RTC support in your kernel. It's located in make menuconfig
+          under "Character devices" -&gt; "Enhanced Real Time Clock
+          Support".</p>
+        </dd>
+        <dt id="no-dev-rtc">modprobe: Can't locate module /dev/rtc</dt>
+        <dd>
+          <p>See the question <a href="#char-major-10-135">"modprobe: Can't locate module char-major-10-135"</a>.</p>
+        </dd>
+        <dt id="eth0-unknown-interface">eth0:unknown interface:No such device [failed] </dt>
+        <dd>
+          <p>The full error looks like this:</p>
+          <div class="cmd">
+            <p>eth0:unknown interface:No such device [failed]<br />
+               Setting up default gateway...<br />
+               SIOCADDRT:No such device [failed]</p>
+          </div>
+          <p>eth0 is a virtual device with no /dev entry. It refers to the
+          first detected network card in your system. The reason the kernel
+          can't find this device is because you forgot to add support for your
+          network card in the kernel. The kernel detected the card but doesn't
+          have a driver for it. The LFS boot script tries to bring up the
+          network but fails because of this.</p>
+          <p>Recompile your kernel with the proper driver, either built in or
+          as a module. If you compiled the network driver as a module, then
+          also adjust /etc/modules.conf to alias the network card module as
+          eth0; for example: <code>alias eth0 8139too</code>. If you don't know
+          which network card you have, you can use <code>dmesg</code>,
+          /proc/pci or <code>lspci</code> to find out.</p>
+          <p>And, udev may rename your network devices.  For example, eth0
+          may be renamed to enp4s0.  You can run <code>ip link</code>
+          command after booting the LFS system, and examine the output to
+          know the name of your network devices.</p>
+        </dd>
+        <dt id="irq-nobody-cared">irq 9: nobody cared (try booting with the "irqpoll" option)</dt>
+        <dd>
+          <p>It may be a bug in the firmware (BIOS) or the drivers in
+          kernel.  Some hardware vendors tend to use Windows-specific hacks
+          in their BIOS, which is misinterpreted by Linux kernel and causing
+          this kind of issue.</p>
+          <p>If you see message like this but your system functions
+          normally, you can ignore it.  If the system malfunctions, you can
+          try the combinations of several kernel options to workaround:
+          <code>irqpoll</code>, <code>noapic</code>, <code>pci=nocrs</code>,
+          and <code>i8042.nopnp=1</code>.</p>
+          <p>And, you can try <a href="https://wiki.debian.org/OverridingDSDT">ACPI DSDT override</a> if you
+          really understand it.</p>
+          <p>You can always report this kind of issue to
+          <a href="https://bugzilla.kernel.org">Kernel bug tracker</a>,
+          no matter if it's a BIOS bug.  The kernel developers want to make
+          Linux runable even if the BIOS has this kind of bug.</p>
+        </dd>
+      </dl>
+
+<!--#include virtual="/common/footer.html" -->

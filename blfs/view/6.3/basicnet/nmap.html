@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Nmap-4.20
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;17.&nbsp;Basic Networking Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="traceroute.html" title=
+          "Traceroute-1.4a12">Prev</a>
+          <p>
+            Traceroute-1.4a12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="whois.html" title="Whois-4.7.26">Next</a>
+          <p>
+            Whois-4.7.26
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netutils.html" title=
+          "Chapter&nbsp;17.&nbsp;Basic Networking Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="nmap" name="nmap"></a>Nmap-4.20
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Nmap
+        </h2>
+        <p>
+          <span class="application">Nmap</span> is a utility for network
+          exploration and security auditing. It supports ping scanning, port
+          scanning and TCP/IP fingerprinting.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://anduin.linuxfromscratch.org/sources/BLFS/6.3/n/nmap-4.20.tar.bz2">
+                http://anduin.linuxfromscratch.org/sources/BLFS/6.3/n/nmap-4.20.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/nmap-4.20.tar.bz2">
+                ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/nmap-4.20.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: ea50419f99472200c4184a304e3831ea
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 2.1 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 21 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.3 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Nmap Dependencies
+        </h3>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../postlfs/openssl.html" title=
+          "OpenSSL-0.9.8g">OpenSSL-0.9.8g</a>, <a class="xref" href=
+          "../general/pcre.html" title="PCRE-7.6">PCRE-7.6</a>, <a class=
+          "xref" href="libpcap.html" title="libpcap-0.9.6">libpcap-0.9.6</a>,
+          <a class="xref" href="../x/gtk2.html" title=
+          "GTK+-2.10.13">GTK+-2.10.13</a> (for building the graphical
+          front-end), and <a class="ulink" href=
+          "http://sourceforge.net/projects/libdnet/">libdnet</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/nmap">http://wiki.linuxfromscratch.org/blfs/wiki/nmap</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Nmap
+        </h2>
+        <p>
+          Install <span class="application">Nmap</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">nmap and optionally, nmapfe and
+              xnmap</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/share/nmap</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nmap-prog" name="nmap-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nmap</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a utility for network exploration and security
+                    auditing. It supports ping scanning, port scanning and
+                    TCP/IP fingerprinting.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nmapfe" name="nmapfe"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nmapfe</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the graphical front end to <span class=
+                    "command"><strong>nmap</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xnmap" name="xnmap"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xnmap</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to <span class=
+                    "command"><strong>nmapfe</strong></span>.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-05-10 18:53:20 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="traceroute.html" title=
+          "Traceroute-1.4a12">Prev</a>
+          <p>
+            Traceroute-1.4a12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="whois.html" title="Whois-4.7.26">Next</a>
+          <p>
+            Whois-4.7.26
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netutils.html" title=
+          "Chapter&nbsp;17.&nbsp;Basic Networking Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

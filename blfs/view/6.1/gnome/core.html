@@ -1,0 +1,170 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;30.&nbsp;GNOME Core Packages
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Part&nbsp;IX.&nbsp;GNOME
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="gnome.html" title="GNOME">Prev</a>
+          <p>
+            GNOME
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ORBit2.html" title="ORBit2-2.12.2">Next</a>
+          <p>
+            ORBit2-2.12.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="gnome.html" title=
+          "Part&nbsp;IX.&nbsp;GNOME">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="gnome-core" name="gnome-core"></a>
+        <h1 class="chapter">
+          GNOME Core Packages
+        </h1>
+      </div>
+      <p>
+        This section contains required elements of the <span class=
+        "application">GNOME</span> environment to display a functional
+        desktop.
+      </p>
+      <div class="caution">
+        <div class="admonhead">
+          <img alt="[Caution]" src="../images/caution.png" />
+          <h3 class="admontitle">
+            Caution
+          </h3>
+        </div>
+        <div class="admonbody">
+          <p>
+            The BLFS team recommends that you carefully evaluate the optional
+            dependencies listed for each of the core <span class=
+            "application">GNOME</span> packages. You may lose desired
+            functionality if you don't install an optional dependency before
+            the package that lists the dependency, even if you later install
+            it.
+          </p>
+        </div>
+      </div>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="gnome-pre-install-config" name=
+          "gnome-pre-install-config"></a>
+          <h1 class="sect1">
+            Pre-installation Configuration
+          </h1>
+        </div>
+        <p>
+          Set an environment variable to resolve the prefix destination.
+        </p>
+        <p>
+          If <span class="application">GNOME</span> is your desktop of
+          choice:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export GNOME_PREFIX=/usr</kbd></pre>
+        <p>
+          If you want to try-out <span class="application">GNOME</span>, or
+          install it in an easy to remove location:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export GNOME_PREFIX=/opt/gnome-2.10</kbd></pre>
+        <p>
+          Remember to execute <span><strong class=
+          "command">ldconfig</strong></span> as the <tt class=
+          "systemitem">root</tt> user after installation of libraries to
+          update the library cache.
+        </p>
+        <p>
+          The try-out group will also need to make all the following
+          configuration changes:
+        </p>
+        <p>
+          Add to your system or personal profile:
+        </p>
+        <pre class="screen"><tt class=
+        "literal">export PATH=$PATH:/opt/gnome-2.10/bin
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/gnome-2.10/lib/pkgconfig
+export GNOME_LIBCONFIG_PATH=/usr/lib:/opt/gnome-2.10/lib</tt></pre>
+        <p>
+          Add to your <tt class="filename">/etc/ld.so.conf</tt>:
+        </p>
+        <pre class="root"><kbd class=
+        "command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin gnome addition to /etc/ld.so.conf
+
+/opt/gnome-2.10/lib
+
+# End gnome addition</tt>
+EOF</kbd></pre>
+        <p>
+          Add to your <tt class="filename">/etc/man.conf</tt>:
+        </p>
+        <pre class="root"><kbd class=
+        "command">cat &gt;&gt; /etc/man.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin gnome addition to man.conf
+
+MANPATH /opt/gnome-2.10/man
+
+# End gnome addition to man.conf</tt>
+EOF</kbd></pre>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnome.html" title="GNOME">Prev</a>
+          <p>
+            GNOME
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ORBit2.html" title="ORBit2-2.12.2">Next</a>
+          <p>
+            ORBit2-2.12.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="gnome.html" title=
+          "Part&nbsp;IX.&nbsp;GNOME">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

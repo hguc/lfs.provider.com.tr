@@ -1,0 +1,443 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.18.&nbsp;Ncurses-5.5
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="lfs" class="6.2">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Linux From Scratch - Version 6.2
+        </h4>
+        <h3>
+          Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="bison.html" title="Bison-2.2">Prev</a>
+          <p>
+            Bison-2.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="procps.html" title="Procps-3.2.6">Next</a>
+          <p>
+            Procps-3.2.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          6.18. Ncurses-5.5
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Ncurses package contains libraries for terminal-independent
+          handling of character screens.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Approximate build
+              time:</span></strong> <span class="seg">0.7 SBU</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Required disk
+              space:</span></strong> <span class="seg">31 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            6.18.1. Installation of Ncurses
+          </h2>
+        </div>
+        <p>
+          Since the release of Ncurses-5.5, a memory leak and some display
+          bugs were found and fixed upstream. Apply those fixes:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../ncurses-5.5-fixes-1.patch</kbd></pre>
+        <p>
+          Prepare Ncurses for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --with-shared --without-debug --enable-widec</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <b>The meaning of the configure option:</b>
+          </p>
+          <dl>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><tt>--enable-widec</tt></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch causes wide-character libraries (e.g., <tt class=
+                "filename">libncursesw.so.5.5</tt>) to be built instead of
+                normal ones (e.g., <tt class=
+                "filename">libncurses.so.5.5</tt>). These wide-character
+                libraries are usable in both multibyte and traditional 8-bit
+                locales, while normal libraries work properly only in 8-bit
+                locales. Wide-character and normal libraries are
+                source-compatible, but not binary-compatible.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+        <p>
+          Give the Ncurses libraries execute permissions:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">chmod -v 755 /usr/lib/*.5.5</kbd></pre>
+        <p>
+          Fix a library that should not be executable:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">chmod -v 644 /usr/lib/libncurses++w.a</kbd></pre>
+        <p>
+          Move the libraries to the <tt class="filename">/lib</tt> directory,
+          where they are expected to reside:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">mv -v /usr/lib/libncursesw.so.5* /lib</kbd></pre>
+        <p>
+          Because the libraries have been moved, one symlink points to a
+          non-existent file. Recreate it:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">ln -sfv ../../lib/libncursesw.so.5 /usr/lib/libncursesw.so</kbd></pre>
+        <p>
+          Many applications still expect the linker to be able to find
+          non-wide-character Ncurses libraries. Trick such applications into
+          linking with wide-character libraries by means of symlinks and
+          linker scripts:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">for lib in curses ncurses form panel menu ; do \
+    rm -vf /usr/lib/lib${lib}.so ; \
+    echo "INPUT(-l${lib}w)" &gt;/usr/lib/lib${lib}.so ; \
+    ln -sfv lib${lib}w.a /usr/lib/lib${lib}.a ; \
+done &amp;&amp;
+ln -sfv libncurses++w.a /usr/lib/libncurses++.a</kbd></pre>
+        <p>
+          Finally, make sure that old applications that look for <tt class=
+          "filename">-lcurses</tt> at build time are still buildable:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">echo "INPUT(-lncursesw)" &gt;/usr/lib/libcursesw.so &amp;&amp;
+ln -sfv libncurses.so /usr/lib/libcurses.so &amp;&amp;
+ln -sfv libncursesw.a /usr/lib/libcursesw.a &amp;&amp;
+ln -sfv libncurses.a /usr/lib/libcurses.a</kbd></pre>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The instructions above don't create non-wide-character Ncurses
+              libraries since no package installed by compiling from sources
+              would link against them at runtime. If you must have such
+              libraries because of some binary-only application, build them
+              with the following commands:
+            </p>
+            <pre class="userinput"><kbd class=
+            "command">make distclean &amp;&amp;
+./configure --prefix=/usr --with-shared --without-normal \
+  --without-debug --without-cxx-binding &amp;&amp;
+make sources libs &amp;&amp;
+cp -av lib/lib*.so.5* /usr/lib</kbd></pre>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="contents-ncurses" name="contents-ncurses"></a>
+          <h2 class="sect2">
+            6.18.2. Contents of Ncurses
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              programs:</span></strong> <span class="seg">captoinfo (link to
+              tic), clear, infocmp, infotocap (link to tic), reset (link to
+              tset), tack, tic, toe, tput, and tset</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              libraries:</span></strong> <span class="seg">libcursesw.{a,so}
+              (symlink and linker script to libncursesw.{a,so}),
+              libformw.{a,so}, libmenuw.{a,so}, libncurses++w.a,
+              libncursesw.{a,so}, libpanelw.{a,so} and their
+              non-wide-character counterparts without "w" in the library
+              names.</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id3679712" name="id3679712"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="captoinfo" name="captoinfo"></a><span class=
+                  "term"><span><strong class=
+                  "command">captoinfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Converts a termcap description into a terminfo
+                    description
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="clear" name="clear"></a><span class=
+                  "term"><span><strong class=
+                  "command">clear</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Clears the screen, if possible
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="infocmp" name="infocmp"></a><span class=
+                  "term"><span><strong class=
+                  "command">infocmp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Compares or prints out terminfo descriptions
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="infotocap" name="infotocap"></a><span class=
+                  "term"><span><strong class=
+                  "command">infotocap</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Converts a terminfo description into a termcap
+                    description
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="reset" name="reset"></a><span class=
+                  "term"><span><strong class=
+                  "command">reset</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Reinitializes a terminal to its default values
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tack" name="tack"></a><span class=
+                  "term"><span><strong class=
+                  "command">tack</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    The terminfo action checker; it is mainly used to test
+                    the accuracy of an entry in the terminfo database
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tic" name="tic"></a><span class=
+                  "term"><span><strong class=
+                  "command">tic</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    The terminfo entry-description compiler that translates a
+                    terminfo file from source format into the binary format
+                    needed for the ncurses library routines. A terminfo file
+                    contains information on the capabilities of a certain
+                    terminal
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="toe" name="toe"></a><span class=
+                  "term"><span><strong class=
+                  "command">toe</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Lists all available terminal types, giving the primary
+                    name and description for each
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tput" name="tput"></a><span class=
+                  "term"><span><strong class=
+                  "command">tput</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Makes the values of terminal-dependent capabilities
+                    available to the shell; it can also be used to reset or
+                    initialize a terminal or report its long name
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tset" name="tset"></a><span class=
+                  "term"><span><strong class=
+                  "command">tset</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Can be used to initialize terminals
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libcurses" name="libcurses"></a><span class=
+                  "term"><tt class="filename">libcurses</tt></span>
+                </td>
+                <td>
+                  <p>
+                    A link to <tt class="filename">libncurses</tt>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libncurses" name="libncurses"></a><span class=
+                  "term"><tt class="filename">libncurses</tt></span>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to display text in many complex ways
+                    on a terminal screen; a good example of the use of these
+                    functions is the menu displayed during the kernel's
+                    <span><strong class="command">make
+                    menuconfig</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libform" name="libform"></a><span class=
+                  "term"><tt class="filename">libform</tt></span>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to implement forms
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libmenu" name="libmenu"></a><span class=
+                  "term"><tt class="filename">libmenu</tt></span>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to implement menus
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libpanel" name="libpanel"></a><span class=
+                  "term"><tt class="filename">libpanel</tt></span>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to implement panels
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="bison.html" title="Bison-2.2">Prev</a>
+          <p>
+            Bison-2.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="procps.html" title="Procps-3.2.6">Next</a>
+          <p>
+            Procps-3.2.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

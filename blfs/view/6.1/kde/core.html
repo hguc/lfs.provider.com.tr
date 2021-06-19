@@ -1,0 +1,174 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;28.&nbsp;KDE Core Packages
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Part&nbsp;VIII.&nbsp;KDE
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="kde.html" title="KDE">Prev</a>
+          <p>
+            KDE
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="arts.html" title="aRts-1.4.1">Next</a>
+          <p>
+            aRts-1.4.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="kde.html" title=
+          "Part&nbsp;VIII.&nbsp;KDE">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="kde-core" name="kde-core"></a>
+        <h1 class="chapter">
+          KDE Core Packages
+        </h1>
+      </div>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="kde-pre-install-config" name="kde-pre-install-config"></a>
+          <h1 class="sect1">
+            KDE Pre-installation Configuration
+          </h1>
+        </div>
+        <p>
+          Based on your preference, set <tt class="envar">KDE_PREFIX</tt>.
+        </p>
+        <p>
+          If <span class="application">KDE</span> is your desktop of choice:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export KDE_PREFIX=/usr</kbd></pre>
+        <p>
+          If you want to try-out <span class="application">KDE</span>:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export KDE_PREFIX=/opt/kde-3.4.1</kbd></pre>
+        <p>
+          Remember to execute <span><strong class=
+          "command">ldconfig</strong></span> after installation of libraries
+          to update the library cache.
+        </p>
+        <p>
+          If you are not installing <span class="application">KDE</span> in
+          <tt class="filename">/usr</tt>, you will need to make some
+          configuration changes:
+        </p>
+        <p>
+          You should consider installing the <a href=
+          "../general/desktop-file-utils.html">desktop-file-utils-0.10</a>
+          package. Though not required, this package will allow you to easily
+          use existing <tt class="filename">.desktop</tt> files in <tt class=
+          "filename">/usr/share/applications</tt> (and any other locations
+          identified by <tt class="envar">XDG_DATA_DIRS</tt>), and
+          automatically add these applications to the <span class=
+          "application">KDE</span> menu system.
+        </p>
+        <p>
+          Add to your system or personal profile:
+        </p>
+        <pre class="screen"><tt class=
+        "literal">export PATH=$PATH:/opt/kde-3.4.1/bin
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/kde-3.4.1/lib/pkgconfig</tt></pre>
+        <p>
+          Add to your <tt class="filename">/etc/ld.so.conf</tt>:
+        </p>
+        <pre class="root"><kbd class=
+        "command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin kde addition to /etc/ld.so.conf
+
+/opt/kde-3.4.1/lib
+
+# End kde addition</tt>
+EOF</kbd></pre>
+        <p>
+          Add to your <tt class="filename">/etc/man.conf</tt>:
+        </p>
+        <pre class="root"><kbd class=
+        "command">cat &gt;&gt; /etc/man.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin kde addition to man.conf
+
+MANPATH /opt/kde-3.4.1/man
+
+# End kde addition to man.conf</tt>
+EOF</kbd></pre>
+        <div class="tip">
+          <div class="admonhead">
+            <img alt="[Tip]" src="../images/tip.png" />
+            <h3 class="admontitle">
+              Tip
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              If you prefer installing KDE in <tt class="filename">/opt</tt>,
+              one trick to avoid the above configuration changes every time
+              you install a new version is to replace <tt class=
+              "filename">/opt/kde-3.4.1</tt> with <tt class=
+              "filename">/opt/kde</tt> and to create a symlink from
+              <tt class="filename">/opt/kde-3.4.1</tt> to <tt class=
+              "filename">/opt/kde</tt>.
+            </p>
+            <pre class="root"><kbd class=
+            "command">ln -v -sf kde-3.4.1 /opt/kde</kbd></pre>
+          </div>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="kde.html" title="KDE">Prev</a>
+          <p>
+            KDE
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="arts.html" title="aRts-1.4.1">Next</a>
+          <p>
+            aRts-1.4.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="kde.html" title=
+          "Part&nbsp;VIII.&nbsp;KDE">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,1067 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Postfix-2.3.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;22.&nbsp;Mail Server Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="mail.html" title=
+          "Mail Server Software">Prev</a>
+          <p>
+            Mail Server Software
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="qpopper.html" title="Qpopper-4.0.9">Next</a>
+          <p>
+            Qpopper-4.0.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mail.html" title=
+          "Chapter&nbsp;22.&nbsp;Mail Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="postfix" name="postfix"></a>
+        <h1 class="sect1">
+          Postfix-2.3.3
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Postfix
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Postfix</span> package contains a
+          Mail Transport Agent (MTA). This is useful for sending email to
+          other users of your host machine. It can also be configured to be a
+          central mail server for your domain, a mail relay agent or simply a
+          mail delivery agent to your local Internet Service Provider (ISP).
+        </p>
+        <h3>
+          <a id="id2786117" name="id2786117"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://www.mirrorspace.org/postfix/official/postfix-2.3.3.tar.gz">
+                <span class=
+                "url">http://www.mirrorspace.org/postfix/official/postfix-2.3.3.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-2.3.3.tar.gz">
+                <span class=
+                "url">ftp://ftp.porcupine.org/mirrors/postfix-release/official/postfix-2.3.3.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: f957e9319428be81c724b606fe060cc7
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 2.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 85 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2615411" name="id2615411"></a>Postfix Dependencies
+        </h3>
+        <h4>
+          <a id="id2816879" name="id2816879"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="../general/genlib.html#pcre">PCRE-6.7</a>, <a href=
+          "mysql.html">MySQL-5.0.21</a>, <a href=
+          "postgresql.html">PostgreSQL-8.1.3</a>, <a href=
+          "openldap.html">OpenLDAP-2.3.27</a>, <a href=
+          "../postlfs/security.html#openssl">OpenSSL-0.9.8d</a>, <a href=
+          "../postlfs/cyrus-sasl.html">Cyrus SASL-2.1.21</a>, and <a href=
+          "http://cr.yp.to/cdb.html"><span class="url">cdb</span></a> or
+          <a href="http://www.corpit.ru/mjt/tinycdb.html"><span class=
+          "url">TinyCDB</span></a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/postfix"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/postfix</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Postfix
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2590302" name="id2590302"></a>Configuring the
+                  Build
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The <span class="application">Postfix</span> source tree does not
+            contain a <tt class="filename">configure</tt> script, rather the
+            makefile in the top-level directory contains a <tt class=
+            "option">makefiles</tt> target that regenerates all the other
+            makefiles in the build tree. If you wish to use additional
+            software such as a database back-end for virtual users, or
+            TLS/SSL authentication, you will need to regenerate the makefiles
+            using one or more of the appropriate <tt class=
+            "envar">CCARGS</tt> and <tt class="envar">AUXLIBS</tt> settings
+            listed below.
+          </p>
+          <p>
+            Here is an example that combines the TLS and <span class=
+            "application">Cyrus-SASL</span> arguments:
+          </p>
+          <pre class="userinput"><kbd class="command">make makefiles \
+CCARGS='-DUSE_TLS -DUSE_SASL_AUTH -DUSE_CYRUS_SASL \
+    -DDEF_DAEMON_DIR=\"/usr/lib/postfix\" \
+    -DDEF_MANPAGE_DIR=\"/usr/share/man\" \
+    -DDEF_HTML_DIR=\"/usr/share/doc/postfix-2.3.3/html\" \
+    -DDEF_README_DIR=\"/usr/share/doc/postfix-2.3.3/README\" \
+    -I/usr/include/openssl -I/usr/include/sasl' \
+    AUXLIBS='-L/usr/lib -lssl -lcrypto -lsasl2'</kbd></pre>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2591075" name="id2591075"></a>TLS Authentication
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              To use TLS authentication with postfix you will need to pass
+              the following values to the <span><strong class="command">make
+              makefiles</strong></span> command:
+            </p>
+            <pre class="screen"><tt class=
+            "literal">CCARGS='-DUSE_TLS -I/usr/include/openssl'
+AUXLIBS='-L/usr/lib -lssl -lcrypto'</tt></pre>
+            <p>
+              To use TLS you will also need <a href=
+              "../postlfs/cyrus-sasl.html">Cyrus SASL-2.1.21</a>.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2773088" name="id2773088"></a>Cyrus-SASL
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              To use <span class="application">Cyrus-SASL</span> with
+              <span class="application">Postfix</span>, use the following
+              arguments:
+            </p>
+            <pre class="screen"><tt class=
+            "literal">CCARGS='-DUSE_SASL_AUTH -DUSE_CYRUS_SASL -I/usr/include/sasl'
+AUXLIBS='-L/usr/lib -lsasl2'</tt></pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2804718" name="id2804718"></a>OpenLDAP
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              To use <span class="application">OpenLDAP</span> with
+              <span class="application">Postfix</span>, use the following
+              arguments:
+            </p>
+            <pre class="screen"><tt class=
+            "literal">CCARGS='-I/usr/include -DHAS_LDAP'
+AUXLIBS='-L/usr/lib -lldap -llber'</tt></pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2730867" name="id2730867"></a>MySQL
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              To use <span class="application">MySQL</span> with <span class=
+              "application">Postfix</span>, use the following arguments:
+            </p>
+            <pre class="screen"><tt class=
+            "literal">CCARGS='-DHAS_MYSQL -I/usr/include/mysql'
+AUXLIBS='-L/usr/lib -lmysqlclient -lz -lm'</tt></pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2678223" name="id2678223"></a>PostgreSQL
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              To use <span class="application">PostgreSQL</span> with
+              <span class="application">Postfix</span>, use the following
+              arguments:
+            </p>
+            <pre class="screen"><tt class=
+            "literal">CCARGS='-DHAS_PGSQL -I/usr/include/postgresql'
+AUXLIBS='-L/usr/lib -lpq -lz -lm'</tt></pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2780794" name="id2780794"></a>TinyCDB
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              To use <span class="application">TinyCDB</span> with
+              <span class="application">Postfix</span>, use the following
+              arguments:
+            </p>
+            <pre class="screen"><tt class="literal">CCARGS='-DHAS_CDB'
+AUXLIBS='<em class=
+"replaceable"><tt>&lt;/path/to/CDB&gt;</tt></em>/libcdb.a'</tt></pre>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2724116" name="id2724116"></a>Installing Postfix
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Before you compile the program, you need to create users and
+            groups that will be expected to be in place during the
+            installation. Add the users and groups with the following
+            commands issued by the <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">groupadd -g 32 postfix &amp;&amp;
+groupadd -g 33 postdrop &amp;&amp;
+useradd -c "Postfix Daemon User" -d /dev/null -g postfix \
+    -s /bin/false -u 32 postfix &amp;&amp;
+chown -v postfix:postfix /var/mail</kbd></pre>
+          <p>
+            Install <span class="application">Postfix</span> by running the
+            following commands:
+          </p>
+          <pre class="userinput"><kbd class="command">make makefiles \
+CCARGS='-DDEF_DAEMON_DIR=\"/usr/lib/postfix\" \
+    -DDEF_MANPAGE_DIR=\"/usr/share/man\" \
+    -DDEF_HTML_DIR=\"/usr/share/doc/postfix-2.3.3/html\" \
+    -DDEF_README_DIR=\"/usr/share/doc/postfix-2.3.3/README\" \
+    <em class="replaceable"><tt>&lt;additional args&gt;</tt></em>' \
+    <em class=
+"replaceable"><tt>&lt;AUXLIBS='additional args'&gt;</tt></em> &amp;&amp;
+make</kbd></pre>
+          <p>
+            This package does not come with a test suite.
+          </p>
+          <p>
+            Now, as the <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">sh postfix-install -non-interactive</kbd></pre>
+        </div>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">make makefiles</strong></span>: This
+          command rebuilds the makefiles throughout the source tree to use
+          the options contained in the <tt class="envar">CCARGS</tt> and
+          <tt class="envar">AUXLIBS</tt> variables.
+        </p>
+        <p>
+          <span><strong class="command">sh postfix-install
+          -non-interactive</strong></span>: This keeps the install script
+          from asking any questions, thereby accepting default destination
+          directories in all but the few cases mentioned in the 'make
+          makefiles' command.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Postfix
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="postfix-config" name="postfix-config"></a>Config
+                  Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/aliases</tt>, <tt class=
+            "filename">/etc/postfix/main.cf</tt>, and <tt class=
+            "filename">/etc/postfix/master.cf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2572627" name="id2572627"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <pre class="root"><kbd class=
+          "command">cat &gt;&gt; /etc/aliases &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/aliases
+
+MAILER-DAEMON:    postmaster
+postmaster:       root
+
+root:             LOGIN
+# End /etc/aliases</tt>
+EOF</kbd></pre>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                To protect an existing <tt class="filename">/etc/aliases</tt>
+                file, the above command appends these aliases to it if it
+                exists. This file should be checked and duplicate aliases
+                removed, if present.
+              </p>
+            </div>
+          </div>
+          <p>
+            The <tt class="filename">/etc/aliases</tt> file that was just
+            created or appended, the <tt class="filename">main.cf</tt> and
+            the <tt class="filename">master.cf</tt> must be personalized for
+            your system. The <tt class="filename">aliases</tt> file needs
+            your non-root login identity so mail addressed to <tt class=
+            "systemitem">root</tt> can be forwarded to you at the user level.
+            The <tt class="filename">main.cf</tt> file needs your fully
+            qualified hostname. All of these edits can be done with
+            <span><strong class="command">sed</strong></span> commands
+            entered into the console with appropriate substitutions of your
+            non-root login name for <em class=
+            "replaceable"><tt>&lt;user&gt;</tt></em> and your fully qualified
+            hostname for <em class=
+            "replaceable"><tt>&lt;localhost.localdomain&gt;</tt></em>. You
+            will find the <tt class="filename">main.cf</tt> file is self
+            documenting, so load it into your editor to make the changes you
+            need for your situation.
+          </p>
+          <pre class="root"><kbd class="command">sed -i "s/LOGIN/<em class=
+          "replaceable"><tt>&lt;user&gt;</tt></em>/" /etc/aliases &amp;&amp;
+sed -i "s/#myhostname = host.domain.tld/myhostname = \
+  <em class=
+"replaceable"><tt>&lt;localhost.localdomain&gt;</tt></em>/" /etc/postfix/main.cf &amp;&amp;
+/usr/bin/newaliases</kbd></pre>
+          <p>
+            If you have an existing configuration, you can run the
+            <span><strong class="command">postfix</strong></span> utility to
+            add any necessary definitions to your existing files. As the
+            <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">/usr/sbin/postfix upgrade-configuration</kbd></pre>
+          <p>
+            Before starting <span class="application">Postfix</span>, you
+            should check that your configuration and file permissions will
+            work properly. Run the following commands as the <tt class=
+            "systemitem">root</tt> user to check and start your <span class=
+            "application">Postfix</span> server:
+          </p>
+          <pre class="root"><kbd class=
+          "command">/usr/sbin/postfix check &amp;&amp;
+/usr/sbin/postfix start</kbd></pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="postfix-init" name="postfix-init"></a>Boot Script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To automate the running of Postfix at startup, install the
+            <tt class="filename">/etc/rc.d/init.d/postfix</tt> init script
+            included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-20060910</a>
+            package.
+          </p>
+          <pre class="root"><kbd class=
+          "command">make install-postfix</kbd></pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">anvil, bounce,
+              cleanup, discard, error, flush, lmtp, local, mailq, master,
+              newaliases, nqmgr, oqmgr, pickup, pipe, postalias, postcat,
+              postconf, postdrop, postfix, postkick, postlock, postlog,
+              postmap, postqueue, postsuper, proxymap, qmgr, qmqpd, sendmail,
+              showq, smtp, smtpd, spawn, tlsmgr, trivial-rewrite, verify, and
+              virtual</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/etc/postfix,
+              /usr/lib/postfix and /usr/share/doc/postfix-2.3.3</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2768943" name="id2768943"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="anvil" name="anvil"></a><span class=
+                  "term"><span><strong class=
+                  "command">anvil</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Provides connection and rate request limiting.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="bounce" name="bounce"></a><span class=
+                  "term"><span><strong class=
+                  "command">bounce</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that maintains per-message log files with
+                    non-delivery status information.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="cleanup" name="cleanup"></a><span class=
+                  "term"><span><strong class=
+                  "command">cleanup</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that processes inbound mail, inserts it into the
+                    incoming mail queue, and informs the queue manager of its
+                    arrival.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="discard" name="discard"></a><span class=
+                  "term"><span><strong class=
+                  "command">discard</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Processes delivery requests from the queue manager that
+                    cannot be delivered to the recipient.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="error" name="error"></a><span class=
+                  "term"><span><strong class=
+                  "command">error</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that processes non-delivery requests from the
+                    queue manager.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="flush" name="flush"></a><span class=
+                  "term"><span><strong class=
+                  "command">flush</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that maintains a record of deferred mail by
+                    destination.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="lmtp" name="lmtp"></a><span class=
+                  "term"><span><strong class=
+                  "command">lmtp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that processes message delivery requests from
+                    the queue manager.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="local" name="local"></a><span class=
+                  "term"><span><strong class=
+                  "command">local</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that processes delivery requests from the queue
+                    manager to deliver mail to local recipients.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="mailq" name="mailq"></a><span class=
+                  "term"><span><strong class=
+                  "command">mailq</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A symlink to <tt class="filename">sendmail</tt>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="master" name="master"></a><span class=
+                  "term"><span><strong class=
+                  "command">master</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    The resident process that runs <span class=
+                    "application">Postfix</span> daemons on demand.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="newaliases" name="newaliases"></a><span class=
+                  "term"><span><strong class=
+                  "command">newaliases</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A symlink to <tt class="filename">sendmail</tt>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="nqmgr" name="nqmgr"></a><span class=
+                  "term"><span><strong class=
+                  "command">nqmgr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that awaits the arrival of incoming mail and
+                    arranges for its delivery.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="oqmgr" name="oqmgr"></a><span class=
+                  "term"><span><strong class=
+                  "command">oqmgr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    The old style queue manager. This will be removed soon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="pickup" name="pickup"></a><span class=
+                  "term"><span><strong class=
+                  "command">pickup</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that waits for hints that new mail has been
+                    dropped into the maildrop directory, and feeds it into
+                    the <span class="application">cleanup</span> daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="pipe" name="pipe"></a><span class=
+                  "term"><span><strong class=
+                  "command">pipe</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that processes requests from the queue manager
+                    to deliver messages to external commands.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postalias" name="postalias"></a><span class=
+                  "term"><span><strong class=
+                  "command">postalias</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Creates or queries one or more <span class=
+                    "application">Postfix</span> alias databases, or updates
+                    an existing one.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postcat" name="postcat"></a><span class=
+                  "term"><span><strong class=
+                  "command">postcat</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Prints the contents of the <span class=
+                    "application">named</span> files in human readable
+                    format.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postconf" name="postconf"></a><span class=
+                  "term"><span><strong class=
+                  "command">postconf</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Displays or changes the value of <span class=
+                    "application">Postfix</span> configuration parameters.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postdrop" name="postdrop"></a><span class=
+                  "term"><span><strong class=
+                  "command">postdrop</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Creates a file in the maildrop directory and copies it's
+                    standard input to the file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postfix-bin" name="postfix-bin"></a><span class=
+                  "term"><span><strong class=
+                  "command">postfix</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Controls the operation of the <span class=
+                    "application">Postfix</span> mail system.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postkick" name="postkick"></a><span class=
+                  "term"><span><strong class=
+                  "command">postkick</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Sends requests to the specified service over a local
+                    transport channel.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postlock" name="postlock"></a><span class=
+                  "term"><span><strong class=
+                  "command">postlock</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Locks a mail folder for exclusive use, and executes
+                    commands passed to it.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postlog" name="postlog"></a><span class=
+                  "term"><span><strong class=
+                  "command">postlog</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A <span class="application">Postfix</span>-compatible
+                    logging interface for use in, for example, shell scripts.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postmap" name="postmap"></a><span class=
+                  "term"><span><strong class=
+                  "command">postmap</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Creates or queries one or more Postfix lookup tables, or
+                    updates an existing one.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postqueue" name="postqueue"></a><span class=
+                  "term"><span><strong class=
+                  "command">postqueue</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    The <span class="application">Postfix</span> user
+                    interface for queue management.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="postsuper" name="postsuper"></a><span class=
+                  "term"><span><strong class=
+                  "command">postsuper</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    The <span class="application">Postfix</span> user
+                    interface for superuser queue management.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="proxymap" name="proxymap"></a><span class=
+                  "term"><span><strong class=
+                  "command">proxymap</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Provides read-only table lookup services to other
+                    <span class="application">Postfix</span> processes.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="qmgr" name="qmgr"></a><span class=
+                  "term"><span><strong class=
+                  "command">qmgr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that awaits the arrival of incoming mail and
+                    arranges for its delivery.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="qmqpd" name="qmqpd"></a><span class=
+                  "term"><span><strong class=
+                  "command">qmqpd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that receives one message per connection, and
+                    pipes it through the <span class=
+                    "application">cleanup</span> daemon, and places it into
+                    the incoming queue.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="scache" name="scache"></a><span class=
+                  "term"><span><strong class=
+                  "command">scache</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Maintains a connection cache used for sharing a
+                    connection multiple times.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="sendmail-postfix" name=
+                  "sendmail-postfix"></a><span class=
+                  "term"><span><strong class=
+                  "command">sendmail</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    The <span class="application">Postfix</span> to
+                    <span class="application">Sendmail</span> compatibility
+                    interface.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="showq" name="showq"></a><span class=
+                  "term"><span><strong class=
+                  "command">showq</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that reports the Postfix mail queue status.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="smtp" name="smtp"></a><span class=
+                  "term"><span><strong class=
+                  "command">smtp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Looks up a list of mail exchanger addresses for the
+                    destination host, sorts the list by preference, and
+                    connects to each listed address until it finds a server
+                    that responds.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="smtpd" name="smtpd"></a><span class=
+                  "term"><span><strong class=
+                  "command">smtpd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Accepts network connection requests and performs zero or
+                    more SMTP transactions per connection.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="spawn" name="spawn"></a><span class=
+                  "term"><span><strong class=
+                  "command">spawn</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Listens on a port as specified in the <span class=
+                    "application">Postfix</span> <tt class=
+                    "filename">master.cf</tt> file and spawns an external
+                    command whenever a connection is established.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tlsmgr" name="tlsmgr"></a><span class=
+                  "term"><span><strong class=
+                  "command">tlsmgr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Maintains the TLS session cache and acts as the PRNG
+                    manager.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="trivial-rewrite" name=
+                  "trivial-rewrite"></a><span class=
+                  "term"><span><strong class=
+                  "command">trivial-rewrite</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon that rewrites addresses to standard form.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="verify" name="verify"></a><span class=
+                  "term"><span><strong class=
+                  "command">verify</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Maintains a record of what recipient addresses are known
+                    to be deliverable or undeliverable.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="virtual" name="virtual"></a><span class=
+                  "term"><span><strong class=
+                  "command">virtual</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Delivers mail to virtual user's mail directories.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2006-10-19 09:06:22 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="mail.html" title=
+          "Mail Server Software">Prev</a>
+          <p>
+            Mail Server Software
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="qpopper.html" title="Qpopper-4.0.9">Next</a>
+          <p>
+            Qpopper-4.0.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mail.html" title=
+          "Chapter&nbsp;22.&nbsp;Mail Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

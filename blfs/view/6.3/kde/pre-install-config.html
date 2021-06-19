@@ -1,0 +1,172 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      KDE Pre-installation Configuration
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;26.&nbsp;KDE Core Packages
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="core.html" title=
+          "KDE Core Packages">Prev</a>
+          <p>
+            KDE Core Packages
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="aRts.html" title="aRts-1.5.9">Next</a>
+          <p>
+            aRts-1.5.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;26.&nbsp;KDE Core Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="kde-pre-install-config" name="kde-pre-install-config"></a>KDE
+        Pre-installation Configuration
+      </h1>
+      <p>
+        Based on your preference, set <code class="envar">KDE_PREFIX</code>.
+      </p>
+      <p>
+        One option is to put <span class="application">KDE</span> into the
+        <code class="filename">/usr</code> hierarchy. This creates a simpler
+        setup but is more difficult to try multiple versions of <span class=
+        "application">KDE</span>.
+      </p>
+      <pre class="userinput">
+<kbd class="command">export KDE_PREFIX=/usr</kbd>
+</pre>
+      <p>
+        A method of building multiple versions installs <span class=
+        "application">KDE</span> in the <code class="filename">/opt</code>
+        hierarchy:
+      </p>
+      <pre class="userinput">
+<kbd class="command">export KDE_PREFIX=/opt/kde-3.5.9</kbd>
+</pre>
+      <p>
+        Remember to execute <span class=
+        "command"><strong>ldconfig</strong></span> after installation of
+        libraries to update the library cache.
+      </p>
+      <p>
+        If you are not installing <span class="application">KDE</span> in
+        <code class="filename">/usr</code>, you will need to make some
+        configuration changes:
+      </p>
+      <p>
+        You should consider installing the <a class="xref" href=
+        "../general/desktop-file-utils.html" title=
+        "desktop-file-utils-0.13">desktop-file-utils-0.13</a> package. Though
+        not required, this package will allow you to easily use existing
+        <code class="filename">.desktop</code> files in <code class=
+        "filename">/usr/share/applications</code> (and any other locations
+        identified by <code class="envar">XDG_DATA_DIRS</code>), and
+        automatically add these applications to the <span class=
+        "application">KDE</span> menu system.
+      </p>
+      <p>
+        Add to your system or personal profile:
+      </p>
+      <pre class="screen">
+<code class="literal">export PATH=$PATH:/opt/kde-3.5.9/bin
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/kde-3.5.9/lib/pkgconfig</code>
+</pre>
+      <p>
+        Add to your <code class="filename">/etc/ld.so.conf</code>:
+      </p>
+      <pre class="root">
+<kbd class="command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"
+<code class="literal"># Begin kde addition to /etc/ld.so.conf
+
+/opt/kde-3.5.9/lib
+
+# End kde addition</code>
+EOF</kbd>
+</pre>
+      <p>
+        Add to your <code class="filename">/etc/man_db.conf</code>:
+      </p>
+      <pre class="root">
+<kbd class="command">cat &gt;&gt; /etc/man_db.conf &lt;&lt; "EOF"
+<code class="literal"># Begin kde addition to man_db.conf
+
+MANDATORY_MANPATH /opt/kde-3.5.9/man
+
+# End kde addition to man_db.conf</code>
+EOF</kbd>
+</pre>
+      <div class="admon tip">
+        <img alt="[Tip]" src="../images/tip.png" />
+        <h3>
+          Tip
+        </h3>
+        <p>
+          If you prefer installing KDE in <code class="filename">/opt</code>,
+          one trick to avoid the above configuration changes every time you
+          install a new version is to replace <code class=
+          "filename">/opt/kde-3.5.9</code> with <code class=
+          "filename">/opt/kde</code> and to create a symlink from
+          <code class="filename">/opt/kde-3.5.9</code> to <code class=
+          "filename">/opt/kde</code>.
+        </p>
+        <pre class="root">
+<kbd class="command">ln -v -sf kde-3.5.9 /opt/kde</kbd>
+</pre>
+      </div>
+      <p class="updated">
+        Last updated on 2007-04-04 14:42:53 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="core.html" title=
+          "KDE Core Packages">Prev</a>
+          <p>
+            KDE Core Packages
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="aRts.html" title="aRts-1.5.9">Next</a>
+          <p>
+            aRts-1.5.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="core.html" title=
+          "Chapter&nbsp;26.&nbsp;KDE Core Packages">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

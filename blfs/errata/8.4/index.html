@@ -1,0 +1,150 @@
+<!--#set var="pageTitle" value="BLFS Errata" -->
+<!--#include virtual="/blfs/header.html" -->
+<!--#include virtual="/blfs/menu.html" -->
+    <div class="main">
+
+     <h1>Errata for BLFS Version 8.4</h1>
+     
+     <ul>
+       <li>After release, a problem was discovered with LXDE/LXPanel where
+       right clicking on the taskbar to close a program would sometimes cause
+       LXPanel to crash with a General Protection Fault. To fix this, upgrade
+       to the latest version: 
+         <a href="../../view/svn/lxde/lxpanel.html">
+         http://www.linuxfromscratch.org/blfs/view/svn/lxde/lxpanel.html</a>.
+       </li>
+
+       <li>After release, a security problem regarding the mprotect() syscall
+       defined in libseccomp was discovered. Upstream released a new version to
+       solve this problem. The BLFS team recommends upgrading to the latest
+       version:
+         <a href="../../view/svn/general/libseccomp.html">
+         http://www.linuxfromscratch.org/blfs/view/svn/general/libseccomp.html</a>.
+       </li>
+
+       <li>A problem was uncovered with Libreoffice Writer and documents
+       longer than 20 pages. This was fixed in the latest upstream release.
+       To fix this problem, upgrade to the latest version:
+         <a href="../../view/svn/xsoft/libreoffice.html">
+            http://www.linuxfromscratch.org/blfs/view/svn/xsoft/libreoffice.html</a>
+       </li>
+
+       <li>On May 4th, 2019, Mozilla let a certificate expire that provided 
+       signatures for all add-ons and extensions in Firefox. In order to fix this
+       and possible SSL problems, the BLFS team recommends updating to Firefox
+       66.0.5 or later as soon as possible, before the temporary fix expires.
+       No dependency updates are required. To upgrade, use the instructions here:
+       <a href="../../view/svn/xsoft/firefox.html">
+          http://www.linuxfromscratch.org/blfs/view/svn/xsoft/firefox.html</a>
+       </li>
+
+       <li>After release, a problem was discovered with WebKitGTK+'s website that
+       prevented the version of WebKitGTK+ shipped with BLFS 8.4 from downloading.
+       The BLFS team recommends using the latest 2.24.x versions because they are
+       API and ABI compatible, and require no modifications to the instructions.</li>
+
+
+<!--       
+       <li>There are no current known errata for BLFS 8.4.</li>
+-->
+     </ul>
+
+     <h2>Known Security Vulnerabilities</h2>
+     
+     <p>A few packages are good at reporting that a new
+     release fixes a vulnerability. For some others, such as firefox,
+     virtually every new release includes security fixes. But in many cases
+     the fixes are not documented as security issues.</p>
+     
+     <p>Updates to the packages in the book may be available
+     in the 
+     <a href="../../view/svn/">development version of the book.</a>
+     </p>
+
+     <p>A vulnerability in kf5's kcodecs package now has a fix for 
+     CVE-2013-0779.  See the build instructions that add
+     a sed to the script in ../../view/svn/kde/krameworks5.html.
+     </p>
+
+     <p>Two critical zero-day security vulnerabilities were discovered in
+     Firefox and Thunderbird. The BLFS team recommends upgrading to the new
+     versions immediately. See the build instructions in
+     ../../view/svn/xsoft/firefox.html and
+     ../../view/svn/xsoft/thunderbird.html.
+     </p>
+
+     <p>After release, thirteen vulnerabilities were discovered in Apache
+     HTTPD. These include two privilege escalation vulnreabilities and
+     one access control bypass. The BLFS team recommends upgrading to the
+     new version ASAP. See the build instructions in
+     ../../view/svn/server/apache.html.
+     </p>
+
+     <p>In May 2018, a vulnerability dubbed "ZombieLoad" was discovered in Intel
+     CPUs. In order to fix this, apply the microcode using the instructions in
+     ../../view/svn/postlfs/firmware.html.</p>
+
+     <p>Post-release, critical vulnerabilities were discovered in Samba, with all
+     versions from 4.0.x to 4.10.3 impacted. These allow for arbitrary file overwrite,
+     authentication bypass, password hash leaks, unauthorized modification/reading
+     of files, and symlink traversal. The BLFS team recommends upgrading to the 4.10.4
+     release of Samba as soon as possible, using the instructions in
+     ../../view/svn/basicnet/samba.html.</p>
+
+     <p>Post-release, a vulnerability was discovered in GLib that allows
+     modification of files and ACLs through the GIO subsystem. This was fixed
+     by clamping down on permissions in version GLib-2.60.4. The BLFS team
+     recommends updating to GLib-2.60.4 or later as soon as possible,
+     using the instructions in
+     ../../view/svn/general/glib2.html.</p>
+
+     <p>Post-release, a vulnerability was discovered in D-Bus that allows
+     for authentication bypass through an open D-Bus socket. To fix this,
+     upgrade to version 1.12.16 or later using the instructions at
+     ../../view/svn/general/dbus.xml.</p>
+
+     <p>In June,, a security problem with vim was discovered: Remote attackers can
+     execute arbitrary OS commands via the :source! command in a modeline. 
+     This has been fixed in version 8.1.1365, see the instructions in
+     ../../view/svn/postlfs/editors/vim.html.</p>
+
+     <p>In June, 23 security vulnerabilities that allow for arbitrary code execution,
+     sandbox escape, URL forging, denial of service, and remote modification of
+     memory were discovered in QtWebEngine. This has been fixed by updating to
+     Qt/QtWebEngine 5.12.4, and upgrading ASAP is recommended. See the instructions
+     in ../../view/svn/x/qt5.html.</p>
+
+     <p>In June, 3 security vulnerabilities that allow for arbitrary code
+     execution, unauthorized modification of data, and information disclosure
+     were discovered in WebKitGTK+ before 2.24.2. The BLFS team recommends
+     upgrading to WebKitGTK+-2.24.2 using the instructions in
+     ../../view/svn/x/webkitgtk.html.</p>
+
+     <p>In June, more 0-days were discovered in Thunderbird and Firefox. The ones
+     in Thunderbird allow for a repeatable crash and subsequent profile corruption
+     simply by receiving a .ics file because of the way that Thunderbird processes
+     mails while it downloads them (indexing attachments and contents). The ones
+     in Firefox allow for Arbitrary Code Execution through the JavaScript and
+     IPC layers. The BLFS team recommends upgrading to Thunderbird-60.7.2 and
+     Firefox-67.0.4 immediately, using the instructions in
+     ../../view/svn/xsoft/thunderbird.html and ../../view/svn/xsoft/firefox.html.</p>
+
+     <p>In August, a 0-day vulnerability was released to the public without prior
+     contact with the KDE developers. This bug has been dubbed CVE-2019-14744, and
+     allows for arbitrary code execution through any .desktop or .directory file
+     that may exist on the system (at least that Baloo can index). In addition,
+     it can be triggered through Ark or a file manager under a Plasma environment.
+     To fix this, apply the following patch to your KConfig sources and rebuild
+     (It has been tested against 5.53.0 as well as 5.60.0):
+     http://linuxfromscratch.org/patches/downloads/kconfig/kconfig-5.60.0-cve_2019_14744-1.patch</p>
+
+<!--
+     <p>A vulnerability with available exploits in all recent versions of
+     ghostscript has been fixed in the development book by patching gs-9.25.
+     The current version of the patch is -2 and the vulnerability applies to
+     PDF files as well as postscript.</p>
+
+     <p>A trivially-exploitable local privilege escalation in versions of
+     xorg-server since 1.19 has been fixed in 1.20.3.</p>
+-->
+<!--#include virtual="/common/footer.html" -->

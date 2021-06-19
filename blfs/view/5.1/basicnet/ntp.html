@@ -1,0 +1,439 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      NTP-4.2.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;18.&nbsp;Basic Networking Programs</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="ncpfs.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="netutils.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          NTP-4.2.0
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to NTP
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">NTP</span></span> package contains a client and server to
+          keep the time synchronized between various computers over a
+          network. This package is the official reference implementation of
+          the <span class="acronym">NTP</span> protocol.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2791128" name="id2791128"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2.0.tar.gz">
+                  http://www.eecis.udel.edu/~ntp/ntp_spool/ntp4/ntp-4.2.0.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.udel.edu/pub/ntp/ntp4/ntp-4.2.0.tar.gz">ftp://ftp.udel.edu/pub/ntp/ntp4/ntp-4.2.0.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 27 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.53 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2791699" name="id2791699"></a><span class=
+                  "application"><span class="acronym">NTP</span></span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2791713" name="id2791713"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/readline.html">readline-4.3</a> and
+              <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of NTP
+          </h3>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">NTP</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --bindir=/usr/sbin \
+    --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring NTP
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2791601" name="id2791601"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/ntp.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2791153" name="id2791153"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The following configuration file defines various <span class=
+            "acronym">NTP</span> stratum 2 servers with open access from
+            different continents. It also creates a drift file where
+            <span><b class="command">ntpd</b></span> stores the frequency
+            offset. Since the documentation included with the package is
+            sparse, visit the <span class="acronym">NTP</span> website at
+            <a href="http://www.ntp.org/">http://www.ntp.org/</a> for more
+            information.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /etc/ntp.conf &lt;&lt; "EOF"</b></span>
+# Africa
+server tock.nml.csir.co.za
+
+# Asia
+server ntp.shim.org
+
+# Australia
+server ntp.saard.net
+        
+# Europe
+server ntp.tuxfamily.net
+
+# North America
+server clock.psu.edu
+
+driftfile /var/cache/ntp.drift
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2791636" name="id2791636"></a>Synchronizing the
+                  time
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            There are two options. Option one is to run <span><b class=
+            "command">ntpd</b></span> continuously and allow it to
+            synchronize the time in a gradual manner. The other option is to
+            run <span><b class="command">ntpd</b></span> periodically (using
+            cron) and update the time each time <span><b class=
+            "command">ntpd</b></span> is scheduled.
+          </p>
+          <p>
+            If you choose Option one, then install the <tt class=
+            "filename">/etc/rc.d/init.d/ntp</tt> init script included in the
+            <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-ntp</b></span></tt>
+</pre>
+          <p>
+            If you prefer to run ntpd periodically, add the following command
+            to root's <tt class="filename">crontab</tt>:
+          </p>
+          <pre class="screen">
+<tt class="userinput">ntpd -q</tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">NTP</span></span> package contains <span><b class=
+          "command">ntp-wait</b></span>, <span><b class=
+          "command">ntptrace</b></span>, <span><b class=
+          "command">ntpd</b></span>, <span><b class=
+          "command">ntpdate</b></span>, <span><b class=
+          "command">ntpdc</b></span>, <span><b class=
+          "command">ntpq</b></span>, <span><b class=
+          "command">ntptime</b></span>, <span><b class=
+          "command">tickadj</b></span> and <span><b class=
+          "command">ntp-keygen</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2791250" name="id2791250"></a>ntp-wait
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ntp-wait</b></span> is useful at boot
+            time, to delay the boot sequence until <span><b class=
+            "command">ntpd</b></span> has set the time.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2792358" name="id2792358"></a>ntptrace
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ntptrace</b></span> traces a chain of
+            <span class="acronym">NTP</span> servers back to the primary
+            source.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2792375" name="id2792375"></a>ntpd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ntpd</b></span> is a NTP daemon that
+            runs in the background and keeps the date and time synchronized
+            based on response from configured <span class=
+            "acronym">NTP</span> servers. It also functions as a <span class=
+            "acronym">NTP</span> server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2792397" name="id2792397"></a>ntpdate
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ntpdate</b></span> is a client program
+            that sets the date and time based on the response from an
+            <span class="acronym">NTP</span> server. This command is
+            deprecated.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2792415" name="id2792415"></a>ntpdc
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ntpdc</b></span> is used to query the
+            <span class="acronym">NTP</span> daemon about its current state
+            and to request changes in that state.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2792432" name="id2792432"></a>ntpq
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ntpq</b></span> is an utility program
+            used to monitor <span><b class="command">ntpd</b></span>
+            operations and determine performance.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2792452" name="id2792452"></a>ntptime
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ntptime</b></span> reads and displays
+            time-related kernel variables.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2792465" name="id2792465"></a>tickadj
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tickadj</b></span> reads, and optionally
+            modifies, several timekeeping-related variables in older kernels
+            that do not have support for precision timekeeping.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2792480" name="id2792480"></a>ntp-keygen
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ntp-keygen</b></span> generates
+            cryptographic data files used by the <span class=
+            "acronym">NTP</span>v4 authentication and identification schemes.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="ncpfs.html">Prev</a><br />
+        NCPFS-2.2.4
+      </div>
+      <div class="next">
+        <a accesskey="n" href="netutils.html">Next</a><br />
+        Chapter&nbsp;19.&nbsp;Basic Networking Utilities
+      </div>
+      <div class="up">
+        <a accesskey="u" href="netprogs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

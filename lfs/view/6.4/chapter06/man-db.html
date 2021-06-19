@@ -1,0 +1,757 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.47.&nbsp;Man-DB-2.5.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="lfs" id="lfs-6.4">
+    <div class="navheader">
+      <h4>
+        Linux From Scratch - Version 6.4
+      </h4>
+      <h3>
+        Chapter&nbsp;6.&nbsp;Installing Basic System Software
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="make.html" title="Make-3.81">Prev</a>
+          <p>
+            Make-3.81
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="module-init-tools.html" title=
+          "Module-Init-Tools-3.4.1">Next</a>
+          <p>
+            Module-Init-Tools-3.4.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.4">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="ch-system-man-db" name="ch-system-man-db"></a>6.47.
+        Man-DB-2.5.2
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Man-DB package contains programs for finding and viewing man
+          pages.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Approximate build time:</strong>
+              <span class="segbody">0.3 SBU</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Required disk space:</strong>
+              <span class="segbody">20 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.47.1. Installation of Man-DB
+        </h2>
+        <p>
+          LFS creates <code class="filename">/usr/man</code> and <code class=
+          "filename">/usr/local/man</code> as symlinks. Remove them from the
+          <code class="filename">man_db.conf</code> file to prevent redundant
+          results when using programs such as <span class=
+          "command"><strong>whatis</strong></span>:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i -e '\%\t/usr/man%d' -e '\%\t/usr/local/man%d' src/man_db.conf.in</kbd></pre>
+        <p>
+          Prepare Man-DB for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --libexecdir=/usr/lib \
+    --sysconfdir=/etc --disable-setuid \
+    --enable-mb-groff --with-browser=/usr/bin/lynx \
+    --with-col=/usr/bin/col --with-vgrind=/usr/bin/vgrind \
+    --with-grap=/usr/bin/grap</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <b>The meaning of the configure options:</b>
+          </p>
+          <dl>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--disable-setuid</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This disables making the <span class=
+                "command"><strong>man</strong></span> program setuid to user
+                <code class="systemitem">man</code>.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--enable-mb-groff</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                This switch tells <span class="application">man-db</span> to
+                expect the Debian multibyte patched version of <span class=
+                "application">groff</span>.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><code>--with-...</code></em></span>
+            </dt>
+            <dd>
+              <p>
+                These four parameters are used to set some default programs.
+                The <span class="command"><strong>col</strong></span> program
+                is a part of the Util-linux-ng package, <span class=
+                "command"><strong>lynx</strong></span> is a text-based web
+                browser (see BLFS for installation instructions),
+                <span class="command"><strong>vgrind</strong></span> converts
+                program sources to Groff input, and <span class=
+                "command"><strong>grap</strong></span> is useful for
+                typesetting graphs in Groff documents. The <span class=
+                "command"><strong>vgrind</strong></span> and <span class=
+                "command"><strong>grap</strong></span> programs are not
+                normally needed for viewing manual pages. They are not part
+                of LFS or BLFS, but you should be able to install them
+                yourself after finishing LFS if you wish to do so.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          6.47.2. Non-English Manual Pages in LFS
+        </h2>
+        <p>
+          Some packages provide non-English manual pages. They are displayed
+          correctly only if their location and encoding matches the
+          expectation of the "man" program. However, different Linux
+          distributions have different policies (expressed in the choice of
+          the <span class="command"><strong>man</strong></span> program, its
+          configuration and patches applied to it) concerning the character
+          encoding in which manual pages are stored in the filesystem.
+        </p>
+        <p>
+          E.g., Debian previously required Russian manual pages to be encoded
+          in KOI8-R and to be placed in <code class=
+          "filename">/usr/share/man/ru</code>. Now, in addition, their
+          <span class="command"><strong>man</strong></span> program
+          (<span class="application">Man-DB</span>) searches for UTF-8
+          encoded Russian manual pages in <code class=
+          "filename">/usr/share/man/ru.UTF-8</code>. On the other hand,
+          Fedora uses UTF-8 encoded manual pages exclusively. Russian manual
+          pages are found in <code class="filename">/usr/share/man/ru</code>
+          and their <span class="command"><strong>man</strong></span> program
+          doesn't acknowledge <code class=
+          "filename">/usr/share/man/ru.UTF-8</code>. Many other distributions
+          ignore the on disk encodings completely, leaving the end user with
+          a mix of improperly encoded manual pages for their configuration.
+          When <span class="command"><strong>man</strong></span> processes
+          the requtested page, it will display the contents as configured,
+          resulting in completely unreadable text if the on disk encoding is
+          not what is expected for that configuration.
+        </p>
+        <p>
+          Disagreement about the expected encoding of manual pages amongst
+          distribution vendors, has led to confusion for upstream package
+          maintainers. One package may contain UTF-8 manual pages, while
+          another ships with manual pages in legacy encodings. <span class=
+          "command"><strong>man</strong></span> searches for manual pages
+          based on the user's locale settings. <span class=
+          "application">Man-DB</span> uses a built-in table (see below) to
+          determine the on disk encoding of manual pages found for a user's
+          locale, only if the directories found do not have an extension that
+          describes the encoding. E.g., because of ".UTF-8" in the directory
+          name, <span class="application">Man-DB</span> knows that all manual
+          pages residing in <code class=
+          "filename">/usr/share/man/fr.UTF-8</code> are UTF-8 encoded and,
+          according to the built-in table, expects all manual pages residing
+          in <code class="filename">/usr/share/man/ru</code> to be encoded
+          using KOI8-R.
+        </p>
+        <div class="table">
+          <a id="id2643547" name="id2643547"></a>
+          <p class="title">
+            <b>Table&nbsp;6.1.&nbsp;Expected character encoding of legacy
+            8-bit manual pages</b>
+          </p>
+          <div class="table-contents">
+            <table summary=
+            "Expected character encoding of legacy 8-bit manual pages"
+            border="1">
+              <colgroup>
+                <col />
+                <col />
+              </colgroup>
+              <thead>
+                <tr>
+                  <th>
+                    Language (code)
+                  </th>
+                  <th>
+                    Encoding
+                  </th>
+                </tr>
+              </thead>
+              <tbody>
+                <tr>
+                  <td>
+                    Danish (da)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    German (de)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    English (en)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Spanish (es)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Finnish (fi)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    French (fr)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Irish (ga)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Galician (gl)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Indonesian (id)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Icelandic (is)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Italian (it)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Dutch (nl)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Norwegian (no)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Portuguese (pt)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Swedish (sv)
+                  </td>
+                  <td>
+                    ISO-8859-1
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Bulgarian (bg)
+                  </td>
+                  <td>
+                    CP1251
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Czech (cs)
+                  </td>
+                  <td>
+                    ISO-8859-2
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Croatian (hr)
+                  </td>
+                  <td>
+                    ISO-8859-2
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Hungarian (hu)
+                  </td>
+                  <td>
+                    ISO-8859-2
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Japanese (ja)
+                  </td>
+                  <td>
+                    EUC-JP
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Korean (ko)
+                  </td>
+                  <td>
+                    EUC-KR
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Polish (pl)
+                  </td>
+                  <td>
+                    ISO-8859-2
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Russian (ru)
+                  </td>
+                  <td>
+                    KOI8-R
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Slovak (sk)
+                  </td>
+                  <td>
+                    ISO-8859-2
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Serbian (sr)
+                  </td>
+                  <td>
+                    ISO-8859-5
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Turkish (tr)
+                  </td>
+                  <td>
+                    ISO-8859-9
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Simplified Chinese (zh_CN)
+                  </td>
+                  <td>
+                    GBK
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Simplified Chinese, Singapore (zh_SG)
+                  </td>
+                  <td>
+                    GBK
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Traditional Chinese (zh_TW)
+                  </td>
+                  <td>
+                    BIG5
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    Traditional Chinese, Hong Kong (zh_HK)
+                  </td>
+                  <td>
+                    BIG5HKSCS
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div><br class="table-break" />
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Manual pages in languages not in the list are not supported.
+            Norwegian does not work because of the transition from no_NO to
+            nb_NO locale, and will be fixed in the next release of
+            <span class="application">Man-DB</span>. Korean is currently non
+            functional because of incomplete fixes in the Debian <span class=
+            "application">Groff</span> patch applied in LFS.
+          </p>
+        </div>
+        <p>
+          Packages may install manual pages into an improperly named
+          directory, depending on which distributions the author develops the
+          package for. To assist in the conversion of the manual pages to the
+          proper encoding for the directory in which they are installed, the
+          <span class="command"><strong>convert-mans</strong></span> script
+          was written. It will convert manual pages to another encoding
+          before (or after) installation. Install the <span class=
+          "command"><strong>convert-mans</strong></span> script with the
+          following instructions:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cat &gt;&gt; convert-mans &lt;&lt; "EOF"
+<code class="literal">#!/bin/sh -e
+FROM="$1"
+TO="$2"
+shift ; shift
+while [ $# -gt 0 ]
+do
+        FILE="$1"
+        shift
+        iconv -f "$FROM" -t "$TO" "$FILE" &gt;.tmp.iconv
+        mv .tmp.iconv "$FILE"
+done</code>
+EOF
+install -m755 convert-mans  /usr/bin</kbd></pre>
+        <p>
+          If upstream distributes the manual pages in a legacy encoding, the
+          manual pages can simply be copied to <code class=
+          "filename">/usr/share/man/<em class=
+          "replaceable"><code>&lt;language code&gt;</code></em></code>. For
+          example, <a class="ulink" href=
+          "http://www.infodrom.org/projects/manpages-de/download/manpages-de-0.5.tar.gz">
+          German manual pages</a> can be installed with the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">mkdir -p /usr/share/man/de
+cp -rv man? /usr/share/man/de</kbd></pre>
+        <p>
+          If upstream distributes manual pages in UTF-8 (i.e.,
+          &ldquo;<span class="quote">for RedHat</span>&rdquo;) instead of the
+          encoding listed in the table above, they can either be converted
+          from UTF-8 to the encoding listed in the table above, or they can
+          be installed directly into <code class=
+          "filename">/usr/share/man/<em class=
+          "replaceable"><code>&lt;language code&gt;</code></em>.UTF-8</code>.
+        </p>
+        <p>
+          For example, to install <a class="ulink" href=
+          "http://manpagesfr.free.fr/download/man-pages-fr-2.40.0.tar.bz2">French
+          manual pages</a> in the legacy encoding, use the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">convert-mans UTF-8 ISO-8859-1 man?/*.?
+mkdir -p /usr/share/man/fr
+cp -rv man? /usr/share/man/fr</kbd></pre>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            The French manual pages ship with ready made scripts to do the
+            same conversion. The above instructions are used only as an
+            example for use of the <span class=
+            "command"><strong>convert-mans</strong></span> script.
+          </p>
+        </div>
+        <p>
+          Finally, as an example installation of UTF-8 manual pages, again,
+          the French manual pages could be installed with the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">mkdir -p /usr/share/man/fr.UTF-8
+cp -rv man? /usr/share/man/fr.UTF-8</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="contents-man-db" name="contents-man-db"></a>6.47.3. Contents
+          of Man-DB
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed programs:</strong>
+              <span class="segbody">apropos, catman, convert-mans, lexgrog,
+              man, mandb, manpath, whatis, and zsoelim</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="apropos" name="apropos"></a><span class=
+                    "term"><span class=
+                    "command"><strong>apropos</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Searches the <span class=
+                    "command"><strong>whatis</strong></span> database and
+                    displays the short descriptions of system commands that
+                    contain a given string
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="catman" name="catman"></a><span class=
+                    "term"><span class=
+                    "command"><strong>catman</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates or updates the pre-formatted manual pages
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="convert-mans" name="convert-mans"></a><span class=
+                    "term"><span class=
+                    "command"><strong>convert-mans</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reformats manual pages into the chosen encoding.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lexgrog" name="lexgrog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lexgrog</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays one-line summary information about a given
+                    manual page
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="man" name="man"></a><span class=
+                    "term"><span class="command"><strong>man</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Formats and displays the requested manual page
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mandb" name="mandb"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mandb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Creates or updates the <span class=
+                    "command"><strong>whatis</strong></span> database
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="manpath" name="manpath"></a><span class=
+                    "term"><span class=
+                    "command"><strong>manpath</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Displays the contents of $MANPATH or (if $MANPATH is not
+                    set) a suitable search path based on the settings in
+                    man.conf and the user's environment
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="whatis" name="whatis"></a><span class=
+                    "term"><span class=
+                    "command"><strong>whatis</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Searches the <span class=
+                    "command"><strong>whatis</strong></span> database and
+                    displays the short descriptions of system commands that
+                    contain the given keyword as a separate word
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="zsoelim" name="zsoelim"></a><span class=
+                    "term"><span class=
+                    "command"><strong>zsoelim</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    Reads files and replaces lines of the form <span class=
+                    "emphasis"><em>.so file</em></span> by the contents of
+                    the mentioned <span class="emphasis"><em>file</em></span>
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="make.html" title="Make-3.81">Prev</a>
+          <p>
+            Make-3.81
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="module-init-tools.html" title=
+          "Module-Init-Tools-3.4.1">Next</a>
+          <p>
+            Module-Init-Tools-3.4.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.4">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

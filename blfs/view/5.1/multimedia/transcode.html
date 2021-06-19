@@ -1,0 +1,559 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      transcode-0.6.12
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;39.&nbsp;Video utilities</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="xine-ui.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="cdwriteutils.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          transcode-0.6.12
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to transcode
+          </h3>
+        </div>
+        <p>
+          <span class="application">transcode</span> is a fast, versatile and
+          command-line based audio/video everything to everything converter.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3199016" name="id3199016"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://zebra.fh-weingarten.de/~transcode/pre/transcode-0.6.12.tar.bz2">
+                  http://zebra.fh-weingarten.de/~transcode/pre/transcode-0.6.12.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 88 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 2.41 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3201432" name="id3201432"></a><span class=
+                  "application">transcode</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3201428" name="id3201428"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/NASM.html">NASM-0.98.38</a>, <a href=
+              "lame.html">LAME-3.95.1</a>, X (<a href=
+              "../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.7.0</a>), <a href=
+              "mplayer.html">MPlayer-1.0pre4</a>, <a href=
+              "../general/imagemagick.html">ImageMagick-5.5.7-16</a>,
+              <a href="libdv.html">libdv-0.101</a>, <a href=
+              "libdvdread.html">libdvdread-0.9.4</a> <a href=
+              "http://mjpeg.sourceforge.net/">mjpeg tools</a>, <a href=
+              "sdl.html">SDL-1.2.7</a>, <a href=
+              "../x/lib.html#qt">Qt-3.3.2</a>, <a href=
+              "avifile.html">Avifile-0.7.38</a>, <a href=
+              "libfame.html">libFAME-0.9.1</a>, <a href=
+              "libmpeg3.html">libmpeg3-1.5.4</a>, <a href=
+              "xvid.html">XviD-1.0.0-rc4</a>, <a href=
+              "../general/LZO.html">LZO-1.08</a>, <a href=
+              "../general/libxml2.html">libxml2-2.6.9</a>, <a href=
+              "liba52.html">liba52-0.7.4</a>, <a href=
+              "videoutils.html#ffmpeg">FFmpeg-0.4.8</a>, <a href=
+              "libmad.html">libmad-0.15.1b</a>, <a href=
+              "../basicnet/netlibs.html#curl">cURL-7.11.2</a>, <a href=
+              "libogg.html">libogg-1.1</a>, <a href=
+              "libvorbis.html">libvorbis-1.0.1</a>, <a href=
+              "http://www.theora.org/">Theora</a>, <a href=
+              "../general/graphlib.html#libjpeg">libjpeg-6b</a>, <a href=
+              "../general/glib.html">GLib-1.2.10</a>, <a href=
+              "../x/gtk.html">GTK+-1.2.10</a>, <a href=
+              "../general/freetype2.html">FreeType-2.1.7</a>, <a href=
+              "libmpeg3.html">libmpeg3-1.5.4</a> and <a href=
+              "openquicktime.html">OpenQuicktime-1.0</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of transcode
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">transcode</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --without-x &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--without-x</tt></i>: Omit this switch if
+          you have an <span class="application">X</span> Window System
+          installed and you want to compile X11 dependent filter plugins.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">transcode</span> package contains
+          <span><b class="command">transcode</b></span>, <span><b class=
+          "command">tccat</b></span>, <span><b class=
+          "command">tcdecode</b></span>, <span><b class=
+          "command">tcdemux</b></span>, <span><b class=
+          "command">tcextract</b></span>, <span><b class=
+          "command">tcframe</b></span>, <span><b class=
+          "command">tcmodinfo</b></span>, <span><b class=
+          "command">tcmp3cut</b></span>, <span><b class=
+          "command">tcmplex</b></span>, <span><b class=
+          "command">tcprobe</b></span>, <span><b class=
+          "command">tcrequant</b></span>, <span><b class=
+          "command">tcscan</b></span>, <span><b class=
+          "command">tcxmlcheck</b></span>, <span><b class=
+          "command">tcxpm2rgb</b></span>, <span><b class=
+          "command">avicodec</b></span>, <span><b class=
+          "command">avidump</b></span>, <span><b class=
+          "command">avifix</b></span>, <span><b class=
+          "command">aviindex</b></span>, <span><b class=
+          "command">avimerge</b></span>, <span><b class=
+          "command">avisplit</b></span>, <span><b class=
+          "command">avisync</b></span> and input/filter/output modules.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202129" name="id3202129"></a>transcode
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">transcode</b></span> is the encoder's
+            user interface that handles the plugins and other programs, being
+            the glue between the modules. There are several well documented
+            usage examples on both the homepage and the documentation
+            included in the package.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202145" name="id3202145"></a>tccat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tccat</b></span> concatenates input
+            files using the input plugins of <span class=
+            "application">transcode</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202164" name="id3202164"></a>tcdecode
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcdecode</b></span> is used to decode
+            input files to raw video and <span class="acronym">PCM</span>
+            audio stream.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202181" name="id3202181"></a>tcdemux
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcdemux</b></span> demultiplexes
+            (separates) audio/video input that contains multiple streams,
+            e.g., <span class="acronym">VOB</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202199" name="id3202199"></a>tcextract
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcextract</b></span> grabs single
+            streams from a file containing multiple streams.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202213" name="id3202213"></a>tcframe
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcframe</b></span> processes single
+            video frames for different color encodings (<span class=
+            "acronym">RGB</span> &gt;-&lt; <span class="acronym">YUV</span>
+            or similar).
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202233" name="id3202233"></a>tcmodinfo
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcmodinfo</b></span> loads a supplied
+            <span class="application">transcode</span> filter module and
+            prints its parameters.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202253" name="id3202253"></a>tcmp3cut
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcmp3cut</b></span> is a tool which can
+            cut <span class="acronym">MP3</span> streams at milliseconds
+            positions.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202269" name="id3202269"></a>tcprobe
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcprobe</b></span> prints information
+            about the input file format.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202282" name="id3202282"></a>tcrequant
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcrequant</b></span> is a tool which can
+            requantize an <span class="acronym">MPEG</span>-2 elementary
+            stream.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202299" name="id3202299"></a>tcscan
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcscan</b></span> performs several
+            measurements on the given input data.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202313" name="id3202313"></a>tcxmlcheck
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tcxmlcheck</b></span> checks information
+            in a <span class="acronym">SMIL</span> input file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202330" name="id3202330"></a>avicodec
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avicodec</b></span> indicates or changes
+            <span class="acronym">FOURCC</span> <span class=
+            "acronym">CODEC</span> flag in an <span class=
+            "acronym">AVI</span> file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202353" name="id3202353"></a>avidump
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avidump</b></span> dumps audio or video
+            stream of a given <span class="acronym">AVI</span> file to stdout
+            (for <span class="acronym">AVI</span> conversion or extraction of
+            audio streams).
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202374" name="id3202374"></a>avifix
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avifix</b></span> fixes the header of an
+            <span class="acronym">AVI</span> file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202391" name="id3202391"></a>aviindex
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">aviindex</b></span> writes a text file
+            describing the index of an <span class="acronym">AVI</span> file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202408" name="id3202408"></a>avimerge
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avimerge</b></span> merges <span class=
+            "acronym">AVI</span> files of the same format. Do not try to
+            merge <span class="acronym">AVI</span> files of different
+            formats, it will most likely result in errors (and format means
+            same bitrates, too!).
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202430" name="id3202430"></a>avisplit
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avisplit</b></span> splits <span class=
+            "acronym">AVI</span> files into multiple files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202446" name="id3202446"></a>avisync
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avisync</b></span> can shift audio in
+            <span class="acronym">AVI</span> files for better synchronizing
+            of audio and video data signal.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3202463" name="id3202463"></a>input/filter/output
+                  modules
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Depending on the external libraries that are used, there are a
+            great number of plugins to convert audio and video input to raw
+            format, process raw video and audio and convert raw audio and
+            video to other formats to be written into a file type of choice.
+            Read the documentation.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="xine-ui.html">Prev</a><br />
+        xine User Interface-0.9.23
+      </div>
+      <div class="next">
+        <a accesskey="n" href="cdwriteutils.html">Next</a><br />
+        Chapter&nbsp;40.&nbsp;CD-Writing utilities
+      </div>
+      <div class="up">
+        <a accesskey="u" href="videoutils.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

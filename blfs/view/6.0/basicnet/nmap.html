@@ -1,0 +1,254 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Nmap-3.75
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;19.&nbsp;Basic Networking Utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="netutils.html" title=
+          "Basic Networking Utilities">Prev</a>
+          <p>
+            Basic Networking Utilities
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="whois.html" title="Whois-4.6.26">Next</a>
+          <p>
+            Whois-4.6.26
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netutils.html" title=
+          "Chapter&nbsp;19.&nbsp;Basic Networking Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="nmap" name="nmap"></a>
+        <h1 class="sect1">
+          Nmap-3.75
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Nmap
+          </h2>
+        </div>
+        <p>
+          <span class="application">Nmap</span> is a utility for network
+          exploration and security auditing. It supports ping scanning, port
+          scanning and <span class="acronym">TCP</span>/<span class=
+          "acronym">IP</span> fingerprinting.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2758475" name="id2758475"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://download.insecure.org/nmap/dist/nmap-3.75.tar.bz2"><span class="url">
+                  http://download.insecure.org/nmap/dist/nmap-3.75.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/nmap-3.75.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/nmap-3.75.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 1b54c0608b36f6b3ac92d7d1b910738f
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 14.7 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.35 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2567933" name="id2567933"></a><span class=
+                  "application">Nmap</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2824146" name="id2824146"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/security.html#openssl">OpenSSL-0.9.7e</a>,
+              <a href="../general/genlib.html#pcre">PCRE-5.0</a>, <a href=
+              "../x/gtk.html">GTK+-1.2.10</a> (for building the graphical
+              front-end) and <a href=
+              "../general/libpcap.html">libpcap-0.8.3</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Nmap
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Nmap</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">nmap and
+              optionally, nmapfe</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/share/applications and /usr/share/nmap</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2720013" name="id2720013"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="nmap-prog" name="nmap-prog"></a><span class=
+              "term"><span><strong class=
+              "command">nmap</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a utility for network exploration and security auditing.
+                It supports ping scanning, port scanning and <span class=
+                "acronym">TCP</span>/<span class="acronym">IP</span>
+                fingerprinting.
+              </p>
+            </dd>
+            <dt>
+              <a id="nmapfe" name="nmapfe"></a><span class=
+              "term"><span><strong class=
+              "command">nmapfe</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is the graphical front end to <span><strong class=
+                "command">nmap</strong></span>.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-01 16:18:46 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="netutils.html" title=
+          "Basic Networking Utilities">Prev</a>
+          <p>
+            Basic Networking Utilities
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="whois.html" title="Whois-4.6.26">Next</a>
+          <p>
+            Whois-4.6.26
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netutils.html" title=
+          "Chapter&nbsp;19.&nbsp;Basic Networking Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

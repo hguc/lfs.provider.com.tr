@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;13.&nbsp;Dial-up networking
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;IV.&nbsp;Connecting to a Network</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="connect.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="wvdial.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Dial-up networking
+        </h1>
+      </div>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h1 class="sect1">
+            PPP-2.4.2
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to PPP
+            </h3>
+          </div>
+          <p>
+            The <span class="application"><span class=
+            "acronym">PPP</span></span> package contains the <span><b class=
+            "command">pppd</b></span> daemon and the <span><b class=
+            "command">chat</b></span> program. This is used for connecting to
+            other machines; often for connecting to the Internet via a
+            dial-up or <span class="acronym">PPPoE</span> connection to an
+            <span class="acronym">ISP</span>.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2758598" name="id2758598"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://ccache.samba.org/ftp/ppp/ppp-2.4.2.tar.gz">http://ccache.samba.org/ftp/ppp/ppp-2.4.2.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.samba.org/pub/ppp/ppp-2.4.2.tar.gz">ftp://ftp.samba.org/pub/ppp/ppp-2.4.2.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 757 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 7.4 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.13 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2759187" name="id2759187"></a>Additional
+                    downloads
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Required patch: <a href=
+                    "http://www.linuxfromscratch.org/patches/blfs/5.1/ppp-2.4.2-nobpf-3.patch">
+                    http://www.linuxfromscratch.org/patches/blfs/5.1/ppp-2.4.2-nobpf-3.patch</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2759220" name="id2759220"></a><span class=
+                    "application">ppp</span> dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2759229" name="id2759229"></a>Required
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../general/libpcap.html">libpcap-0.8.3</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of PPP
+            </h3>
+          </div>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                <span class="application"><span class=
+                "acronym">PPP</span></span> support must be compiled into the
+                kernel or available as a kernel module.
+              </p>
+            </div>
+          </div>
+          <p>
+            Install <span class="application"><span class=
+            "acronym">PPP</span></span> by running the following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../ppp-2.4.2-nobpf-3.patch &amp;&amp;
+./configure &amp;&amp;
+make ETCDIR=/etc/ppp &amp;&amp;
+make ETCDIR=/etc/ppp install</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring PPP
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2758660" name="id2758660"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/ppp/*</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2758673" name="id2758673"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The <span class="application"><span class=
+              "acronym">PPP</span></span> daemon requires very little
+              configuration. The main trick is scripting the connection. This
+              can be done either using the chat program which comes with this
+              package or by using <a href="wvdial.html">WvDial-1.53</a>.
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application"><span class=
+            "acronym">PPP</span></span> package contains the <span><b class=
+            "command">chat</b></span>, <span><b class=
+            "command">pppd</b></span>, <span><b class=
+            "command">pppdump</b></span> and <span><b class=
+            "command">pppstats</b></span> programs.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2759041" name="id2759041"></a>chat
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The <span><b class="command">chat</b></span> program defines a
+              conversational exchange between the computer and the modem. Its
+              primary purpose is to establish the connection between the
+              Point-to-Point Protocol Daemon (<span class=
+              "acronym">PPPD</span>) and the remote's <span><b class=
+              "command">pppd</b></span> process.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2759674" name="id2759674"></a>pppd
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">pppd</b></span> is the Point to Point
+              Protocol daemon.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2759688" name="id2759688"></a>pppdump
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">pppdump</b></span> is used to convert
+              <span class="application"><span class=
+              "acronym">PPP</span></span> record files to a readable format.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2759708" name="id2759708"></a>pppstats
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">pppstats</b></span> is used to print
+              <span class="application"><span class=
+              "acronym">PPP</span></span> statistics.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="connect.html">Prev</a><br />
+        Part&nbsp;IV.&nbsp;Connecting to a Network
+      </div>
+      <div class="next">
+        <a accesskey="n" href="wvdial.html">Next</a><br />
+        WvDial-1.53
+      </div>
+      <div class="up">
+        <a accesskey="u" href="connect.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

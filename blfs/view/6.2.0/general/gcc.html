@@ -1,0 +1,902 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      GCC-4.0.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;12.&nbsp;Programming
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="gc.html" title="GC-6.8">Prev</a>
+          <p>
+            GC-6.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc3.html" title="GCC-3.3.6">Next</a>
+          <p>
+            GCC-3.3.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="gcc" name="gcc"></a>
+        <h1 class="sect1">
+          GCC-4.0.3
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to GCC
+          </h2>
+        </div>
+        <p>
+          The <span class="application">GCC</span> package contains GNU
+          compilers. This package is useful for compiling programs written in
+          C, C++, Fortran, Java, Objective C and Ada. Also included is GNU
+          Treelang. Treelang is a sample language, useful only to help people
+          understand how to implement a new language front end to GCC. It is
+          not a useful language in itself other than as an example or basis
+          for building a new language. Therefore only language developers are
+          likely to have an interest in it.
+        </p>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The Fortran compiler included with the <span class=
+              "application">GCC</span>-4.x package now aims to be conformant
+              with the Fortran 95 standard, not the Fortran 77 standard as
+              all previous versions of <span class="application">GCC</span>
+              have been. Please note the following paragraph copied directly
+              from the <span class="application">GCC</span>-4.0.3
+              <span><strong class="command">gfortran</strong></span> man
+              page.
+            </p>
+            <p>
+              &ldquo;<span class="quote">Gfortran is not yet a fully
+              conformant Fortran 95 compiler. It can generate code for most
+              constructs and expressions, but work remains to be done. In
+              particular, there are known deficiencies with ENTRY, NAMELIST,
+              and sophisticated use of MODULES, POINTERS and DERIVED TYPES.
+              For those whose Fortran codes conform to either the Fortran 77
+              standard or the GNU Fortran 77 language, we recommend to use
+              <span><strong class="command">g77</strong></span> from
+              <span class="application">GCC</span> 3.4.x</span>&rdquo;
+            </p>
+            <p>
+              Instructions to install the 3.4.6 version of the Fortran
+              compiler can be found in <a href="gcc3.html">GCC-3.3.6</a> and
+              on the <a href=
+              "http://wiki.linuxfromscratch.org/blfs/wiki/gcc3"><span class=
+              "url">BLFS Wiki</span></a>.
+            </p>
+          </div>
+        </div>
+        <h3>
+          <a id="id2656499" name="id2656499"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://ftp.gnu.org/gnu/gcc/gcc-4.0.3/gcc-4.0.3.tar.bz2"><span class="url">
+                http://ftp.gnu.org/gnu/gcc/gcc-4.0.3/gcc-4.0.3.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.gnu.org/gnu/gcc/gcc-4.0.3/gcc-4.0.3.tar.bz2"><span class="url">
+                ftp://ftp.gnu.org/gnu/gcc/gcc-4.0.3/gcc-4.0.3.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 6ff1af12c53cbb3f79b27f2d6a9a3d50
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 32.9 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 1.7 GB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 60 SBU (build, test and install all
+                compilers)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2602445" name="id2602445"></a>GCC Dependencies
+        </h3>
+        <h4>
+          <a id="id2737042" name="id2737042"></a>Recommended
+        </h4>
+        <p class="recommended">
+          <a href="prog.html#dejagnu">DejaGnu-1.4.4</a>
+        </p>
+        <h4>
+          <a id="id2817399" name="id2817399"></a>Optional (Required to Build
+          the Fortran Compiler)
+        </h4>
+        <p class="optional">
+          <a href="gmp.html">GMP-4.2</a> and <a href=
+          "http://www.mpfr.org/"><span class="url">MPFR</span></a>
+        </p>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              If you plan to compile Ada, you will need to install
+              <span class="application">GNAT</span> temporarily to satisfy
+              the circular dependency when you recompile <span class=
+              "application">GCC</span> to include Ada.
+            </p>
+          </div>
+        </div>
+        <h3>
+          <a id="id2788025" name="id2788025"></a>GNAT-3.15 Package
+          Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://anduin.linuxfromscratch.org/sources/BLFS/6.2.0/g/gnat-3.15p-i686-pc-redhat71-gnu-bin.tar.bz2">
+                <span class=
+                "url">http://anduin.linuxfromscratch.org/sources/BLFS/6.2.0/g/gnat-3.15p-i686-pc-redhat71-gnu-bin.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://anduin.linuxfromscratch.org/BLFS/6.2.0/g/gnat-3.15p-i686-pc-redhat71-gnu-bin.tar.bz2">
+                <span class=
+                "url">ftp://anduin.linuxfromscratch.org/BLFS/6.2.0/g/gnat-3.15p-i686-pc-redhat71-gnu-bin.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: c9aad2da908a40e876c24fc85f248b51
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 11.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 97.7 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: less than 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/gcc"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/gcc</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of GNAT
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">GNAT</span> by running the
+          following command as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">make ins-all prefix=/opt/gnat</kbd></pre>
+        <p>
+          The <span class="application">GNAT</span> compiler can be invoked
+          by executing the <span><strong class="command">gcc</strong></span>
+          binary installed in <tt class="filename">/opt/gnat/bin</tt>.
+        </p>
+        <p>
+          You may now remove the <span class="application">GNAT</span> source
+          directory:
+        </p>
+        <pre class="userinput"><kbd class="command">cd .. &amp;&amp;
+rm -rf gnat-3.15p-i686-pc-linux-gnu-bin</kbd></pre>
+        <p>
+          Prepare to compile <span class="application">GCC</span> by placing
+          the <span class="application">GNAT</span> version of
+          <span><strong class="command">gcc</strong></span> at the beginning
+          of the <tt class="envar">PATH</tt> variable by using the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">PATH_HOLD=$PATH &amp;&amp;
+export PATH=/opt/gnat/bin:$PATH_HOLD</kbd></pre>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of GCC
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">GCC</span> by running the
+          following commands:
+        </p>
+        <div class="important">
+          <div class="admonhead">
+            <img alt="[Important]" src="../images/important.png" />
+            <h3 class="admontitle">
+              Important
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The installation process may overwrite your existing
+              <span class="application">GCC</span> <span><strong class=
+              "command">gcc</strong></span> and <span><strong class=
+              "command">c++</strong></span> compilers and libraries. It is
+              highly recommended that you have the <span class=
+              "application">Tcl</span>, <span class=
+              "application">Expect</span> and <span class=
+              "application">DejaGnu</span> packages installed before
+              beginning the build so you can run the full suite of tests.
+            </p>
+            <p>
+              Do not continue with the <span><strong class="command">make
+              install</strong></span> command until you are confident the
+              build was successful. You can compare your test results with
+              those found at <a href=
+              "http://gcc.gnu.org/ml/gcc-testresults/"><span class=
+              "url">http://gcc.gnu.org/ml/gcc-testresults/</span></a>.
+              There's also an i686 platform test result produced by an
+              LFS-SVN-20051127 system at <a href=
+              "http://anduin.linuxfromscratch.org/files/BLFS/gcc403_test.txt">
+              <span class=
+              "url">http://anduin.linuxfromscratch.org/files/BLFS/gcc403_test.txt</span></a>.
+              You may also want to refer to the information found in the
+              <span class="application">GCC</span>-Pass 2 section of Chapter
+              5 in the LFS book (<a href=
+              "../../../../lfs/view/6.2/chapter05/gcc-pass2.html"><span class="url">../../../../lfs/view/6.2/chapter05/gcc-pass2.html</span></a>).
+            </p>
+          </div>
+        </div>
+        <pre class="userinput"><kbd class=
+        "command">sed -i 's/install_to_$(INSTALL_DEST) //' libiberty/Makefile.in &amp;&amp;
+sed -i 's@\./fixinc\.sh@-c true@' gcc/Makefile.in &amp;&amp;
+mkdir ../gcc-build &amp;&amp;
+cd ../gcc-build &amp;&amp;
+../gcc-4.0.3/configure \
+    --prefix=/usr \
+    --libexecdir=/usr/lib \
+    --enable-shared \
+    --enable-threads=posix \
+    --enable-__cxa_atexit \
+    --enable-clocale=gnu \
+    --enable-languages=c,c++,objc,f95,ada,java,treelang &amp;&amp;
+make bootstrap &amp;&amp;
+make -k check &amp;&amp;
+../gcc-4.0.3/contrib/test_summary</kbd></pre>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+ln -v -sf ../usr/bin/cpp /lib &amp;&amp;
+ln -v -sf gcc /usr/bin/cc &amp;&amp;
+chown -v -R root:root \
+    /usr/lib/gcc/i686-pc-linux-gnu/4.0.3/include &amp;&amp;
+chown -v -R root:root \
+    /usr/lib/gcc/i686-pc-linux-gnu/4.0.3/ada{lib,include}</kbd></pre>
+        <p>
+          The <tt class="filename">libffi</tt> interface header is installed
+          in a location where other packages will not be able to find it. If
+          you included Java as one of the installed languages, create a
+          symbolic link in <tt class="filename">/usr/include</tt> to remedy
+          this:
+        </p>
+        <pre class="root"><kbd class=
+        "command">ln -v -sf `find /usr/lib/gcc -name ffitarget.h` /usr/include</kbd></pre>
+        <p>
+          As the <tt class="systemitem">root</tt> user, remove the
+          <span class="application">GNAT</span> installation:
+        </p>
+        <pre class="root"><kbd class="command">rm -rf /opt/gnat</kbd></pre>
+        <p>
+          Now, as the unprivileged user, restore your old <tt class=
+          "envar">PATH</tt>:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export PATH=$PATH_HOLD &amp;&amp;
+unset PATH_HOLD</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">sed -i 's/install_to_$(INSTALL_DEST)
+          //' libiberty/Makefile.in</strong></span>: This command suppresses
+          the installation of <tt class="filename">libiberty.a</tt> as the
+          version provided by <span class="application">Binutils</span> is
+          used instead.
+        </p>
+        <p>
+          <span><strong class="command">mkdir ../gcc-build; cd
+          ../gcc-build</strong></span>: The <span class=
+          "application">GCC</span> documentation recommends building the
+          package in a dedicated build directory.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-shared --enable-threads=posix
+          --enable-__cxa_atexit</tt></em>: These parameters are required to
+          build the <span class="application">C++</span> libraries to
+          published standards.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-clocale=gnu</tt></em>: This
+          command is a failsafe for incomplete locale data.
+        </p>
+        <p>
+          <em class=
+          "parameter"><tt>--enable-languages=c,c++,objc,f95,ada,java,treelang</tt></em>:
+          This command identifies which languages to build. You may modify
+          this command to remove undesired languages.
+        </p>
+        <p>
+          <span><strong class="command">make -k check</strong></span>: This
+          command runs the test suite without stopping if any errors are
+          encountered.
+        </p>
+        <p>
+          <span><strong class=
+          "command">../gcc-4.0.3/contrib/test_summary</strong></span>: This
+          command will produce a summary of the test suite results. You can
+          append <span><strong class="command">| grep -A7
+          Summ</strong></span> to the command to produce an even more
+          condensed version of the summary. You may also wish to redirect the
+          output to a file for review and comparison later on.
+        </p>
+        <p>
+          <span><strong class="command">ln -v -sf ../usr/bin/cpp
+          /lib</strong></span>: This command creates a link to the C
+          PreProcessor as some packages expect it to be installed in the
+          <tt class="filename">/lib</tt> directory.
+        </p>
+        <p>
+          <span><strong class="command">ln -v -sf gcc
+          /usr/bin/cc</strong></span>: This link is created as some packages
+          refer to the C compiler using an alternate name.
+        </p>
+        <p>
+          <span><strong class="command">chown -v -R root:root
+          /usr/lib/gcc/i686-pc-linux-gnu/...</strong></span>: If the package
+          is built by a user other than root, the ownership of the installed
+          <tt class="filename">include</tt> and <tt class=
+          "filename">adalib</tt> directories (and their contents) will be
+          incorrect. These commands change the ownership to the <tt class=
+          "systemitem">root</tt> user and group . Omit the command changing
+          the Ada directories if you did not include Ada as one of the
+          installed languages.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">addr2name.awk,
+              fastjar, gcj, gcj-dbtool,gcjh, gfortran, gij, gjnih, gnat,
+              gnatbind, gnatbl, gnatchop, gnatclean, gnatfind, gnatkr,
+              gnatlink, gnatls, gnatmake, gnatname, gnatprep, gnatxref,
+              gprmake, grepjar, grmic, grmiregistry, gtreelang, jcf-dump,
+              jv-convert, jv-scan and architecture specific names for gcj and
+              gcjh</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libffi.{so,a},
+              libgcj.{so,a}, libgfortran.{so,a}, libgfortranbegin.a,
+              libgij.{so,a}, libobjc.{so,a} and numerous other run-time
+              libraries and executables in /usr/lib/gcc</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/include/c++/4.0.3/{gcj,gnu,java,javax,org},
+              /usr/lib/gcc/i686-pc-linux-gnu/4.0.3/ada{include,lib},
+              /usr/lib/gcj-4.0.3, /usr/lib/security and
+              /usr/share/java</span>
+            </div>
+          </div>
+        </div>
+        <p>
+          Some program and library names and descriptions are not listed
+          here, but can be found at <a href=
+          "../../../../lfs/view/6.2/chapter06/gcc.html#contents-gcc"><span class="url">
+          ../../../../lfs/view/6.2/chapter06/gcc.html#contents-gcc</span></a>
+          as they were initially installed during the building of LFS.
+        </p>
+        <div class="variablelist">
+          <h3>
+            <a id="id2722126" name="id2722126"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="addr2name.awk" name="addr2name.awk"></a><span class=
+                  "term"><span><strong class=
+                  "command">addr2name.awk</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    emulates some of the functionality of addr2line.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="fastjar-gcc" name="fastjar-gcc"></a><span class=
+                  "term"><span><strong class=
+                  "command">fastjar</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an archive tool for <span class=
+                    "application">Java</span> archives.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gcj" name="gcj"></a><span class=
+                  "term"><span><strong class=
+                  "command">gcj</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an ahead-of-time compiler for the <span class=
+                    "application">Java</span> language.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gcj-dbtool" name="gcj-dbtool"></a><span class=
+                  "term"><span><strong class=
+                  "command">gcj-dbtool</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a tool for creating and manipulating class file
+                    mapping databases.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gcjh" name="gcjh"></a><span class=
+                  "term"><span><strong class=
+                  "command">gcjh</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generates header files from <span class=
+                    "application">Java</span> class files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gfortran" name="gfortran"></a><span class=
+                  "term"><span><strong class=
+                  "command">gfortran</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">Fortran</span> compiler
+                    invoked by <span><strong class=
+                    "command">gcc</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gij" name="gij"></a><span class=
+                  "term"><span><strong class=
+                  "command">gij</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the GNU interpreter for <span class=
+                    "application">Java</span> bytecode.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gjnih" name="gjnih"></a><span class=
+                  "term"><span><strong class=
+                  "command">gjnij</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to generate JNI header files from class files.
+                    Running it is equivalent to running <span><strong class=
+                    "command">gcjh -jni</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnat" name="gnat"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnat</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">Ada</span> compiler
+                    invoked by <span><strong class=
+                    "command">gcc</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatbind" name="gnatbind"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatbind</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to bind compiled objects.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatbl" name="gnatbl"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatbl</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">Ada</span> linker.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatchop" name="gnatchop"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatchop</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is useful for renaming files to meet the standard
+                    <span class="application">Ada</span> default file naming
+                    conventions.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatclean" name="gnatclean"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatclean</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to remove files associated with a <span class=
+                    "application">GNAT</span> project.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatfind" name="gnatfind"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatfind</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">GNAT</span>
+                    definition/use finder.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatkr" name="gnatkr"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatkr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to determine the crunched name for a given file,
+                    when crunched to a specified maximum length.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatlink" name="gnatlink"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatlink</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to link programs and build an executable file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatls" name="gnatls"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatls</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the compiled unit browser.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatmake" name="gnatmake"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatmake</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an automatic <span><strong class=
+                    "command">make</strong></span> facility.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatname" name="gnatname"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatname</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    will list the files associated with a <span class=
+                    "application">GNAT</span> project.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatprep" name="gnatprep"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatprep</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">GNAT</span> external
+                    preprocessor.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnatxref" name="gnatxref"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnatxref</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">GNAT</span>
+                    cross-referencer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gprmake" name="gprmake"></a><span class=
+                  "term"><span><strong class=
+                  "command">gprmake</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a tool used to create <tt class=
+                    "filename">Makefile</tt>s that support compilation by
+                    multiple languages.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="grepjar" name="grepjar"></a><span class=
+                  "term"><span><strong class=
+                  "command">grepjar</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    searches <tt class="filename">jar</tt> files for a
+                    pattern.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="grmic-gcc" name="grmic-gcc"></a><span class=
+                  "term"><span><strong class=
+                  "command">grmic</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generates stubs for Remote Method Invocation.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="grmiregistry-gcc" name=
+                  "grmiregistry-gcc"></a><span class=
+                  "term"><span><strong class=
+                  "command">grmiregistry</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    starts a remote object registry on the current host.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gtreelang" name="gtreelang"></a><span class=
+                  "term"><span><strong class=
+                  "command">gtreelang</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is largely a cut down version of C, designed to showcase
+                    the features of the <span class="application">GCC</span>
+                    code generation back end. Only those features that are
+                    directly supported by the <span class=
+                    "application">GCC</span> code generation back end are
+                    implemented. Features are implemented in a manner which
+                    is easiest and clearest to implement. Not all or even
+                    most code generation back end features are implemented.
+                    The intention is to add features incrementally until most
+                    features of the <span class="application">GCC</span> back
+                    end are implemented in Treelang.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="jcf-dump" name="jcf-dump"></a><span class=
+                  "term"><span><strong class=
+                  "command">jcf-dump</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints information about <span class=
+                    "application">Java</span> class files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="jv-convert" name="jv-convert"></a><span class=
+                  "term"><span><strong class=
+                  "command">jv-convert</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts files from one encoding to another.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="jv-scan" name="jv-scan"></a><span class=
+                  "term"><span><strong class=
+                  "command">jv-scan</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints information about <span class=
+                    "application">Java</span> source files.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-24 16:21:51 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gc.html" title="GC-6.8">Prev</a>
+          <p>
+            GC-6.8
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gcc3.html" title="GCC-3.3.6">Next</a>
+          <p>
+            GCC-3.3.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,453 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      OpenSSH-3.8.1p1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;22.&nbsp;Other Server Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="leafnode.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="rsync.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          OpenSSH-3.8.1p1
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to OpenSSH
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Open<span class=
+          "acronym">SSH</span></span> package contains <span><b class=
+          "command">ssh</b></span> clients and the <span><b class=
+          "command">sshd</b></span> daemon. This is useful for encrypting
+          authentication and subsequent traffic over a network.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2854766" name="id2854766"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://sunsite.ualberta.ca/pub/OpenBSD/OpenSSH/portable/openssh-3.8.1p1.tar.gz">
+                  http://sunsite.ualberta.ca/pub/OpenBSD/OpenSSH/portable/openssh-3.8.1p1.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-3.8.1p1.tar.gz">
+                  ftp://ftp.openbsd.org/pub/OpenBSD/OpenSSH/portable/openssh-3.8.1p1.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 799 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 37 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.49 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2854816" name="id2854816"></a><span class=
+                  "application">Open<span class="acronym">SSH</span></span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2854825" name="id2854825"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2854836" name="id2854836"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/linux_pam.html">Linux-PAM-0.77</a>,
+              <a href="../basicnet/tcpwrappers.html">tcpwrappers-7.6</a>, X
+              (<a href="../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.7.0</a>), <a href=
+              "../postlfs/mitkrb.html">MIT krb5-1.3.3</a> or <a href=
+              "../postlfs/heimdal.html">Heimdal-0.6.2</a>, and <a href=
+              "http://www.opensc.org/">OpenSC</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of OpenSSH
+          </h3>
+        </div>
+        <p>
+          <span class="application">Open<span class=
+          "acronym">SSH</span></span> runs as two processes when connecting
+          to other computers. The first process is a privileged process and
+          controls the issuance of privileges as necessary. The second
+          process communicates with the network. Additional installation
+          steps are necessary to set up the proper environment which are
+          performed by the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">mkdir /var/empty &amp;&amp;
+chown root:sys /var/empty &amp;&amp;
+groupadd sshd &amp;&amp;
+useradd -c 'sshd privsep' -d /var/empty -g sshd -s /bin/false sshd</b></span></tt>
+</pre>
+        <p>
+          <span class="application">OpenSSH</span> is very sensitive to
+          changes in the linked <span class="application">OpenSSL</span>
+          libraries. If you recompile <span class=
+          "application">OpenSSL</span>, <span class=
+          "application">OpenSSH</span> may fail to startup. An alternative is
+          to link against the static <span class="application">OpenSSL</span>
+          library. To link against the static library, execute the following
+          command:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">sed -i "s:-lcrypto:/usr/lib/libcrypto.a:g" configure</b></span></tt>
+</pre>
+        <p>
+          Install <span class="application">Open<span class=
+          "acronym">SSH</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --sysconfdir=/etc/ssh \
+    --libexecdir=/usr/sbin --with-md5-passwords &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc/ssh</tt></i>: This
+          prevents the configuration files from going to <tt class=
+          "filename">/usr/etc</tt>.
+        </p>
+        <p>
+          <i class="parameter"><tt>--with-md5-passwords</tt></i>: This is
+          required if you made the changes recommended by the
+          shadowpasswd_plus <span class="acronym">LFS</span> hint on your
+          <span class="acronym">SSH</span> server when you installed the
+          Shadow Password Suite or if you access a <span class=
+          "acronym">SSH</span> server that authenticates by user passwords
+          encrypted with md5.
+        </p>
+        <p>
+          <i class="parameter"><tt>--libexecdir=/usr/sbin</tt></i>:
+          <span class="application">Open<span class=
+          "acronym">SSH</span></span> installs programs called by programs in
+          <tt class="filename">/usr/libexec</tt>. <span><b class=
+          "command">sftp-server</b></span> is a <span><b class=
+          "command">sshd</b></span> utility and <span><b class=
+          "command">ssh-askpass</b></span> is a <span><b class=
+          "command">ssh-add</b></span> utility that is installed as a link to
+          <span><b class="command">X11-ssh-askpass</b></span>. Both of these
+          should go in <tt class="filename">/usr/sbin</tt> not <tt class=
+          "filename">/usr/libexec</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring OpenSSH
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2854484" name="id2854484"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/ssh/ssh_config</tt>, <tt class=
+            "filename">/etc/ssh/sshd_config</tt>
+          </p>
+          <p>
+            There are no required changes in either of these files. However
+            you may wish to view them to make changes for appropriate
+            security to your system. Configuration information can be found
+            in the man pages for <span><b class="command">sshd</b></span>,
+            <span><b class="command">ssh</b></span> and <span><b class=
+            "command">ssh-agent</b></span>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855615" name="id2855615"></a>sshd init.d script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To start the SSH Server at boot, install the <tt class=
+            "filename">/etc/rc.d/init.d/sshd</tt> init script included in the
+            <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-sshd</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Open<span class=
+          "acronym">SSH</span></span> package contains <span><b class=
+          "command">ssh</b></span>, <span><b class="command">sshd</b></span>,
+          <span><b class="command">ssh-agent</b></span>, <span><b class=
+          "command">ssh-add</b></span>, <span><b class=
+          "command">sftp</b></span>, <span><b class="command">scp</b></span>,
+          <span><b class="command">ssh-keygen</b></span>, <span><b class=
+          "command">sftp-server</b></span> and <span><b class=
+          "command">ssh-keyscan</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855517" name="id2855517"></a>ssh
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The basic rlogin/rsh-like client program.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855525" name="id2855525"></a>sshd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The daemon that listens for ssh login requests.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855534" name="id2855534"></a>ssh-agent
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            An authentication agent that can store private keys.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855543" name="id2855543"></a>ssh-add
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Tool which adds keys to the <span><b class=
+            "command">ssh-agent</b></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855557" name="id2855557"></a>sftp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="acronym">FTP</span>-like program that works over
+            <span class="acronym">SSH</span>1 and <span class=
+            "acronym">SSH</span>2 protocols.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855574" name="id2855574"></a>scp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            File copy program that acts like rcp.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855583" name="id2855583"></a>ssh-keygen
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Key generation tool.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855590" name="id2855590"></a>sftp-server
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="acronym">SFTP</span> server subsystem.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2855918" name="id2855918"></a>ssh-keyscan
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Utility for gathering public host keys from a number of hosts.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="leafnode.html">Prev</a><br />
+        Leafnode-1.9.43
+      </div>
+      <div class="next">
+        <a accesskey="n" href="rsync.html">Next</a><br />
+        rsync-2.6.2
+      </div>
+      <div class="up">
+        <a accesskey="u" href="other.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

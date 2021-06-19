@@ -1,0 +1,252 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      SDL-1.2.7
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="esound.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="libao.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          SDL-1.2.7
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to SDL
+          </h3>
+        </div>
+        <p>
+          The Simple DirectMedia Layer (<span class=
+          "application"><span class="acronym">SDL</span></span> for short) is
+          a cross-platform library designed to make it easy to write
+          multimedia software, such as games and emulators.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3160830" name="id3160830"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.libsdl.org/release/SDL-1.2.7.tar.gz">http://www.libsdl.org/release/SDL-1.2.7.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 46 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.99 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3164199" name="id3164199"></a><span class=
+                  "application"><span class="acronym">SDL</span></span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3164207" name="id3164207"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="libdriv.html#alsa">ALSA-1.0.4</a>, <a href=
+              "esound.html">EsounD-0.2.34</a>, <a href=
+              "arts.html">aRts-1.2.2</a>, <a href="nas.html">NAS-1.6</a>,
+              <a href="../general/NASM.html">NASM-0.98.38</a>, X (<a href=
+              "../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.7.0</a>), <a href=
+              "../general/aalib.html">AAlib-1.4rc5</a>, <a href=
+              "../general/DirectFB.html">DirectFB-0.9.20</a> and <a href=
+              "../general/SVGAlib.html">SVGAlib-1.4.3</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of SDL
+          </h3>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">SDL</span></span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --disable-debug &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--disable-debug</tt></i>: This switch
+          configures <span class="application"><span class=
+          "acronym">SDL</span></span> to build with aggressive optimizations.
+        </p>
+        <p>
+          <i class="parameter"><tt>--enable-video-aalib</tt></i>: This switch
+          is required to build <span class="application"><span class=
+          "acronym">SDL</span></span> with <span class="acronym">AA</span>lib
+          video support.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring SDL
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3164105" name="id3164105"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            As with most libraries, there is no configuration to do, save
+            that the library directory i.e., <tt class=
+            "filename">/opt/lib</tt> or <tt class=
+            "filename">/usr/local/lib</tt> should appear in <tt class=
+            "filename">/etc/ld.so.conf</tt> so that <span><b class=
+            "command">ldd</b></span> can find the shared libraries. After
+            checking that this is the case, <span><b class=
+            "command">/sbin/ldconfig</b></span> should be run while logged in
+            as root.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">SDL</span></span> package contains the <tt class=
+          "userinput">Simple DirectMedia Layer</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3164618" name="id3164618"></a>Simple DirectMedia
+                  Layer
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The Simple DirectMedia Layer is a generic <span class=
+            "acronym">API</span> that provides low level access to audio,
+            keyboard, mouse, joystick, 3D hardware via OpenGL, and 2D frame
+            buffer across multiple platforms.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="esound.html">Prev</a><br />
+        EsounD-0.2.34
+      </div>
+      <div class="next">
+        <a accesskey="n" href="libao.html">Next</a><br />
+        libao-0.8.5
+      </div>
+      <div class="up">
+        <a accesskey="u" href="libdriv.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

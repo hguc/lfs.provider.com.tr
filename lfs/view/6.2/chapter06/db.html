@@ -1,0 +1,412 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.13.&nbsp;Berkeley DB-4.4.20
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="lfs" class="6.2">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Linux From Scratch - Version 6.2
+        </h4>
+        <h3>
+          Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="gcc.html" title="GCC-4.0.3">Prev</a>
+          <p>
+            GCC-4.0.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="coreutils.html" title=
+          "Coreutils-5.96">Next</a>
+          <p>
+            Coreutils-5.96
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          6.13. Berkeley DB-4.4.20
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Berkeley DB package contains programs and utilities used by
+          many other applications for database related functions.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Approximate build
+              time:</span></strong> <span class="seg">1.2 SBU</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Required disk
+              space:</span></strong> <span class="seg">77 MB</span>
+            </div>
+          </div>
+        </div>
+        <div class="tip">
+          <div class="admonhead">
+            <img alt="[Tip]" src="../images/tip.png" />
+            <h3 class="admontitle">
+              Other Installation Possibilities
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              There are instructions to build this package in the BLFS book
+              if you need to build the RPC server or additional language
+              bindings. The additional language bindings will require
+              additional packages to be installed. See <a href=
+              "http://www.linuxfromscratch.org/blfs/view/svn/server/databases.html#db">
+              <i>http://www.linuxfromscratch.org/blfs/view/svn/server/databases.html#db</i></a>
+              for suggested installation instructions.
+            </p>
+            <p>
+              Also, GDBM <span class="emphasis"><em>could</em></span> be used
+              in place of Berkeley DB to satisfy Man-DB. However, since
+              Berkeley DB is considered a core part of the LFS build, it will
+              not be listed as a dependency for any package in the BLFS book.
+              Likewise, many hours go into testing LFS with Berkeley DB
+              installed, not with GDBM. If you fully understand the risks
+              versus benefits of using GDBM and wish to use it anyway, see
+              the BLFS instructions located at <a href=
+              "http://www.linuxfromscratch.org/blfs/view/svn/general/gdbm.html">
+              <i>http://www.linuxfromscratch.org/blfs/view/svn/general/gdbm.html</i></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            6.13.1. Installation of Berkeley DB
+          </h2>
+        </div>
+        <p>
+          Patch the package to eliminate potential trap events:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../db-4.4.20-fixes-1.patch</kbd></pre>
+        <p>
+          Prepare Berkeley DB for compilation:
+        </p>
+        <pre class="userinput"><kbd class="command">cd build_unix &amp;&amp;
+../dist/configure --prefix=/usr --enable-compat185 --enable-cxx</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <b>The meaning of the configure options:</b>
+          </p>
+          <dl>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><tt>--enable-compat185</tt></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option enables building Berkeley DB 1.85 compatibility
+                API.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><tt>--enable-cxx</tt></em></span>
+            </dt>
+            <dd>
+              <p>
+                This option enables building C++ API libraries.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          It is not possible to test the package meaningfully, because that
+          would involve building TCL bindings. TCL bindings cannot be built
+          properly now because TCL is linked against Glibc in <tt class=
+          "filename">/tools</tt>, not against Glibc in <tt class=
+          "filename">/usr</tt>.
+        </p>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make docdir=/usr/share/doc/db-4.4.20 install</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <b>The meaning of the make parameter:</b>
+          </p>
+          <dl>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><tt>docdir=...</tt></em></span>
+            </dt>
+            <dd>
+              <p>
+                This variable specifies the correct place for the
+                documentation.
+              </p>
+            </dd>
+          </dl>
+        </div>
+        <p>
+          Fix the ownerships of the installed files:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">chown -v root:root /usr/bin/db_* \
+    /usr/lib/libdb* /usr/include/db* &amp;&amp;
+chown -Rv root:root /usr/share/doc/db-4.4.20</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="contents-db" name="contents-db"></a>
+          <h2 class="sect2">
+            6.13.2. Contents of Berkeley DB
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              programs:</span></strong> <span class="seg">db_archive,
+              db_checkpoint, db_deadlock, db_dump, db_hotbackup, db_load,
+              db_printlog, db_recover, db_stat, db_upgrade, and
+              db_verify</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              libraries:</span></strong> <span class="seg">libdb.{so,ar}and
+              libdb_cxx.r{o,ar}</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id3675498" name="id3675498"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="db_archive" name="db_archive"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_archive</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Prints the pathnames of log files that are no longer in
+                    use
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="db_checkpoint" name="db_checkpoint"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_checkpoint</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon used to monitor and checkpoint database logs
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="db_deadlock" name="db_deadlock"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_deadlock</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A daemon used to abort lock requests when deadlocks are
+                    detected
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="db_dump" name="db_dump"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_dump</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Converts database files to a plain-text file format
+                    readable by <span><strong class=
+                    "command">db_load</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="db_hotbackup" name="db_hotbackup"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_hotbackup</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Creates &ldquo;<span class="quote">hot
+                    backup</span>&rdquo; or &ldquo;<span class="quote">hot
+                    failover</span>&rdquo; snapshots of Berkeley DB databases
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="db_load" name="db_load"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_load</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Is used to create database files from plain-text files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="db_printlog" name="db_printlog"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_printlog</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Converts database log files to human readable text
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="db_recover" name="db_recover"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_recover</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Is used to restore a database to a consistent state after
+                    a failure
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="db_stat" name="db_stat"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_stat</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Displays statistics for Berkeley databases
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="db_upgrade" name="db_upgrade"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_upgrade</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Is used to upgrade database files to a newer version of
+                    Berkeley DB
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="db_verify" name="db_verify"></a><span class=
+                  "term"><span><strong class=
+                  "command">db_verify</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Is used to run consistency checks on database files
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libdb" name="libdb"></a><span class=
+                  "term"><tt class="filename">libdb.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to manipulate database files from C
+                    programs
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libdb_cxx" name="libdb_cxx"></a><span class=
+                  "term"><tt class="filename">libdb_cxx.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    Contains functions to manipulate database files from C++
+                    programs
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gcc.html" title="GCC-4.0.3">Prev</a>
+          <p>
+            GCC-4.0.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="coreutils.html" title=
+          "Coreutils-5.96">Next</a>
+          <p>
+            Coreutils-5.96
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

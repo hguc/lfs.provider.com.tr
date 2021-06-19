@@ -1,0 +1,399 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      NSS-3.11.7
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;4.&nbsp;Security
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sudo.html" title="Sudo-1.6.9p15">Prev</a>
+          <p>
+            Sudo-1.6.9p15
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="filesystems.html" title=
+          "File Systems">Next</a>
+          <p>
+            File Systems
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="nss" name="nss"></a>NSS-3.11.7
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to NSS
+        </h2>
+        <p>
+          The Network Security Services (<span class=
+          "application">NSS</span>) package is a set of libraries designed to
+          support cross-platform development of security-enabled client and
+          server applications. Applications built with NSS can support SSL v2
+          and v3, TLS, PKCS #5, PKCS #7, PKCS #11, PKCS #12, S/MIME, X.509 v3
+          certificates, and other security standards. This is useful for
+          implementing SSL and S/MIME or other Internet security standards
+          into an application.
+        </p>
+        <p>
+          The <span class="application">NSS</span> package requires the
+          Netscape Portable Runtime (NSPR) libraries as a prerequisite for
+          building. The <span class="application">NSS</span> package tarball
+          contains the code necessary to build the NSPR libraries. These
+          libraries are built and installed using the instructions below.
+          Essentially, the <span class="application">NSS</span> package is
+          now a combined <span class="application">NSS</span>/NSPR
+          installation.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_11_7_RTM/src/nss-3.11.7-with-nspr-4.6.7.tar.gz">
+                http://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_11_7_RTM/src/nss-3.11.7-with-nspr-4.6.7.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_11_7_RTM/src/nss-3.11.7-with-nspr-4.6.7.tar.gz">
+                ftp://ftp.mozilla.org/pub/mozilla.org/security/nss/releases/NSS_3_11_7_RTM/src/nss-3.11.7-with-nspr-4.6.7.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 0b0c6bdf63c442d68453e470b8747a9d
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 5.0 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 71 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.8 SBU (additional 0.9 SBU to run the
+                test suite)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Required patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/nss-3.11.7-with-nspr-4.6.7-fedora_fixes-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/nss-3.11.7-with-nspr-4.6.7-fedora_fixes-1.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/nss">http://wiki.linuxfromscratch.org/blfs/wiki/nss</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of NSS
+        </h2>
+        <p>
+          Install <span class="application">NSS</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">bash
+
+export WORKINGDIR=$PWD &amp;&amp;
+export BUILD_OPT=1 &amp;&amp;
+
+patch -Np1 -i ../nss-3.11.7-with-nspr-4.6.7-fedora_fixes-1.patch &amp;&amp;
+
+cd mozilla/security/nss &amp;&amp;
+make nss_build_all &amp;&amp;
+cd ../.. &amp;&amp;
+
+export NSS_LINUXDIR=$(basename `ls -d $WORKINGDIR/mozilla/dist/Linux*`)</kbd>
+</pre>
+        <p>
+          To test the results, you'll need to set the domain name of your
+          system in the <code class="envar">DOMSUF</code> environment
+          variable. Most of the tests will fail if you don't provide the
+          correct domain name. A self-generated log file will be parsed at
+          the end of the test to display how many tests passed. It should
+          return 800. To run the tests, ensure you change the <span class=
+          "command"><strong>export DOMSUF</strong></span> command below to an
+          appropriate value, e.g., <em class=
+          "parameter"><code>mydomain.com</code></em> and issue the following
+          commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">bash
+
+export DOMSUF=<em class=
+"replaceable"><code>&lt;validdomain.name&gt;</code></em> &amp;&amp;
+export PATH=$PATH:$WORKINGDIR/mozilla/dist/$NSS_LINUXDIR/bin &amp;&amp;
+export TEST_RESULTSDIR=$WORKINGDIR/mozilla/tests_results/security &amp;&amp;
+
+cd security/nss/tests &amp;&amp;
+sed -i 's/gmake/make/' common/init.sh &amp;&amp;
+./all.sh &amp;&amp;
+
+grep Passed $TEST_RESULTSDIR/$(hostname).1/results.html | wc -l &amp;&amp;
+
+exit</kbd>
+</pre>
+        <div class="admon caution">
+          <img alt="[Caution]" src="../images/caution.png" />
+          <h3>
+            Caution
+          </h3>
+          <p>
+            If you switch to the <code class="systemitem">root</code> user
+            using a method that does not inherit the environment from the
+            unprivileged user, ensure that <code class=
+            "systemitem">root</code>'s <code class=
+            "envar">NSS_LINUXDIR</code> environment variable is set correctly
+            before proceeding with the installation commands.
+          </p>
+        </div>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class=
+"command">install -v -m755 nsprpub/$NSS_LINUXDIR/config/nspr-config \
+                 security/nss/cmd/config/nss-config \
+    /usr/bin &amp;&amp;
+install -v -m755 -d /usr/lib/pkgconfig &amp;&amp;
+install -v -m644 nsprpub/lib/pkgconfig/nspr.pc \
+                 security/nss/lib/pkgconfig/nss.pc \
+    /usr/lib/pkgconfig &amp;&amp;
+
+cd dist &amp;&amp;
+
+install -v -m755 $NSS_LINUXDIR/lib/*.so /usr/lib &amp;&amp;
+install -v -m644 $NSS_LINUXDIR/lib/{*.chk,libcrmf.a} /usr/lib &amp;&amp;
+
+install -v -m755 -d /usr/include/{nss,nspr} &amp;&amp;
+install -v -m644 {public,private}/nss/* /usr/include/nss &amp;&amp;
+cp -v -RL $NSS_LINUXDIR/include/* /usr/include/nspr &amp;&amp;
+chmod -v 644 /usr/include/nspr/prvrsion.h</kbd>
+</pre>
+        <p>
+          Now as the unprivileged user, exit the <span class=
+          "command"><strong>bash</strong></span> shell started at the
+          beginning of the installation to restore the environment to the
+          original state.
+        </p>
+        <pre class="userinput">
+<kbd class="command">exit</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>bash</strong></span>: Shells are
+          started as many environment variables are created during the
+          installation process. Exiting the shells serves the purpose of
+          restoring the environment and returning back to the original
+          directory when the installation is complete.
+        </p>
+        <p>
+          <span class="command"><strong>export
+          WORKINGDIR=$PWD</strong></span>: This variable is set because many
+          of the commands are dependent on knowing the full path of certain
+          directories. <code class="envar">WORKINGDIR</code> establishes a
+          known path so that all others can be determined relative to this.
+        </p>
+        <p>
+          <span class="command"><strong>export BUILD_OPT=1</strong></span>:
+          This variable is set so that the build is performed with no
+          debugging symbols built into the binaries and that the default
+          compiler optimizations are used.
+        </p>
+        <p>
+          <span class="command"><strong>export
+          NSS_LINUXDIR=...</strong></span>: This variable is set so that the
+          exact name of the architecture specific directories where the
+          binaries are stored in the source tree can be determined.
+        </p>
+        <p>
+          <span class="command"><strong>make nss_build_all</strong></span>:
+          This command builds the NSPR and <span class=
+          "application">NSS</span> libraries and creates a <code class=
+          "filename">dist</code> directory which houses all the programs,
+          libraries and interface headers. None of the programs created by
+          this process are installed onto the system using the default
+          instructions. If you need any of these programs installed, you can
+          find them in the <code class="filename">mozilla/dist/bin</code>
+          directory of the source tree.
+        </p>
+        <p>
+          <span class="command"><strong>export PATH=...</strong></span>: This
+          command sets the <code class="envar">PATH</code> environment
+          variable to include the executables in the source tree as some of
+          them are required to run the test suite.
+        </p>
+        <p>
+          <span class="command"><strong>sed -i 's/gmake/make/'
+          common/init.sh</strong></span>: This command changes the command
+          used to compile some test programs.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">nspr-config and nss-config</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libcrmf.a, libfreebl3.so, libnspr4.so,
+              libnss3.so, libnssckbi.so, libplc4.so, libplds4.so,
+              libsmime3.so, libsoftokn3.so and libssl3.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/include/nspr and
+              /usr/include/nss</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nspr-config" name="nspr-config"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nspr-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to determine the NSPR installation settings of
+                    the installed NSPR libraries.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nss-config" name="nss-config"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nss-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to determine the NSS library settings of the
+                    installed NSS libraries.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+        <p>
+          The <code class="filename">libnspr4.so</code>, <code class=
+          "filename">libplc4.so</code> and <code class=
+          "filename">libplds4.so</code> libraries make up the Netscape
+          Portable Runtime (NSPR) libraries. These libraries provide a
+          platform-neutral API for system level and libc like functions. The
+          API is used in the Mozilla client, many of the Netscape/AOL/iPlanet
+          offerings and other software applications.
+        </p>
+        <p>
+          The <code class="filename">libcrmf.a</code>, <code class=
+          "filename">libfreebl.so</code>, <code class=
+          "filename">libnss3.so</code>, <code class=
+          "filename">libnssckbi.so</code>, <code class=
+          "filename">libsmime3.so</code>, <code class=
+          "filename">libsoftokn3.so</code> and <code class=
+          "filename">libnssl3.so</code> libraries make up the <span class=
+          "application">NSS</span> libraries.
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2007-07-15 10:53:33 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sudo.html" title="Sudo-1.6.9p15">Prev</a>
+          <p>
+            Sudo-1.6.9p15
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="filesystems.html" title=
+          "File Systems">Next</a>
+          <p>
+            File Systems
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

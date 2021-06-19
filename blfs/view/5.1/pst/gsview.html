@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      GSview-4.6
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;45.&nbsp;PostScript</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="psutils.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="xpdf.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          GSview-4.6
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to GSview
+          </h3>
+        </div>
+        <p>
+          <span class="application">GSview</span> is a viewer for PostScript
+          and <span class="acronym">PDF</span> using <span class=
+          "application">X</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3254117" name="id3254117"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/publishing/ghostscript/ghostgum/gsview-4.6.tar.gz">
+                  http://gd.tuwien.ac.at/publishing/ghostscript/ghostgum/gsview-4.6.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/ghostgum/gsview-4.6.tar.gz">
+                  ftp://mirror.cs.wisc.edu/pub/mirrors/ghost/ghostgum/gsview-4.6.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 895 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 19 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.19 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3254150" name="id3254150"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/gsview-4.6-pstotext.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/gsview-4.6-pstotext.patch</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/gsview-4.6-lang.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/gsview-4.6-lang.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3258279" name="id3258279"></a><span class=
+                  "application">GSview</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3258288" name="id3258288"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../x/gtk.html">GTK+-1.2.10</a> and <a href=
+              "gs.html">AFPL Ghostscript-8.14</a> or <a href="espgs.html">ESP
+              Ghostscript-7.07.1</a> (with libgs.so installed)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of GSview
+          </h3>
+        </div>
+        <p>
+          <span class="application">GSview</span> uses <span><b class=
+          "command">netscape</b></span> to browse through the online help.
+          <span class="acronym">BLFS</span> does not install <span class=
+          "application">Netscape</span>, but has other browsers from which to
+          choose. Simply edit <tt class="filename">srcunx/gvxreg.c</tt> using
+          the following sed script with your browser's executable file name
+          substituting for <i class="replaceable"><tt>[browser]</tt></i>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">sed -i s/netscape/<i class=
+"replaceable"><tt>[browser]</tt></i>/ srcunx/gvxreg.c</b></span></tt>
+</pre>
+        <p>
+          Install <span class="application">GSview</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">sed 's|GSVIEW_ROOT=/usr/local|GSVIEW_ROOT=/usr|' \
+    srcunx/unx.mak &gt; Makefile &amp;&amp;
+patch -Np1 -i ../gsview-4.6-pstotext.patch &amp;&amp;
+patch -Np1 -i ../gsview-4.6-lang.patch &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">sed
+          's|GSVIEW_ROOT=/usr/local|GSVIEW_ROOT=/usr|'</b></span>: This
+          command changes the default installation directory to <tt class=
+          "filename">/usr</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring GSview
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3258034" name="id3258034"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/gsview/*</tt>
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">GSview</span> package contains
+          <span><b class="command">epstool</b></span>, <span><b class=
+          "command">gsview</b></span> and <span><b class=
+          "command">gsview-help</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3258149" name="id3258149"></a>epstool
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">epstool</b></span> is a tool for
+            extracting preview bitmaps in <span class="acronym">EPS</span>
+            files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3258071" name="id3258071"></a>gsview
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gsview</b></span> is a viewer for
+            PostScript (<span class="acronym">PS</span>) and <span class=
+            "acronym">PDF</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3258840" name="id3258840"></a>gsview-help
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gsview-help</b></span> is a script for
+            displaying help files in your chosen browser.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="psutils.html">Prev</a><br />
+        PSUtils-p17
+      </div>
+      <div class="next">
+        <a accesskey="n" href="xpdf.html">Next</a><br />
+        Xpdf-3.00
+      </div>
+      <div class="up">
+        <a accesskey="u" href="ps.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

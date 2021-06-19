@@ -1,0 +1,175 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      The /etc/vimrc and ~/.vimrc Files
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;3.&nbsp;After LFS Configuration Issues
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="profile.html" title=
+          "The Bash Shell Startup Files">Prev</a>
+          <p>
+            The Bash Shell Startup Files
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="logon.html" title=
+          "Customizing your Logon with /etc/issue">Next</a>
+          <p>
+            Customizing your Logon with /etc/issue
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="postlfs-config-vimrc" name="postlfs-config-vimrc"></a>
+        <h1 class="sect1">
+          The /etc/vimrc and ~/.vimrc Files
+        </h1>
+      </div>
+      <p>
+        The LFS book installs <span class="application">Vim</span> as its
+        text editor. At this point it should be noted that there are a
+        <span class="emphasis"><em>lot</em></span> of different editing
+        applications out there including <span class=
+        "application">Emacs</span>, <span class="application">nano</span>,
+        <span class="application">Joe</span> and many more. Anyone who has
+        been around the Internet (especially usenet) for a short time will
+        certainly have observed at least one flame war, usually involving
+        <span class="application">Vim</span> and <span class=
+        "application">Emacs</span> users!
+      </p>
+      <p>
+        The LFS book creates a basic <tt class="filename">vimrc</tt> file. In
+        this section you'll find an attempt to enhance this file. At startup,
+        <span><strong class="command">vim</strong></span> reads <tt class=
+        "filename">/etc/vimrc</tt> and <tt class="filename">~/.vimrc</tt>
+        (i.e., the global <tt class="filename">vimrc</tt> and the
+        user-specific one). Note that this is only true if you compiled
+        <span class="application">vim</span> using LFS-3.1 onwards. Prior to
+        this, the global <tt class="filename">vimrc</tt> was <tt class=
+        "filename">/usr/share/vim/vimrc</tt>.
+      </p>
+      <p>
+        Here is a slightly expanded <tt class="filename">.vimrc</tt> that you
+        can put in <tt class="filename">~/.vimrc</tt> to provide user
+        specific effects. Of course, if you put it into <tt class=
+        "filename">/etc/skel/.vimrc</tt> instead, it will be made available
+        to users you add to the system later. You can also copy the file from
+        <tt class="filename">/etc/skel/.vimrc</tt> to the home directory of
+        users already on the system, such as <tt class=
+        "systemitem">root</tt>. Be sure to set permissions, owner, and group
+        if you do copy anything directly from <tt class=
+        "filename">/etc/skel</tt>.
+      </p>
+      <pre class="screen"><tt class="literal">" Begin .vimrc
+
+set columns=80
+set wrapmargin=8
+set ruler
+
+" End .vimrc</tt></pre>
+      <p>
+        A FAQ on the LFS mailing lists regards the comment tags in <tt class=
+        "filename">vimrc</tt>. Note that they are " instead of the more usual
+        # or //. This is correct, the syntax for <tt class=
+        "filename">vimrc</tt> is slightly unusual.
+      </p>
+      <p>
+        Below you'll find a quick explanation of what each of the options in
+        this example file means here:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li>
+            <p>
+              <tt class="option">set columns=80</tt>: This simply sets the
+              number of columns used on the screen.
+            </p>
+          </li>
+          <li>
+            <p>
+              <tt class="option">set wrapmargin=8</tt>: This is the number of
+              characters from the right window border where wrapping starts.
+            </p>
+          </li>
+          <li>
+            <p>
+              <tt class="option">set ruler</tt>: This makes
+              <span><strong class="command">vim</strong></span> show the
+              current row and column at the bottom right of the screen.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        More information on the <span class="emphasis"><em>many</em></span>
+        <span><strong class="command">vim</strong></span> options can be
+        found by reading the help inside <span><strong class=
+        "command">vim</strong></span> itself. Do this by typing
+        <span><strong class="command">:</strong></span><tt class=
+        "option">help</tt> in <span><strong class=
+        "command">vim</strong></span> to get the general help, or by typing
+        <span><strong class="command">:</strong></span><tt class=
+        "option">help usr_toc.txt</tt> to view the User Manual Table of
+        Contents.
+      </p>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="profile.html" title=
+          "The Bash Shell Startup Files">Prev</a>
+          <p>
+            The Bash Shell Startup Files
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="logon.html" title=
+          "Customizing your Logon with /etc/issue">Next</a>
+          <p>
+            Customizing your Logon with /etc/issue
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="config.html" title=
+          "Chapter&nbsp;3.&nbsp;After LFS Configuration Issues">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,902 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      HAL-0.5.9.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;11.&nbsp;System Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dbus.html" title="D-BUS-1.0.2">Prev</a>
+          <p>
+            D-BUS-1.0.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="prog.html" title="Programming">Next</a>
+          <p>
+            Programming
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;11.&nbsp;System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="hal" name="hal"></a>HAL-0.5.9.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to HAL
+        </h2>
+        <p>
+          <span class="application">HAL</span> is a hardware abstraction
+          layer, which is a piece of software that provides a view of the
+          various hardware attached to a system. In addition to this,
+          <span class="application">HAL</span> keeps detailed metadata for
+          each piece of hardware and provides hooks such that system and
+          desktop-level software can react to changes in the hardware
+          configuration in order to maintain system policy.
+        </p>
+        <p>
+          The most important goal of <span class="application">HAL</span> is
+          to provide plug-and-play facilities for UNIX-like desktops with
+          focus on providing a rich and extensible description of device
+          characteristics and features. One example of the functionality
+          provided by <span class="application">HAL</span> is when you plug
+          in a USB storage device. <span class="application">HAL</span> can
+          automatically create a mount point in <code class=
+          "filename">/media</code> and mount the device.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://freedesktop.org/~david/dist/hal-0.5.9.1.tar.gz">http://freedesktop.org/~david/dist/hal-0.5.9.1.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 6a40f49f964e64358e53652038f3059f
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.5 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 24 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Package Download
+        </h3>
+        <div class="itemizedlist">
+          <p class="title">
+            <b>Required Hardware Data</b>
+          </p>
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://freedesktop.org/~david/dist/hal-info-20070618.tar.gz">
+                http://freedesktop.org/~david/dist/hal-info-20070618.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: c7005ccb1765d8359fd2348350770495
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 118 KB
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          HAL Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="dbus-bindings.html#dbus-glib" title=
+          "D-Bus GLib Bindings">D-Bus GLib Bindings-0.74</a> and <a class=
+          "xref" href="perl-modules.html#perl-xml-parser" title=
+          "XML::Parser-2.34">XML::Parser-2.34</a>
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="pciutils.html" title=
+          "PCI Utilities-2.2.3">PCI Utilities-2.2.3</a> (with a current
+          <code class="filename">pci.ids</code> file) and <a class="xref"
+          href="usbutils.html" title="usbutils-0.72">usbutils-0.72</a> (with
+          a current <code class="filename">usb.ids</code> file)
+        </p>
+        <h4>
+          Optional (to Build <span class=
+          "command"><strong>hal-device-manager</strong></span>)
+        </h4>
+        <p class="optional">
+          <a class="xref" href="python.html" title=
+          "Python-2.5.2">Python-2.5.2</a>
+        </p>
+        <h4>
+          Optional (to Create Documentation)
+        </h4>
+        <p class="optional">
+          <a class="xref" href="libxml2.html" title=
+          "libxml2-2.6.31">libxml2-2.6.31</a> and <a class="ulink" href=
+          "http://cyberelk.net/tim/xmlto/">xmlto</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="gtk-doc.html" title=
+          "GTK-Doc-1.8">GTK-Doc-1.8</a>, <a class="xref" href="libusb.html"
+          title="libusb-0.1.12">libusb-0.1.12</a>, <a class="ulink" href=
+          "http://www.gnu.org/software/parted/index.shtml">Parted</a>*,
+          <a class="ulink" href=
+          "http://linux.dell.com/libsmbios/main/index.html">libsmbios</a>,
+          <a class="ulink" href=
+          "http://gitweb.freedesktop.org/?p=PolicyKit.git;a=summary">PolicyKit</a>,
+          and <a class="xref" href="intltool.html" title=
+          "Intltool-0.35.5">intltool-0.35.5</a>
+        </p>
+        <p>
+          * Use the following command after changing into the <span class=
+          "application">HAL</span> source directory to modify the package
+          <span class="command"><strong>configure</strong></span> script if
+          you have <span class="application">Parted</span> version 1.8.7
+          installed.
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i -e   's%, 1.8.6%&amp;, 1.8.7%' \
+       -e   's% or 1.8.6%/1.8.6 or 1.8.7%' \
+       -e   's%6))%6) ||\
+            (major == 1 \&amp;\&amp; minor == 8 \&amp;\&amp; micro == 7))%' \
+    configure</kbd>
+</pre>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/hal">http://wiki.linuxfromscratch.org/blfs/wiki/hal</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of HAL
+        </h2>
+        <p>
+          You must create a dedicated user and group before installing the
+          package. Though the default BLFS instructions run the <span class=
+          "application">HAL</span> daemon as the <code class=
+          "systemitem">root</code> user, a configuration file is installed
+          which has the dedicated user's name hard-coded in it. This causes a
+          confusing message to be generated when starting the <span class=
+          "application">D-BUS</span> daemon. Issue the following commands as
+          the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">groupadd -g 19 haldaemon &amp;&amp;
+useradd -c "HAL Daemon User" -d /dev/null -u 19 \
+        -g haldaemon -s /bin/false haldaemon</kbd>
+</pre>
+        <p>
+          Install <span class="application">HAL</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --libexecdir=/usr/lib/hal \
+            --localstatedir=/var &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          To test the results, issue <span class="command"><strong>make
+          check</strong></span>.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          Install the <span class="application">HAL</span> hardware data with
+          the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">tar -xf ../hal-info-20070618.tar.gz &amp;&amp;
+cd hal-info-20070618 &amp;&amp;
+./configure --prefix=/usr</kbd>
+</pre>
+        <p>
+          Finally, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--libexecdir=/usr/lib/hal</code></em>:
+          This parameter forces the installation of libexec files to
+          <code class="filename">/usr/lib/hal</code> instead of <code class=
+          "filename">/usr/libexec</code>.
+        </p>
+        <p>
+          <em class="parameter"><code>--localstatedir=/var</code></em>: This
+          parameter forces the creation of the <code class=
+          "filename">pid</code> file to <code class=
+          "filename">/var/run/hald</code> instead of <code class=
+          "filename">/usr/var/run/hald</code>.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-docbook-docs
+          --docdir=/usr/share/doc/hal-0.5.9.1</code></em>: If <a class="xref"
+          href="libxml2.html" title="libxml2-2.6.31">libxml2-2.6.31</a> and
+          <a class="ulink" href="http://cyberelk.net/tim/xmlto/">xmlto</a>
+          are available, these parameters enable the <span class=
+          "application">HAL</span> specification documentation to be built.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Run-Time Dependencies
+        </h2>
+        <p>
+          A few more packages enable more functionality in <span class=
+          "application">HAL</span> at run-time. These include <a class=
+          "ulink" href=
+          "http://ca.geocities.com/jefftranter@rogers.com/eject.html">Eject</a>,
+          <a class="ulink" href=
+          "http://people.freedesktop.org/~mccann/dist/">ConsoleKit</a>,
+          <a class="ulink" href=
+          "http://www.nongnu.org/dmidecode/">dmidecode</a>, <a class="ulink"
+          href="http://sourceware.org/dm/">Device-mapper</a>, <a class=
+          "ulink" href=
+          "http://luks.endorphin.org/dm-crypt">Cryptsetup-LUKS</a>, and
+          <a class="ulink" href=
+          "http://cvsweb.freedesktop.org/pm-utils/pm-utils/">pm-utils</a>.
+        </p>
+        <p>
+          The <a class="xref" href="hal.html#hal-device-manager"><span class=
+          "command"><strong>hal-device-manager</strong></span></a> program
+          requires several additional <span class="application">Python</span>
+          modules to be available at runtime. These are <a class="xref" href=
+          "dbus-bindings.html#dbus-python" title=
+          "D-Bus Python Bindings">D-Bus Python Bindings-0.82.0</a>, <a class=
+          "xref" href="python-modules.html#pygtk" title=
+          "PyGTK-2.10.6">PyGTK-2.10.6</a> (including the gtk and gtk.libglade
+          modules), and <a class="xref" href=
+          "python-modules.html#gnome-python" title=
+          "Gnome-Python-2.18.2">Gnome-Python-2.18.2</a> (including the
+          gnome.ui module).
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring HAL
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="hal-config" name="hal-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/dbus-1/system.d/hal.conf</code>,
+            <code class="filename">/etc/dbus-1/system.d/halusers.conf</code>
+            and <code class="filename">/etc/hal/*</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2686829" name="id2686829"></a>Allowing users to
+                    invoke HAL methods
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              The default setup for <span class="application">HAL</span> is
+              to allow only certain users to invoke methods such as Mount().
+              These are the <code class="systemitem">root</code> user and the
+              user determined to be at the active console using <a class=
+              "ulink" href=
+              "http://wiki.linuxfromscratch.org/blfs/wiki/linux-pam">pam_console</a>.
+              If you are not set up to use <a class="xref" href=
+              "../postlfs/linux-pam.html" title=
+              "Linux-PAM-0.99.10.0">Linux-PAM-0.99.10.0</a> and <a class=
+              "ulink" href=
+              "http://wiki.linuxfromscratch.org/blfs/wiki/linux-pam">pam_console</a>,
+              create a group that is allowed to invoke <span class=
+              "application">HAL</span> methods with the following commands:
+            </p>
+            <pre class="root">
+<kbd class="command">groupadd -g 61 halusers &amp;&amp;
+cat &gt; /etc/dbus-1/system.d/halusers.conf &lt;&lt; "EOF"
+<code class="literal">&lt;!DOCTYPE busconfig PUBLIC
+ "-//freedesktop//DTD D-BUS Bus Configuration 1.0//EN"
+ "http://www.freedesktop.org/standards/dbus/1.0/busconfig.dtd"&gt;
+&lt;busconfig&gt;
+
+ &lt;!-- Allow users in the halusers group invoke HAL methods --&gt;
+ &lt;policy group="halusers"&gt;
+  &lt;allow send_interface="org.freedesktop.Hal.Device.SystemPowerManagement"/&gt;
+  &lt;allow send_interface="org.freedesktop.Hal.Device.LaptopPanel"/&gt;
+  &lt;allow send_interface="org.freedesktop.Hal.Device.Volume"/&gt;
+  &lt;allow send_interface="org.freedesktop.Hal.Device.Volume.Crypto"/&gt;
+ &lt;/policy&gt;
+
+&lt;/busconfig&gt;</code>
+EOF</kbd>
+</pre>
+            <p>
+              Now add the users you would like to the <code class=
+              "systemitem">halusers</code> group to use <span class=
+              "application">HAL</span>.
+            </p>
+            <pre class="root">
+<kbd class="command">usermod -a -G halusers <em class=
+"replaceable"><code>&lt;username&gt;</code></em></kbd>
+</pre>
+            <p>
+              Note that these users still need to have appropriate
+              permissions to access the devices that <span class=
+              "application">HAL</span> will invoke its methods on.
+            </p>
+            <p>
+              With the above configuration in place, authorized users now
+              have the ability to unmount disk partitions mounted at
+              non-standard locations such as <code class=
+              "filename">/pub</code>. If you'd like to restrict this policy
+              to only drives which are considered removable or hotpluggable,
+              add the following configuration file as the <code class=
+              "systemitem">root</code> user:
+            </p>
+            <pre class="root">
+<kbd class=
+"command">cat &gt; /etc/hal/fdi/policy/no-fixed-drives.fdi &lt;&lt; "EOF"
+<code class=
+"literal">&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;!-- -*- SGML -*- --&gt;
+
+&lt;!-- Don't allow HAL methods on disks that are not
+     removable or hotpluggable --&gt;
+
+&lt;deviceinfo version="0.2"&gt;
+&lt;device&gt;
+  &lt;match key="@block.storage_device:storage.hotpluggable" bool="false"&gt;
+    &lt;match key="@block.storage_device:storage.removable" bool="false"&gt;
+      &lt;merge key="volume.ignore" type="bool"&gt;true&lt;/merge&gt;
+    &lt;/match&gt;
+  &lt;/match&gt;
+&lt;/device&gt;
+&lt;/deviceinfo&gt;</code>
+EOF</kbd>
+</pre>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2687015" name="id2687015"></a>Installing mount
+                    helpers
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span class="application">HAL</span> only provides the methods
+              such as Mount() to act on hardware. In order to take advantage
+              of these, a <span class="application">HAL</span> event handler
+              such as <a class="xref" href=
+              "../gnome/gnome-volume-manager.html" title=
+              "gnome-volume-manager-2.17.0">gnome-volume-manager-2.17.0</a>
+              or <a class="ulink" href=
+              "http://ivman.sourceforge.net/">Ivman</a> should be installed.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2687056" name="id2687056"></a>Changing default
+                    mount options
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              In some cases, it is necessary to specify some default mount
+              options for filesystems. E.g., in non-English environments, the
+              <code class="option">iocharset</code> and <code class=
+              "option">codepage</code> options are needed for filesystems of
+              Windows origin in order to show national characters correctly.
+              Also, due to a <a class="ulink" href=
+              "https://launchpad.net/bugs/133567">bug</a> in the Linux kernel
+              version in LFS (2.6.22.x), you may want to pass the
+              <code class="option">usefree</code> option to vfat filesystems
+              in order to reduce the time needed to determine the amount of
+              free space on the filesystem.
+            </p>
+            <p>
+              Google search results for &ldquo;<span class="quote">hal
+              default mount options</span>&rdquo; are still full of
+              recommendations to create <code class="filename">*.fdi</code>
+              files mentioning either <code class=
+              "option">volume.policy</code> or <code class=
+              "option">storage.policy</code> keys. Such recommendations
+              worked for HAL-0.4.x only and are invalid now. For HAL-0.5.9.1,
+              mount options are expected to be handled as follows:
+            </p>
+            <div class="itemizedlist">
+              <ul>
+                <li>
+                  <p>
+                    An event handler from the desktop environment receives an
+                    event describing the newly-added storage device.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    If the storage device is not already mentioned in
+                    <code class="filename">/etc/fstab</code>, mount options
+                    are fetched from a database of user preferences, which is
+                    specific to the desktop environment, and passed back to
+                    HAL. This process can be influenced by the filesystem
+                    type and possibly other volume properties available from
+                    HAL.
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    If the options are in the list of permitted ones, HAL
+                    mounts the volume.
+                  </p>
+                </li>
+              </ul>
+            </div>
+            <p>
+              The important point above is that the configuration procedure
+              is desktop-specific. However, as of December, 2007, only GNOME
+              allows the user to set default mount options on a
+              per-filesystem basis, as described in the next paragraph. KDE
+              allows the mount options to be set only on a per-volume basis,
+              not per-filesystem, which is a <a class="ulink" href=
+              "http://bugs.kde.org/show_bug.cgi?id=133456">bug</a>, because,
+              as mentioned in the report, &ldquo;<span class="quote">for
+              every new device (let's say your friend's USB stick) you have
+              to first not mount it, then change options and then
+              mount</span>&rdquo;. Xfce, if compiled with HAL support,
+              <a class="ulink" href=
+              "http://bugzilla.xfce.org/show_bug.cgi?id=2891">hard-codes</a>
+              the mount options without any means to override them, which is
+              even worse. In KDE and Xfce, if the built-in default mount
+              options are not suitable, it is needed to mention every
+              possible removable storage device in <code class=
+              "filename">/etc/fstab</code> with the correct options, thus
+              mostly defeating the point of installing HAL.
+            </p>
+            <p>
+              In order to adjust the default mount options, GNOME users
+              should change the <code class=
+              "systemitem">/system/storage/default_options/[fs_type]/mount_options</code>
+              GConf key either using <a class="xref" href=
+              "../gnome/gconf-editor.html" title="GConf Editor-2.18.0">GConf
+              Editor-2.18.0</a>, or from the command line, as demonstrated in
+              the following example:
+            </p>
+            <pre class="userinput">
+<kbd class="command">gconftool-2 --type list --list-type=string \
+    --set /system/storage/default_options/vfat/mount_options \
+    "[shortname=mixed,uid=,usefree,iocharset=koi8-r,codepage=866]"</kbd>
+</pre>
+            <p>
+              See more details in the gnome-mount(1) manual page.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2687240" name="id2687240"></a>Adding allowed
+                    mount options
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              The list of mount options permitted in the default HAL
+              configuration resides in the <code class=
+              "filename">/usr/share/hal/fdi/policy/10osvendor/20-storage-methods.fdi</code>
+              file. GNOME and KDE users may want to use options not in this
+              list (in the above example, this applies to the <code class=
+              "option">usefree</code> option). In this case, as <code class=
+              "systemitem">root</code> user, create a custom policy file that
+              mentions unknown mount options:
+            </p>
+            <pre class="root">
+<kbd class=
+"command">cat &gt; /etc/hal/fdi/policy/user-options.fdi &lt;&lt; "EOF"
+<code class=
+"literal">&lt;?xml version="1.0" encoding="UTF-8"?&gt; &lt;!-- -*- SGML -*- --&gt;
+
+&lt;!--
+This file is used to set custom options to the HAL policy settings.
+The default policy settings are defined in files contained in the
+/usr/share/hal/fdi/policy subdirectories. User defined customizations
+should be in files contained in the /etc/hal/fdi/policy directory.
+--&gt;
+
+&lt;deviceinfo version="0.2"&gt;
+&lt;device&gt;
+
+&lt;!-- this is to be able to mount media in drives we cannot poll,
+     e.g. IDE Zip Drives and PC style floppy drives --&gt;
+&lt;match key="storage.media_check_enabled" bool="false"&gt;
+  &lt;match key="storage.no_partitions_hint" bool="true"&gt;
+    &lt;append key="volume.mount.valid_options" type="strlist"&gt;usefree&lt;/append&gt;
+    &lt;!-- Insert other options here --&gt;
+  &lt;/match&gt;
+&lt;/match&gt;
+
+&lt;match key="volume.fsusage" string="filesystem"&gt;
+
+  &lt;!-- allow these mount options for vfat --&gt;
+  &lt;match key="volume.fstype" string="vfat"&gt;
+    &lt;append key="volume.mount.valid_options" type="strlist"&gt;usefree&lt;/append&gt;
+    &lt;!-- Insert other options here --&gt;
+  &lt;/match&gt;
+&lt;/match&gt;
+
+&lt;/device&gt;
+&lt;/deviceinfo&gt;</code>
+EOF</kbd>
+</pre>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="hal-init" name="hal-init"></a>Boot Script
+          </h3>
+          <p>
+            To automatically start the <span class=
+            "command"><strong>hald</strong></span> daemon when the system is
+            rebooted, install the <code class=
+            "filename">/etc/rc.d/init.d/haldaemon</code> bootscript from the
+            <a class="xref" href="../introduction/bootscripts.html" title=
+            "BLFS Boot Scripts">blfs-bootscripts-20080816</a> package.
+          </p>
+          <div class="admon important">
+            <img alt="[Important]" src="../images/important.png" />
+            <h3>
+              Important
+            </h3>
+            <p>
+              If the system-wide <span class="application">D-BUS</span>
+              daemon was running during the installation of <span class=
+              "application">HAL</span>, ensure you stop and restart the
+              <span class="application">D-BUS</span> daemon before attempting
+              to start the <span class="command"><strong>hald</strong></span>
+              daemon.
+            </p>
+          </div>
+          <pre class="root">
+<kbd class="command">make install-haldaemon</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">hal-device, hal-device-manager,
+              hal-disable-polling, hal-find-by-capability,
+              hal-find-by-property, hal-get-property,
+              hal-is-caller-locked-out, hal-lock, hal-set-property, hald and
+              lshal</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libhal.{so,a} and
+              libhal-storage,{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/hal, /usr/include/hal, /usr/lib/hal,
+              /usr/share/doc/hal-0.5.9.1, /usr/share/hal, /var/cache/hald,
+              /var/lib/hal, and /var/run/hald</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hal-device" name="hal-device"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hal-device</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to create, remove or show a <span class=
+                    "application">HAL</span> device.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hal-device-manager" name=
+                    "hal-device-manager"></a><span class="term"><span class=
+                    "command"><strong>hal-device-manager</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    shows a graphical representation of all the devices
+                    <span class="application">HAL</span> is aware of. Here is
+                    a <a class="ulink" href=
+                    "http://cvs.freedesktop.org/*checkout*/hal/hal/doc/spec/hal-devices1.png">
+                    screenshot</a> of <span class=
+                    "command"><strong>hal-device-manager</strong></span>
+                    communicating with the HAL daemon and displaying a tree
+                    of device objects. The shown properties in the screenshot
+                    are for a device object representing a hard disk.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hal-disable-polling" name=
+                    "hal-disable-polling"></a><span class="term"><span class=
+                    "command"><strong>hal-disable-polling</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    can be used to to disable and enable media detection on
+                    drives with removable storage.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hal-find-by-capability" name=
+                    "hal-find-by-capability"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hal-find-by-capability</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    prints the Unique Device Identifiers for <span class=
+                    "application">HAL</span> device objects of a given
+                    capability.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hal-find-by-property" name=
+                    "hal-find-by-property"></a><span class=
+                    "term"><span class="command"><strong>hal-find-by-property</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    prints the Unique Device Identifiers for <span class=
+                    "application">HAL</span> device objects where a given
+                    property assumes a given value.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hal-get-property" name=
+                    "hal-get-property"></a><span class="term"><span class=
+                    "command"><strong>hal-get-property</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    retrieves a property from a device.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hal-set-property" name=
+                    "hal-set-property"></a><span class="term"><span class=
+                    "command"><strong>hal-set-property</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    attempts to set property for a device. Note that, due to
+                    security considerations, it may not be possible to set a
+                    property.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hal-is-caller-locked-out" name=
+                    "hal-is-caller-locked-out"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hal-is-caller-locked-out</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    determines if a specific caller is locked out of a
+                    specific <span class="application">D-Bus</span> interface
+                    on a specific device.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hald" name="hald"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hald</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">HAL</span> daemon
+                    program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lshal" name="lshal"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lshal</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    shows all devices and their properties. If the --monitor
+                    option is given then the device list and all devices are
+                    monitored for changes.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libhal" name="libhal"></a><span class=
+                    "term"><code class="filename">libhal.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the API functions required by the <span class=
+                    "application">HAL</span> programs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libhal-storage" name=
+                    "libhal-storage"></a><span class="term"><code class=
+                    "filename">libhal-storage.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the API functions required by the <span class=
+                    "application">HAL</span> storage and volume utility
+                    programs.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-08-11 19:15:25 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dbus.html" title="D-BUS-1.0.2">Prev</a>
+          <p>
+            D-BUS-1.0.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="prog.html" title="Programming">Next</a>
+          <p>
+            Programming
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;11.&nbsp;System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

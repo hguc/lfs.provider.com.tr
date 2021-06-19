@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      ProFTPD-1.2.9
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;24.&nbsp;Web serving</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="php.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="../x/x.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          ProFTPD-1.2.9
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to ProFTPD
+          </h3>
+        </div>
+        <p>
+          The <span class="application">ProFTPD</span> package contains a
+          secure and highly configurable FTP daemon. This is useful for
+          serving large file archives over a network.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2899683" name="id2899683"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP):<a href=
+                  "http://ftp.proftpd.org/distrib/source/proftpd-1.2.9.tar.bz2">
+                  http://ftp.proftpd.org/distrib/source/proftpd-1.2.9.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.proftpd.org/distrib/source/proftpd-1.2.9.tar.bz2">
+                  ftp://ftp.proftpd.org/distrib/source/proftpd-1.2.9.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 761 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 6.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.27 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2901714" name="id2901714"></a><span class=
+                  "application">ProFTPD</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2901726" name="id2901726"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/linux_pam.html">Linux-PAM-0.77</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of ProFTPD
+          </h3>
+        </div>
+        <p>
+          For security reasons, running <span class=
+          "application">ProFTPD</span> as an unprivileged user and group is
+          encouraged.
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">groupadd proftpd &amp;&amp;
+useradd -c proftpd -d /home/ftp -g proftpd -s /bin/false proftpd</b></span>
+</tt>
+</pre>
+        <p>
+          Install <span class="application">ProFTPD</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">install_user=proftpd install_group=proftpd \
+   ./configure --prefix=/usr --sysconfdir=/etc \
+   --localstatedir=/var/run &amp;&amp;
+make &amp;&amp;
+make install </b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>install_user=proftpd
+          install_group=proftpd</tt></i>: Specify the user and group identity
+          for ProFTPD.
+        </p>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc</tt></i>: This prevents
+          the configuration files from going to <tt class=
+          "filename">/usr/etc</tt>.
+        </p>
+        <p>
+          <i class="parameter"><tt>--localstatedir=/var/run</tt></i>: This
+          uses <tt class="filename">/var/run</tt> instead of <tt class=
+          "filename">/usr/var</tt> for lock files.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring ProFTPD
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2901603" name="id2901603"></a>proftpd init.d
+                  script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/proftpd</tt>
+            init script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-proftpd</b></span></tt>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2901297" name="id2901297"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/proftpd.conf</tt>
+          </p>
+          <p>
+            This is a simple, download-only sample configuration. See the
+            ProFTPD documentation in <tt class=
+            "filename">/usr/share/doc/proftpd</tt> and consult the website at
+            <a href="http://www.proftpd.org/">http://www.proftpd.org/</a> for
+            example configurations.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; /etc/proftpd.conf &lt;&lt; "EOF"</b></span>
+# This is a basic ProFTPD configuration file
+# It establishes a single server and a single anonymous login.
+
+ServerName                      "ProFTPD Default Installation"
+ServerType                      standalone
+DefaultServer                   on
+
+# Port 21 is the standard FTP port.
+Port                            21
+# Umask 022 is a good standard umask to prevent new dirs and files
+# from being group and world writable.
+Umask                           022
+
+# To prevent DoS attacks, set the maximum number of child processes
+# to 30.  If you need to allow more than 30 concurrent connections
+# at once, simply increase this value.  Note that this ONLY works
+# in standalone mode, in inetd mode you should use an inetd server
+# that allows you to limit maximum number of processes per service
+# (such as xinetd)
+MaxInstances                    30
+
+# Set the user and group that the server normally runs at.
+User                            proftpd
+Group                           proftpd
+
+# Normally, we want files to be overwritable.
+&lt;Directory /*&gt;
+  AllowOverwrite                on
+&lt;/Directory&gt;
+
+# A basic anonymous configuration, no upload directories.
+&lt;Anonymous ~proftpd&gt;
+  User                          proftpd
+  Group                         proftpd
+  # We want clients to be able to login with "anonymous" as well as "proftpd"
+  UserAlias                     anonymous proftpd
+
+  # Limit the maximum number of anonymous logins
+  MaxClients                    10
+
+  # We want 'welcome.msg' displayed at login, and '.message' displayed
+  # in each newly chdired directory.
+  DisplayLogin                  welcome.msg
+  DisplayFirstChdir             .message
+
+  # Limit WRITE everywhere in the anonymous chroot
+  &lt;Limit WRITE&gt;
+    DenyAll
+  &lt;/Limit&gt;
+&lt;/Anonymous&gt;
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">ProFTPD</span> package contains
+          <span><b class="command">ftpcount</b></span>, <span><b class=
+          "command">ftpshut</b></span>, <span><b class=
+          "command">ftptop</b></span>, <span><b class=
+          "command">ftpwho</b></span> and <span><b class=
+          "command">proftpd</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2902089" name="id2902089"></a>ftpcount
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ftpcount</b></span> shows the current
+            number of connections.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2902101" name="id2902101"></a>ftpshut
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ftpshut</b></span> shuts down all
+            proftpd servers at a given time.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2902114" name="id2902114"></a>ftptop
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ftptop</b></span> displays running
+            status on connections.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2902128" name="id2902128"></a>ftpwho
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ftpwho</b></span> shows current process
+            information for each session.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2902141" name="id2902141"></a>proftpd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">proftpd</b></span> is the daemon itself.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="php.html">Prev</a><br />
+        PHP-4.3.6
+      </div>
+      <div class="next">
+        <a accesskey="n" href="../x/x.html">Next</a><br />
+        Part&nbsp;VIII.&nbsp;X + Window Managers
+      </div>
+      <div class="up">
+        <a accesskey="u" href="web.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

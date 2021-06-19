@@ -1,0 +1,208 @@
+<!--#set var="pageTitle" value="BLFS Errata" -->
+<!--#include virtual="/blfs/header.html" -->
+<!--#include virtual="/blfs/menu.html" -->
+    <div class="main">
+
+     <h1>Errata for BLFS Version 9.0</h1>
+     
+     <ul>
+       <li>After release, a problem was discovered in BIND where the instructions
+       used in the book would result in a nonexistent rndc.conf file. To fix this,
+       run "rndc-confgen -a -b 512 -t /srv/named" instead of
+       "rndc-confgen -r /dev/urandom -b 512 &gt; /etc/rndc.conf". Also, 
+       please modify the files to reference /etc/named instead of /etc/namedb.</li>
+     </ul>
+
+     <h2>Known Security Vulnerabilities</h2>
+     
+     <p>A few packages are good at reporting that a new
+     release fixes a vulnerability. For some others, such as firefox,
+     virtually every new release includes security fixes. But in many cases
+     the fixes are not documented as security issues.</p>
+     
+     <p>Updates to the packages in the book may be available in the 
+        <a href="../../view/svn/">development version of the book.</a>
+     </p>
+
+     <p>After release, three security vulnerabilities were identified in the
+     CUPS print server. These are primarily buffer overflow vulnerabilities. To
+     fix them, use the instructions in
+     <a href="../../view/svn/pst/cups.html">CUPS 2.3.1</a> to upgrade to
+     CUPS-2.3.1.</p>
+
+     <p>After release, several vulnerabilities were identified in Firefox.
+     Several of them are rated High or Moderate. An additional one contains
+     a 0-day fix for CVE-2019-17026. All users should update immediately.
+     To fix these, upgrade to Firefox-68.4.1 using the instructions in
+     <a href="../../view/svn/xsoft/firefox.html">Firefox-68.4.1</a>.</p>
+
+     <p>After release, a vulnerability was discovered in the version of PHP
+     shipped with BLFS 9.0. The BLFS team recommends updating to the latest version
+     of PHP in the instructions here:
+     <a href="../../view/svn/general/php.html">PHP-7.3.11</a>.</p>
+
+     <p>After release, several high and critical severity vulnerabilities were
+     patched in Seamonkey-2.49.5. The BLFS team highly recommends updating to
+     Seamonkey-2.49.5 using the instructions in
+     <a href="../../view/svn/xsoft/seamonkey.html">Seamonkey-2.49.5</a>.</p>
+
+     <p>After release, vulnerabilities were discovered in the version of Glib
+     shipped with BLFS 9.0. To fix these, update to glib-2.60.7 or later
+     (glib-2.62.0 is in at the time of this errata) using the instructions in
+     <a href="../../view/svn/general/glib2.html">GLib-2.60.7</a>.</p>
+
+     <p>After release, a Use-After-Free vulnerability was discovered in
+     gnome-bluetooth when used in gnome-shell with malicious extensions. To fix
+     this, upgrade to gnome-bluetooth-3.34.0 using the instructions in
+     <a href="../../view/svn/gnome/gnome-bluetooth.html">gnome-bluetooth-3.24.0</a>.</p>
+
+     <p>After release, a vulnerability was discovered in libjpeg-turbo. To fix this,
+     upgrade to libjpeg-turbo-2.0.3 or later using the instructions in
+     <a href="../../view/svn/general/libjpeg.html">libjpeg-turbo-2.0.3</a>.</p>
+
+     <p>After release, a critical security vulnerability that allows root access
+     was discovered in Exim. The BLFS team recommends upgrading to Exim-4.92.4
+     immediately to prevent exploitation. To upgrade, use the instructions in
+     <a href="../../view/svn/server/exim.html">exim-4.92.2</a>.</p>
+
+     <p>After release, a use-after-free vulnerability was discoverd in at-spi2-core.
+     To fix this, upgrade using the instructions in
+     <a href="../../view/svn/x/at-spi2-core.html">at-spi2-core-2.34.0</a>.</p>
+
+     <p>After release, several high and critical vulnerabilities were discovered in
+     QtWebEngine (Chromium-based). Additional vulnerabilities were discovered in
+     the Qt plugin loader and QSQLite. The BLFS team recommends upgrading 
+     to version 5.14.1 or later immediately. To upgrade, 
+     upgrade to Qt-5.14,1 first and then to QtWebEngine-5.14,1 using the 
+     instructions in <a href="../../view/svn/x/qt5.html">Qt-5.14.1</a> and
+     <a href="../../view/svn/x/qtwebengine.html">QtWebEngine-5.14.1</a> respectively.</p>
+
+     <p>After release, two vulnerabilities were discovered in cURL. These are
+     double-free and heap-buffer-overflow vulnerabilities in TFTP and FTP (with KRB)
+     support. If you don't have TFTP support enabled or Kerberos support enabled,
+     disregard this notice. Otherwise, upgrade using the instructions in
+     <a href="../../view/svn/basicnet/curl.html">cURL-7.66.0</a>.</p>
+
+     <p>After release, a potential Denial of Service vulnerability was discovered
+     in DHCPCD. To fix this, upgrade to the latest version using the instructions here:
+     <a href="../../view/svn/basicnet/dhcpcd.html">dhcpcd-8.0.6</a>.</p>
+
+     <p>After release, a security vulnerability was discovered in Wireshark that could lead
+     to a kernel panic or client crash when analyzing bluetooth packets. To fix this,
+     upgrade to the latest version of Wireshark using the instructions in
+     <a href="../../view/svn/basicnet/wireshark.html">Wireshark-3.0.7</a>.</p>
+
+     <p>After release, a use-after-free vulnerability was discovered in Evolution-Data-Server that
+     could lead to a denial of service condition. To fix this, upgrade to the latest
+     version of evolution-data-server and evolution using the instructions in
+     <a href="../../view/svn/gnome/evolution-data-server.html">evolution-data-server-3.34.0</a> and
+     <a href="../../view/svn/gnome/evolution.html">evolution-3.34.0</a> respectively.</p>
+
+     <p>After release, several vulnerabilites were discovered in the rdoc implementation of
+     Ruby. The BLFS team recommends updating to the latest version of Ruby ASAP using the
+     instrunctions in
+     <a href="../../view/svn/general/ruby.html">Ruby-2.6.5</a>.</p>
+
+     <p>After release, a vulnerability was discovered in Unbound that allows remote attackers
+     to crash the process. To fix this, update to the latest version of Unbound using the
+     instructions in
+     <a href="../../view/svn/server/unbound.html">Unbound-1.9.6</a>.</p>
+
+     <p>After release, many new sandbox/-dSAFER escape vulnerabilities were
+     discovered in Ghostscript. Unless these vulnerabilities are patched,
+     PDF documents can access the filesystem outside of restricted areas
+     and execute arbitrary commands. To fix these vulnerabilities, update
+     to
+     <a href="../../view/svn/pst/gs.html">ghostscript-9.50</a>.</p>
+
+     <p>After release, a potential restriction bypass vulnerability was
+     discovered in Sudo prior to version 1.8.28. Another security flaw 
+     was found in the pwfeedback option in 1.8.30. To fix these, update to
+     Sudo-1.8.31 ASAP using the instructions in
+     <a href="../../view/svn/postlfs/sudo.html">sudo-1.8.31</a>.</p>
+
+     <p>After release, five vulnerabilities were discovered in Python-2.7.16
+     as shipped with BLFS 9.0. To fix these vulnerabilities, update to
+     Python-2.7.17 using the instructions in
+     <a href="../../view/svn/general/python2.html">Python-2.7.17</a>.</p>
+
+     <p>After release, a new vulnerability (which got media attention) was
+     revealed in ProFTPD. This classifies as a buffer overflow vulnerability.
+     To fix this vulnerability, update to ProFTPD-1.3.6b using the instructions
+     in <a href="../../view/svn/server/proftpd.html">ProFTPD-1.3.6b</a>.</p>
+
+     <p>After release, several vulnerabilities were discovered in Thunderbird.
+     In addition, a zero day security flaw that was patched in Firefox also
+     affects Thunderbird, and has been fixed.
+     These include memory safety bugs, restriction bypasses, and a
+     remote code execution bug in the iCal parser. To fix these, update to
+     Thunderbird-68.4.1 using the instructions in
+     <a href="../../view/svn/xsoft/thunderbird.html">Thunderbird-68.4.1</a>.</p>
+
+     <p>After release, a security flaw was found in NSS, CVE-2019-11745.
+     An additional security flaw was found that was fixed by adding extra
+     encryption tests (CVE-2019-17023). To fix these,
+     update to the latest version of NSS using the instructions in
+     <a href="../../view/svn/postlfs/nss.html">NSS-3.49</a>.</p>
+
+     <p>After release, a security flaw was discovered in the way that SHA-1
+     signatures are used in GnuPG. The SHA-1 support has been removed from
+     the "Web of Trust". Please update to GnuPG-2.2.18 or later using the
+     instructions in
+     <a href="../../view/svn/postlfs/gnupg.html">GnuPG-2.2.18</a> if you
+     wish to still continue using GnuPG if you have a SHA-1 signature.</p>
+
+     <p>After release it was discovered that many security fixes for
+     unzip-6.0 were present in distros but had not been applied to BLFS.
+     To fix these, rebuild unzip using the patch in
+     <a href="../..//view/svn/general/unzip.html">unzip-6.0</a>.</p>
+
+     <p>After release the xvid team released a new version that contained
+     fixes for "various, long-standing and potentially critical security
+     vulnerabilities in the decoder". To resolve this, upgrade to
+     XviD-1.3.6 using the instructions in
+     <a href="../../view/svn/multimedia/xvid.html">XviD-1.3.6</a>.</p>
+
+     <p>After release, a series of security flaws in all maintained versions
+     of git were disclosed. These allow an attacker to overwrite arbitrary
+     paths, remotely execute code, or overwrite files in the .git/ directory.
+     To fix these, please update to git-2.24.1 using the instructions in
+     <a href="../../view/svn/general/git.html">git-2.24.1</a>.</p>
+
+     <p>After release, a security flaw was discovered in npm, shipped with
+     node.js, that leads to files being overwrited when installing packages.
+     These files get overwritten in whatever prefix you are installing node in,
+     and can include files in /usr/bin and /usr/sbin. This can lead to file
+     deletion of files installed by other packages and other damage. Additional
+     flaws in the HTTP parser were also found. Please
+     update to node.js-12.15.0 as soon as possible using the instructions in
+     <a href="../../view/svn/general/nodejs.html">Node.JS-12.15.0</a>.</p>
+
+     <p>After release, a series of security flaws was discovered in libarchive.
+     These include security fixes in the RAR5 reader, wide string processing,
+     optimizations to the write filter logic, and the use of readlink(2). To fix
+     these vulnerabilities, update to libarchive-3.4.1 or later using the
+     instructions in
+     <a href="../../view/svn/general/libarchive.html">libarchive-3.4.1</a>.</p>
+
+     <p>After release, two security problems were found in GNU Screen. These
+     are primarily use-after-free and out-of-bounds access vulnerabilities.
+     To fix these, please update to Screen-4.8.0 or later using the
+     instructions in
+     <a href="../../view/svn/general/screen.html">Screen-4.8.0</a>.</p>
+
+     <p>After release, a security vulnerability was found in the way that
+     libexif processes image tags. This is classified as an integer overflow
+     vulnerability. To fix this, please apply the patch in
+     <a href="../../view/svn/general/libexif.html">libexif-0.6.21</a>.</p>
+
+<!--
+     <p>A vulnerability with available exploits in all recent versions of
+     ghostscript has been fixed in the development book by patching gs-9.25.
+     The current version of the patch is -2 and the vulnerability applies to
+     PDF files as well as postscript.</p>
+
+     <p>A trivially-exploitable local privilege escalation in versions of
+     xorg-server since 1.19 has been fixed in 1.20.3.</p>
+-->
+<!--#include virtual="/common/footer.html" -->

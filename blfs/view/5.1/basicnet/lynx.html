@@ -1,0 +1,274 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Lynx-2.8.5
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;17.&nbsp;Text Web Browsers</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="textweb.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="w3m.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Lynx-2.8.5
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Lynx
+          </h3>
+        </div>
+        <p>
+          <span class="application">Lynx</span> is a text based web browser.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2774609" name="id2774609"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://lynx.isc.org/release/lynx2.8.5.tar.bz2">http://lynx.isc.org/release/lynx2.8.5.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://lynx.isc.org/lynx/lynx2.8.5/lynx2.8.5.tar.bz2">ftp://lynx.isc.org/lynx/lynx2.8.5/lynx2.8.5.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 18 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.45 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2776236" name="id2776236"></a><span class=
+                  "application">Lynx</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2776247" name="id2776247"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a>,
+              <a href="http://www.gnu.org/software/gnutls/">GnuTLS</a> (which
+              needs <a href=
+              "ftp://ftp.gnupg.org/gcrypt/alpha/libgpg-error/">libgpg-error</a>,
+              <a href="ftp://ftp.gnupg.org/gcrypt/libgcrypt/">libgcrypt</a>
+              and <a href=
+              "ftp://ftp.gnupg.org/gcrypt/alpha/gnutls/opencdk/">opencdk</a>,
+              in that order.), <a href="../server/mail.html">MTA</a> and
+              <a href="../general/zip.html">Zip-2.3</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Lynx
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Lynx</span> by running the
+          following commands.
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --libdir=/etc --with-zlib &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+make docdir=/usr/share/doc/lynx-2.8.5/lynx_doc \
+    helpdir=/usr/share/doc/lynx-2.8.5/lynx_help install-doc &amp;&amp;
+make docdir=/usr/share/doc/lynx-2.8.5/lynx_doc \
+    helpdir=/usr/share/doc/lynx-2.8.5/lynx_help install-help</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--libdir=/etc</tt></i>: For some reason,
+          the configure and make routine for lynx uses libdir as the prefix
+          for the configuration file. We set this to <tt class=
+          "filename">/etc</tt> so that the system wide configuration file is
+          <tt class="filename">/etc/lynx.cfg</tt>.
+        </p>
+        <p>
+          <tt class="option">--with-zlib</tt>: This enables support for
+          linking <span class="application">zlib</span> into <span class=
+          "application">Lynx</span>.
+        </p>
+        <p>
+          <i class="parameter"><tt>docdir=... helpdir=...</tt></i>: We set
+          these variables to avoid getting the help and documentation files
+          installed under <tt class="filename">/etc</tt>.
+        </p>
+        <p>
+          <tt class="option">--with-ssl</tt>: This enables support for
+          linking <span class="acronym">SSL</span> into <span class=
+          "application">Lynx</span>.
+        </p>
+        <p>
+          <tt class="option">--with-gnutls</tt>: This enables support for
+          linking Gnu<span class="acronym">TLS</span> into <span class=
+          "application">Lynx</span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Lynx
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2776020" name="id2776020"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/lynx.cfg</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775844" name="id2775844"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Various settings such as proxies can be set in the system-wide
+            <tt class="filename">lynx.cfg</tt> file found in <tt class=
+            "filename">/etc</tt>.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Lynx</span> package contains
+          <span><b class="command">lynx</b></span> .
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2775897" name="id2775897"></a>lynx
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lynx</b></span> is a general purpose,
+            text-based, distributed information browser for the World Wide
+            Web.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="textweb.html">Prev</a><br />
+        Chapter&nbsp;17.&nbsp;Text Web Browsers
+      </div>
+      <div class="next">
+        <a accesskey="n" href="w3m.html">Next</a><br />
+        w3m-0.4.2
+      </div>
+      <div class="up">
+        <a accesskey="u" href="textweb.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

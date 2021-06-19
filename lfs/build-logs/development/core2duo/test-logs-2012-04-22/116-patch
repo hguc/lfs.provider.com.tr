@@ -1,0 +1,192 @@
+Mon Apr 23 16:41:14 CDT 2012
+make[1]: Entering directory `/sources/patch-2.6.1'
+[tests/asymmetric-hunks]
+[31] patch < a.diff -- ok
+[38] patch < a.diff -- ok
+[58] patch < a.diff -- ok
+[79] patch < a.diff -- ok
+4 tests (4 passed, 0 failed)
+[tests/backup-prefix-suffix]
+[24] patch -b -p1 < ab.diff -- ok
+[28] cat f.orig -- ok
+[33] patch -b -B prefix. -p1 < ab.diff -- ok
+[37] cat prefix.f -- ok
+[42] patch -b -z .suffix -p1 < ab.diff -- ok
+[46] cat f.suffix -- ok
+[51] patch -b -B prefix. -z .suffix -p1 < ab.diff -- ok
+[55] cat prefix.f.suffix -- ok
+[62] patch -b -p1 < ab.diff -- ok
+[66] cat f.bak -- ok
+[72] patch -b -p1 < ab.diff -- ok
+[76] cat f.~2~ -- ok
+[82] patch -b -p1 < ab.diff -- ok
+[86] cat f.~3~ -- ok
+[105] patch -b -p1 < ab.diff -- ok
+[109] cat d/f.orig -- ok
+[114] patch -b -B orig/ -p1 < ab.diff -- ok
+[118] cat orig/d/f -- ok
+[123] patch -b -B orig/ -z .orig -p1 < ab.diff -- ok
+[127] cat orig/d/f.orig -- ok
+[132] patch -b -Y .orig/ -p1 < ab.diff -- ok
+[136] cat d/.orig/f -- ok
+[141] patch -b -Y .orig/ -z .orig -p1 < ab.diff -- ok
+[145] cat d/.orig/f.orig -- ok
+24 tests (24 passed, 0 failed)
+[tests/corrupt-reject-files]
+[43] patch a < ab.diff || echo "Status: $?" -- ok
+[50] cat -A a.rej -- ok
+2 tests (2 passed, 0 failed)
+[tests/create-delete]
+[26] patch -f -p1 < f.diff || echo "Status: $?" -- ok
+[44] patch -f < f.diff || echo "Status: $?" -- ok
+[58] patch -p0 < f.diff || echo "Status: $?" -- ok
+[72] patch -p0 -f < f.diff || echo "Status: $?" -- ok
+[88] patch -f f < f.diff || echo "Status: $?" -- ok
+[97] ls -l f.orig | sed "s,\(..........\).*,\1," -- ok
+[108] patch -f < f.diff || echo "Status: $?" -- ok
+7 tests (7 passed, 0 failed)
+[tests/crlf-handling]
+[24] patch c < ab.diff -- ok
+[31] patch c < ab.diff -- ok
+[38] patch c < ab.diff -- ok
+The ed utility is not available; skipping ed related tests
+[58] patch c < ab.diff -- ok
+[62] cat -A c -- ok
+[70] patch c < ab.diff -- ok
+[74] cat -A c -- ok
+[82] patch c < ab.diff -- ok
+[86] cat -A c -- ok
+The ed utility is not available; skipping ed related tests
+[101] cat -A c -- ok
+[112] patch c < ab.diff -- ok
+[117] cat -A c -- ok
+[122] patch --binary c < ab.diff -- ok
+[126] cat -A c -- ok
+[134] patch c < ab.diff -- ok
+[139] cat -A c -- ok
+[144] patch --binary c < ab.diff -- ok
+[148] cat -A c -- ok
+[156] patch c < ab.diff -- ok
+[161] cat -A c -- ok
+[166] patch --binary c < ab.diff -- ok
+[170] cat -A c -- ok
+[187] patch c < ab.diff -- ok
+[191] cat -A c -- ok
+24 tests (24 passed, 0 failed)
+[tests/filename-choice]
+[26] patch -p0 < f.diff -- ok
+[30] cat f -- ok
+2 tests (2 passed, 0 failed)
+[tests/global-reject-files]
+[34] patch -p0 < ab.diff -- ok
+[41] patch -p0 -f < ab.diff || echo "Status: $?" -- ok
+[51] cat a.rej -- ok
+[59] cat b.rej -- ok
+[67] patch -p0 -f -r ab.rej < ab.diff || echo "Status: $?" -- ok
+[77] cat ab.rej -- ok
+6 tests (6 passed, 0 failed)
+[tests/inname]
+[32] patch x < f.diff -- ok
+[37] cat x -- ok
+2 tests (2 passed, 0 failed)
+[tests/line-numbers]
+[34] patch -f --verbose a < a.diff | grep ^Hunk -- ok
+[40] cat a -- ok
+[52] patch -f --verbose a < a.diff | grep ^Hunk -- ok
+[58] cat a -- ok
+4 tests (4 passed, 0 failed)
+[tests/merge]
+[59] x 3 -- ok
+[69] x 3  2d -- ok
+[77] x 2  2ib -- ok
+[87] x 3  2ib -- 3ic -- ok
+[105] x 3  2c2b -- 2c2c -- ok
+[129] x 3  2d -- 2d -- ok
+[139] x 2  2ibc -- 2ibc -- ok
+[151] x 4  2aa 2aa -- 2aa 2aa -- ok
+[171] x 4  2d -- 3d -- ok
+[196] x 4  3d -- 2d -- ok
+[223] x 3  3ib -- 2d -- ok
+[247] x 3  2d -- 3ib -- ok
+[277] x 1  1cb -- 1cc -- ok
+[297] x 4  2ca 3cb -- 2ca 3cc -- ok
+[325] x 6  3c3b 4c4b -- 3c3c 4c4c -- ok
+[358] x 4  2cb 3ca -- 2cc 3ca -- ok
+[386] x 3  2ib 3ib -- 2ic -- ok
+[413] x 3  2ib 3ib 3ib -- 2ic -- ok
+[442] x 9  4ca 5cb 6ca -- 4ca 5cc 6ca -- ok
+[482] x 3  2ib 3ib -- 1i0 -- ok
+[498] x 4  2ib 4ib -- 1i0 3ic -- ok
+[522] x 5  2,4d -- 3c3c -- ok
+[550] x 5  3c3c -- 2,4d -- ok
+[580] x 3  1,2d -- 2ic -- ok
+[605] x 3  2ic -- 1,2d -- ok
+25 tests (25 passed, 0 failed)
+[tests/munged-context-format]
+[28] patch < ab.diff -- ok
+[35] patch < c.diff -- ok
+2 tests (2 passed, 0 failed)
+[tests/need-filename]
+[22] patch < n.diff || echo "Status: $?" -- ok
+[27] patch -f -n < n.diff || echo "Status: $?" -- ok
+[35] patch f < n.diff -- ok
+The ed utility is not available; skipping ed related tests
+[82] patch < h+c.diff -- ok
+[86] cat f -- ok
+[92] patch < c.diff || echo "Status: $?" -- ok
+[98] patch f < c.diff -- ok
+[102] cat f -- ok
+[116] patch < h+u.diff -- ok
+[120] cat f -- ok
+[126] patch < u.diff || echo "Status: $?" -- ok
+[132] patch f < u.diff -- ok
+[136] cat f -- ok
+13 tests (13 passed, 0 failed)
+[tests/no-newline-triggers-assert]
+[32] patch -p0 < f.diff -- ok
+1 tests (1 passed, 0 failed)
+[tests/preserve-c-function-names]
+[36] patch c < ab.diff || cat c.rej -- ok
+1 tests (1 passed, 0 failed)
+[tests/preserve-mode-and-timestamp]
+[40] patch -p1 --backup --set-utc < f.diff -- ok
+[44] date -u "+%Y-%m-%d %H:%M:%S %z" -r f -- ok
+[51] ls -l f.orig | sed "s,\(..........\).*,\1," -- ok
+[64] patch -p1 --backup --set-utc < f.diff || echo "Status: $?" -- ok
+[72] ls -l f.rej | sed "s,\(..........\).*,\1," -- ok
+[85] patch -p1 --backup --set-utc < f.diff || echo "Status: $?" -- ok
+[93] ls -l f.rej | sed "s,\(..........\).*,\1," -- ok
+7 tests (7 passed, 0 failed)
+[tests/reject-format]
+[31] patch -f -F0 --no-backup-if-mismatch f < f.diff || echo "Status: $?" -- ok
+[38] cat f.rej -- ok
+[61] patch -f -F0 --no-backup-if-mismatch f < f.diff || echo "Status: $?" -- ok
+[68] cat f.rej -- ok
+[85] patch -f -F0 --no-backup-if-mismatch --reject-format=unified f < f.diff || echo "Status: $?" -- ok
+[92] cat f.rej -- ok
+[108] patch -f -F0 --no-backup-if-mismatch --reject-format=context f < f.diff || echo "Status: $?" -- ok
+[115] cat f.rej -- ok
+[143] patch -f < ab.diff || echo "Status: $?" -- ok
+[150] cat a.rej -- ok
+10 tests (10 passed, 0 failed)
+[tests/remember-backup-files]
+[38] patch -p0 < f.diff -- ok
+[47] cat f.orig -- ok
+[71] patch -p0 < fg.diff -- ok
+[78] cat f.orig -- ok
+[82] cat g.orig -- ok
+[107] patch -p0 < f.diff -- ok
+6 tests (6 passed, 0 failed)
+[tests/remember-reject-files]
+[36] patch -p0 < f.diff || echo "Status: $?" -- ok
+[49] cat f.rej -- ok
+2 tests (2 passed, 0 failed)
+[tests/unmodified-files]
+[32] patch -b -B backup/ a < a.diff || echo "Status: $?" -- ok
+[39] test a -ef a.first -- ok
+[41] cat backup/a -- ok
+[54] patch -o b a < a.diff -- ok
+[58] cat b -- ok
+5 tests (5 passed, 0 failed)
+All tests succeeded!
+make[1]: Leaving directory `/sources/patch-2.6.1'

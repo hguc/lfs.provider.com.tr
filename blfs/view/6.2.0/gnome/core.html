@@ -1,0 +1,207 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;31.&nbsp;GNOME Core Packages
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Part&nbsp;IX.&nbsp;GNOME
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="gnome.html" title="GNOME">Prev</a>
+          <p>
+            GNOME
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ORBit2.html" title="ORBit2-2.14.2">Next</a>
+          <p>
+            ORBit2-2.14.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="gnome.html" title=
+          "Part&nbsp;IX.&nbsp;GNOME">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="gnome-core" name="gnome-core"></a>
+        <h1 class="chapter">
+          GNOME Core Packages
+        </h1>
+      </div>
+      <p>
+        This section contains required elements of the <span class=
+        "application">GNOME</span> environment to display a functional
+        desktop.
+      </p>
+      <div class="caution">
+        <div class="admonhead">
+          <img alt="[Caution]" src="../images/caution.png" />
+          <h3 class="admontitle">
+            Caution
+          </h3>
+        </div>
+        <div class="admonbody">
+          <p>
+            The BLFS team recommends that you carefully evaluate the optional
+            dependencies listed for each of the core <span class=
+            "application">GNOME</span> packages. You may lose desired
+            functionality if you don't install an optional dependency before
+            the package that lists the dependency, even if you later install
+            it.
+          </p>
+        </div>
+      </div>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="gnome-pre-install-config" name=
+          "gnome-pre-install-config"></a>
+          <h1 class="sect1">
+            Pre-installation Configuration
+          </h1>
+        </div>
+        <p>
+          Set an environment variable to resolve the prefix destination.
+        </p>
+        <p>
+          If <span class="application">GNOME</span> is your desktop of
+          choice:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export GNOME_PREFIX=/usr</kbd></pre>
+        <p>
+          If you want to try-out <span class="application">GNOME</span>, or
+          install it in an easy-to-remove location:
+        </p>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              You may wish to create a symbolic link to the actual versioned
+              directory using a non-versioned name. This has the advantage of
+              an easier path to type in all the changes below and also makes
+              it easy to point to a different/newer version of GNOME without
+              changing all the edits below. If you wish to use a
+              non-versioned name in the changes below, issue the following
+              commands as the <tt class="systemitem">root</tt> user:
+            </p>
+            <pre class="root"><kbd class=
+            "command">install -v -m755 -d /opt/gnome-2.14.3 &amp;&amp;
+ln -v -s gnome-2.14.3 /opt/gnome</kbd></pre>
+          </div>
+        </div>
+        <p>
+          If you created the symbolic link, change all instances of
+          <tt class="filename">/opt/gnome-2.14.3</tt> to <tt class=
+          "filename">/opt/gnome</tt> in the instructions below.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export GNOME_PREFIX=/opt/gnome-2.14.3</kbd></pre>
+        <p>
+          The try-out group will also need to make all the following
+          configuration changes:
+        </p>
+        <p>
+          Add to your system or personal profile:
+        </p>
+        <pre class="screen"><tt class=
+        "literal">export PATH=$PATH:/opt/gnome-2.14.3/bin
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/gnome-2.14.3/lib/pkgconfig
+export GNOME_LIBCONFIG_PATH=/usr/lib:/opt/gnome-2.14.3/lib</tt></pre>
+        <p>
+          Add to your <tt class="filename">/etc/ld.so.conf</tt>:
+        </p>
+        <pre class="root"><kbd class=
+        "command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin gnome addition to /etc/ld.so.conf
+
+/opt/gnome-2.14.3/lib
+
+# End gnome addition</tt>
+EOF</kbd></pre>
+        <p>
+          Add to your <tt class="filename">/etc/man_db.conf</tt>:
+        </p>
+        <pre class="root"><kbd class=
+        "command">cat &gt;&gt; /etc/man_db.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin gnome addition to man_db.conf
+
+MANDATORY_MANPATH /opt/gnome-2.14.3/share/man
+
+# End gnome addition to man_db.conf</tt>
+EOF</kbd></pre>
+        <div class="tip">
+          <div class="admonhead">
+            <img alt="[Tip]" src="../images/tip.png" />
+            <h3 class="admontitle">
+              Tip
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              Remember to execute <span><strong class=
+              "command">ldconfig</strong></span> as the <tt class=
+              "systemitem">root</tt> user after installation of libraries to
+              update the linker's library cache.
+            </p>
+          </div>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2006-06-21 13:27:21 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gnome.html" title="GNOME">Prev</a>
+          <p>
+            GNOME
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ORBit2.html" title="ORBit2-2.14.2">Next</a>
+          <p>
+            ORBit2-2.14.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="gnome.html" title=
+          "Part&nbsp;IX.&nbsp;GNOME">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,537 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      NetworkManager-0.9.10.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.6-systemd">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch (systemd edition) - Version
+        7.6-systemd
+      </h4>
+      <h3>
+        Chapter&nbsp;16.&nbsp;Networking Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="mod_dnssd.html" title=
+          "mod_dnssd-0.6">Prev</a>
+          <p>
+            mod_dnssd-0.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="nmap.html" title="Nmap-6.47">Next</a>
+          <p>
+            Nmap-6.47
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netutils.html" title=
+          "Chapter&nbsp;16.&nbsp;Networking Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.6-systemd">
+          Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="NetworkManager" name=
+        "NetworkManager"></a>NetworkManager-0.9.10.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to NetworkManager
+        </h2>
+        <p>
+          <span class="application">NetworkManager</span> is a set of
+          co-operative tools that make networking simple and straightforward.
+          Whether WiFi, wired, 3G, or Bluetooth, NetworkManager allows you to
+          quickly move from one network to another: Once a network has been
+          configured and joined once, it can be detected and re-joined
+          automatically the next time it's available.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.6
+          systemd platform.
+        </p>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            Make sure you disable <span class=
+            "command"><strong>systemd-networkd</strong></span> service or
+            make it not configure the connections you want to manage with
+            <span class="application">NetworkManager</span>.
+          </p>
+        </div>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://ftp.gnome.org/pub/gnome/sources/NetworkManager/0.9/NetworkManager-0.9.10.0.tar.xz">
+                http://ftp.gnome.org/pub/gnome/sources/NetworkManager/0.9/NetworkManager-0.9.10.0.tar.xz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.gnome.org/pub/gnome/sources/NetworkManager/0.9/NetworkManager-0.9.10.0.tar.xz">
+                ftp://ftp.gnome.org/pub/gnome/sources/NetworkManager/0.9/NetworkManager-0.9.10.0.tar.xz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 21b9051dbbd6434df4624a90ca9d71b6
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 2.5 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 127 MB (additional 10 MB for
+                the tests)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 1.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          NetworkManager Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="../general/dbus-glib.html" title=
+          "dbus-glib-0.102">dbus-glib-0.102</a>, <a class="xref" href=
+          "libndp.html" title="libndp-1.4">libndp-1.4</a>, <a class="xref"
+          href="libnl.html" title="libnl-3.2.25">libnl-3.2.25</a>, <a class=
+          "xref" href="../postlfs/nss.html" title="NSS-3.17">NSS-3.17</a>,
+          (or <a class="xref" href="../postlfs/gnutls.html" title=
+          "GnuTLS-3.3.7">GnuTLS-3.3.7</a>), and <a class="xref" href=
+          "../general/systemd.html" title="Systemd">Systemd</a> (for GUdev
+          and Logind)
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="dhcpcd.html" title=
+          "dhcpcd-6.4.3">dhcpcd-6.4.3</a> or <a class="xref" href="dhcp.html"
+          title="DHCP-4.3.1">DHCP-4.3.1</a> (client only), <a class="xref"
+          href="../general/gobject-introspection.html" title=
+          "gobject-introspection-1.40.0">gobject-introspection-1.40.0</a>,
+          <a class="xref" href="../postlfs/iptables.html" title=
+          "Iptables-1.4.21">Iptables-1.4.21</a>, <a class="xref" href=
+          "libsoup.html" title="libsoup-2.46.0">libsoup-2.46.0</a>, <a class=
+          "xref" href="../general/newt.html" title=
+          "newt-0.52.17">newt-0.52.17</a> (for <span class=
+          "command"><strong>nmtui</strong></span>), <a class="xref" href=
+          "../postlfs/polkit.html" title="Polkit-0.112">Polkit-0.112</a>, and
+          <a class="xref" href="../general/vala.html" title=
+          "Vala-0.24.0">Vala-0.24.0</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/bluez.html" title=
+          "BlueZ-5.23">BlueZ-5.23</a> (runtime), <a class="xref" href=
+          "../general/gtk-doc.html" title="GTK-Doc-1.20">GTK-Doc-1.20</a>,
+          <a class="xref" href="../general/ModemManager.html" title=
+          "ModemManager-1.4.0">ModemManager-1.4.0</a>, <a class="xref" href=
+          "../general/python-modules.html#pygobject3" title=
+          "PyGObject-3.12.2">PyGObject-3.12.2</a>, <a class="xref" href=
+          "../x/qt4.html" title="Qt-4.8.6">Qt-4.8.6</a>, <a class="xref"
+          href="../general/valgrind.html" title=
+          "Valgrind-3.10.0">Valgrind-3.10.0</a>, <a class="xref" href=
+          "wpa_supplicant.html" title=
+          "wpa_supplicant-2.2">wpa_supplicant-2.2</a> (built with D-Bus
+          support), and <a class="ulink" href=
+          "http://libteam.org/">libteam</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/NetworkManager">http://wiki.linuxfromscratch.org/blfs/wiki/NetworkManager</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of NetworkManager
+        </h2>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr                   \
+            --sysconfdir=/etc               \
+            --localstatedir=/var            \
+            --disable-ppp                   \
+            --with-nmtui                    \
+            --with-session-tracking=systemd \
+            --with-systemdsystemunitdir=/lib/systemd/system &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          An already active graphical session with bus address is necessary
+          to run the tests. To test the results, issue: <span class=
+          "command"><strong>make check</strong></span>.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--disable-ppp</code></em>: This switch
+          disables <span class="application">PPP</span> support in
+          <span class="application">NetworkManager</span> because
+          <span class="application">PPP</span> isn't part of BLFS.
+        </p>
+        <p>
+          <em class="parameter"><code>--with-nmtui</code></em>: This switch
+          enables building of the <span class=
+          "command"><strong>nmtui</strong></span> program. Remove it if you
+          have not installed <a class="xref" href="../general/newt.html"
+          title="newt-0.52.17">newt-0.52.17</a>.
+        </p>
+        <p>
+          <em class=
+          "parameter"><code>--with-session-tracking=systemd</code></em>: This
+          switch is used to set <span class=
+          "command"><strong>systemd-logind</strong></span> as the default
+          program for session tracking.
+        </p>
+        <p>
+          <em class=
+          "parameter"><code>--with-systemdsystemunitdir=/lib/systemd/system</code></em>:
+          This switch is used to set the correct installation directory for
+          systemd units.
+        </p>
+        <p>
+          <code class="option">--enable-gtk-doc</code>: Use this switch if
+          you have installed <a class="xref" href="../general/gtk-doc.html"
+          title="GTK-Doc-1.20">GTK-Doc-1.20</a> and wish to build the API
+          manuals.
+        </p>
+        <p>
+          <code class="option">--without-iptables</code>: Use this switch if
+          you don't have <span class="application">Iptables</span> installed.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring NetworkManager
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="NetworkManager-config" name=
+            "NetworkManager-config"></a>Config Files
+          </h3>
+          <p>
+            <code class=
+            "filename">/etc/NetworkManager/NetworkManager.conf</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            For <span class="application">NetworkManager</span> to work, at
+            least a basic configuration file must be present. Such file is
+            not installed with <span class="command"><strong>make
+            install</strong></span>. Run the following command as the
+            <code class="systemitem">root</code> user to create a basic
+            <code class="filename">NetworkManager.conf</code> file:
+          </p>
+          <pre class="root">
+<kbd class=
+"command">cat &gt;&gt; /etc/NetworkManager/NetworkManager.conf &lt;&lt; "EOF"
+<code class="literal">[main]
+plugins=keyfile</code>
+EOF</kbd>
+</pre>
+          <p>
+            You can add <code class="option">dns=none</code> to suppress
+            changes to <code class="filename">/etc/resolv.conf</code>. See
+            <span class="command"><strong>man 5
+            NetworkManager.conf</strong></span> for any additional options.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="NetworkManager-init" name=
+            "NetworkManager-init"></a>Systemd Units
+          </h3>
+          <p>
+            To start the <span class=
+            "command"><strong>NetworkManager</strong></span> daemon at boot,
+            enable the previously installed systemd unit by running the
+            following command as the <code class="systemitem">root</code>
+            user:
+          </p>
+          <pre class="root">
+<kbd class="command">systemctl enable NetworkManager</kbd>
+</pre>
+          <p>
+            <span class="application">NetworkManager</span> also ships a
+            systemd unit called <code class=
+            "filename">NetworkManager-wait-online.service</code> which can be
+            used to prevent services that require network connectivity from
+            starting until <span class="application">NetworkManager</span>
+            has established the connection. To enable it, run the following
+            command as the <code class="systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">systemctl enable NetworkManager-wait-online</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">NetworkManager, nm-online, nmcli, nmtui,
+              nmtui-connect, nmtui-edit, and nmtui-hostname</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libnm-glib.so, libnm-glib-vpn.so, and
+              libnm-util.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/NetworkManager,
+              /usr/include/libnm-glib, /usr/include/NetworkManager,
+              /usr/lib/NetworkManager, /usr/share/doc/NetworkManager,
+              /usr/share/gtk-doc/html/libnm-glib,
+              /usr/share/gtk-doc/html/libnm-util,
+              /usr/share/gtk-doc/html/NetworkManager,
+              /var/lib/NetworkManager, and /var/run/NetworkManager</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nmcli" name="nmcli"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nmcli</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a command-line tool for controlling <span class=
+                    "application">NetworkManager</span> and getting its
+                    status.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nm-online" name="nm-online"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nm-online</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a utility to find out whether you are online.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nmtui" name="nmtui"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nmtui</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an interactive ncurses based interface for
+                    <span class="application">nmcli</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nmtui-connect" name=
+                    "nmtui-connect"></a><span class="term"><span class=
+                    "command"><strong>nmtui-connect</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an interactive ncurses based interface connection
+                    activate/deactivate.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nmtui-edit" name="nmtui-edit"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nmtui-edit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an interactive ncurses based interface connection
+                    editor.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nmtui-hostname" name=
+                    "nmtui-hostname"></a><span class="term"><span class=
+                    "command"><strong>nmtui-hostname</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an interactive ncurses based interface hostname
+                    editor.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="NetworkManager-prog" name=
+                    "NetworkManager-prog"></a><span class="term"><span class=
+                    "command"><strong>NetworkManager</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the network management daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libnm-glib" name="libnm-glib"></a><span class=
+                    "term"><code class="filename">libnm-glib.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains functions used by <span class=
+                    "application">NetworkManager</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libnm-glib-vpn" name=
+                    "libnm-glib-vpn"></a><span class="term"><code class=
+                    "filename">libnm-glib-vpn.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains functions used by <span class=
+                    "application">NetworkManager</span> VPN plugins.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libnm-util" name="libnm-util"></a><span class=
+                    "term"><code class="filename">libnm-util.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains functions used by <span class=
+                    "application">NetworkManager</span> utils.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2014-08-23 13:42:03 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="mod_dnssd.html" title=
+          "mod_dnssd-0.6">Prev</a>
+          <p>
+            mod_dnssd-0.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="nmap.html" title="Nmap-6.47">Next</a>
+          <p>
+            Nmap-6.47
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netutils.html" title=
+          "Chapter&nbsp;16.&nbsp;Networking Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.6-systemd">
+          Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

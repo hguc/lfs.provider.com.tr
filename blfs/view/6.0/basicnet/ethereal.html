@@ -1,0 +1,528 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Ethereal-0.10.9
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;19.&nbsp;Basic Networking Utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="bind-utils.html" title=
+          "BIND Utilities-9.3.0p1">Prev</a>
+          <p>
+            BIND Utilities-9.3.0p1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="mailnews.html" title=
+          "Mail/News Clients">Next</a>
+          <p>
+            Mail/News Clients
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netutils.html" title=
+          "Chapter&nbsp;19.&nbsp;Basic Networking Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="ethereal" name="ethereal"></a>
+        <h1 class="sect1">
+          Ethereal-0.10.9
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Ethereal
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Ethereal</span> package contains a
+          network protocol analyzer, also known as a &ldquo;<span class=
+          "quote">sniffer</span>&rdquo;. This is useful for analyzing data
+          captured &ldquo;<span class="quote">off the wire</span>&rdquo; from
+          a live network connection, or data read from a capture file.
+          <span class="application">Ethereal</span> provides both
+          <span class="acronym">GUI</span> and <span class=
+          "acronym">TTY</span>-mode programs for examining captured network
+          packets from over 500 protocols, as well as the capability to read
+          capture files from many other popular network analyzers.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687156" name="id2687156"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.ethereal.com/distribution/ethereal-0.10.9.tar.bz2">
+                  <span class=
+                  "url">http://www.ethereal.com/distribution/ethereal-0.10.9.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.ethereal.com/pub/ethereal/all-versions/ethereal-0.10.9.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.ethereal.com/pub/ethereal/all-versions/ethereal-0.10.9.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 Sum: f8b7a2c2dcf273e7fd755f972167dacb
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 5.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 194 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 3.78 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2856600" name="id2856600"></a><span class=
+                  "application">Ethereal</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2605600" name="id2605600"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/glib.html">GLib-1.2.10</a> or <a href=
+              "../general/glib2.html">GLib-2.6.3</a> (to build the
+              <span class="acronym">TTY</span>-mode front-end only)
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2564907" name="id2564907"></a>Recommended
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/libpcap.html">libpcap-0.8.3</a> (required
+              to capture data)
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2560098" name="id2560098"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/pkgconfig.html">pkgconfig-0.15.0</a>,
+              <a href="../x/gtk.html">GTK+-1.2.10</a> or <a href=
+              "../x/gtk2.html">GTK+-2.6.4</a> (to build the <span class=
+              "acronym">GUI</span> front-end), <a href=
+              "../postlfs/security.html#openssl">OpenSSL-0.9.7e</a>, <a href=
+              "../postlfs/heimdal.html">Heimdal-0.6.3</a> or <a href=
+              "../postlfs/mitkrb.html">MIT krb5-1.4</a>, <a href=
+              "../general/prog.html#python">Python-2.4</a>, <a href=
+              "../general/genlib.html#pcre">PCRE-5.0</a>, <a href=
+              "../general/doxygen.html">Doxygen-1.4.1</a>, <a href=
+              "http://www.net-snmp.org/"><span class=
+              "url">Net-SNMP</span></a> and <a href=
+              "http://www.gnu.org/software/adns/adns.html"><span class=
+              "url">adns</span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Ethereal
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Ethereal</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr --sysconfdir=/etc \
+    --enable-randpkt --enable-threads &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <tt class="option">--enable-randpkt</tt>: This parameter builds the
+          random capture program.
+        </p>
+        <p>
+          <tt class="option">--enable-threads</tt>: This parameter enables
+          the use of threads in <span><strong class=
+          "command">ethereal</strong></span>.
+        </p>
+        <p>
+          <tt class="option">--with-ssl</tt>: This parameter enables the use
+          of the <span class="application">Open<span class=
+          "acronym">SSL</span></span> <tt class="filename">libcrypto</tt>
+          library.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Ethereal
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="ethereal-config" name="ethereal-config"></a>Config
+                  files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/ethereal.conf</tt> and <tt class=
+            "filename">~/.ethereal/preferences</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2659492" name="id2659492"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2563264" name="id2563264"></a>Package
+                    configuration
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              Though the default configuration parameters are very sane,
+              reference the configuration section of the <a href=
+              "http://www.ethereal.com/docs/user-guide/"><span class=
+              "url">Ethereal User's Guide</span></a> for configuration
+              information. Most of <span class=
+              "application">Ethereal</span>'s configuration can be
+              accomplished using the menu options of the <span><strong class=
+              "command">ethereal</strong></span> <span class=
+              "acronym">GUI</span> interface.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="ethereal-kernel" name="ethereal-kernel"></a>Kernel
+                    configuration
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              The kernel must have the Packet protocol enabled for
+              <span class="application">Ethereal</span> to capture live
+              packets from the network. Enable the Packet protocol by
+              choosing &ldquo;<span class="quote">Y</span>&rdquo; in the
+              &ldquo;<span class="quote">Device Drivers</span>&rdquo; &ndash;
+              &ldquo;<span class="quote">Networking support</span>&rdquo;
+              &ndash; &ldquo;<span class="quote">Networking
+              options</span>&rdquo; &ndash; &ldquo;<span class="quote">Packet
+              socket</span>&rdquo; configuration parameter. Alternatively,
+              build the af_packet module by choosing &ldquo;<span class=
+              "quote">M</span>&rdquo; in this parameter.
+            </p>
+            <p>
+              Note: If you want to look at packets, make sure you don't
+              filter them out with <a href=
+              "../postlfs/iptables.html">iptables-1.3.1</a>. If you want to
+              exclude certain classes of packets, it is more efficient to do
+              it with <span class="application">iptables</span> than
+              <span class="application">Ethereal</span>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">capinfos, dftest,
+              editcap, ethereal, idl2eth, mergecap, randpkt, tethereal and
+              text2pcap</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libethereal.so,
+              libwiretap.so and numerous dissector plugin modules</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/lib/ethereal and /usr/share/ethereal</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2759161" name="id2759161"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="capinfos" name="capinfos"></a><span class=
+              "term"><span><strong class=
+              "command">capinfos</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                reads a saved capture file and returns any or all of several
+                statistics about that file. It is able to detect and read any
+                capture supported by the <span class=
+                "application">Ethereal</span> package.
+              </p>
+            </dd>
+            <dt>
+              <a id="dftest" name="dftest"></a><span class=
+              "term"><span><strong class=
+              "command">dftest</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a display-filter-compiler test program.
+              </p>
+            </dd>
+            <dt>
+              <a id="editcap" name="editcap"></a><span class=
+              "term"><span><strong class=
+              "command">editcap</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                edits and/or translates the format of capture files. It knows
+                how to read <span class="application">libpcap</span> capture
+                files, including those of <span><strong class=
+                "command">tcpdump</strong></span>, <span class=
+                "application">Ethereal</span> and other tools that write
+                captures in that format.
+              </p>
+            </dd>
+            <dt>
+              <a id="ethereal-prog" name="ethereal-prog"></a><span class=
+              "term"><span><strong class=
+              "command">ethereal</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a <span class="acronym">GUI</span> network protocol
+                analyzer. It lets you interactively browse packet data from a
+                live network or from a previously saved capture file.
+              </p>
+            </dd>
+            <dt>
+              <a id="idl2eth" name="idl2eth"></a><span class=
+              "term"><span><strong class=
+              "command">idl2eth</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                takes a user specified <span class="acronym">CORBA</span>
+                <span class="acronym">IDL</span> file and generates
+                &ldquo;<span class="quote">C</span>&rdquo; source code that
+                can be used to create an <span class=
+                "application">Ethereal</span> plugin.
+              </p>
+            </dd>
+            <dt>
+              <a id="mergecap" name="mergecap"></a><span class=
+              "term"><span><strong class=
+              "command">mergecap</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                combines multiple saved capture files into a single output
+                file.
+              </p>
+            </dd>
+            <dt>
+              <a id="randpkt" name="randpkt"></a><span class=
+              "term"><span><strong class=
+              "command">randpkt</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                creates random-packet capture files.
+              </p>
+            </dd>
+            <dt>
+              <a id="tethereal" name="tethereal"></a><span class=
+              "term"><span><strong class=
+              "command">tethereal</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a <span class="acronym">TTY</span>-mode network protocol
+                analyzer. It lets you capture packet data from a live network
+                or read packets from a previously saved capture file.
+              </p>
+            </dd>
+            <dt>
+              <a id="text2pcap" name="text2pcap"></a><span class=
+              "term"><span><strong class=
+              "command">text2pcap</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                reads in an <span class="acronym">ASCII</span> hex dump and
+                writes the data described into a <span class=
+                "application">libpcap</span>-style capture file.
+              </p>
+            </dd>
+            <dt>
+              <a id="libethereal" name="libethereal"></a><span class=
+              "term"><tt class="filename">libethereal.so</tt></span>
+            </dt>
+            <dd>
+              <p>
+                contains functions used by the <span class=
+                "application">Ethereal</span> programs to perform filtering
+                and packet capturing.
+              </p>
+            </dd>
+            <dt>
+              <a id="libwiretap" name="libwiretap"></a><span class=
+              "term"><tt class="filename">libwiretap.so</tt></span>
+            </dt>
+            <dd>
+              <p>
+                is a library being developed as a future replacement for
+                <tt class="filename">libpcap</tt>, the current standard Unix
+                library for packet capturing. For more information, see the
+                <tt class="filename">README</tt> file in the source
+                <tt class="filename">wiretap</tt> directory.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-01-27 16:19:30 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="bind-utils.html" title=
+          "BIND Utilities-9.3.0p1">Prev</a>
+          <p>
+            BIND Utilities-9.3.0p1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="mailnews.html" title=
+          "Mail/News Clients">Next</a>
+          <p>
+            Mail/News Clients
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netutils.html" title=
+          "Chapter&nbsp;19.&nbsp;Basic Networking Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

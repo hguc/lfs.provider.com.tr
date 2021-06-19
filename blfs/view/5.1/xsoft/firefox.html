@@ -1,0 +1,198 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      MozillaFirefox-0.8
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;35.&nbsp;Graphical Web Browsers</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="graphweb.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="galeon.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          MozillaFirefox-0.8
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Mozilla Firefox
+          </h3>
+        </div>
+        <p>
+          <span class="application">Mozilla Firefox</span> is a stand-alone
+          browser based on the <span class="application">Mozilla</span>
+          codebase.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3137670" name="id3137670"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/0.8/firefox-source-0.8.tar.bz2">
+                  http://ftp.mozilla.org/pub/mozilla.org/firefox/releases/0.8/firefox-source-0.8.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/0.8/firefox-source-0.8.tar.bz2">
+                  ftp://ftp.mozilla.org/pub/mozilla.org/firefox/releases/0.8/firefox-source-0.8.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 30 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 550 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 10.14 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3138235" name="id3138235"></a><span class=
+                  "application">Mozilla Firefox</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3138258" name="id3138258"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/zip.html">Zip-2.3</a>, <a href=
+              "../x/gtk2.html">GTK+-2.4.1</a>, <a href=
+              "../gnome/libIDL.html">libIDL-0.8.3</a>, <a href=
+              "../general/libmng.html">libmng-1.0.7</a> and <a href=
+              "../general/which.html">which-2.16</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Mozilla Firefox
+          </h3>
+        </div>
+        <p>
+          The configuration of <span class="application">Mozilla
+          Firefox</span> is very similar to <a href=
+          "graphweb.html#mozilla">Mozilla-1.6</a> and hence the options will
+          not be discussed. Refer to the <a href=
+          "graphweb.html#mozilla">Mozilla-1.6</a> for explanations and
+          additional configuration information.
+        </p>
+        <p>
+          Compile and install <span class="application">Mozilla
+          Firefox</span> by running the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">export MOZILLA_OFFICIAL="1" &amp;&amp;
+export BUILD_OFFICIAL="1" &amp;&amp;
+export MOZ_PHOENIX="1" &amp;&amp;
+./configure --prefix=/opt/firefox-0.8 \
+            --enable-default-toolkit=gtk2 \
+            --with-x --with-system-zlib \
+            --with-system-jpeg --with-system-png --with-system-mng \
+            --enable-xft --enable-crypto \
+            --disable-accessibility \
+            --disable-tests --disable-debug \
+            --disable-logging --enable-reorder \
+            --enable-strip --disable-pedantic \
+            --enable-cpp-rtti --enable-extensions=all \
+            --disable-calendar --disable-mailnews &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+ln -sf /opt/firefox-0.8/bin/firefox /usr/bin/MozillaFirefox</b></span></tt>
+</pre>
+        <p>
+          To enable multi-user operation, execute the following:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cd /opt/firefox-0.8/lib/mozilla-* &amp;&amp;
+export LD_LIBRARY_PATH="$PWD" &amp;&amp;
+export MOZILLA_FIVE_HOME="$PWD" &amp;&amp;
+./regxpcom &amp;&amp;
+./regchrome &amp;&amp;
+touch `find $PWD -name *.rdf`</b></span></tt>
+</pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="graphweb.html">Prev</a><br />
+        Chapter&nbsp;35.&nbsp;Graphical Web Browsers
+      </div>
+      <div class="next">
+        <a accesskey="n" href="galeon.html">Next</a><br />
+        Galeon-1.3.14a
+      </div>
+      <div class="up">
+        <a accesskey="u" href="graphweb.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

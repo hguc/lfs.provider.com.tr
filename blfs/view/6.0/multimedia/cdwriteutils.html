@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;40.&nbsp;CD-Writing utilities
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Part&nbsp;XII.&nbsp;Multimedia
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="transcode.html" title=
+          "Transcode-0.6.14">Prev</a>
+          <p>
+            Transcode-0.6.14
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cdrdao.html" title="Cdrdao-1.1.9">Next</a>
+          <p>
+            Cdrdao-1.1.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="multimedia.html" title=
+          "Part&nbsp;XII.&nbsp;Multimedia">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="multimedia-cdwriteutils" name="multimedia-cdwriteutils"></a>
+        <h1 class="chapter">
+          CD-Writing utilities
+        </h1>
+      </div>
+      <p>
+        This chapter contains information on <span class=
+        "acronym">CD</span>-writing utilities in Linux.
+      </p>
+      <p>
+        Additional sources of information include:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li>
+            <p>
+              <a href=
+              "http://www.tldp.org/HOWTO/CD-Writing-HOWTO.html"><span class=
+              "url">CD-Writing HOWTO</span></a>
+            </p>
+          </li>
+          <li>
+            <p>
+              <a href="http://www.cdrfaq.org"><span class="url">CD-Recordable
+              FAQ</span></a>
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="cdrtools" name="cdrtools"></a>
+          <h1 class="sect1">
+            Cdrtools-2.01
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to Cdrtools
+            </h2>
+          </div>
+          <p>
+            The <span class="application">Cdrtools</span> package contains
+            <span class="acronym">CD</span> recording utilities. These are
+            useful for reading, creating or writing (burning) Compact Discs.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2804782" name="id2804782"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://gd.tuwien.ac.at/utils/schilling/cdrtools/cdrtools-2.01.tar.bz2">
+                    <span class=
+                    "url">http://gd.tuwien.ac.at/utils/schilling/cdrtools/cdrtools-2.01.tar.bz2</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.berlios.de/pub/cdrecord/cdrtools-2.01.tar.bz2">
+                    <span class=
+                    "url">ftp://ftp.berlios.de/pub/cdrecord/cdrtools-2.01.tar.bz2</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download MD5 sum: d44a81460e97ae02931c31188fe8d3fd
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 1.4 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated disk space required: 21 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.55 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of Cdrtools
+            </h2>
+          </div>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                Installation of <span class="application">Cdrtools</span>
+                will fail if raw kernel headers are found in <tt class=
+                "filename">/usr/src/linux</tt> either as actual files or a
+                symlink. As of the Linux 2.6 kernel series, this directory
+                should no longer exist because appropriate headers were
+                installed in the linux-libc-headers package during the base
+                <span class="acronym">LFS</span> installation.
+              </p>
+            </div>
+          </div>
+          <p>
+            Install <span class="application">Cdrtools</span> by running the
+            following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make INS_BASE=/usr DEFINSUSR=root DEFINSGRP=root</strong></span></kbd></pre>
+          <p>
+            Now, as the root user:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make INS_BASE=/usr DEFINSUSR=root DEFINSGRP=root install</strong></span></kbd></pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command explanations
+            </h2>
+          </div>
+          <p>
+            <em class="parameter"><tt>INS_BASE=/usr</tt></em>: This parameter
+            moves the install directory from <tt class=
+            "filename">/opt/schily</tt> to <tt class="filename">/usr</tt>.
+          </p>
+          <p>
+            <em class="parameter"><tt>DEFINSUSR=root
+            DEFINSGRP=root</tt></em>: These parameters install all programs
+            with root:root ownership instead of the default bin:bin.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <div class="segmentedlist">
+            <div class="seglistitem">
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Programs:</span></strong> <span class="seg">cdda2wav,
+                cdrecord, devdump, isodebug, isodump, isoinfo, isovfy,
+                mkhybrid, mkisofs, readcd, rscsi, scgcheck, skel</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Libraries:</span></strong> <span class="seg">libdeflt.a,
+                libedc_ecc.a, libfile.a, libhfs.a, libparanoia.a, librscg.a,
+                libscg.a, libschily.a, libunls.a</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Directories:</span></strong> <span class="seg">None</span>
+              </div>
+            </div>
+          </div>
+          <div class="variablelist">
+            <h3>
+              <a id="id2655590" name="id2655590"></a>Short Descriptions
+            </h3>
+            <dl>
+              <dt>
+                <a id="cdda2wav" name="cdda2wav"></a><span class=
+                "term"><span><strong class=
+                "command">cdda2wav</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  converts Compact Disc audio into <tt class=
+                  "filename">WAV</tt> sound files.
+                </p>
+              </dd>
+              <dt>
+                <a id="cdrecord" name="cdrecord"></a><span class=
+                "term"><span><strong class=
+                "command">cdrecord</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  records audio or data Compact Discs.
+                </p>
+              </dd>
+              <dt>
+                <a id="devdump" name="devdump"></a><span class=
+                "term"><span><strong class=
+                "command">devdump</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a diagnostic program used to dump an <span class=
+                  "acronym">ISO</span>-9660 device or file in hex.
+                </p>
+              </dd>
+              <dt>
+                <a id="isodebug" name="isodebug"></a><span class=
+                "term"><span><strong class=
+                "command">isodebug</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is used to display the command-line parameters used to
+                  create an <span class="acronym">ISO</span>-9660 image.
+                </p>
+              </dd>
+              <dt>
+                <a id="isodump" name="isodump"></a><span class=
+                "term"><span><strong class=
+                "command">isodump</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a diagnostic program used to dump a device or file based
+                  on <span class="acronym">ISO</span>-9660.
+                </p>
+              </dd>
+              <dt>
+                <a id="isoinfo" name="isoinfo"></a><span class=
+                "term"><span><strong class=
+                "command">isoinfo</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is used to analyze or list an <span class=
+                  "acronym">ISO</span>-9660 image.
+                </p>
+              </dd>
+              <dt>
+                <a id="isovfy" name="isovfy"></a><span class=
+                "term"><span><strong class=
+                "command">isovfy</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is used to verify an <span class="acronym">ISO</span>-9660
+                  image.
+                </p>
+              </dd>
+              <dt>
+                <a id="mkhybrid" name="mkhybrid"></a><span class=
+                "term"><span><strong class=
+                "command">mkhybrid</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a symbolic link to <span><strong class=
+                  "command">mkisofs</strong></span> used to create
+                  <span class="acronym">ISO</span>-9660/<span class=
+                  "acronym">HFS</span> hybrid filesystem images.
+                </p>
+              </dd>
+              <dt>
+                <a id="mkisofs" name="mkisofs"></a><span class=
+                "term"><span><strong class=
+                "command">mkisofs</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is used to create <span class=
+                  "acronym">ISO</span>-9660/JOLIET/HFS filesystem images,
+                  optionally with Rock Ridge attributes.
+                </p>
+              </dd>
+              <dt>
+                <a id="readcd" name="readcd"></a><span class=
+                "term"><span><strong class=
+                "command">readcd</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  reads or writes Compact Discs.
+                </p>
+              </dd>
+              <dt>
+                <a id="rscsi" name="rscsi"></a><span class=
+                "term"><span><strong class=
+                "command">rscsi</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a remote <span class="acronym">SCSI</span> manager.
+                </p>
+              </dd>
+              <dt>
+                <a id="scgcheck" name="scgcheck"></a><span class=
+                "term"><span><strong class=
+                "command">scgcheck</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is used to check and verify the Application Binary
+                  Interface of <tt class="filename">libscg</tt>.
+                </p>
+              </dd>
+              <dt>
+                <a id="libscg" name="libscg"></a><span class=
+                "term"><tt class="filename">libscg.a</tt></span>
+              </dt>
+              <dd>
+                <p>
+                  is a highly portable <span class="acronym">SCSI</span>
+                  transport library.
+                </p>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="transcode.html" title=
+          "Transcode-0.6.14">Prev</a>
+          <p>
+            Transcode-0.6.14
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cdrdao.html" title="Cdrdao-1.1.9">Next</a>
+          <p>
+            Cdrdao-1.1.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="multimedia.html" title=
+          "Part&nbsp;XII.&nbsp;Multimedia">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

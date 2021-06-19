@@ -1,0 +1,16 @@
+#!/bin/bash
+set +h
+set -e
+
+cd $PKGDIR
+sed -i -e '/gets is a/d' gnu/stdio.in.h
+FORCE_UNSAFE_CONFIGURE=1  \
+./configure --prefix=/usr \
+            --bindir=/bin \
+            --libexecdir=/usr/sbin
+make
+make -k check >> $TEST_LOG 2>&1 || true
+make install
+make -C doc install-html docdir=/usr/share/doc/tar-1.26
+echo -e "\n\nTotalseconds: $SECONDS\n"
+exit

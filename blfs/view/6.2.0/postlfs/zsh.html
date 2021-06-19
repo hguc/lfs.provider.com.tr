@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      ZSH-4.2.6
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;7.&nbsp;Shells
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="tcsh.html" title="Tcsh-6.14.00">Prev</a>
+          <p>
+            Tcsh-6.14.00
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../general/general.html" title=
+          "General Libraries and Utilities">Next</a>
+          <p>
+            General Libraries and Utilities
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="shells.html" title=
+          "Chapter&nbsp;7.&nbsp;Shells">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="zsh" name="zsh"></a>
+        <h1 class="sect1">
+          ZSH-4.2.6
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to ZSH
+          </h2>
+        </div>
+        <p>
+          The <span class="application">ZSH</span> package contains a command
+          interpreter (shell) usable as an interactive login shell and as a
+          shell script command processor. Of the standard shells,
+          <span class="application">ZSH</span> most closely resembles
+          <span class="application">KSH</span> but includes many
+          enhancements.
+        </p>
+        <div class="warning">
+          <div class="admonhead">
+            <img alt="[Warning]" src="../images/warning.png" />
+            <h3 class="admontitle">
+              Warning
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              This version of <span class="application">ZSH</span> does not
+              work properly with multibyte locales (e.g., UTF-8). A
+              development version is available that addresses many, but not
+              all, locale related issues. You can download the development
+              version from the <a href=
+              "http://sourceforge.net/project/showfiles.php?group_id=4068"><span class="url">
+              ZSH Sourceforge Download Page</span></a> and use the following
+              BLFS instructions to build and install.
+            </p>
+          </div>
+        </div>
+        <h3>
+          <a id="id2704698" name="id2704698"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://downloads.sourceforge.net/zsh/zsh-4.2.6.tar.bz2"><span class="url">
+                http://downloads.sourceforge.net/zsh/zsh-4.2.6.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 2cefebf742c190cbc611baded825db64
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 2.0 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 41 MB (includes installing all
+                documentation)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.5 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2677100" name="id2677100"></a>Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Optional Documentation: <a href=
+                "http://downloads.sourceforge.net/zsh/zsh-4.2.6-doc.tar.bz2"><span class="url">
+                http://downloads.sourceforge.net/zsh/zsh-4.2.6-doc.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                MD5 sum: 3ca3b7c199db6eb942f2a296e3fad270
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2703698" name="id2703698"></a>ZSH Dependencies
+        </h3>
+        <h4>
+          <a id="id2740767" name="id2740767"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="../general/genlib.html#pcre">PCRE-6.7</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/zsh"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/zsh</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of ZSH
+          </h2>
+        </div>
+        <p>
+          If you downloaded the optional documentation, unpack it the same
+          way you would the source tarball. The documentation will unpack
+          into the <tt class="filename">Doc</tt> directory of the source
+          tree.
+        </p>
+        <p>
+          Install <span class="application">ZSH</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr \
+            --sysconfdir=/etc/zsh \
+            --enable-etcdir=/etc/zsh &amp;&amp;
+make</kbd></pre>
+        <p>
+          If you downloaded the optional documentation, and you have <a href=
+          "../pst/typesetting.html#tetex">teTeX-3.0</a> installed, you can
+          build additional formats of the documentation by issuing any or all
+          of the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">texi2pdf  Doc/zsh.texi -o Doc/zsh.pdf &amp;&amp;
+texi2html Doc/zsh.texi --output=Doc/zsh_1file_t.html &amp;&amp;
+makeinfo  Doc/zsh.texi --html --no-split --no-headers \
+                       -o Doc/zsh_1file_m.html &amp;&amp;
+makeinfo  Doc/zsh.texi --plaintext -o Doc/zsh.txt</kbd></pre>
+        <p>
+          To test the results, issue: <span><strong class="command">make
+          check</strong></span>.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+make infodir=/usr/share/info install.info</kbd></pre>
+        <p>
+          If you downloaded the optional documentation, install it by issuing
+          the following commands as the <tt class="systemitem">root</tt>
+          user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">make htmldir=/usr/share/doc/zsh-4.2.6/html install.html &amp;&amp;
+install -v -m644 Doc/*.{ps,dvi} /usr/share/doc/zsh-4.2.6</kbd></pre>
+        <p>
+          If you built any additional formats of the documentation, install
+          them by issuing the following command as the <tt class=
+          "systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">install -v -m644 Doc/{zsh_1file*,*.{pdf,txt}} \
+        /usr/share/doc/zsh-4.2.6</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--sysconfdir=/etc/zsh</tt></em> and
+          <em class="parameter"><tt>--enable-etcdir=/etc/zsh</tt></em>: These
+          parameters are used so that all the <span class=
+          "application">ZSH</span> configuration files are consolidated into
+          the <tt class="filename">/etc/zsh</tt> directory. Omit these
+          parameters if you wish to retain historical compatibility by having
+          all the files located in the <tt class="filename">/etc</tt>
+          directory.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring ZSH
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="zsh-config" name="zsh-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            There are a whole host of configuration files for <span class=
+            "application">ZSH</span> including <tt class=
+            "filename">/etc/zsh/zshenv</tt>, <tt class=
+            "filename">/etc/zsh/zprofile</tt>, <tt class=
+            "filename">/etc/zsh/zshrc</tt>, <tt class=
+            "filename">/etc/zsh/zlogin</tt> and <tt class=
+            "filename">/etc/zsh/zlogout</tt>. You can find more information
+            on these in the <tt class="filename">zsh(1)</tt> and related
+            manual pages.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2549618" name="id2549618"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Update <tt class="filename">/etc/shells</tt> to include the
+            <span class="application">ZSH</span> shell program names (as the
+            <tt class="systemitem">root</tt> user):
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt;&gt; /etc/shells &lt;&lt; "EOF"
+<tt class="literal">/usr/bin/zsh
+/usr/bin/zsh-4.2.6</tt>
+EOF</kbd></pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">zsh and
+              zsh-4.2.6</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">Numerous plugin
+              helper modules</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/etc/zsh,
+              /usr/lib/zsh, /usr/share/doc/zsh-4.2.6 and
+              /usr/share/zsh</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2565391" name="id2565391"></a>Short Description
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="zsh-prog" name="zsh-prog"></a><span class=
+                  "term"><span><strong class=
+                  "command">zsh</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a shell which has command-line editing, built-in
+                    spelling correction, programmable command completion,
+                    shell functions (with autoloading), a history mechanism,
+                    and a host of other features.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-30 14:24:11 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="tcsh.html" title="Tcsh-6.14.00">Prev</a>
+          <p>
+            Tcsh-6.14.00
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../general/general.html" title=
+          "General Libraries and Utilities">Next</a>
+          <p>
+            General Libraries and Utilities
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="shells.html" title=
+          "Chapter&nbsp;7.&nbsp;Shells">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

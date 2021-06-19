@@ -1,0 +1,140 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;32.&nbsp;GNOME 1.4 Libraries
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Part&nbsp;IX.&nbsp;GNOME
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="gdm.html" title="GDM-2.6.0.9">Prev</a>
+          <p>
+            GDM-2.6.0.9
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ORBit.html" title="ORBit-0.5.17">Next</a>
+          <p>
+            ORBit-0.5.17
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="gnome.html" title=
+          "Part&nbsp;IX.&nbsp;GNOME">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="gnome-otherlibs" name="gnome-otherlibs"></a>
+        <h1 class="chapter">
+          GNOME 1.4 Libraries
+        </h1>
+      </div>
+      <p>
+        This section contains <span class="application">GNOME</span> 1.4
+        libraries, needed by some applications that have not yet been ported
+        to <span class="application">GNOME</span> 2.x. None of these
+        libraries are needed for a <span class="application">GNOME</span>
+        desktop installation.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="gnome-otherlib-config" name="gnome-otherlib-config"></a>
+          <h1 class="sect1">
+            Pre-installation Configuration
+          </h1>
+        </div>
+        <p>
+          Add to your system or personal profile:
+        </p>
+        <pre class="screen"><tt class=
+        "literal">export PATH=$PATH:/opt/gnome-1.4/bin
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/gnome-1.4/lib/pkgconfig
+export GNOME_LIBCONFIG_PATH=/usr/lib
+
+if [ -z $INFOPATH ]
+then
+  export INFOPATH=/usr/share/info:/opt/gnome-1.4/info
+else
+  export INFOPATH=$INFOPATH:/opt/gnome-1.4/info
+fi</tt></pre>
+        <p>
+          Add to your <tt class="filename">/etc/ld.so.conf</tt>:
+        </p>
+        <pre class="root"><kbd class=
+        "command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin GNOME-1 addition to /etc/ld.so.conf
+
+/opt/gnome-1.4/lib
+
+# End GNOME-1 addition</tt>
+EOF</kbd></pre>
+        <p>
+          Remember to execute <span><strong class=
+          "command">ldconfig</strong></span> after installation of libraries
+          to update the library cache.
+        </p>
+        <p>
+          Add to your <tt class="filename">/etc/man.conf</tt>:
+        </p>
+        <pre class="root"><kbd class=
+        "command">cat &gt;&gt; /etc/man.conf &lt;&lt; "EOF"
+<tt class="literal"># Begin GNOME-1 addition to man.conf
+
+MANPATH /opt/gnome-1.4/man
+
+# END GNOME-1 addition to man.conf</tt>
+EOF</kbd></pre>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gdm.html" title="GDM-2.6.0.9">Prev</a>
+          <p>
+            GDM-2.6.0.9
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ORBit.html" title="ORBit-0.5.17">Next</a>
+          <p>
+            ORBit-0.5.17
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="gnome.html" title=
+          "Part&nbsp;IX.&nbsp;GNOME">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

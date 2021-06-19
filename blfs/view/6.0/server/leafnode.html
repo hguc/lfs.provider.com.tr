@@ -1,0 +1,465 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Leafnode-1.10.8
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;22.&nbsp;Other Server Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="dhcp.html" title="DHCP-3.0.2">Prev</a>
+          <p>
+            DHCP-3.0.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="openssh.html" title="OpenSSH-3.9p1">Next</a>
+          <p>
+            OpenSSH-3.9p1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="other.html" title=
+          "Chapter&nbsp;22.&nbsp;Other Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="leafnode" name="leafnode"></a>
+        <h1 class="sect1">
+          Leafnode-1.10.8
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Leafnode
+          </h2>
+        </div>
+        <p>
+          <span class="application">Leafnode</span> is an <span class=
+          "acronym">NNTP</span> server designed for small sites to provide a
+          local USENET spool.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2642077" name="id2642077"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/leafnode/leafnode-1.10.8.rel.tar.bz2">
+                  <span class=
+                  "url">http://prdownloads.sourceforge.net/leafnode/leafnode-1.10.8.rel.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gwdg.de/pub/linux/mirrors/sunsite/system/news/transport/leafnode-1.10.8.rel.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.gwdg.de/pub/linux/mirrors/sunsite/system/news/transport/leafnode-1.10.8.rel.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 1d8d27673780ba49fcb69883c2cabdec
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 385 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 6.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.10 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2704602" name="id2704602"></a><span class=
+                  "application">Leafnode</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2592390" name="id2592390"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/genlib.html#pcre">PCRE-5.0</a> and <a href=
+              "../basicnet/tcpwrappers.html">tcpwrappers-7.6</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2755953" name="id2755953"></a>Recommended
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="xinetd.html">xinetd-2.3.13</a> and <a href=
+              "../general/fcron.html">Fcron-2.9.5.1</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Leafnode
+          </h2>
+        </div>
+        <p>
+          Create the group and user news, if not present:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">groupadd news &amp;&amp;
+useradd -c "Leafnode News Server" -d /var/spool/news -g news news</strong></span></kbd></pre>
+        <p>
+          Install <span class="application">Leafnode</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr \
+    --localstatedir=/var --sysconfdir=/etc/leafnode \
+    --with-lockfile=/var/lock/leafnode/fetchnews.lck &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--localstatedir=/var</tt></em>: Change
+          the default spool directory of <tt class="filename">/usr/var</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--sysconfdir=/etc/leafnode</tt></em>:
+          <span class="application">Leafnode</span> reads its configuration
+          data from a file called <tt class="filename">config</tt> which will
+          be created in <tt class="filename">/etc/leafnode</tt> to avoid any
+          potential conflict with other packages.
+        </p>
+        <p>
+          <span><strong class="command">make update</strong></span>: Run this
+          command if you are upgrading from a very old version of
+          <span class="application">Leafnode</span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Leafnode
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="leafnode-config" name="leafnode-config"></a>Config
+                  files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/leafnode/config</tt>, <tt class=
+            "filename">/etc/nntpserver</tt>, <tt class=
+            "filename">/etc/xinetd.conf</tt> or <tt class=
+            "filename">/etc/inetd.conf</tt> and <tt class=
+            "filename">/etc/sysconfig/createfiles</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2756013" name="id2756013"></a>Configuration
+                  commands
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The <tt class="filename">/etc/leafnode/config</tt> file must be
+            edited to reflect the name of the upstream <span class=
+            "acronym">NNTP</span> provider. Copy the example configuration
+            file to <tt class="filename">/etc/leafnode/config</tt> and save
+            the original for reference:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cp /etc/leafnode/config.example /etc/leafnode/config</strong></span></kbd></pre>
+          <p>
+            Change the
+          </p>
+          <pre class="userinput"><kbd class="command">server = </kbd></pre>
+          <p>
+            entry to reflect your news provider.
+          </p>
+          <p>
+            The <tt class="filename">/etc/nntpserver</tt> file must contain
+            127.0.0.1 to prevent news clients from reading news from the
+            upstream feed. Create this file using the following command:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/nntpserver &lt;&lt; "EOF"</strong></span>
+127.0.0.1
+
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            The <span><strong class=
+            "command">/etc/rc.d/init.d/cleanfs</strong></span> script, part
+            of the <span class="acronym">LFS</span> bootscript package, will
+            remove the <tt class="filename">/var/lock/leafnode</tt> directory
+            during the system boot sequence. Install the following line in
+            the <tt class="filename">/etc/sysconfig/createfiles</tt> file to
+            re-create the directory:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">/var/lock/leafnode   dir   2775   news   news</kbd></pre>
+          <p>
+            <span class="application">Leafnode</span> may be configured to
+            use <span><strong class="command">inetd</strong></span> by adding
+            an entry to the <tt class="filename">/etc/inetd.conf</tt> file
+            with the following command:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">echo "nntp stream tcp nowait news /usr/sbin/tcpd /usr/sbin/leafnode" \
+&gt;&gt; /etc/inetd.conf</strong></span></kbd></pre>
+          <p>
+            Issue a <span><strong class="command">killall -HUP
+            inetd</strong></span> to reread the changed <tt class=
+            "filename">inetd.conf</tt> file.
+          </p>
+          <p>
+            Alternatively, <span class="application">Leafnode</span> may be
+            configured to use <span><strong class=
+            "command">xinetd</strong></span> by adding an entry to the
+            <tt class="filename">/etc/xinetd.conf</tt> file with the
+            following command:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt;&gt; /etc/xinetd.conf &lt;&lt; "EOF"</strong></span>
+        service nntp
+        {
+           flags           = NAMEINARGS NOLIBWRAP
+           socket_type     = stream
+           protocol        = tcp
+           wait            = no
+           user            = news
+           server          = /usr/sbin/tcpd
+           server_args     = /usr/sbin/leafnode
+           instances       = 7
+           per_source      = 3
+        }
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            Issue a <span><strong class="command">killall -HUP
+            xinetd</strong></span> to reread the changed <tt class=
+            "filename">xinetd.conf</tt> file.
+          </p>
+          <p>
+            Add entries to the root or news user's crontab to run the
+            <span><strong class="command">fetchnews</strong></span> and
+            <span><strong class="command">texpire</strong></span> commands at
+            the desired time intervals.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">applyfilter,
+              checkgroups, fetchnews, leafnode, leafnode-version, newsq and
+              texpire</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/etc/leafnode,
+              /var/lock/leafnode and /var/spool/news</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2623896" name="id2623896"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="applyfilter" name="applyfilter"></a><span class=
+              "term"><span><strong class=
+              "command">applyfilter</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                filters newsgroup articles according to regular expressions.
+              </p>
+            </dd>
+            <dt>
+              <a id="checkgroups" name="checkgroups"></a><span class=
+              "term"><span><strong class=
+              "command">checkgroups</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                inserts newsgroup titles into the newsgroup database.
+              </p>
+            </dd>
+            <dt>
+              <a id="fetchnews" name="fetchnews"></a><span class=
+              "term"><span><strong class=
+              "command">fetchnews</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                sends posted articles to and retrieves new articles from an
+                upstream news server.
+              </p>
+            </dd>
+            <dt>
+              <a id="leafnode-prog" name="leafnode-prog"></a><span class=
+              "term"><span><strong class=
+              "command">leafnode</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is an <span class="acronym">NNTP</span> server daemon.
+              </p>
+            </dd>
+            <dt>
+              <a id="leafnode-version" name=
+              "leafnode-version"></a><span class="term"><span><strong class=
+              "command">leafnode-version</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                prints the <span class="application">Leafnode</span> version.
+              </p>
+            </dd>
+            <dt>
+              <a id="newsq" name="newsq"></a><span class=
+              "term"><span><strong class=
+              "command">newsq</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                shows articles waiting to be sent upstream.
+              </p>
+            </dd>
+            <dt>
+              <a id="texpire" name="texpire"></a><span class=
+              "term"><span><strong class=
+              "command">texpire</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                expires old articles and unread groups.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-25 16:51:59 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dhcp.html" title="DHCP-3.0.2">Prev</a>
+          <p>
+            DHCP-3.0.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="openssh.html" title="OpenSSH-3.9p1">Next</a>
+          <p>
+            OpenSSH-3.9p1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="other.html" title=
+          "Chapter&nbsp;22.&nbsp;Other Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

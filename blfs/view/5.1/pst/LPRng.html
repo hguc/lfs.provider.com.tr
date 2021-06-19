@@ -1,0 +1,407 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      LPRng-3.8.26
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;41.&nbsp;Printing</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="printing.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="gs.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          LPRng-3.8.26
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to LPRng
+          </h3>
+        </div>
+        <p>
+          The <span class="application">LPRng</span> package contains an
+          enhanced, extended and portable implementation of the Berkeley Line
+          PRinter (<span class="acronym">LPR</span>) print spooler. This is
+          useful for queuing print jobs.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3231076" name="id3231076"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.lprng.com/DISTRIB/LPRng/LPRng-3.8.26.tgz">http://www.lprng.com/DISTRIB/LPRng/LPRng-3.8.26.tgz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.lprng.com/pub/LPRng/LPRng/LPRng-3.8.26.tgz">ftp://ftp.lprng.com/pub/LPRng/LPRng/LPRng-3.8.26.tgz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 11 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 54 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.35 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3231639" name="id3231639"></a><span class=
+                  "application">LPRng</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3231662" name="id3231662"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a>,
+              <a href="../basicnet/tcpwrappers.html">tcpwrappers-7.6</a> and
+              <a href="http://www.pdc.kth.se/kth-krb/">krb4</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of LPRng
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">LPRng</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --libexecdir=/usr/sbin \
+    --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring LPRng
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3231578" name="id3231578"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/printcap</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3231594" name="id3231594"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            There is no generic <tt class="filename">printcap</tt> for all
+            printers. A sample printcap is loaded into the <tt class=
+            "filename">/etc</tt> directory which can be of some help.
+            Information is also available at <a href=
+            "http://www.lprng.org">http://www.lprng.org</a> and <a href=
+            "http://www.linuxprinting.org">http://www.linuxprinting.org</a>.
+          </p>
+          <p>
+            The init script installed by <span class=
+            "application">LPRng</span> is not consistent with other
+            <span class="acronym">BLFS</span> scripts; therefore, install the
+            <tt class="filename">/etc/rc.d/init.d/lprng</tt> init script
+            included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-lprng</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The LPRng package contains <span><b class=
+          "command">cancel</b></span>, <span><b class=
+          "command">checkpc</b></span>, <span><b class=
+          "command">lp</b></span>, <span><b class="command">lpc</b></span>,
+          <span><b class="command">lpd</b></span>, <span><b class=
+          "command">lpq</b></span>, <span><b class="command">lpr</b></span>,
+          <span><b class="command">lprm</b></span>, <span><b class=
+          "command">lprng_certs</b></span>, <span><b class=
+          "command">lprng_index_certs</b></span>, <span><b class=
+          "command">lpstat</b></span> and <tt class="filename">liblpr</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232178" name="id3232178"></a>cancel
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">cancel</b></span> sends cancel requests
+            to an LPRng print service.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232192" name="id3232192"></a>checkpc
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">checkpc</b></span> checks out the
+            printcap database.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232205" name="id3232205"></a>lp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lp</b></span> sends requests to an LPRng
+            print service.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232217" name="id3232217"></a>lpc
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lpc</b></span> is the control program
+            for the daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232230" name="id3232230"></a>lpd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lpd</b></span> is the daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232242" name="id3232242"></a>lpq
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lpq</b></span> is the status monitoring
+            program.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232255" name="id3232255"></a>lpr
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lpr</b></span> is the job spooler
+            program.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232267" name="id3232267"></a>lprm
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lprm</b></span> is the job removal
+            program.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232280" name="id3232280"></a>lprng_certs
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lprng_certs</b></span> is a program used
+            to manage <span class="acronym">SSL</span> certificates for the
+            LPRng software.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232297" name="id3232297"></a>lprng_index_certs
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lprng_index_certs</b></span> creates a
+            set of index files in the LPRng signing certificate directory.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3232311" name="id3232311"></a>lpstat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">lpstat</b></span> is the job status
+            program.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="printing.html">Prev</a><br />
+        Chapter&nbsp;41.&nbsp;Printing
+      </div>
+      <div class="next">
+        <a accesskey="n" href="gs.html">Next</a><br />
+        AFPL Ghostscript-8.14
+      </div>
+      <div class="up">
+        <a accesskey="u" href="printing.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,260 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Going Beyond BLFS
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;2.&nbsp;Important Information
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="locale-issues.html" title=
+          "Locale Related Issues">Prev</a>
+          <p>
+            Locale Related Issues
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../postlfs/postlfs.html" title=
+          "Post LFS Configuration and Extra Software">Next</a>
+          <p>
+            Post LFS Configuration and Extra Software
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="important.html" title=
+          "Chapter&nbsp;2.&nbsp;Important Information">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="beyond" name="beyond"></a>
+        <h1 class="sect1">
+          Going Beyond BLFS
+        </h1>
+      </div>
+      <p>
+        The packages that are installed in this book are only the tip of the
+        iceberg. We hope that the experience you gained with the LFS book and
+        the BLFS book will give you the background needed to compile, install
+        and configure packages that are not included in this book.
+      </p>
+      <p>
+        When you want to install a package to a location other than
+        <tt class="filename">/</tt>, or <tt class="filename">/usr</tt>, you
+        are installing outside the default environment settings on most
+        machines. The following examples should assist you in determining how
+        to correct this situation. The examples cover the complete range of
+        settings that may need updating, but they are not all needed in every
+        situation.
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li>
+            <p>
+              Expand the <tt class="envar">PATH</tt> to include <tt class=
+              "filename">$PREFIX/bin</tt>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Expand the <tt class="envar">PATH</tt> for <tt class=
+              "systemitem">root</tt> to include <tt class=
+              "filename">$PREFIX/sbin</tt>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Add <tt class="filename">$PREFIX/lib</tt> to <tt class=
+              "filename">/etc/ld.so.conf</tt> or expand <tt class=
+              "envar">LD_LIBRARY_PATH</tt> to include it. Before using the
+              latter option, check out <a href=
+              "http://xahlee.org/UnixResource_dir/_/ldpath.html"><span class=
+              "url">http://xahlee.org/UnixResource_dir/_/ldpath.html</span></a>.
+              If you modify <tt class="filename">/etc/ld.so.conf</tt>,
+              remember to update <tt class="filename">/etc/ld.so.cache</tt>
+              by executing <span><strong class=
+              "command">ldconfig</strong></span> as the <tt class=
+              "systemitem">root</tt> user.
+            </p>
+          </li>
+          <li>
+            <p>
+              Add <tt class="filename">$PREFIX/man</tt> to <tt class=
+              "filename">/etc/man_db.conf</tt> or expand <tt class=
+              "envar">MANPATH</tt>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Add <tt class="filename">$PREFIX/info</tt> to <tt class=
+              "envar">INFOPATH</tt>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Add <tt class="filename">$PREFIX/lib/pkgconfig</tt> to
+              <tt class="envar">PKG_CONFIG_PATH</tt>. Some packages are now
+              installing <tt class="filename">.pc</tt> files in <tt class=
+              "filename">$PREFIX/share/pkgconfig</tt>, so you may have to
+              include this directory also.
+            </p>
+          </li>
+          <li>
+            <p>
+              Add <tt class="filename">$PREFIX/include</tt> to <tt class=
+              "envar">CPPFLAGS</tt> when compiling packages that depend on
+              the package you installed.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        If you are in search of a package that is not in the book, the
+        following are different ways you can search for the desired package.
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li>
+            <p>
+              If you know the name of the package, then search FreshMeat for
+              it at <a href="http://freshmeat.net/"><span class=
+              "url">http://freshmeat.net/</span></a>. Also search Google at
+              <a href="http://google.com/"><span class=
+              "url">http://google.com/</span></a>. Sometimes a search for the
+              <tt class="filename">rpm</tt> at <a href=
+              "http://rpmfind.net/"><span class=
+              "url">http://rpmfind.net/</span></a> or the <tt class=
+              "filename">deb</tt> at <a href=
+              "http://www.debian.org/distrib/packages#search_packages"><span class="url">
+              http://www.debian.org/distrib/packages#search_packages</span></a>
+              can also lead to a link to the package.
+            </p>
+          </li>
+          <li>
+            <p>
+              If you know the name of the executable, but not the package
+              that the executable belongs to, first try a Google search with
+              the name of the executable. If the results are overwhelming,
+              try searching for the given executable in the Debian repository
+              at <a href=
+              "http://www.debian.org/distrib/packages#search_contents"><span class="url">
+              http://www.debian.org/distrib/packages#search_contents</span></a>.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <p>
+        Some general hints on handling new packages:
+      </p>
+      <div class="itemizedlist">
+        <ul>
+          <li>
+            <p>
+              Many of the newer packages follow the <span><strong class=
+              "command">./configure &amp;&amp; make &amp;&amp; make
+              install</strong></span> process. Help on the options accepted
+              by configure can be obtained via the command
+              <span><strong class="command">./configure
+              --help</strong></span>.
+            </p>
+          </li>
+          <li>
+            <p>
+              Most of the packages contain documentation on compiling and
+              installing the package. Some of the documents are excellent,
+              some not so excellent. Check out the homepage of the package
+              for any additional and updated hints for compiling and
+              configuring the package.
+            </p>
+          </li>
+          <li>
+            <p>
+              If you are having a problem compiling the package, try
+              searching the LFS archives at <a href=
+              "http://search.linuxfromscratch.org/"><span class=
+              "url">http://search.linuxfromscratch.org/</span></a> for the
+              error or if that fails, try searching Google. If everything
+              else fails, try the blfs-support mailing-list.
+            </p>
+          </li>
+        </ul>
+      </div>
+      <div class="tip">
+        <div class="admonhead">
+          <img alt="[Tip]" src="../images/tip.png" />
+          <h3 class="admontitle">
+            Tip
+          </h3>
+        </div>
+        <div class="admonbody">
+          <p>
+            If you have found a package that is only available in <tt class=
+            "filename">.deb</tt> or <tt class="filename">.rpm</tt> format,
+            there are two small scripts, <span><strong class=
+            "command">rpm2targz</strong></span> and <span><strong class=
+            "command">deb2targz</strong></span> that are available at
+            <a href="http://downloads.linuxfromscratch.org/deb2targz.tar.bz2">
+            <span class=
+            "url">http://downloads.linuxfromscratch.org/deb2targz.tar.bz2</span></a>
+            and <a href=
+            "http://downloads.linuxfromscratch.org/rpm2targz.tar.bz2"><span class="url">
+            http://downloads.linuxfromscratch.org/rpm2targz.tar.bz2</span></a>
+            to convert the archives into a simple <tt class=
+            "filename">tar.gz</tt> format.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-02-01 15:46:27 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="locale-issues.html" title=
+          "Locale Related Issues">Prev</a>
+          <p>
+            Locale Related Issues
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../postlfs/postlfs.html" title=
+          "Post LFS Configuration and Extra Software">Next</a>
+          <p>
+            Post LFS Configuration and Extra Software
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="important.html" title=
+          "Chapter&nbsp;2.&nbsp;Important Information">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

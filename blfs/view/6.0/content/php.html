@@ -1,0 +1,464 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      PHP-5.0.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;24.&nbsp;Web serving
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="web.html" title="Web serving">Prev</a>
+          <p>
+            Web serving
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="proftpd.html" title=
+          "ProFTPD-1.2.10">Next</a>
+          <p>
+            ProFTPD-1.2.10
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="web.html" title=
+          "Chapter&nbsp;24.&nbsp;Web serving">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="php" name="php"></a>
+        <h1 class="sect1">
+          PHP-5.0.3
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to PHP
+          </h2>
+        </div>
+        <p>
+          <span class="application"><span class="acronym">PHP</span></span>
+          is the <span class="acronym">PHP</span> Hypertext Preprocessor.
+          Primarily used in dynamic web sites, it allows for programming code
+          to be directly embedded into the <span class="acronym">HTML</span>
+          markup.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2584968" name="id2584968"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://us2.php.net/distributions/php-5.0.3.tar.bz2"><span class="url">
+                  http://us2.php.net/distributions/php-5.0.3.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.isu.edu.tw/pub/Unix/Web/PHP/distributions/php-5.0.3.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.isu.edu.tw/pub/Unix/Web/PHP/distributions/php-5.0.3.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: fd26455febdddee0977ce226b9108d9c
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 4.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 101 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 1.29 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2703692" name="id2703692"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required patch for Berkeley DB: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/php-5.0.3-db43-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/php-5.0.3-db43-1.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2696928" name="id2696928"></a><span class=
+                  "application"><span class="acronym">PHP</span></span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2551125" name="id2551125"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="web.html#apache">Apache-2.0.53</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2711752" name="id2711752"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/libxml2.html">libxml2-2.6.17</a>, <a href=
+              "../general/libxslt.html">libxslt-1.1.12</a>, <a href=
+              "../postlfs/security.html#openssl">OpenSSL-0.9.7e</a>, <a href=
+              "http://www.fastio.com/"><span class="url">ClibPDF</span></a>,
+              <a href="../general/graphlib.html#libjpeg">libjpeg-6b</a>,
+              <a href="../general/libtiff.html">libtiff-3.7.1</a>, <a href=
+              "../basicnet/netlibs.html#curl">cURL-7.13.1</a>, <a href=
+              "http://qdbm.sourceforge.net/"><span class=
+              "url">QDBM</span></a>, <a href=
+              "http://cr.yp.to/cdb.html"><span class="url">cdb</span></a>,
+              <a href="../general/gdbm.html">GDBM-1.8.3</a>, <a href=
+              "databases.html#db">Berkeley DB-4.3.27</a>, <a href=
+              "../general/fam.html">FAM-2.7.0</a>, <a href=
+              "http://www.boutell.com/gd/"><span class="url">GD</span></a>,
+              <a href="../general/libpng.html">libpng-1.2.8</a>, X (<a href=
+              "../x/installing.html#xorg">X.org-6.8.2</a> or <a href=
+              "../x/xfree86.html">XFree86-4.4.0</a>), <a href=
+              "../general/freetype2.html">FreeType-2.1.9</a>, <a href=
+              "http://gd.tuwien.ac.at/visual/ibiblio/libs/graphics/t1lib-5.0.2.tar.gz">
+              <span class="url">t1lib</span></a>, <a href=
+              "../general/gmp.html">GMP-4.1.4</a> <a href=
+              "mysql.html">MySQL-4.1.8a</a>, <a href=
+              "../general/genlib.html#pcre">PCRE-5.0</a>, <a href=
+              "postgresql.html">PostgreSQL-7.4.6</a>, <a href=
+              "../general/aspell.html">Aspell-0.60</a>, <a href=
+              "../general/pkgconfig.html">pkgconfig-0.15.0</a>, <a href=
+              "../general/tidy.html">HTML Tidy-050305</a>, <a href=
+              "../server/openldap.html">OpenLDAP-2.2.20</a>, <a href=
+              "../postlfs/cyrus-sasl.html">Cyrus SASL-2.1.20</a>, <a href=
+              "../postlfs/mitkrb.html">MIT krb5-1.4</a> or <a href=
+              "../postlfs/heimdal.html">Heimdal-0.6.3</a>, <a href=
+              "http://mcrypt.hellug.gr/"><span class=
+              "url">libmcrypt</span></a>, <a href=
+              "http://mhash.sourceforge.net/"><span class=
+              "url">mhash</span></a>, <a href=
+              "http://www.net-snmp.org/"><span class=
+              "url">Net-SNMP</span></a>, <a href=
+              "http://www.sqlite.org/"><span class="url">SQLite</span></a>,
+              <a href="http://dmalloc.com/"><span class=
+              "url">Dmalloc</span></a>, <a href=
+              "http://www.mnogosearch.org/"><span class=
+              "url">mnoGoSearch</span></a>, <a href=
+              "http://www.hughes.com.au/products/msql/"><span class=
+              "url">Mini SQL</span></a>, <a href=
+              "http://www.empress.com/"><span class="url">Empress</span></a>,
+              <a href="http://www.birdstep.com/"><span class=
+              "url">Birdstep</span></a>, <a href=
+              "http://www.dbmaker.com/"><span class="url">DBMaker</span></a>,
+              <a href="http://www.softwareag.com/"><span class=
+              "url">Adabas</span></a>, <a href=
+              "http://www.frontbase.com/"><span class=
+              "url">FrontBase</span></a>, <a href=
+              "http://caudium.net/"><span class="url">Caudium</span></a>,
+              <a href="http://www.openwddx.org/"><span class=
+              "url">WDDX</span></a>, <a href=
+              "http://partners.adobe.com/asn/acrobat/forms.jsp"><span class=
+              "url">FDF Toolkit</span></a>, <a href=
+              "http://www.hyperwave.com/"><span class=
+              "url">Hyperwave</span></a>, <a href=
+              "http://www.mainstreetsoftworks.com/"><span class=
+              "url">Monetra</span></a>, <a href=
+              "../general/expat.html">expat-1.95.8</a> and <a href=
+              "../server/mail.html"><span class="url">MTA</span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of PHP
+          </h2>
+        </div>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              You can use <span class="application"><span class=
+              "acronym">PHP</span></span> for server-side scripting, command
+              line scripting or client-side <span class="acronym">GUI</span>
+              applications. The book provides instructions for setting up
+              <span class="application"><span class=
+              "acronym">PHP</span></span> for server-side scripting as it is
+              the most common form.
+            </p>
+          </div>
+        </div>
+        <p>
+          If you have Berkeley DB installed and wish to utilize it, apply the
+          following patch:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">patch -Np1 -i ../php-5.0.3-db43-1.patch</strong></span></kbd></pre>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">PHP</span></span> by running the following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr \
+            --sysconfdir=/etc \
+            --with-apxs2 \
+            --with-config-file-path=/etc \
+            --with-zlib \
+            --enable-bcmath \
+            --with-bz2 \
+            --enable-calendar \
+            --enable-dba \
+            --enable-exif \
+            --enable-ftp \
+            --with-gettext \
+            --with-iconv \
+            --with-ncurses \
+            --with-readline \
+            --disable-libxml &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+cp php.ini-recommended /etc/php.ini</strong></span></kbd></pre>
+        <p>
+          Remove the <em class="parameter"><tt>--disable-libxml</tt></em>
+          switch if you have <a href=
+          "../general/libxml2.html">libxml2-2.6.17</a> installed otherwise
+          <span><strong class="command">pear</strong></span> will not be
+          built.
+        </p>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              <span class="acronym">PHP</span> has many more configure
+              options that will enable support for certain things. You can
+              use <span><strong class="command">./configure
+              --help</strong></span> to see a full list of the available
+              options. Also, use of the <a href=
+              "http://www.php.net/"><span class="url"><span class=
+              "acronym">PHP</span> web site</span></a> is highly recommended,
+              as their online docs are very good.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring PHP
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2684227" name="id2684227"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/php.ini</tt>, <tt class=
+            "filename">/etc/pear.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2653028" name="id2653028"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To enable <span class="acronym">PHP</span> support in the
+            <span class="application">Apache</span> web server, a new
+            LoadModule (this one should be handled automatically by the
+            <span><strong class="command">make install</strong></span>
+            command) and AddType directives must be added to the <tt class=
+            "filename">httpd.conf</tt> file:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">LoadModule php5_module lib/apache/libphp5.so
+AddType application/x-httpd-php .php</kbd></pre>
+          <p>
+            Also, it can be useful to add an entry for <tt class=
+            "filename">index.php</tt> to the DirectoryIndex directive of the
+            <tt class="filename">httpd.conf</tt> file.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">PHP</span></span> package contains <span><strong class=
+          "command">pear</strong></span>, <span><strong class=
+          "command">php</strong></span>, <span><strong class=
+          "command">php-config</strong></span>, <span><strong class=
+          "command">phpextdist</strong></span> and <span><strong class=
+          "command">phpize</strong></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2752714" name="id2752714"></a>php
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">php</strong></span> is a command
+            line interface that enables you to parse and execute <span class=
+            "acronym">PHP</span> code.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2681405" name="id2681405"></a>pear
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">pear</strong></span> is the
+            <span class="acronym">PHP</span> Extension and Application
+            Repository (<span class="acronym">PEAR</span>) package manager.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-12 09:53:54 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="web.html" title="Web serving">Prev</a>
+          <p>
+            Web serving
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="proftpd.html" title=
+          "ProFTPD-1.2.10">Next</a>
+          <p>
+            ProFTPD-1.2.10
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="web.html" title=
+          "Chapter&nbsp;24.&nbsp;Web serving">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

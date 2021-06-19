@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Additional X Window System Configuration
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;23.&nbsp;X Window System Environment
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="x-setup.html" title=
+          "X Window System Components">Prev</a>
+          <p>
+            X Window System Components
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lib.html" title="X Libraries">Next</a>
+          <p>
+            X Libraries
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;23.&nbsp;X Window System Environment">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="x-config" name="x-config"></a>Additional X Window System
+        Configuration
+      </h1>
+      <p>
+        Below you will find information on fine tuning the components of the
+        <span class="application">X Window System</span>. The documentation
+        links are specifically for <span class="application">XFree86</span>,
+        which has been retired in BLFS, however, the information contained in
+        those documents usually pertains to <span class=
+        "application">Xorg</span> as well. Detailed descriptions are also
+        located in the <code class="filename">xorg.conf</code> man page.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="xinput" name="xinput"></a>Setting up X Input Devices
+        </h2>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/XInputDevices">http://wiki.linuxfromscratch.org/blfs/wiki/XInputDevices</a>
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="xkeyboard" name="xkeyboard"></a>Keyboards
+          </h3>
+          <p>
+            The following external links provide a good introduction to
+            setting up various keyboards.
+          </p>
+          <p>
+            <a class="ulink" href=
+            "http://www.xfree86.org/current/XKB-Config.html">The <span class=
+            "application">XKB</span> Configuration Guide</a>
+          </p>
+          <p>
+            <a class="ulink" href=
+            "http://www.xfree86.org/current/XKB-Enhancing.html">How to
+            further enhance <span class="application">XKB</span>
+            configuration</a>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="xmice" name="xmice"></a>Mice
+          </h3>
+          <p>
+            Multi-button mice can be used to their full potential by mapping
+            the additional buttons to X button events. Wheel mice are a
+            common example. The ordinary ones contain two buttons, and a
+            scroll wheel that doubles as a third button. As far as
+            <span class="application">X</span> is concerned, there are 5
+            buttons as it counts the 'scroll up' and 'scroll down' functions
+            (internally they are buttons). Here is an example 'InputDevice'
+            section for a typical PS/2 wheel mouse:
+          </p>
+          <pre class="screen">
+<code class="literal">Section "InputDevice"
+  Identifier  "Mouse 0"
+  Driver      "mouse"
+  Option      "Device"        "/dev/input/mice"
+  Option      "Protocol"      "IMPS/2"
+  Option      "ZAxisMapping"  "4 5"
+  Option      "Buttons"       "5"
+EndSection</code>
+</pre>
+          <p>
+            Button assignments differ for every mouse type. On more exotic
+            mice, you may find that the rocker wheel buttons are 6 and 7.
+            Simply add those values to the <code class=
+            "option">ZAxisMapping</code> option, and set the <code class=
+            "option">Buttons</code> option appropriately to enable side to
+            side scrolling. Additional information on button assignment can
+            be found in the following <span class=
+            "application">XFree86</span> document:
+          </p>
+          <p>
+            <a class="ulink" href=
+            "http://www.xfree86.org/current/mouse.html">Mouse Support in
+            <span class="application">XFree86</span></a>
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="xdisplay" name="xdisplay"></a>Fine Tuning Display Settings
+        </h2>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/xdisplay">http://wiki.linuxfromscratch.org/blfs/wiki/xdisplay</a>
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            The 'Monitor' Section
+          </h3>
+          <p>
+            One or more monitor sections specify the characteristics of your
+            monitor(s). Usually, the setup program can probe your monitor and
+            setup a monitor properly, however, this does not always work. The
+            most common entries that need to be updated are <code class=
+            "option">HorizSync</code> and <code class=
+            "option">VertRefresh</code>. If the configuration program does
+            not set these properly, you will notice a resolution much lower
+            than desired. The default <code class="option">HorizSync</code>
+            setting is 28-33kHz which is very conservative. The default
+            <code class="option">VertRefresh</code> is 43-72Hz. Consult your
+            monitor documentation or search online for the proper settings
+            for your monitor.
+          </p>
+          <p>
+            It is also possible to control many detailed timing
+            characteristics of a monitor with a <code class=
+            "option">Modeline</code> setting. Most users will not need to do
+            this, but details are in the man page referenced above.
+          </p>
+          <div class="admon warning">
+            <img alt="[Warning]" src="../images/warning.png" />
+            <h3>
+              Warning
+            </h3>
+            <p>
+              Incorrect monitor settings can destroy your monitor or even set
+              it on fire! For most newer monitors, the result of overly
+              aggressive settings is a blank screen, but older monitors do
+              not all have built in safeguards.
+            </p>
+          </div>
+          <p>
+            Other items that may be of interest in this section is the
+            <code class="option">DPMS</code> and associated <code class=
+            "option">StandbyTime</code>, <code class=
+            "option">SuspendTime</code>, and <code class=
+            "option">OffTime</code> options. These parameters control the
+            energy saving features of your monitor. They may also be
+            controlled at runtime with the <span class=
+            "command"><strong>xset</strong></span> command or via a graphical
+            interface such as <span class="application">KDE</span>'s Control
+            Center.
+          </p>
+          <p>
+            A typical monitor section will normally look like:
+          </p>
+          <pre class="screen">
+<code class="literal">Section "Monitor"
+    DisplaySize   400   300 # mm
+    Identifier   "Monitor0"
+    VendorName   "VSC"
+    ModelName    "G810-2"
+    HorizSync     30.0 - 92.0
+    VertRefresh   50.0 - 180.0
+    Option       "DPMS"
+    Option       "StandbyTime" "10"
+    Option       "SuspendTime" "20"
+    Option       "OffTime"     "30"
+EndSection</code>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            The 'Device' Section
+          </h3>
+          <p>
+            This section basically controls your video card. The key entry is
+            the <code class="option">Driver</code> setting. This can be a
+            driver from the <span class="application">X</span> distribution
+            you are using, from the kernel source, or a proprietary driver
+            for devices such as a Nvidia graphics adaptor. The driver often
+            is a kernel module or built into the kernel itself, but there are
+            also separate non-kernel components usually found in the
+            <code class="filename">/usr/X11R6/lib/modules/drivers/</code>
+            directory. These were either built with the <span class=
+            "application">X</span> server or installed via external (i.e.,
+            proprietary) programs.
+          </p>
+          <p>
+            There are many options for device drivers and most are specific
+            to the driver being used. Documentation for many drivers can be
+            found at the <a class="ulink" href=
+            "http://www.xfree86.org/current/manindex4.html">XFree86 Driver
+            Manual Pages</a>.
+          </p>
+          <p>
+            A typical Device section will look like:
+          </p>
+          <pre class="screen">
+<code class="literal">Section "Device"
+    Identifier  "Videocard0"
+    Driver      "radeon"
+    VendorName  "Videocard vendor"
+    BoardName   "ATI Radeon 7500"
+EndSection</code>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          <a id="xlayouts" name="xlayouts"></a>Display Layouts
+        </h2>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/xlayouts">http://wiki.linuxfromscratch.org/blfs/wiki/xlayouts</a>
+        </p>
+        <p>
+          Within the <span class="application">X Window System</span>
+          configuration file there may be multiple layout sections like:
+        </p>
+        <pre class="screen">
+<code class="literal">Section "ServerLayout"
+    Identifier     "X.org Configured"
+    Screen      0  "Screen0" 0 0
+    InputDevice    "Mouse0" "CorePointer"
+    InputDevice    "Keyboard0" "CoreKeyboard"
+EndSection</code>
+</pre>
+        <p>
+          The default layout is the first, but if you have special needs, you
+          can create others with different configurations. The <code class=
+          "option">Identifier</code> line in each section is the key.
+          Different layouts can be created using different Screen and
+          InputDevice sections.
+        </p>
+        <p>
+          After the configuration file is updated, an alternate configuration
+          can be specified on the <span class=
+          "command"><strong>startx</strong></span> line. For instance, to
+          start <span class="application">X</span> with an alternate layout
+          with an Identifier of "layout2", use the following command line:
+        </p>
+        <pre class="screen">
+<span class="command"><strong>startx -- -layout layout2</strong></span>
+</pre>
+      </div>
+      <p class="updated">
+        Last updated on 2008-05-03 00:18:57 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="x-setup.html" title=
+          "X Window System Components">Prev</a>
+          <p>
+            X Window System Components
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="lib.html" title="X Libraries">Next</a>
+          <p>
+            X Libraries
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;23.&nbsp;X Window System Environment">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

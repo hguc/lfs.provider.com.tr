@@ -1,0 +1,337 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;43.&nbsp;Standard Generalized Markup Language (SGML)
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;XIII.&nbsp;Printing, Scanning and Typesetting</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="xsane.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="sgml-dtd-3.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Standard Generalized Markup Language (SGML)
+        </h1>
+      </div>
+      <p>
+        This chapter contains DocBook <span class="acronym">SGML</span>
+        document type definitions (<span class="acronym">DTD</span>s),
+        DocBook <span class="acronym">DSSSL</span> Stylesheets and DocBook
+        tools to validate, transform, format and publish DocBook documents.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="sgml-common" name="sgml-common"></a>
+          <h2 class="sect1">
+            SGML Common-0.6.3
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to SGML Common
+            </h3>
+          </div>
+          <p>
+            The <span class="application"><span class="acronym">SGML</span>
+            Common package</span> contains <span><b class=
+            "command">install-catalog</b></span>. This is useful for creating
+            and maintaining centralized <span class="acronym">SGML</span>
+            catalogs.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3241927" name="id3241927"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://gd.tuwien.ac.at/hci/kde/devel/docbook/SOURCES/sgml-common-0.6.3.tgz">
+                    http://gd.tuwien.ac.at/hci/kde/devel/docbook/SOURCES/sgml-common-0.6.3.tgz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz">
+                    ftp://sources.redhat.com/pub/docbook-tools/new-trials/SOURCES/sgml-common-0.6.3.tgz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 75 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 648 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.00 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3241979" name="id3241979"></a>Additional
+                    downloads
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Required Patch: <a href=
+                    "http://www.linuxfromscratch.org/patches/blfs/5.1/sgml-common-0.6.3-manpage-1.patch">
+                    http://www.linuxfromscratch.org/patches/blfs/5.1/sgml-common-0.6.3-manpage-1.patch</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of SGML Common
+            </h3>
+          </div>
+          <p>
+            First apply the patch
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../sgml-common-0.6.3-manpage-1.patch</b></span></tt>
+</pre>
+          <p>
+            The autotools files included with sgml-common are old. Use the
+            following commands to regenerate the files.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">aclocal &amp;&amp;
+automake -acf &amp;&amp;
+autoconf</b></span></tt>
+</pre>
+          <p>
+            Install <span class="application"><span class=
+            "acronym">SGML</span> Common</span> by running the following
+            commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+install-catalog --add /etc/sgml/sgml-ent.cat \
+    /usr/share/sgml/sgml-iso-entities-8879.1986/catalog &amp;&amp;
+install-catalog --add /etc/sgml/sgml-docbook.cat \
+    /etc/sgml/sgml-ent.cat</b></span></tt>
+</pre>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Tip]" src="../images/tip.png" />
+              <h3 class="tip">
+                Tip: Update hint
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                Remove the above catalog items prior to upgrading with:
+              </p>
+              <pre class="screen">
+<span><b class="command">install-catalog --remove /etc/sgml/sgml-ent.cat \
+    /usr/share/sgml/sgml-iso-entities-8879.1986/catalog &amp;&amp;
+install-catalog --remove /etc/sgml/sgml-docbook.cat \
+    /etc/sgml/sgml-ent.cat</b></span>
+</pre>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring SGML-common
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3242368" name="id3242368"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/sgml/sgml.conf</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3241496" name="id3241496"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              No change in this file is necessary.
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application"><span class="acronym">SGML</span>
+            Common</span> package contains <span><b class=
+            "command">install-catalog</b></span>, <span><b class=
+            "command">sgmlwhich</b></span>, <span class="acronym">SGML</span>
+            entities files and <span class="acronym">XML</span> entities
+            files.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3242260" name="id3242260"></a>install-catalog
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">install-catalog</b></span> creates a
+              centralized catalog that maintains references to catalogs
+              scattered throughout the <tt class=
+              "filename">/usr/share/sgml</tt> directory tree.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3242308" name="id3242308"></a>sgmlwhich
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">sgmlwhich</b></span> will print to
+              standard output the name of the main configuration file.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3242322" name="id3242322"></a>SGML entities
+                    files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span class="acronym">SGML</span> entities files contain the
+              basic character entities defined with <span class=
+              "acronym">SDATA</span> entries.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3242337" name="id3242337"></a>XML entities files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span class="acronym">XML</span> entities files contain the
+              basic character entities defined by a hexadecimal
+              representation of the Unicode character number.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="xsane.html">Prev</a><br />
+        XSane-0.93
+      </div>
+      <div class="next">
+        <a accesskey="n" href="sgml-dtd-3.html">Next</a><br />
+        DocBook SGML DTD-3.1
+      </div>
+      <div class="up">
+        <a accesskey="u" href="pst.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

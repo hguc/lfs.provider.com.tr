@@ -1,0 +1,395 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      JadeTeX-3.13
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;46.&nbsp;Typesetting
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="typesetting.html" title=
+          "Typesetting">Prev</a>
+          <p>
+            Typesetting
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../appendices/creat-comm.html" title=
+          "Creative Commons License">Next</a>
+          <p>
+            Creative Commons License
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="typesetting.html" title=
+          "Chapter&nbsp;46.&nbsp;Typesetting">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="jadetex" name="jadetex"></a>
+        <h1 class="sect1">
+          JadeTeX-3.13
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to JadeTeX
+          </h2>
+        </div>
+        <p>
+          The <span class="application">JadeTeX</span> package is a companion
+          package to the <span class="application">OpenJade</span>
+          <span class="acronym">DSSSL</span> processor. <span class=
+          "application">JadeTeX</span> transforms high level LaTeX macros
+          into <span class="acronym">DVI</span>/PostScript and Portable
+          Document Format (<span class="acronym">PDF</span>) forms.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2782859" name="id2782859"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/jadetex/jadetex-3.13.tar.gz">
+                  <span class=
+                  "url">http://prdownloads.sourceforge.net/jadetex/jadetex-3.13.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 634dfc172fbf66a6976e2c2c60e2d198
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 103 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 9.6 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.11 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2632282" name="id2632282"></a><span class=
+                  "application">JadeTeX</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2602428" name="id2602428"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="typesetting.html#tex">TeX-2.0.2</a> and <a href=
+              "openjade.html">OpenJade-1.3.2</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of JadeTeX
+          </h2>
+        </div>
+        <p>
+          First, as the root user, make some required modifications to files
+          already installed on the system:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">sed -i.orig -e "s/original texmf.cnf/modified texmf.cnf/" \
+   /usr/share/texmf/web2c/texmf.cnf</strong></span></kbd></pre>
+        <p>
+          You'll need to make two modifications to <tt class=
+          "filename">/usr/share/texmf/web2c/texmf.cnf</tt>. First, add the
+          following line under the section titled &ldquo;<span class=
+          "quote">ConTeXt is a memory hog...</span>&rdquo;:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">pool_size.context = 750000</kbd></pre>
+        <p>
+          Next, add <span><strong class="command">latex</strong></span>,
+          <span><strong class="command">jadetex</strong></span> and
+          <span><strong class="command">pdfjadetex</strong></span> settings
+          using the following command:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">cat &gt;&gt; /usr/share/texmf/web2c/texmf.cnf &lt;&lt; "EOF"</strong></span>
+
+% The following 3 sections added for JadeTeX
+
+% latex settings
+main_memory.latex = 1100000
+param_size.latex = 1500
+stack_size.latex = 1500
+hash_extra.latex = 15000
+string_vacancies.latex = 45000
+pool_free.latex = 47500
+nest_size.latex = 500
+save_size.latex = 5000
+pool_size.latex = 500000
+max_strings.latex = 55000
+font_mem_size.latex= 400000
+
+% jadetex settings
+main_memory.jadetex = 1500000
+param_size.jadetex = 1500
+stack_size.jadetex = 1500
+hash_extra.jadetex = 50000
+string_vacancies.jadetex = 45000
+pool_free.jadetex = 47500
+nest_size.jadetex = 500
+save_size.jadetex = 5000
+pool_size.jadetex = 500000
+max_strings.jadetex = 55000
+
+% pdfjadetex settings
+main_memory.pdfjadetex = 2500000
+param_size.pdfjadetex = 1500
+stack_size.pdfjadetex = 1500
+hash_extra.pdfjadetex = 50000
+string_vacancies.pdfjadetex = 45000
+pool_free.pdfjadetex = 47500
+nest_size.pdfjadetex = 500
+save_size.pdfjadetex = 5000
+pool_size.pdfjadetex = 500000
+max_strings.pdfjadetex = 55000
+<span><strong class="command">EOF</strong></span></kbd></pre>
+        <p>
+          Build a new <tt class="filename">latex.fmt</tt> file using the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">cp -v -R /usr/share/texmf/tex/latex/config . &amp;&amp;
+cd config &amp;&amp;
+tex -ini -progname=latex latex.ini &amp;&amp;
+cd ..</strong></span></kbd></pre>
+        <p>
+          Now, as the root user, install the <tt class=
+          "filename">latex.fmt</tt> file, then build and install <span class=
+          "application">JadeTex</span> using the following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">mv /usr/share/texmf/web2c/latex.fmt \
+   /usr/share/texmf/web2c/latex.fmt.orig &amp;&amp;
+install -v -m644 config/latex.fmt /usr/share/texmf/web2c &amp;&amp;
+make install &amp;&amp;
+ln -v -sf tex /usr/bin/jadetex &amp;&amp;
+ln -v -sf pdftex /usr/bin/pdfjadetex &amp;&amp;
+mktexlsr</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">sed -i -e "s/original
+          texmf.cnf/modified texmf.cnf/"</strong></span>: This changes
+          <tt class="filename">/usr/share/texmf/web2c/texmf.cnf</tt> so that
+          if <span class="application">TeX</span> is upgraded, this file
+          won't get overwritten.
+        </p>
+        <p>
+          <span><strong class="command">ln -v -sf tex ...; ln -v -sf pdftex
+          ...; mktexlsr</strong></span>: The <span class=
+          "application">JadeTeX</span> programs are actually just symlinks to
+          the <span class="application">TeX</span> programs.
+          <span><strong class="command">mktexlsr</strong></span> updates
+          <span class="application">TeX</span>'s <tt class=
+          "filename">ls-R</tt> database used by the <tt class=
+          "filename">libkpathsea</tt> library so that <span class=
+          "application">TeX</span> knows to use the <span class=
+          "application">JadeTeX</span> <tt class="filename">.fmt</tt> files
+          when <span><strong class="command">jadetex</strong></span> or
+          <span><strong class="command">pdfjadetex</strong></span> is called.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring JadeTeX
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2594765" name="id2594765"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">jadetex.dtx</tt> in the <span class=
+            "application">JadeTeX</span> source tree.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2835058" name="id2835058"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            If you need to modify the default <span class=
+            "application">JadeTeX</span> macro settings, see the <a href=
+            "http://jadetex.sourceforge.net/#index-div-d18e397"><span class=
+            "url"><span class="application">JadeTeX</span> <span class=
+            "acronym">FAQ</span></span></a>.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">jadetex and
+              pdfjadetex</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/share/texmf/tex/jadetex</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2678640" name="id2678640"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="jadetex-prog" name="jadetex-prog"></a><span class=
+              "term"><span><strong class=
+              "command">jadetex</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                transforms LaTeX macros created by <span class=
+                "application">OpenJade</span> into <span class=
+                "acronym">DVI</span>/PostScript forms.
+              </p>
+            </dd>
+            <dt>
+              <a id="pdfjadetex" name="pdfjadetex"></a><span class=
+              "term"><span><strong class=
+              "command">pdfjadetex</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                transforms LaTeX macros created by <span class=
+                "application">OpenJade</span> into Portable Document Format
+                (<span class="acronym">PDF</span>) forms.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-16 14:46:41 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="typesetting.html" title=
+          "Typesetting">Prev</a>
+          <p>
+            Typesetting
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../appendices/creat-comm.html" title=
+          "Creative Commons License">Next</a>
+          <p>
+            Creative Commons License
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="typesetting.html" title=
+          "Chapter&nbsp;46.&nbsp;Typesetting">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

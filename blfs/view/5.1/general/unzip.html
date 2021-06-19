@@ -1,0 +1,309 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      UnZip-5.51
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;11.&nbsp;System Utilities</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="which.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="zip.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          UnZip-5.51
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to UnZip
+          </h3>
+        </div>
+        <p>
+          The <span class="application">UnZip</span> package contains
+          <tt class="filename">ZIP</tt> extraction utilities. These are
+          useful for extracting files from <tt class="filename">ZIP</tt>
+          archives. <tt class="filename">ZIP</tt> archives are created with
+          <span class="application">PKZIP</span> or <span class=
+          "application">Info-ZIP</span> utilities primarily in a <span class=
+          "acronym">DOS</span> environment.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2706224" name="id2706224"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.mirror.ac.uk/sites/ftp.info-zip.org/pub/infozip/src/unzip551.tar.gz">
+                  http://www.mirror.ac.uk/sites/ftp.info-zip.org/pub/infozip/src/unzip551.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.info-zip.org/pub/infozip/src/unzip551.tar.gz">ftp://ftp.info-zip.org/pub/infozip/src/unzip551.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 6.5 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.11 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2706278" name="id2706278"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/unzip-5.51-fix-Makefile.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/unzip-5.51-fix-Makefile.patch</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/unzip-5.51-fix-libz.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/unzip-5.51-fix-libz.patch</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Recommended patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/unzip-5.51-dont-make-noise.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/unzip-5.51-dont-make-noise.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of UnZip
+          </h3>
+        </div>
+        <p>
+          By default, <span class="application">UnZip</span> does not support
+          shrink decompression. To enable it or to obtain more information,
+          check out the <span class="application">UnZip</span> <span class=
+          "acronym">FAQ</span> at <a href=
+          "http://www.info-zip.org/pub/infozip/FAQ.html#unshrink">http://www.info-zip.org/pub/infozip/FAQ.html#unshrink</a>.
+        </p>
+        <p>
+          Install <span class="application">UnZip</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../unzip-5.51-fix-Makefile.patch &amp;&amp;
+patch -Np1 -i ../unzip-5.51-fix-libz.patch &amp;&amp;
+patch -Np1 -i ../unzip-5.51-dont-make-noise.patch &amp;&amp;
+cp unix/Makefile . &amp;&amp;
+make prefix=/usr linux &amp;&amp;
+make prefix=/usr linux_shlibz &amp;&amp;
+make prefix=/usr install &amp;&amp;
+cp -a libunzip.so* /usr/lib</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">make prefix=/usr linux</b></span>: This
+          command overrides the prefix variable that is set to <tt class=
+          "filename">/usr/local</tt> in the <tt class=
+          "filename">Makefile</tt> and builds the executables for a linux
+          system. The alternatives to 'linux' can be seen with a 'make list'
+          command.
+        </p>
+        <p>
+          <span><b class="command">make prefix=/usr linux_shlibz</b></span>:
+          Build shared <tt class="filename">libunzip</tt> and link
+          <span class="application">UnZip</span> against it and <span class=
+          "application">zlib</span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">UnZip</span> package contains
+          <span><b class="command">unzip</b></span> , <span><b class=
+          "command">funzip</b></span>, <span><b class=
+          "command">unzipfsx</b></span>, <span><b class=
+          "command">zipgrep</b></span> and <span><b class=
+          "command">zipinfo</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2706694" name="id2706694"></a>unzip
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">unzip</b></span> lists, tests or
+            extracts files from a <tt class="filename">ZIP</tt> archive.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2706713" name="id2706713"></a>funzip
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">funzip</b></span> allows the output of
+            <span><b class="command">unzip</b></span> commands to be
+            redirected.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2706731" name="id2706731"></a>unzipfsx
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">unzipfsx</b></span> is the
+            self-extracting stub that can be prepended to a <tt class=
+            "filename">ZIP</tt> archive. Files in this format allow the
+            recipient to decompress the archive without installing
+            <span class="application">UnZip</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2707472" name="id2707472"></a>zipgrep
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">zipgrep</b></span> is a grep for
+            <tt class="filename">ZIP</tt> archives.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2707491" name="id2707491"></a>zipinfo
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">zipinfo</b></span> produces technical
+            information about the files in a <tt class="filename">ZIP</tt>
+            archive, including file access permissions, encryption status,
+            type of compression, etc.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="which.html">Prev</a><br />
+        which-2.16 and alternatives
+      </div>
+      <div class="next">
+        <a accesskey="n" href="zip.html">Next</a><br />
+        Zip-2.3
+      </div>
+      <div class="up">
+        <a accesskey="u" href="sysutils.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

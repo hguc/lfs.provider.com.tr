@@ -1,0 +1,202 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Perl modules
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;12.&nbsp;Programming</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="prog.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="librep.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Perl modules
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Perl modules
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Perl</span> module packages add
+          useful objects to the <span class="application">Perl</span>
+          language. Modules utilized by packages throughout <span class=
+          "acronym">BLFS</span> are listed here, along with their
+          dependencies.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2715752" name="id2715752"></a>Perl Packages
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  <a href=
+                  "http://search.cpan.org/CPAN/authors/id/C/CS/CSOE/PDL-2.4.0.tar.gz">
+                  PDL-2.4.0</a>
+                </p>
+                <div class="itemizedlist">
+                  <ul compact="compact">
+                    <li>
+                      <p>
+                        <a href=
+                        "http://search.cpan.org/CPAN/authors/id/A/AA/AALLAN/Astro-FITS-Header-2.8.1.tar.gz">
+                        Astro-FITS-Header-2.8.1</a>
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <p>
+                  <a href=
+                  "http://search.cpan.org/CPAN/authors/id/M/ML/MLEHMANN/Gtk-Perl-0.7009.tar.gz">
+                  Gtk-Perl-0.7009</a>
+                </p>
+                <div class="itemizedlist">
+                  <ul compact="compact">
+                    <li>
+                      <p>
+                        <a href=
+                        "http://search.cpan.org/CPAN/authors/id/E/ED/EDAVIS/XML-Writer-0.4.1.tar.gz">
+                        XML-Writer-0.4.1</a>
+                      </p>
+                    </li>
+                    <li>
+                      <p>
+                        <a href=
+                        "http://search.cpan.org/CPAN/authors/id/M/MS/MSERGEANT/XML-Parser-2.34.tar.gz">
+                        XML-Parser-2.34</a>
+                      </p>
+                    </li>
+                  </ul>
+                </div>
+              </li>
+              <li>
+                <p>
+                  <a href=
+                  "http://search.cpan.org/CPAN/authors/id/D/DC/DCONWAY/Parse-RecDescent-1.94.tar.gz">
+                  Parse-RecDescent-1.94</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Perl modules
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Perl</span> modules by running
+          the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">perl Makefile.PL &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <p>
+          The module listed below requires a modification in order to install
+          successfully.
+        </p>
+        <p>
+          Gtk-Perl-0.7009:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">perl Makefile.PL --without-guessing &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            (Alternate) Auto installation of Perl modules.
+          </h3>
+        </div>
+        <p>
+          There is an alternate way of installing the modules using
+          <span class="application">Perl</span>'s built-in <span><b class=
+          "command">install</b></span> command. The command automatically
+          downloads the source from the <span class="acronym">CPAN</span>
+          archive, extracts it, runs the commands mentioned above, and
+          removes the build tree.
+        </p>
+        <p>
+          Start the perl shell with the commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">perl -MCPAN -e shell</b></span></tt>
+</pre>
+        <p>
+          Each module may now be installed from this shell with the command:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">install &lt;moduleName&gt;</b></span></tt>
+</pre>
+        <p>
+          For additional commands and help, type <span><b class=
+          "command">help</b></span>.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="prog.html">Prev</a><br />
+        Chapter&nbsp;12.&nbsp;Programming
+      </div>
+      <div class="next">
+        <a accesskey="n" href="librep.html">Next</a><br />
+        librep-0.17
+      </div>
+      <div class="up">
+        <a accesskey="u" href="prog.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

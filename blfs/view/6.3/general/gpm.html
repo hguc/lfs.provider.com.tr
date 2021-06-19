@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      GPM-1.20.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;11.&nbsp;System Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sysutils.html" title=
+          "System Utilities">Prev</a>
+          <p>
+            System Utilities
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="fcron.html" title="Fcron-3.0.3">Next</a>
+          <p>
+            Fcron-3.0.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;11.&nbsp;System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="gpm" name="gpm"></a>GPM-1.20.1
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to GPM
+        </h2>
+        <p>
+          The <span class="application">GPM</span> (General Purpose Mouse
+          daemon) package contains a mouse server for the console and
+          <span class="command"><strong>xterm</strong></span>. It not only
+          provides cut and paste support generally, but its library component
+          is used by various software such as <span class=
+          "application">Links</span> to provide mouse support to the
+          application. It is useful on desktops, especially if following
+          (Beyond) Linux From Scratch instructions; it's often much easier
+          (and less error prone) to cut and paste between two console windows
+          than to type everything by hand!
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://ftp.schottelius.org/pub/linux/gpm/gpm-1.20.1.tar.bz2">
+                http://ftp.schottelius.org/pub/linux/gpm/gpm-1.20.1.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/gpm-1.20.1.tar.bz2">
+                ftp://ftp.linux.ee/pub/gentoo/distfiles/distfiles/gpm-1.20.1.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 2c63e827d755527950d9d13fe3d87692
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 556 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 6.7 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Recommended Patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/gpm-1.20.1-segfault-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/gpm-1.20.1-segfault-1.patch</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Recommended Patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/gpm-1.20.1-silent-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/gpm-1.20.1-silent-1.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/GPM">http://wiki.linuxfromscratch.org/blfs/wiki/GPM</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of GPM
+        </h2>
+        <p>
+          Install <span class="application">GPM</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">patch -Np1 -i ../gpm-1.20.1-segfault-1.patch &amp;&amp;
+patch -Np1 -i ../gpm-1.20.1-silent-1.patch &amp;&amp;
+./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+LDFLAGS="-lm" make</kbd>
+</pre>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+cp -v conf/gpm-root.conf /etc &amp;&amp;
+ldconfig</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>LDFLAGS="-lm"</strong></span>: The
+          math library must be linked with <span class=
+          "command"><strong>gpm</strong></span>, as ceil() is used in some
+          cursor scrolling logic.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring GPM
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="gpm-init" name="gpm-init"></a>Boot Script
+          </h3>
+          <p>
+            Install the <code class="filename">/etc/rc.d/init.d/gpm</code>
+            init script included in the <a class="xref" href=
+            "../introduction/bootscripts.html" title=
+            "BLFS Boot Scripts">blfs-bootscripts-20080816</a> package.
+          </p>
+          <pre class="root">
+<kbd class="command">make install-gpm</kbd>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="gpm-config" name="gpm-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/gpm-root.conf</code> and <code class=
+            "filename">~/.gpm-root</code>: The default and individual user
+            <span class="command"><strong>gpm-root</strong></span>
+            configuration files.
+          </p>
+          <p>
+            <code class="filename">/etc/sysconfig/mouse</code>: This file
+            contains the name of your mouse device and the protocol which it
+            uses. To create this file, run the following as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">cat &gt; /etc/sysconfig/mouse &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/sysconfig/mouse
+
+MDEVICE="<em class="replaceable"><code>&lt;yourdevice&gt;</code></em>"
+PROTOCOL="<em class="replaceable"><code>&lt;yourprotocol&gt;</code></em>"
+GPMOPTS="<em class=
+"replaceable"><code>&lt;additional options&gt;</code></em>"
+
+# End /etc/sysconfig/mouse</code>
+EOF</kbd>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            Examples of values to set <code class="envar">MDEVICE</code>,
+            <code class="envar">PROTOCOL</code>, and <code class=
+            "envar">GPMOPTS</code> to are:
+          </p>
+          <pre class="screen">
+<code class="literal">MDEVICE="/dev/psaux"
+PROTOCOL="imps2"
+GPMOPTS=""</code>
+</pre>
+          <p>
+            A list of which protocol values are known can be found by running
+            <span class="command"><strong>gpm -m <em class=
+            "replaceable"><code>[device]</code></em> -t
+            -help</strong></span>. The <code class="envar">MDEVICE</code>
+            setting depends on which type of mouse you have. For example,
+            <code class="filename">/dev/ttyS0</code> for a serial mouse (on
+            Windows this is COM1), <code class=
+            "filename">/dev/input/mice</code> is often used for USB mice and
+            <code class="filename">/dev/psaux</code> for PS2 mice.
+            <code class="envar">GPMOPTS</code> is the 'catch all' for any
+            additional options that are needed for your hardware.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">disable-paste, gpm, gpm-root, hltest,
+              mev, and mouse-test</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libgpm.{so.a}</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="disable-paste" name=
+                    "disable-paste"></a><span class="term"><span class=
+                    "command"><strong>disable-paste</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a security mechanism used to disable the paste buffer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gpm-prog" name="gpm-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gpm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a cut and paste utility and mouse server for virtual
+                    consoles.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gpm-root" name="gpm-root"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gpm-root</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a default handler for <span class=
+                    "command"><strong>gpm</strong></span>. It is used to draw
+                    menus on the root window.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="hltest" name="hltest"></a><span class=
+                    "term"><span class=
+                    "command"><strong>hltest</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a simple sample application using the high-level
+                    library, meant to be read by programmers trying to use
+                    the high-level library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mev" name="mev"></a><span class=
+                    "term"><span class="command"><strong>mev</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a program to report mouse events.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mouse-test" name="mouse-test"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mouse-test</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool for determining the mouse type and device it's
+                    attached to.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libgpm" name="libgpm"></a><span class=
+                    "term"><code class="filename">libgpm.{so.a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the API functions to access the <span class=
+                    "application">GPM</span> daemon.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-07-14 18:27:07 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="sysutils.html" title=
+          "System Utilities">Prev</a>
+          <p>
+            System Utilities
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="fcron.html" title="Fcron-3.0.3">Next</a>
+          <p>
+            Fcron-3.0.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;11.&nbsp;System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,632 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Expect-5.43.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;12.&nbsp;Programming
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="doxygen.html" title="Doxygen-1.4.6">Prev</a>
+          <p>
+            Doxygen-1.4.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gc.html" title="GC-6.8">Next</a>
+          <p>
+            GC-6.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="expect" name="expect"></a>
+        <h1 class="sect1">
+          Expect-5.43.0
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Expect
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Expect</span> package contains tools
+          for automating interactive applications such as
+          <span><strong class="command">telnet</strong></span>,
+          <span><strong class="command">ftp</strong></span>,
+          <span><strong class="command">passwd</strong></span>,
+          <span><strong class="command">fsck</strong></span>,
+          <span><strong class="command">rlogin</strong></span>,
+          <span><strong class="command">tip</strong></span>, etc.
+          <span class="application">Expect</span> is also useful for testing
+          these same applications as well as easing all sorts of tasks that
+          are prohibitively difficult with anything else.
+        </p>
+        <h3>
+          <a id="id2631677" name="id2631677"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://expect.nist.gov/old/expect-5.43.0.tar.gz"><span class="url">
+                http://expect.nist.gov/old/expect-5.43.0.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 230400129630335b3060a42f66fec11d
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 525 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 4.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.07 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2780761" name="id2780761"></a>Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Required Patch: <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/expect-5.43.0-spawn-2.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/expect-5.43.0-spawn-2.patch</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2552835" name="id2552835"></a>Expect Dependencies
+        </h3>
+        <h4>
+          <a id="id2560934" name="id2560934"></a>Required
+        </h4>
+        <p class="required">
+          <a href="tcl.html">Tcl-8.4.13</a>
+        </p>
+        <h4>
+          <a id="id2741573" name="id2741573"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="tk.html">Tk-8.4.13</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/expect"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/expect</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Expect
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Expect</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../expect-5.43.0-spawn-2.patch &amp;&amp;
+./configure --prefix=/usr \
+            --with-tcl=/usr/lib \
+            --with-tclinclude=/usr/include \
+            --enable-shared &amp;&amp;
+make</kbd></pre>
+        <p>
+          To test the results, issue: <span><strong class="command">make
+          test</strong></span>.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+ln -sf ../libexpect5.43.a /usr/lib/expect5.43</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>-with-tcl=/usr/lib</tt></em>: This
+          parameter is required in some cases to link in the <span class=
+          "application">Tcl</span> library.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-shared</tt></em>: This option
+          enables building the shared library.
+        </p>
+        <p>
+          <span><strong class="command">ln -sf ../libexpect5.43.a
+          /usr/lib/expect5.43</strong></span>: This command creates a
+          required link to the static library.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Expect
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="expect-config" name="expect-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">$exp_library/expect.rc</tt> and <tt class=
+            "filename">~/.expect.rc</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2715242" name="id2715242"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Reference the <span><strong class=
+            "command">expect</strong></span> man page for information about
+            utilizing the <tt class="filename">expect.rc</tt> configuration
+            files. Additionally, many of the tools contained in the
+            <span class="application">Expect</span> package will use their
+            own configuration files. Reference the respective man page, or
+            examine the script directly for configuration file information.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">autoexpect,
+              autopasswd, cryptdir, decryptdir, dislocate, expect, ftp-rfc,
+              kibitz, lpunlock, mkpasswd, passmass, rftp, rlogin-cwd,
+              timed-read, timed-run, unbuffer, weather, and optionally (if
+              <span class="application">Expect</span> was linked against
+              <span class="application">Tk</span>), expectk, multixterm,
+              tknewsbiff, tkpasswd, xkibitz, and xpstat</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Library:</span></strong> <span class=
+              "seg">libexpect5.43.{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directory:</span></strong> <span class=
+              "seg">/usr/lib/expect5.43</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2654452" name="id2654452"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="autoexpect" name="autoexpect"></a><span class=
+                  "term"><span><strong class=
+                  "command">autoexpect</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generates an <span class="application">Expect</span>
+                    script from watching a session.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="autopasswd" name="autopasswd"></a><span class=
+                  "term"><span><strong class=
+                  "command">autopasswd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a wrapper to make <span><strong class=
+                    "command">passwd</strong></span>(1) be non-interactive.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="cryptdir" name="cryptdir"></a><span class=
+                  "term"><span><strong class=
+                  "command">cryptdir</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    encrypts all files in a directory.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="decryptdir" name="decryptdir"></a><span class=
+                  "term"><span><strong class=
+                  "command">decryptdir</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    decrypts all files in a directory.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="dislocate" name="dislocate"></a><span class=
+                  "term"><span><strong class=
+                  "command">dislocate</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    allows processes to be disconnected and reconnected to a
+                    terminal.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="expect-prog" name="expect-prog"></a><span class=
+                  "term"><span><strong class=
+                  "command">expect</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a program that &ldquo;<span class=
+                    "quote">talks</span>&rdquo; to other interactive programs
+                    according to a script.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ftp-rfc" name="ftp-rfc"></a><span class=
+                  "term"><span><strong class=
+                  "command">ftp-rfc</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    retrieves an RFC (or the index) from UUNET.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="kibitz" name="kibitz"></a><span class=
+                  "term"><span><strong class=
+                  "command">kibitz</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    allows two (or more) people to interact with one shell
+                    (or any arbitrary program).
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="lpunlock" name="lpunlock"></a><span class=
+                  "term"><span><strong class=
+                  "command">lpunlock</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    unhangs a printer which claims it is &ldquo;<span class=
+                    "quote">waiting for lock</span>&rdquo;.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="mkpasswd" name="mkpasswd"></a><span class=
+                  "term"><span><strong class=
+                  "command">mkpasswd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generates passwords and can apply them automatically to
+                    users.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="passmass" name="passmass"></a><span class=
+                  "term"><span><strong class=
+                  "command">passmass</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    changes a password on multiple machines.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rftp" name="rftp"></a><span class=
+                  "term"><span><strong class=
+                  "command">rftp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is much like <span><strong class=
+                    "command">ftp</strong></span> except it uses <tt class=
+                    "option">~g</tt> and <tt class="option">~p</tt> instead
+                    of <tt class="option">mget</tt> and <tt class=
+                    "option">mput</tt>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rlogin-cwd" name="rlogin-cwd"></a><span class=
+                  "term"><span><strong class=
+                  "command">rlogin-cwd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is <span><strong class="command">rlogin</strong></span>
+                    except it uses the local current directory as the current
+                    working directory on the remote machine.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="timed-read" name="timed-read"></a><span class=
+                  "term"><span><strong class=
+                  "command">timed-read</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    reads a complete line from stdin and aborts after a given
+                    number of seconds.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="timed-run" name="timed-run"></a><span class=
+                  "term"><span><strong class=
+                  "command">timed-run</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    runs a program for a given amount of time.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="unbuffer" name="unbuffer"></a><span class=
+                  "term"><span><strong class=
+                  "command">unbuffer</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    disables the output buffering that occurs when program
+                    output is redirected.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="weather" name="weather"></a><span class=
+                  "term"><span><strong class=
+                  "command">weather</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    retrieves a weather report (courtesy University of
+                    Michigan) for a given city or geographical area.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="expectk" name="expectk"></a><span class=
+                  "term"><span><strong class=
+                  "command">expectk</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a combination of <span class=
+                    "application">Expect</span> with <span class=
+                    "application">Tk</span> and should run any
+                    <span><strong class="command">wish</strong></span> or
+                    <span class="application">Expect</span> script.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="multixterm" name="multixterm"></a><span class=
+                  "term"><span><strong class=
+                  "command">multixterm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates multiple <span><strong class=
+                    "command">xterm</strong></span>s that can be driven
+                    together or separately.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tknewsbiff" name="tknewsbiff"></a><span class=
+                  "term"><span><strong class=
+                  "command">tknewsbiff</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    pops up a window when there is unread news in your
+                    favorite newsgroups and removes the window after you've
+                    read the news.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tkpasswd" name="tkpasswd"></a><span class=
+                  "term"><span><strong class=
+                  "command">tkpasswd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a script to change passwords using
+                    <span><strong class="command">expectk</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xkibitz" name="xkibitz"></a><span class=
+                  "term"><span><strong class=
+                  "command">xkibitz</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    allows users in separate <span><strong class=
+                    "command">xterm</strong></span>s to share one shell (or
+                    any program that runs in an <span><strong class=
+                    "command">xterm</strong></span>).
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xpstat" name="xpstat"></a><span class=
+                  "term"><span><strong class=
+                  "command">xpstat</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a script that acts as a front-end for
+                    <span><strong class="command">xpilot</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libexpect" name="libexpect"></a><span class=
+                  "term"><tt class=
+                  "filename">libexpect5.43.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    contains functions that allow <span class=
+                    "application">Expect</span> to be used as a <span class=
+                    "application">Tcl</span> extension or to be used directly
+                    from C or C++ (without <span class=
+                    "application">Tcl</span>).
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-02-14 13:35:05 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="doxygen.html" title="Doxygen-1.4.6">Prev</a>
+          <p>
+            Doxygen-1.4.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gc.html" title="GC-6.8">Next</a>
+          <p>
+            GC-6.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      hdparm-5.8
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;11.&nbsp;System Utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="fcron.html" title="Fcron-2.9.5.1">Prev</a>
+          <p>
+            Fcron-2.9.5.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="which.html" title=
+          "which-2.16 and alternatives">Next</a>
+          <p>
+            which-2.16 and alternatives
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;11.&nbsp;System Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="hdparm" name="hdparm"></a>
+        <h1 class="sect1">
+          hdparm-5.8
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to hdparm
+          </h2>
+        </div>
+        <p>
+          The <span class="application">hdparm</span> package contains a
+          utility that is useful for controlling <span class=
+          "acronym">ATA</span>/<span class="acronym">IDE</span> controllers
+          and hard drives both to increase performance and sometimes to
+          increase stability.
+        </p>
+        <div class="warning">
+          <div class="admonhead">
+            <img alt="[Warning]" src="../images/warning.png" />
+            <h3 class="admontitle">
+              Warning
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              As well as being useful, incorrect usage of <span class=
+              "application">hdparm</span> can destroy your information and in
+              rare cases, drives. Use with caution and make sure you know
+              what you are doing. If in doubt, we recommend you leave the
+              default kernel parameters alone.
+            </p>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2653059" name="id2653059"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.ibiblio.org/pub/Linux/system/hardware/hdparm-5.8.tar.gz">
+                  <span class=
+                  "url">http://www.ibiblio.org/pub/Linux/system/hardware/hdparm-5.8.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: a4187336bc79a8538549e18540313ffd
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 38 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 404 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.01 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of hdparm
+          </h2>
+        </div>
+        <p>
+          Build <span class="application">hdparm</span> by running the
+          following command:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make</strong></span></kbd></pre>
+        <p>
+          As the root user, install <span class="application">hdparm</span>:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install</strong></span></kbd></pre>
+        <p>
+          Note that by default, <span><strong class=
+          "command">hdparm</strong></span> is installed in <tt class=
+          "filename">/sbin</tt> as some systems may require it during the
+          boot process before <tt class="filename">/usr</tt> is mounted. If
+          you wish to install <span><strong class=
+          "command">hdparm</strong></span> under the <tt class=
+          "filename">/usr</tt> hierarchy, then replace the above command with
+          the following:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make binprefix=/usr install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Program:</span></strong> <span class="seg">hdparm</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2651366" name="id2651366"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="hdparm-prog" name="hdparm-prog"></a><span class=
+              "term"><span><strong class=
+              "command">hdparm</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                provides a command-line interface to various hard disk ioctls
+                supported by the stock Linux <span class=
+                "acronym">ATA</span>/<span class="acronym">IDE</span> device
+                driver subsystem.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-07 19:34:15 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="fcron.html" title="Fcron-2.9.5.1">Prev</a>
+          <p>
+            Fcron-2.9.5.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="which.html" title=
+          "which-2.16 and alternatives">Next</a>
+          <p>
+            which-2.16 and alternatives
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;11.&nbsp;System Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

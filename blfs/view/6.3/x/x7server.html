@@ -1,0 +1,734 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Xorg-Server-1.2.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;23.&nbsp;X Window System Environment
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="luit.html" title="Luit-1.0.2">Prev</a>
+          <p>
+            Luit-1.0.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="x7driver.html" title="Xorg Drivers">Next</a>
+          <p>
+            Xorg Drivers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;23.&nbsp;X Window System Environment">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="xorg7-server" name="xorg7-server"></a>Xorg-Server-1.2.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Xorg-Server
+        </h2>
+        <p>
+          The <span class="application">Xorg</span> Server is the core of the
+          X Window system.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-1.2.0.tar.bz2">
+                http://xorg.freedesktop.org/releases/individual/xserver/xorg-server-1.2.0.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://ftp.x.org/pub/individual/xserver/xorg-server-1.2.0.tar.bz2">
+                ftp://ftp.x.org/pub/individual/xserver/xorg-server-1.2.0.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: ea291c89e68832d570d9d5e007218bd6
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 5.7 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 425 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 4.9 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Required patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/xorg-server-1.2.0-security-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/xorg-server-1.2.0-security-1.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Xorg Server Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="x7font.html" title="Xorg Fonts">Xorg
+          Fonts</a> and <a class="xref" href="xkeyboard-config.html" title=
+          "XKeyboardConfig-1.2">xkeyboard-config-1.2</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="mesalib.html" title=
+          "MesaLib-6.5.2">MesaLib-6.5.2</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/Xorg7Server">http://wiki.linuxfromscratch.org/blfs/wiki/Xorg7Server</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Xorg Server
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            If you intend to build with <span class=
+            "application">Mesa</span>, you must have the <span class=
+            "application">Mesa</span> source directory available when
+            building the <span class="application">Xorg-server</span>.
+          </p>
+        </div>
+        <p>
+          Multiple <a class="ulink" href=
+          "http://wiki.x.org/wiki/Development/Security">security
+          vulnerabilities</a> have been identified in the xorg-server
+          package. Apply a patch to fix these vulnerabilities with the
+          following command:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">patch -Np1 -i ../xorg-server-1.2.0-security-1.patch</kbd>
+</pre>
+        <p>
+          Install the server by running the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure $XORG_CONFIG \
+    --with-mesa-source=<em class=
+"replaceable"><code>&lt;/absolute/path/to&gt;</code></em>/Mesa-6.5.2 \
+    --with-module-dir=$XORG_PREFIX/lib/X11/modules \
+    --with-dri-driver-path=$XORG_PREFIX/lib/X11/modules/dri \
+    --with-xkb-output=/var/lib/xkb \
+    --enable-install-setuid &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--with-mesa-source=...</code></em>:
+          This switch directs the build system to the location of the
+          <span class="application">Mesa</span> source directory. This must
+          be an absolute path. If you wish to build without <span class=
+          "application">Mesa</span>, omit this switch.
+        </p>
+        <p>
+          <em class="parameter"><code>--with-module-dir=...</code></em>: This
+          parameter sets the destination for the installed modules.
+        </p>
+        <p>
+          <em class="parameter"><code>--with-dri-driver-path=...</code></em>:
+          This is the location of the <span class="application">Mesa</span>
+          DRI drivers.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-install-setuid</code></em>:
+          The Xorg binary must run as the root user. This switch ensures that
+          the binary is installed setuid when <span class=
+          "command"><strong>make</strong></span> is run by an unprivileged
+          user.
+        </p>
+        <p>
+          <em class="parameter"><code>--disable-glx</code></em>: Disable
+          building of the GLX extension. This parameter is required if
+          building without <span class="application">Mesa</span>.
+        </p>
+        <p>
+          <em class="parameter"><code>--disable-dri</code></em>: Disable
+          building of the DRI extension. This parameter is required if
+          building without <span class="application">Mesa</span>.
+        </p>
+        <p>
+          <em class="parameter"><code>--disable-xprint</code></em>: Disable
+          building of the <span class="application">Xprint</span> extension
+          and server. This parameter is required if building without
+          <span class="application">Mesa</span>.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">cvt, dmxaddinput, dmxaddscreen,
+              dmxreconfig, dmxresize, dmxrminput, dmxrmscreen, dmxtodmx,
+              dmxwininfo, getconfig, getconfig.pl, gtf, inb, inl, inw,
+              ioport, outb, outl, outw, pcitweak, scanpci, vdltodmx, X, Xdmx,
+              xdmx, xdmxconfig, Xnest, Xorg, xorgcfg, xorgconfig and
+              Xvfb</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">None</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/var/lib/xkb and the following
+              subdirectories of <code class="envar">$XORG_PREFIX</code>/:
+              include/xorg, include/X11/pixmaps, lib/X11/{getconfig,modules}
+              and lib/xserver</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cvt-x7" name="cvt-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cvt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    calculates VESA CVT mode lines.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmxaddinput-x7" name=
+                    "dmxaddinput-x7"></a><span class="term"><span class=
+                    "command"><strong>dmxaddinput</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    adds an input device to an Xdmx server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmxaddscreen-x7" name=
+                    "dmxaddscreen-x7"></a><span class="term"><span class=
+                    "command"><strong>dmxaddscreen</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    adds a screen to an Xdmx server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmxreconfig-x7" name=
+                    "dmxreconfig-x7"></a><span class="term"><span class=
+                    "command"><strong>dmxreconfig</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    refreshes the screen attributes in an Xdmx server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmxresize-x7" name="dmxresize-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>dmxresize</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    resizes an Xdmx desktop.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmxrminput-x7" name=
+                    "dmxrminput-x7"></a><span class="term"><span class=
+                    "command"><strong>dmxrminput</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    removes an input device from an Xdmx server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmxrmscreen-x7" name=
+                    "dmxrmscreen-x7"></a><span class="term"><span class=
+                    "command"><strong>dmxrmscreen</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    removes a screen from an Xdmx server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmxtodmx-x7" name="dmxtodmx-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>dmxtodmx</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a dmx configuration file parser and printer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="dmxwininfo-x7" name=
+                    "dmxwininfo-x7"></a><span class="term"><span class=
+                    "command"><strong>dmxwininfo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    queries a window's attributes on an Xdmx server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="getconfig-x7" name="getconfig-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>getconfig</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    a wrapper script around getconfig.pl.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="getconfig.pl-x7" name=
+                    "getconfig.pl-x7"></a><span class="term"><span class=
+                    "command"><strong>getconfig.pl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    gets configuration information for the Xorg server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="gtf-x7" name="gtf-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>gtf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    calculates VESA GTF mode lines.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="inb-x7" name="inb-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>inb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to ioport.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="inl-x7" name="inl-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>inl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to ioport.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="inw-x7" name="inw-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>inw</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to ioport.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ioport-x7" name="ioport-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ioport</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    sets input and output ports for the X server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="outb-x7" name="outb-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>outb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to ioport.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="outl-x7" name="outl-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>outl</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to ioport.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="outw-x7" name="outw-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>outw</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to ioport.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pcitweak-x7" name="pcitweak-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pcitweak</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    reads or writes the PCI config space.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="scanpci-x7" name="scanpci-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>scanpci</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    scans and probes the PCI buses.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="vdltodmx-x7" name="vdltodmx-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>vdltodmx</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a VDL format dmx configuration file parser and
+                    printer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="X-x7" name="X-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>X</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symbolic link to Xorg.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="Xdmx-x7" name="Xdmx-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>Xdmx</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the Distributed Multi-head X server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xdmx-x7" name="xdmx-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xdmx</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    prints information about the Xdmx server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xdmxconfig-x7" name=
+                    "xdmxconfig-x7"></a><span class="term"><span class=
+                    "command"><strong>xdmxconfig</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a graphical configuration tool for Xdmx configuration
+                    files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="Xnest-x7" name="Xnest-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>Xnest</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a nested X server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="Xorg-x7" name="Xorg-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>Xorg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the X11R7 X Server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xorgcfg-x7" name="xorgcfg-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xorgcfg</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a graphical configuration tool for Xorg.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xorgconfig-x7" name=
+                    "xorgconfig-x7"></a><span class="term"><span class=
+                    "command"><strong>xorgconfig</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    generates an xorg.conf file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="Xvfb-x7" name="Xvfb-x7"></a><span class=
+                    "term"><span class=
+                    "command"><strong>Xvfb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the virtual framebuffer X server for X Version 11.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-04-22 09:28:24 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="luit.html" title="Luit-1.0.2">Prev</a>
+          <p>
+            Luit-1.0.2
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="x7driver.html" title="Xorg Drivers">Next</a>
+          <p>
+            Xorg Drivers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;23.&nbsp;X Window System Environment">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

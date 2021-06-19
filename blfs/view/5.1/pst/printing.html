@@ -1,0 +1,588 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;41.&nbsp;Printing
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;XIII.&nbsp;Printing, Scanning and Typesetting</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="pst.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="LPRng.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Printing
+        </h1>
+      </div>
+      <p>
+        This chapter contains spooling printer management systems and
+        ghostscript applications to render PostScript for display on
+        terminals or paper.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="cups" name="cups"></a>
+          <h2 class="sect1">
+            CUPS-1.1.20
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to CUPS
+            </h3>
+          </div>
+          <p>
+            The Common Unix Printing System (<span class=
+            "acronym">CUPS</span>) is a print spooler and associated
+            utilities. It is based on the "Internet Printing Protocol" and
+            provides printing services to most PostScript and raster
+            printers.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3228403" name="id3228403"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://multivac.cwru.edu/mirror/packages/cups-1.1.20-source.tar.bz2">
+                    http://multivac.cwru.edu/mirror/packages/cups-1.1.20-source.tar.bz2</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.easysw.com/pub/cups/1.1.20/cups-1.1.20-source.tar.bz2">
+                    ftp://ftp.easysw.com/pub/cups/1.1.20/cups-1.1.20-source.tar.bz2</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 3.7 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 24 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.67 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3228982" name="id3228982"></a><span class=
+                    "application"><span class="acronym">CUPS</span></span>
+                    dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id3228990" name="id3228990"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../general/graphlib.html#libjpeg">libjpeg-6b</a>,
+                <a href="../general/libpng.html">libpng-1.2.5</a>, <a href=
+                "../general/libtiff.html">libtiff-3.6.1</a>, <a href=
+                "../general/genlib.html#openssl">OpenSSL-0.9.7d</a> or
+                <a href="http://www.gnu.org/software/gnutls/">GnuTLS</a>
+                (which needs <a href=
+                "ftp://ftp.gnupg.org/gcrypt/alpha/libgpg-error/">libgpg-error</a>,
+                <a href="ftp://ftp.gnupg.org/gcrypt/libgcrypt/">libgcrypt</a>
+                and <a href=
+                "ftp://ftp.gnupg.org/gcrypt/alpha/gnutls/opencdk/">opencdk</a>,
+                in that order.), <a href=
+                "../postlfs/linux_pam.html">Linux-PAM-0.77</a>, <a href=
+                "../content/php.html">PHP-4.3.6</a> and <a href=
+                "../general/prog.html#Python">Python-2.3.3</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of CUPS
+            </h3>
+          </div>
+          <p>
+            Install <span class="application"><span class=
+            "acronym">CUPS</span></span> by running the following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">./configure &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Command explanations
+            </h3>
+          </div>
+          <p>
+            The basic default behavior of the installation is appropriate for
+            <span class="acronym">LFS</span> systems. <span class=
+            "application"><span class="acronym">CUPS</span></span> files are
+            placed in <tt class="filename">/usr/bin</tt>, <tt class=
+            "filename">/usr/sbin</tt>, <tt class="filename">/var</tt> and
+            <tt class="filename">/etc/cups</tt>.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring CUPS
+            </h3>
+          </div>
+          <p>
+            Configuration of <span class="application"><span class=
+            "acronym">CUPS</span></span> is dependent on the type of printer
+            and can be complex. Generally, PostScript printers are easier.
+            For detailed instructions on configuration and use of
+            <span class="application"><span class=
+            "acronym">CUPS</span></span>, see <a href=
+            "http://www.cups.org/documentation.php">http://www.cups.org/documentation.php</a>.
+            The Software Administrators Manual and Software Users Manual are
+            particularly useful.
+          </p>
+          <p>
+            For non-PostScript printers to print with CUPS, you need to
+            install <a href="espgs.html">ESP Ghostscript-7.07.1</a> to
+            convert PostScript to raster images and a driver (e.g., from
+            <a href="gimp-print.html">Gimp-Print-4.2.6</a>) to convert the
+            resulting raster images to a form that the printer understands.
+            <a href="http://www.linuxprinting.org/foomatic.html">Foomatic</a>
+            drivers use Ghostscript to convert PostScript to a printable form
+            directly, but this is considered to be a hack by <span class=
+            "application"><span class="acronym">CUPS</span></span>
+            developers.
+          </p>
+          <p>
+            During the install, <span class="application"><span class=
+            "acronym">CUPS</span></span> created the startup file <tt class=
+            "filename">/etc/rc.d/init.d/cups</tt>. The file works, but you
+            may want to change it to a more conventional <span class=
+            "acronym">LFS</span> startup file by installing the script
+            included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-cups</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            <span class="application"><span class=
+            "acronym">CUPS</span></span> provides <span><b class=
+            "command">accept</b></span>, <span><b class=
+            "command">cupsaddsmb</b></span>, <span><b class=
+            "command">cupsd</b></span>, <span><b class=
+            "command">cupstestppd</b></span>, <span><b class=
+            "command">lpadmin</b></span>, <span><b class=
+            "command">lpc</b></span>, <span><b class=
+            "command">lpinfo</b></span>, <span><b class=
+            "command">lpmove</b></span>, <span><b class=
+            "command">reject</b></span>, <span><b class=
+            "command">cancel</b></span>, <span><b class=
+            "command">cups-config</b></span>, <span><b class=
+            "command">disable</b></span>, <span><b class=
+            "command">enable</b></span>, <span><b class=
+            "command">lp</b></span>, <span><b class=
+            "command">lpoptions</b></span>, <span><b class=
+            "command">lppasswd</b></span>, <span><b class=
+            "command">lpq</b></span>, <span><b class=
+            "command">lpr</b></span>, <span><b class=
+            "command">lprm</b></span>, <span><b class=
+            "command">lpstat</b></span>, <tt class="filename">libcups</tt>,
+            <tt class="filename">libcupsimage</tt> and various scripts and
+            filters.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229805" name="id3229805"></a>lpc
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lpc</b></span> provides limited
+              control over printer and class queues provided by <span class=
+              "application"><span class="acronym">CUPS</span></span> .
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229826" name="id3229826"></a>cupsd
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">cupsd</b></span> is the scheduler for
+              the Common Unix Printing System.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229840" name="id3229840"></a>accept
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">accept</b></span> instructs the
+              printing system to accept print jobs to the specified
+              destinations.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229854" name="id3229854"></a>reject
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">reject</b></span> instructs the
+              printing system to reject print jobs to the specified
+              destinations.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229867" name="id3229867"></a>cupsaddsmb
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">cupsaddsmb</b></span> exports printers
+              to the SAMBA software for use with Windows clients.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229881" name="id3229881"></a>lpadmin
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lpadmin</b></span> configures printer
+              and class queues provided by <span class="acronym">CUPS</span>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229898" name="id3229898"></a>lpinfo
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lpinfo</b></span> lists the available
+              devices or drivers known to the <span class=
+              "acronym">CUPS</span> server.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229915" name="id3229915"></a>lpmove
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lpmove</b></span> moves the specified
+              job to a new destination.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229928" name="id3229928"></a>cupstestppd
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">cupstestppd</b></span> tests the
+              conformance of <tt class="filename">PPD</tt> files.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229947" name="id3229947"></a>lpq
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lpq</b></span> shows the current print
+              queue status on the named printer.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229960" name="id3229960"></a>lpr
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lpr</b></span> submits files for
+              printing.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229973" name="id3229973"></a>lprm
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lprm</b></span> cancels print jobs
+              that have been queued for printing.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229986" name="id3229986"></a>cancel
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">cancel</b></span> cancels existing
+              print jobs.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3229999" name="id3229999"></a>disable
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">disable</b></span> stops the named
+              printers or classes.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3230012" name="id3230012"></a>enable
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">enable</b></span> starts the named
+              printers or classes.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3230026" name="id3230026"></a>lp
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lp</b></span> submits files for
+              printing or alters a pending job.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3230038" name="id3230038"></a>lpoptions
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lpoptions</b></span> displays or sets
+              printer options and defaults.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3230052" name="id3230052"></a>lpstat
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lpstat</b></span> displays status
+              information about the current classes, jobs, and printers.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3230066" name="id3230066"></a>lppasswd
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">lppasswd</b></span> adds, changes or
+              deletes passwords in the <span class="application"><span class=
+              "acronym">CUPS</span></span> digest password file <tt class=
+              "filename">passwd.md5</tt>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3230092" name="id3230092"></a>cups-config
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">cups-config</b></span> is the
+              <span class="application"><span class=
+              "acronym">CUPS</span></span> program configuration utility.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="pst.html">Prev</a><br />
+        Part&nbsp;XIII.&nbsp;Printing, Scanning and Typesetting
+      </div>
+      <div class="next">
+        <a accesskey="n" href="LPRng.html">Next</a><br />
+        LPRng-3.8.26
+      </div>
+      <div class="up">
+        <a accesskey="u" href="pst.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

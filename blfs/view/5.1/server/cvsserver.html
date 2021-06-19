@@ -1,0 +1,369 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Running a CVS server
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;22.&nbsp;Other Server Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="other.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="dhcp.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Running a CVS server
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Running a CVS server
+          </h3>
+        </div>
+        <p>
+          This section will describe how to set up, administer and secure a
+          <span class="acronym">CVS</span> server.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2848801" name="id2848801"></a><span class=
+                  "application">CVS server</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2848814" name="id2848814"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../basicnet/cvs.html">CVS-1.11.16</a> and <a href=
+              "openssh.html">OpenSSH-3.8.1p1</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Setting up a CVS server.
+          </h3>
+        </div>
+        <p>
+          A <span class="acronym">CVS</span> server will be set up using
+          OpenSSH as the remote access method. Other access methods,
+          including :pserver: and :server: will not be used for write access
+          to the <span class="acronym">CVS</span> repository. The :pserver:
+          method sends clear text passwords over the network and the :server:
+          method is not supported in all <span class="acronym">CVS</span>
+          ports. Instructions for anonymous, read only <span class=
+          "acronym">CVS</span> access using :pserver: can be found at the end
+          of this section.
+        </p>
+        <p>
+          Configuration of the <span class="acronym">CVS</span> server
+          consists of four steps:
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2848874" name="id2848874"></a>1. Create a
+                  repository.
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Create a new <span class="acronym">CVS</span> repository with the
+            following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">mkdir /home/cvsroot &amp;&amp;
+chmod 1777 /home/cvsroot &amp;&amp;
+export CVSROOT=/home//cvsroot &amp;&amp;
+cvs init</b></span></tt>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2849330" name="id2849330"></a>2. Import source
+                  code into the repository.
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Import a source module into the repository with the following
+            commands, issued from a user account on the same machine as the
+            <span class="acronym">CVS</span> repository:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">export CVSROOT=/home/cvsroot &amp;&amp;
+cd <i class="replaceable"><tt>[sourcedir]</tt></i> &amp;&amp;
+cvs import -m <i class=
+"replaceable"><tt>["repository test"] [cvstest] [vendortag] [releasetag]</tt></i></b></span></tt>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2849514" name="id2849514"></a>3. Verify local
+                  repository access.
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Test access to the <span class="acronym">CVS</span> repository
+            from the same user account with the following command:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">cvs co cvstest</b></span></tt>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2849540" name="id2849540"></a>4. Verify remote
+                  repository access.
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Test access to the <span class="acronym">CVS</span> repository
+            from a remote machine using a user account that has
+            <span><b class="command">ssh</b></span> access to the
+            <span class="acronym">CVS</span> server with the following
+            commands:
+          </p>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                Replace <i class="replaceable"><tt>[servername]</tt></i> with
+                the <span class="acronym">IP</span> address or host name of
+                the <span class="acronym">CVS</span> repository machine. You
+                will be prompted for the user's shell account password before
+                <span class="acronym">CVS</span> checkout can continue.
+              </p>
+            </div>
+          </div>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">export CVS_RSH=/usr/bin/ssh &amp;&amp;
+cvs -d:ext:<i class=
+"replaceable"><tt>[servername]</tt></i>:/cvsroot co cvstest</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring CVS for anonymous read only access.
+          </h3>
+        </div>
+        <p>
+          <span class="acronym">CVS</span> can be set up to allow anonymous
+          read only access using the :pserver: method by logging on as root
+          and executing the following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">(grep anonymous /etc/passwd || useradd anonymous -s /bin/false) &amp;&amp;
+echo anonymous: &gt; /home/cvsroot/CVSROOT/passwd &amp;&amp;
+echo anonymous &gt; /home/cvsroot/CVSROOT/readers</b></span></tt>
+</pre>
+        <p>
+          If you use <span><b class="command">inetd</b></span>, the following
+          command will add the pserver entry to <tt class=
+          "filename">/etc/inetd.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">echo "2401  stream  tcp  nowait  root  /usr/bin/cvs cvs -f \
+        --allow-root=/home/cvsroot pserver" &gt;&gt; /etc/inetd.conf</b></span></tt>
+</pre>
+        <p>
+          Issue a <span><b class="command">killall -HUP inetd</b></span> to
+          reread the changed <tt class="filename">inetd.conf</tt> file.
+        </p>
+        <p>
+          If you use <span><b class="command">xinetd</b></span>, the
+          following command will add the pserver entry to <tt class=
+          "filename">/etc/xinetd.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/xinetd.conf &lt;&lt; "EOF"</b></span>
+     service cvspserver
+     {
+          port        = 2401
+          socket_type = stream
+          protocol    = tcp
+          wait        = no
+          user        = root
+          passenv     = PATH
+          server      = /usr/bin/cvs
+         server_args = -f --allow-root=/home/cvsroot pserver
+     }
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        <p>
+          Issue a <span><b class="command">/etc/rc.d/init.d/xinetd
+          reload</b></span> to reread the changed <tt class=
+          "filename">xinetd.conf</tt> file.
+        </p>
+        <p>
+          Testing anonymous access to the new repository requires an account
+          on another machine that can reach the <span class=
+          "acronym">CVS</span> server via network. No account on the
+          <span class="acronym">CVS</span> repository is needed. To test
+          anonymous access to the <span class="acronym">CVS</span>
+          repository, log in to another machine as an unprivileged user and
+          execute the following command:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cvs -d:pserver:anonymous@<i class=
+"replaceable"><tt>[servername]</tt></i>:/home/cvsroot co cvstest</b></span></tt>
+</pre>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              Replace <i class="replaceable"><tt>[servername]</tt></i> with
+              the <span class="acronym">IP</span> address or hostname of the
+              <span class="acronym">CVS</span> server
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">mkdir /home/cvsroot</b></span>: Create the
+          <span class="acronym">CVS</span> repository directory.
+        </p>
+        <p>
+          <span><b class="command">chmod 1777 /home/cvsroot</b></span>: Set
+          sticky bit permissions for <tt class="envar">CVSROOT</tt>.
+        </p>
+        <p>
+          <span><b class="command">export CVSROOT=/home/cvsroot</b></span>:
+          Specify new <tt class="envar">CVSROOT</tt> for all <span><b class=
+          "command">cvs</b></span> commands.
+        </p>
+        <p>
+          <span><b class="command">cvs init</b></span>: Initialize the new
+          <span class="acronym">CVS</span> repository.
+        </p>
+        <p>
+          <span><b class="command">cvs import -m "repository test" cvstest
+          vendortag releasetag</b></span>: All source code modules must be
+          imported into the <span class="acronym">CVS</span> repository
+          before use, with the <span><b class="command">cvs import</b></span>
+          command. The <tt class="userinput">-m</tt> flags specifies an
+          initial descriptive entry for the new module. The "cvstest"
+          parameter is the name used for the module in all subsequent
+          <span><b class="command">cvs</b></span> commands. The "vendortag"
+          and "releasetag" parameters are used to further identify each
+          <span class="acronym">CVS</span> module and are mandatory whether
+          used or not.
+        </p>
+        <p>
+          <span><b class="command">(grep anonymous /etc/passwd || useradd
+          anonymous -s /bin/false)</b></span>: Check for an existing
+          anonymous user and create one if not found.
+        </p>
+        <p>
+          <span><b class="command">echo anonymous: &gt;
+          /home/cvsroot/CVSROOT/passwd</b></span> : Add the anonymous user to
+          the <span class="acronym">CVS</span> passwd file, which is unused
+          for anything else in this configuration.
+        </p>
+        <p>
+          <span><b class="command">echo anonymous &gt;
+          /home/cvsroot/CVSROOT/readers</b></span>: Add the anonymous user to
+          the <span class="acronym">CVS</span> readers file, a list of users
+          who have read only access to the repository.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="other.html">Prev</a><br />
+        Chapter&nbsp;22.&nbsp;Other Server Software
+      </div>
+      <div class="next">
+        <a accesskey="n" href="dhcp.html">Next</a><br />
+        DHCP-3.0pl2
+      </div>
+      <div class="up">
+        <a accesskey="u" href="other.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

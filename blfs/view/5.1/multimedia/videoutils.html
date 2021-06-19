@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;39.&nbsp;Video utilities
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;XII.&nbsp;Multimedia</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="cdparanoia.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="avifile.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Video utilities
+        </h1>
+      </div>
+      <p>
+        This chapter always seems to be the favorite chapter. It's probably
+        because there is a lot of satisfaction in playing your first video
+        when you have spent so much time getting to that point. All those
+        libraries, all the configurations and your reward is that you finally
+        get to watch a movie. Not to worry though, there is always one more
+        <span class="acronym">CODEC</span> to install.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="ffmpeg" name="ffmpeg"></a>
+          <h2 class="sect1">
+            FFmpeg-0.4.8
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to FFmpeg
+            </h3>
+          </div>
+          <p>
+            <span class="application">FFmpeg</span> is a solution to record,
+            convert and stream audio and video. Due to heavy development, not
+            all of these functions will work.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3193261" name="id3193261"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://prdownloads.sourceforge.net/ffmpeg/ffmpeg-0.4.8.tar.gz">
+                    http://prdownloads.sourceforge.net/ffmpeg/ffmpeg-0.4.8.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=""></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 1.3 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 31 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.89 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3193824" name="id3193824"></a><span class=
+                    "application">FFmpeg</span> dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id3193847" name="id3193847"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="libvorbis.html">libvorbis-1.0.1</a>, <a href=
+                "lame.html">LAME-3.95.1</a>, X (<a href=
+                "../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+                "../x/installing.html#xorg">X.org-6.7.0</a>), <a href=
+                "sdl.html">SDL-1.2.7</a> and <a href=
+                "../general/freetype2.html">FreeType-2.1.7</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of FFmpeg
+            </h3>
+          </div>
+          <p>
+            Install <span class="application">FFmpeg</span> by running the
+            following commands:
+          </p>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                The package maintainers recommend compiling without any
+                optimizations.
+              </p>
+            </div>
+          </div>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --enable-shared &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Command explanations
+            </h3>
+          </div>
+          <p>
+            <tt class="option">--enable-shared</tt>: This switch is needed to
+            build <tt class="filename">libavcodec</tt> and <tt class=
+            "filename">libavformat</tt> shared libraries.
+          </p>
+          <p>
+            <tt class="option">--enable-mp3lame</tt>: Link against <tt class=
+            "filename">libmp3lame</tt>.
+          </p>
+          <p>
+            <tt class="option">--enable-vorbis</tt>: Link against <tt class=
+            "filename">libvorbis</tt>.
+          </p>
+          <p>
+            <tt class="option">--disable-ffplay</tt>: Only installs the
+            server part. <span><b class="command">ffplay</b></span> requires
+            X for building.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring FFmpeg
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3194125" name="id3194125"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">~/.ffmpeg/ffserver-config</tt>
+            </p>
+            <p>
+              You'll find a sample ffserver configuration file at <a href=
+              "http://ffmpeg.sourceforge.net/sample.html">http://ffmpeg.sourceforge.net/sample.html</a>
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application">FFmpeg</span> package contains
+            <span><b class="command">ffmpeg</b></span> , <span><b class=
+            "command">ffserver</b></span>, <span><b class=
+            "command">ffplay</b></span>, <tt class="filename">libavcodec</tt>
+            and <tt class="filename">libavformat</tt>.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3193647" name="id3193647"></a>ffmpeg
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">ffmpeg</b></span> is a command-line
+              tool to convert video files, network streams and input from a
+              TV card to several video formats.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3193662" name="id3193662"></a>ffserver
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">ffserver</b></span> is a streaming
+              server for everything that <span><b class=
+              "command">ffmpeg</b></span> could use as input (files, streams,
+              TV card input, webcam, etc.).
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3193682" name="id3193682"></a>ffplay
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">ffplay</b></span> is a very simple and
+              portable media player using the <tt class=
+              "filename">ffmpeg</tt> libraries and the <span class=
+              "acronym">SDL</span> library.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3194432" name=
+                    "id3194432"></a>libavcodec/libavformat
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">libavcodec</tt> and <tt class=
+              "filename">libavformats</tt> are libraries for
+              encoding/decoding video streams and putting them into files or
+              network packets. Since they're well documented, you can easily
+              include them in your software, like some other packages already
+              do.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="cdparanoia.html">Prev</a><br />
+        CDParanoia-III-9.8
+      </div>
+      <div class="next">
+        <a accesskey="n" href="avifile.html">Next</a><br />
+        Avifile-0.7.38
+      </div>
+      <div class="up">
+        <a accesskey="u" href="multimedia.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,289 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      GCC-2.95.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;12.&nbsp;Programming</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="tk.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="NASM.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          GCC-2.95.3
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to GCC-2.95.3
+          </h3>
+        </div>
+        <p>
+          There are two reasons for installing <span class=
+          "acronym">GCC</span>-2.95.3. The first is that the kernel
+          developers have certified <span class="acronym">GCC</span>-2.95.3
+          as the preferred compiler for compiling the kernel. The other (and
+          more compelling reason) is that some commercial closed-source
+          packages (such as Netscape Navigator, Yahoo Pager) and precompiled
+          packages (such as Mozilla) are linked against <span class=
+          "acronym">GCC</span>-2.95.3 libs.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2727221" name="id2727221"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.gnu.org/gnu/gcc/gcc-2.95.3.tar.gz">http://ftp.gnu.org/gnu/gcc/gcc-2.95.3.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnu.org/gnu/gcc/gcc-2.95.3.tar.gz">ftp://ftp.gnu.org/gnu/gcc/gcc-2.95.3.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 9.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 150 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 2.60 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2727287" name="id2727287"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/gcc-2.95.3-2.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/gcc-2.95.3-2.patch</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/gcc-2.95.3-no-fixinc.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/gcc-2.95.3-no-fixinc.patch</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/gcc-2.95.3-returntype-fix.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/gcc-2.95.3-returntype-fix.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of GCC
+          </h3>
+        </div>
+        <p>
+          Apply the patches:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../gcc-2.95.3-2.patch &amp;&amp;
+patch -Np1 -i ../gcc-2.95.3-no-fixinc.patch &amp;&amp;
+patch -Np1 -i ../gcc-2.95.3-returntype-fix.patch</b></span></tt>
+</pre>
+        <p>
+          The <span class="acronym">GCC</span> development team recommends
+          building in a separate directory.
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">mkdir ../gcc-build &amp;&amp;
+cd ../gcc-build</b></span></tt>
+</pre>
+        <p>
+          Configure <span class="acronym">GCC</span> to build the
+          <span class="application">C</span> and <span class=
+          "application">C++</span> compilers and enable the related
+          <span class="application">C++</span> options.
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">../gcc-2.95.3/configure \
+--prefix=/opt/gcc-2.95.3 \
+--enable-shared --enable-languages=c,c++ \
+--enable-threads=posix</b></span></tt>
+</pre>
+        <p>
+          Compile and install <span class="acronym">GCC</span>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">make bootstrap &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <p>
+          Make note of the library that is installed.
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">L=`find /opt/gcc-2.95.3/lib -name "*libstdc++*.so" -type f` &amp;&amp;
+IL=`basename $L`</b></span></tt>
+</pre>
+        <p>
+          Move the <span class="application">C++</span> libraries to the
+          standard lib directory to avoid having to add <tt class=
+          "userinput">/opt/gcc-2.95.3/lib</tt> to <tt class=
+          "filename">/etc/ld.so.conf</tt>.
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">for i in /opt/gcc-2.95.3/lib/*.so*; do mv -f $i /usr/lib;
+ln -sf /usr/lib/`basename $i` /opt/gcc-2.95.3/lib; done</b></span></tt>
+</pre>
+        <p>
+          Create symlinks required by commercial and precompiled packages.
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">ln -sf $IL /usr/lib/libstdc++-libc6.1-1.so.2 &amp;&amp;
+ln -sf $IL /usr/lib/libstdc++-libc6.2-2.so.3 &amp;&amp;
+ln -sf $IL /usr/lib/libstdc++-libc6.3-2.so.3</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring GCC
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2729076" name="id2729076"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            As with most libraries, there is no configuration to do, save
+            that the library directory i.e., <tt class=
+            "filename">/opt/lib</tt> or <tt class=
+            "filename">/usr/local/lib</tt> should appear in <tt class=
+            "filename">/etc/ld.so.conf</tt> so that <span><b class=
+            "command">ldd</b></span> can find the shared libraries. After
+            checking that this is the case, <span><b class=
+            "command">/sbin/ldconfig</b></span> should be run while logged in
+            as root.
+          </p>
+          <p>
+            The instructions given above make compatibility symlinks that
+            pre-compiled packages in <span class="acronym">BLFS</span>
+            require. You may create additional compatibility links based on
+            your requirements.
+          </p>
+          <p>
+            If you only need the GCC-2.95.3 libraries, you may delete
+            <tt class="filename">/opt/gcc-2.95.3</tt>.
+          </p>
+          <p>
+            Whenever you need to use GCC-2.95.3 instead of your system
+            installed compiler, add <tt class=
+            "filename">/opt/gcc-2.95.3/bin</tt> to the front of your
+            <tt class="envar">PATH</tt> or (preferably) set the <tt class=
+            "envar">CC</tt> environment variable before compiling the
+            concerned package.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The GCC-2.95.3 package contains the <span><b class=
+          "command">gcc</b></span>-2.95.3 <span class="application">C</span>
+          and <span class="application">C++</span> compilers and GCC-2.95.3
+          <tt class="filename">libstdc++.so</tt> that is required by some
+          commercial and pre-compiled packages.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="tk.html">Prev</a><br />
+        Tk-8.4.6
+      </div>
+      <div class="next">
+        <a accesskey="n" href="NASM.html">Next</a><br />
+        NASM-0.98.38
+      </div>
+      <div class="up">
+        <a accesskey="u" href="prog.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

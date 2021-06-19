@@ -1,0 +1,415 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      X Window Components
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;25.&nbsp;X Window Environment</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="xfree86.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="lib.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          X Window Components
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Checking Direct Rendering Infrastructure (DRI) Installation
+          </h3>
+        </div>
+        <p>
+          <span class="acronym">DRI</span> is a framework for allowing
+          software to access graphics hardware in a safe and efficient
+          manner. It is installed in <span class="application">X</span> by
+          default if you have a supported video card. To check if
+          <span class="acronym">DRI</span> is installed properly, check the
+          log file <tt class="filename">/var/log/XFree86.0.log</tt> or
+          <tt class="filename">/var/log/Xorg.0.log</tt> for statements like:
+        </p>
+        <pre class="screen">
+(II) R128(0): Direct rendering enabled
+</pre>
+        <p>
+          From an <span><b class="command">xterm</b></span>, run
+          <span><b class="command">glxinfo</b></span> and look for the
+          phrase:
+        </p>
+        <pre class="screen">
+direct rendering: Yes
+</pre>
+        <p>
+          You can also run the test program <span><b class=
+          "command">glxgears</b></span>. This program brings up a window with
+          three gears turning. The <span><b class="command">xterm</b></span>
+          will display how many frames were drawn every five seconds, so this
+          is a reasonable benchmark. The window is scalable, and the frames
+          drawn per second is highly dependent on the size of the window.
+        </p>
+        <p>
+          For troubleshooting problems, check the <span class=
+          "acronym">DRI</span> Users Guide at <a href=
+          "http://dri.sourceforge.net/doc/DRIuserguide.html">http://dri.sourceforge.net/doc/DRIuserguide.html</a>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Adding TrueType fonts to X
+          </h3>
+        </div>
+        <p>
+          <span class="application">TrueType</span> font support is built
+          into <span class="application">X</span>. The following items need
+          to be completed to make the fonts available.
+        </p>
+        <div class="itemizedlist">
+          <ul>
+            <li>
+              <p>
+                Establish a directory for the fonts and move any <span class=
+                "application">TrueType</span> fonts you want into that
+                directory.
+              </p>
+            </li>
+            <li>
+              <p>
+                Create the <tt class="filename">fonts.scale</tt> and
+                <tt class="filename">fonts.dir</tt> files in the <span class=
+                "application">TrueType</span> font directory.
+              </p>
+            </li>
+            <li>
+              <p>
+                Ensure the <span class="application">TrueType</span> module
+                is loaded in the <tt class="filename">XF86Config</tt> or
+                <tt class="filename">xorg.conf</tt>.
+              </p>
+            </li>
+            <li>
+              <p>
+                Ensure the <i class="parameter"><tt>FontPath</tt></i> in
+                <tt class="filename">XF86Config</tt> or <tt class=
+                "filename">Xorg.conf</tt> contains the <span class=
+                "application">TrueType</span> font directory.
+              </p>
+            </li>
+          </ul>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2918487" name="id2918487"></a>Establish a
+                  <span class="application">TrueType</span> font directory
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The build of <span class="application">X</span> as given above
+            automatically creates a <span class="application">TrueType</span>
+            font directory: <tt class=
+            "filename">/usr/X11R6/lib/X11/fonts/TTF</tt>. This directory
+            already has some <span class="application">TrueType</span> fonts
+            and is set up correctly. If this directory is satisfactory, copy
+            any other <span class="application">TrueType</span> fonts you
+            want into that directory. If not, create a new directory,
+            preferably in the <tt class=
+            "filename">/usr/X11R6/lib/X11/fonts/</tt> directory and put your
+            <span class="application">TrueType</span> fonts there.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2918553" name="id2918553"></a>Create <tt class=
+                  "filename">fonts.scale</tt> and <tt class=
+                  "filename">fonts.dir</tt>
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Now change to the directory where you have your <span class=
+            "application">TrueType</span> fonts and run:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">mkfontscale &amp;&amp;
+mkfontdir</b></span></tt>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2918590" name="id2918590"></a>Ensure <span class=
+                  "application">TrueType</span> is loaded in <tt class=
+                  "filename">XF86Config</tt> or <tt class=
+                  "filename">xorg.conf</tt>
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The "Module" section should look like:
+          </p>
+          <pre class="screen">
+Section "Module"
+        ...
+        Load  "freetype"
+        ...
+EndSection
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2918621" name="id2918621"></a>Ensure the <i class=
+                  "parameter"><tt>FontPath</tt></i> in <tt class=
+                  "filename">XF86Config</tt> points to the <span class=
+                  "application">TrueType</span> font directory
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The "Files" section should look like:
+          </p>
+          <pre class="screen">
+Section "Files"
+        ...
+        FontPath "/usr/X11R6/lib/X11/fonts/<i class=
+"replaceable"><tt>[TrueTypeDir]</tt></i>/"
+        ...
+EndSection
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2918659" name="id2918659"></a>Update the font
+                  cache files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Finally, to update all the font cache files specified in
+            <tt class="filename">/etc/fonts/fonts.conf</tt>, run
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">fc-cache</b></span></tt>
+</pre>
+          <p>
+            <span class="application">X</span> will now be able to use
+            <span class="application">TrueType</span> fonts when it is
+            restarted. You can check to see if the new fonts are available
+            with the <span><b class="command">xlsfonts</b></span> or
+            <span><b class="command">xfontsel</b></span> program.
+          </p>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                You should rerun <span><b class=
+                "command">mkfontscale</b></span> and <span><b class=
+                "command">mkfontdir</b></span> any time you add or delete
+                <span class="application">TrueType</span> fonts. You should
+                also rerun <span><b class="command">fc-cache</b></span> each
+                time you add or remove any fonts.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Setting up keyboards
+          </h3>
+        </div>
+        <p>
+          In this version of <span class="application">X</span>, it has been
+          reported that non-Latin keyboard layouts do not include Latin
+          configurations as was previous practice. To set up a keyboard for
+          Latin and non-Latin input, change the XkbLayout keyboard driver
+          option in the InputDevice section of the <tt class=
+          "filename">XF86Config</tt> or <tt class="filename">xorg.conf</tt>
+          file. For example:
+        </p>
+        <pre class="screen">
+   Section "InputDevice"
+     Identifier          "Keyboard0"
+     Driver              "Keyboard"
+     Option "XkbModel"   "pc105"
+     Option "XkbLayout"  "en_US,ru"
+     Option "XkbOptions" "grp:switch,grp:alt_shift_toggle,grp_led:scroll"
+   EndSection
+</pre>
+        <p>
+          In this example, you can use the Alt-Shift combination to switch
+          between keyboard layouts and use the Scroll Lock <span class=
+          "acronym">LED</span> to indicate when the second layout is active.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Setting up XDM
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">xdm</b></span> provides a graphical logon
+          capability and is normally set up in <tt class=
+          "filename">/etc/inittab</tt>. Most of the information you need to
+          customize <span><b class="command">xdm</b></span> is found in its
+          man page. To execute <span><b class="command">xdm</b></span> during
+          bootup, change the initdefault level to 5 and add the following
+          lines to <tt class="filename">/etc/inittab</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"># Run xdm as a separate service
+x:5:respawn:/usr/X11R6/bin/xdm -nodaemon</tt>
+</pre>
+        <p>
+          If Linux-PAM is installed on your system, you should create a PAM
+          entry for xdm by duplicating the login entry using the following
+          command:
+        </p>
+        <pre class="screen">
+<tt class="userinput">cp /etc/pam.d/login /etc/pam.d/xdm</tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Using X Resources
+          </h3>
+        </div>
+        <p>
+          There are many options that can be set in <span class=
+          "application">X</span> and <span class="application">X</span>
+          clients via resources. Typically resources are set in the
+          <tt class="filename">~/.Xresources</tt> file.
+        </p>
+        <p>
+          The layout of the <tt class="filename">~/.Xresources</tt> file
+          consists of a list of specifications in the form of
+        </p>
+        <pre class="screen">
+object.subobject[.subobject...].attribute: value
+</pre>
+        <p>
+          Components of a resource specification are linked together by
+          either <span class="emphasis"><em>tight</em></span>, represented by
+          a dot (.), or <span class="emphasis"><em>loose</em></span>,
+          represented by an asterisk (*), bindings. A tight binding indicates
+          that the components on either side of the dot must be directly next
+          to each other as defined in a specific implementation. An asterisk
+          is a wildcard character that means that any number of levels in a
+          defined hierarchy can be between the components. For example, X
+          offers two special cursors: redglass and whiteglass. To use one of
+          these resources, you need to add the following line:
+        </p>
+        <pre class="screen">
+Xcursor.theme: whiteglass
+</pre>
+        <p>
+          However, you can specify the background for all clients with:
+        </p>
+        <pre class="screen">
+*background: blue
+</pre>
+        <p>
+          More specific resource variables will override less specific names.
+        </p>
+        <p>
+          Resource definitions can be found in the man pages for each
+          respective client.
+        </p>
+        <p>
+          In order to load your resources, the <span><b class=
+          "command">xrdb</b></span> program must be called with the
+          appropriate parameters. Typically, the first time resources are
+          loaded, you use:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">xrdb -load &lt;filename&gt;</b></span></tt>
+</pre>
+        <p>
+          To add resources to <span class="application">X</span>'s database
+          in memory, use:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">xrdb -merge &lt;filename&gt;</b></span></tt>
+</pre>
+        <p>
+          The <span><b class="command">xrdb</b></span> instruction is usually
+          placed in <tt class="filename">~/.xinitrc</tt> or <tt class=
+          "filename">~/.xsession</tt>. To get more information, see the xrdb
+          man page.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="xfree86.html">Prev</a><br />
+        XFree86-4.4.0
+      </div>
+      <div class="next">
+        <a accesskey="n" href="lib.html">Next</a><br />
+        Chapter&nbsp;26.&nbsp;X Libraries
+      </div>
+      <div class="up">
+        <a accesskey="u" href="installing.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

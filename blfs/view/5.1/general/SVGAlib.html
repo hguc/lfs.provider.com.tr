@@ -1,0 +1,400 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      SVGAlib-1.4.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;9.&nbsp;Graphics and Font Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="aalib.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="DirectFB.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          SVGAlib-1.4.3
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to SVGAlib
+          </h3>
+        </div>
+        <p>
+          <span class="application">SVGAlib</span> is a low-level graphics
+          library that provides <span class="acronym">VGA</span> and
+          <span class="acronym">SVGA</span> modes in a console. This is
+          useful for programs running on a console that require graphics
+          capabilities.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2684780" name="id2684780"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.svgalib.org/svgalib-1.4.3.tar.gz">http://www.svgalib.org/svgalib-1.4.3.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 827 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 9.7 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.20 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2685777" name="id2685777"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/svgalib-1.4.3-gcc3-1.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/svgalib-1.4.3-gcc3-1.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of SVGAlib
+          </h3>
+        </div>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              You must compile and install as root. If you don't, certain
+              tools won't be able to become <span class="acronym">SUID</span>
+              root which is required for proper operation. However, this
+              raises a risk of exposing your system to any holes in those
+              tools that might be used to gain root access, so use with
+              caution.
+            </p>
+          </div>
+        </div>
+        <p>
+          Install <span class="application">SVGAlib</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../svgalib-1.4.3-gcc3-1.patch &amp;&amp;
+make prefix=/usr install &amp;&amp;
+cd doc &amp;&amp;
+for dir in man?; do for file in $dir/*; do \
+gunzip /usr/share/man/$file; done; done</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">cd doc &amp;&amp; for dir in man?; do for
+          file in $dir/*; do gunzip /usr/share/man/$file; done;
+          done</b></span>: <span class="application">SVGAlib</span> installs
+          its man pages in compressed format so we uncompress them.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring SVGAlib
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2686612" name="id2686612"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/vga/libvga.config</tt>, <tt class=
+            "filename">~/.svgalibrc</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2686634" name="id2686634"></a>Configuration
+                  information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            You must edit the config file to set the monitor and mouse type.
+            Depending on your hardware, other setup might be required.
+          </p>
+          <p>
+            As with most libraries, there is no configuration to do, save
+            that the library directory i.e., <tt class=
+            "filename">/opt/lib</tt> or <tt class=
+            "filename">/usr/local/lib</tt> should appear in <tt class=
+            "filename">/etc/ld.so.conf</tt> so that <span><b class=
+            "command">ldd</b></span> can find the shared libraries. After
+            checking that this is the case, <span><b class=
+            "command">/sbin/ldconfig</b></span> should be run while logged in
+            as root.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The SVGAlib package contains <tt class="filename">libvga</tt> and
+          <tt class="filename">libvgagl</tt> libraries, <span><b class=
+          "command">dumpreg</b></span>, <span><b class=
+          "command">mode3</b></span>, <span><b class=
+          "command">restorefont</b></span>, <span><b class=
+          "command">restorepalette</b></span>, <span><b class=
+          "command">restoretextmode</b></span>, <span><b class=
+          "command">savetextmode</b></span>, <span><b class=
+          "command">textmode</b></span> and <span><b class=
+          "command">svgakeymap</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687491" name="id2687491"></a>libvga library
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libvga</tt> is a low-level graphics library.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687506" name="id2687506"></a>libvgagl library
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libvgagl</tt> is a fast frame buffer level
+            graphics library based on libvga.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687522" name="id2687522"></a>dumpreg
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">dumpreg</b></span> dumps the state of
+            the card as the svgalib chipset driver sees it.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687536" name="id2687536"></a>mode3
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mode3</b></span> sets a <span class=
+            "acronym">VESA</span> mode.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687552" name="id2687552"></a>restorefont
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">restorefont</b></span> saves or restores
+            the <span class="acronym">SVGA</span> font for textmode.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687569" name="id2687569"></a>restorepalette
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">restorepalette</b></span> sets the color
+            palette for textmode.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687582" name="id2687582"></a>restoretextmode
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">restoretextmode</b></span> saves or
+            restores the <span class="acronym">SVGA</span> registers for
+            textmode.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687599" name="id2687599"></a>savetextmode,
+                  textmode
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">savetextmode</b></span> and
+            <span><b class="command">textmode</b></span> save or restore the
+            complete <span class="acronym">SVGA</span> status for textmode.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2687623" name="id2687623"></a>svgakeymap
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">svgakeymap</b></span> generates keymaps
+            for svgalib.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="aalib.html">Prev</a><br />
+        AAlib-1.4rc5
+      </div>
+      <div class="next">
+        <a accesskey="n" href="DirectFB.html">Next</a><br />
+        DirectFB-0.9.20
+      </div>
+      <div class="up">
+        <a accesskey="u" href="graphlib.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

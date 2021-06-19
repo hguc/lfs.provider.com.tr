@@ -1,0 +1,574 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Transcode-0.6.14
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;39.&nbsp;Video utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="xine-ui.html" title=
+          "xine User Interface-0.99.3">Prev</a>
+          <p>
+            xine User Interface-0.99.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cdwriteutils.html" title=
+          "CD-Writing utilities">Next</a>
+          <p>
+            CD-Writing utilities
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="videoutils.html" title=
+          "Chapter&nbsp;39.&nbsp;Video utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="transcode" name="transcode"></a>
+        <h1 class="sect1">
+          Transcode-0.6.14
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Transcode
+          </h2>
+        </div>
+        <p>
+          <span class="application">Transcode</span> is a fast, versatile and
+          command-line based audio/video everything to everything converter.
+          For a rundown of the features and capabilities, along with usage
+          examples, visit the Transcode Wiki at <a href=
+          "http://www.transcoding.org/"><span class=
+          "url">http://www.transcoding.org/</span></a>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2581988" name="id2581988"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.ligo.caltech.edu/~pehrens/transcode-0.6.14.tar.gz">
+                  <span class=
+                  "url">http://www.ligo.caltech.edu/~pehrens/transcode-0.6.14.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/transcode-0.6.14.tar.gz">
+                  <span class=
+                  "url">ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/transcode-0.6.14.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 9bfef83b7e0fe2c27d25d871fef75a92
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.6 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 60 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 1.69 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2958784" name="id2958784"></a><span class=
+                  "application">Transcode</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2622103" name="id2622103"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="videoutils.html#ffmpeg">FFmpeg-0.4.9-pre1</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2604831" name="id2604831"></a>Recommended
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/NASM.html">NASM-0.98.38</a> and <a href=
+              "lame.html">LAME-3.96.1</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2749428" name="id2749428"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              X (<a href="../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.8.2</a>), <a href=
+              "../general/freetype2.html">FreeType-2.1.9</a>, <a href=
+              "../x/gtk.html">GTK+-1.2.10</a>, <a href=
+              "sdl.html">SDL-1.2.8</a>, <a href=
+              "../general/libxml2.html">libxml2-2.6.17</a>, <a href=
+              "../general/imagemagick.html">ImageMagick-6.2.0-7</a>, <a href=
+              "../general/graphlib.html#libjpeg">libjpeg-6b</a> or <a href=
+              "http://sourceforge.net/projects/mjpeg"><span class="url">MMX
+              Jpeg</span></a>, <a href="libdv.html">libdv-0.103</a>, <a href=
+              "libdvdread.html">libdvdread-0.9.4</a>, <a href=
+              "avifile.html">Avifile-0.7.41</a>, <a href=
+              "libfame.html">libFAME-0.9.1</a>, <a href=
+              "libmpeg3.html">libmpeg3-1.5.4</a>, <a href=
+              "xvid.html">XviD-1.0.2</a>, <a href=
+              "../general/LZO.html">LZO-1.08</a>, <a href=
+              "liba52.html">liba52-0.7.4</a>, <a href=
+              "libogg.html">libogg-1.1.2</a>, <a href=
+              "libvorbis.html">libvorbis-1.1.0</a>, <a href=
+              "http://mjpeg.sourceforge.net/"><span class="url">MJPEG
+              Tools</span></a>, <a href=
+              "http://libquicktime.sourceforge.net/"><span class=
+              "url">libquicktime</span></a>, <a href=
+              "http://www.theora.org/"><span class="url">Theora</span></a>,
+              <a href="http://lvempeg.sourceforge.net/"><span class=
+              "url">LVE</span></a>, <a href=
+              "http://www.netlib.org/pvm3/"><span class="url">PVM3</span></a>
+              and <a href="http://loci.cs.utk.edu/"><span class=
+              "url">LoRS/IBP</span></a>
+            </p>
+            <p>
+              Though <span class="application">Transcode</span> has no
+              compile-time requirement for <a href=
+              "mplayer.html">MPlayer-1.0pre6a</a>'s shared post-processing
+              library, <span class="application">Transcode</span> can use it
+              at run-time.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Transcode
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Transcode</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr --without-x &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <tt class="option">--without-x</tt>: Omit this parameter if you
+          have an <span class="application">X</span> Window System installed
+          and you want to compile X11 dependent filter plugins.
+        </p>
+        <p>
+          <tt class="option">--enable-netstream</tt>: This parameter enables
+          network streaming support.
+        </p>
+        <p>
+          Building support for most of the dependency packages requires using
+          options passed to the <span><strong class=
+          "command">configure</strong></span> script. View the <tt class=
+          "filename">INSTALL</tt> file and the output from
+          <span><strong class="command">./configure --help</strong></span>
+          for complete information about enabling dependency packages.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">avicodec, avidump,
+              avifix, aviindex, avimerge, avisplit, avisync, tccat, tcdecode,
+              tcdemux, tcextract, tcframe, tcmodinfo, tcmp3cut, tcmplex,
+              tcprobe, tcrequant, tcscan, tcxmlcheck, tcxpm2rgb and
+              transcode</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">a52_decore.so,
+              af6_decore.so, export*.so, filter*.so and import*.so
+              output/filter/input modules</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/lib/transcode and /usr/share/doc/transcode</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2645576" name="id2645576"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="avicodec" name="avicodec"></a><span class=
+              "term"><span><strong class=
+              "command">avicodec</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                indicates or changes the <span class="acronym">FOURCC</span>
+                <span class="acronym">CODEC</span> flag in an <span class=
+                "acronym">AVI</span> file.
+              </p>
+            </dd>
+            <dt>
+              <a id="avidump" name="avidump"></a><span class=
+              "term"><span><strong class=
+              "command">avidump</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                dumps audio or video stream of a given <span class=
+                "acronym">AVI</span> file to stdout (for <span class=
+                "acronym">AVI</span> conversion or extraction of audio
+                streams).
+              </p>
+            </dd>
+            <dt>
+              <a id="avifix" name="avifix"></a><span class=
+              "term"><span><strong class=
+              "command">avifix</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                fixes the header of an <span class="acronym">AVI</span> file.
+              </p>
+            </dd>
+            <dt>
+              <a id="aviindex" name="aviindex"></a><span class=
+              "term"><span><strong class=
+              "command">aviindex</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                writes a text file describing the index of an <span class=
+                "acronym">AVI</span> file.
+              </p>
+            </dd>
+            <dt>
+              <a id="avimerge" name="avimerge"></a><span class=
+              "term"><span><strong class=
+              "command">avimerge</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                merges <span class="acronym">AVI</span> files of the same
+                format. Do not try to merge <span class="acronym">AVI</span>
+                files of different formats, it will most likely result in
+                errors (and format means same bitrates, too!).
+              </p>
+            </dd>
+            <dt>
+              <a id="avisplit" name="avisplit"></a><span class=
+              "term"><span><strong class=
+              "command">avisplit</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                splits <span class="acronym">AVI</span> files into multiple
+                files.
+              </p>
+            </dd>
+            <dt>
+              <a id="avisync" name="avisync"></a><span class=
+              "term"><span><strong class=
+              "command">avisync</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                can shift audio in <span class="acronym">AVI</span> files for
+                better synchronizing of the audio and video data signal.
+              </p>
+            </dd>
+            <dt>
+              <a id="tccat" name="tccat"></a><span class=
+              "term"><span><strong class=
+              "command">tccat</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                concatenates input files using the input plugins of
+                <span class="application">Transcode</span>.
+              </p>
+            </dd>
+            <dt>
+              <a id="tcdecode" name="tcdecode"></a><span class=
+              "term"><span><strong class=
+              "command">tcdecode</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is used to decode input files to raw video and <span class=
+                "acronym">PCM</span> audio streams.
+              </p>
+            </dd>
+            <dt>
+              <a id="tcdemux" name="tcdemux"></a><span class=
+              "term"><span><strong class=
+              "command">tcdemux</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                demultiplexes (separates) audio/video input that contains
+                multiple streams, e.g., <span class="acronym">VOB</span>
+                files.
+              </p>
+            </dd>
+            <dt>
+              <a id="tcextract" name="tcextract"></a><span class=
+              "term"><span><strong class=
+              "command">tcextract</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                grabs single streams from a file containing multiple streams.
+              </p>
+            </dd>
+            <dt>
+              <a id="tcframe" name="tcframe"></a><span class=
+              "term"><span><strong class=
+              "command">tcframe</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                processes single video frames for different color encodings
+                (<span class="acronym">RGB</span> &gt;-&lt; <span class=
+                "acronym">YUV</span> or similar).
+              </p>
+            </dd>
+            <dt>
+              <a id="tcmodinfo" name="tcmodinfo"></a><span class=
+              "term"><span><strong class=
+              "command">tcmodinfo</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                loads a supplied <span class="application">Transcode</span>
+                filter module and prints its parameters.
+              </p>
+            </dd>
+            <dt>
+              <a id="tcmp3cut" name="tcmp3cut"></a><span class=
+              "term"><span><strong class=
+              "command">tcmp3cut</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a tool which can cut <span class="acronym">MP3</span>
+                streams at milliseconds positions.
+              </p>
+            </dd>
+            <dt>
+              <a id="tcprobe" name="tcprobe"></a><span class=
+              "term"><span><strong class=
+              "command">tcprobe</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                prints information about the input file format.
+              </p>
+            </dd>
+            <dt>
+              <a id="tcrequant" name="tcrequant"></a><span class=
+              "term"><span><strong class=
+              "command">tcrequant</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is a tool which can requantize an <span class=
+                "acronym">MPEG</span>-2 elementary stream.
+              </p>
+            </dd>
+            <dt>
+              <a id="tcscan" name="tcscan"></a><span class=
+              "term"><span><strong class=
+              "command">tcscan</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                performs several measurements on the given input data.
+              </p>
+            </dd>
+            <dt>
+              <a id="tcxmlcheck" name="tcxmlcheck"></a><span class=
+              "term"><span><strong class=
+              "command">tcxmlcheck</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                checks information in a <span class="acronym">SMIL</span>
+                input file.
+              </p>
+            </dd>
+            <dt>
+              <a id="transcode-prog" name="transcode-prog"></a><span class=
+              "term"><span><strong class=
+              "command">transcode</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is the encoder's user interface that handles the plugins and
+                other programs, being the glue between the modules. There are
+                several well documented usage examples on both the homepage
+                and the documentation included in the package.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><tt class=
+              "filename">a52_decore.so</tt></span>
+            </dt>
+            <dd>
+              <p>
+                is used to interface with the <tt class=
+                "filename">liba52</tt> library for decoding <span class=
+                "acronym">AC</span>-3 streams.
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><tt class=
+              "filename">af6_decore.so</tt></span>
+            </dt>
+            <dd>
+              <p>
+                is a support module used to decode <tt class=
+                "filename">libaviplay</tt> library supported codecs and file
+                formats
+              </p>
+            </dd>
+            <dt>
+              <span class="term"><tt class=
+              "filename">export/filter/import_*.so</tt></span>
+            </dt>
+            <dd>
+              <p>
+                &mdash; depending on the external libraries that are used,
+                there are a great number of plugins to convert audio and
+                video input to raw format, process raw video and audio and
+                convert raw audio and video to other formats to be written
+                into a file type of choice. Read the documentation for
+                complete information.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-01-25 12:21:25 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xine-ui.html" title=
+          "xine User Interface-0.99.3">Prev</a>
+          <p>
+            xine User Interface-0.99.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cdwriteutils.html" title=
+          "CD-Writing utilities">Next</a>
+          <p>
+            CD-Writing utilities
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="videoutils.html" title=
+          "Chapter&nbsp;39.&nbsp;Video utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

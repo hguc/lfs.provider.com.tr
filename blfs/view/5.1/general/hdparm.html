@@ -1,0 +1,226 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      hdparm-5.5
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;11.&nbsp;System Utilities</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="fcron.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="which.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          hdparm-5.5
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to hdparm
+          </h3>
+        </div>
+        <p>
+          The <span class="application">hdparm</span> package contains a
+          utility that is useful for controlling <span class=
+          "acronym">ATA</span>/<span class="acronym">IDE</span> controllers
+          and hard drives both to increase performance and sometimes to
+          increase stability.
+        </p>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Warning]" src="../images/warning.png" />
+            <h3 class="warning">
+              Warning
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              As well as being useful, incorrect usage of <span class=
+              "application">hdparm</span> can destroy your information and in
+              rare cases, drives. Use with caution and make sure you know
+              what you are doing. If in doubt, we recommend you leave the
+              default kernel parameters alone.
+            </p>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2705345" name="id2705345"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.ibiblio.org/pub/Linux/system/hardware/hdparm-5.5.tar.gz">
+                  http://www.ibiblio.org/pub/Linux/system/hardware/hdparm-5.5.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 33 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 257 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.01 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2705378" name="id2705378"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required Patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/hdparm-5.5-glibc_CVS-1.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/hdparm-5.5-glibc_CVS-1.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of hdparm
+          </h3>
+        </div>
+        <p>
+          First apply the required patch:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../hdparm-5.5-glibc_CVS-1.patch</b></span></tt>
+</pre>
+        <p>
+          Install <span class="application">hdparm</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <p>
+          Note that by default, <span><b class="command">hdparm</b></span> is
+          installed in <tt class="filename">/sbin</tt> as some systems may
+          require it during the boot process before <tt class=
+          "filename">/usr</tt> is mounted. If you wish to install
+          <span><b class="command">hdparm</b></span> under the <tt class=
+          "filename">/usr</tt> hierarchy, then replace the above commands
+          with the following:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">make &amp;&amp;
+make binprefix=/usr install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">hdparm</span> package contains
+          <span><b class="command">hdparm</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2704926" name="id2704926"></a>hdparm
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">hdparm</b></span> provides a
+            command-line interface to various hard disk ioctls supported by
+            the stock Linux <span class="acronym">ATA</span>/<span class=
+            "acronym">IDE</span> device driver subsystem.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="fcron.html">Prev</a><br />
+        Fcron-2.9.4
+      </div>
+      <div class="next">
+        <a accesskey="n" href="which.html">Next</a><br />
+        which-2.16 and alternatives
+      </div>
+      <div class="up">
+        <a accesskey="u" href="sysutils.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

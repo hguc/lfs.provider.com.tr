@@ -1,0 +1,780 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;25.&nbsp;X Window System Environment
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Part&nbsp;VII.&nbsp;X + Window Managers
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="x.html" title="X + Window Managers">Prev</a>
+          <p>
+            X + Window Managers
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xfree86.html" title="XFree86-4.5.0">Next</a>
+          <p>
+            XFree86-4.5.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="x.html" title=
+          "Part&nbsp;VII.&nbsp;X + Window Managers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="x-installing" name="x-installing"></a>
+        <h1 class="chapter">
+          X Window System Environment
+        </h1>
+      </div>
+      <p>
+        This chapter contains a graphical user environment.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="xorg" name="xorg"></a>
+          <h1 class="sect1">
+            Xorg-6.8.2
+          </h1>
+        </div>
+        <div class="package" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to Xorg
+            </h2>
+          </div>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                There are two packages in BLFS that implement the
+                <span class="application">X Window System</span>:
+                <span class="application">Xorg</span> and <span class=
+                "application">XFree86</span>. These packages are quite
+                similar. In fact, the base system of <span class=
+                "application">Xorg</span> is <span class=
+                "application">XFree86</span>-4.4.0RC2. The primary difference
+                as of this writing is the license provisions of the packages.
+                For someone building a package for their own use, these
+                issues are not significant. Most large commercial
+                distributions have decided to use the <span class=
+                "application">Xorg</span> package, but several still use
+                <span class="application">XFree86</span>.
+              </p>
+              <p>
+                A second reason for the forking of <span class=
+                "application">X</span> packages is the stated goals of the
+                developers. Some developers were unhappy with the
+                administration and progress of <span class=
+                "application">XFree86</span>. X.org's future plans include
+                significant improvements to the internals of the system and
+                more frequent releases.
+              </p>
+              <p>
+                <span class="application">XFree86</span> continues to be a
+                solid, conservative application with excellent driver
+                support.
+              </p>
+              <p>
+                Both <span class="application">Xorg</span> and <span class=
+                "application">XFree86</span> can be installed in the same
+                way, but this section will provide a slightly different and
+                more current variation for installation.
+              </p>
+            </div>
+          </div>
+          <p>
+            <span class="application">Xorg</span> is a freely redistributable
+            open-source implementation of the <span class=
+            "application">X</span> Window System. This application provides a
+            client/server interface between display hardware (the mouse,
+            keyboard, and video displays) and the desktop environment, while
+            also providing both the windowing infrastructure and a
+            standardized application interface (API).
+          </p>
+          <h3>
+            <a id="id2880616" name="id2880616"></a>Package Information
+          </h3>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.opengroup.org/pub/x.org/pub/X11R6.8.2/src-single/X11R6.8.2-src.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.opengroup.org/pub/x.org/pub/X11R6.8.2/src-single/X11R6.8.2-src.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 8131cd7ea1e4566e6e05c438a93fcfe1
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 43 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 839 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 10.34 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+          <h3>
+            <a id="id2826120" name="id2826120"></a>Xorg Dependencies
+          </h3>
+          <h4>
+            <a id="id2880189" name="id2880189"></a>Required
+          </h4>
+          <p>
+            <a href="../general/libpng.html">libpng-1.2.8</a> and <a href=
+            "../general/fontconfig.html">Fontconfig-2.3.2</a>
+          </p>
+          <h4>
+            <a id="id2866275" name="id2866275"></a>Optional
+          </h4>
+          <p>
+            <a href="../postlfs/linux_pam.html">Linux-PAM-0.80</a>
+          </p>
+          <h3>
+            <a id="id2647107" name="id2647107"></a>Download Instructions
+          </h3>
+          <p>
+            As an alternative to downloading the entire source tree in a
+            single file, there are several files that need to be fetched from
+            the download location (directory /pub/x.org/pub/X11R6.8.2/src/):
+          </p>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  <tt class="filename">X11R6.8.2-src1.tar.gz</tt>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <tt class="filename">X11R6.8.2-src2.tar.gz</tt>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <tt class="filename">X11R6.8.2-src3.tar.gz</tt>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <tt class="filename">X11R6.8.2-src4.tar.gz</tt>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <tt class="filename">X11R6.8.2-src5.tar.gz</tt>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <tt class="filename">X11R6.8.2-src6.tar.gz</tt>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <tt class="filename">X11R6.8.2-src7.tar.gz</tt>
+                </p>
+              </li>
+            </ul>
+          </div>
+          <p>
+            The first package contains the <span class=
+            "application">Xorg</span> libraries and support programs, the
+            second contains standard <span class="application">X</span>
+            programs, the third contains the <span class=
+            "application">X</span> server, the fourth and fifth are fonts,
+            the sixth is normal documentation, and the seventh is hardcopy
+            documentation.
+          </p>
+          <p>
+            To check your file for integrity, download the <tt class=
+            "filename">md5sums</tt> file. Then:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">md5sum -c md5sums</kbd></pre>
+          <p>
+            The package (or all seven packages) should give an OK status.
+          </p>
+        </div>
+        <div class="kernel" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <a id="xorg-kernel" name="xorg-kernel"></a>
+            <h2 class="sect2">
+              Kernel Configuration
+            </h2>
+          </div>
+          <p>
+            If you have an Intel P6 (Pentium Pro, Pentium II and later), it
+            is recommended that you compile MTRR (Memory Type Range
+            Registers) support into the kernel. The kernel can map Cyrix and
+            AMD CPUs to the MTRR interface, so selecting this option is
+            useful for those processors also. This option is found in the
+            "Processor type and features" menu. It can increase performance
+            of image write operations 2.5 times or more on PCI or AGP video
+            cards.
+          </p>
+          <p>
+            In the "Character Devices" section of the "Device Drivers" menu,
+            enable AGP Support and select the chipset support on your
+            motherboard. If you do not know the chipset, you may select all
+            the chip types at the expense of extra kernel size. You can
+            usually determine your motherboard's chipset by running the
+            command <span><strong class="command">lspci</strong></span>, a
+            program from the <a href="../general/pciutils.html">PCI
+            Utilities-2.1.11</a> package.
+          </p>
+          <p>
+            In the "Character Devices" section, <span class=
+            "emphasis"><em>disable</em></span> Direct Rendering Manager
+            unless you have a Direct Rendering Infrastructure (DRI) supported
+            video card. A complete list of DRI supported video cards can be
+            found at <a href="http://dri.sourceforge.net"><span class=
+            "url">http://dri.sourceforge.net</span></a> in the "Status"
+            section. Currently, supported cards include those from 3dfx
+            (Voodoo, Banshee), 3Dlabs, ATI (Rage Pro, Rage 128, Radeon 7X00,
+            Radeon 2), Intel (i810, i815), and Matrox (G200, G400, G450).
+          </p>
+          <p>
+            Additionally NVidia provides their own closed source binary
+            drivers, which do not make use of DRI. If you intend to use these
+            drivers, do not enable DRI.
+          </p>
+          <p>
+            If you made any changes to the kernel configuration, recompile
+            and install the new kernel.
+          </p>
+        </div>
+        <div class="installation" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of Xorg
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2873323" name="id2873323"></a>Suppressing
+                    Xprint-related Modification to '/etc'
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span class="application">Xorg</span> insists on putting its
+              boot and profile scripts into the <tt class=
+              "filename">/etc</tt> directory even if specifically told not to
+              compile anything Xprint server or client related (see
+              <tt class="filename">host.def</tt> below). The following
+              command will suppress any such modifications:
+            </p>
+            <pre class="userinput"><kbd class=
+            "command">sed -i '/^SUBDIRS =/s/ etc$//' programs/Xserver/Xprint/Imakefile</kbd></pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2599842" name="id2599842"></a>Setting Up a
+                    Shadow Directory
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              When building <span class="application">Xorg</span>, you should
+              create a shadow directory of symbolic links for the compiled
+              code. To do that, first make <span><strong class=
+              "command">lndir</strong></span>. Starting from the <tt class=
+              "filename">xc</tt> directory:
+            </p>
+            <pre class="userinput"><kbd class=
+            "command">pushd config/util &amp;&amp;
+make -f Makefile.ini lndir</kbd></pre>
+            <p>
+              Now, as the <tt class="systemitem">root</tt> user:
+            </p>
+            <pre class="root"><kbd class=
+            "command">cp -v lndir /usr/bin/</kbd></pre>
+            <p>
+              And back as an unprivileged user:
+            </p>
+            <pre class="userinput"><kbd class="command">popd</kbd></pre>
+            <p>
+              Now create the shadow tree:
+            </p>
+            <pre class="userinput"><kbd class=
+            "command">mkdir ../xcbuild &amp;&amp;
+cd ../xcbuild &amp;&amp;
+lndir ../xc</kbd></pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2862426" name="id2862426"></a>Creating
+                    'host.def'
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The next step is to create the <tt class=
+              "filename">config/cf/host.def</tt> file. The documentation for
+              <span class="application">Xorg</span> indicates that the
+              application will build without a <tt class=
+              "filename">host.def</tt> file, but the included libraries for
+              <span class="application">Fontconfig</span> and <span class=
+              "application">FreeType2</span> do not build properly on a base
+              LFS system. Therefore, you must specify that these libraries,
+              as well as others, should be imported from the system.
+            </p>
+            <div class="note">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="admontitle">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  <tt class="filename">config/cf/host.def</tt> is a C file,
+                  not a shell script. Ensure the comments delimited by /* ...
+                  */ are balanced when modifying the file.
+                </p>
+              </div>
+            </div>
+            <pre class="userinput"><kbd class=
+            "command">cat &gt; config/cf/host.def &lt;&lt; "EOF"
+<tt class="literal">/* Begin Xorg host.def file */
+
+/* System Related Information.  If you read and configure only one
+ * section then it should be this one.  The Intel architecture defaults
+ * are set for a i686 and higher.  Axp is for the Alpha architecture
+ * and Ppc is for the Power PC.  AMD64 is for the Opteron processor.
+ * Note that there have been reports that the Ppc optimization line
+ * causes segmentation faults during build.  If that happens, try
+ * building without the DefaultGcc2PpcOpt line.  ***********/
+
+/* #define DefaultGcc2i386Opt  -O2 -fno-strength-reduce \
+                               -fno-strict-aliasing -march=i686 */
+/* #define DefaultGcc2AMD64Opt -O2 -fno-strength-reduce \
+                               -fno-strict-aliasing */
+/* #define DefaultGcc2AxpOpt   -O2 -mcpu=ev6 */
+/* #define DefaultGcc2PpcOpt   -O2 -mcpu=750 */
+
+#define HasFreetype2            YES
+#define HasFontconfig           YES
+#define HasExpat                YES
+#define HasLibpng               YES
+#define HasZlib                 YES
+
+/*
+ * Which drivers to build.  When building a static server, each of
+ * these will be included in it.  When building the loadable server
+ * each of these modules will be built.
+ *
+#define XF86CardDrivers         mga glint nv tga s3virge sis rendition \
+                                neomagic i740 tdfx savage \
+                                cirrus vmware tseng trident chips apm \
+                                GlideDriver fbdev i128 \
+                                ati DevelDrivers ark \
+                                cyrix siliconmotion vesa vga \
+                                XF86OSCardDrivers XF86ExtraCardDrivers
+*/
+
+/*
+ * Select the XInput devices you want by uncommenting this.
+ *
+#define XInputDrivers           mouse keyboard acecad calcomp citron \
+                                digitaledge dmc dynapro elographics \
+                                microtouch mutouch penmount spaceorb \
+                                summa wacom void magictouch aiptek
+ */
+
+/* Most installs will only need this */
+
+#define XInputDrivers           mouse keyboard
+
+/* Disable building Xprint server and clients until we get them figured
+ * out but build Xprint libraries to allow precompiled binaries such as
+ * Acrobat Reader to run.
+ */
+
+#define XprtServer              NO
+#define BuildXprintClients      NO
+
+/* Uncomment the following define if you would prefer to install X into
+ * /usr or change it to any other location that you prefer.
+ * The GL related defines disable compatibility symlinks (the links are not needed
+ * when X is installed in /usr).
+#define ProjectRoot             /usr
+#define LinkGLToUsrInclude      NO
+#define LinkGLToUsrLib          NO
+ */
+
+/* Uncomment the following define if you would prefer to install the
+ * fonts into /usr/share/fonts, a directory that is fontconfig's default
+ * font search path.
+#define FontDir /usr/share/fonts
+ */
+
+/* End Xorg host.def file */</tt>
+EOF</kbd></pre>
+            <p>
+              There are several other options that you may want to consider.
+              A well documented example file is <tt class=
+              "filename">config/cf/xorgsite.def</tt>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2736152" name="id2736152"></a>Build Commands
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              Install <span class="application">Xorg</span> by running the
+              following commands:
+            </p>
+            <pre class="userinput"><kbd class=
+            "command">sed -i -e "s@^#include &lt;linux/config.h&gt;@/* &amp; */@" \
+    `grep -lr linux/config.h *` &amp;&amp;
+( make World 2&gt;&amp;1 | tee xorg-compile.log &amp;&amp; exit $PIPESTATUS )</kbd></pre>
+            <p>
+              Again as the <tt class="systemitem">root</tt> user:
+            </p>
+            <pre class="root"><kbd class="command">make install &amp;&amp;
+make install.man &amp;&amp;
+ln -v -sf ../X11R6/bin /usr/bin/X11 &amp;&amp;
+ln -v -sf ../X11R6/lib/X11 /usr/lib/X11 &amp;&amp;
+ln -v -sf ../X11R6/include/X11 /usr/include/X11</kbd></pre>
+          </div>
+        </div>
+        <div class="commands" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command Explanations
+            </h2>
+          </div>
+          <p>
+            <span><strong class="command">sed -i -e "s@^#include
+            &lt;linux/config.h&gt;@...</strong></span>: The <span class=
+            "application">Linux-Libc-Headers</span> package installed in LFS
+            installs a <tt class="filename">/usr/include/linux/config.h</tt>
+            file which is not compatible with userspace applications. The
+            recommended fix for applications including this file is to remove
+            it (see <a href=
+            "http://ep09.pld-linux.org/~mmazur/linux-libc-headers/doc/FAQ"><span class="url">
+            linux-libc-headers FAQ</span></a>). The <span><strong class=
+            "command">sed</strong></span> uses <span><strong class=
+            "command">grep -lr</strong></span> to replace all occurrences. If
+            you desire, just remove (comment) the line in the appropriate
+            video driver file if you customized <tt class=
+            "filename">host.def</tt>.
+          </p>
+          <p>
+            <span><strong class="command">( make World 2&gt;&amp;1 | tee
+            xorg-compile.log &amp;&amp; exit $PIPESTATUS )</strong></span>:
+            This command runs multiple <tt class="filename">Makefile</tt>s to
+            completely rebuild the system. <em class=
+            "parameter"><tt>2&gt;&amp;1</tt></em> redirects error messages to
+            the same location as standard output. The <span><strong class=
+            "command">tee</strong></span> command allows viewing of the
+            output while logging the results to a file. The parentheses
+            around the command runs the entire command in a subshell and
+            finally the <span><strong class="command">exit
+            $PIPESTATUS</strong></span> ensures the result of the
+            <span><strong class="command">make</strong></span> is returned as
+            the result and not the result of the <span><strong class=
+            "command">tee</strong></span> command.
+          </p>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                When rebuilding <span class="application">Xorg</span>, a
+                separate command that may be used if only minor changes are
+                made to the sources is <span><strong class="command">make
+                Everything</strong></span>. This does not automatically
+                remove generated files and only rebuilds those files or
+                programs that are out of date.
+              </p>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">ln -v -sf ...</strong></span>:
+            These commands are present to enable other (broken) packages to
+            build against <span class="application">Xorg</span>, even though
+            the Filesystem Hierarchy Standard says: &ldquo;<span class=
+            "quote">In general, software must not be installed or managed via
+            the above symbolic links. They are intended for utilization by
+            users only.</span>&rdquo;
+          </p>
+        </div>
+        <div class="configuration" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <a id="xorg-config" name="xorg-config"></a>
+            <h2 class="sect2">
+              Configuring Xorg
+            </h2>
+          </div>
+          <p>
+            Edit <tt class="filename">/etc/ld.so.conf</tt> and add <tt class=
+            "filename">/usr/X11R6/lib</tt>. Run:
+          </p>
+          <pre class="root"><kbd class="command">ldconfig</kbd></pre>
+          <p>
+            Ensure <tt class="filename">/usr/X11R6/bin</tt> and <tt class=
+            "filename">/usr/X11R6/lib/pkgconfig</tt> are added to your
+            <tt class="envar">PATH</tt> and <tt class=
+            "envar">PKG_CONFIG_PATH</tt> environment variables, respectively.
+            Instructions for doing this are described in the section <a href=
+            "../postlfs/profile.html">The Bash Shell Startup Files</a>.
+          </p>
+          <p>
+            Create the <tt class="filename">xorg.conf</tt> file with:
+          </p>
+          <pre class="userinput"><kbd class="command">cd ~ &amp;&amp;
+Xorg -configure</kbd></pre>
+          <p>
+            The screen will go black and you may hear some clicking of the
+            monitor. This command will create a file, <tt class=
+            "filename">xorg.conf.new</tt> in your home directory.
+          </p>
+          <p>
+            Edit <tt class="filename">xorg.conf.new</tt> to suit your system.
+            The details of the file are located in the xorg.conf man page.
+            Some things you may want to do are:
+          </p>
+          <div class="itemizedlist">
+            <ul>
+              <li>
+                <p>
+                  Section "Files". Change the order of the font paths
+                  searched. You may want to put 100dpi fonts ahead of 75dpi
+                  fonts if your system normally comes up closer to 100 dots
+                  per inch. You may want to remove some font directories
+                  completely.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Section "Module". If you are going to install NVidia
+                  drivers, remove the "dri" line.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Sections "InputDevice". You may want to change the keyboard
+                  autorepeat rate by adding <tt class="option">Option
+                  "Autorepeat" "250 30"</tt>.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Section "Monitor". Specify the <tt class=
+                  "option">VertRefresh</tt> and <tt class=
+                  "option">HorizSync</tt> values if the system does not
+                  automatically detect the monitor and its values.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Section "Device". You may want to set some of the options
+                  available for your selected video driver. A description of
+                  the driver parameters is in the man page for your driver.
+                </p>
+              </li>
+              <li>
+                <p>
+                  Section "Screen". Add a DefaultDepth statement such as:
+                  <tt class="option">DefaultDepth 24</tt>. In the SubSection
+                  for your default depth, add a modes line such as:
+                  <tt class="option">Modes "1600x1200" "1280x1024"
+                  "1024x768"</tt>. The first mode listed will normally be the
+                  starting resolution.
+                </p>
+              </li>
+            </ul>
+          </div>
+          <p>
+            Test the system with:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">X -config ~/xorg.conf.new</kbd></pre>
+          <p>
+            You will only get a gray background with an X-shaped mouse
+            cursor, but it confirms the system is working. Exit with
+            <span><strong class=
+            "keycap">Control+Alt+Backspace</strong></span>. If the system
+            does not work, take a look at <tt class=
+            "filename">/var/log/Xorg.0.log</tt> to see what went wrong.
+          </p>
+          <p>
+            Move the configuration file to its final location:
+          </p>
+          <pre class="root"><kbd class=
+          "command">mv ~/xorg.conf.new /etc/X11/xorg.conf</kbd></pre>
+          <p>
+            Create <tt class="filename">.xinitrc</tt>:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">cat &gt; ~/.xinitrc &lt;&lt; "EOF"
+<tt class="literal"># Begin .xinitrc file
+xterm  -g 80x40+0+0   &amp;
+xclock -g 100x100-0+0 &amp;
+twm</tt>
+EOF</kbd></pre>
+          <p>
+            This provides an initial screen with an xterm and a clock that is
+            managed by a simple window manager, Tab Window Manager. For
+            details of <span><strong class="command">twm</strong></span>, see
+            the man page.
+          </p>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                When needed, <span class="application">Xorg</span> creates
+                the directory <tt class="filename">/tmp/.ICE-unix</tt> if it
+                does not exist. If this directory is not owned by <tt class=
+                "systemitem">root</tt>, <span class="application">Xorg</span>
+                delays startup by a few seconds and also appends a warning to
+                the logfile. This also affects startup of other applications.
+                To improve performance, it is advisable to manually create
+                the directory before <span class="application">Xorg</span>
+                uses it. Add the file creation to <tt class=
+                "filename">/etc/sysconfig/createfiles</tt> that is sourced by
+                the <tt class="filename">/etc/rc.d/init.d/cleanfs</tt>
+                startup script.
+              </p>
+              <pre class="root"><kbd class=
+              "command">cat &gt;&gt; /etc/sysconfig/createfiles &lt;&lt; "EOF"
+<tt class="literal">/tmp/.ICE-unix dir 1777 root root</tt>
+EOF</kbd></pre>
+            </div>
+          </div>
+          <p>
+            Start <span class="application">X</span> with:
+          </p>
+          <pre class="userinput"><kbd class="command">startx</kbd></pre>
+          <p>
+            to get a basic functional <span class="application">X Window
+            System</span>.
+          </p>
+          <p>
+            At this point, you should check out <a href="xfree86-setup.html"
+            title="X Window System Components">the section called &ldquo;X
+            Window System Components&rdquo;</a> for the necessary
+            configuration to make <span class="application">X</span> fully
+            functional. Additionally, you can have a look at <a href=
+            "xconfig.html" title=
+            "Additional X Window System Configuration">the section called
+            &ldquo;Additional X Window System Configuration&rdquo;</a> for
+            information on fine tuning your <span class=
+            "application">X</span> configuration.
+          </p>
+          <p>
+            For a list of the package contents and a description of the
+            commands, see the sections in the <a href=
+            "xfree86.html#xfree86-contents">XFree86 Contents and
+            Descriptions</a>.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-14 10:48:48 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="x.html" title="X + Window Managers">Prev</a>
+          <p>
+            X + Window Managers
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xfree86.html" title="XFree86-4.5.0">Next</a>
+          <p>
+            XFree86-4.5.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="x.html" title=
+          "Part&nbsp;VII.&nbsp;X + Window Managers">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

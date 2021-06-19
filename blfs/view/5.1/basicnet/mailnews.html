@@ -1,0 +1,240 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;20.&nbsp;Mail/News Clients
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;V.&nbsp;Basic Networking</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="bind-utils.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="procmail.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Mail/News Clients
+        </h1>
+      </div>
+      <p>
+        Mail Clients help you retrieve (Fetchmail), sort (Procmail), read and
+        compose responses (Nail, Mutt, Pine, Kmail, Balsa, Evolution,
+        Mozilla) to email.
+      </p>
+      <p>
+        News clients also help you retrieve, sort, read and compose
+        responses, but these messages travel through USENET (a worldwide
+        bulletin board system) using the Network News Transfer Protocol
+        (<span class="acronym">NNTP</span>).
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h1 class="sect1">
+            Nail-10.7
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to Nail
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Nail</span> package contains a
+            command-line Mail User Agent that is compatible with the
+            <span><b class="command">mail</b></span> command available in
+            commercial Unix versions. The <span><b class=
+            "command">mail</b></span> command is useful for writing scripts.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2802515" name="id2802515"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://prdownloads.sourceforge.net/nail/nail-10.7.tar.bz2">
+                    http://prdownloads.sourceforge.net/nail/nail-10.7.tar.bz2</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=""></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 152 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 3.8 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.10 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2802549" name="id2802549"></a><span class=
+                    "application">Nail</span> dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2802560" name="id2802560"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a>
+                and <a href="../server/mail.html">MTA</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of Nail
+            </h3>
+          </div>
+          <p>
+            Install <span class="application">Nail</span> by running the
+            following commands. (Note: If you would like Nail to be linked
+            against <span class="application">OpenSSL</span>, add <i class=
+            "parameter"><tt>--with-openssl</tt></i> to the configure command
+            mentioned below.)
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+ln -sf nail /usr/bin/mail</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring Nail
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2802499" name="id2802499"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/nail.rc</tt>
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Nail</span> package contains
+            <span><b class="command">nail</b></span>, a program compatible
+            with <span><b class="command">mail</b></span> found on commercial
+            Unix versions.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2802298" name="id2802298"></a>nail
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">nail</b></span> is a command-line mail
+              user agent.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="bind-utils.html">Prev</a><br />
+        BIND Utilities-9.2.3
+      </div>
+      <div class="next">
+        <a accesskey="n" href="procmail.html">Next</a><br />
+        Procmail-3.22
+      </div>
+      <div class="up">
+        <a accesskey="u" href="basicnet.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

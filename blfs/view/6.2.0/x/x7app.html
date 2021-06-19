@@ -1,0 +1,1675 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Xorg Applications
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;25.&nbsp;X Window System Environment
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="xbitmaps.html" title=
+          "Xbitmaps-1.0.1">Prev</a>
+          <p>
+            Xbitmaps-1.0.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="x7data.html" title="Xorg Data">Next</a>
+          <p>
+            Xorg Data
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;25.&nbsp;X Window System Environment">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="xorg7-app" name="xorg7-app"></a>
+        <h1 class="sect1">
+          Xorg Applications
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Xorg Applications
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Xorg</span> applications provide the
+          expected applications available in previous X Window
+          implementations.
+        </p>
+        <h3>
+          <a id="id2576280" name="id2576280"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://xorg.freedesktop.org/releases/individual/app/"><span class="url">
+                http://xorg.freedesktop.org/releases/individual/app/</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.x.org/pub/individual/app/"><span class=
+                "url">ftp://ftp.x.org/pub/individual/app/</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: <a href=
+                "http://anduin.linuxfromscratch.org/files/BLFS/xorg/md5sums"><span class="url">
+                http://anduin.linuxfromscratch.org/files/BLFS/xorg/md5sums</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 9.1 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 30.7 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 2.9 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2814346" name="id2814346"></a>Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Required patch: <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/xload-1.0.1-setuid-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/xload-1.0.1-setuid-1.patch</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2864157" name="id2864157"></a>Xorg Applications
+          Dependencies
+        </h3>
+        <h4>
+          <a id="id2592882" name="id2592882"></a>Required
+        </h4>
+        <p class="required">
+          <a href="xbitmaps.html">xbitmaps-1.0.1</a>, <a href=
+          "../general/libpng.html">libpng-1.2.12</a>, and <a href=
+          "x7lib.html">Xorg Libraries</a>
+        </p>
+        <h4>
+          <a id="id2748662" name="id2748662"></a>Recommended
+        </h4>
+        <p class="recommended">
+          <a href="mesalib.html">MesaLib-6.5</a>
+        </p>
+        <h4>
+          <a id="id2927748" name="id2927748"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="../postlfs/linux-pam.html">Linux-PAM-0.99.4.0</a> (only
+          used by XDM)
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/Xorg7Applications"><span class="url">
+          http://wiki.linuxfromscratch.org/blfs/wiki/Xorg7Applications</span></a>
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Downloading Xorg Applications
+          </h2>
+        </div>
+        <p>
+          To download the needed files using <span class=
+          "application">wget</span>, use the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">wget http://anduin.linuxfromscratch.org/files/BLFS/xorg/app-7.1.wget &amp;&amp;
+mkdir app &amp;&amp;
+cd app &amp;&amp;
+wget -B http://xorg.freedesktop.org/releases/individual/app/ \
+     -i ../app-7.1.wget</kbd></pre>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Xorg Applications
+          </h2>
+        </div>
+        <p>
+          A <a href="http://wiki.x.org/wiki/SecurityPage"><span class=
+          "url">security vulnerability</span></a> has been identified in the
+          xload package. Before building this package with the commands shown
+          below, be sure to apply the supplied patches. The patch can be
+          applied with with the following command:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../xload-1.0.1-setuid-1.patch</kbd></pre>
+        <p>
+          Install the applications by running the following commands for each
+          chosen package:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure $XORG_CONFIG &amp;&amp;
+make</kbd></pre>
+        <p>
+          These packages do not provide test suites.
+        </p>
+        <p>
+          Now as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">appres, atobm,
+              bdftopcf, beforelight, bitmap, bmtoa, dga, editres,
+              fontname.sh, fontprop.sh, fonttosfnt, fslsfonts, fstobdf,
+              iceauth, ico, lbxproxy, listres, mkcfm, mkfontdir, mkfontscale,
+              oclock, proxymngr, rstart, rstartd, sessreg, setxkbmap,
+              showfont, showrgb, smproxy, startx, twm, viewres, x11perf,
+              x11perfcomp, xauth, xauth_switch_to_sun-des-1, xbiff, xcalc,
+              xclipboard, xclock, xcmsdb, xconsole, xcursorgen, xcutsel,
+              xdbedizzy, xditview, xdm, xdmshell, xdpr, xdpyinfo, xdriinfo,
+              xedit, xev, xeyes, xfd, xfindproxy, xfontsel, xfs, xfsinfo,
+              xfwp, xgamma, xgc, xhost, xinit, xkbbell, xkbcomp, xkbevd,
+              xkbprint, xkbvleds, xkbwatch, xkill, xload, xlogo, xlsatoms,
+              xlsclients, xlsfonts, xmag, xman, xmessage, xmh, xmodmap,
+              xmore, xon, xphelloworld, xplsprinters, xpr,
+              xprehashprinterlist, xprop, xpsimplehelloworld, xpxthelloworld,
+              xrandr, xrdb, xrefresh, xrx, xset, xsetmode, xsetpointer,
+              xsetroot, xsm, xstdcmap, xtrapchar, xtrapin, xtrapinfo,
+              xtrapout, xtrapproto, xtrapreset, xtrapstats, xvidtune, xvinfo,
+              xwd, xwininfo, and xwud</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libxrx.{so,a} and
+              libxrxnest.{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">The following
+              subdirectories of <tt class="envar">$XORG_PREFIX</tt>/:
+              lib/X11/{fs,lbxproxy,proxymgr,rstart,x11perfcomp,xdm,xedit,xinit,xsm}
+              and share/X11/{app-defaults,twm}</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2811991" name="id2811991"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="appres-x7" name="appres-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">appres</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    lists the X application resource database.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="atobm-x7" name="atobm-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">atobm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a bitmap converter utility for the X Window System.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="bdftopcf-x7" name="bdftopcf-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">bdftopcf</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts an X font from Bitmap Distribution Format to
+                    Portable Compiled Format.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="beforelight-x7" name=
+                  "beforelight-x7"></a><span class=
+                  "term"><span><strong class="command">beforelight</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a screensaver.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="bitmap-x7" name="bitmap-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">bitmap</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a bitmap editor utility for the X Window System.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="bmtoa-x7" name="bmtoa-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">bmtoa</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a bitmap converter utility for the X Window System.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="dga-x7" name="dga-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">dga</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a test program for the XFree86-DGA extension.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="editres-x7" name="editres-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">editres</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a dynamic resource editor for X Toolkit applications.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="fontname.sh-x7" name=
+                  "fontname.sh-x7"></a><span class=
+                  "term"><span><strong class="command">fontname.sh</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a script used to generate the FONT properties.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="fontprop.sh-x7" name=
+                  "fontprop.sh-x7"></a><span class=
+                  "term"><span><strong class="command">fontprop.sh</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a script used to generate the various XLFD font
+                    properties given an XLFD-style font name.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="fonttosfnt-x7" name="fonttosfnt-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">fonttosfnt</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    wraps a bitmap font in a sfnt (TrueType) wrapper.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="fslsfonts-x7" name="fslsfonts-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">fslsfonts</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    lists fonts served by X font server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="fstobdf-x7" name="fstobdf-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">fstobdf</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generates a BDF font from X font server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="iceauth-x7" name="iceauth-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">iceauth</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the ICE authority file utility.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ico-x7" name="ico-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">ico</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    animates an icosahedron or other polyhedron.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="lbxproxy-x7" name="lbxproxy-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">lbxproxy</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the Low Bandwidth X proxy.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="listres-x7" name="listres-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">listres</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    lists resources in widgets.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="mkcfm-x7" name="mkcfm-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">mkcfm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates summaries of font metric files in CID font
+                    directories.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="mkfontdir-x7" name="mkfontdir-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">mkfontdir</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates an index of X font files in a directory.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="mkfontscale-x7" name=
+                  "mkfontscale-x7"></a><span class=
+                  "term"><span><strong class="command">mkfontscale</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates an index of scalable font files for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="oclock-x7" name="oclock-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">oclock</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a round X clock.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="proxymngr-x7" name="proxymngr-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">proxymngr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X proxy manager service.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rstart-x7" name="rstart-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">rstart</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a sample implementation of a Remote Start client.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rstartd-x7" name="rstartd-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">rstartd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a sample implementation of a Remote Start rsh helper.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="sessreg-x7" name="sessreg-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">sessreg</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    manages utmp/wtmp entries for non-init clients.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="setxkbmap-x7" name="setxkbmap-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">setxkbmap</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    sets the keyboard using the X Keyboard Extension.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="showfont-x7" name="showfont-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">showfont</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a font dumper for X font server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="showrgb-x7" name="showrgb-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">showrgb</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    uncompiles an rgb color-name database.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="smproxy-x7" name="smproxy-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">smproxy</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the Session Manager Proxy.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="startx-x7" name="startx-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">startx</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    initializes an X session.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="twm-x7" name="twm-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">twm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the Tab Window Manager for the X Window System.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="viewres-x7" name="viewres-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">viewres</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a graphical class browser for Xt.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="x11perf-x7" name="x11perf-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">x11perf</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an X11 server performance test program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="x11perfcomp-x7" name=
+                  "x11perfcomp-x7"></a><span class=
+                  "term"><span><strong class="command">x11perfcomp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an X11 server performance comparison program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xauth-x7" name="xauth-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xauth</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X authority file utility.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xauth_switch_to_sun-des-1-x7" name=
+                  "xauth_switch_to_sun-des-1-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xauth_switch_to_sun-des-1</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    switches the current Xserver's authentification to
+                    SUN-DES-1.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xbiff-x7" name="xbiff-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xbiff</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a mailbox flag for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xcalc-x7" name="xcalc-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xcalc</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a scientific calculator for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xclipboard-x7" name="xclipboard-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xclipboard</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an X clipboard client.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xclock-x7" name="xclock-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xclock</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an analog/digital clock for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xcmsdb-x7" name="xcmsdb-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xcmsdb</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the Device Color Characterization utility for the X
+                    Color Management System.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xconsole-x7" name="xconsole-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xconsole</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    monitors system console messages with X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xcursorgen-x7" name="xcursorgen-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xcursorgen</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates an X cursor file from a collection of PNG images.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xcutsel-x7" name="xcutsel-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xcutsel</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    interchanges between cut buffer and selection.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xdbedizzy-x7" name="xdbedizzy-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xdbedizzy</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a demo of DBE creating a double buffered spinning
+                    scene.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xditview-x7" name="xditview-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xditview</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    displays ditroff output.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xdm-x7" name="xdm-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xdm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X Display Manager with support for XDMCP and a
+                    host chooser.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xdmshell-x7" name="xdmshell-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xdmshell</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a simple program for running xdm from login.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xdpr-x7" name="xdpr-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xdpr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    dumps an X window directly to a printer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xdpyinfo-x7" name="xdpyinfo-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xdpyinfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a display information utility for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xdriinfo-x7" name="xdriinfo-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xdriinfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    queries configuration information of DRI drivers.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xedit-x7" name="xedit-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xedit</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a simple text editor for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xev-x7" name="xev-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xev</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints contents of X events.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xeyes-x7" name="xeyes-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xeyes</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a a follow the mouse X demo.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfd-x7" name="xfd-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    displays all the characters in an X font.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfindproxy-x7" name="xfindproxy-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfindproxy</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    locates proxy services.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfontsel-x7" name="xfontsel-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfontsel</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    provides point and click selection of X11 font names.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfs-x7" name="xfs-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfs</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X font server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfsinfo-x7" name="xfsinfo-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfsinfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X font server information utility.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xfwp-x7" name="xfwp-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xfwp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X firewall proxy.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xgamma-x7" name="xgamma-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xgamma</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    alters a monitor's gamma correction through the X server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xgc-x7" name="xgc-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xgc</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an X graphics demo.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xhost-x7" name="xhost-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xhost</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a server access control program for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xinit-x7" name="xinit-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xinit</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X Window System initializer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xkbbell-x7" name="xkbbell-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xkbbell</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an XKB utility program that raises a bell event.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xkbcomp-x7" name="xkbcomp-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xkbcomp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    compiles an XKB keyboard description.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xkbevd-x7" name="xkbevd-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xkbevd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the XKB event daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xkbprint-x7" name="xkbprint-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xkbprint</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints an XKB keyboard description.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xkbvleds-x7" name="xkbvleds-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xkbvleds</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    shows the XKB status of keyboard LEDs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xkbwatch-x7" name="xkbwatch-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xkbwatch</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    monitors modifier keys and LEDs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xkill-x7" name="xkill-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xkill</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    kills a client by its X resource.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xload-x7" name="xload-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xload</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a system load average display for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xlogo-x7" name="xlogo-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xlogo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X Window System logo.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xlsatoms-x7" name="xlsatoms-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xlsatoms</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    lists interned atoms defined on the server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xlsclients-x7" name="xlsclients-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xlsclients</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    lists client applications running on a display.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xlsfonts-x7" name="xlsfonts-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xlsfonts</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a server font list displayer for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xmag-x7" name="xmag-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xmag</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    magnifies parts of the screen.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xman-x7" name="xman-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xman</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a manual page display program for the X Window System.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xmessage-x7" name="xmessage-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xmessage</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    displays a message or query in a window.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xmh-x7" name="xmh-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xmh</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    sends and reads mail with an X interface to MH.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xmodmap-x7" name="xmodmap-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xmodmap</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a utility for modifying keymaps and pointer button
+                    mappings in X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xmore-x7" name="xmore-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xmore</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a plain text display program for the X Window System.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xon-x7" name="xon-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xon</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    starts an X program on a remote machine.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xphelloworld-x7" name=
+                  "xphelloworld-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xphelloworld</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    sends a test page to an Xprint printer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xplsprinters-x7" name=
+                  "xplsprinters-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xplsprinters</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    shows a list of Xprint printers and their attributes.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xpr-x7" name="xpr-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xpr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints an X window dump.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xprehashprinterlist-x7" name=
+                  "xprehashprinterlist-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xprehashprinterlist</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    recomputes the list of available printers.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xprop-x7" name="xprop-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xprop</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a property displayer for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xpsimplehelloworld-x7" name=
+                  "xpsimplehelloworld-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xpsimplehelloworld</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a "Hello World"-like Xprint sample utility based on
+                    plain X11 rendering calls.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xpxthelloworld-x7" name=
+                  "xpxthelloworld-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xpxthelloworld</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a "Hello World"-like Xprint sample utility based on
+                    the Xt toolkit.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xrandr-x7" name="xrandr-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xrandr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a primitive command line interface to RandR extension.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xrdb-x7" name="xrdb-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xrdb</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X server resource database utility.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xrefresh-x7" name="xrefresh-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xrefresh</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    refreshes all or part of an X screen.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xrx-x7" name="xrx-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xrx</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an RX MIME type helper program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xset-x7" name="xset-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xset</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the user preference utility for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xsetmode-x7" name="xsetmode-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xsetmode</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    sets the mode for an X Input device.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xsetpointer-x7" name=
+                  "xsetpointer-x7"></a><span class=
+                  "term"><span><strong class="command">xsetpointer</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    sets an X Input device as the main pointer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xsetroot-x7" name="xsetroot-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xsetroot</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the root window parameter setting utility for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xsm-x7" name="xsm-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xsm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X Session Manager.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xstdcmap-x7" name="xstdcmap-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xstdcmap</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the X standard colormap utility.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xtrapchar-x7" name="xtrapchar-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xtrapchar</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    parses ANSI character sequences to synthesize input
+                    events to X Window servers using the XTrap server
+                    extension.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xtrapin-x7" name="xtrapin-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xtrapin</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    tests the input transport to the XTrap server extension.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xtrapinfo-x7" name="xtrapinfo-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xtrapinfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    displays general XTrap configuration information.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xtrapout-x7" name="xtrapout-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xtrapout</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    tests the output transport from the XTrap extension to
+                    the XTrap client library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xtrapproto-x7" name="xtrapproto-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xtrapproto</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    tests the XTrap protocol between a client and server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xtrapreset-x7" name="xtrapreset-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xtrapreset</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    queries the XTrap extension.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xtrapstats-x7" name="xtrapstats-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xtrapstats</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    configures XTrap to collect usage statistics on all core
+                    input events and requests.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xvidtune-x7" name="xvidtune-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xvidtune</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is the video mode tuner for Xorg.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xvinfo-x7" name="xvinfo-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xvinfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints out X-Video extension adaptor information.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xwd-x7" name="xwd-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xwd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    dumps an image of an X window.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xwininfo-x7" name="xwininfo-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xwininfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a window information utility for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="xwud-x7" name="xwud-x7"></a><span class=
+                  "term"><span><strong class=
+                  "command">xwud</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an image displayer for X.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libxrx-x7" name="libxrx-x7"></a><span class=
+                  "term"><tt class="filename">libxrx.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    is the RX MIME type Netscape Navigator Plug-in.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libxrxnest-x7" name="libxrxnest-x7"></a><span class=
+                  "term"><tt class="filename">libxrxnest.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    is the RX MIME type Netscape Navigator Plug-in using
+                    Xnest.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-02-11 09:18:24 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xbitmaps.html" title=
+          "Xbitmaps-1.0.1">Prev</a>
+          <p>
+            Xbitmaps-1.0.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="x7data.html" title="Xorg Data">Next</a>
+          <p>
+            Xorg Data
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;25.&nbsp;X Window System Environment">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

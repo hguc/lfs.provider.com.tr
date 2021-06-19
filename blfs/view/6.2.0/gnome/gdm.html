@@ -1,0 +1,535 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      GDM-2.14.10
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;32.&nbsp;GNOME Additional Packages
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="totem.html" title="Totem-1.4.3">Prev</a>
+          <p>
+            Totem-1.4.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gnome-screensaver.html" title=
+          "gnome-screensaver-2.14.3">Next</a>
+          <p>
+            gnome-screensaver-2.14.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="add.html" title=
+          "Chapter&nbsp;32.&nbsp;GNOME Additional Packages">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="gdm" name="gdm"></a>
+        <h1 class="sect1">
+          GDM-2.14.10
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to GDM
+          </h2>
+        </div>
+        <p>
+          The <span class="application">GDM</span> package contains
+          <span class="application">GNOME</span>'s Display Manager daemon.
+          This is useful for allowing configurable graphical logins.
+        </p>
+        <h3>
+          <a id="id2947115" name="id2947115"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://ftp.gnome.org/pub/gnome/sources/gdm/2.14/gdm-2.14.10.tar.bz2">
+                <span class=
+                "url">http://ftp.gnome.org/pub/gnome/sources/gdm/2.14/gdm-2.14.10.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.gnome.org/pub/gnome/sources/gdm/2.14/gdm-2.14.10.tar.bz2">
+                <span class=
+                "url">ftp://ftp.gnome.org/pub/gnome/sources/gdm/2.14/gdm-2.14.10.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: e880558dc3574f804f3abca869992a4f
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 3.0 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 54.6 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.6 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2959810" name="id2959810"></a>GDM Dependencies
+        </h3>
+        <h4>
+          <a id="id2944036" name="id2944036"></a>Required
+        </h4>
+        <p class="required">
+          <a href="libgnomecanvas.html">libgnomecanvas-2.14.0</a>, <a href=
+          "gnome-doc-utils.html">GNOME Doc Utils-0.6.1</a>, and <a href=
+          "../general/librsvg.html">librsvg-2.14.4</a>
+        </p>
+        <h4>
+          <a id="id2887970" name="id2887970"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="../general/intltool.html">intltool-0.34.2</a>, <a href=
+          "zenity.html">Zenity-2.14.3</a>, <a href=
+          "../postlfs/linux-pam.html">Linux-PAM-0.99.4.0</a>, <a href=
+          "../basicnet/tcpwrappers.html">TCP Wrapper-7.6</a>, and <a href=
+          "http://www.openafs.org/"><span class="url">OpenAFS</span></a>
+        </p>
+        <p>
+          If you configure <span class="application">GDM</span> to offer
+          secure connections to remote machines, you will need to have
+          <a href="zenity.html">Zenity-2.14.3</a>, <a href=
+          "../server/openssh.html">OpenSSH-4.5p1</a> and <a href=
+          "../general/which.html">which-2.16</a> installed.
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/gdm"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/gdm</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of GDM
+          </h2>
+        </div>
+        <p>
+          It is recommended to have a dedicated user and group to take
+          control of the <span><strong class=
+          "command">gdm-binary</strong></span> daemon after it is started.
+          Issue the following commands as the <tt class=
+          "systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">groupadd -g 21 gdm &amp;&amp;
+useradd -c "GDM Daemon Owner" -d /dev/null \
+        -g gdm -s /bin/bash -u 21 gdm</kbd></pre>
+        <p>
+          Install <span class="application">GDM</span> by running the
+          following commands as an unprivileged user:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=$(pkg-config --variable=prefix ORBit-2.0) \
+            --sysconfdir=/etc/gnome/2.14.3 \
+            --localstatedir=/var/lib \
+            --libexecdir=$(pkg-config \
+                --variable=prefix ORBit-2.0)/lib/gdm \
+            --mandir=$(pkg-config \
+                --variable=prefix ORBit-2.0)/share/man \
+            --with-pam-prefix=/etc &amp;&amp;
+make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--prefix=$(pkg-config --variable=prefix
+          ORBit-2.0)</tt></em>: Setting the prefix using this parameter
+          instead of with <tt class="envar">$GNOME_PREFIX</tt> will ensure
+          that the prefix is consistent with the installation environment and
+          the package will be installed in the correct location.
+        </p>
+        <p>
+          <em class="parameter"><tt>--sysconfdir=/etc/gnome/2.14.3</tt></em>:
+          This parameter causes the configuration files to be installed in
+          <tt class="filename">/etc/gnome/2.14.3</tt> instead of <tt class=
+          "filename">$GNOME_PREFIX/etc</tt>. Additionally (if applicable),
+          the parameter ensures that the <span class=
+          "application">GConf</span>-2 database is correctly updated.
+        </p>
+        <p>
+          <em class="parameter"><tt>--localstatedir=/var/lib</tt></em>: This
+          command puts files in <tt class="filename">/var/lib</tt> instead of
+          <tt class="filename">$GNOME_PREFIX/var</tt>. This also has the
+          downside affect of using <tt class="filename">/var/lib/log/gdm</tt>
+          as the log directory. See the &ldquo;<span class=
+          "quote">Configuration Information</span>&rdquo; section below for
+          instructions on relocating the log file directory.
+        </p>
+        <p>
+          <em class="parameter"><tt>--libexecdir=$(pkg-config
+          --variable=prefix ORBit-2.0)/lib/gdm</tt></em>: This parameter is
+          used so that the <span class="application">GDM</span> internal
+          support programs are installed in the preferred location of
+          <tt class="filename">$GNOME_PREFIX/lib/gdm</tt> instead of
+          <tt class="filename">$GNOME_PREFIX/libexec</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--mandir=$(pkg-config --variable=prefix
+          ORBit-2.0)/share/man</tt></em>: This parameter causes the
+          <tt class="filename">man.(X)</tt> files to be installed in
+          <tt class="filename">$GNOME_PREFIX/share/man/man(X)</tt> instead of
+          <tt class="filename">$GNOME_PREFIX/man/man(X)</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-pam-prefix=/etc</tt></em>: This
+          command puts <span class="application">PAM</span> configuration
+          files in <tt class="filename">/etc/pam.d</tt> instead of <tt class=
+          "filename">/etc/gnome/2.14.3</tt>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring GDM
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="gdm-config" name="gdm-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/gnome/2.14.3/gdm/custom.conf</tt>,
+            <tt class="filename">$GNOME_PREFIX/share/gdm/defaults.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2925577" name="id2925577"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Starting with the 2.14.x version of GNOME, the default
+            configuration parameters are stored in a static file (<tt class=
+            "filename"><tt class=
+            "envar">$GNOME_PREFIX</tt>/share/gdm/defaults.conf</tt>). This
+            file is not intended to be edited. If modification of the
+            configuration is necessary, you should add parameters to the
+            <tt class="filename">/etc/gnome/2.14.3/gdm/custom.conf</tt> file.
+            The settings in this file will override the settings in the
+            static file. The same parameters in the static file are used in
+            the configuration file.
+          </p>
+          <p>
+            Change the directory containing the <span class=
+            "application">GDM</span> log files to the <tt class=
+            "filename">/var/log</tt> hierarchy by creating a directory and
+            modifying the <tt class=
+            "filename">/etc/gnome/2.14.3/gdm/custom.conf</tt> configuration
+            file. Issue the following commands as the <tt class=
+            "systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">install -v -m755 -d /var/log/gdm &amp;&amp;
+sed -i.orig "/\[daemon\]/ a LogDir=/var/log/gdm" \
+    /etc/gnome/2.14.3/gdm/custom.conf &amp;&amp;
+rmdir -v /var/lib/log/gdm &amp;&amp;
+rmdir -v /var/lib/log</kbd></pre>
+          <p>
+            The <span class="application">GDM</span> <span class=
+            "application">PAM</span> configuration files contain modules not
+            present in a BLFS installation. If you have <span class=
+            "application">PAM</span> installed, issue the following commands
+            as the <tt class="systemitem">root</tt> user to replace those
+            files with files containing correctly specified modules:
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/pam.d/gdm &lt;&lt; "EOF"
+<tt class="literal">auth        required    pam_unix.so
+auth        required    pam_nologin.so
+account     required    pam_unix.so
+password    required    pam_unix.so
+session     required    pam_unix.so</tt>
+
+EOF
+cat &gt; /etc/pam.d/gdm-autologin &lt;&lt; "EOF"
+<tt class="literal">auth        required    pam_env.so
+auth        required    pam_nologin.so
+auth        required    pam_permit.so
+account     required    pam_unix.so
+password    required    pam_unix.so
+session     required    pam_unix.so</tt>
+
+EOF</kbd></pre>
+          <p>
+            <a id="gdm-config-dbus" name="gdm-config-dbus"></a>If you have
+            <span class="application">D-BUS</span> installed and you want to
+            start the session <span class="application">D-BUS</span> daemon
+            when you start the GNOME desktop environment using
+            <span><strong class="command">gdm</strong></span>, you'll need to
+            create a new Xsession file. Create the file using the following
+            command as the root user.
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; $GNOME_PREFIX/share/xsessions/gnome-dbus.desktop &lt;&lt; "EOF"
+<tt class="literal">[Desktop Entry]
+Encoding=UTF-8
+Name=GNOME with D-BUS
+Comment=GNOME Desktop with D-BUS support
+Exec=dbus-launch --exit-with-session gnome-session
+TryExec=/usr/bin/dbus-launch
+Icon=
+Type=Application</tt>
+
+EOF
+chmod -v 644 $GNOME_PREFIX/share/xsessions/gnome-dbus.desktop</kbd></pre>
+          <p>
+            Choose this session using the session selection dialog on the
+            display manager login screen. You also have the opportunity to
+            make this your default session.
+          </p>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                You may use the <tt class="filename">.desktop</tt> file
+                created above as an example to create additional <tt class=
+                "filename">.desktop</tt> files and add any other desired
+                items to the <span class="application">GDM</span> display
+                manager session selection menu.
+              </p>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">gdm</strong></span> can be tested
+            by executing it as the <tt class="systemitem">root</tt> user. Use
+            the <span><strong class="command">gdm-stop</strong></span>
+            command if you wish to stop the display manager.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="gdm-init" name="gdm-init"></a>Boot Script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To start a graphical login when the system is booted, install the
+            <tt class="filename">/etc/rc.d/init.d/gdm</tt> init script
+            included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-20060910</a>
+            package. If your <tt class="envar">GNOME_PREFIX</tt> environment
+            variable is anything other than <tt class="filename">/usr</tt> or
+            <tt class="filename">/opt/gnome-2.14.3</tt>, you will need to
+            modify the <tt class="envar">PATH</tt> statement in the script to
+            include the path where you have <span class=
+            "application">GNOME</span> installed.
+          </p>
+          <pre class="root"><kbd class="command">make install-gdm</kbd></pre>
+          <p>
+            Now edit <tt class="filename">/etc/inittab</tt> so that the line
+            containing:
+          </p>
+          <pre class="screen"><tt class=
+          "literal">id:3:initdefault:</tt></pre>
+          <p>
+            is changed to:
+          </p>
+          <pre class="screen"><tt class=
+          "literal">id:5:initdefault:</tt></pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">gdm, gdm-binary,
+              gdm-dmx-reconnect-proxy, gdm-restart, gdm-safe-restart,
+              gdm-stop, gdmXnest, gdmXnestchooser, gdmdynamic,
+              gdmflexiserver, gdmphotosetup, gdmsetup, and
+              gdmthemetester</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class=
+              "seg">lib*mouselistener.{so,a} GTK+ modules</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/etc/gnome/2.14.3/{,g}dm, /var/lib/gdm, /var/log/gdm and
+              the following directories in <tt class=
+              "envar">$GNOME_PREFIX</tt>/: share/{,gnome/help/
+              ,omf/}gdm</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2878209" name="id2878209"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="gdm-prog" name="gdm-prog"></a><span class=
+                  "term"><span><strong class=
+                  "command">gdm</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a wrapper script to execute the <span class=
+                    "application">GDM</span> binary, the configurable
+                    <span class="application">GNOME</span> based login
+                    prompt.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gdm-restart" name="gdm-restart"></a><span class=
+                  "term"><span><strong class=
+                  "command">gdm-restart</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    sends the HUP signal to the <span class=
+                    "application">GDM</span> daemon so that it restarts. It's
+                    used after the config file is edited
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gdm-safe-restart" name=
+                  "gdm-safe-restart"></a><span class=
+                  "term"><span><strong class=
+                  "command">gdm-safe-restart</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    sends the USR1 signal to the <span class=
+                    "application">GDM</span> daemon so that it restarts. It's
+                    used after the config file is edited.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gdmsetup" name="gdmsetup"></a><span class=
+                  "term"><span><strong class=
+                  "command">gdmsetup</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a graphical interface to edit the <tt class=
+                    "filename">gdm.conf</tt> file.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-14 12:11:18 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="totem.html" title="Totem-1.4.3">Prev</a>
+          <p>
+            Totem-1.4.3
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gnome-screensaver.html" title=
+          "gnome-screensaver-2.14.3">Next</a>
+          <p>
+            gnome-screensaver-2.14.3
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="add.html" title=
+          "Chapter&nbsp;32.&nbsp;GNOME Additional Packages">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

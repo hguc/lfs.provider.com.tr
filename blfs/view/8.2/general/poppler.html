@@ -1,0 +1,577 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Poppler-0.62.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-8.2">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 8.2
+      </h4>
+      <h3>
+        Chapter&nbsp;10.&nbsp;Graphics and Font Libraries
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="pixman.html" title="Pixman-0.34.0">Prev</a>
+          <p>
+            Pixman-0.34.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="potrace.html" title="Potrace-1.15">Next</a>
+          <p>
+            Potrace-1.15
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;10.&nbsp;Graphics and Font Libraries">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 8.2">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="poppler" name="poppler"></a>Poppler-0.62.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Poppler
+        </h2>
+        <p>
+          The <span class="application">Poppler</span> package contains a PDF
+          rendering library and command line tools used to manipulate PDF
+          files. This is useful for providing PDF rendering functionality as
+          a shared library.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-8.2
+          platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://poppler.freedesktop.org/poppler-0.62.0.tar.xz">https://poppler.freedesktop.org/poppler-0.62.0.tar.xz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 42b801f2defaccb6b6cf1bf783ee1552
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.4 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 59 MB (with Qt5 library and
+                tests)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.5 SBU (with parallelism=4, Qt5
+                library, and tests)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <p class="title">
+            <b>Poppler Encoding Data</b>
+          </p>
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "https://poppler.freedesktop.org/poppler-data-0.4.8.tar.gz">https://poppler.freedesktop.org/poppler-data-0.4.8.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 00f8989c804de84af0ba2ea629949980
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 4.1 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 24 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: less than 0.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+          The additional package consists of encoding files for use with
+          <span class="application">Poppler</span>. The encoding files are
+          optional and <span class="application">Poppler</span> will
+          automatically read them if they are present. When installed, they
+          enable <span class="application">Poppler</span> to render CJK and
+          Cyrillic properly.
+        </p>
+        <h3>
+          Poppler Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="cmake.html" title=
+          "CMake-3.10.2">CMake-3.10.2</a> and <a class="xref" href=
+          "fontconfig.html" title="Fontconfig-2.12.6">Fontconfig-2.12.6</a>
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="../x/cairo.html" title=
+          "Cairo-1.14.12">Cairo-1.14.12</a>, <a class="xref" href=
+          "libjpeg.html" title="libjpeg-turbo-1.5.3">libjpeg-turbo-1.5.3</a>,
+          <a class="xref" href="libpng.html" title=
+          "libpng-1.6.34">libpng-1.6.34</a>, <a class="xref" href=
+          "../postlfs/nss.html" title="NSS-3.35">NSS-3.35</a>, and <a class=
+          "xref" href="openjpeg2.html" title=
+          "OpenJPEG-2.3.0">OpenJPEG-2.3.0</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../basicnet/curl.html" title=
+          "cURL-7.58.0">cURL-7.58.0</a>, <a class="xref" href=
+          "../x/gdk-pixbuf.html" title=
+          "gdk-pixbuf-2.36.11">gdk-pixbuf-2.36.11</a>, <a class="xref" href=
+          "git.html" title="Git-2.16.2">git-2.16.2</a> (for downloading test
+          files), <a class="xref" href="gobject-introspection.html" title=
+          "gobject-introspection-1.54.1">gobject-introspection-1.54.1</a>,
+          <a class="xref" href="gtk-doc.html" title=
+          "GTK-Doc-1.27">GTK-Doc-1.27</a>, <a class="xref" href=
+          "../x/gtk3.html" title="GTK+-3.22.28">GTK+-3.22.28</a>, <a class=
+          "xref" href="lcms2.html" title="Little CMS-2.9">Little CMS-2.9</a>,
+          <a class="xref" href="libtiff.html" title=
+          "LibTIFF-4.0.9">LibTIFF-4.0.9</a>, <a class="xref" href=
+          "../x/qt5.html" title="Qt-5.10.1">Qt-5.10.1</a> (required for PDF
+          support in <a class="xref" href="../kde/okular5.html" title=
+          "Okular-17.12.2">Okular-17.12.2</a>)
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/poppler">http://wiki.linuxfromscratch.org/blfs/wiki/poppler</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Poppler
+        </h2>
+        <p>
+          Install <span class="application">Poppler</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir build                         &amp;&amp;
+cd    build                         &amp;&amp;
+
+cmake  -DCMAKE_BUILD_TYPE=Release   \
+       -DCMAKE_INSTALL_PREFIX=/usr  \
+       -DTESTDATADIR=$PWD/testfiles \
+       -DENABLE_XPDF_HEADERS=ON     \
+       ..                           &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          In order to run the test suite, some testcases are needed and can
+          be obtained only from a git repository. The command to download
+          them is: <span class="command"><strong>git clone
+          git://git.freedesktop.org/git/poppler/test
+          testfiles</strong></span>. Then issue: <span class=
+          "command"><strong>LC_ALL=en_US.UTF-8 make test</strong></span>.
+          Only the Qt5 libraries are tested.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          To install the documentation, run the following commands as
+          <code class="systemitem">root</code>:
+        </p>
+        <pre class="root">
+<kbd class=
+"command">install -v -m755 -d           /usr/share/doc/poppler-0.62.0 &amp;&amp;
+cp -vr ../glib/reference/html /usr/share/doc/poppler-0.62.0</kbd>
+</pre>
+        <h3>
+          Poppler Data
+        </h3>
+        <p>
+          If you downloaded the additional encoding data package, install it
+          by issuing the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">tar -xf ../../poppler-data-0.4.8.tar.gz &amp;&amp;
+cd poppler-data-0.4.8</kbd>
+</pre>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make prefix=/usr install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>-DCMAKE_BUILD_TYPE=Release</code></em>:
+          This switch is used to apply a higher level of compiler
+          optimizations.
+        </p>
+        <p>
+          <em class=
+          "parameter"><code>-DTESTDATADIR=$PWD/testfiles</code></em>: Tell
+          the test programs where the auxiliary files are located.
+        </p>
+        <p>
+          <em class="parameter"><code>-DENABLE_XPDF_HEADERS=ON</code></em>:
+          Install some old <span class="application">Xpdf</span> headers
+          required by certain programs (e.g. <span class=
+          "application">Okular</span>, <span class=
+          "application">LibreOffice</span> and <span class=
+          "application">Inkscape</span>).
+        </p>
+        <p>
+          <span class="command"><strong>LC_ALL=en_US.UTF-8 make
+          test</strong></span>: Run the test suite. The environment variable
+          LC_ALL=en_US.UTF-8 is only needed if the default locale does not
+          include UTF-8.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">pdfdetach, pdffonts, pdfimages, pdfinfo,
+              pdfseparate, pdfsig, pdftocairo, pdftohtml, pdftoppm, pdftops,
+              pdftotext, and pdfunite</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libpoppler.so, libpoppler-cpp.so,
+              libpoppler-glib.so, and libpoppler-qt5.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/include/poppler, /usr/share/poppler,
+              and /usr/share/doc/poppler-0.62.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdfdetach" name="pdfdetach"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdfdetach</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    lists or extracts embedded files from PDF files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdffonts" name="pdffonts"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdffonts</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    lists the fonts used in a PDF file along with various
+                    information for each font.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdfimages" name="pdfimages"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdfimages</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    saves images from a PDF file as PPM, PBM, or JPEG files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdfinfo" name="pdfinfo"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdfinfo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    prints the contents of the 'Info' dictionary (plus some
+                    other useful information) from a PDF file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdfseparate" name="pdfseparate"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdfseparate</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    extracts single pages from a PDF file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdfsig" name="pdfsig"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdfsig</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    verifies the digital signatures in a PDF document.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdftocairo" name="pdftocairo"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdftocairo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    converts a PDF file to one of several formats (PNG, JPEG,
+                    PDF, PS, EPS, SVG) using the cairo output device of the
+                    poppler library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdftohtml" name="pdftohtml"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdftohtml</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    converts a PDF file to HTML.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdftoppm" name="pdftoppm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdftoppm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    converts PDF files to PBM, PGM and PPM formats.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdftops" name="pdftops"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdftops</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    converts PDF files to Postscript format.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdftotext" name="pdftotext"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdftotext</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    converts PDF files to plain text.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdfunite" name="pdfunite"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdfunite</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    merges several PDF files, in the order of their
+                    occurrence on the command line, to one PDF output file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libpoppler" name="libpoppler"></a><span class=
+                    "term"><code class="filename">libpoppler.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the API functions to render PDF files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libpoppler-cpp" name=
+                    "libpoppler-cpp"></a><span class="term"><code class=
+                    "filename">libpoppler-cpp.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a C++ backend for rendering PDF files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libpoppler-glib" name=
+                    "libpoppler-glib"></a><span class="term"><code class=
+                    "filename">libpoppler-glib.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a wrapper library used to interface the PDF rendering
+                    functions with <span class="application">GTK+</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libpoppler-qt5" name=
+                    "libpoppler-qt5"></a><span class="term"><code class=
+                    "filename">libpoppler-qt5.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a wrapper library used to interface the PDF rendering
+                    functions with <span class="application">Qt</span>5.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2018-02-19 20:56:06 -0800
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="pixman.html" title="Pixman-0.34.0">Prev</a>
+          <p>
+            Pixman-0.34.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="potrace.html" title="Potrace-1.15">Next</a>
+          <p>
+            Potrace-1.15
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="graphlib.html" title=
+          "Chapter&nbsp;10.&nbsp;Graphics and Font Libraries">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 8.2">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

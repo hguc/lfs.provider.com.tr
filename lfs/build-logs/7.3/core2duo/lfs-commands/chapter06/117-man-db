@@ -1,0 +1,18 @@
+#!/bin/bash
+set +h
+set -e
+
+cd $PKGDIR
+./configure --prefix=/usr                        \
+            --libexecdir=/usr/lib                \
+            --docdir=/usr/share/doc/man-db-2.6.3 \
+            --sysconfdir=/etc                    \
+            --disable-setuid                     \
+            --with-browser=/usr/bin/lynx         \
+            --with-vgrind=/usr/bin/vgrind        \
+            --with-grap=/usr/bin/grap
+make
+make -k check >> $TEST_LOG 2>&1 || true
+make install
+echo -e "\n\nTotalseconds: $SECONDS\n"
+exit

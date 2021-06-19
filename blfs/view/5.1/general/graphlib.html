@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;9.&nbsp;Graphics and Font Libraries
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;III.&nbsp;General Libraries and Utilities</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="libusb.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="libpng.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Graphics and Font Libraries
+        </h1>
+      </div>
+      <p>
+        Depending on what your system will be used for, you may or may not
+        require the graphics and font libraries. Most desktop machines will
+        want them for use with graphical applications. Most servers on the
+        other hand, will not require them.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="libjpeg" name="libjpeg"></a>
+          <h2 class="sect1">
+            libjpeg-6b
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to libjpeg
+            </h3>
+          </div>
+          <p>
+            The <span class="application">libjpeg</span> package contains
+            libraries that allow compression of image files based on the
+            Joint Photographic Experts Group standard. It is a "lossy"
+            compression algorithm.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2673726" name="id2673726"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://www.ijg.org/files/jpegsrc.v6b.tar.gz">http://www.ijg.org/files/jpegsrc.v6b.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.uu.net/graphics/jpeg/jpegsrc.v6b.tar.gz">ftp://ftp.uu.net/graphics/jpeg/jpegsrc.v6b.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 599 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 3.7 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.26 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of libjpeg
+            </h3>
+          </div>
+          <p>
+            Install <span class="application">libjpeg</span> by running the
+            following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --enable-static --enable-shared --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Command explanations
+            </h3>
+          </div>
+          <p>
+            <span><b class="command">./configure --enable-static
+            --enable-shared --prefix=/usr</b></span>: This command tells
+            libjpeg to build both shared and static libraries and to install
+            them with a base of <tt class="filename">/usr</tt>.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring libjpeg
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2674205" name="id2674205"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              As with most libraries, there is no configuration to do, save
+              that the library directory i.e., <tt class=
+              "filename">/opt/lib</tt> or <tt class=
+              "filename">/usr/local/lib</tt> should appear in <tt class=
+              "filename">/etc/ld.so.conf</tt> so that <span><b class=
+              "command">ldd</b></span> can find the shared libraries. After
+              checking that this is the case, <span><b class=
+              "command">/sbin/ldconfig</b></span> should be run while logged
+              in as root.
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The libjpeg package contains <span><b class=
+            "command">cjpeg</b></span>, <span><b class=
+            "command">djpeg</b></span>, <span><b class=
+            "command">jpegtran</b></span>, <span><b class=
+            "command">rdjpgcom</b></span>, <span><b class=
+            "command">wrjpgcom</b></span> and <tt class=
+            "filename">libjpeg</tt> libraries.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2674149" name="id2674149"></a>cjpeg
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">cjpeg</b></span> compresses image
+              files to produce a <span class=
+              "acronym">JPEG</span>/<span class="acronym">JFIF</span> file on
+              the standard output. Currently supported input file formats
+              are: <span class="acronym">PPM</span> (PBMPLUS color format),
+              <span class="acronym">PGM</span> (PBMPLUS gray-scale format),
+              <span class="acronym">BMP</span>, and Targa.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2674180" name="id2674180"></a>djpeg
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">djpeg</b></span> decompresses image
+              files from <span class="acronym">JPEG/JFIF</span> format to
+              either <span class="acronym">PPM</span> (PBMPLUS color format),
+              <span class="acronym">PGM</span> (PBMPLUS gray-scale format),
+              <span class="acronym">BMP</span>, or Targa format.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2674743" name="id2674743"></a>jpegtran
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">jpegtran</b></span> is used for
+              lossless transformation of <span class="acronym">JPEG</span>
+              files.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2674759" name="id2674759"></a>rdjpgcom
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">rdjpgcom</b></span> displays text
+              comments from within a <span class="acronym">JPEG</span> file.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2674776" name="id2674776"></a>wrjpgcom
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">wrjpgcom</b></span> inserts text
+              comments into a <span class="acronym">JPEG</span> file.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2674793" name="id2674793"></a>jpeg libraries
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              These libraries are used by many programs for reading and
+              writing jpeg format files.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="libusb.html">Prev</a><br />
+        libusb-0.1.8
+      </div>
+      <div class="next">
+        <a accesskey="n" href="libpng.html">Next</a><br />
+        libpng-1.2.5
+      </div>
+      <div class="up">
+        <a accesskey="u" href="general.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

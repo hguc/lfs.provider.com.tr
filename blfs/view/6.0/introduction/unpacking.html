@@ -1,0 +1,199 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Notes on building software
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;2.&nbsp;Important Information
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="important.html" title=
+          "Important Information">Prev</a>
+          <p>
+            Important Information
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="position.html" title=
+          "The /usr versus /usr/local debate">Next</a>
+          <p>
+            The /usr versus /usr/local debate
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="important.html" title=
+          "Chapter&nbsp;2.&nbsp;Important Information">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="intro-important-unpacking" name=
+        "intro-important-unpacking"></a>
+        <h1 class="sect1">
+          Notes on building software
+        </h1>
+      </div>
+      <p>
+        Those people who have built an <span class="acronym">LFS</span>
+        system will be aware of the general principles of downloading and
+        unpacking software. We will however repeat some of that information
+        here for those new to building their own software.
+      </p>
+      <p>
+        Each set of installation instructions contains a <span class=
+        "acronym">URL</span> from which you can download the package. We do
+        however keep a selection of patches available via http. These are
+        referenced as needed in the installation instructions.
+      </p>
+      <p>
+        While you can keep the source files anywhere you like, we assume that
+        you have unpacked them and unzipped any required patches into
+        <tt class="filename">/usr/src</tt>.
+      </p>
+      <p>
+        We can not emphasize strongly enough that you should start from a
+        <span class="emphasis"><em>clean source tree</em></span> each time.
+        This means that if you have had an error, it's usually best to delete
+        the source tree and re-unpack it <span class=
+        "emphasis"><em>before</em></span> trying again. This obviously
+        doesn't apply if you're an advanced user used to hacking Makefiles
+        and C code, but if in doubt, start from a clean tree.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Unpacking the software
+          </h2>
+        </div>
+        <p>
+          If a file is tar'ed and gzip'ed, it is unpacked by running one of
+          the following commands, depending on the filename:
+        </p>
+        <pre class="screen"><span><strong class=
+        "command">tar -xvzf filename.tar.gz
+tar -xvzf filename.tgz
+tar -xvzf filename.tar.Z</strong></span></pre>
+        <p>
+          If a file is tar'ed and bzip2'ed, it can usually be unpacked by
+          running:
+        </p>
+        <pre class="screen"><span><strong class=
+        "command">tar -jxvf filename.tar.bz2</strong></span></pre>
+        <p>
+          You can also use a slightly different method:
+        </p>
+        <pre class="screen"><span><strong class=
+        "command">bzcat filename.tar.bz2 | tar -xv</strong></span></pre>
+        <p>
+          Finally, you sometimes need to be able to unpack patches which are
+          generally not tar'ed. The best way to do this is to copy the patch
+          file to <tt class="filename">/usr/src</tt> and then to run one of
+          the following commands depending on whether the file is .gz or
+          .bz2:
+        </p>
+        <pre class="screen"><span><strong class="command">gunzip patchname.gz
+bunzip2 patchname.bz2</strong></span></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Verifying file integrity using md5sum
+          </h2>
+        </div>
+        <p>
+          Generally, to verify that the downloaded file is genuine and
+          complete, most package maintainers also distribute md5sums of the
+          files. To verify the md5sum of the downloaded files, download both
+          the file and the corresponding md5sum file to the same directory
+          (preferably from different on-line locations), and (assuming
+          file.md5sum is the md5sum file downloaded) run the following
+          command:
+        </p>
+        <pre class="screen"><span><strong class=
+        "command">md5sum -c file.md5sum</strong></span></pre>
+        <p>
+          If there are any errors, they will be reported.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Creating Log files during installation
+          </h2>
+        </div>
+        <p>
+          For larger packages, it is convenient to create log files instead
+          of staring at the screen hoping to catch a particular error or
+          warning. Log files are also useful for debugging and keeping
+          records. The following command allows you to create an installation
+          log. Replace &lt;command&gt; with the command you intend to
+          execute.
+        </p>
+        <pre class="screen"><span><strong class=
+        "command">( &lt;command&gt; 2&gt;&amp;1 | tee compile.log &amp;&amp; exit $PIPESTATUS )</strong></span></pre>
+        <p>
+          <em class="parameter"><tt>2&gt;&amp;1</tt></em> redirects error
+          messages to the same location as standard output. The
+          <span><strong class="command">tee</strong></span> command allows
+          viewing of the output while logging the results to a file. The
+          parentheses around the command run the entire command in a subshell
+          and finally the <span><strong class="command">exit
+          $PIPESTATUS</strong></span> ensures the result of the
+          &lt;command&gt; is returned as the result and not the result of the
+          <span><strong class="command">tee</strong></span> command.
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-04 00:30:54 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="important.html" title=
+          "Important Information">Prev</a>
+          <p>
+            Important Information
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="position.html" title=
+          "The /usr versus /usr/local debate">Next</a>
+          <p>
+            The /usr versus /usr/local debate
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="important.html" title=
+          "Chapter&nbsp;2.&nbsp;Important Information">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

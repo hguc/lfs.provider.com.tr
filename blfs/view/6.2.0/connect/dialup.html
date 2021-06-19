@@ -1,0 +1,350 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;13.&nbsp;Dial-up Networking
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Part&nbsp;IV.&nbsp;Connecting to a Network
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="connect.html" title=
+          "Connecting to a Network">Prev</a>
+          <p>
+            Connecting to a Network
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="wvdial.html" title="WvDial-1.54.0">Next</a>
+          <p>
+            WvDial-1.54.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="connect.html" title=
+          "Part&nbsp;IV.&nbsp;Connecting to a Network">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="connect-dialup" name="connect-dialup"></a>
+        <h1 class="chapter">
+          Dial-up Networking
+        </h1>
+      </div>
+      <p>
+        This chapter provides utilities for system interaction with a modem.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="ppp" name="ppp"></a>
+          <h1 class="sect1">
+            PPP-2.4.4
+          </h1>
+        </div>
+        <div class="package" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to PPP
+            </h2>
+          </div>
+          <p>
+            The <span class="application">PPP</span> package contains the
+            <span><strong class="command">pppd</strong></span> daemon and the
+            <span><strong class="command">chat</strong></span> program. This
+            is used for connecting to other machines; often for connecting to
+            the Internet via a dial-up or PPPoE connection to an ISP.
+          </p>
+          <h3>
+            <a id="id2758367" name="id2758367"></a>Package Information
+          </h3>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://samba.org/ftp/ppp/ppp-2.4.4.tar.gz"><span class=
+                  "url">http://samba.org/ftp/ppp/ppp-2.4.4.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/ppp-2.4.4.tar.gz">
+                  <span class=
+                  "url">ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/ppp-2.4.4.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 183800762e266132218b204dfb428d29
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 673 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 5.6 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.1 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+          <h3>
+            <a id="id2763246" name="id2763246"></a>PPP Dependencies
+          </h3>
+          <h4>
+            <a id="id2713126" name="id2713126"></a>Optional
+          </h4>
+          <p class="optional">
+            <a href="../basicnet/libpcap.html">libpcap-0.9.4</a> (needed to
+            do PPP filtering) and <a href=
+            "http://linux-atm.sourceforge.net/"><span class="url">Linux
+            ATM</span></a> (to build the pppoatm.so plugin)
+          </p>
+          <p class="usernotes">
+            User Notes: <a href=
+            "http://wiki.linuxfromscratch.org/blfs/wiki/PPP"><span class=
+            "url">http://wiki.linuxfromscratch.org/blfs/wiki/PPP</span></a>
+          </p>
+        </div>
+        <div class="installation" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of PPP
+            </h2>
+          </div>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                <span class="application">PPP</span> support must be compiled
+                into the kernel or available as a kernel module.
+              </p>
+            </div>
+          </div>
+          <p>
+            Install <span class="application">PPP</span> by running the
+            following commands:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">./configure --prefix=/usr &amp;&amp;
+make</kbd></pre>
+          <p>
+            This package does not come with a test suite.
+          </p>
+          <p>
+            Now, as the <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class="command">make install &amp;&amp;
+make install-etcppp</kbd></pre>
+        </div>
+        <div class="commands" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command Explanations
+            </h2>
+          </div>
+          <p>
+            <span><strong class="command">make
+            install-etcppp</strong></span>: This command puts example
+            configuration files in <tt class="filename">/etc/ppp</tt>.
+          </p>
+        </div>
+        <div class="configuration" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Configuring PPP
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="ppp-config" name="ppp-config"></a>Config Files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/ppp/*</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2717900" name="id2717900"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The <span class="application">PPP</span> daemon requires very
+              little configuration. The main trick is scripting the
+              connection. This can be done either using the
+              <span><strong class="command">chat</strong></span> program
+              which comes with this package or by using <a href=
+              "wvdial.html">WvDial-1.54.0</a>.
+            </p>
+          </div>
+        </div>
+        <div class="content" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <div class="segmentedlist">
+            <div class="seglistitem">
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Programs:</span></strong> <span class="seg">chat, pppd,
+                pppdump, pppoe-discovery and pppstats</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Libraries:</span></strong> <span class="seg">Several plugin
+                modules installed in <tt class=
+                "filename">/usr/lib/pppd/2.4.3</tt></span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Directories:</span></strong> <span class="seg">/etc/ppp,
+                /usr/include/pppd and /usr/lib/pppd</span>
+              </div>
+            </div>
+          </div>
+          <div class="variablelist">
+            <h3>
+              <a id="id2631146" name="id2631146"></a>Short Descriptions
+            </h3>
+            <table border="0">
+              <col align="left" valign="top" />
+              <tbody>
+                <tr>
+                  <td>
+                    <a id="chat" name="chat"></a><span class=
+                    "term"><span><strong class=
+                    "command">chat</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      defines a conversational exchange between the computer
+                      and the modem. Its primary purpose is to establish the
+                      connection between the Point-to-Point Protocol Daemon
+                      (PPPD) and the remote <span><strong class=
+                      "command">pppd</strong></span> process.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="pppd" name="pppd"></a><span class=
+                    "term"><span><strong class=
+                    "command">pppd</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is the Point to Point Protocol daemon.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="pppdump" name="pppdump"></a><span class=
+                    "term"><span><strong class=
+                    "command">pppdump</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is used to convert <span class="application">PPP</span>
+                      record files to a readable format.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="pppstats" name="pppstats"></a><span class=
+                    "term"><span><strong class=
+                    "command">pppstats</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is used to print <span class="application">PPP</span>
+                      statistics.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-26 17:28:31 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="connect.html" title=
+          "Connecting to a Network">Prev</a>
+          <p>
+            Connecting to a Network
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="wvdial.html" title="WvDial-1.54.0">Next</a>
+          <p>
+            WvDial-1.54.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="connect.html" title=
+          "Part&nbsp;IV.&nbsp;Connecting to a Network">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

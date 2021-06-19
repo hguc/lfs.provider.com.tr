@@ -1,0 +1,423 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Avifile-0.7.38
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;39.&nbsp;Video utilities</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="videoutils.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="mplayer.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Avifile-0.7.38
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Avifile
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Avifile</span> package contains an
+          <span class="acronym">AVI</span> video file player, tools and
+          support libraries. This is useful for viewing and editing
+          <span class="acronym">AVI</span> files.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3192761" name="id3192761"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/avifile/avifile-0.7-0.7.38.tar.gz">
+                  http://prdownloads.sourceforge.net/avifile/avifile-0.7-0.7.38.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 46.0 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 4.28 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195163" name="id3195163"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required <span class="acronym">CODEC</span>s: <a href=
+                  "http://prdownloads.sourceforge.net/avifile/binaries-011002.tgz">
+                  http://prdownloads.sourceforge.net/avifile/binaries-011002.tgz</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195198" name="id3195198"></a><span class=
+                  "application">Avifile</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3195208" name="id3195208"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../x/lib.html#qt">Qt-3.3.2</a> and <a href=
+              "sdl.html">SDL-1.2.7</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3195224" name="id3195224"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="videoutils.html#ffmpeg">FFmpeg-0.4.8</a>, <a href=
+              "xvid.html">XviD-1.0.0-rc4</a>, <a href=
+              "libmad.html">libmad-0.15.1b</a>, <a href=
+              "libvorbis.html">libvorbis-1.0.1</a> and <a href=
+              "lame.html">LAME-3.95.1</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Avifile
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Avifile</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">install -d /usr/lib/avifile-0.7/win32 &amp;&amp;
+tar xzvf ../binaries-011002.tgz -C /usr/lib/avifile-0.7 &amp;&amp;
+./autogen.sh &amp;&amp;
+./configure &amp;&amp;
+make maintainer-clean &amp;&amp;
+./autogen.sh &amp;&amp;
+./configure --prefix=/usr \
+    --with-win32-path=/usr/lib/avifile-0.7/win32 &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">./autogen.sh &amp;&amp; ./configure
+          &amp;&amp; make maintainer-clean &amp;&amp;
+          ./autogen.sh</b></span>: The author of this package used the old
+          autoconf which leads to problems like configure not being able to
+          detect some libraries and compilation errors. We fix this by
+          rebuilding the configuration scripts.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Avifile</span> package contains
+          <span><b class="command">aviplay</b></span>, <span><b class=
+          "command">avibench</b></span>, <span><b class=
+          "command">avifile-config</b></span>, <span><b class=
+          "command">mmxnow-config</b></span>, <span><b class=
+          "command">avirecompress</b></span>, <span><b class=
+          "command">avicap</b></span>, <span><b class=
+          "command">avirec</b></span>, <span><b class=
+          "command">kv4lsetup</b></span>, <span><b class=
+          "command">avicat</b></span>, <span><b class=
+          "command">avitype</b></span> and <span><b class=
+          "command">avimake</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195638" name="id3195638"></a>aviplay
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">aviplay</b></span> manages the input
+            formats, the <span class="acronym">CODEC</span>s and the output
+            formats to display <span class="acronym">AVI</span> video files
+            on your screen.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195660" name="id3195660"></a>avibench
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avibench</b></span> performs a
+            measurement of the <span class="application">AVI file
+            support</span> library's performance for a file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195679" name="id3195679"></a>avifile-config
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avifile-config</b></span> is run by
+            configure for programs wishing to link to the <span class=
+            "application">Avifile</span> library.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195699" name="id3195699"></a>mmxnow-config
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mmxnow-config</b></span> is run by
+            configure for programs wishing to link to the mmxnow library.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195713" name="id3195713"></a>avirecompress
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avirecompress</b></span> is a widget
+            that takes an input file of one <span class=
+            "acronym">CODEC</span> type and converts it into a video file of
+            another <span class="acronym">CODEC</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195735" name="id3195735"></a>avicap
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avicap</b></span> is a widget that
+            displays acquired video from a Video For Windows (vfw) compatible
+            device, like a webcam or a TV-tuner.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195751" name="id3195751"></a>avirec
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avirec</b></span> is a command-line
+            video recording tool.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195765" name="id3195765"></a>kv4lsetup
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">kv4lsetup</b></span> is a small tool
+            which tells video4linux about the current video mode.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195779" name="id3195779"></a>avicat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avicat</b></span> takes a set of
+            <span class="acronym">AVI</span> files and combines them into a
+            single file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195796" name="id3195796"></a>avitype
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avitype</b></span> will read and display
+            <span class="acronym">AVI</span> file header information.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3195812" name="id3195812"></a>avimake
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">avimake</b></span> takes a set of
+            <span class="acronym">JPG</span> images and creates a movie.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="videoutils.html">Prev</a><br />
+        Chapter&nbsp;39.&nbsp;Video utilities
+      </div>
+      <div class="next">
+        <a accesskey="n" href="mplayer.html">Next</a><br />
+        MPlayer-1.0pre4
+      </div>
+      <div class="up">
+        <a accesskey="u" href="videoutils.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

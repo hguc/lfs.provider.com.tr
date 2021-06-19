@@ -1,0 +1,435 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;18.&nbsp;Basic Networking Programs
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Part&nbsp;V.&nbsp;Basic Networking
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="w3m.html" title="W3m-0.5.1">Prev</a>
+          <p>
+            W3m-0.5.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="inetutils.html" title=
+          "Inetutils-1.4.2">Next</a>
+          <p>
+            Inetutils-1.4.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="basicnet.html" title=
+          "Part&nbsp;V.&nbsp;Basic Networking">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="basicnet-netprogs" name="basicnet-netprogs"></a>
+        <h1 class="chapter">
+          Basic Networking Programs
+        </h1>
+      </div>
+      <p>
+        These applications are generally client applications used to access
+        the appropriate server across the building or across the world.
+        <span class="application">Tcpwrappers</span> and <span class=
+        "application">portmap</span> are support programs for daemons that
+        you may have running on your machine.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="cvs" name="cvs"></a>
+          <h1 class="sect1">
+            CVS-1.11.22
+          </h1>
+        </div>
+        <div class="package" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to CVS
+            </h2>
+          </div>
+          <p>
+            <span class="application">CVS</span> is the Concurrent Versions
+            System. This is a version control system useful for projects
+            using a central repository to hold files and then track all
+            changes made to those files. These instructions install the
+            client used to manipulate the repository, creation of a
+            repository is covered at <a href=
+            "../server/cvsserver.html">Running a CVS Server</a>.
+          </p>
+          <h3>
+            <a id="id2741651" name="id2741651"></a>Package Information
+          </h3>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.22/cvs-1.11.22.tar.bz2">
+                  <span class=
+                  "url">http://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.22/cvs-1.11.22.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.22/cvs-1.11.22.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.gnu.org/non-gnu/cvs/source/stable/1.11.22/cvs-1.11.22.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: f24043a640509aff1aa28871dd345762
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.9 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 32.3 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.3 SBU (additional ~20 SBU to run
+                  the test suite)
+                </p>
+              </li>
+            </ul>
+          </div>
+          <h3>
+            <a id="id2668172" name="id2668172"></a>Additional Downloads
+          </h3>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Recommended patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/6.2.0/cvs-1.11.22-zlib-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/cvs-1.11.22-zlib-1.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+          <h3>
+            <a id="id2777743" name="id2777743"></a>CVS Dependencies
+          </h3>
+          <h4>
+            <a id="id2823165" name="id2823165"></a>Optional
+          </h4>
+          <p class="optional">
+            <a href="../general/gdbm.html">GDBM-1.8.3</a>, <a href=
+            "../postlfs/tcsh.html">Tcsh-6.14.00</a>, <a href=
+            "../server/openssh.html">OpenSSH-4.5p1</a>, <a href=
+            "http://www.pdc.kth.se/kth-krb/"><span class=
+            "url">krb4</span></a>, <a href="../postlfs/mitkrb.html">MIT
+            Kerberos V5-1.6</a> or <a href=
+            "../postlfs/heimdal.html">Heimdal-0.7.2</a> (for the GSSAPI
+            libraries), <a href="../pst/gs.html">AFPL Ghostscript-8.53</a> or
+            <a href="../pst/espgs.html">ESP Ghostscript-8.15.2</a>, and an
+            <a href="../server/mail.html">MTA</a> (that provides a
+            <span><strong class="command">sendmail</strong></span> command)
+          </p>
+          <p>
+            <span class="application">CVS</span> will invoke a default text
+            editor to create a commit message if the <em class=
+            "parameter"><tt>-m "Commit message"</tt></em> parameter was not
+            used when changes are committed to a respository. <span class=
+            "application">CVS</span> looks for the following text editors, in
+            the order shown below, during configuration to determine the
+            default. This default can always be overridden by the <tt class=
+            "envar">CVSEDITOR</tt> or <tt class="envar">EDITOR</tt>
+            environment variables and can be specified directly by passing
+            the <tt class="option">--with-editor=<em class=
+            "replaceable"><tt>&lt;desired text editor&gt;</tt></em></tt>
+            parameter to the <span><strong class=
+            "command">configure</strong></span> script.
+          </p>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  <a href="../postlfs/editors.html#vim">Vim-7.0</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <a href="../postlfs/emacs.html">Emacs-21.4a</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <a href="../postlfs/nano.html">nano-2.0.1</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  <a href="pine.html">Pine-4.64</a> (for Pico)
+                </p>
+              </li>
+            </ul>
+          </div>
+          <p class="usernotes">
+            User Notes: <a href=
+            "http://wiki.linuxfromscratch.org/blfs/wiki/cvs"><span class=
+            "url">http://wiki.linuxfromscratch.org/blfs/wiki/cvs</span></a>
+          </p>
+        </div>
+        <div class="installation" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Installation of CVS
+            </h2>
+          </div>
+          <p>
+            By default <span class="application">CVS</span> is statically
+            linked against the <span class="application">Zlib</span> library
+            included in its source tree. This makes it exposed to possible
+            security vulnerabilities in that library. If you want to modify
+            <span class="application">CVS</span> to use the system shared
+            <span class="application">Zlib</span> library, apply the
+            following patch:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">patch -Np1 -i ../cvs-1.11.22-zlib-1.patch</kbd></pre>
+          <p>
+            Install <span class="application">CVS</span> by running the
+            following commands:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">./configure --prefix=/usr &amp;&amp;
+make</kbd></pre>
+          <p>
+            If you have <a href="../pst/typesetting.html#tetex">teTeX-3.0</a>
+            installed and wish to create DVI, Postscript, HTML or text docs
+            from the documentation source files, issue the following command:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">make -C doc html txt dvi ps</kbd></pre>
+          <p>
+            To test the results, issue: <span><strong class="command">make
+            check</strong></span>. This will take quite a while. If you don't
+            have <span><strong class="command">rsh</strong></span> configured
+            for access to the host you are building on (or you didn't pass
+            the <tt class="option">--with-rsh=</tt> parameter to the
+            <span><strong class="command">configure</strong></span> script,
+            some tests may fail. If you passed the <tt class=
+            "option">--with-rsh=ssh</tt> parameter to enable
+            <span><strong class="command">ssh</strong></span> as the default
+            remote shell program, you'll need to issue the following command
+            so that the tests will complete without any failures:
+          </p>
+          <pre class="userinput"><kbd class=
+          "command">sed -e 's/rsh};/ssh};/' \
+    -e 's/g=rw,o=r$/g=r,o=r/' \
+    -i src/sanity.sh</kbd></pre>
+          <p>
+            Now, as the <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class="command">make install &amp;&amp;
+install -v -m755 -d /usr/share/doc/cvs-1.11.22 &amp;&amp;
+install -v -m644 FAQ README /usr/share/doc/cvs-1.11.22 &amp;&amp;
+install -v -m644 doc/*.pdf /usr/share/doc/cvs-1.11.22</kbd></pre>
+          <p>
+            If you created any additional documentation, install it by
+            issuing the following commands as the <tt class=
+            "systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">install -v -m644 doc/*.{ps,dvi,txt} /usr/share/doc/cvs-1.11.22 &amp;&amp;
+install -v -m755 -d /usr/share/doc/cvs-1.11.22/html/cvs{,client} &amp;&amp;
+install -v -m644 doc/cvs.html/* \
+                 /usr/share/doc/cvs-1.11.22/html/cvs &amp;&amp;
+install -v -m644 doc/cvsclient.html/* \
+                 /usr/share/doc/cvs-1.11.22/html/cvsclient</kbd></pre>
+        </div>
+        <div class="configuration" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Configuring CVS
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="cvs-config" name="cvs-config"></a>Config Files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">~/.cvsrc</tt>, <tt class=
+              "filename">~/.cvswrappers</tt>, and <tt class=
+              "filename">~/.cvspass</tt>.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2619485" name="id2619485"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">~/.cvsrc</tt> is the main <span class=
+              "application">CVS</span> configuration file. This file is used
+              by users to specify defaults for different <span><strong class=
+              "command">cvs</strong></span> commands. For example, to make
+              all <span><strong class="command">cvs diff</strong></span>
+              commands run with <tt class="option">-u</tt>, a user would add
+              <tt class="option">diff -u</tt> to their <tt class=
+              "filename">.cvsrc</tt> file.
+            </p>
+            <p>
+              <tt class="filename">~/.cvswrappers</tt> specifies wrappers to
+              be used in addition to those specified in the <tt class=
+              "filename">CVSROOT/cvswrappers</tt> file in the repository.
+            </p>
+            <p>
+              <tt class="filename">~/.cvspass</tt> contains passwords used to
+              complete logins to servers.
+            </p>
+          </div>
+        </div>
+        <div class="content" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <div class="segmentedlist">
+            <div class="seglistitem">
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Programs:</span></strong> <span class="seg">cvs, cvsbug, and
+                rcs2log</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Libraries:</span></strong> <span class="seg">None</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Directories:</span></strong> <span class="seg">/usr/share/cvs
+                and /usr/share/doc/cvs-1.11.22</span>
+              </div>
+            </div>
+          </div>
+          <div class="variablelist">
+            <h3>
+              <a id="id2807359" name="id2807359"></a>Short Descriptions
+            </h3>
+            <table border="0">
+              <col align="left" valign="top" />
+              <tbody>
+                <tr>
+                  <td>
+                    <a id="cvs-prog" name="cvs-prog"></a><span class=
+                    "term"><span><strong class=
+                    "command">cvs</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is the main program file for the concurrent versions
+                      system.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="cvsbug" name="cvsbug"></a><span class=
+                    "term"><span><strong class=
+                    "command">cvsbug</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is used to send problem reports about <span class=
+                      "application">CVS</span> to a central support site.
+                    </p>
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    <a id="rcs2log" name="rcs2log"></a><span class=
+                    "term"><span><strong class=
+                    "command">rcs2log</strong></span></span>
+                  </td>
+                  <td>
+                    <p>
+                      is a symlink to the contributed RCS to Change Log
+                      generator.
+                    </p>
+                  </td>
+                </tr>
+              </tbody>
+            </table>
+          </div>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2006-07-11 07:56:55 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="w3m.html" title="W3m-0.5.1">Prev</a>
+          <p>
+            W3m-0.5.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="inetutils.html" title=
+          "Inetutils-1.4.2">Next</a>
+          <p>
+            Inetutils-1.4.2
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="basicnet.html" title=
+          "Part&nbsp;V.&nbsp;Basic Networking">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      portmap-5beta
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;18.&nbsp;Basic Networking Programs</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="tcpwrappers.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="inetutils.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          portmap-5beta
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to portmap
+          </h3>
+        </div>
+        <p>
+          The <span class="application">portmap</span> package is a more
+          secure replacement for the original SUN <span class=
+          "application">portmap</span> package. <span class=
+          "application">Portmap</span> is used to forward <span class=
+          "acronym">RPC</span> requests to <span class="acronym">RPC</span>
+          daemons such as <span class="acronym">NFS</span> and <span class=
+          "acronym">NIS</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2780450" name="id2780450"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.porcupine.org/pub/security/portmap_5beta.tar.gz">
+                  ftp://ftp.porcupine.org/pub/security/portmap_5beta.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 20 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 250 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.03 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2784281" name="id2784281"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/portmap-5beta-compilation-fixes-2.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/portmap-5beta-compilation-fixes-2.patch</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/portmap-5beta-glibc-errno-fix.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/portmap-5beta-glibc-errno-fix.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2784311" name="id2784311"></a><span class=
+                  "application">portmap</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2784321" name="id2784321"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="tcpwrappers.html">tcpwrappers-7.6</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of portmap
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">portmap</span> with the following
+          commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../portmap-5beta-compilation-fixes-2.patch &amp;&amp;
+patch -Np1 -i ../portmap-5beta-glibc-errno-fix.patch &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The above installation places executable <tt class=
+              "filename">portmap</tt> in <tt class="filename">/sbin</tt>. You
+              may choose to move the file to <tt class=
+              "filename">/usr/sbin</tt>. If you do, remember to modify the
+              bootscript.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring portmap
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2784159" name="id2784159"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/rc.d/init.d/portmap</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2784171" name="id2784171"></a>Boot script
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/portmap</tt>
+            init script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+            package.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-portmap</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">portmap</span> package contains
+          <span><b class="command">portmap</b></span>, <span><b class=
+          "command">pmap_dump</b></span> and <span><b class=
+          "command">pmap_set</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2783950" name="id2783950"></a>portmap
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">portmap</b></span> is the <span class=
+            "acronym">RPC</span> port mapper.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2784121" name="id2784121"></a>pmap_dump
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pmap_dump</b></span> saves the port
+            mapping table to an <span class="acronym">ASCII</span> file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2784138" name="id2784138"></a>pmap_set
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pmap_set</b></span> restores the port
+            mapping table from an <span class="acronym">ASCII</span> file.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="tcpwrappers.html">Prev</a><br />
+        tcpwrappers-7.6
+      </div>
+      <div class="next">
+        <a accesskey="n" href="inetutils.html">Next</a><br />
+        Inetutils-1.4.2
+      </div>
+      <div class="up">
+        <a accesskey="u" href="netprogs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,155 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;5.&nbsp;File Systems
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Part&nbsp;II.&nbsp;Post <span class="acronym">LFS</span>
+          Configuration and Extra Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="stunnel.html" title="Stunnel-4.07">Prev</a>
+          <p>
+            Stunnel-4.07
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="reiserfs.html" title=
+          "ReiserFS-3.6.19">Next</a>
+          <p>
+            ReiserFS-3.6.19
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Part&nbsp;II.&nbsp;Post LFS Configuration and Extra Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="postlfs-filesystems" name="postlfs-filesystems"></a>
+        <h1 class="chapter">
+          File Systems
+        </h1>
+      </div>
+      <p>
+        Journaling file systems reduce the time needed to recover a file
+        system that was not unmounted properly. While this can be extremely
+        important in reducing downtime for servers, it has also become
+        popular for desktop environments. This chapter contains a variety of
+        journaling file systems.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="postlfs-filesystems-ext3" name=
+          "postlfs-filesystems-ext3"></a>
+          <h1 class="sect1">
+            Ext3
+          </h1>
+        </div>
+        <p>
+          Ext3 is a journaling file system that is an extension to the ext2
+          file system. It is backward compatible with ext2 and the conversion
+          from ext2 to ext3 is trivial.
+        </p>
+        <p>
+          You don't need to install anything to use ext3, all the required
+          packages are available with a bare <span class="acronym">LFS</span>
+          system.
+        </p>
+        <p>
+          When building the kernel, ensure that you have compiled in ext3
+          support. If you want your root partition to be ext3, then compile
+          the ext3 support in the kernel, else you may compile it as a
+          module. Recompile the kernel if needed.
+        </p>
+        <p>
+          Edit your <tt class="filename">/etc/fstab</tt>. For each partition
+          that you want to convert into ext3, edit the entry so that it looks
+          similar to the following line.
+        </p>
+        <pre class="screen">/dev/hd<em class=
+        "replaceable"><tt>XX</tt></em> /mnt_point ext3 defaults 1 0</pre>
+        <p>
+          In the above line, replace <tt class="filename">/dev/hd<em class=
+          "replaceable"><tt>XX</tt></em></tt> by the partition (e.g.,
+          <tt class="filename">/dev/hda2</tt>), <tt class=
+          "filename">/mnt_point</tt> by the mount point (e.g., <tt class=
+          "filename">/home</tt>). The <tt class="option">0</tt> in the last
+          field ensures that the partition will not be checked for
+          consistency during the boot process by the <span><strong class=
+          "command">checkfs</strong></span> script. You may replace the
+          <tt class="option">ext3</tt> fs type in the above by <tt class=
+          "option">auto</tt> if you want to ensure that the partition is
+          mounted if you accidentally skip enabling the ext3 support in the
+          kernel.
+        </p>
+        <p>
+          For each partition that you have converted to ext3 in <tt class=
+          "filename">/etc/fstab</tt>, enable the journal for the partition by
+          running the following command.
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">tune2fs -j /dev/hd<em class=
+        "replaceable"><tt>XX</tt></em></strong></span></kbd></pre>
+        <p>
+          Remount the concerned partitions, or simply reboot if you have
+          recompiled the kernel to enable ext3 support.
+        </p>
+        <p>
+          More information is available at <a href=
+          "http://www.zip.com.au/~akpm/linux/ext3/ext3-usage.html"><span class="url">
+          http://www.zip.com.au/~akpm/linux/ext3/ext3-usage.html</span></a>.
+          This informaion is still relevant to the 2.6 kernels.
+        </p>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="stunnel.html" title="Stunnel-4.07">Prev</a>
+          <p>
+            Stunnel-4.07
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="reiserfs.html" title=
+          "ReiserFS-3.6.19">Next</a>
+          <p>
+            ReiserFS-3.6.19
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="postlfs.html" title=
+          "Part&nbsp;II.&nbsp;Post LFS Configuration and Extra Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

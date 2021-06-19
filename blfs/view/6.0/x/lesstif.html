@@ -1,0 +1,409 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      LessTif-0.94.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;26.&nbsp;X Libraries
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="gtk2.html" title="GTK+-2.6.4">Prev</a>
+          <p>
+            GTK+-2.6.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="startup-notification.html" title=
+          "startup-notification-0.8">Next</a>
+          <p>
+            startup-notification-0.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lib.html" title=
+          "Chapter&nbsp;26.&nbsp;X Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="lesstif" name="lesstif"></a>
+        <h1 class="sect1">
+          LessTif-0.94.0
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to LessTif
+          </h2>
+        </div>
+        <p>
+          The <span class="application">LessTif</span> package contains an
+          Open Source version of <span class=
+          "application">OSF/Motif(R)</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2679336" name="id2679336"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/lesstif/lesstif-0.94.0.tar.bz2">
+                  <span class=
+                  "url">http://prdownloads.sourceforge.net/lesstif/lesstif-0.94.0.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 20f38a06c863e0c51ca0c862ef039601
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 109.9 MB (includes building
+                  test suite)
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 2.94 SBU (includes building test
+                  suite)
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623844" name="id2623844"></a><span class=
+                  "application">LessTif</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2750987" name="id2750987"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              X (<a href="xfree86.html">XFree86-4.4.0</a> or <a href=
+              "installing.html#xorg">X.org-6.8.2</a>)
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2720551" name="id2720551"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../basicnet/lynx.html">Lynx-2.8.5</a> or <a href=
+              "../basicnet/textweb.html#Links">Links-2.1pre15</a> and
+              <a href="http://dmalloc.com"><span class=
+              "url">Dmalloc</span></a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of LessTif
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">LessTif</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">find -name Makefile.in | \
+    xargs sed -i 's@$(prefix)/LessTif@$(prefix)/share/LessTif@g' &amp;&amp;
+./configure --prefix=/usr \
+    --enable-build-21 \
+    --disable-debug \
+    --enable-production \
+    --disable-build-tests \
+    --with-xdnd &amp;&amp;
+make &amp;&amp;
+make install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">sed -i
+          's@$(prefix)/LessTif@$(prefix)/share/LessTif@g'</strong></span>:
+          This moves the location of the non-FHS compliant <tt class=
+          "filename">/usr/LessTif</tt> directory to <tt class=
+          "filename">/usr/share/LessTif</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-build-21</tt></em>: Build the
+          <span class="application">Motif</span> 2.1 compatible version of
+          the <span class="application">LessTif</span> libraries.
+        </p>
+        <p>
+          <em class="parameter"><tt>--disable-debug</tt></em>: Do not
+          generate debugging information.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-production</tt></em>: Build the
+          release version of the <span class="application">LessTif</span>
+          libraries.
+        </p>
+        <p>
+          <em class="parameter"><tt>--disable-build-tests</tt></em>: Do not
+          build the <tt class="filename">test/</tt> tree (see Testing
+          <span class="application">LessTif</span>).
+        </p>
+        <p>
+          <em class="parameter"><tt>--with-xdnd</tt></em>: Enable
+          <span class="acronym">XDND</span> <span class=
+          "acronym">GNOME</span> compatibility support.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring LessTif
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2566704" name="id2566704"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            As with most libraries, there is no configuration to do, save
+            that the library directory i.e., <tt class=
+            "filename">/opt/lib</tt> or <tt class=
+            "filename">/usr/local/lib</tt> should appear in <tt class=
+            "filename">/etc/ld.so.conf</tt> so that <span><strong class=
+            "command">ldd</strong></span> can find the shared libraries.
+            After checking that this is the case, <span><strong class=
+            "command">/sbin/ldconfig</strong></span> should be run while
+            logged in as root.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Testing LessTif
+          </h2>
+        </div>
+        <p>
+          It is advisable to test the installation of <span class=
+          "application">LessTif</span> with the test suite located in
+          <tt class="filename">lesstif-0.94.0/test</tt>. It is not required
+          to install any of the resulting binaries to validate the
+          installation. The following commands executed from the source
+          directory will suffice:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">cd test &amp;&amp;
+./configure &amp;&amp;
+make</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          The <span class="application">LessTif</span> package contains
+          <span><strong class="command">mxmkmf</strong></span>,
+          <span><strong class="command">mwm</strong></span>,
+          <span><strong class="command">xmbind</strong></span>,
+          <span><strong class="command">uil</strong></span> and <span class=
+          "application">LessTif</span> libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Description
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2818689" name="id2818689"></a>mxmkmf
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">mxmkmf</strong></span> is the
+            <span class="application">LessTif</span> version of
+            <span><strong class="command">xmkmf</strong></span> which creates
+            a <tt class="filename">Makefile</tt> from an <tt class=
+            "filename">Imakefile</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2746025" name="id2746025"></a>mwm
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">mwm</strong></span> is a window
+            manager that adheres largely to the <span class=
+            "application">Motif</span> <span><strong class=
+            "command">mwm</strong></span> specification.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2644340" name="id2644340"></a>xmbind
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">xmbind</strong></span> configures
+            the virtual key bindings of <span class=
+            "application">LessTif</span> applications
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2593061" name="id2593061"></a>uil
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><strong class="command">uil</strong></span> is a user
+            interface language compiler which translates a plain text
+            description of the user interface of a <span class=
+            "application">Motif</span> application into a machine-readable
+            form.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2734166" name="id2734166"></a>lesstif libraries
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span class="application">LessTif</span> libraries are an
+            <span class="application"><span class=
+            "acronym">OSF</span>/Motif(R)</span> source code compatible
+            library for the <span class="application">X</span> Window System.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-12 13:26:58 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gtk2.html" title="GTK+-2.6.4">Prev</a>
+          <p>
+            GTK+-2.6.4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="startup-notification.html" title=
+          "startup-notification-0.8">Next</a>
+          <p>
+            startup-notification-0.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lib.html" title=
+          "Chapter&nbsp;26.&nbsp;X Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,485 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Emacs-21.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;6.&nbsp;Editors</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="editors.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="nano.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Emacs-21.3
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Emacs
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Emacs</span> package contains the
+          extensible, customizable, self-documenting real-time display
+          editor.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2622723" name="id2622723"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.gnu.org/pub/gnu/emacs/emacs-21.3.tar.gz">http://ftp.gnu.org/pub/gnu/emacs/emacs-21.3.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnu.org/pub/gnu/emacs/emacs-21.3.tar.gz">ftp://ftp.gnu.org/pub/gnu/emacs/emacs-21.3.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 20 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 92.5 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 4.20 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623286" name="id2623286"></a><span class=
+                  "application">Emacs</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2623297" name="id2623297"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              X (<a href="../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.7.0</a>), <a href=
+              "../general/graphlib.html#libjpeg">libjpeg-6b</a>, <a href=
+              "../general/libpng.html">libpng-1.2.5</a>, <a href=
+              "../general/libtiff.html">libtiff-3.6.1</a> and <a href=
+              "../general/libungif.html">libungif-4.1.0b1</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Emacs
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Emacs</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">./configure --prefix=/usr \
+   --libexecdir=/usr/sbin &amp;&amp;
+make bootstrap &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Emacs</span> package contains
+          <span><b class="command">emacs</b></span>, <span><b class=
+          "command">b2m</b></span>, <span><b class=
+          "command">ctags</b></span>, <span><b class=
+          "command">ebrowse</b></span>, <span><b class=
+          "command">emacsclient</b></span>, <span><b class=
+          "command">etags</b></span>, <span><b class=
+          "command">grep-changelog</b></span>, <span><b class=
+          "command">rcs-checkin</b></span>, <span><b class=
+          "command">cvt-mail</b></span>, <span><b class=
+          "command">digest-doc</b></span>, <span><b class=
+          "command">emacsserver</b></span>, <span><b class=
+          "command">fakemail</b></span>, <span><b class=
+          "command">hexl</b></span>, <span><b class=
+          "command">movemail</b></span>, <span><b class=
+          "command">profile</b></span>, <span><b class=
+          "command">rcs2log</b></span>, <span><b class=
+          "command">sorted-doc</b></span>, <span><b class=
+          "command">vcdiff</b></span> and <span><b class=
+          "command">yow</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623685" name="id2623685"></a>emacs
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The editor proper.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623693" name="id2623693"></a>b2m
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">b2m</b></span> is a program to convert
+            mail files from RMAIL format to Unix &ldquo;<span class=
+            "quote">mbox</span>&rdquo; format.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623710" name="id2623710"></a>ctags
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ctags</b></span> creates cross-reference
+            tagfile database files for source code.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623724" name="id2623724"></a>ebrowse
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ebrowse</b></span> permits browsing of
+            C++ class hierarchies from within emacs.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623737" name="id2623737"></a>emacsclient
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">emacsclient</b></span> attaches an emacs
+            session to an already running emacsserver instance.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623751" name="id2623751"></a>etags
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">etags</b></span> is another program to
+            generate source code cross-reference tagfiles.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623765" name="id2623765"></a>grep-changelog
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">grep-changelog</b></span> prints entries
+            in Change Logs matching various criteria.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623778" name="id2623778"></a>rcs-checkin
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rcs-checkin</b></span> is a shell script
+            used to check files into <span class="acronym">RCS</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623795" name="id2623795"></a>cvt-mail
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">cvt-mail</b></span> converts old style
+            goslings emacs mail directories into gnu-rmail format.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623809" name="id2623809"></a>digest-doc
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">digest-doc</b></span> is a filter to
+            create nroff output for man pages.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623822" name="id2623822"></a>emacsserver
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">emacserver</b></span> allows other
+            applications/shells to access an already running emacs instance
+            and share buffers with it.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623836" name="id2623836"></a>fakemail
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">fakemail</b></span> is a sendmail-like
+            interface to <tt class="filename">/bin/mail</tt>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623855" name="id2623855"></a>hexl
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">hexl</b></span> converts files for
+            editing with emacs hexl-mode binary file editing mode.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623869" name="id2623869"></a>movemail
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">movemail</b></span> provides access to
+            <span class="acronym">POP</span>3 mailboxes.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623885" name="id2623885"></a>profile
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">profile</b></span> generates periodic
+            events for profiling of Emacs Lisp code.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623898" name="id2623898"></a>rcs2log
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rcs2log</b></span> generates change log
+            prefixes from <span class="acronym">RCS</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623915" name="id2623915"></a>sorted-doc
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">sorted-doc</b></span> is a filter to
+            generate texinfo files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623928" name="id2623928"></a>vcdiff
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">vcdiff</b></span> compares <span class=
+            "acronym">SCCS</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2623945" name="id2623945"></a>yow
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">yow</b></span> prints a quotation from
+            Zippy the Pinhead.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="editors.html">Prev</a><br />
+        Chapter&nbsp;6.&nbsp;Editors
+      </div>
+      <div class="next">
+        <a accesskey="n" href="nano.html">Next</a><br />
+        nano-1.2.3
+      </div>
+      <div class="up">
+        <a accesskey="u" href="editors.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

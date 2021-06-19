@@ -1,0 +1,473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Shadow-4.0.4.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;4.&nbsp;Security
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="linux_pam.html" title=
+          "Linux-PAM-0.78">Prev</a>
+          <p>
+            Linux-PAM-0.78
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="iptables.html" title=
+          "iptables-1.3.1">Next</a>
+          <p>
+            iptables-1.3.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="shadow" name="shadow"></a>
+        <h1 class="sect1">
+          Shadow-4.0.4.1
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Shadow
+          </h2>
+        </div>
+        <p>
+          Shadow was indeed installed in <span class="acronym">LFS</span> and
+          there is no reason to reinstall it unless you installed
+          <span class="application">Linux-<span class=
+          "acronym">PAM</span></span>. If you did, this will allow programs
+          like <span><strong class="command">login</strong></span> and
+          <span><strong class="command">su</strong></span> to utilize
+          <span class="acronym">PAM</span>.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2757108" name="id2757108"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.pld.org.pl/software/shadow/old/shadow-4.0.4.1.tar.bz2">
+                  <span class=
+                  "url">ftp://ftp.pld.org.pl/software/shadow/old/shadow-4.0.4.1.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 3a3d17d3d7c630b602baf66ae7434c61
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 814 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 14.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.42 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2662651" name="id2662651"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Patch to fix linking against PAM: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/shadow-4.0.4.1-pam-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/shadow-4.0.4.1-pam-1.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2746111" name="id2746111"></a><span class=
+                  "application">Shadow</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2652157" name="id2652157"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="linux_pam.html">Linux-PAM-0.78</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Shadow
+          </h2>
+        </div>
+        <p>
+          Reinstall <span class="application">Shadow</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">patch -Np1 -i ../shadow-4.0.4.1-pam-1.patch &amp;&amp;
+LIBS="-lpam -lpam_misc" ./configure --libdir=/usr/lib \
+    --enable-shared --with-libpam --without-libcrack &amp;&amp;
+echo '#define HAVE_SETLOCALE 1' &gt;&gt; config.h &amp;&amp;
+sed -i '/extern char/d' libmisc/xmalloc.c &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install &amp;&amp;
+mv /bin/sg /usr/bin &amp;&amp;
+mv /bin/vigr /usr/sbin &amp;&amp;
+mv /usr/bin/passwd /bin &amp;&amp;
+rm /bin/groups &amp;&amp;
+mv /usr/lib/lib{misc,shadow}.so.0* /lib &amp;&amp;
+ln -sf ../../lib/libshadow.so.0 /usr/lib/libshadow.so &amp;&amp;
+ln -sf ../../lib/libmisc.so.0 /usr/lib/libmisc.so</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--without-libcrack</tt></em>: This switch
+          tells <span class="application">Shadow</span> not to use <tt class=
+          "filename">libcrack</tt>. This is desired as <span class=
+          "application">Linux-<span class="acronym">PAM</span></span> already
+          contains <tt class="filename">libcrack</tt>.
+        </p>
+        <p>
+          <span><strong class="command">sed -i '/extern char/d'
+          libmisc/xmalloc.c</strong></span>: This fixes a compilation problem
+          when using <span class="application">GCC</span>-3.4.x.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Linux-PAM to work with Shadow
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="pam.d" name="pam.d"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/pam.d/login</tt>, <tt class=
+            "filename">/etc/pam.d/passwd</tt>, <tt class=
+            "filename">/etc/pam.d/su</tt>, <tt class=
+            "filename">/etc/pam.d/shadow</tt>, <tt class=
+            "filename">/etc/pam.d/useradd</tt>, and <tt class=
+            "filename">/etc/pam.d/chage</tt> &ndash; alternatively,
+            <tt class="filename">/etc/pam.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2660714" name="id2660714"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Add the following <span class="application">Linux-<span class=
+            "acronym">PAM</span></span> configuration files to <tt class=
+            "filename">/etc/pam.d/</tt> (or add them to <tt class=
+            "filename">/etc/pam.conf</tt> with the additional field for the
+            program).
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/pam.d/login &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/login
+
+auth        requisite      pam_securetty.so
+auth        requisite      pam_nologin.so
+auth        required       pam_env.so
+auth        required       pam_unix.so
+account     required       pam_access.so
+account     required       pam_unix.so
+session     required       pam_motd.so
+session     required       pam_limits.so
+session     optional       pam_mail.so     dir=/var/mail standard
+session     optional       pam_lastlog.so
+session     required       pam_unix.so
+
+# End /etc/pam.d/login
+<span><strong class="command">EOF
+cat &gt; /etc/pam.d/passwd &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/passwd
+
+password    required       pam_unix.so     md5 shadow 
+
+# End /etc/pam.d/passwd
+<span><strong class="command">EOF
+cat &gt; /etc/pam.d/shadow &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/shadow
+
+auth        sufficient      pam_rootok.so
+auth        required        pam_unix.so
+account     required        pam_unix.so
+session     required        pam_unix.so
+password    required        pam_permit.so
+
+# End /etc/pam.d/shadow
+<span><strong class="command">EOF
+cat &gt; /etc/pam.d/su &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/su
+
+auth        sufficient      pam_rootok.so
+auth        required        pam_unix.so
+account     required        pam_unix.so
+session     required        pam_unix.so
+
+# End /etc/pam.d/su
+<span><strong class="command">EOF
+cat &gt; /etc/pam.d/useradd &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/useradd
+
+auth        sufficient      pam_rootok.so
+auth        required        pam_unix.so
+account     required        pam_unix.so
+session     required        pam_unix.so
+password    required        pam_permit.so
+
+# End /etc/pam.d/useradd
+<span><strong class="command">EOF
+cat &gt; /etc/pam.d/chage &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/chage
+
+auth        sufficient      pam_rootok.so
+auth        required        pam_unix.so
+account     required        pam_unix.so
+session     required        pam_unix.so
+password    required        pam_permit.so
+
+# End /etc/pam.d/chage
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                If you've installed <span class=
+                "application">cracklib</span>, replace <tt class=
+                "filename">/etc/pam.d/passwd</tt> with the following:
+              </p>
+            </div>
+          </div>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/pam.d/passwd &lt;&lt; "EOF"</strong></span> 
+# Begin /etc/pam.d/passwd
+
+password    required    pam_cracklib.so     \
+    retry=3  difok=8  minlen=5  dcredit=3  ocredit=3  ucredit=2  lcredit=2
+password    required    pam_unix.so     md5 shadow use_authtok
+
+# End /etc/pam.d/passwd
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <div class="warning">
+            <div class="admonhead">
+              <img alt="[Warning]" src="../images/warning.png" />
+              <h3 class="admontitle">
+                Warning
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                At this point, you should do a simple test to see if
+                <span class="application">Shadow</span> is working as
+                expected. Open another term and login as a user, then su to
+                to root. If you do not see any errors, then all is well and
+                you should proceed with the rest of the configuration. If you
+                did receive errors, stop now and double check the above
+                configuration files manually. If you cannot find, and fix the
+                error, you should recompile shadow replacing <tt class=
+                "envar">--with-libpam</tt> with <tt class=
+                "envar">--without-libpam</tt> in the above instructions. If
+                you fail to do this and the errors remain, you will be unable
+                to log into your system.
+              </p>
+            </div>
+          </div>
+          <p>
+            Currently, <tt class="filename">/etc/pam.d/other</tt> is
+            configured to allow anyone with an account on the machine to use
+            programs that do not specifically have a configuration file of
+            their own. After testing <span class=
+            "application">Linux-<span class="acronym">PAM</span></span> for
+            proper configuration, it can be changed to the following:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/pam.d/other &lt;&lt; "EOF"</strong></span>
+# Begin /etc/pam.d/other
+
+auth        required        pam_deny.so
+auth        required        pam_warn.so
+account     required        pam_deny.so
+session     required        pam_deny.so
+password    required        pam_deny.so
+password    required        pam_warn.so
+
+# End /etc/pam.d/other
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            Finally, edit <tt class="filename">/etc/login.defs</tt> by adding
+            '#' to the beginning of the following lines:
+          </p>
+          <pre class="screen">LASTLOG_ENAB
+MAIL_CHECK_ENAB
+PORTTIME_CHECKS_ENAB
+CONSOLE
+MOTD_FILE
+NOLOGINS_FILE
+PASS_MIN_LEN
+SU_WHEEL_ONLY
+MD5_CRYPT_ENAB
+CONSOLE_GROUPS
+ENVIRON_FILE</pre>
+          <p>
+            This stops <span><strong class="command">login</strong></span>
+            from performing these functions, as they will now be performed by
+            <span class="acronym">PAM</span> modules. Additionally, add a '#'
+            to the beginning of the following lines if you've installed
+            <span class="application">cracklib</span>:
+          </p>
+          <pre class="screen">OBSCURE_CHECKS_ENAB
+CRACKLIB_DICTPATH
+PASS_CHANGE_TRIES
+PASS_ALWAYS_WARN</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <p>
+          A list of the installed files, along with their short descriptions
+          can be found at <a href=
+          "../../../../lfs/view/6.0/chapter06/shadow.html#contents-shadow"><span class="url">
+          ../../../../lfs/view/6.0/chapter06/shadow.html#contents-shadow</span></a>.
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2005-03-04 14:08:15 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="linux_pam.html" title=
+          "Linux-PAM-0.78">Prev</a>
+          <p>
+            Linux-PAM-0.78
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="iptables.html" title=
+          "iptables-1.3.1">Next</a>
+          <p>
+            iptables-1.3.1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="security.html" title=
+          "Chapter&nbsp;4.&nbsp;Security">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

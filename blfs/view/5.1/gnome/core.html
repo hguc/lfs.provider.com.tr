@@ -1,0 +1,137 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;30.&nbsp;GNOME Core Packages
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;X.&nbsp;GNOME</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="gnome.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="gtk-doc.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          GNOME Core Packages
+        </h1>
+      </div>
+      <p>
+        This section contains required elements of the <span class=
+        "application"><span class="acronym">GNOME</span></span> environment
+        to display a functional desktop.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="gnome-pre-install-config" name=
+          "gnome-pre-install-config"></a>
+          <h2 class="sect1">
+            Pre-installation configuration
+          </h2>
+        </div>
+        <p>
+          Set an environment variable to resolve the prefix destination.
+        </p>
+        <p>
+          If <span class="application"><span class=
+          "acronym">GNOME</span></span> is your desktop of choice:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">export GNOME_PREFIX=/usr</b></span></tt>
+</pre>
+        <p>
+          If you want to try-out <span class="application"><span class=
+          "acronym">GNOME</span></span>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">export GNOME_PREFIX=/opt/gnome-2.6</b></span></tt>
+</pre>
+        <p>
+          Remember to execute <span><b class="command">ldconfig</b></span>
+          after installation of libraries to update the library cache.
+        </p>
+        <p>
+          The try-out group will also need to make all the following
+          configuration changes:
+        </p>
+        <p>
+          Add to your system or personal profile:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">export PATH=$PATH:/opt/gnome-2.6/bin
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/gnome-2.6/lib/pkgconfig
+export GNOME_LIBCONFIG_PATH=/usr/lib</b></span></tt>
+</pre>
+        <p>
+          Add to your <tt class="filename">/etc/ld.so.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"</b></span>
+# Begin gnome addition to /etc/ld.so.conf
+
+/opt/gnome-2.6/lib
+
+# End gnome addition
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        <p>
+          Add to your <tt class="filename">/etc/man.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/man.conf &lt;&lt; "EOF"</b></span>
+# Begin gnome addition to man.conf
+
+MANPATH /opt/gnome-2.6/man
+
+# End gnome addition to man.conf
+<span><b class="command">EOF</b></span></tt>
+</pre>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="gnome.html">Prev</a><br />
+        Part&nbsp;X.&nbsp;GNOME
+      </div>
+      <div class="next">
+        <a accesskey="n" href="gtk-doc.html">Next</a><br />
+        GTK-Doc-1.2
+      </div>
+      <div class="up">
+        <a accesskey="u" href="gnome.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

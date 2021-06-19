@@ -1,0 +1,492 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;15.&nbsp;Other Connections
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Part&nbsp;IV.&nbsp;Connecting to a Network
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="dhcpcd.html" title=
+          "dhcpcd-1.3.22-pl4">Prev</a>
+          <p>
+            dhcpcd-1.3.22-pl4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../basicnet/basicnet.html" title=
+          "Basic Networking">Next</a>
+          <p>
+            Basic Networking
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="connect.html" title=
+          "Part&nbsp;IV.&nbsp;Connecting to a Network">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="connect-other" name="connect-other"></a>
+        <h1 class="chapter">
+          Other Connections
+        </h1>
+      </div>
+      <p>
+        Other methods to connect to large networks are through <span class=
+        "acronym">ISDN</span> and <span class="acronym">PPPoE</span>
+        interfaces, among others. <span class="acronym">PPPoE</span> is
+        discussed here. Pages written for <span class="acronym">ISDN</span>
+        (or others as the need arises) are always welcome and will be
+        included in future books, if available.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="pppoe" name="pppoe"></a>
+          <h1 class="sect1">
+            RP-PPPoE-3.5
+          </h1>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Introduction to RP-PPPoE
+            </h2>
+          </div>
+          <p>
+            The Roaring Penguin <span class="application"><span class=
+            "acronym">PPPoE</span></span> package contains both a client and
+            a server component that works with the client. The client allows
+            you to connect to large networks that use the <span class=
+            "acronym">PPPoE</span> protocol, common among <span class=
+            "acronym">ADSL</span> providers. The server component runs
+            alongside the client, allowing you to configure other clients
+            that send out a configuration request.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2756923" name="id2756923"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://www.roaringpenguin.com/penguin/pppoe/rp-pppoe-3.5.tar.gz">
+                    <span class=
+                    "url">http://www.roaringpenguin.com/penguin/pppoe/rp-pppoe-3.5.tar.gz</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/rp-pppoe-3.5.tar.gz">
+                    <span class=
+                    "url">ftp://ftp.fu-berlin.de/unix/linux/mirrors/gentoo/distfiles/rp-pppoe-3.5.tar.gz</span></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download MD5 sum: 97972f8f8f6a3ab9b7070333a6a29c4b
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 185 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated disk space required: 2.2 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.05 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2682500" name="id2682500"></a> <span class=
+                    "application"><span class=
+                    "acronym">RP</span>-<span class="acronym">PPPoE</span></span>
+                    dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2715727" name="id2715727"></a>Required
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="dialup.html#ppp">PPP-2.4.3</a> and <a href=
+                "../basicnet/net-tools.html">Net-tools-1.60</a> (you may omit
+                <span class="application">Net-tools</span> by using the
+                following patch to utilize <span class=
+                "application"><span class="acronym">IP</span>Route2</span>:
+                <a href=
+                "http://www.linuxfromscratch.org/blfs/downloads/6.0/rp-pppoe-3.5-iproute2-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/rp-pppoe-3.5-iproute2-1.patch</span></a>)
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <a id="pppoe-kernel" name="pppoe-kernel"></a>
+            <h2 class="sect2">
+              Installation of RP-PPPoE
+            </h2>
+          </div>
+          <div class="note">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="admontitle">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                If you plan on using kernel-mode <span class=
+                "acronym">PPPoE</span>, this package is no longer explicitly
+                needed, however, it is recomended for ease of configuration.
+                Additional information about kernel mode <span class=
+                "acronym">PPPoE</span> can be found in <tt class=
+                "filename">rp-pppoe-3.5/doc/KERNEL-MODE-PPPOE</tt>.
+              </p>
+            </div>
+          </div>
+          <p>
+            Install <span class="application"><span class=
+            "acronym">RP</span>-<span class="acronym">PPPoE</span></span> by
+            running the following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cd src &amp;&amp;
+./configure &amp;&amp;
+make</strong></span></kbd></pre>
+          <p>
+            Now, as the root user:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make install</strong></span></kbd></pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Command explanations
+            </h2>
+          </div>
+          <p>
+            These are the standard installation commands that will install
+            into the <tt class="filename">/usr</tt> prefix. You can
+            optionally use the <span><strong class=
+            "command">go</strong></span> script in the root of the source
+            tree, to run the same commands, which are then immediately
+            followed by the <span><strong class=
+            "command">adsl-setup</strong></span> script.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Configuring RP-PPPoE
+            </h2>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="pppoe-config" name="pppoe-config"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/ppp/pppoe.conf</tt>, <tt class=
+              "filename">/etc/ppp/firewall-standalone</tt>, <tt class=
+              "filename">/etc/ppp/firewall-masq</tt>, <tt class=
+              "filename">/etc/ppp/pppoe-server-options</tt>, <tt class=
+              "filename">/etc/resolv.conf</tt>, <tt class=
+              "filename">/etc/ppp/pap-secrets</tt>, <tt class=
+              "filename">/etc/ppp/chap-secrets</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2682553" name="id2682553"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              To configure <span class="application"><span class=
+              "acronym">RP</span>-<span class="acronym">PPPoE</span></span>
+              after installation, you should run the <span><strong class=
+              "command">adsl-setup</strong></span> script.
+            </p>
+            <p>
+              When configuring your connection, you will need to have your
+              <span class="acronym">ISP</span>'s nameserver information
+              available, as well as your username and password. You will also
+              be asked whether to configure a dial-on-demand or a constant
+              connection. If your service provider does not charge by the
+              minute, it is usually good to have a bootscript handle the
+              connection for you. You can, of course, choose not to install
+              the following script, and start your connection manually with
+              the <span><strong class="command">adsl-start</strong></span>
+              script.
+            </p>
+            <p>
+              <a id="pppoe-init" name="pppoe-init"></a><span class=
+              "emphasis"><em>Optionally</em></span> install the <tt class=
+              "filename">/etc/sysconfig/network-devices/services/pppoe</tt>
+              service script included with the <a href=
+              "../introduction/bootscripts.html">blfs-bootscripts-6.0</a>
+              package (as user root).
+            </p>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">make install-service-pppoe</strong></span></kbd></pre>
+            <p>
+              <a id="pppoe-config2" name="pppoe-config2"></a>Now create the
+              config file for use with the <tt class="filename">pppoe</tt>
+              service script (as user root):
+            </p>
+            <div class="note">
+              <div class="admonhead">
+                <img alt="[Note]" src="../images/note.png" />
+                <h3 class="admontitle">
+                  Note
+                </h3>
+              </div>
+              <div class="admonbody">
+                <p>
+                  If you have previously configured the network interface
+                  that will now use <span class="acronym">PPPoE</span>, you
+                  should remove the interface configuration files for that
+                  interface (as user root):
+                </p>
+                <p>
+                  <span><strong class="command"><strong class=
+                  "userinput"><tt>rm
+                  /etc/sysconfig/network-devices/ifconfig.eth0/*</tt></strong></strong></span>
+                </p>
+              </div>
+            </div>
+            <pre class="userinput"><kbd class="command"><span><strong class=
+            "command">install -d /etc/sysconfig/network-devices/ifconfig.eth0 &amp;&amp;
+cat &gt; /etc/sysconfig/network-devices/ifconfig.eth0/pppoe &lt;&lt; "EOF"</strong></span>
+ONBOOT="yes"
+SERVICE="pppoe"
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h2 class="sect2">
+              Contents
+            </h2>
+          </div>
+          <div class="segmentedlist">
+            <div class="seglistitem">
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Programs:</span></strong> <span class="seg">adsl-connect,
+                adsl-setup, adsl-start, adsl-status, adsl-stop, pppoe,
+                pppoe-relay, pppoe-server and pppoe-sniff</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Libraries:</span></strong> <span class="seg">None</span>
+              </div>
+              <div class="seg">
+                <strong><span class="segtitle">Installed
+                Directories:</span></strong> <span class=
+                "seg">/etc/ppp/plugins and /usr/share/doc/rp-pppoe-3.5</span>
+              </div>
+            </div>
+          </div>
+          <div class="variablelist">
+            <h3>
+              <a id="id2667187" name="id2667187"></a>Short Descriptions
+            </h3>
+            <dl>
+              <dt>
+                <a id="adsl-connect" name="adsl-connect"></a><span class=
+                "term"><span><strong class=
+                "command">adsl-connect</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a shell script which manages an <span class=
+                  "acronym">ADSL</span> connection using the user-space
+                  <span class="acronym">PPPoE</span> client.
+                </p>
+              </dd>
+              <dt>
+                <a id="adsl-setup" name="adsl-setup"></a><span class=
+                "term"><span><strong class=
+                "command">adsl-setup</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a script for configuring the client. Configuration is
+                  then stored in <tt class=
+                  "filename">/etc/ppp/pppoe.conf</tt>.
+                </p>
+              </dd>
+              <dt>
+                <a id="adsl-start" name="adsl-start"></a><span class=
+                "term"><span><strong class=
+                "command">adsl-start</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  starts the client using the options specified in <tt class=
+                  "filename">/etc/ppp/pppoe.conf</tt>.
+                </p>
+              </dd>
+              <dt>
+                <a id="adsl-status" name="adsl-status"></a><span class=
+                "term"><span><strong class=
+                "command">adsl-status</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  displays the status of the <span class=
+                  "acronym">ADSL</span> connection.
+                </p>
+              </dd>
+              <dt>
+                <a id="adsl-stop" name="adsl-stop"></a><span class=
+                "term"><span><strong class=
+                "command">adsl-stop</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  stops the client.
+                </p>
+              </dd>
+              <dt>
+                <a id="pppoe-prog" name="pppoe-prog"></a><span class=
+                "term"><span><strong class=
+                "command">pppoe</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is the client program. Generally it should not be started
+                  on its own.
+                </p>
+              </dd>
+              <dt>
+                <a id="pppoe-relay" name="pppoe-relay"></a><span class=
+                "term"><span><strong class=
+                "command">pppoe-relay</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  starts the server relay agent.
+                </p>
+              </dd>
+              <dt>
+                <a id="pppoe-server" name="pppoe-server"></a><span class=
+                "term"><span><strong class=
+                "command">pppoe-server</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  starts the server component.
+                </p>
+              </dd>
+              <dt>
+                <a id="pppoe-sniff" name="pppoe-sniff"></a><span class=
+                "term"><span><strong class=
+                "command">pppoe-sniff</strong></span></span>
+              </dt>
+              <dd>
+                <p>
+                  is a small network sniffer designed to assist in setting
+                  <tt class="envar">PPPOE_EXTRA</tt> settings.
+                </p>
+              </dd>
+            </dl>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="dhcpcd.html" title=
+          "dhcpcd-1.3.22-pl4">Prev</a>
+          <p>
+            dhcpcd-1.3.22-pl4
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="../basicnet/basicnet.html" title=
+          "Basic Networking">Next</a>
+          <p>
+            Basic Networking
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="connect.html" title=
+          "Part&nbsp;IV.&nbsp;Connecting to a Network">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

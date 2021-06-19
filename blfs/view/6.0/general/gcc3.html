@@ -1,0 +1,373 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      GCC-3.3.4
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;12.&nbsp;Programming
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="gcc.html" title="GCC-3.4.1">Prev</a>
+          <p>
+            GCC-3.4.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="NASM.html" title="NASM-0.98.38">Next</a>
+          <p>
+            NASM-0.98.38
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="gcc3" name="gcc3"></a>
+        <h1 class="sect1">
+          GCC-3.3.4
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to GCC-3.3.4
+          </h2>
+        </div>
+        <p>
+          The reason for installing <span class="application"><span class=
+          "acronym">GCC</span></span>-3.3.4 is that some <span class=
+          "acronym">BLFS</span> packages (such as compiled <span class=
+          "application">Java</span> and <span class=
+          "application">OpenOffice</span>) have not been updated to be
+          compilable by <span class="application"><span class=
+          "acronym">GCC</span></span>-3.4.1. Additionally, some pre-compiled
+          packages may require the <span class="application"><span class=
+          "acronym">GCC</span></span>-3.3.4 libraries.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2656594" name="id2656594"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.gnu.org/gnu/gcc/gcc-3.3.4/gcc-3.3.4.tar.bz2"><span class="url">
+                  http://ftp.gnu.org/gnu/gcc/gcc-3.3.4/gcc-3.3.4.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.gnu.org/gnu/gcc/gcc-3.3.4/gcc-3.3.4.tar.bz2"><span class="url">
+                  ftp://ftp.gnu.org/gnu/gcc/gcc-3.3.4/gcc-3.3.4.tar.bz2</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: a1c267b34f05c8660b24251865614d8b
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 23 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 489 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 5.72 SBU (additional 12.54 SBU to run
+                  the test suite)
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2716685" name="id2716685"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Required patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/gcc-3.3.4-no_fixincludes-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/gcc-3.3.4-no_fixincludes-1.patch</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Required patch: <a href=
+                  "http://www.linuxfromscratch.org/blfs/downloads/6.0/gcc-3.3.4-linkonce-1.patch">
+                  <span class=
+                  "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/gcc-3.3.4-linkonce-1.patch</span></a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2836008" name="id2836008"></a><span class=
+                  "application"><span class="acronym">GCC</span>-3</span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2674857" name="id2674857"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="dejagnu.html">DejaGnu-1.4.4</a> (required to run the
+              full test suite)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of GCC-3
+          </h2>
+        </div>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">patch -Np1 -i ../gcc-3.3.4-no_fixincludes-1.patch &amp;&amp;
+patch -Np1 -i ../gcc-3.3.4-linkonce-1.patch &amp;&amp;
+mkdir ../gcc-build &amp;&amp;
+cd ../gcc-build &amp;&amp;
+../gcc-3.3.4/configure \
+    --prefix=/opt/gcc-3.3.4 \
+    --enable-shared --enable-languages=c,c++ \
+    --enable-threads=posix &amp;&amp;
+make bootstrap</strong></span></kbd></pre>
+        <p>
+          If desired, run the test suite using the following commands. The
+          <span><strong class="command">test_summary</strong></span> commands
+          create log files which can be compared to known good results
+          located at <a href=
+          "http://linuxfromscratch.org/~randy/gcc-334-lfs-6.0-test_summary.log">
+          <span class=
+          "url">http://linuxfromscratch.org/~randy/gcc-334-lfs-6.0-test_summary.log</span></a>
+          and <a href=
+          "http://linuxfromscratch.org/~randy/gcc-334-lfs-6.0-test_summary_short.log">
+          <span class=
+          "url">http://linuxfromscratch.org/~randy/gcc-334-lfs-6.0-test_summary_short.log</span></a>.
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make -k check &amp;&amp;
+../gcc-3.3.4/contrib/test_summary &gt;test_summary.log 2&gt;&amp;1 &amp;&amp;
+../gcc-3.3.4/contrib/test_summary | \
+    grep -A7 Summ &gt;test_summary_short.log 2&gt;&amp;1</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install &amp;&amp;
+mv /opt/gcc-3.3.4/lib/libstdc++.so.5* /usr/lib &amp;&amp;
+ln -sf /usr/lib/libstdc++.so.5.0.6 /opt/gcc-3.3.4/lib &amp;&amp;
+ln -sf libstdc++.so.5.0.6 /opt/gcc-3.3.4/lib/libstdc++.so.5 &amp;&amp;
+chown -R root:root \
+    /opt/gcc-3.3.4/lib/gcc-lib/i686-pc-linux-gnu/3.3.4/include</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">mkdir ../gcc-build; cd
+          ../gcc-build</strong></span>: The <span class=
+          "application"><span class="acronym">GCC</span></span> development
+          team recommends building in a separate directory.
+        </p>
+        <p>
+          <em class="parameter"><tt>--enable-shared --enable-languages=c,c++
+          --enable-threads=posix</tt></em>: Configures <span class=
+          "application"><span class="acronym">GCC</span></span> to build the
+          <span class="application">C</span> and <span class=
+          "application">C++</span> compilers and enable the related
+          <span class="application">C++</span> options.
+        </p>
+        <p>
+          <span><strong class="command">mv /opt/gcc-3.3.4/lib/libstdc++.so.5*
+          /usr/lib</strong></span>: Moves the <span class=
+          "application">C++</span> libraries to the standard lib directory to
+          avoid having to add <strong class=
+          "userinput"><tt>/opt/gcc-3.3.4/lib</tt></strong> to <tt class=
+          "filename">/etc/ld.so.conf</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring GCC
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2652504" name="id2652504"></a>Configuration
+                  information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            As with most libraries, there is no configuration to do, save
+            that the library directory i.e., <tt class=
+            "filename">/opt/lib</tt> or <tt class=
+            "filename">/usr/local/lib</tt> should appear in <tt class=
+            "filename">/etc/ld.so.conf</tt> so that <span><strong class=
+            "command">ldd</strong></span> can find the shared libraries.
+            After checking that this is the case, <span><strong class=
+            "command">/sbin/ldconfig</strong></span> should be run while
+            logged in as root.
+          </p>
+          <p>
+            If you only need the GCC-3.3.4 libraries, you may delete
+            <tt class="filename">/opt/gcc-3.3.4</tt>.
+          </p>
+          <p>
+            Whenever you need to use GCC-3.3.4 instead of your system
+            installed compiler, add <tt class=
+            "filename">/opt/gcc-3.3.4/bin</tt> to the front of your
+            <tt class="envar">PATH</tt> or (preferably) set the <tt class=
+            "envar">CC</tt> environment variable before compiling the
+            concerned package.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">c++, cpp, g++, gcc,
+              gccbug, gcov and architecture specific names of these
+              programs.</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libgcc_s.so,
+              libiberty.a, libstdc++.[a,so], libsupc++.a and other support
+              libraries and files.</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/opt/gcc-3.3.4</span>
+            </div>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2665706" name="id2665706"></a>Short Descriptions
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The GCC-3.3.4 package contains the <span><strong class=
+            "command">gcc</strong></span>-3.3.4 <span class=
+            "application">C</span> and <span class="application">C++</span>
+            compilers and GCC-3.3.4 <tt class="filename">libstdc++.so</tt>
+            that is required by some commercial and pre-compiled packages.
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-27 19:21:57 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gcc.html" title="GCC-3.4.1">Prev</a>
+          <p>
+            GCC-3.4.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="NASM.html" title="NASM-0.98.38">Next</a>
+          <p>
+            NASM-0.98.38
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

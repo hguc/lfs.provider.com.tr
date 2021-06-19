@@ -1,0 +1,290 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      6.47.&nbsp;Module-Init-Tools-3.2.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="lfs" class="6.2">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Linux From Scratch - Version 6.2
+        </h4>
+        <h3>
+          Chapter&nbsp;6.&nbsp;Installing Basic System Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="mktemp.html" title="Mktemp-1.5">Prev</a>
+          <p>
+            Mktemp-1.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="patch.html" title="Patch-2.5.4">Next</a>
+          <p>
+            Patch-2.5.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="wrap" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          6.47. Module-Init-Tools-3.2.2
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <p>
+          The Module-Init-Tools package contains programs for handling kernel
+          modules in Linux kernels greater than or equal to version 2.5.47.
+        </p>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Approximate build
+              time:</span></strong> <span class="seg">less than 0.1
+              SBU</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Required disk
+              space:</span></strong> <span class="seg">7 MB</span>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            6.47.1. Installation of Module-Init-Tools
+          </h2>
+        </div>
+        <p>
+          First correct a potential problem when modules are specified using
+          regular expressions:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">patch -Np1 -i ../module-init-tools-3.2.2-modprobe-1.patch</kbd></pre>
+        <p>
+          Issue the following commands to perform the tests (note that the
+          <span><strong class="command">make distclean</strong></span>
+          command is required to clean up the source tree, as the source gets
+          recompiled as part of the testing process):
+        </p>
+        <pre class="userinput"><kbd class="command">./configure &amp;&amp;
+make check &amp;&amp;
+make distclean</kbd></pre>
+        <p>
+          Prepare Module-Init-Tools for compilation:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/ --enable-zlib</kbd></pre>
+        <p>
+          Compile the package:
+        </p>
+        <pre class="userinput"><kbd class="command">make</kbd></pre>
+        <p>
+          Install the package:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">make INSTALL=install install</kbd></pre>
+        <div class="variablelist">
+          <p class="title">
+            <b>The meaning of the make parameter:</b>
+          </p>
+          <dl>
+            <dt>
+              <span class="term"><em class=
+              "parameter"><tt>INSTALL=install</tt></em></span>
+            </dt>
+            <dd>
+              <p>
+                Normally, <span><strong class="command">make
+                install</strong></span> will not install the binaries if they
+                already exist. This option overrides that behavior by calling
+                <span><strong class="command">install</strong></span> instead
+                of using the default wrapper script.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="contents-module-init-tools" name=
+          "contents-module-init-tools"></a>
+          <h2 class="sect2">
+            6.47.2. Contents of Module-Init-Tools
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              programs:</span></strong> <span class="seg">depmod,
+              generate-modprobe.conf, insmod, insmod.static, lsmod, modinfo,
+              modprobe, and rmmod</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id3694737" name="id3694737"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="depmod" name="depmod"></a><span class=
+                  "term"><span><strong class=
+                  "command">depmod</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Creates a dependency file based on the symbols it finds
+                    in the existing set of modules; this dependency file is
+                    used by <span><strong class=
+                    "command">modprobe</strong></span> to automatically load
+                    the required modules
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="generate-modprobe.conf" name=
+                  "generate-modprobe.conf"></a><span class=
+                  "term"><span><strong class=
+                  "command">generate-modprobe.conf</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Creates a modprobe.conf file from an existing 2.2 or 2.4
+                    module setup
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="insmod" name="insmod"></a><span class=
+                  "term"><span><strong class=
+                  "command">insmod</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Installs a loadable module in the running kernel
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="insmod.static" name="insmod.static"></a><span class=
+                  "term"><span><strong class=
+                  "command">insmod.static</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    A statically compiled version of <span><strong class=
+                    "command">insmod</strong></span>
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="lsmod" name="lsmod"></a><span class=
+                  "term"><span><strong class=
+                  "command">lsmod</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Lists currently loaded modules
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="modinfo" name="modinfo"></a><span class=
+                  "term"><span><strong class=
+                  "command">modinfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Examines an object file associated with a kernel module
+                    and displays any information that it can glean
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="modprobe" name="modprobe"></a><span class=
+                  "term"><span><strong class=
+                  "command">modprobe</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Uses a dependency file, created by <span><strong class=
+                    "command">depmod</strong></span>, to automatically load
+                    relevant modules
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rmmod" name="rmmod"></a><span class=
+                  "term"><span><strong class=
+                  "command">rmmod</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    Unloads modules from the running kernel
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="mktemp.html" title="Mktemp-1.5">Prev</a>
+          <p>
+            Mktemp-1.5
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="patch.html" title="Patch-2.5.4">Next</a>
+          <p>
+            Patch-2.5.4
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="chapter06.html" title=
+          "Chapter&nbsp;6.&nbsp;Installing Basic System Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Linux From Scratch - Version 6.2">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,335 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Fontconfig-2.2.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;9.&nbsp;Graphics and Font Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="freetype2.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="imlib.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Fontconfig-2.2.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Fontconfig
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Fontconfig</span> package is a
+          library for configuring and customizing font access.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2682629" name="id2682629"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://freedesktop.org/~fontconfig/release/fontconfig-2.2.2.tar.gz">
+                  http://freedesktop.org/~fontconfig/release/fontconfig-2.2.2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.us.sinuspl.net/pub/src/fontconfig-2.2.2.tar.gz">ftp://ftp.us.sinuspl.net/pub/src/fontconfig-2.2.2.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 727 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 11 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.18 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                The numbering system of <span class=
+                "application">Fontconfig</span> is unusual. The beta versions
+                of the package are numbered with a 9x in the last portion of
+                the release number. This means that 2.2.90 is a beta release
+                and the most current release is of the form 2.2.1
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2682693" name="id2682693"></a><span class=
+                  "application">Fontconfig</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2682702" name="id2682702"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="freetype2.html">FreeType-2.1.7</a> and <a href=
+              "expat.html">expat-1.95.7</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2682718" name="id2682718"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href=
+              "http://sources.redhat.com/docbook-tools/">docbook-utils</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Fontconfig
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Fontconfig</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Fontconfig
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2683712" name="id2683712"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/fonts/*</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2683725" name="id2683725"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The configuration file for <span class=
+            "application">Fontconfig</span> is <tt class=
+            "filename">/etc/fonts/fonts.conf</tt>. Generally you do not want
+            to edit this file. To put a new font directory in the
+            configuration, update the <tt class=
+            "filename">/etc/fonts/local.conf</tt> file with your local
+            information. The default location of fonts in <span class=
+            "application">Fontconfig</span> is:
+          </p>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  /usr/share/fonts
+                </p>
+              </li>
+              <li>
+                <p>
+                  ~/.fonts
+                </p>
+              </li>
+            </ul>
+          </div>
+          <p>
+            Because we have not built <span class=
+            "application">XFree86</span> yet, put the following directory
+            entries into <tt class="filename">/etc/fonts/local.conf</tt>,
+            inside the fontconfig tags:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">sed -i -e '/^&lt;\/fontconfig&gt;/i\
+&lt;dir&gt;/usr/X11R6/lib/X11/fonts/TTF&lt;/dir&gt;\
+&lt;dir&gt;/usr/X11R6/lib/X11/fonts/Type1&lt;/dir&gt;\
+&lt;dir&gt;/usr/X11R6/lib/X11/fonts/truetype&lt;/dir&gt;' /etc/fonts/local.conf</b></span></tt>
+</pre>
+          <p>
+            The <span class="application">Fontconfig</span> program will
+            automatically search the above directories and all subdirectories
+            for needed fonts.
+          </p>
+          <div class="admonition">
+            <div class="admonhead">
+              <img alt="[Note]" src="../images/note.png" />
+              <h3 class="note">
+                Note
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                <span class="application">X</span> also includes an internal
+                (and older) version of <span class=
+                "application">Fontconfig</span> and unless it is explicitly
+                disabled when building <span class=
+                "application">XFree86</span>, the internal version is created
+                leaving two slightly incompatible libraries on your system.
+                It is recommended that you only install one version.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Fontconfig</span> package contains
+          the <tt class="filename">libfontconfig</tt> library,
+          <span><b class="command">fc-cache</b></span>, and <span><b class=
+          "command">fc-list</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2683774" name="id2683774"></a>fc-cache
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">fc-cache</b></span> is a command to
+            create font information caches.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2684100" name="id2684100"></a>fc-list
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">fc-list</b></span> is a command to list
+            fonts.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="freetype2.html">Prev</a><br />
+        FreeType-2.1.7
+      </div>
+      <div class="next">
+        <a accesskey="n" href="imlib.html">Next</a><br />
+        Imlib-1.9.14
+      </div>
+      <div class="up">
+        <a accesskey="u" href="graphlib.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

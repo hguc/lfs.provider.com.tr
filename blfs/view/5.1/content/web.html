@@ -1,0 +1,506 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;24.&nbsp;Web serving
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;VII.&nbsp;Content Serving</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="postgresql.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="php.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Web serving
+        </h1>
+      </div>
+      <p>
+        This chapter includes applications that respond to requests
+        originating from <span class="acronym">LAN</span>, intranet and
+        internet clients. Specifically covered are <span class=
+        "acronym">HTTP</span> requests and <span class="acronym">FTP</span>
+        requests.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="apache" name="apache"></a>
+          <h2 class="sect1">
+            Apache-2.0.49
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to Apache
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Apache</span> package contains an
+            open-source <span class="acronym">HTTP</span> server. It is
+            useful for creating local intranet web sites or running huge web
+            serving operations.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2897443" name="id2897443"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://www.apache.org/dist/httpd/httpd-2.0.49.tar.gz">http://www.apache.org/dist/httpd/httpd-2.0.49.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.tux.org/pub/net/apache/dist/httpd/httpd-2.0.49.tar.gz">
+                    ftp://ftp.tux.org/pub/net/apache/dist/httpd/httpd-2.0.49.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 5.7 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 75 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 1.32 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2898006" name="id2898006"></a>Additional
+                    downloads
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Required Patch: <a href=
+                    "http://www.linuxfromscratch.org/patches/blfs/5.1/httpd-2.0.49-config.patch">
+                    http://www.linuxfromscratch.org/patches/blfs/5.1/httpd-2.0.49-config.patch</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2898039" name="id2898039"></a><span class=
+                    "application">Apache</span> dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id2898049" name="id2898049"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="databases.html#db">Berkeley DB-4.2.52.2</a> or
+                <a href="../general/gdbm.html">GDBM-1.8.3</a>, <a href=
+                "../general/genlib.html#openssl">OpenSSL-0.9.7d</a>, <a href=
+                "../server/openldap.html">OpenLDAP-2.1.30</a> and <a href=
+                "../general/expat.html">expat-1.95.7</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of Apache
+            </h3>
+          </div>
+          <p>
+            For security reasons, running the server as an unprivileged user
+            and group is strongly encouraged.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class="command">groupadd apache &amp;&amp;
+useradd -c apache -d /dev/null -g apache -s /bin/false apache</b></span></tt>
+</pre>
+          <p>
+            The following patch will define the layout of destination
+            directories and, among them, the build directory at <tt class=
+            "filename">/usr/lib/apache/build</tt>. This will allow the
+            modules added to <span class="application">Apache</span> to be
+            configured without errors. Apply the patch:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../httpd-2.0.49-config.patch</b></span></tt>
+</pre>
+          <p>
+            Build and install <span class="application">Apache</span> by
+            running the following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --enable-layout=LFS \
+            --enable-mods-shared=all &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Command explanations
+            </h3>
+          </div>
+          <p>
+            <i class="parameter"><tt>--with-expat=/usr</tt></i>: Uses system
+            installed expat. <span class="emphasis"><em>If you have installed
+            expat and do not use this switch, the apache installation may
+            overwrite some files from the expat installation.</em></span>
+          </p>
+          <p>
+            <i class="parameter"><tt>--enable-mods-shared=all</tt></i>: We
+            want modules to be compiled and used as Dynamic Shared Objects
+            (<span class="acronym">DSO</span>s) so they can be included and
+            excluded from the server using the run-time configuration
+            directives.
+          </p>
+          <p>
+            <i class="parameter"><tt>--enable-ssl</tt></i>: Use this switch
+            to create the <tt class="filename">mod_ssl</tt> module and enable
+            <span class="acronym">SSL</span> support.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring Apache
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2898416" name="id2898416"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <tt class="filename">/etc/apache/*</tt>
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2898433" name="id2898433"></a>Configuration
+                    Information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              The main configuration file is called <tt class=
+              "filename">httpd.conf</tt>. Modify it to run the server as a
+              dedicated user:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">sed -i -e "s%User nobody%User apache%" -e "s%^Group #-1%Group apache%" /etc/apache/httpd.conf</b></span></tt>
+</pre>
+            <p>
+              See <a href=
+              "http://httpd.apache.org/docs-2.0/configuring.html">http://httpd.apache.org/docs-2.0/configuring.html</a>
+              for detailed instructions on customizing your Apache
+              <span class="acronym">HTTP</span> server.
+            </p>
+            <p>
+              Install the <tt class="filename">/etc/rc.d/init.d/apache</tt>
+              init script included in the <a href=
+              "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+              package.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-apache</b></span></tt>
+</pre>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application">Apache</span> package provides
+            <span><b class="command">ab</b></span>, <span><b class=
+            "command">apachectl</b></span>, <span><b class=
+            "command">apr-config</b></span>, <span><b class=
+            "command">apu-config</b></span>, <span><b class=
+            "command">apxs</b></span>, <span><b class=
+            "command">checkgid</b></span>, <span><b class=
+            "command">dbmmanage</b></span>, <span><b class=
+            "command">htdbm</b></span>, <span><b class=
+            "command">htdigest</b></span>, <span><b class=
+            "command">htpasswd</b></span>, <span><b class=
+            "command">httpd</b></span>, <span><b class=
+            "command">instdso.sh</b></span>, <span><b class=
+            "command">logresolve</b></span>, <span><b class=
+            "command">rotatelogs</b></span>, <tt class=
+            "filename">libapr</tt>, <tt class="filename">libaprutil</tt> and
+            various modules.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2898588" name="id2898588"></a>ab
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">ab</b></span> is a tool for
+              benchmarking your <span class="application">Apache</span>
+              <span class="acronym">HTTP</span> server.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2898610" name="id2898610"></a>apachectl
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">apachectl</b></span> is a front end to
+              the <span class="application">Apache</span> <span class=
+              "acronym">HTTP</span> server which is designed to help the
+              administrator control the functioning of the <span class=
+              "application">Apache</span> httpd daemon.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2898921" name="id2898921"></a>apxs
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">apxs</b></span> is a tool for building
+              and installing extension modules for the <span class=
+              "application">Apache</span> <span class="acronym">HTTP</span>
+              server.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2898944" name="id2898944"></a>dbmmanage
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">dbmmanage</b></span> is used to create
+              and update the <tt class="filename">DBM</tt> format files used
+              to store usernames and passwords for basic authentication of
+              <span class="acronym">HTTP</span> users.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2898967" name="id2898967"></a>htdigest
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">htdigest</b></span> is used to create
+              and update the flat-files used to store usernames, realms and
+              passwords for digest authentication of <span class=
+              "acronym">HTTP</span> users.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2898986" name="id2898986"></a>htpasswd
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">htpasswd</b></span> is used to create
+              and update the flat-files used to store usernames and passwords
+              for basic authentication of <span class="acronym">HTTP</span>
+              users.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2899004" name="id2899004"></a>httpd
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">httpd</b></span> is the <span class=
+              "application">Apache</span> <span class="acronym">HTTP</span>
+              server program.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2899026" name="id2899026"></a>instdso.sh
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">instdso.sh</b></span> is a script
+              which installs <span class="application">Apache</span>
+              <span class="acronym">DSO</span> modules.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2899048" name="id2899048"></a>logresolve
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">logresolve</b></span> is a
+              post-processing program to resolve <span class=
+              "acronym">IP</span>-addresses in <span class=
+              "application">Apache</span>'s access log files.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2899071" name="id2899071"></a>rotatelogs
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">rotatelogs</b></span> is a simple
+              program for use in conjunction with <span class=
+              "application">Apache</span>'s piped log file feature.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="postgresql.html">Prev</a><br />
+        PostgreSQL-7.4.2
+      </div>
+      <div class="next">
+        <a accesskey="n" href="php.html">Next</a><br />
+        PHP-4.3.6
+      </div>
+      <div class="up">
+        <a accesskey="u" href="content.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,798 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Graphviz-2.8
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;10.&nbsp;General Utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="unixodbc.html" title=
+          "unixODBC-2.2.11">Prev</a>
+          <p>
+            unixODBC-2.2.11
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xterm.html" title="xterm-223">Next</a>
+          <p>
+            xterm-223
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genutils.html" title=
+          "Chapter&nbsp;10.&nbsp;General Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="graphviz" name="graphviz"></a>
+        <h1 class="sect1">
+          Graphviz-2.8
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Graphviz
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Graphviz</span> package contains
+          graph visualization software. Graph visualization is a way of
+          representing structural information as diagrams of abstract graphs
+          and networks. <span class="application">Graphviz</span> has several
+          main graph layout programs. It also has web and interactive
+          graphical interfaces, auxiliary tools, libraries, and language
+          bindings.
+        </p>
+        <p>
+          The <span class="application">Graphviz</span> layout programs take
+          descriptions of graphs in a simple text language, and creates
+          diagrams in several useful formats such as images and SVG for web
+          pages, Postscript for inclusion in PDF or other documents, or as
+          objects displayed in an interactive graph browser. (Graphviz also
+          supports GXL, an XML dialect.) In practice, graphs are usually
+          generated from external data sources, but they can also be created
+          and edited manually, either as raw text files or within a graphical
+          editor. (Graphviz was not intended to be a <span class=
+          "application">Visio</span> replacement, so it would probably be
+          frustrating to try to use it that way.)
+        </p>
+        <p>
+          This package is useful for automatic graph drawing which has many
+          important applications in software engineering, database and web
+          design, networking, and in visual interfaces for many other
+          domains. Graphviz has many useful features for concrete diagrams,
+          such as options for colors, fonts, tabular node layouts, line
+          styles, hyperlinks, and custom shapes.
+        </p>
+        <h3>
+          <a id="id2714423" name="id2714423"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://www.graphviz.org/pub/graphviz/ARCHIVE/graphviz-2.8.tar.gz">
+                <span class=
+                "url">http://www.graphviz.org/pub/graphviz/ARCHIVE/graphviz-2.8.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: ca921b4a9bcd86da4a1092bb17a57d83
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 4.2 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 124 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 2.1 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2757784" name="id2757784"></a>Graphviz Dependencies
+        </h3>
+        <h4>
+          <a id="id2683219" name="id2683219"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="../x/installing.html">X Window System</a>, <a href=
+          "pkgconfig.html">pkg-config-0.20</a>, <a href=
+          "expat.html">expat-2.0.0</a>, <a href=
+          "libpng.html">libpng-1.2.12</a>, <a href=
+          "graphlib.html#libjpeg">libjpeg-6b</a>, <a href=
+          "freetype2.html">FreeType-2.1.10</a>, <a href=
+          "fontconfig.html">Fontconfig-2.3.2</a>, <a href=
+          "tcl.html">Tcl-8.4.13</a>, <a href="tk.html">Tk-8.4.13</a>, and
+          <a href=
+          "http://www.perens.com/FreeSoftware/ElectricFence/"><span class=
+          "url">Electric Fence</span></a>
+        </p>
+        <h4>
+          <a id="id2821387" name="id2821387"></a>Optional (to Build Language
+          Bindings)
+        </h4>
+        <p class="optional">
+          <a href="http://www.swig.org/"><span class="url">SWIG</span></a>
+          (<span class="application">SWIG</span> must be installed or no
+          bindings will be built), <a href="guile.html">Guile-1.6.7</a>,
+          <a href="jdk.html">JDK-1.5.0_10</a>, <a href=
+          "php.html">PHP-5.1.4</a>, <a href="python.html">Python-2.4.4</a>,
+          <a href="ruby.html">Ruby-1.8.5</a>, <a href=
+          "tcl.html">Tcl-8.4.13</a>, C# (<a href=
+          "http://www.southern-storm.com.au/portable_net.html"><span class=
+          "url">DotGNU Portable.NET</span></a> or <a href=
+          "http://www.mono-project.com/Main_Page"><span class=
+          "url">Mono</span></a>), <a href=
+          "http://www.iolanguage.com/about/"><span class="url">Io</span></a>,
+          <a href="http://www.lua.org/"><span class="url">Lua</span></a>, and
+          <a href="http://caml.inria.fr/ocaml/index.en.html"><span class=
+          "url">Objective Caml</span></a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/graphviz"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/graphviz</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Graphviz
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Graphviz</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">sed -i 's|JAVA_LIBS=|&amp; \
+if test -n "$JAVA_HOME"; then \
+  CPPFLAGS="$CPPFLAGS -I$JAVA_HOME/include -I$JAVA_HOME/include/linux" \
+fi|' configure &amp;&amp;
+./configure --prefix=/usr &amp;&amp;
+make</kbd></pre>
+        <p>
+          This package does not come with a test suite that provides
+          meaningful results.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <p>
+          If desired, create a symbolic link in the system documents
+          directory to the documentation installed in <tt class=
+          "filename">/usr/share/graphviz/doc</tt> using the following command
+          as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">ln -v -s /usr/share/graphviz/doc \
+         /usr/share/doc/graphviz-2.8</kbd></pre>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Graphviz
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="graphviz-config" name="graphviz-config"></a>Config
+                  Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/usr/lib/graphviz/config</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2576627" name="id2576627"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            There are no specific configuration requirements for <span class=
+            "application">Graphviz</span>. You may consider installing the
+            additional plugins and tools available from the download page at
+            <a href=
+            "http://www.graphviz.org/Download_source.php"><span class="url">http://www.graphviz.org/Download_source.php</span></a>
+            for additional capabilities. If additional plugins are installed,
+            you can run <span><strong class="command">dot_static
+            -c</strong></span> (as the <tt class="systemitem">root</tt> user)
+            to update the <tt class="filename">config</tt> file in <tt class=
+            "filename">/usr/lib/graphviz</tt>.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">acyclic, bcomps,
+              ccomps, circo, dijkstra, dot, dot2gxl, dot_static, dotty, fdp,
+              gc, gvcolor, gvpack, gvpr, gxl2dot, lefty, lneato, nop, prune,
+              sccmap, tred, twopi and unflatten</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libagraph.{so,a},
+              libcdt.{so,a}, libexpr.{so,a}, libgraph.{so,a}, libpack.{so,a},
+              libpathplan.{so,a}, additional support libraries and language
+              bindings</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/usr/include/graphviz, /usr/lib/graphviz and
+              /usr/share/graphviz</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2596036" name="id2596036"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="acyclic" name="acyclic"></a><span class=
+                  "term"><span><strong class=
+                  "command">acyclic</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a filter that takes a directed graph as input and
+                    outputs a copy of the graph with sufficient edges
+                    reversed to make the graph acyclic. The reversed edge
+                    inherits all of the attributes of the original edge.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="bcomps" name="bcomps"></a><span class=
+                  "term"><span><strong class=
+                  "command">bcomps</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    decomposes graphs into their biconnected components,
+                    printing the components to standard output.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ccomps" name="ccomps"></a><span class=
+                  "term"><span><strong class=
+                  "command">ccomps</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    decomposes graphs into their connected components,
+                    printing the components to standard output.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="circo" name="circo"></a><span class=
+                  "term"><span><strong class=
+                  "command">circo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    draws graphs using a circular layout. The tool identifies
+                    biconnected components and draws the nodes of the
+                    component on a circle. The block-cutpoint tree is then
+                    laid out using a recursive radial algorithm. Edge
+                    crossings within a circle are minimized by placing as
+                    many edges on the circle's perimeter as possible. In
+                    particular, if the component is outerplanar, the
+                    component will have a planar layout.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="dijkstra" name="dijkstra"></a><span class=
+                  "term"><span><strong class=
+                  "command">dijkstra</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    reads a stream of graphs and for each computes the
+                    distance of every node from sourcenode.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="dot" name="dot"></a><span class=
+                  "term"><span><strong class=
+                  "command">dot</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    draws directed graphs. It works well on DAGs and other
+                    graphs that can be drawn as hierarchies. It reads
+                    attributed graph files and writes drawings. By default,
+                    the output format dot is the input file with layout
+                    coordinates appended.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="dot2gxl" name="dot2gxl"></a><span class=
+                  "term"><span><strong class=
+                  "command">dot2gxl</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts between graphs represented in GXL and in the DOT
+                    language. Unless a conversion type is specified using a
+                    flag, <span><strong class=
+                    "command">gxl2dot</strong></span> will deduce the type of
+                    conversion from the suffix of the input file, a
+                    <tt class="filename">.dot</tt> suffix causing a
+                    conversion from DOT to GXL, and a <tt class=
+                    "filename">.gxl</tt> suffix causing a conversion from GXL
+                    to DOT.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="dot_static" name="dot_static"></a><span class=
+                  "term"><span><strong class=
+                  "command">dot_static</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a version of <span><strong class=
+                    "command">dot</strong></span>that has all the
+                    <span class="application">Graphviz</span> libraries
+                    compiled statically.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="dotty" name="dotty"></a><span class=
+                  "term"><span><strong class=
+                  "command">dotty</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a graph editor for the X Window System. It may be run
+                    as a standalone editor, or as a front end for
+                    applications that use graphs. It can control multiple
+                    windows viewing different graphs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="fdp" name="fdp"></a><span class=
+                  "term"><span><strong class=
+                  "command">fdp</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    draws undirected graphs using a &ldquo;<span class=
+                    "quote">spring</span>&rdquo; model. It relies on a
+                    force-directed approach in the spirit of Fruchterman and
+                    Reingold.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gc-graphviz" name="gc-graphviz"></a><span class=
+                  "term"><span><strong class=
+                  "command">gc</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a graph analogue to <span><strong class=
+                    "command">wc</strong></span> in that it prints to
+                    standard output the number of nodes, edges, connected
+                    components or clusters contained in the input files. It
+                    also prints a total count for all graphs if more than one
+                    graph is given.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gvcolor" name="gvcolor"></a><span class=
+                  "term"><span><strong class=
+                  "command">gvcolor</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a filter that sets node colors from initial seed
+                    values. Colors flow along edges from tail to head, and
+                    are averaged (as HSB vectors) at nodes. The graph must
+                    already have been processed by <span><strong class=
+                    "command">dot</strong></span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gvpack" name="gvpack"></a><span class=
+                  "term"><span><strong class=
+                  "command">gvpack</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    reads in a stream of graphs, combines the graphs into a
+                    single layout, and produces a single graph serving as the
+                    union of the input graphs. The input graphs must be in
+                    <span><strong class="command">dot</strong></span> format,
+                    and must have all necessary layout information.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gvpr" name="gvpr"></a><span class=
+                  "term"><span><strong class=
+                  "command">gvpr</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a graph stream editor inspired by <span><strong class=
+                    "command">awk</strong></span>. It copies input graphs to
+                    its output, possibly transforming their structure and
+                    attributes, creating new graphs, or printing arbitrary
+                    information.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gxl2dot" name="gxl2dot"></a><span class=
+                  "term"><span><strong class=
+                  "command">gxl2dot</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts between graphs represented in GXL and in the DOT
+                    language. Unless a conversion type is specified using a
+                    flag, <span><strong class=
+                    "command">gxl2dot</strong></span> will deduce the type of
+                    conversion from the suffix of the input file, a
+                    <tt class="filename">.dot</tt> suffix causing a
+                    conversion from DOT to GXL, and a <tt class=
+                    "filename">.gxl</tt> suffix causing a conversion from GXL
+                    to DOT.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="lefty" name="lefty"></a><span class=
+                  "term"><span><strong class=
+                  "command">lefty</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a two-view graphics editor for technical pictures.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="lneato" name="lneato"></a><span class=
+                  "term"><span><strong class=
+                  "command">lneato</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a graph editor for the X Window System. It may be run
+                    as a standalone editor, or as a front end for
+                    applications that use graphs. It can control multiple
+                    windows viewing different graphs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="nop" name="nop"></a><span class=
+                  "term"><span><strong class=
+                  "command">nop</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    reads a stream of graphs and prints each in
+                    pretty-printed (canonical) format on stdout. If no files
+                    are given, it reads from stdin.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="prune" name="prune"></a><span class=
+                  "term"><span><strong class=
+                  "command">prune</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    reads directed graphs in the same format used by
+                    <span><strong class="command">dot</strong></span> and
+                    removes subgraphs rooted at nodes specified on the
+                    command line via options. These nodes themselves will not
+                    be removed, but can be given attributes so that they can
+                    be easily located by a graph stream editor such as
+                    <span><strong class="command">gpr</strong></span>.
+                    <span><strong class="command">prune</strong></span>
+                    correctly handles cycles, loops and multi-edges.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="sccmap" name="sccmap"></a><span class=
+                  "term"><span><strong class=
+                  "command">sccmap</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    decomposes digraphs into strongly connected components
+                    and an auxiliary map of the relationship between
+                    components. In this map, each component is collapsed into
+                    a node. The resulting graphs are printed to standard out.
+                    The number of nodes, edges and strongly connected
+                    components are printed to standard error.
+                    <span><strong class="command">sccmap</strong></span> is a
+                    way of partitioning large graphs into more manageable
+                    pieces.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tred" name="tred"></a><span class=
+                  "term"><span><strong class=
+                  "command">tred</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    computes the transitive reduction of directed graphs, and
+                    prints the resulting graphs to standard output. This
+                    removes edges implied by transitivity. Nodes and
+                    subgraphs are not otherwise affected. The
+                    &ldquo;<span class="quote">meaning</span>&rdquo; and
+                    validity of the reduced graphs is application dependent.
+                    <span><strong class="command">tred</strong></span> is
+                    particularly useful as a preprocessor to
+                    <span><strong class="command">dot</strong></span> to
+                    reduce clutter in dense layouts.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="twopi" name="twopi"></a><span class=
+                  "term"><span><strong class=
+                  "command">twopi</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    draws graphs using a radial layout. Basically, one node
+                    is chosen as the center and put at the origin. The
+                    remaining nodes are placed on a sequence of concentric
+                    circles centered about the origin, each a fixed radial
+                    distance from the previous circle.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="unflatten" name="unflatten"></a><span class=
+                  "term"><span><strong class=
+                  "command">unflatten</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a preprocessor to <span><strong class=
+                    "command">dot</strong></span> that is used to improve the
+                    aspect ratio of graphs having many leaves or disconnected
+                    nodes. The usual layout for such a graph is generally
+                    very wide or tall. <span><strong class=
+                    "command">unflatten</strong></span> inserts invisible
+                    edges or adjusts the minlen on edges to improve layout
+                    compaction.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libagraph" name="libagraph"></a><span class=
+                  "term"><tt class="filename">libagraph.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    supports graph programming by maintaining graphs in
+                    memory and reading and writing graph files. Graphs, nodes
+                    and edges may be attributed with programmer-defined
+                    records and string name-value pairs. Graphs are composed
+                    of nodes, edges, and nested subgraphs. Internally,
+                    <tt class="filename">libagraph</tt> depends extensively
+                    on <tt class="filename">libcdt</tt> (formerly <tt class=
+                    "filename">libdict</tt>) for set representation.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libcdt" name="libcdt"></a><span class=
+                  "term"><tt class="filename">libcdt.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    manages run-time dictionaries using standard container
+                    data types: unordered set/multiset, ordered set/multiset,
+                    list, stack, and queue.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libexpr" name="libexpr"></a><span class=
+                  "term"><tt class="filename">libexpr.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    is a C-like expression library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libgraph" name="libgraph"></a><span class=
+                  "term"><tt class="filename">libgraph.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    maintains directed and undirected attributed graphs in
+                    memory and reads and writes graph files. Graphs are
+                    composed of nodes, edges, and nested subgraphs. A
+                    subgraph may contain any nodes and edges of its parents,
+                    and may be passed to any <tt class=
+                    "filename">libgraph</tt> function taking a graph pointer,
+                    except the three that create new attributes (where a main
+                    graph is required).
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libpack" name="libpack"></a><span class=
+                  "term"><tt class="filename">libpack.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    supports the use of connected components in the context
+                    of laying out graphs using other <span class=
+                    "application">Graphviz</span> libraries. One set of
+                    functions can be used to take a single graph and break it
+                    apart into connected components. A complementary set of
+                    functions takes a collection of graphs (not necessarily
+                    components of a single graph) which have been laid out
+                    separately, and packs them together moderately tightly.
+                    The packing is done using the polyomino algorithm of K.
+                    Freivalds et al.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libpathplan" name="libpathplan"></a><span class=
+                  "term"><tt class="filename">libpathplan.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    contains functions to find the shortest path between two
+                    points in a simple polygon.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-18 13:38:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="unixodbc.html" title=
+          "unixODBC-2.2.11">Prev</a>
+          <p>
+            unixODBC-2.2.11
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xterm.html" title="xterm-223">Next</a>
+          <p>
+            xterm-223
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genutils.html" title=
+          "Chapter&nbsp;10.&nbsp;General Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

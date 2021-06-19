@@ -1,0 +1,336 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Vorbis Tools-1.1.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;38.&nbsp;Audio Utilities
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="audioutils.html" title=
+          "Audio Utilities">Prev</a>
+          <p>
+            Audio Utilities
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xmms.html" title="XMMS-1.2.10">Next</a>
+          <p>
+            XMMS-1.2.10
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="audioutils.html" title=
+          "Chapter&nbsp;38.&nbsp;Audio Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="vorbistools" name="vorbistools"></a>
+        <h1 class="sect1">
+          Vorbis Tools-1.1.1
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Vorbis Tools
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Vorbis Tools</span> package contains
+          command-line tools for Ogg audio files. This is useful for
+          encoding, playing or editing files using the Ogg CODEC.
+        </p>
+        <h3>
+          <a id="id2563155" name="id2563155"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.1.1.tar.gz">
+                <span class=
+                "url">http://downloads.xiph.org/releases/vorbis/vorbis-tools-1.1.1.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 47845fd76f5f2354a3619c4097575487
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 701 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 6.9 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.13 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2690591" name="id2690591"></a>Vorbis Tools Dependencies
+        </h3>
+        <h4>
+          <a id="id2793219" name="id2793219"></a>Required
+        </h4>
+        <p>
+          <a href="libvorbis.html">libvorbis-1.1.1</a>
+        </p>
+        <h4>
+          <a id="id2691631" name="id2691631"></a>Recommended (Required to
+          Build the 'ogg123' Program)
+        </h4>
+        <p>
+          <a href="../basicnet/netlibs.html#curl">cURL-7.14.0</a> and
+          <a href="libao.html">libao-0.8.6</a>
+        </p>
+        <h4>
+          <a id="id2686950" name="id2686950"></a>Optional
+        </h4>
+        <p>
+          <a href="flac.html">FLAC-1.1.2</a> and <a href=
+          "speex.html">Speex-1.0.5</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Vorbis Tools
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Vorbis Tools</span> by running
+          the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --enable-vcut &amp;&amp;
+make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Vorbis Tools
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="vorbistools-config" name=
+                  "vorbistools-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/libao.conf</tt>, <tt class=
+            "filename">~/.libao</tt>, and <tt class=
+            "filename">~/.ogg123rc</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2480099" name="id2480099"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Issue <span><strong class="command">man
+            libao.conf</strong></span> for information about setting the
+            default output device. Also see <tt class=
+            "filename">/usr/share/doc/vorbis-tools-1.1.1/ogg123rc-example</tt>.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">ogg123, oggdec,
+              oggenc, ogginfo, vcut, and vorbiscomment</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directory:</span></strong> <span class=
+              "seg">/usr/share/doc/vorbis-tools-1.1.1</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2846992" name="id2846992"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="ogg123" name="ogg123"></a><span class=
+                  "term"><span><strong class=
+                  "command">ogg123</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a command-line audio player for Ogg Vorbis streams.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="oggdec" name="oggdec"></a><span class=
+                  "term"><span><strong class=
+                  "command">oggdec</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a simple decoder which converts Ogg Vorbis files into
+                    PCM audio files (WAV or raw).
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="oggenc" name="oggenc"></a><span class=
+                  "term"><span><strong class=
+                  "command">oggenc</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an encoder that turns raw, WAV or AIFF files into an
+                    Ogg Vorbis stream.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="ogginfo" name="ogginfo"></a><span class=
+                  "term"><span><strong class=
+                  "command">ogginfo</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    prints information stored in an audio file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="vcut" name="vcut"></a><span class=
+                  "term"><span><strong class=
+                  "command">vcut</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    will split a file into two files at a designated cut
+                    point.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="vorbiscomment" name="vorbiscomment"></a><span class=
+                  "term"><span><strong class=
+                  "command">vorbiscomment</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is an editor that changes information in the audio file
+                    metadata tags.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="audioutils.html" title=
+          "Audio Utilities">Prev</a>
+          <p>
+            Audio Utilities
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xmms.html" title="XMMS-1.2.10">Next</a>
+          <p>
+            XMMS-1.2.10
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="audioutils.html" title=
+          "Chapter&nbsp;38.&nbsp;Audio Utilities">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

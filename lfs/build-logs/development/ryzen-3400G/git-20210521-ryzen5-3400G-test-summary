@@ -1,0 +1,190 @@
+Test results from building LFS git 20210521 on a Ryzen 5 3400G (zen+).
+Toolchain results, and Python, updated for an unoptimized build of
+LFS  git 20210521 (previous build used -O2 without -g and also some
+hardening).  I added a patch to gcc-11.1.0 to allow it to build
+firefox-89 (and, presumably, later firefoxes).
+
+This build uses the packages' own default CFLAGS, and my earlier
+issue with an incredibly slow compiler in the resulting system has
+been solved (in fact, only g++ was slow) and the compiler has been
+rebuilt.
+
+For tests, I'm only really concerned about test failures.
+
+glibc-2.33 3 failures
+
+FAIL: elf/tst-cpu-features-cpuinfo
+FAIL: io/tst-lchmod
+FAIL: misc/tst-ttyname
+
+zlib-1.2.11 all OK
+
+bzip2-1.0.8 all 6 tests passed
+
+xz-5.2.5 all 9 tests passed
+
+zstd-1.4.9
+
+No mention of any 'FAIL'.
+
+file-5.40 seems ok
+
+m4-1.4.18 All checks successful, then 157 PASS, 0 FAIL.
+
+bc-4.0.1 All tests (dc, bc) passed
+
+flex-2.6.4 All 114 tests passed
+
+tcl-8.6.11 Passed 30147,  Failed 0
+
+expect5.45.4 Passed 29, Failed 0
+
+dejagnu-1.6.2 No failures (5 and 77 expected passes)
+
+binutils-2.36.1
+
+7 failures in gold
+FAIL: debug_msg.sh
+FAIL: missing_key_func.sh
+FAIL: gdb_index_test_1.sh
+FAIL: gdb_index_test_2.sh
+FAIL: gdb_index_test_2_gabi.sh
+FAIL: gdb_index_test_3.sh
+FAIL: gdb_index_test_4.sh
+
+4 failures in ld
+FAIL: Run property 4
+FAIL: Run property 4 (PIE)
+FAIL: Run property 5
+FAIL: Run property 5 (PIE)
+
+gmp-6.2.1  197 tests passed
+
+mpfr-4.1.0 181 PASS, 0 FAIL
+
+mpc-1.2.1 all 69 PASS
+
+attr-2.5.1 both tests PASS
+
+acl-2.3.1 13 PASS, 0 FAIL
+
+libcap-2.49 both PASSED
+
+gcc-11.1.0
+ Variation: I added a patch from upstream to fix breakage when trying
+ to use g++ to compile firefox-89.0 (that is a regression, g++-10.2.0
+ is apparently able to build it, as is clang).
+
+g++ 3 unexpected failures
+FAIL: g++.dg/cpp0x/constexpr-52830.C  -std=c++14 (test for excess errors)
+FAIL: g++.dg/cpp0x/constexpr-52830.C  -std=c++17 (test for excess errors)
+FAIL: g++.dg/cpp0x/constexpr-52830.C  -std=c++2a (test for excess errors)
+
+libstdc++ 8 unexpected failures, 1 new unresolved
+FAIL: 22_locale/numpunct/members/char/3.cc execution test
+FAIL: 22_locale/time_get/get_time/char/2.cc execution test
+FAIL: 22_locale/time_get/get_time/char/wrapped_env.cc execution test
+FAIL: 22_locale/time_get/get_time/char/wrapped_locale.cc execution test
+FAIL: 22_locale/time_get/get_time/wchar_t/2.cc execution test
+FAIL: 22_locale/time_get/get_time/wchar_t/wrapped_env.cc execution test
+FAIL: 22_locale/time_get/get_time/wchar_t/wrapped_locale.cc execution test
+FAIL: 30_threads/this_thread/95989.cc (test for excess errors)
+UNRESOLVED: 30_threads/this_thread/95989.cc compilation failed to produce executable
+
+pkg-config-0.29.2
+0 tests were run in the prelimary parts.
+In the main part All 30 tests passed
+
+sed-4.8 59, 167,  PASS, 0 FAIL
+
+gettext-0.21  0, 2, 422, 14, 252 PASS, 0 FAIL
+
+bison-3.7.6 11 PASS, 0 FAIL in initial part, 620 successful in main part
+
+grep-3.6 94, 184 PASS, 0 FAIL
+
+bash-5.1 No failures nor any diff output.
+
+libtool-2.4.6
+ 5 unexpected failures, as noted in the book
+
+gdbm-1.19 All 30 tests were successful
+gdbmtool:
+FAIL: version
+
+gperf-3.1 no failures reported
+
+expat-2.3.0 both tests PASS
+
+inetutils-2.0 10 PASS, 0 FAIL
+
+perl-5.32.1 All tests successful
+
+XML-Parser-2.46 PASS
+
+intltool-0.51.0 1 PASS, 0 FAIL
+
+autoconf-2.71 543 tests behaved as expected
+
+automake-1.16.3  2721 PASS, 2 FAIL -
+FAIL: t/deprecated-acinit.sh
+FAIL: t/init.sh
+ Note that t/subobj.sh PASSed
+
+libtool -2 after automake - 138 tests behaved as expected.
+
+elfutils-0.183 220 PASS, 0 FAIL
+
+libffi-3.3 2284 expected passes
+
+openssl-1.1.1k All tests successful. PASS
+
+ninja-1.10.2 passed
+
+coreutils-8.32 493 and 328 PASS, 0 FAIL
+
+check-0.15.2 1 and 9 PASS, 0 FAIL
+
+diffutils-3.7 20 and 160 PASS, 0 FAIL
+
+gawk-5.1.0 ALL TESTS PASSED
+
+findutils-4.8.0 2, 238, 14 PASS, 0 FAIL
+
+gzip-1.10 22 PASS, 0 FAIL
+
+kbd-2.4.0 36 tests were successful
+
+libpipeline-1.5.3 7 PASS, 0 FAIL
+
+make-4.3 690 Tests in 125 Categories Complete ... No Failures :-)
+
+patch-2.7.6 41 PASS, 0 FAIL
+
+man-db-2.9.4 29, 9, 12 PASS, 0 FAIL
+
+tar-1.34 218 tests were run, 1 failed -
+227: capabilities: binary store/restore              FAILED (capabs_raw01.at:28)
+(that one skipped on my skylake and haswell)
+
+I suspect I have enabled something on in my ryzen kernel config,
+but not on the intels.
+
+texinfo-6.7 85, 57, 0, 83, 0, 1, 1, 1 PASS, 0 FAIL
+
+vim-8.2.2813 Executed 3790, Failed 0
+
+eudev-3.2.10 PASS 2, FAIL 0 in initial part, then 0 errors occurred
+
+procps-ng-3.3.17 5 FAIL on pkill tests, as noted
+
+util-linux-2.36.2 1 tests of 207 FAILED
+column: invalid multibyte                             ... FAILED
+
+e2fsprogs-1.46.2 373 tests succeeded, 0 failed
+
+Python-3.9.5 tests were run after sqlite3 had been installed:
+== Tests result: SUCCESS ==
+406 tests OK.
+
+

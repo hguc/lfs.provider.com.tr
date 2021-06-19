@@ -1,0 +1,345 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      GNOME Media-2.10.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;31.&nbsp;GNOME Additional Packages
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="nautilus-cd-burner.html" title=
+          "Nautilus CD Burner-2.10.1">Prev</a>
+          <p>
+            Nautilus CD Burner-2.10.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gnome-audio.html" title=
+          "gnome-audio-2.0.0">Next</a>
+          <p>
+            gnome-audio-2.0.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="add.html" title=
+          "Chapter&nbsp;31.&nbsp;GNOME Additional Packages">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="gnome-media" name="gnome-media"></a>
+        <h1 class="sect1">
+          GNOME Media-2.10.2
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to GNOME Media
+          </h2>
+        </div>
+        <p>
+          The <span class="application">GNOME Media</span> package contains
+          <span class="application">GNOME</span>'s media applications.
+        </p>
+        <h3>
+          <a id="id2908691" name="id2908691"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://ftp.gnome.org/pub/GNOME/sources/gnome-media/2.10/gnome-media-2.10.2.tar.bz2">
+                <span class=
+                "url">http://ftp.gnome.org/pub/GNOME/sources/gnome-media/2.10/gnome-media-2.10.2.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.gnome.org/pub/GNOME/sources/gnome-media/2.10/gnome-media-2.10.2.tar.bz2">
+                <span class=
+                "url">ftp://ftp.gnome.org/pub/GNOME/sources/gnome-media/2.10/gnome-media-2.10.2.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 3d73cd40cfa52c5eef882302f92c60d6
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 3.3 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 36 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.50 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2718961" name="id2718961"></a>GNOME Media Dependencies
+        </h3>
+        <h4>
+          <a id="id2875257" name="id2875257"></a>Required
+        </h4>
+        <p>
+          <a href="libgnomeui.html">libgnomeui-2.10.0</a>, <a href=
+          "nautilus-cd-burner.html">Nautilus CD Burner-2.10.1</a>, <a href=
+          "../multimedia/gst-plugins.html">gst-plugins-0.8.10</a> and
+          <a href="scrollkeeper.html">ScrollKeeper-0.3.14</a>
+        </p>
+        <h4>
+          <a id="id2643784" name="id2643784"></a>Optional
+        </h4>
+        <p>
+          <a href="gail.html">GAIL-1.8.3</a>, <a href=
+          "../server/mail.html"><span class="url">MTA</span></a>, <a href=
+          "../pst/docbook-utils.html">DocBook-utils-0.6.14</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of GNOME Media
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">GNOME Media</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class="command">sed -i -e \
+"s/-lORBit-2 -lbonobo-2 -lgobject-2.0 -lglib-2.0/\$(CDDBSLAVE_LIBS)/" \
+    cddb-slave2/Makefile.in &amp;&amp;
+./configure --prefix=`pkg-config --variable=prefix ORBit-2.0` \
+    --libexecdir=`pkg-config --variable=prefix ORBit-2.0`/sbin \
+    --sysconfdir=/etc/gnome --localstatedir=/var/lib &amp;&amp;
+make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+gst-register</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">sed -i -e ...
+          cddb-slave2/Makefile.in</strong></span>: This command fixes a bug
+          encountered if <tt class="envar">$GNOME_PREFIX</tt> is not set to
+          <tt class="filename">/usr</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--libexecdir=`pkg-config
+          --variable=prefix ORBit-2.0`/sbin</tt></em>: This switch puts
+          libexec files in <tt class="filename">$GNOME_PREFIX/sbin</tt>
+          instead of <tt class="filename">$GNOME_PREFIX/libexec</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--sysconfdir=/etc/gnome</tt></em>: This
+          switch puts configuration files in <tt class=
+          "filename">/etc/gnome</tt> instead of <tt class=
+          "filename">$GNOME_PREFIX/etc</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--localstatedir=/var/lib</tt></em>: This
+          switch puts <span class="application">ScrollKeeper</span> files in
+          <tt class="filename">/var/lib/scrollkeeper</tt> instead of
+          <tt class="filename">$GNOME_PREFIX/var/scrollkeeper</tt>.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">CDDBSlave2,
+              cddb-slave2-properties, cddb-track-editor,
+              gnome-audio-profiles-properties, gnome-cd,
+              gnome-sound-recorder, gnome-volume-control,
+              gstreamer-properties, and vumeter</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class=
+              "seg">libcddb-slave2.[so,a], libgnome-media-profiles.[so,a],
+              libgnome-media-profiles.[so,a] libglade library, and
+              GNOME_Media_CDDBSlave2.server bonobo server</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class=
+              "seg">/etc/gnome/gconf/gconf.xml.defaults/apps/CDDB-Slave2,
+              /etc/gnome/gconf/gconf.xml.defaults/apps/gnome-cd,
+              /etc/gnome/gconf/gconf.xml.defaults/apps/gnome-sound-recorder,
+              /etc/gnome/gconf/gconf.xml.defaults/schemas/apps/CDDB-Slave2,
+              /etc/gnome/gconf/gconf.xml.defaults/schemas/apps/gnome-cd,
+              /etc/gnome/gconf/gconf.xml.defaults/schemas/apps/gnome-sound-recorder,
+              /etc/gnome/gconf/gconf.xml.defaults/schemas/system/gstreamer/audio,
+              /etc/gnome/gconf/gconf.xml.defaults/system/gstreamer/audio,
+              $GNOME_PREFIX/include/[cddb-slave2,gnome-media],
+              $GNOME_PREFIX/share/gnome-media,
+              $GNOME_PREFIX/share/gnome-sound-recorder,
+              $GNOME_PREFIX/share/gnome/help/gnome-cd,
+              $GNOME_PREFIX/share/gnome/help/gnome-sound-recorder,
+              $GNOME_PREFIX/share/gnome/help/gnome-volume-control,
+              $GNOME_PREFIX/share/gnome/help/grecord,
+              $GNOME_PREFIX/share/gnome/help/gstreamer-properties,
+              $GNOME_PREFIX/share/gstreamer-properties,
+              $GNOME_PREFIX/share/omf/gnome-media,
+              $GNOME_PREFIX/share/pixmaps/gnome-cd, and
+              $GNOME_PREFIX/share/pixmaps/gnome-media</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2888898" name="id2888898"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="gnome-cd" name="gnome-cd"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnome-cd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is <span class="application">GNOME</span>'s CD Player.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnome-sound-recorder" name=
+                  "gnome-sound-recorder"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnome-sound-recorder</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is <span class="application">GNOME</span>'s recorder.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnome-volume-control" name=
+                  "gnome-volume-control"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnome-volume-control</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is <span class="application">GNOME</span>'s mixer with
+                    volume applet.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gstreamer-properties" name=
+                  "gstreamer-properties"></a><span class=
+                  "term"><span><strong class=
+                  "command">gstreamer-properties</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a GUI front-end to <span class=
+                    "application">GStreamer</span>'s audio/video input/output
+                    parameters.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="vumeter" name="vumeter"></a><span class=
+                  "term"><span><strong class=
+                  "command">vumeter</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a visual volume meter.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="nautilus-cd-burner.html" title=
+          "Nautilus CD Burner-2.10.1">Prev</a>
+          <p>
+            Nautilus CD Burner-2.10.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gnome-audio.html" title=
+          "gnome-audio-2.0.0">Next</a>
+          <p>
+            gnome-audio-2.0.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="add.html" title=
+          "Chapter&nbsp;31.&nbsp;GNOME Additional Packages">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

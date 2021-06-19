@@ -1,0 +1,965 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      JDK-1.5.0_10
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;12.&nbsp;Programming
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="guile.html" title="Guile-1.6.7">Prev</a>
+          <p>
+            Guile-1.6.7
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="librep.html" title="Librep-0.17">Next</a>
+          <p>
+            Librep-0.17
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="jdk" name="jdk"></a>
+        <h1 class="sect1">
+          JDK-1.5.0_10
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to JDK
+          </h2>
+        </div>
+        <p>
+          The <span class="application">JDK</span> package contains Sun's
+          <span class="application">Java</span> development environment. This
+          is useful for developing <span class="application">Java</span>
+          programs and provides the runtime environment necessary to run
+          <span class="application">Java</span> programs. It also includes a
+          plug-in for browsers so that they can be <span class=
+          "application">Java</span> aware.
+        </p>
+        <p>
+          The <span class="application">JDK</span> comes in two flavors, a
+          precompiled binary and a source package. Previously, the plugin
+          included in the <span class="application">JDK</span> binary package
+          was unusable on LFS owing to incompatibilities with <span class=
+          "application">GCC</span>-3 compiled browsers. This is not the case
+          anymore.
+        </p>
+        <p>
+          In order to use the source code and patches, you must read and
+          agree to the Sun <a href="http://www.java.net/jrl.csp"><span class=
+          "url">Java Research License</span></a> or optionally, the Sun
+          <a href="http://java.net/jiul.csp"><span class="url">Java Internal
+          Use License</span></a>. In addition, the source code is not allowed
+          to be downloaded to some countries, so for users in those
+          countries, the binary is the only option.
+        </p>
+        <p>
+          You will first need to download and install the binary version of
+          the <span class="application">JDK</span>.
+        </p>
+        <p>
+          To build from the source, you will also need to download the
+          additional files and patches to complete the source build as
+          detailed below.
+        </p>
+        <h3>
+          <a id="id2779699" name="id2779699"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Binary download: <a href=
+                "http://java.sun.com/j2se/1.5.0/download.jsp"><span class=
+                "url">http://java.sun.com/j2se/1.5.0/download.jsp</span></a>
+                (to download jdk-1_5_0_10-linux-i586.bin)
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum (binary): d916c24bed9eef7aebc2626115e14a11
+              </p>
+            </li>
+            <li>
+              <p>
+                Source download: <a href=
+                "http://download.java.net/tiger/archive/tiger_u10/"><span class="url">
+                http://download.java.net/tiger/archive/tiger_u10/</span></a>
+                (to download jdk-1_5_0_10-fcs-src-b03-jrl-09_nov_2006.jar (or
+                optionally the JIUL version),
+                jdk-1_5_0_10-fcs-bin-b03-09_nov_2006.jar, and
+                jdk-1_5_0_10-mozilla_headers-b03-unix-09_nov_2006.jar)
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sums (source):
+              </p>
+              <table class="simplelist" border="0" summary="Simple list">
+                <tr>
+                  <td>
+                    09842a4e68040db473e04dbcc284f1d5
+                    jdk-1_5_0_10-fcs-bin-b03-09_nov_2006.jar
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    b59335f620e7da524be168b07319fa3b
+                    jdk-1_5_0_10-fcs-src-b03-jrl-09_nov_2006.jar
+                  </td>
+                </tr>
+                <tr>
+                  <td>
+                    f49df1a1e7fe351b7fa9f66db121616e
+                    jdk-1_5_0_10-mozilla_headers-b03-unix-09_nov_2006.jar
+                  </td>
+                </tr>
+              </table>
+            </li>
+            <li>
+              <p>
+                Download size (binary): 47.2 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size (source): 64.2 MB (three .jar files)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 1882 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 34 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2660408" name="id2660408"></a>Additional Downloads
+        </h3>
+        <h4>
+          <a id="id2785946" name="id2785946"></a>Required Patches
+        </h4>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-gcc4-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-gcc4-1.patch</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-motif_fixes-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-motif_fixes-1.patch</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-nptl-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-nptl-1.patch</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-remove_broken_demo-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-remove_broken_demo-1.patch</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-remove_fixed_paths-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-remove_fixed_paths-1.patch</span></a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h4>
+          <a id="id2785910" name="id2785910"></a>Recommended Patches
+        </h4>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-remove_debug_image-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-remove_debug_image-1.patch</span></a>
+                (skips compiling of the <span class="application">JDK</span>
+                debug image)
+              </p>
+            </li>
+            <li>
+              <p>
+                <a href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-static_cxx-1.patch">
+                <span class=
+                "url">http://www.linuxfromscratch.org/patches/blfs/6.2.0/jdk-1.5.0_10-static_cxx-1.patch</span></a>
+                (forces dynamic linking to <span class=
+                "application">GCC</span> libs)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2727610" name="id2727610"></a>JDK Dependencies
+        </h3>
+        <h4>
+          <a id="id2727616" name="id2727616"></a>Required (to Build JDK from
+          Source)
+        </h4>
+        <p class="required">
+          <a href="../x/installing.html">X Window System</a>, <a href=
+          "zip.html">Zip-2.32</a>, <a href="unzip.html">UnZip-5.52</a>,
+          <a href="cpio.html">cpio-2.6</a>, <a href=
+          "../multimedia/alsa-lib.html">ALSA Library-1.0.13</a>, and <a href=
+          "../postlfs/tcsh.html">Tcsh-6.14.00</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/jdk"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/jdk</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of JDK
+          </h2>
+        </div>
+        <p>
+          Both the binary and source built versions will be installed. You
+          may choose to keep either or both.
+        </p>
+        <div class="tip">
+          <div class="admonhead">
+            <img alt="[Tip]" src="../images/tip.png" />
+            <h3 class="admontitle">
+              Tip
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The <span><strong class="command">./jdk-mod.bin</strong></span>
+              command below unpacks the distribution into a <tt class=
+              "filename">jdk1.5.0_10</tt> directory. You will be required to
+              view, and then accept (by entering a <span><strong class=
+              "keycap">y</strong></span> keypress), a license agreement
+              before any files are unpacked. If you are scripting
+              (automating) the build, you'll need to account for this. There
+              is information about automating build commands in the <a href=
+              "../introduction/important.html#automating-builds">Automated
+              Building Procedures</a> section of Chapter 2. Towards the end
+              of this section, specific information for automating this type
+              of installation is discussed.
+            </p>
+          </div>
+        </div>
+        <p>
+          Normally in BLFS, the files are unpacked into a subdirectory and
+          the starting point for the installation procedures is that
+          location. For this application only, start in the directory where
+          all the downloaded files are located.
+        </p>
+        <p>
+          Install the precompiled <span class="application">JDK</span> with
+          the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cp jdk-1_5_0_10-linux-i?86.bin jdk-mod.bin &amp;&amp;
+sed -i "s:^PATH=.*::" jdk-mod.bin &amp;&amp;
+chmod -v +x jdk-mod.bin &amp;&amp;
+./jdk-mod.bin</kbd></pre>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">cd jdk1.5.0_10 &amp;&amp;
+install -v -d /opt/jdk/jdk-precompiled-1.5.0_10 &amp;&amp;
+mv -v * /opt/jdk/jdk-precompiled-1.5.0_10 &amp;&amp;
+chown -v -R root:root /opt/jdk/jdk-precompiled-1.5.0_10 &amp;&amp;
+ln -v -sf motif21/libmawt.so \
+    /opt/jdk/jdk-precompiled-1.5.0_10/jre/lib/i386/ &amp;&amp;
+cd ..</kbd></pre>
+        <p>
+          The binary version is now installed.
+        </p>
+        <p>
+          If you don't want to compile the source or are not in a position to
+          download the source owing to license restrictions, skip ahead to
+          the configuration section.
+        </p>
+        <p>
+          Save the existing path, and append the recently installed
+          <span class="application">JDK</span>.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export JAVA_HOME=/opt/jdk/jdk-precompiled-1.5.0_10 &amp;&amp;
+export PATH_HOLD=${PATH} &amp;&amp;
+export PATH=${PATH}:${JAVA_HOME}/bin</kbd></pre>
+        <p>
+          The source code is contained in self-extracting <tt class=
+          "filename">jar</tt> files. You will need to be in a windowed
+          environment to extract the sources. Create a directory to store the
+          extracted sources. Choose the newly created <tt class=
+          "filename">jdk-build</tt> directory when prompted for the target
+          directory.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">mkdir jdk-build &amp;&amp;
+cd jdk-build &amp;&amp;
+for JAR in ../jdk-1_5_0_10*.jar
+    do java -jar ${JAR}
+done</kbd></pre>
+        <p>
+          Apply all the patches downloaded above:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">for PATCH in ../jdk-1.5.0_10*.patch
+    do patch -Np1 -i ${PATCH}
+done</kbd></pre>
+        <p>
+          If your <span class="application">X Window System</span> is
+          installed into any prefix other than <tt class=
+          "filename">/usr/X11R6</tt>, execute the following command,
+          replacing <em class="replaceable"><tt>&lt;PREFIX&gt;</tt></em> with
+          the installation prefix of the <span class="application">X Window
+          System</span>:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">find . -type f -exec sed -i 's@/usr/X11R6@<em class=
+        "replaceable"><tt>&lt;PREFIX&gt;</tt></em>@g' {} \;</kbd></pre>
+        <p>
+          Set/unset some variables which affect the build:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export ALT_BOOTDIR=${JAVA_HOME} &amp;&amp;
+export CLASSPATH_HOLD=${CLASSPATH} &amp;&amp;
+unset JAVA_HOME CLASSPATH CFLAGS CXXFLAGS LDFLAGS &amp;&amp;
+export ALT_DEVTOOLS_PATH="/usr/bin" &amp;&amp;
+export BUILD_NUMBER="update-10" &amp;&amp;
+export DEV_ONLY=true &amp;&amp;
+export ALT_MOZILLA_HEADERS_PATH=${PWD}/share/plugin/ &amp;&amp;
+export INSANE=true &amp;&amp;
+export MAKE_VERBOSE=true &amp;&amp;
+export ALT_CACERTS_FILE=${ALT_BOOTDIR}/jre/lib/security/cacerts</kbd></pre>
+        <div class="warning">
+          <div class="admonhead">
+            <img alt="[Warning]" src="../images/warning.png" />
+            <h3 class="admontitle">
+              Warning
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              Setting CFLAGS/CXXFLAGS/LDFLAGS is guaranteed to make the build
+              fail. If you are interested in optimizing the build, set
+              OTHER_CFLAGS/OTHER_CXXFLAGS/OTHER_LDFLAGS instead. -O3, even in
+              OTHER_C{,XX}FLAGS, is known to cause a build failure.
+            </p>
+          </div>
+        </div>
+        <p>
+          Additionally, if you would like to <span><strong class=
+          "command">make</strong></span> in parallel, add the following:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export HOTSPOT_BUILD_JOBS=<em class=
+        "replaceable"><tt>&lt;3&gt;</tt></em></kbd></pre>
+        <p>
+          Build the <span class="application">JDK</span> with the following
+          commands. There will be a lot of messages about missing files that
+          look like errors. These are caused by not meeting the expected
+          build environment (Red Hat). As long as the build doesn't stop, the
+          messages are harmless.
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cd control/make &amp;&amp;
+make &amp;&amp;
+cd ../build/linux-i?86</kbd></pre>
+        <p>
+          To test the results, you can run one of the provided demo programs
+          using the newly created <span><strong class=
+          "command">java</strong></span> binary. Issue the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">cd j2sdk-image/demo/jfc/Java2D &amp;&amp;
+../../../bin/java -jar Java2Demo.jar &amp;&amp;
+cd ../../../..</kbd></pre>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user, install the
+          <span class="application">JDK</span>:
+        </p>
+        <pre class="root"><kbd class=
+        "command">cp -v -a j2sdk-image /opt/jdk/jdk-1.5.0_10 &amp;&amp;
+chown -v -R root:root /opt/jdk/jdk-1.5.0_10 &amp;&amp;
+ln -v -sf motif21/libmawt.so  /opt/jdk/jdk-1.5.0_10/jre/lib/i386/</kbd></pre>
+        <p>
+          Restore the unprivileged user's environment using the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export JAVA_HOME=${ALT_BOOTDIR} &amp;&amp;
+export CLASSPATH=${CLASSPATH_HOLD} &amp;&amp;
+export PATH=${PATH_HOLD} &amp;&amp;
+unset ALT_BOOTDIR CLASSPATH_HOLD ALT_DEVTOOLS_PATH BUILD_NUMBER &amp;&amp;
+unset DEV_ONLY ALT_MOZILLA_HEADERS_PATH INSANE MAKE_VERBOSE &amp;&amp;
+unset ALT_CACERTS_FILE PATH_HOLD</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <span><strong class="command">export
+          ALT_BOOTDIR=${JAVA_HOME}</strong></span>: This variable sets the
+          location of the bootstrap <span class="application">JDK</span>.
+        </p>
+        <p>
+          <span><strong class="command">export
+          ALT_MOZILLA_HEADERS_PATH=${PWD}/share/plugin/</strong></span>: This
+          tells the build exactly where to find the <span class=
+          "application">Mozilla</span> headers. This has changed since the
+          previous version and is not mentioned in the installation
+          documentation included with the package source.
+        </p>
+        <p>
+          <span><strong class="command">export
+          ALT_DEVTOOLS_PATH="/usr/bin"</strong></span>: This changes the
+          location where the build finds the needed executables.
+        </p>
+        <p>
+          <span><strong class="command">export
+          BUILD_NUMBER="update-10"</strong></span>: This will help you
+          identify the compiled version of the runtime environment and
+          virtual machine by appending this information to the version
+          string.
+        </p>
+        <p>
+          <span><strong class="command">export DEV_ONLY=true</strong></span>:
+          This command skips compiling the documentation and eliminates a
+          dependency on <span class="application">rpm</span>.
+        </p>
+        <p>
+          <span><strong class="command">unset JAVA_HOME CLASSPATH CFLAGS
+          CXXFLAGS LDFLAGS</strong></span>: These variables cause
+          miscompilation of the build. Never set them.
+        </p>
+        <p>
+          <span><strong class="command">export INSANE=true</strong></span>:
+          The certified platform for the build is Redhat Enterprise Advanced
+          Server 2.1. This variable ensures that all the errors related to
+          compiling on a non-certified platform will be displayed as warnings
+          instead of errors.
+        </p>
+        <p>
+          <span><strong class="command">export
+          MAKE_VERBOSE=true</strong></span>: Allows the compiler commands to
+          be displayed on the console.
+        </p>
+        <p>
+          <span><strong class="command">export
+          ALT_CACERTS_FILE...</strong></span>: Specifies the certificate file
+          to use (from the installed binary <span class=
+          "application">JDK</span>).
+        </p>
+        <p>
+          <span><strong class="command">ln -sf motif21/libmawt.so
+          /opt/jdk/jdk-1.5.0_10/jre/lib/i386/</strong></span>: This fixes
+          linking issues with other applications that expect to find the
+          <span class="application">motif</span> libraries with the other
+          <span class="application">JDK</span> libraries.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring JDK
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2766922" name="id2766922"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            There are now two Java 2 SDKs installed in <tt class=
+            "filename">/opt/jdk</tt>. You should decide on which one you
+            would like to use as the default. For example if you decide to
+            use the source compiled <span class="application">JDK</span>, do
+            the following as the <tt class="systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">ln -v -nsf jdk-1.5.0_10 /opt/jdk/jdk</kbd></pre>
+          <p>
+            Add the following <tt class="filename">jdk.sh</tt> shell startup
+            file to the <tt class="filename">/etc/profile.d</tt> directory
+            with the following commands as the <tt class=
+            "systemitem">root</tt> user:
+          </p>
+          <pre class="root"><kbd class=
+          "command">cat &gt; /etc/profile.d/jdk.sh &lt;&lt; "EOF"
+<tt class="literal"># Begin /etc/profile.d/jdk.sh
+
+# Set JAVA_HOME directory
+JAVA_HOME=/opt/jdk/jdk
+
+# Adjust PATH
+pathappend ${JAVA_HOME}/bin PATH
+
+# Auto Java CLASSPATH
+# Copy jar files to, or create symlinks in this directory
+AUTO_CLASSPATH_DIR=/usr/lib/classpath
+pathprepend . CLASSPATH
+for dir in `find ${AUTO_CLASSPATH_DIR} -type d 2&gt;/dev/null`; do
+    pathappend $dir CLASSPATH
+done
+
+export JAVA_HOME CLASSPATH
+unset AUTO_CLASSPATH_DIR
+unset dir
+
+# End /etc/profile.d/jdk.sh</tt>
+EOF</kbd></pre>
+          <p>
+            The <span class="application">Java</span> plugin is located in
+            <tt class="filename">$JAVA_HOME/jre/plugin/i?86/ns7/</tt>. Make a
+            symbolic link to the file in that directory from your browser(s)
+            plugins directory.
+          </p>
+          <div class="important">
+            <div class="admonhead">
+              <img alt="[Important]" src="../images/important.png" />
+              <h3 class="admontitle">
+                Important
+              </h3>
+            </div>
+            <div class="admonbody">
+              <p>
+                The plugin must be a symlink for it to work. If not, the
+                browsers will crash when you attempt to load a <span class=
+                "application">Java</span> application.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">appletviewer,
+              extcheck, idlj, jar, jarsigner, java, javac, javadoc,javah,
+              javap, javaws, jdb, keytool, native2ascii, orbd, policytool,
+              rmic, rmid, rmiregistry, serialver, servertool, and
+              tnameserv</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg"><tt class=
+              "envar">$JAVA_HOME</tt>/lib/*, <tt class=
+              "envar">$JAVA_HOME</tt>/jre/lib/*, and
+              libjavaplugin_oji.so</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directory:</span></strong> <span class="seg">/opt/jdk</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2819090" name="id2819090"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="appletviewer" name="appletviewer"></a><span class=
+                  "term"><span><strong class=
+                  "command">appletviewer</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    runs <span class="application">Java</span> applets
+                    outside of the context of a browser.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="extcheck" name="extcheck"></a><span class=
+                  "term"><span><strong class=
+                  "command">extcheck</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    checks a specified <tt class="filename">JAR</tt> file for
+                    title and version conflicts with any extensions installed
+                    in the <span class="application">JDK</span> software.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="idlj" name="idlj"></a><span class=
+                  "term"><span><strong class=
+                  "command">idlj</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generates <span class="application">Java</span> bindings
+                    from a given IDL file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="jar" name="jar"></a><span class=
+                  "term"><span><strong class=
+                  "command">jar</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    combines multiple files into a single <tt class=
+                    "filename">JAR</tt> archive file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="jarsigner" name="jarsigner"></a><span class=
+                  "term"><span><strong class=
+                  "command">jarsigner</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    signs <tt class="filename">JAR</tt> (Java ARchive) files
+                    and verifies the signatures and integrity of a signed
+                    <tt class="filename">JAR</tt>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="java" name="java"></a><span class=
+                  "term"><span><strong class=
+                  "command">java</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    launches a <span class="application">Java</span>
+                    application by starting a <span class=
+                    "application">Java</span> runtime environment, loading a
+                    specified class and invoking its main method.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="javac" name="javac"></a><span class=
+                  "term"><span><strong class=
+                  "command">javac</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    reads class and interface definitions, written in the
+                    <span class="application">Java</span> programming
+                    language, and compiles them into bytecode class files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="javadoc" name="javadoc"></a><span class=
+                  "term"><span><strong class=
+                  "command">javadoc</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    parses the declarations and documentation comments in a
+                    set of <span class="application">Java</span> source files
+                    and produces a corresponding set of HTML pages describing
+                    the classes, interfaces, constructors, methods, and
+                    fields.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="javah" name="javah"></a><span class=
+                  "term"><span><strong class=
+                  "command">javah</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generates <span class="application">C</span> header and
+                    source files that are needed to implement native methods.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="javap" name="javap"></a><span class=
+                  "term"><span><strong class=
+                  "command">javap</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    disassembles a <span class="application">Java</span>
+                    class file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="javaws" name="javaws"></a><span class=
+                  "term"><span><strong class=
+                  "command">javaws</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    launches <span class="application">Java</span>
+                    application/applets hosted on a network.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="jdb" name="jdb"></a><span class=
+                  "term"><span><strong class=
+                  "command">jdb</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a simple command-line debugger for <span class=
+                    "application">Java</span> classes.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="keytool" name="keytool"></a><span class=
+                  "term"><span><strong class=
+                  "command">keytool</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a key and certificate management utility.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="native2ascii" name="native2ascii"></a><span class=
+                  "term"><span><strong class=
+                  "command">native2ascii</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    converts files that contain non-supported character
+                    encoding into files containing Latin-1 or Unicode-encoded
+                    characters.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="orbd" name="orbd"></a><span class=
+                  "term"><span><strong class=
+                  "command">orbd</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to enable clients to transparently locate and
+                    invoke persistent objects on servers in the CORBA
+                    environment.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="policytool" name="policytool"></a><span class=
+                  "term"><span><strong class=
+                  "command">policytool</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates and manages a policy file graphically.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rmic" name="rmic"></a><span class=
+                  "term"><span><strong class=
+                  "command">rmic</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    generates stub and skeleton class files for remote
+                    objects from the names of compiled <span class=
+                    "application">Java</span> classes that contain remote
+                    object implementations.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rmid" name="rmid"></a><span class=
+                  "term"><span><strong class=
+                  "command">rmid</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    starts the activation system daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="rmiregistry" name="rmiregistry"></a><span class=
+                  "term"><span><strong class=
+                  "command">rmiregistry</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    creates and starts a remote object registry on the
+                    specified port on the current host.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="serialver" name="serialver"></a><span class=
+                  "term"><span><strong class=
+                  "command">serialver</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    returns the serialVersionUID for one or more classes in a
+                    form suitable for copying into an evolving class.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="servertool" name="servertool"></a><span class=
+                  "term"><span><strong class=
+                  "command">servertool</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    provides an ease-of-use interface for application
+                    programmers to register, unregister, startup and shutdown
+                    a server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="tnameserv" name="tnameserv"></a><span class=
+                  "term"><span><strong class=
+                  "command">tnameserv</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    starts the <span class="application">Java</span> IDL name
+                    server.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-02-06 23:51:27 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="guile.html" title="Guile-1.6.7">Prev</a>
+          <p>
+            Guile-1.6.7
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="librep.html" title="Librep-0.17">Next</a>
+          <p>
+            Librep-0.17
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="prog.html" title=
+          "Chapter&nbsp;12.&nbsp;Programming">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

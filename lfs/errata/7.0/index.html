@@ -1,0 +1,72 @@
+<!--#set var="pageTitle" value="LFS Errata" -->
+<!--#include virtual="/lfs/header.html" -->
+<!--#include virtual="/lfs/menu.html" -->
+    <div class="main">
+     <h1>Errata for the 7.0 Version of the LFS Book</h1>
+
+<!-- TEMPLATE
+       <h2>Known Security Vulnerabilities</h2>
+         <ul>
+            <li><p>Item 1</p></li>
+            <li><p>Item 2</p></li>
+         </ul>
+
+       <h2>Miscellaneous Errata</h2>
+         <ul>
+           <li><p>Item 1</p></li>
+           <li><p>Item 2</p></li>
+         </ul>
+
+     END TEMPLATE -->
+
+       <h2>Known Security Vulnerabilities</h2>
+         <ul>
+            <li><p>A code injection vulnerability (CVE-2011-3597) is present in
+                Perl-5.14.2.  Perl should be recompiled with the 
+<a href="http://www.linuxfromscratch.org/patches/downloads/perl/perl-5.14.2-security_fix-1.patch">security fix patch</a>.</p></li>
+         </ul>
+
+       <h2>Miscellaneous Errata</h2>
+         <ul>
+ 
+           <li>Glibc doesn't install some RPC or NIS headers that are required
+           by some BLFS packages (notably NFS).  The following commands should
+           be run following the 'make install' in chapter 6's Glibc
+           section:<br/><br/>
+
+           <code>
+           cp -v ../glibc-2.14.1/sunrpc/rpc/*.h /usr/include/rpc<br/>
+           cp -v ../glibc-2.14.1/sunrpc/rpcsvc/*.h /usr/include/rpcsvc<br/>
+           cp -v ../glibc-2.14.1/nis/rpcsvc/*.h /usr/include/rpcsvc<br/>
+           </code>
+           </li> &nbsp;
+
+           <li>In section 7.7.1, the text refers to <em>/etc/sysconfig/init_params</em>.
+           This should read <em>/etc/sysconfig/rc.site</em>.</li>
+
+           <li>In the bootscripts /etc/init.d/functions file, the following lines
+           should be deleted:<br/><br/>
+
+           <code>
+           # Set any needed environment variables e.g. HEADLESS<br/>
+           . /lib/lsb/init_params
+           </code>
+         
+           </li>  &nbsp;
+
+           <li>One of the coreutils tests can fail because of a bug in how the
+           gnulib testsuite handles daylight saving time changes.  This can be
+           fixed by applying the 
+<a href="http://www.linuxfromscratch.org/patches/downloads/coreutils/coreutils-8.14-test_fix-1.patch">test fix patch</a>.</p></li> &nbsp;
+
+           <li>The permissions of /run/shm will prevent ordinary users creating
+           files.  This affects a few BLFS packages such as PulseAudio.  The
+           following commands should be run as the <emphasis>root</emphasis>
+           user in a completed system if you experience this problem:<br/><br/>
+
+           <code>
+           sed -i.bak '/mkdir.*shm/a\ &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;chmod 1777 /run/shm' /etc/rc.d/init.d/mountvirtfs
+           </code>
+           </li> &nbsp;
+         </ul>
+<!--#include virtual="/common/footer.html" -->

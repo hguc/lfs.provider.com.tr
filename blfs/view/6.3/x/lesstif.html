@@ -1,0 +1,451 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      LessTif-0.95.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;24.&nbsp;X Libraries
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gtk2.html" title="GTK+-2.10.13">Prev</a>
+          <p>
+            GTK+-2.10.13
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="startup-notification.html" title=
+          "startup-notification-0.9">Next</a>
+          <p>
+            startup-notification-0.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lib.html" title=
+          "Chapter&nbsp;24.&nbsp;X Libraries">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="lesstif" name="lesstif"></a>LessTif-0.95.0
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to LessTif
+        </h2>
+        <p>
+          The <span class="application">LessTif</span> package contains an
+          Open Source version of <span class="application">OSF/Motif®</span>.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://downloads.sourceforge.net/lesstif/lesstif-0.95.0.tar.bz2">
+                http://downloads.sourceforge.net/lesstif/lesstif-0.95.0.tar.bz2</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: ab895165c149d7f95843c7584b1c7ad4
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 2.4 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 160 MB (includes building and
+                running the test suite)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 4.1 SBU (includes building the test
+                suite)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Additional Downloads
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Required patch: <a class="ulink" href=
+                "http://www.linuxfromscratch.org/patches/blfs/6.3/lesstif-0.95.0-testsuite_fix-1.patch">
+                http://www.linuxfromscratch.org/patches/blfs/6.3/lesstif-0.95.0-testsuite_fix-1.patch</a>
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          LessTif Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="installing.html" title=
+          "Chapter&nbsp;23.&nbsp;X Window System Environment">X Window
+          System</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../basicnet/lynx.html" title=
+          "Lynx-2.8.6rel.5">Lynx-2.8.6rel.5</a> or <a class="xref" href=
+          "../basicnet/links.html" title="Links-2.1pre33">Links-2.1pre33</a>
+          (used to generate the <code class="filename">INSTALL</code>
+          documentation file) and <a class="ulink" href=
+          "http://dmalloc.com">Dmalloc</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/lesstif">http://wiki.linuxfromscratch.org/blfs/wiki/lesstif</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of LessTif
+        </h2>
+        <p>
+          Install <span class="application">LessTif</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">sed -i -e '/ShellP/d' \
+       -e '/XMLIBEXPORT extern Cardinal/i#include &lt;X11/ShellP.h&gt;\n'  \
+    include/Motif-2.1/Xm/VendorSP.h &amp;&amp;
+
+patch -Np1 -i ../lesstif-0.95.0-testsuite_fix-1.patch &amp;&amp;
+./configure --prefix=/usr \
+            --sysconfdir=/etc/X11 \
+            --disable-debug \
+            --enable-production \
+            --with-xdnd &amp;&amp;
+sed -i "s@libdir)/X11/mwm@sysconfdir)/mwm@" clients/Motif-2.1/mwm/Makefile &amp;&amp;
+make rootdir=/usr/share/doc/lesstif-0.95.0</kbd>
+</pre>
+        <p>
+          This package requires that it is installed before the test suite is
+          run. The commands to run the tests are located a bit later in the
+          instructions.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class=
+"command">make rootdir=/usr/share/doc/lesstif-0.95.0 install &amp;&amp;
+ldconfig</kbd>
+</pre>
+        <p>
+          Applicatons that utilize Xorg libraries often, and incorrectly,
+          expect to find configuration files in <code class=
+          "filename">$XORG_PREFIX/lib/X11</code>. While still the
+          <code class="systemitem">root</code> user, create a compatibility
+          symlink with the following command:
+        </p>
+        <pre class="root">
+<kbd class="command">ln -v -sf /etc/X11/mwm $XORG_PREFIX/lib/X11</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>sed -i -e '...' -e '...'
+          include/Motif-2.1/Xm/VendorSP.h</strong></span>: This command moves
+          one line in the header file to avoid C++ compilation problems.
+        </p>
+        <p>
+          <em class="parameter"><code>--disable-debug</code></em>: Do not
+          generate debugging information.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-production</code></em>: Build
+          the release version of the <span class="application">LessTif</span>
+          libraries.
+        </p>
+        <p>
+          <em class="parameter"><code>--with-xdnd</code></em>: Enable XDND
+          GNOME compatibility support.
+        </p>
+        <p>
+          <em class=
+          "parameter"><code>rootdir=/usr/share/doc/lesstif-0.95.0</code></em>:
+          This installs the documentation into an appropriate directory
+          instead of the non-FHS compliant <code class=
+          "filename">/usr/LessTif</code> directory.
+        </p>
+        <p>
+          <span class="command"><strong>sed -i
+          "s@libdir)/X11/mwm@sysconfdir)/mwm@"
+          clients/Motif-2.1/mwm/Makefile</strong></span>: This corrects the
+          installation prefix for the mwm directory for FHS compliance.
+        </p>
+      </div>
+      <div class="testing" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Testing LessTif
+        </h2>
+        <p>
+          It is advisable to test the installation of <span class=
+          "application">LessTif</span> using the included test suite. It is
+          not required to install any of the resulting binaries to validate
+          the installation. Issue the following commands to build the test
+          suite:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cd test &amp;&amp;
+./configure &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          To run the tests, issue the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cd Xm &amp;&amp;
+./testall *</kbd>
+</pre>
+        <p>
+          You may need to manually close four of the test windows. The first
+          one is from <span class="command"><strong>test28</strong></span> in
+          the <code class="filename">list</code> directory. The second one is
+          from <span class="command"><strong>test10</strong></span> in the
+          <code class="filename">menushell</code> directory. You should click
+          on the button in the window and choose &ldquo;<span class=
+          "quote">exit</span>&rdquo; (do it twice) to finish the test. The
+          third test is from <span class=
+          "command"><strong>test20</strong></span> in the <code class=
+          "filename">PushButton</code> and the last one is from <span class=
+          "command"><strong>test24</strong></span> in the <code class=
+          "filename">scrolledwindow</code> directory.
+        </p>
+        <p>
+          As many as 101 tests are known to fail. The patch applied at the
+          beginning of the installation created a file used to compare known
+          failures to the failures from the test run. This file was created
+          from an installation using the current LFS book and should be a
+          fairly accurate representation of the failures you'll encounter.
+          You could see some minor variances, however.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring LessTif
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="lesstif-config" name="lesstif-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/X11/mwm/system.mwmrc</code> and
+            <code class="filename">~/.mwmrc</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            The config files are used to customize the behavior of the
+            <span class="command"><strong>mwm</strong></span> window manager.
+            Information about customizing these files can be found in the
+            <code class="filename">mwmrc(5)</code> man page.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">motif-config, mwm, mxmkmf, uil, and
+              xmbind</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libDtPrints.so, libMrm.so, libUil.so, and
+              libXm.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/X11/mwm, /usr/include/Xm,
+              /usr/include/Mrm, /usr/include/uil, /usr/include/Dt,
+              /usr/lib/LessTif, and /usr/share/doc/lesstif-0.95.0</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="motif-config" name="motif-config"></a><span class=
+                    "term"><span class=
+                    "command"><strong>motif-config</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to find out configuration information for
+                    packages needing to link to the <span class=
+                    "application">LessTif</span> libraries.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mwm" name="mwm"></a><span class=
+                    "term"><span class="command"><strong>mwm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a window manager that adheres largely to the
+                    <span class="application">Motif</span> <span class=
+                    "command"><strong>mwm</strong></span> specification.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mxmkmf" name="mxmkmf"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mxmkmf</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">LessTif</span> version
+                    of <span class="command"><strong>xmkmf</strong></span>
+                    which creates a <code class="filename">Makefile</code>
+                    from an <code class="filename">Imakefile</code>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="uil" name="uil"></a><span class=
+                    "term"><span class="command"><strong>uil</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a user interface language compiler which translates a
+                    plain text description of the user interface of a
+                    <span class="application">Motif</span> application into a
+                    machine-readable form.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="xmbind" name="xmbind"></a><span class=
+                    "term"><span class=
+                    "command"><strong>xmbind</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    configures the virtual key bindings of <span class=
+                    "application">LessTif</span> applications.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libXm" name="libXm"></a><span class=
+                    "term"><code class="filename">libXm.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is an <span class="application">OSF/Motif®</span> source
+                    code compatible library for the <span class=
+                    "application">X Window System</span>. You can download an
+                    excellent reference guide (mainly for programmers) for
+                    the Motif-2.1 specification from <a class="ulink" href=
+                    "http://unc.dl.sourceforge.net/lesstif/6B_book.pdf">http://unc.dl.sourceforge.net/lesstif/6B_book.pdf</a>.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-05-09 08:00:42 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gtk2.html" title="GTK+-2.10.13">Prev</a>
+          <p>
+            GTK+-2.10.13
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="startup-notification.html" title=
+          "startup-notification-0.9">Next</a>
+          <p>
+            startup-notification-0.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lib.html" title=
+          "Chapter&nbsp;24.&nbsp;X Libraries">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

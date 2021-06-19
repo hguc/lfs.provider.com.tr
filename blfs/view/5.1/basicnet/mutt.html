@@ -1,0 +1,324 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Mutt-1.4.2.1i
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;20.&nbsp;Mail/News Clients</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="fetchmail.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="pine.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Mutt-1.4.2.1i
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Mutt
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Mutt</span> package contains a Mail
+          User Agent. This is useful for reading, writing, replying, saving,
+          and deleting your email.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2804968" name="id2804968"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/infosys/mail/mutt/mutt-1.4.2.1i.tar.gz">
+                  http://gd.tuwien.ac.at/infosys/mail/mutt/mutt-1.4.2.1i.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.mutt.org/mutt/mutt-1.4.2.1i.tar.gz">ftp://ftp.mutt.org/mutt/mutt-1.4.2.1i.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.6 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 16.9 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.35 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2805575" name="id2805575"></a><span class=
+                  "application">Mutt</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2805570" name="id2805570"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/gnupg.html">GnuPG-1.2.4</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Mutt
+          </h3>
+        </div>
+        <p>
+          <span class="application">Mutt</span> requires a group named
+          'mail'. You can add this group, if it does not exist, with this
+          command:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class="command">groupadd mail</b></span></tt>
+</pre>
+        <p>
+          If you did not install a <span class="acronym">MTA</span>, such as
+          <a href="../server/mail.html#postfix">Postfix-2.1.1</a> or <a href=
+          "../server/sendmail.html">Sendmail-8.12.10</a>, you need to modify
+          the ownership of <tt class="filename">/var/mail</tt> with this
+          command:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">chgrp mail /var/mail</b></span></tt>
+</pre>
+        <p>
+          Install <span class="application">Mutt</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc</tt></i>: This installs
+          the configuration files into <tt class="filename">/etc</tt> instead
+          of <tt class="filename">/usr/etc</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Mutt
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2805853" name="id2805853"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/Muttrc</tt>, <tt class=
+            "filename">~/.muttrc</tt>, <tt class=
+            "filename">/etc/mime.types</tt>, <tt class=
+            "filename">~/.mime.types</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2805821" name="id2805821"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            No changes in these files are necessary to begin using
+            <span class="application">Mutt</span>. When you are ready to make
+            changes, the man page for <tt class="filename">muttrc</tt> is a
+            good starting place.
+          </p>
+          <p>
+            In order to utilize <span class="application">GnuPG</span>, use
+            the following command:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat /usr/share/doc/mutt/samples/gpg.rc &gt;&gt; ~/.muttrc</b></span></tt>
+</pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Mutt</span> package contains
+          <span><b class="command">mutt</b></span>, <span><b class=
+          "command">flea</b></span>, <span><b class=
+          "command">muttbug</b></span>, <span><b class=
+          "command">mutt_dotlock</b></span>, <span><b class=
+          "command">pgpwrap</b></span> and <span><b class=
+          "command">pgpring</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2806209" name="id2806209"></a>mutt
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mutt</b></span> is a Mail User Agent
+            (<span class="acronym">MUA</span>) which enables you to read,
+            write and delete your email.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2806226" name="id2806226"></a>flea
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">flea</b></span> is a bug submitter for
+            <span class="application">Mutt</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2806244" name="id2806244"></a>muttbug
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">muttbug</b></span> is a script that
+            executes <span><b class="command">flea</b></span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2806263" name="id2806263"></a>mutt_dotlock
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mutt_dotlock</b></span> implements the
+            mail spool file lock.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="fetchmail.html">Prev</a><br />
+        Fetchmail-6.2.5
+      </div>
+      <div class="next">
+        <a accesskey="n" href="pine.html">Next</a><br />
+        Pine-4.60
+      </div>
+      <div class="up">
+        <a accesskey="u" href="mailnews.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

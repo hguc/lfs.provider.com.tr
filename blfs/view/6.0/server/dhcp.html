@@ -1,0 +1,406 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      DHCP-3.0.2
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;22.&nbsp;Other Server Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="svnserver.html" title=
+          "Running a Subversion Server">Prev</a>
+          <p>
+            Running a Subversion Server
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="leafnode.html" title=
+          "Leafnode-1.10.8">Next</a>
+          <p>
+            Leafnode-1.10.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="other.html" title=
+          "Chapter&nbsp;22.&nbsp;Other Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="dhcp" name="dhcp"></a>
+        <h1 class="sect1">
+          DHCP-3.0.2
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to DHCP
+          </h2>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">DHCP</span></span> package contains both the client and
+          server programs for <span class="acronym">DHCP</span>.
+          <span><strong class="command">dhclient</strong></span> (the client)
+          is useful for connecting your computer to a network which uses
+          <span class="acronym">DHCP</span> to assign network addresses.
+          <span><strong class="command">dhcpd</strong></span> (the server) is
+          useful for assigning network addresses on your private network.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2604612" name="id2604612"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://gd.tuwien.ac.at/infosys/servers/isc/dhcp/dhcp-3.0.2.tar.gz">
+                  <span class=
+                  "url">http://gd.tuwien.ac.at/infosys/servers/isc/dhcp/dhcp-3.0.2.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.isc.org/isc/dhcp/dhcp-3.0.2.tar.gz"><span class=
+                  "url">ftp://ftp.isc.org/isc/dhcp/dhcp-3.0.2.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 04800a111521e7442749b2ce883f962b
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 834 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 29.7 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.22 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2697980" name="id2697980"></a><span class=
+                  "application">dhcp</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2755898" name="id2755898"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../basicnet/net-tools.html">Net-tools-1.60</a> (you
+              may omit <span class="application">net-tools</span> by using
+              the following patch to utilize <span class=
+              "application">iproute2</span>: <a href=
+              "http://www.linuxfromscratch.org/blfs/downloads/6.0/dhcp-3.0.2-iproute2-2.patch">
+              <span class=
+              "url">http://www.linuxfromscratch.org/blfs/downloads/6.0/dhcp-3.0.2-iproute2-2.patch</span></a>)
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="dhcp-kernel" name="dhcp-kernel"></a>
+          <h2 class="sect2">
+            Installation of DHCP
+          </h2>
+        </div>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              You must have Packet Socket support (Device Drivers -&gt;
+              Networking Support -&gt; Networking Options -&gt; Packet
+              Socket) compiled into the kernel.
+            </p>
+          </div>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">DHCP</span></span> by running the following commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">patch -Np1 -i ../dhcp-3.0.2-iproute2-2.patch &amp;&amp;
+./configure &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make LIBDIR=/usr/lib INCDIR=/usr/include install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>LIBDIR=/usr/lib
+          INCDIR=/usr/include</tt></em>: This command installs the library
+          and include files in <tt class="filename">/usr</tt> instead of
+          <tt class="filename">/usr/local</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="dhcp-config" name="dhcp-config"></a>
+          <h2 class="sect2">
+            Configuring DHCP
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2702272" name="id2702272"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/dhclient.conf</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="dhcp-init" name="dhcp-init"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Information on configuring the <span class="acronym">DHCP</span>
+            client can be found in <a href="../connect/dhcp.html" title=
+            "Chapter&nbsp;14.&nbsp;DHCP Clients">Chapter&nbsp;14,
+            <span class="acronym">DHCP</span> Clients</a>.
+          </p>
+          <p>
+            Note that you only need the <span class="acronym">DHCP</span>
+            server if you want to issue <span class="acronym">LAN</span>
+            addresses over your network. The <span class=
+            "acronym">DHCP</span> client doesn't need this script to be used.
+            Also note that this script is coded for the <span class=
+            "strong"><strong>eth1</strong></span> interface, which may need
+            to be modified for your hardware configuration.
+          </p>
+          <p>
+            Install the <tt class="filename">/etc/rc.d/init.d/dhcp</tt> init
+            script included in the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-6.0</a>
+            package.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make install-dhcp</strong></span></kbd></pre>
+          <p>
+            The lease file must exist on startup. The following command will
+            satisfy that requirement:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">touch /var/state/dhcp/dhcpd.leases</strong></span></kbd></pre>
+          <p>
+            The following commands will create a base configuration file for
+            a <span class="acronym">DHCP</span> server. There are several
+            options that you may want to add (information that is passed back
+            to the <span class="acronym">DHCP</span> client) and those are
+            covered in the man pages for <tt class="filename">dhcp.conf</tt>.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt; /etc/dhcpd.conf &lt;&lt; "EOF"</strong></span>
+default-lease-time 72000;
+max-lease-time 144000;
+ddns-update-style ad-hoc;
+
+subnet <em class="replaceable"><tt>[192.168.5.0]</tt></em> netmask <em class=
+"replaceable"><tt>[255.255.255.0]</tt></em> {
+  range <em class="replaceable"><tt>[192.168.5.10] [192.168.5.240]</tt></em>;
+  option broadcast-address <em class=
+"replaceable"><tt>[192.168.5.255]</tt></em>;
+  option routers <em class="replaceable"><tt>[192.168.5.1]</tt></em>;
+}
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            All addresses should be changed to meet your circumstance.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">dhcpd, dhcrelay,
+              dhclient, dhclient-script, omshell</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">bdhcpctl.a,
+              libomapi.a</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/var/state/dhcp,
+              /usr/include/omapip, /usr/include/isi-dhcp</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2715194" name="id2715194"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="dhclient" name="dhclient"></a><span class=
+              "term"><span><strong class=
+              "command">dhclient</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is the implementation of the <span class=
+                "acronym">DHCP</span> client.
+              </p>
+            </dd>
+            <dt>
+              <a id="dhcpd" name="dhcpd"></a><span class=
+              "term"><span><strong class=
+              "command">dhcpd</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                implements Dynamic Host Configuration Protocol (<span class=
+                "acronym">DHCP</span>) and Internet Bootstrap Protocol
+                (<span class="acronym">BOOTP</span>) requests for network
+                addresses.
+              </p>
+            </dd>
+            <dt>
+              <a id="dhcrelay" name="dhcrelay"></a><span class=
+              "term"><span><strong class=
+              "command">dhcrelay</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                provides a means to accept <span class="acronym">DHCP</span>
+                and <span class="acronym">BOOTP</span> requests on a subnet
+                without a <span class="acronym">DHCP</span> server and relay
+                them to a <span class="acronym">DHCP</span> server on another
+                subnet.
+              </p>
+            </dd>
+            <dt>
+              <a id="omshell" name="omshell"></a><span class=
+              "term"><span><strong class=
+              "command">omshell</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                provides an interactive way to connect to, query, and
+                possibly change, the ISC DHCP Server's state via OMAPI, the
+                Object Management API.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-03-13 19:07:02 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="svnserver.html" title=
+          "Running a Subversion Server">Prev</a>
+          <p>
+            Running a Subversion Server
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="leafnode.html" title=
+          "Leafnode-1.10.8">Next</a>
+          <p>
+            Leafnode-1.10.8
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="other.html" title=
+          "Chapter&nbsp;22.&nbsp;Other Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

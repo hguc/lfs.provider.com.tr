@@ -1,0 +1,410 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      NCPFS-2.2.4
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;18.&nbsp;Basic Networking Programs
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="nfs-utils.html" title=
+          "NFS Utilities-1.0.6">Prev</a>
+          <p>
+            NFS Utilities-1.0.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ntp.html" title="NTP-4.2.0">Next</a>
+          <p>
+            NTP-4.2.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="ncpfs" name="ncpfs"></a>
+        <h1 class="sect1">
+          NCPFS-2.2.4
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to NCPFS
+          </h2>
+        </div>
+        <p>
+          The <span class="application"><span class=
+          "acronym">NCPFS</span></span> package contains client and
+          administration tools for use with Novell networks.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2611568" name="id2611568"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://platan.vc.cvut.cz/ftp/pub/linux/ncpfs/ncpfs-2.2.4.tar.gz">
+                  <span class=
+                  "url">http://platan.vc.cvut.cz/ftp/pub/linux/ncpfs/ncpfs-2.2.4.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://platan.vc.cvut.cz/pub/linux/ncpfs/ncpfs-2.2.4.tar.gz">
+                  <span class=
+                  "url">ftp://platan.vc.cvut.cz/pub/linux/ncpfs/ncpfs-2.2.4.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: 5fd2ec0680ba7e66df142637e17a5ac9
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.6 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 30 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.52 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2728991" name="id2728991"></a><span class=
+                  "application"><span class="acronym">NCPFS</span></span>
+                  dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2643261" name="id2643261"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/linux_pam.html">Linux-PAM-0.78</a> and
+              <a href="../content/php.html">PHP-5.0.3</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of NCPFS
+          </h2>
+        </div>
+        <p>
+          Install <span class="application"><span class=
+          "acronym">NCPFS</span></span> by running the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix="" --includedir=/usr/include \
+    --mandir=/usr/share/man --datadir=/usr/share &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+make install-dev</kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--prefix=""</tt></em>: installs binaries
+          on the root partition so that they are available at boot time. This
+          may not be ideal for all systems. If <tt class="filename">/usr</tt>
+          is mounted locally, <em class=
+          "parameter"><tt>--prefix=/usr</tt></em> may be a better option.
+        </p>
+        <p>
+          <em class="parameter"><tt>--includedir=/usr/include</tt></em>:
+          Tells configure to look in <tt class="filename">/usr/include</tt>
+          for header files. It also tells make to install <span class=
+          "application">NCPFS</span>'s headers here.
+        </p>
+        <p>
+          <em class="parameter"><tt>--mandir=/usr/share/man</tt></em>:
+          installs the man pages in the correct location.
+        </p>
+        <p>
+          <em class="parameter"><tt>--datadir=/usr/share</tt></em>: correctly
+          installs the locale files to <tt class="filename">/usr/share</tt>.
+        </p>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              If you do not need to use the <span class="acronym">IPX</span>
+              protocol, or you use a different <span class=
+              "acronym">IPX</span> package, you can optionally pass
+              <em class="parameter"><tt>--disable-ipx</tt></em> and/or
+              <em class="parameter"><tt>--disable-ipx-tools</tt></em> to the
+              <span><strong class="command">configure</strong></span> script
+              to disable these options.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring NCPFS
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2759235" name="id2759235"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.nwclient</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2690122" name="id2690122"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            A config file <tt class="filename">~/.nwclient</tt> should be
+            placed in the home directory of each user that intends to use
+            <span class="application">ncpfs</span>. The permissions on this
+            file should be set to 600, for obvious security reasons. The
+            configuration file should contain a single line per server that
+            the user will use. Each line should contain the server name, the
+            user name, and optionally the password. Below is a sample
+            <tt class="filename">.nwclient</tt> file.
+          </p>
+          <pre class="userinput"><kbd class=
+          "command"># Begin example <tt class=
+          "filename">~/.nwclient</tt> config file
+
+Server1/User1 Password
+Server2/User1 
+Server2/Guest1 -
+
+# End example .nwclient config file</kbd></pre>
+          <p>
+            The syntax for the <tt class="filename">.nwclient</tt> file is
+            simple, <strong class="userinput"><tt>server_name/user_name
+            password</tt></strong>. Be extremely careful when creating or
+            editing this file as the client utilities are very picky about
+            syntax. There should always be a space immediately after the
+            username. If this space is substituted by a tab or multiple
+            spaces, you will not get the expected results when attempting to
+            use the <span class="application">NCPFS</span> tools. If no
+            password is supplied, the client utilities will ask for a
+            password when it is needed. If no password is needed, for
+            instance when using a guest account, a single '-' should be put
+            in place of a password.
+          </p>
+          <p>
+            It should be noted that the ncpmount is not intended to mount
+            individual volumes because each mount point creates a separate
+            client connection to the Novell server. Mounting each individual
+            volume separately would be unwise, as mounting all volumes on a
+            server under one mount point uses only one client connection.
+          </p>
+          <p>
+            If you need to set up the <span class="acronym">IPX</span>
+            protocol at boot, you can install the <tt class=
+            "filename">/etc/sysconfig/network-devices/services/ipx</tt>
+            network service script included with the <a href=
+            "../introduction/bootscripts.html">blfs-bootscripts-6.0</a>
+            package.
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">make install-service-ipx</strong></span></kbd></pre>
+          <p>
+            Next install the <tt class=
+            "filename">/etc/sysconfig/network-devices/ifconfig.eth0/ipx</tt>
+            configuration file with the following commands:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">install -d /etc/sysconfig/network-devices/ifconfig.eth0 &amp;&amp;
+cat &gt; /etc/sysconfig/network-devices/ifconfig.eth0/ipx &lt;&lt; "EOF"</strong></span>
+ONBOOT="yes"
+SERVICE="ipx"
+FRAME="<em class="replaceable"><tt>[802.2]</tt></em>"
+<span><strong class="command">EOF</strong></span></kbd></pre>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="itemizedlist">
+          <ul>
+            <li>
+              <p>
+                <span class="emphasis"><em>Client Utilities:</em></span>
+                <span><strong class="command">ncpmount</strong></span>,
+                <span><strong class="command">ncpumountt</strong></span>,
+                <span><strong class="command">nprintt</strong></span>,
+                <span><strong class="command">nsendt</strong></span>,
+                <span><strong class="command">nwpasswdt</strong></span>,
+                <span><strong class="command">nwsfindt</strong></span>,
+                <span><strong class="command">pqlistt</strong></span>,
+                <span><strong class="command">pqrmt</strong></span>,
+                <span><strong class="command">pqstatt</strong></span> and
+                <span><strong class="command">slist</strong></span>.
+              </p>
+            </li>
+            <li>
+              <p>
+                <span class="emphasis"><em>Server Admin
+                Utilities:</em></span> <span><strong class=
+                "command">ncopyt</strong></span>, <span><strong class=
+                "command">nwbocreatet</strong></span>, <span><strong class=
+                "command">nwbolst</strong></span>, <span><strong class=
+                "command">nwbopropst</strong></span>, <span><strong class=
+                "command">nwbormt</strong></span>, <span><strong class=
+                "command">nwbpaddt</strong></span>, <span><strong class=
+                "command">nwbpcreatet</strong></span>, <span><strong class=
+                "command">nwbprmt</strong></span>, <span><strong class=
+                "command">nwbpsett</strong></span>, <span><strong class=
+                "command">nwbpvaluest</strong></span>, <span><strong class=
+                "command">nwdirt</strong></span>, <span><strong class=
+                "command">nwdpvaluest</strong></span>, <span><strong class=
+                "command">nwfsctrlt</strong></span>, <span><strong class=
+                "command">nwfsinfot</strong></span>, <span><strong class=
+                "command">nwfstimet</strong></span>, <span><strong class=
+                "command">nwgrantt</strong></span>, <span><strong class=
+                "command">nwpurget</strong></span>, <span><strong class=
+                "command">nwrevoket</strong></span>, <span><strong class=
+                "command">nwrightst</strong></span>, <span><strong class=
+                "command">nwtrusteet</strong></span>, <span><strong class=
+                "command">nwtrustee2t</strong></span>, <span><strong class=
+                "command">nwuserlistt</strong></span>, and
+                <span><strong class="command">nwvolinfo</strong></span>.
+              </p>
+            </li>
+            <li>
+              <p>
+                <span class="emphasis"><em><span class="acronym">IPX</span>
+                Interface Utilities:</em></span> <span><strong class=
+                "command">ipx_cmdt</strong></span>, <span><strong class=
+                "command">ipx_configuret</strong></span>,
+                <span><strong class="command">ipx_interfacet</strong></span>,
+                <span><strong class=
+                "command">ipx_internal_nett</strong></span> and
+                <span><strong class="command">ipx_route</strong></span>.
+              </p>
+            </li>
+            <li>
+              <p>
+                <span class="emphasis"><em>Other Utilities:</em></span>
+                <span><strong class="command">ncpmap</strong></span> and
+                <span><strong class="command">nwauth</strong></span>.
+              </p>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-02-11 08:57:40 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="nfs-utils.html" title=
+          "NFS Utilities-1.0.6">Prev</a>
+          <p>
+            NFS Utilities-1.0.6
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="ntp.html" title="NTP-4.2.0">Next</a>
+          <p>
+            NTP-4.2.0
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

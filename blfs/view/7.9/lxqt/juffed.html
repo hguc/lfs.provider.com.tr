@@ -1,0 +1,307 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      juffed-0.10.r71.gc3c1a3f
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.9">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 7.9
+      </h4>
+      <h3>
+        Chapter&nbsp;42.&nbsp;LXQt Applications
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="qscintilla.html" title=
+          "QScintilla-gpl-2.9.1">Prev</a>
+          <p>
+            QScintilla-gpl-2.9.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="qupzilla.html" title=
+          "qupzilla-1.8.9">Next</a>
+          <p>
+            qupzilla-1.8.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lxqt-apps.html" title=
+          "Chapter&nbsp;42.&nbsp;LXQt Applications">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.9">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="juffed" name="juffed"></a>juffed-0.10.r71.gc3c1a3f
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to JuffEd
+        </h2>
+        <p>
+          The <span class="application">JuffEd</span> package is a Qt based
+          editor with support for multiple tabs. It is simple and clear, but
+          very powerful. It supports language syntax highlighting,
+          auto-indents in accordance with file type, code blocks folding,
+          matching braces highlighting with instant jumps between them,
+          powerful search and replacing text using regular expressions
+          (including multiline ones) with the opportunity to use matches \1,
+          \2, &hellip; in substitutions, a terminal emulator, saving named
+          sessions and many other features.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.9
+          platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://anduin.linuxfromscratch.org/BLFS/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz">
+                http://anduin.linuxfromscratch.org/BLFS/juffed/juffed-0.10.r71.gc3c1a3f.tar.xz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 5d211f5aadcb3d7365b5a6127d3d275f
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.3 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 22 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.8 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <p>
+          The source tarball shown above was created by the BLFS team by
+          cloning the source code repository, finding the correct version to
+          rename accordingly the source code directory, removing <code class=
+          "filename">.git</code> directory and <code class=
+          "filename">.gitignore</code> file, and finally making the
+          compressed tarball. No other modification has been made.
+        </p>
+        <h3>
+          JuffEd Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="qscintilla.html" title=
+          "QScintilla-gpl-2.9.1">qscintilla-2.9.1</a>
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="qtermwidget.html" title=
+          "qtermwidget-0.6.0">qtermwidget-0.6.0</a> (for the terminal)
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/desktop-file-utils.html" title=
+          "desktop-file-utils-0.22">desktop-file-utils-0.22</a> and <a class=
+          "ulink" href="http://cihar.com/software/enca/">Enca</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/juffed">http://wiki.linuxfromscratch.org/blfs/wiki/juffed</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of JuffEd
+        </h2>
+        <p>
+          For compilation with <span class="application">Qt4</span>, see
+          &ldquo;<span class="quote">Command Explanations</span>&rdquo;
+          below. Install <span class="application">JuffEd</span> by running
+          the following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">mkdir -v build &amp;&amp;
+cd       build &amp;&amp;
+
+cmake -DCMAKE_BUILD_TYPE=Release  \
+      -DCMAKE_INSTALL_PREFIX=/usr \
+      -DLIB_INSTALL_DIR=/usr/lib  \
+      -DBUILD_TERMINAL=ON         \
+      -DUSE_QT5=true              \
+      ..       &amp;&amp;
+
+make</kbd>
+</pre>
+        <p>
+          The choice of <code class="filename">/usr</code> prefix is due to
+          the general characteristics of this program, which can be used
+          without <span class="application">LXQt</span>.
+        </p>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>-DBUILD_TERMINAL=ON</code></em>: This
+          switch is used in order to enable building the terminal. Toggle to
+          &ldquo;<span class="quote">OFF</span>&rdquo; or remove the switch,
+          if you do not wish it.
+        </p>
+        <p>
+          <em class="parameter"><code>-DUSE_QT5=true</code></em>: This switch
+          is used in order to build this application linked to <span class=
+          "application">Qt5</span>. Toggle to &ldquo;<span class=
+          "quote">false</span>&rdquo;, if you prefer to use <span class=
+          "application">Qt4</span>.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Program:</strong>
+              <span class="segbody">juffed</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libjuff.so, libjuffed-engine-qsci.so and
+              plugins under /usr/lib/juffed/plugins</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directory:</strong>
+              <span class="segbody">/usr/{include,lib,share}/juffed</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="juffed-prog" name="juffed-prog"></a><span class=
+                    "term"><span class=
+                    "command"><strong>juffed</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a <span class="application">Qt</span> based text
+                    editor.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libjuff" name="libjuff"></a><span class=
+                    "term"><code class="filename">libjuff.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the <span class="application">JuffEd</span> API
+                    functions.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libjuffed-engine-qsci" name=
+                    "libjuffed-engine-qsci"></a><span class=
+                    "term"><code class=
+                    "filename">libjuffed-engine-qsci.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the <span class="application">QScintilla</span>
+                    bindings.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2016-03-05 10:01:52 -0800
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="qscintilla.html" title=
+          "QScintilla-gpl-2.9.1">Prev</a>
+          <p>
+            QScintilla-gpl-2.9.1
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="qupzilla.html" title=
+          "qupzilla-1.8.9">Next</a>
+          <p>
+            qupzilla-1.8.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="lxqt-apps.html" title=
+          "Chapter&nbsp;42.&nbsp;LXQt Applications">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.9">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

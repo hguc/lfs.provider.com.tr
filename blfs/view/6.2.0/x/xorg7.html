@@ -1,0 +1,238 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Introduction to Xorg-7.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;25.&nbsp;X Window System Environment
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="xfree86.html" title="XFree86-4.6.0">Prev</a>
+          <p>
+            XFree86-4.6.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="x7proto.html" title=
+          "Xorg Protocol Headers">Next</a>
+          <p>
+            Xorg Protocol Headers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;25.&nbsp;X Window System Environment">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="xorg7" name="xorg7"></a>
+        <h1 class="sect1">
+          Introduction to Xorg-7.1
+        </h1>
+      </div>
+      <p>
+        <span class="application">Xorg</span> is a freely redistributable,
+        open-source implementation of the <span class="application">X</span>
+        Window System. This system provides a client/server interface between
+        display hardware (the mouse, keyboard, and video displays) and the
+        desktop environment, while also providing both the windowing
+        infrastructure and a standardized application interface (API).
+      </p>
+      <p class="usernotes">
+        User Notes: <a href=
+        "http://wiki.linuxfromscratch.org/blfs/wiki/Xorg7"><span class=
+        "url">http://wiki.linuxfromscratch.org/blfs/wiki/Xorg7</span></a>
+      </p>
+      <h3>
+        <a id="id2721346" name="id2721346"></a>Xorg Download and Installation
+        Instructions
+      </h3>
+      <p>
+        Xorg-7.0.0 introduced a completely auto-tooled, modular build system.
+        With the new modular build system, it is no longer possible to
+        download the entire package in a single file. In fact, there may be
+        as many as 293 files that need to be fetched from the download
+        location. To assist with such a large task, installing <a href=
+        "../basicnet/wget.html">Wget-1.10.2</a> is strongly recommended for
+        downloading the needed files. A complete <span class=
+        "application">wget</span> file list is provided for each section that
+        includes multiple packages.
+      </p>
+      <p>
+        Given the number of packages available, deciding which packages you
+        need to install for your particular setup may seem a bit overwhelming
+        at first. Take a look at <a href=
+        "http://lists.x.org/archives/xorg-modular/2005-November/000801.html"><span class="url">
+        this thread</span></a> to get an idea of what you will need. If you
+        are unsure, you should install all packages at the cost of extra disk
+        space.
+      </p>
+      <div class="note">
+        <div class="admonhead">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3 class="admontitle">
+            Note
+          </h3>
+        </div>
+        <div class="admonbody">
+          <p>
+            Even if you intend to download only the necessary packages, you
+            should download the wget file lists. The list of files are
+            ordered by dependency, and the package versions listed in the
+            files are known to work well with each other. Newer packages are
+            likely intended for the next release of <span class=
+            "application">Xorg</span> and have already proved to be
+            incompatible with current versions of software installed in BLFS.
+            The installed size of <span class="application">Xorg</span> can
+            be reduced considerably by installing only the packages that you
+            will need and use, however, the BLFS book cannot account for all
+            dependencies and build options for the individual <span class=
+            "application">Xorg</span> packages. The instructions assume that
+            all packages have been built. A <a href=
+            "http://wiki.linuxfromscratch.org/blfs/wiki/Xorg-7.1"><span class="url">
+            wiki</span></a> page containing dependency information is under
+            development. You are encouraged to add to these pages if you
+            discover additional information that may be helpful to other
+            users who selectively install individual packages.
+          </p>
+        </div>
+      </div>
+      <p>
+        Additionally, because of the large number of repetitive commands, you
+        are encouraged to script the build. For most sections, you can use a
+        script with commands similar to the following, to compile and install
+        all packages in a wget file list:
+      </p>
+      <pre class="screen">bash -e #exit on all errors
+for package in $(cat ../wgetlist.wget)
+do
+  packagedir=$(echo $package | sed 's/.tar.bz2//')
+  tar -xf $package
+  cd $packagedir
+  ./configure $XORG_CONFIG
+  make
+  make install
+  cd ..
+  rm -rf $packagedir
+  rm -f $package
+done 2&gt;&amp;1 | tee -a ../xorg-compile.log #log the entire loop</pre>
+      <p>
+        The above shell will exit immediately on error. If it runs to
+        completion, you should manually exit the shell before continuing on
+        to the next set of instructions.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Setting up the Xorg Build Environment
+          </h2>
+        </div>
+        <p>
+          First, you'll need to create a working directory:
+        </p>
+        <pre class="userinput"><kbd class="command">mkdir xc &amp;&amp;
+cd xc</kbd></pre>
+        <p>
+          As with previous releases of the X Window System, it may be
+          desirable to install <span class="application">Xorg</span> into an
+          alternate prefix. This is no longer common practice among Linux
+          distributions. The common installation prefix for <span class=
+          "application">Xorg</span> on Linux is <tt class=
+          "filename">/usr</tt>. There is no standard alternate prefix, nor is
+          there any exception in the current revision of the Filesystem
+          Hierarchy Standard for Release 7 of the X Window System. Alan
+          Coopersmith of Sun Microsystems, has recently stated "At Sun, we
+          were using <tt class="filename">/usr/X11</tt> and plan to stick
+          with it." Only the <tt class="filename">/opt/*</tt> prefix or the
+          <tt class="filename">/usr</tt> prefix adhere to the current FHS
+          guidelines.
+        </p>
+        <p>
+          Choose your installation prefix, and set the <tt class=
+          "envar">XORG_PREFIX</tt> variable with the following command:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export XORG_PREFIX="<em class=
+        "replaceable"><tt>&lt;PREFIX&gt;</tt></em>"</kbd></pre>
+        <p>
+          Throughout these instructions, you will use the following
+          <span><strong class="command">configure</strong></span> switches
+          for all of the packages. Create the <tt class=
+          "envar">XORG_CONFIG</tt> variable to use for this parameter
+          substitution:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">export XORG_CONFIG="--prefix=$XORG_PREFIX --sysconfdir=/etc \
+    --mandir=$XORG_PREFIX/share/man --localstatedir=/var"</kbd></pre>
+        <p>
+          If you've decided to use an alternate prefix, be sure to add
+          <tt class="filename"><em class=
+          "replaceable"><tt>&lt;PREFIX&gt;</tt></em>/bin</tt> to your
+          <tt class="envar">PATH</tt> environment variable and <tt class=
+          "filename"><em class=
+          "replaceable"><tt>&lt;PREFIX&gt;</tt></em>/lib/pkgconfig</tt> to
+          your <tt class="envar">PKG_CONFIG_PATH</tt> variable. For detailed
+          instructions, see <a href="../postlfs/profile.html">The Bash Shell
+          Startup Files</a>. You should also add <tt class=
+          "filename"><em class=
+          "replaceable"><tt>&lt;PREFIX&gt;</tt></em>/lib</tt> to the
+          <tt class="filename">/etc/ld.so.conf</tt> file and <tt class=
+          "filename"><em class=
+          "replaceable"><tt>&lt;PREFIX&gt;</tt></em>/share/man</tt> as a
+          MANDATORY_MANPATH in <tt class="filename">/etc/man_db.conf</tt>.
+        </p>
+      </div>
+      <p class="updated">
+        Last updated on 2007-02-10 09:17:46 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xfree86.html" title="XFree86-4.6.0">Prev</a>
+          <p>
+            XFree86-4.6.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="x7proto.html" title=
+          "Xorg Protocol Headers">Next</a>
+          <p>
+            Xorg Protocol Headers
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;25.&nbsp;X Window System Environment">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

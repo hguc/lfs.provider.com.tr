@@ -1,0 +1,473 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Colord-1.3.3
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.10">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch <span>(systemd edition)</span>
+        - Version 7.10
+      </h4>
+      <h3>
+        Chapter&nbsp;12.&nbsp;System Utilities
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="colord.html" title="Colord-1.2.12">Prev</a>
+          <p>
+            Colord-1.2.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cpio.html" title="cpio-2.12">Next</a>
+          <p>
+            cpio-2.12
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;12.&nbsp;System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="colord1" name="colord1"></a>Colord-1.3.3
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Colord
+        </h2>
+        <p>
+          <span class="application">Colord</span> is a system service that
+          makes it easy to manage, install, and generate color profiles. It
+          is used mainly by <span class="application">GNOME Color
+          Manager</span> for system integration and use when no users are
+          logged in.
+        </p>
+        <p>
+          This package is known to build and work properly using an LFS-7.10
+          platform.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://www.freedesktop.org/software/colord/releases/colord-1.3.3.tar.xz">
+                http://www.freedesktop.org/software/colord/releases/colord-1.3.3.tar.xz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 63ad39539845040141e8deffde11cf85
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.2 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 39 MB (with tests)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.4 SBU (with tests)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Colord Dependencies
+        </h3>
+        <h4>
+          Required
+        </h4>
+        <p class="required">
+          <a class="xref" href="dbus.html" title=
+          "D-Bus-1.10.10">D-Bus-1.10.10</a>, <a class="xref" href=
+          "glib2.html" title="GLib-2.48.2">GLib-2.48.2</a>, <a class="xref"
+          href="lcms2.html" title="Little CMS-2.8">Little CMS-2.8</a>, and
+          <a class="xref" href="../server/sqlite.html" title=
+          "SQLite-3.14.1">SQLite-3.14.1</a>
+        </p>
+        <h4>
+          Recommended
+        </h4>
+        <p class="recommended">
+          <a class="xref" href="gobject-introspection.html" title=
+          "gobject-introspection-1.48.0">gobject-introspection-1.48.0</a>,
+          <a class="xref" href="libgudev.html" title=
+          "libgudev-230">libgudev-230</a>, <a class="xref" href=
+          "libgusb.html" title="libgusb-0.2.9">libgusb-0.2.9</a>, <a class=
+          "xref" href="../postlfs/polkit.html" title=
+          "Polkit-0.113">Polkit-0.113</a>, <a class="xref" href=
+          "systemd.html" title="Systemd-231">Systemd-231</a>, and <a class=
+          "xref" href="vala.html" title="Vala-0.32.1">Vala-0.32.1</a>
+        </p>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../pst/docbook-utils.html" title=
+          "DocBook-utils-0.6.14">DocBook-utils-0.6.14</a>, <a class="xref"
+          href="../gnome/gnome-desktop.html" title=
+          "gnome-desktop-3.20.2">gnome-desktop-3.20.2</a> and <a class="xref"
+          href="../x/colord-gtk.html" title=
+          "colord-gtk-0.1.26">colord-gtk-0.1.26</a> (to build the example
+          tools), <a class="xref" href="gtk-doc.html" title=
+          "GTK-Doc-1.25">GTK-Doc-1.25</a>, <a class="xref" href=
+          "libxslt.html" title="libxslt-1.1.29">libxslt-1.1.29</a>, <a class=
+          "xref" href="../pst/sane.html" title="SANE-1.0.25">SANE-1.0.25</a>,
+          <a class="ulink" href="http://www.argyllcms.com/">ArgLLCMS</a>, and
+          <a class="ulink" href=
+          "http://www.bash-completion.alioth-debian.org/">Bash Completion</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/colord1">http://wiki.linuxfromscratch.org/blfs/wiki/colord1</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Colord
+        </h2>
+        <div class="admon warning">
+          <img alt="[Warning]" src="../images/warning.png" />
+          <h3>
+            Warning
+          </h3>
+          <p>
+            This package will overwrite any previous version of Colord that
+            you may have on your system. This package is a development
+            version and is only intended to be used by gnome-color-manager at
+            this time.
+          </p>
+        </div>
+        <p>
+          There should be a dedicated user and group to take control of the
+          colord daemon after it has started. Issue the following commands as
+          the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">groupadd -g 71 colord &amp;&amp;
+useradd -c "Color Daemon Owner" -d /var/lib/colord -u 71 \
+        -g colord -s /bin/false colord</kbd>
+</pre>
+        <p>
+          Install <span class="application">Colord</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">./configure --prefix=/usr              \
+            --sysconfdir=/etc          \
+            --localstatedir=/var       \
+            --with-daemon-user=colord  \
+            --enable-vala              \
+            --enable-daemon            \
+            --enable-session-helper    \
+            --enable-libcolordcompat   \
+            --disable-rpath            \
+            --disable-argyllcms-sensor \
+            --disable-bash-completion  \
+            --disable-static &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install</kbd>
+</pre>
+        <p>
+          To test the results, issue: <span class="command"><strong>make -k
+          check</strong></span>. At least one test, <code class=
+          "filename">./lib/colord/.libs/lt-cd-test-daemon</code>, may fail.
+          The test suite must be run after the package is installed, and the
+          system-wide D-Bus Daemon must be running.
+        </p>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--with-daemon-user=colord</code></em>:
+          This switch is used so the colord daemon will run as an
+          unprivileged user instead of the <code class=
+          "systemitem">root</code> user.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-vala</code></em>: This switch
+          enables building the <span class="application">Vala</span>
+          bindings. Remove if you don't have <a class="xref" href="vala.html"
+          title="Vala-0.32.1">Vala-0.32.1</a> installed.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-daemon</code></em>: This
+          switch enables building the <span class="application">Colord</span>
+          daemon.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-session-helper</code></em>:
+          This switch enables building the session helper for <span class=
+          "application">Colord</span>.
+        </p>
+        <p>
+          <em class="parameter"><code>--enable-libcolordcompat</code></em>:
+          This switch enables building a compatibility library for older
+          packages that use <span class="application">Colord</span>.
+        </p>
+        <p>
+          <em class="parameter"><code>--disable-rpath</code></em>: This
+          switch prevents the build process from hard-coding library paths
+          into its executables.
+        </p>
+        <p>
+          <em class="parameter"><code>--disable-argyllcms-sensor</code></em>:
+          This switch disables the ArgLLCMS sensor driver. Omit if you have
+          <a class="ulink" href="http://www.argyllcms.com/">ArgLLCMS</a>
+          installed and wish to use it.
+        </p>
+        <p>
+          <em class="parameter"><code>--disable-bash-completion</code></em>:
+          This switch disables Bash Completion support for Colord
+          applications.
+        </p>
+        <p>
+          <em class="parameter"><code>--disable-static</code></em>: This
+          switch prevents installation of static versions of the libraries.
+        </p>
+        <p>
+          <code class="option">--enable-gtk-doc</code>: Use this parameter if
+          <span class="application">GTK-Doc</span> is installed and you wish
+          to rebuild and install the API documentation.
+        </p>
+        <p>
+          <code class="option">--disable-gusb</code>: Use this switch if you
+          don't have <span class="application">libgusb</span> installed.
+        </p>
+        <p>
+          <code class="option">--disable-udev</code>: Use this switch if you
+          don't have <span class="application">libgudev</span> installed.
+        </p>
+        <p>
+          <code class="option">--disable-polkit</code>: Use this switch if
+          you don't have <span class="application">polkit</span> installed.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">cd-create-profile, cd-fix-profile,
+              cd-iccdump, cd-it8, and colormgr</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libcolord.so, libcolordcompat.so,
+              libcolordprivate.so, and libcolorhug.so</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/usr/include/colord-1,
+              /usr/lib/colord-{plugins,sensors}, /usr/share/color{d},
+              /usr/share/gtk-doc/html/colord, and /var/lib/colord</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cd-create-profile1" name=
+                    "cd-create-profile1"></a><span class="term"><span class=
+                    "command"><strong>cd-create-profile</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the Color Manager Profile Creation Tool.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cd-fix-profile1" name=
+                    "cd-fix-profile1"></a><span class="term"><span class=
+                    "command"><strong>cd-fix-profile</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool used to fix metadata in ICC profiles.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cd-iccdump1" name="cd-iccdump1"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cd-iccdump</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    dumps the contents of an ICC profile as human readable
+                    text.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cd-it81" name="cd-it81"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cd-it8</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the Color Manager Testing Tool.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="colormgr1" name="colormgr1"></a><span class=
+                    "term"><span class=
+                    "command"><strong>colormgr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a text-mode program that allows you to interact with
+                    colord on the command line.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libcolord.so" name="libcolord.so"></a><span class=
+                    "term"><code class="filename">libcolord.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the <span class="application">Colord</span> API
+                    functions.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libcolordcompat.so" name=
+                    "libcolordcompat.so"></a><span class="term"><code class=
+                    "filename">libcolordcompat.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains legacy API functions for compatibility with
+                    older applications.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libcolordprivate.so" name=
+                    "libcolordprivate.so"></a><span class="term"><code class=
+                    "filename">libcolordprivate.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains internal API functions for the programs included
+                    with <span class="application">Colord</span>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="libcolorhug.so" name=
+                    "libcolorhug.so"></a><span class="term"><code class=
+                    "filename">libcolorhug.so</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains a simple display hardware colorimiter.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2016-08-28 02:28:15 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="colord.html" title="Colord-1.2.12">Prev</a>
+          <p>
+            Colord-1.2.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="cpio.html" title="cpio-2.12">Next</a>
+          <p>
+            cpio-2.12
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="sysutils.html" title=
+          "Chapter&nbsp;12.&nbsp;System Utilities">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch (systemd edition) - Version 7.10">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,549 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Subversion-1.1.4
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;18.&nbsp;Basic Networking Programs
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="samba3-client.html" title=
+          "Samba-3.0.14a Client">Prev</a>
+          <p>
+            Samba-3.0.14a Client
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="tcpwrappers.html" title=
+          "Tcpwrappers-7.6">Next</a>
+          <p>
+            Tcpwrappers-7.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="subversion" name="subversion"></a>
+        <h1 class="sect1">
+          Subversion-1.1.4
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Subversion
+          </h2>
+        </div>
+        <p>
+          <span class="application">Subversion</span> is a version control
+          system that is designed to be a compelling replacement for
+          <span class="application">CVS</span> in the open source community.
+          It extends and enhances <span class="application">CVS</span>'
+          feature set, while maintaining a similar interface for those
+          already familiar with <span class="application">CVS</span>. These
+          instructions install the client and server software used to
+          manipulate a <span class="application">Subversion</span>
+          repository. Creation of a repository is covered at <a href=
+          "../server/svnserver.html">Running a Subversion Server</a>.
+        </p>
+        <h3>
+          <a id="id2710649" name="id2710649"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://subversion.tigris.org/tarballs/subversion-1.1.4.tar.bz2">
+                <span class=
+                "url">http://subversion.tigris.org/tarballs/subversion-1.1.4.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 6e557ae65b6b8d7577cc7704ede85a23
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 6.7 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 182 MB (additional 577 MB to
+                run all test suites)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 1.24 SBU (add 0.90 SBU for SWIG
+                bindings and 6.45 SBU to run test suites)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2724328" name="id2724328"></a>Subversion Dependencies
+        </h3>
+        <h4>
+          <a id="id2758931" name="id2758931"></a>Required
+        </h4>
+        <p>
+          <a href="../general/libxml2.html">libxml2-2.6.20</a> (only if using
+          the bundled version of <span class="application">neon</span>)
+        </p>
+        <h4>
+          <a id="id2806184" name="id2806184"></a>Optional
+        </h4>
+        <p>
+          <a href="../general/Python.html">Python-2.4.1</a> (required to run
+          the full test suite), <a href=
+          "../server/majorservers.html#apache">Apache-2.0.54</a>, <a href=
+          "../server/openssh.html">OpenSSH-4.1p1</a> (runtime only), <a href=
+          "http://www.webdav.org/neon/"><span class=
+          "url">neon-0.24.7</span></a>, <a href=
+          "../general/jdk.html">JDK-1.5.0</a> (to build the <span class=
+          "application">JAVA</span> bindings), <a href=
+          "http://www.junit.org/"><span class="url">JUnit</span></a> (for
+          running the <span class="application">JAVA</span> bindings test
+          suite and requires <a href="../general/unzip.html">UnZip-5.52</a>),
+          <a href="http://www.inet.no/dante/"><span class=
+          "url">Dante</span></a> (alternate <span class=
+          "application">JAVA</span> compiler), <a href=
+          "http://oss.software.ibm.com/developerworks/opensource/jikes/"><span class="url">
+          Jikes</span></a> (another alternate <span class=
+          "application">JAVA</span> compiler) and inetd or <a href=
+          "../server/xinetd.html">xinetd-2.3.13</a> (server only)
+        </p>
+        <h4>
+          <a id="id2646386" name="id2646386"></a>Optional for the Bundled
+          Version of <span class="application">Neon</span>
+        </h4>
+        <p>
+          <a href="../general/pkgconfig.html">pkg-config-0.19</a>, <a href=
+          "../postlfs/security.html#openssl">OpenSSL-0.9.7g</a>, <a href=
+          "../postlfs/heimdal.html">Heimdal-0.7</a> or <a href=
+          "../postlfs/mitkrb.html">MIT krb5-1.4.1</a>
+        </p>
+        <h4>
+          <a id="id2792495" name="id2792495"></a>Optional for the Bundled
+          Version of <span class="application">Apache Portable Runtime</span>
+        </h4>
+        <p>
+          <a href="../general/expat.html">expat-1.95.8</a> and <a href=
+          "../general/gdbm.html">GDBM-1.8.3</a>
+        </p>
+        <h4>
+          <a id="id2686597" name="id2686597"></a>Optional to Build the
+          <span class="application">SWIG</span> Bindings
+        </h4>
+        <p>
+          <a href="http://www.swig.org"><span class="url">SWIG</span></a> and
+          <a href="../general/Python.html">Python-2.4.1</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Subversion
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Subversion</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make</kbd></pre>
+        <div class="note">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="admontitle">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              If you have <span class="application">Apache</span> installed,
+              pass the <tt class="option">--with-apr=/usr</tt> and <tt class=
+              "option">--with-apr-util=/usr</tt> switches to the
+              <span><strong class="command">configure</strong></span> script.
+              Otherwise, <span class="application">Subversion</span> will
+              overwrite APR and APR-utils from the <span class=
+              "application">Apache</span> installation with its own files.
+              You may also need to pass <tt class=
+              "option">--with-apxs=/usr/sbin/apxs</tt> as
+              <span><strong class="command">apxs</strong></span> might not be
+              in an unprivileged user's <tt class="envar">PATH</tt> and won't
+              be properly discovered.
+            </p>
+          </div>
+        </div>
+        <p>
+          If you passed the <tt class="option">--enable-javahl</tt> parameter
+          to <span><strong class="command">configure</strong></span> and wish
+          to build the <span class="application">JAVA</span> <span class=
+          "application">Subversion</span> bindings, issue the following
+          command:
+        </p>
+        <pre class="userinput"><kbd class="command">make javahl</kbd></pre>
+        <p>
+          If you passed the <tt class="option">--with-swig</tt> and
+          <tt class="option">--enable-swig-bindings</tt> parameters to
+          <span><strong class="command">configure</strong></span> and wish to
+          build the <span class="application">SWIG</span> <span class=
+          "application">Perl</span> and <span class=
+          "application">Python</span> <span class=
+          "application">Subversion</span> bindings, issue the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class="command">make swig-pl &amp;&amp;
+make swig-py</kbd></pre>
+        <p>
+          To test the results, issue: <span><strong class="command">make
+          check</strong></span>.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install &amp;&amp;
+install -v -d -m755 /usr/share/doc/subversion-1.1.4 &amp;&amp;
+cp -v -R doc/* /usr/share/doc/subversion-1.1.4</kbd></pre>
+        <p>
+          If you built the <span class="application">JAVA</span> <span class=
+          "application">Subversion</span> bindings, issue the following
+          command as the <tt class="systemitem">root</tt> user to install
+          them:
+        </p>
+        <pre class="root"><kbd class=
+        "command">make install-javahl</kbd></pre>
+        <p>
+          If you built the <span class="application">SWIG</span> <span class=
+          "application">Perl</span> and <span class=
+          "application">Python</span> <span class=
+          "application">Subversion</span> bindings, issue the following
+          commands as the <tt class="systemitem">root</tt> user to install
+          them:
+        </p>
+        <pre class="root"><kbd class=
+        "command">make install-swig-pl &amp;&amp;
+make install-swig-py &amp;&amp;
+echo /usr/lib/svn-python \
+    &gt; /usr/lib/python2.4/site-packages/subversion.pth</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <tt class="option">--with-ssl</tt>: This switch enables
+          <span class="application">OpenSSL</span> support in <span class=
+          "application">neon</span> (only required if you use the bundled
+          version of <span class="application">neon</span>).
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Subversion
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="subversion-config" name=
+                  "subversion-config"></a>Config Files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.subversion/config</tt> and <tt class=
+            "filename">/etc/subversion/config</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2781152" name="id2781152"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">/etc/subversion/config</tt> is the
+            <span class="application">Subversion</span> system-wide
+            configuration file. This file is used to specify defaults for
+            different <span><strong class="command">svn</strong></span>
+            commands.
+          </p>
+          <p>
+            <tt class="filename">~/.subversion/config</tt> is the user's
+            personal configuration file. It is used to override the
+            system-wide defaults set in <tt class=
+            "filename">/etc/subversion/config</tt>.
+          </p>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">svn, svnadmin,
+              svndumpfilter, svnlook, svnserve, svnversion, and optionally,
+              neon-config</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libsvn*.[so,a] and
+              optionally, libneon.[so,a] and the mod_dav_svn.so, and
+              mod_authz_svn.so <span class="application">Apache HTTP</span>
+              DSO modules</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">/etc/subversion,
+              /usr/include/neon (optional), /usr/include/subversion-1,
+              /usr/lib/perl5/site_perl/5.8.6/i686-linux/auto/SVN (optional),
+              /usr/lib/perl5/site_perl/5.8.6/i686-linux/SVN (optional),
+              /usr/lib/svn-javahl (optional), /usr/lib/svn-python (optional),
+              /usr/share/doc/neon-0.24.7 (optional), and
+              /usr/share/doc/subversion-1.1.4</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2742802" name="id2742802"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="svn" name="svn"></a><span class=
+                  "term"><span><strong class=
+                  "command">svn</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a command-line client program used to access
+                    <span class="application">Subversion</span> repositories.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="svnadmin" name="svnadmin"></a><span class=
+                  "term"><span><strong class=
+                  "command">svnadmin</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a tool for creating, tweaking or repairing a
+                    <span class="application">Subversion</span> repository.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="svndumpfilter" name="svndumpfilter"></a><span class=
+                  "term"><span><strong class=
+                  "command">svndumpfilter</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a program for filtering <span class=
+                    "application">Subversion</span> repository dumpfile
+                    format streams.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="svnlook" name="svnlook"></a><span class=
+                  "term"><span><strong class=
+                  "command">svnlook</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a tool for inspecting a <span class=
+                    "application">Subversion</span> repository.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="svnserve" name="svnserve"></a><span class=
+                  "term"><span><strong class=
+                  "command">svnserve</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a custom standalone server program, able to run as a
+                    daemon process or invoked by SSH.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="svnversion" name="svnversion"></a><span class=
+                  "term"><span><strong class=
+                  "command">svnversion</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to report the version number and state of a
+                    working <span class="application">Subversion</span>
+                    repository copy.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="neon-config" name="neon-config"></a><span class=
+                  "term"><span><strong class=
+                  "command">neon-config</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a script which provides information about an installed
+                    copy of the <span class="application">neon</span>
+                    library.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libsvn_star" name="libsvn_star"></a><span class=
+                  "term"><tt class="filename">libsvn_*.[so,a]</tt></span>
+                </td>
+                <td>
+                  <p>
+                    are the support libraries used by the <span class=
+                    "application">Subversion</span> programs.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libneon" name="libneon"></a><span class=
+                  "term"><tt class="filename">libneon.[so,a]</tt></span>
+                </td>
+                <td>
+                  <p>
+                    is used as a high-level interface to common HTTP and
+                    WebDAV methods.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="mod_authz_svn" name="mod_authz_svn"></a><span class=
+                  "term"><tt class="filename">mod_authz_svn.so</tt></span>
+                </td>
+                <td>
+                  <p>
+                    is a plug-in module for the <span class=
+                    "application">Apache</span> HTTP server, used to
+                    authenticate users to a <span class=
+                    "application">Subversion</span> repository over the
+                    Internet or an intranet.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="mod_dav_svn" name="mod_dav_svn"></a><span class=
+                  "term"><tt class="filename">mod_dav_svn.so</tt></span>
+                </td>
+                <td>
+                  <p>
+                    is a plug-in module for the <span class=
+                    "application">Apache</span> HTTP server, used to make a
+                    <span class="application">Subversion</span> repository
+                    available to others over the Internet or an intranet.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="samba3-client.html" title=
+          "Samba-3.0.14a Client">Prev</a>
+          <p>
+            Samba-3.0.14a Client
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="tcpwrappers.html" title=
+          "Tcpwrappers-7.6">Next</a>
+          <p>
+            Tcpwrappers-7.6
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="netprogs.html" title=
+          "Chapter&nbsp;18.&nbsp;Basic Networking Programs">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

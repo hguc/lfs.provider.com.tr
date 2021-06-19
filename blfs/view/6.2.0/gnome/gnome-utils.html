@@ -1,0 +1,358 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      GNOME Utilities-2.14.0
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;32.&nbsp;GNOME Additional Packages
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="gconf-editor.html" title=
+          "GConf Editor-2.14.0">Prev</a>
+          <p>
+            GConf Editor-2.14.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gnome-system-monitor.html" title=
+          "GNOME System Monitor-2.14.5">Next</a>
+          <p>
+            GNOME System Monitor-2.14.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="add.html" title=
+          "Chapter&nbsp;32.&nbsp;GNOME Additional Packages">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="gnome-utils" name="gnome-utils"></a>
+        <h1 class="sect1">
+          GNOME Utilities-2.14.0
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to GNOME Utilities
+          </h2>
+        </div>
+        <p>
+          The <span class="application">GNOME Utilities</span> package
+          contains a collection of small applications designed to make your
+          life a little easier.
+        </p>
+        <h3>
+          <a id="id2904153" name="id2904153"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://ftp.gnome.org/pub/gnome/sources/gnome-utils/2.14/gnome-utils-2.14.0.tar.bz2">
+                <span class=
+                "url">http://ftp.gnome.org/pub/gnome/sources/gnome-utils/2.14/gnome-utils-2.14.0.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=
+                "ftp://ftp.gnome.org/pub/gnome/sources/gnome-utils/2.14/gnome-utils-2.14.0.tar.bz2">
+                <span class=
+                "url">ftp://ftp.gnome.org/pub/gnome/sources/gnome-utils/2.14/gnome-utils-2.14.0.tar.bz2</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: d1d16ff6bfc1f6ddc110d18ec4dfdbfa
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 1.8 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 36.0 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.6 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2922349" name="id2922349"></a>GNOME Utilities Dependencies
+        </h3>
+        <h4>
+          <a id="id3013770" name="id3013770"></a>Required
+        </h4>
+        <p class="required">
+          <a href="gnome-panel.html">GNOME Panel-2.14.3</a> and <a href=
+          "libgnomeprintui.html">libgnomeprintui-2.12.1</a>
+        </p>
+        <h4>
+          <a id="id2922926" name="id2922926"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="../general/intltool.html">intltool-0.34.2</a>, <a href=
+          "../postlfs/linux-pam.html">Linux-PAM-0.99.4.0</a> (only if
+          consolehelper is also installed), and <a href=
+          "../general/hal.html">HAL-0.5.7.1</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/gnome-utils"><span class="url">
+          http://wiki.linuxfromscratch.org/blfs/wiki/gnome-utils</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of GNOME Utilities
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">GNOME Utilities</span> by running
+          the following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=$(pkg-config --variable=prefix ORBit-2.0) \
+            --sysconfdir=/etc/gnome/2.14.3 \
+            --localstatedir=/var/lib \
+            --libexecdir=$(pkg-config \
+                --variable=prefix ORBit-2.0)/lib/gnome-utils \
+            --mandir=$(pkg-config \
+                --variable=prefix ORBit-2.0)/share/man &amp;&amp;
+make</kbd></pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--prefix=$(pkg-config --variable=prefix
+          ORBit-2.0)</tt></em>: Setting the prefix using this parameter
+          instead of with <tt class="envar">$GNOME_PREFIX</tt> will ensure
+          that the prefix is consistent with the installation environment and
+          the package will be installed in the correct location.
+        </p>
+        <p>
+          <em class="parameter"><tt>--sysconfdir=/etc/gnome/2.14.3</tt></em>:
+          This parameter causes the configuration files to be installed in
+          <tt class="filename">/etc/gnome/2.14.3</tt> instead of <tt class=
+          "filename">$GNOME_PREFIX/etc</tt>. Additionally (if applicable),
+          the parameter ensures that the <span class=
+          "application">GConf</span>-2 database is correctly updated.
+        </p>
+        <p>
+          <em class="parameter"><tt>--localstatedir=/var/lib</tt></em>: This
+          parameter is used so that all <span class=
+          "application">ScrollKeeper</span> files are installed in, and the
+          <span class="application">ScrollKeeper</span> database is properly
+          updated in <tt class="filename">/var/lib/scrollkeeper</tt> instead
+          of some files being installed in <tt class=
+          "filename">$GNOME_PREFIX/var/scrollkeeper</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--libexecdir=$(pkg-config
+          --variable=prefix ORBit-2.0)/lib/bonobo</tt></em>: This parameter
+          causes the libexec files to be installed in the preferred location
+          of <tt class="filename">$GNOME_PREFIX/lib/gnome-utils</tt> instead
+          of <tt class="filename">$GNOME_PREFIX/libexec</tt>.
+        </p>
+        <p>
+          <em class="parameter"><tt>--mandir=$(pkg-config --variable=prefix
+          ORBit-2.0)/share/man</tt></em>: This parameter causes the
+          <tt class="filename">man.(X)</tt> files to be installed in
+          <tt class="filename">$GNOME_PREFIX/share/man/man(X)</tt> instead of
+          <tt class="filename">$GNOME_PREFIX/man/man(X)</tt>.
+        </p>
+        <p>
+          <tt class="option">--enable-gtk-doc</tt>: Use this parameter if
+          <span class="application">GTK-Doc</span> is installed and you wish
+          to rebuild the API documentation.
+        </p>
+        <p>
+          <tt class="option">--with-pam-prefix=/etc/pam.d</tt>: This
+          parameter causes the <span class="application">PAM</span> files to
+          be installed in the correct location of <tt class=
+          "filename">/etc/pam.d</tt> instead of <tt class=
+          "filename">/etc/gnome/2.14.3</tt>.
+        </p>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Programs:</span></strong> <span class="seg">gfloppy,
+              gnome-dictionary, gnome-panel-screenshot, gnome-screenshot,
+              gnome-search-tool, and gnome-system-log</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class=
+              "seg">libgdict-1.0.{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">The following
+              subdirectories of <tt class="envar">$GNOME_PREFIX</tt>/:
+              include/gdict-1.0, lib/gnome-utils, share/{gnome-{screenshot,
+              system-log, utils}, gnome/help/{gfloppy, gnome-dictionary,
+              gnome-search-tool, gnome-system-log} omf/gnome-utils,
+              pixmaps/gsearchtool}</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2508263" name="id2508263"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="gfloppy" name="gfloppy"></a><span class=
+                  "term"><span><strong class=
+                  "command">gfloppy</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    formats floppy disks under Linux.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnome-dictionary" name=
+                  "gnome-dictionary"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnome-dictionary</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    allows you to look up definitions and spelling of words.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnome-screenshot" name=
+                  "gnome-screenshot"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnome-screenshot</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is used to capture the contents of the current desktop as
+                    a graphics formatted file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnome-search-tool" name=
+                  "gnome-search-tool"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnome-search-tool</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    allows you to search for files on your system using
+                    simple and advanced search options.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="gnome-system-log" name=
+                  "gnome-system-log"></a><span class=
+                  "term"><span><strong class=
+                  "command">gnome-system-log</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    allows you to monitor and view system log files.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-15 18:08:14 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="gconf-editor.html" title=
+          "GConf Editor-2.14.0">Prev</a>
+          <p>
+            GConf Editor-2.14.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gnome-system-monitor.html" title=
+          "GNOME System Monitor-2.14.5">Next</a>
+          <p>
+            GNOME System Monitor-2.14.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="add.html" title=
+          "Chapter&nbsp;32.&nbsp;GNOME Additional Packages">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

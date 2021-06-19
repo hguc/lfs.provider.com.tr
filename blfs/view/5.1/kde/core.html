@@ -1,0 +1,153 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;28.&nbsp;KDE Core Packages
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;IX.&nbsp;KDE</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="kde.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="arts.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          KDE Core Packages
+        </h1>
+      </div>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h1 class="sect1">
+            Pre-installation configuration
+          </h1>
+        </div>
+        <p>
+          Based on your preference, set <tt class="envar">KDE_PREFIX</tt>.
+        </p>
+        <p>
+          If <span class="application"><span class=
+          "acronym">KDE</span></span> is your desktop of choice:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">export KDE_PREFIX=/usr</b></span></tt>
+</pre>
+        <p>
+          If you want to try-out <span class="application"><span class=
+          "acronym">KDE</span></span>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">export KDE_PREFIX=/opt/kde-3.2.2</b></span></tt>
+</pre>
+        <p>
+          Remember to execute <span><b class="command">ldconfig</b></span>
+          after installation of libraries to update the library cache.
+        </p>
+        <p>
+          If you are not installing <span class="acronym">KDE</span> in
+          <tt class="filename">/usr</tt>, you will need to make some
+          configuration changes:
+        </p>
+        <p>
+          Add to your system or personal profile:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">export PATH=$PATH:/opt/kde-3.2.2/bin
+export PKG_CONFIG_PATH=$PKG_CONFIG_PATH:/opt/kde-3.2.2/lib/pkgconfig</b></span></tt>
+</pre>
+        <p>
+          Add to your <tt class="filename">/etc/ld.so.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/ld.so.conf &lt;&lt; "EOF"</b></span>
+# Begin kde addition to /etc/ld.so.conf
+
+/opt/kde-3.2.2/lib
+
+# End kde addition
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        <p>
+          Add to your <tt class="filename">/etc/man.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/man.conf &lt;&lt; "EOF"</b></span>
+# Begin kde addition to man.conf
+
+MANPATH /opt/kde-3.2.2/man
+
+# End kde addition to man.conf
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Tip]" src="../images/tip.png" />
+            <h3 class="tip">
+              Tip
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              If you prefer installing <span class="acronym">KDE</span> in
+              <tt class="filename">/opt</tt>, one trick to avoid the above
+              configuration changes every time you install the new version is
+              to replace <tt class="filename">/opt/kde-3.2.2</tt> with
+              <tt class="filename">/opt/kde</tt> and to create a symlink from
+              <tt class="filename">/opt/kde-3.2.2</tt> to <tt class=
+              "filename">/opt/kde</tt>.
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">ln -sf kde-3.2.2 /opt/kde</b></span></tt>
+</pre>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="kde.html">Prev</a><br />
+        Part&nbsp;IX.&nbsp;KDE
+      </div>
+      <div class="next">
+        <a accesskey="n" href="arts.html">Next</a><br />
+        aRts-1.2.2
+      </div>
+      <div class="up">
+        <a accesskey="u" href="kde.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

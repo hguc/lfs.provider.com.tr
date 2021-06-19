@@ -1,0 +1,319 @@
+<!--#set var="pageTitle" value="BLFS Errata" -->
+<!--#include virtual="/blfs/header.html" -->
+<!--#include virtual="/blfs/menu.html" -->
+    <div class="main">
+
+     <h1>Errata for BLFS Version 9.1</h1>
+     
+     <!-- Editors: Do not remove this entry, just comment it out. -->
+     <!--<ul>
+       <li>There are no current errata for blfs-9.1.</li>
+     </ul>-->
+
+     <ul>
+       <li>The md5sum for the package xf86-video-intel-20200218.tar.xz is
+           incorrect.  It should be 3bffa543c146e801a7f2674865c34331.</li>
+
+       <li>The md5sum for the package  cairo-1.17.2+f93fc72c03e.tar.xz is
+           incorrect.  It should be 23a9420780f74ad0ca1e9885e53ee022.</li>
+
+       <li>In kdenlive, a problem was discovered where Kdenlive would
+           crash with a segmentation fault anytime that it was closed, which would
+           corrupt any project files that were open as well as the source media.
+           To fix this, please apply the patch in
+           <a href="http://linuxfromscratch.org/patches/downloads/kdenlive/kdenlive-19.12.2-segfault_fix-1.patch">
+           kdenlive-19.12.2 segmentation fault patch</a> to your source tree.</li>
+
+       <li>In the seamonkey page, it was discovered that the symlink to place
+           the seamonkey.png icon in /usr/share/pixmaps was incorrect. Use the
+           following command to fix it:
+           ln -sfv /usr/lib/seamonkey-2.53.1/chrome/icons/default/default128.png \
+                   /usr/share/pixmaps/seamonkey.png</li>
+
+       <li>In the Plasma page, it was discovered that the filename for
+           "plasmawayland.desktop" was incorrect. In the instructions for when
+           $KF5_PREFIX isn't /usr, change plasma.desktop to plasmawayland.desktop
+           when creating the symbolic link in /usr/share/wayland-sessions.</li>
+
+       <li>In the Rustc page, the grep command to report the total number of
+           tests was incorrect because where a suite only runs 1 test if reports
+           it is running 1 test and the grep looked for tests. That is why the
+           number of tests has not added up ever since the rustc tests were added
+           to BLFS. Now fixed, using an egrep command.</li>
+
+       <li>It was discovered that after BLFS 9.1 was released, the version of
+           PDFBox and FontBox used in fop was no longer available. Please use 
+           the 2.0.19 version of these packages instead. The md5sum for
+           pdfbox-2.0.19.jar is 1c085389e055c957b07c25c8443de728. The md5sum
+           for fontbox-2.0.19.jar is 74b3b8ee7eef40b0aff5ca5aa07d96f7.</li>
+
+       <li>The configuration section for iptables was accidentally omitted
+           from BLFS 9.1. To view the configuration section, go to
+           <a href="../../view/svn/postlfs/iptables.html">iptables-1.8.4</a>.</li>
+
+       <li>In texlive from source, the tlpdb database is not shipped with the
+           source in years after 2018. That means that 'texdoc' does not work in
+           the 9.1 book. For TL2020 this has now been fixed in the svn book
+           <a href="../../view/svn/pst/texlive.html">texlive-20200406</a> but
+
+           if you wish to fix this in the 2019 release you can download the
+           texlive-20190410-tlpdb-full.tar.gz file from tug's historic/2019
+           directory.</li>
+
+       <li>The url for popt has been dead for a while, and the blfs team
+           was providing the package on
+           <a href="http://anduin.linuxfromscratch.org">anduin</a>. Now 
+           upstream has provided a new
+           <a href="http://ftp.rpm.org/mirror/popt/">download url</a> too.
+           according to this <a href=
+           "http://lists.rpm.org/pipermail/rpm-announce/2020-May/000077.html">
+            mail</a>, upstream is also preparing a new release.</li>
+
+       <li>In dvisvgm the dependency links to brotli (required) and woff2
+           (recommended) were accidentally omitted.</li>
+     </ul>
+
+     <h2>Known Security Vulnerabilities</h2>
+     
+     <p>A few packages are good at reporting that a new
+     release fixes a vulnerability. For some others, such as firefox,
+     virtually every new release includes security fixes. But in many cases
+     the fixes are not documented as security issues.</p>
+     
+     <p>Updates to the packages in the book may be available in the 
+        <a href="../../view/svn/">development version of the book.</a>
+     </p>
+
+     <!-- Editors: Do not remove this entry, just comment it out. -->
+     <!--<ul>
+       <li>There are no current known security vulnerabilities for blfs-9.1.</li>
+     </ul>-->
+     <ul>
+      <li>After release, a security vulnerability was discovered in Avahi-0.7.
+          To fix this, update to avahi-0.8 using the instructions in
+          <a href="../../view/svn/basicnet/avahi.html">avahi-0.8</a>.</li>
+      <li>After release, security vulnerabilities were discovered in Wireshark
+          that could cause Wireshark to crash. To fix these, update to
+          Wireshark-3.2.6 or later using the instructions in
+          <a href="../../view/svn/basicnet/wireshark.html">Wireshark-3.2.6</a>.</li>
+      <li>After release, several security vulnerabilities were discovered in
+          PHP. These included access violations, heap buffer overflows, and
+          null pointer dereference vulnerabilities. To fix these, update to
+          PHP-7.4.9 or later using the instructions in
+          <a href="../../view/svn/general/php.html">PHP-7.4.9</a>.</li>
+      <li>After release, four security vulnerabilities were discovered in
+          NTP. These include uninitialized memory readings, memory leaks,
+          forged packet DoS attacks, and unauthenticated time source attacks.
+          To fix these, update to NTP-4.2.8p15 or later using the instructions in
+          <a href="../../view/svn/basicnet/ntp.html">NTP-4.2.8p15</a>.</li>
+      <li>After release, multiple security vulnerabilities were discovered in
+          WebkitGTK+ that allow for arbitrary code execution. It's recommended
+          by the developers of WebKitGTK+ that you update as soon as possible
+          to WebKitGTK+-2.28.4 or later. To do this, follow the instructions in
+          <a href="../../view/svn/x/webkitgtk.html">WebKitGTK+-2.28.4</a>.</li>
+      <li>After release, several security vulnerabilities were discovered in
+          Firefox. Two of these vulnerabilities are 0days that are being used
+          in the wild. Please update immediately using the instructions in 
+          <a href="../../view/svn/xsoft/firefox.html">Firefox-78.2.0esr</a>.
+          If you would prefer to stay with the 68-ESR series, update to
+          Firefox-68.12.0 instead but note that is the last release of that
+          series.</li>
+      <li>After release, several critical security vulnerabilities were 
+          discovered in Thunderbird. To fix these, update to Thunderbird-78.1.0
+          or later using the instructions in
+          <a href="../../view/svn/xsoft/thunderbird.html">Thunderbird-78.1.0</a>.</li>
+      <li>After release, a privilege escalation vulnerability was discovered in
+          Bubblewrap. To fix this vulnerability, update to Bubblewrap-0.4.1 or
+          later using the instructions in
+          <a href="../../view/svn/general/bubblewrap.html">Bubblewrap-0.4.1</a>.</li>
+      <li>After release, a serious security flaw was found in the DTLS
+          implementation in GnuTLS. Another security flaw was found in 
+          the way that GnuTLS processed session tickets. A root certificate
+          expired on 5/30/2020 that also broke several websites because GnuTLS
+          didn't have the logic available to switch to an alternate certificate
+          with an identical private key. To fix these vulnerabilities, update 
+          to GnuTLS-3.6.14 or later using the instructions in
+          <a href="../../view/svn/postlfs/gnutls.html">GnuTLS-3.6.14</a>.</li>
+      <li>After release, multiple low-to-high severity security flaws were found in
+          Apache HTTPD. To fix these vulnerabilities, update to
+          httpd-2.4.46 or later using the instructions in
+          <a href="../../view/svn/server/apache.html">Apache-2.4.46</a>.</li>
+      <li>After release, two security flaws were discovered in Ruby, one of
+          them an incomplete fix for a high severity flaw from 2013. To fix
+          these, update to ruby-2.7.1 or higher ASAP using the instructions in
+          <a href="../../view/svn/general/ruby.html">Ruby-2.7.1</a>.</li>
+      <li>After release, several high and critical severity security flaws
+          were found in Qt5 and QtWebEngine. It's recommended that you upgrade
+          to QtWebEngine-5.15.0 and Qt5-5.15.0 using the instructions in
+          <a href="../../view/svn/x/qt5.html">Qt-5.15.0</a> and
+          <a href="../../view/svn/x/qtwebengine.html">QtWebEngine-5.15.0</a>
+          as soon as possible.</li>
+      <li>After release, a critical security vulnerability was found in Git.
+          This security vulnerability affects versions all the way back to 2.17.x.
+          Affected versions can be tricked into sending private credentials to
+          a host controlled by an attacker instead of the intended location.
+          To fix this, upgrade to git-2.26.2 or later immediately using the
+          instructions
+          in <a href="../../view/svn/general/git.html">git-2.28.0</a>.</li>
+      <li>After release, 19 security vulnerabilities were discovered in faad2,
+          ranging from low to critical on the severity scale. It's recommended
+          that all users who have this package installed update to faad2-2.9.1
+          or later immediately using the instructions in
+          <a href="../../view/svn/multimedia/faad2.html">faad2-2_9_1</a>.</li>
+      <li>After release, a medium-severity memory corruption security
+          vulnerability was discovered in FAAC. To fix this vulnerability,
+          update to faac-1.30 or later using the instructions in
+          <a href="../../view/svn/multimedia/faac.html">faac-1.30</a>.</li>
+      <li>After release, multiple vulnerabilities were discovered in Samba.
+          These include use-after-free and stack overflow vulnerabilities.
+          To fix these vulnerabilities, update to Samba-4.12.5 or later using
+          the instructions in
+          <a href="../../view/svn/basicnet/samba.html">Samba-4.12.5</a>.</li>
+      <li>After release, two vulnerabilities were discovered in CUPS. These
+          include buffer under-read vulnerabilities and access restriction
+          bypasses. To fix these vulnerabilities, update to CUPS-2.3.3 or later
+          using the instructions in
+          <a href="../../view/svn/pst/cups.html">Cups-2.3.3</a>.</li>
+      <li>After release, over one hundred security vulnerabilities were
+          patched in Seamonkey-2.53.3. The BLFS team highly recommends 
+          updating to Seamonkey-2.53.3 using the instructions in
+          <a href="../../view/svn/xsoft/seamonkey.html">Seamonkey-2.53.3</a>
+          as soon as possible.</li>
+      <li>Various security vulnerabilities have been found in the old
+          version of fontforge we were using. These can be fixed by updating
+          to fontforge-20200314 using the instructions in
+          <a href="../../view/svn/xsoft/fontforge.html">fontforge-20200314</a>.</li>
+      <li>After release, several security vulnerabilities were patched in p7zip
+          while fixing the book to support GCC-10. To fix these vulnerabilities,
+          apply the patch in the page below and rebuild p7zip:
+          <a href="../../view/svn/general/p7zip.html">p7zip-16.02</a>.</li>
+      <li>After release, four security vulnerabilities were discovered
+          in MariaDB. These four vulnerabilities are marked "Medium" in the
+          NVD database. If you wish to fix them, update to MariaDB-10.4.13
+          or later using the instructions in
+          <a href="../../view/svn/server/mariadb.html">MariaDB-10.4.13</a>.</li>
+      <li>After release, five security vulnerabilities were discovered in
+          the version of Python-3 shipped with BLFS 9.1. These vulnerabilities
+          were discovered in the urllib module. To fix these, update to
+          Python-3.8.5 using the instructions in
+          <a href="../../view/svn/general/python3.html">Python-3.8.5</a>.</li>
+      <li>After release, multiple high severity vulnerabilities were disclosed
+          in the ISC BIND DNS Server. These vulnerabilities were fixed in
+          BIND-9.16.4. To fix these vulnerabilities, update to BIND-9.16.4
+          or later using the instructions in
+          <a href="../../view/svn/server/bind.html">BIND-9.16.4</a>.</li>
+      <li>After release, multiple security vulnerabilities were discovered in 
+          the Unbound DNS Server. To fix these, update to Unbound-1.10.1 or
+          later using the instructions in
+          <a href="../../view/svn/server/unbound.html">Unbound-1.10.1</a>.</li>
+      <li>While adapting Sharutils to GCC-10, it was discovered that there was
+          a security issue that was missed in Sharutils. To fix this security
+          issue, use the following sed and then rebuild sharutils:
+          sed -i 's/BUFSIZ/rw_base_size/' src/unshar.c</li>
+      <li>After release, two security vulnerabilities were discovered in Mozilla
+          Network Security Services (NSS). To fix these vulnerabilities, update to
+          NSS-3.55 using the instructions in 
+          <a href="../../view/svn/postlfs/nss.html">NSS-3.55</a>.</li>
+      <li>After release, several security vulnerabilities were discovered in
+          the Dovecot IMAP server. Three of these are known to crash the server
+          if exploited successfully, which results in a DoS attack. To fix
+          these vulnerabilities, update to Dovecot-2.3.11.3 or later using
+          the instructions in
+          <a href="../../view/svn/server/dovecot.html">Dovecot-2.3.11.3</a>.</li>
+      <li>After release, multiple security vulnerabilities were discovered in
+          SQLite prior to 3.32.1. These vulnerabilities are primarily DoS
+          vulnerabilities, and have no effect on the integrity of the data stored
+          in a database. To fix these vulnerabilities, update to SQLite-3.32.1
+          using the instructions in
+          <a href="../../view/svn/server/sqlite.html">SQLite-3.32.1</a>.</li>
+      <li>After release, a XSS (Cross-Site-Scripting) vulnerability was found
+          in Transmission prior to 3.00. To fix this vulnerability, update to
+          Transmission-3.00 or higher using the instructions in
+          <a href="../../view/svn/xsoft/transmission.html">Transmission-3.00</a>.</li>
+      <li>After release, a security vulnerability was identified in
+          glib-networking. To fix this vulnerability, update to
+          glib-networking-2.64.3 or higher using the instructions in
+          <a href="../../view/svn/basicnet/glib-networking.html">glib-networking-2.64.3</a>.</li>
+      <li>After release, a security vulnerability was identified in
+          NetworkManager that could allow a user's configuration to not be
+          honored and a connection formed that is unauthenticated via
+          insecure defaults. This vulnerability is identified as CVE-2020-10754.
+          To fix this vulnerability, update to NetworkManager-1.24.2 or higher
+          using the instructions in
+          <a href="../../view/svn/basicnet/networkmanager.html">NetworkManager-1.24.2</a>.</li>
+      <li>After release, several security vulnerabilities were identified in
+          nghttp2 and node-js. To fix these vulnerabilities, update to
+          node-v12.18.0 or higher and nghttp2-1.41.0 or higher using the
+          instructions in
+          <a href="../../view/svn/basicnet/nghttp2.html">nghttp2-1.41.0</a>
+          and <a href="../../view/svn/general/nodejs.html">Node.js-12.18.0</a>,
+          respectively.</li>
+      <li>After release, a security vulnerability was identified in D-Bus that
+          could allow for a local attacker to run the D-Bus Daemon out of file
+          descriptors by repeatedly connecting to the system-wide D-Bus Daemon
+          and sending file descriptors that would get leaked. To fix this
+          vulnerability, update to dbus-1.12.20 or higher using the
+          instructions in
+          <a href="../../view/svn/general/dbus.html">dbus-1.12.20</a>.</li>
+      <li>After release, 9 security vulnerabilities were discovered in the version
+          of libexif shipped with BLFS 9.1. To fix these security vulnerabilities,
+          update to libexif-0.6.22 or higher using the instructions in
+          <a href="../../view/svn/general/libexif.html">libexif-0.6.22</a>.</li>
+      <li>In versions of Mutt before 1.14.4, man-in-the-middle attacks are
+          possible. Also, before 1.14.3 GnuTLS was not verifying expiration dates
+          of all certificates in a chain. To fix these vulnerabilities, update to
+          mutt-1.14.4 or higher using the instructions at
+          <a href="../../view/svn/basicnet/mutt.html">mutt-1.14.5</a>.</li>
+      <li>After release, multiple security vulnerabilities were discovered in cURL.
+          One of these security vulnerabilities involves a partial password leak,
+          and another involves overwriting local files with a certain flag passed
+          to cURL. To fix these vulnerabilities, please update to cURL-7.71.0
+          immediately using the instructions in
+          <a href="../../view/svn/basicnet/curl.html">cURL-7.71.0</a>.</li>
+      <li>After release, a security vulnerability was discovered in libjpeg-turbo
+          prior to 2.0.5 that caused a buffer overrun in cjpeg and tjLoadImage().
+          To fix this vulnerability, update to libjpeg-turbo-2.0.5 or later using
+          the instructions in
+          <a href="../../view/svn/general/libjpeg.html">libjpeg-turbo-2.0.5</a>.</li>
+      <li>After release, several security issues were discovered in exiv2.
+          These issues include null pointer reads, insufficient validation,
+          memory leaks, and segmentation faults. To fix these issues, update to
+          exiv2-0.27.3 or higher using the instructions in
+          <a href="../../view/svn/general/exiv2.html">exiv2-0.27.3</a>.</li>
+      <li>After release, a response injection vulnerability was discovered in
+          evolution-data-server before 3.36.4. To fix this vulnerability, update to
+          evolution-data-server-3.36.4 or higher using the instructions in
+          <a href="../../view/svn/gnome/evolution-data-server.html">evolution-data-server-3.36.4</a>.</li>
+      <li>After release, two out-of-bounds read vulnerabilities were discovered
+          in libvorbis prior to 1.3.7. To fix these, update to libvorbis-1.3.7
+          or later using the instructions in 
+          <a href="../../view/svn/multimedia/libvorbis.html">libvorbis-1.3.7</a>.</li>
+      <li>After release, a security vulnerability was identified in Sendmail
+          that happens when communicating over the SMTP protocol. To fix this
+          vulnerability, update to Sendmail-8.16.1 using the instructions in
+          <a href="../../view/svn/server/sendmail.html">Sendmail-8.16.1</a>.</li>
+      <li>After release, a security vulnerability was identified in LibRaw. The
+          security vulnerability is identified by CVE-2020-15503. To fix this
+          vulnerability, update to LibRaw-0.20.0 using the instructions in
+          <a href="../../view/svn/general/libraw.html">LibRaw-0.20.0</a>.</li>
+      <li>After release, a security vulnerability was discovered in the Mozilla
+          JavaScript interpreter when debugging scripts. To fix this issue,
+          update to js68-68.11.0 or higher using the instructions in
+          <a href="../../view/svn/general/js68.html">js68-68.11.0</a>.</li>
+      <li>After release, a security vulnerability was identified in libX11.
+          This vulnerability was assigned CVE-2020-14344, and is identified
+          as a heap corruption vulnerability. To fix this issue, update to
+          libX11-1.6.11 or higher using the instructions for libX11 in the
+          <a href="../../view/svn/x/x7lib.html">Xorg Libraries</a> page.</li>
+      <li>After release, a security vulnerability was identified in
+          xorg-server that leads to uninitialized memory disclosure. To
+          fix this vulnerability, apply the following sed to your build:
+          "sed -i 's/malloc(pScreen/calloc(1, pScreen/' dix/pixmap.c".</li>
+      <li>After release, two security vulnerabilities were discovered in the
+          PostgreSQL database server. These two vulnerabilities have to do with
+          uncontrolled search path elements. To fix these vulnerabilities,
+          update to PostgreSQL-12.4 or later using the instructions in
+          <a href="../../view/svn/server/postgresql.html">PostgreSQL-12.4</a>.</li>
+     </ul>
+
+<!--#include virtual="/common/footer.html" -->

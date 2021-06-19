@@ -1,0 +1,259 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      libdv-0.101
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;37.&nbsp;Multimedia Libraries and Drivers</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="libdvdread.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="liba52.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          libdv-0.101
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to libdv
+          </h3>
+        </div>
+        <p>
+          <span class="application">libdv</span> (Quasar DV) is a software
+          <span class="acronym">CODEC</span> for DV video, the encoding
+          format used by most digital camcorders.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3173284" name="id3173284"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://prdownloads.sourceforge.net/libdv/libdv-0.101.tar.gz">
+                  http://prdownloads.sourceforge.net/libdv/libdv-0.101.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 465 KB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 8.5 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.21 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3174764" name="id3174764"></a><span class=
+                  "application">libdv</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3174775" name="id3174775"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/popt.html">popt-1.7</a>, <a href=
+              "sdl.html">SDL-1.2.7</a>, <a href=
+              "../x/gtk.html">GTK+-1.2.10</a> and X (<a href=
+              "../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+              "../x/installing.html#xorg">X.org-6.7.0</a>).
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of libdv
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">libdv</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              The configure check for <span class="application">GTK+</span>
+              is broken. If <span class="application">GTK+</span> is not
+              installed, also pass <tt class="option">--without-gtk</tt> to
+              the configure script.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The libdv package contains <span><b class=
+          "command">dvconnect</b></span>, <span><b class=
+          "command">encodedv</b></span>, <span><b class=
+          "command">playdv</b></span> and <tt class="filename">libdv</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3174930" name="id3174930"></a>dvconnect
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">dvconnect</b></span> is a small utility
+            to send or capture raw data from and to the camcorder.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3174658" name="id3174658"></a>encodedv
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">encodedv</b></span> encodes a series of
+            images to a digital video stream.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3174672" name="id3174672"></a>playdv
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">playdv</b></span> displays digital video
+            streams on the screen.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3174685" name="id3174685"></a>libdv
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">libdv</tt> provides functions for the
+            programs manipulating with the Quasar DV <span class=
+            "acronym">CODEC</span>.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="libdvdread.html">Prev</a><br />
+        libdvdread-0.9.4
+      </div>
+      <div class="next">
+        <a accesskey="n" href="liba52.html">Next</a><br />
+        liba52-0.7.4
+      </div>
+      <div class="up">
+        <a accesskey="u" href="libdriv.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

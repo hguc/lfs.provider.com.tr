@@ -1,0 +1,271 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Balsa-2.0.15
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;36.&nbsp;Other X-based Internet Programs</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="pan.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="../multimedia/multimedia.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Balsa-2.0.15
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Balsa
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Balsa</span> package contains a
+          <span class="application"><span class="acronym">GNOME</span></span>
+          2 based mail reader.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3142146" name="id3142146"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://balsa.gnome.org/balsa-2.0.15.tar.bz2">http://balsa.gnome.org/balsa-2.0.15.tar.bz2</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.7 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 74.0 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.82 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3142183" name="id3142183"></a><span class=
+                  "application">Balsa</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3142207" name="id3142207"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../gnome/libgtkhtml.html">libgtkhtml-2.6.1</a>,
+              <a href=
+              "../gnome/libgnomeprintui.html">libgnomeprintui-2.6.1</a>,
+              <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a>,
+              <a href="../general/aspell.html">aspell-0.50.5</a> and <a href=
+              "../general/libesmtp.html">libesmtp-1.0.2</a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id3144334" name="id3144334"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/pcre.html">PCRE-4.5</a>, <a href=
+              "../postlfs/gnupg.html">GnuPG-1.2.4</a> using gpgme and
+              <a href="../server/openldap.html">OpenLDAP-2.1.30</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Balsa
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Balsa</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=`pkg-config --variable=prefix ORBit-2.0` \
+    --localstatedir=/var/lib --with-ssl \
+    --sysconfdir=/etc/gnome --with-ldap --with-gpgme &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <i class="parameter"><tt>--localstatedir=/var/lib</tt></i>: This
+          switch puts <span class="application">ScrollKeeper</span> files in
+          <tt class="filename">/var/lib/scrollkeeper</tt> instead of
+          <tt class="filename">$GNOME_PREFIX/var/scrollkeeper</tt>.
+        </p>
+        <p>
+          <tt class="option">--with-ssl</tt>: Change the default of no ssl
+          support.
+        </p>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc/gnome</tt></i>: This
+          switch puts configuration files in <tt class=
+          "filename">/etc/gnome</tt> instead of <tt class=
+          "filename">$GNOME_PREFIX/etc</tt>.
+        </p>
+        <p>
+          <tt class="option">--with-ldap</tt>: Change the default to support
+          <span class="acronym">LDAP</span> if it is available.
+        </p>
+        <p>
+          <tt class="option">--with-gpgme</tt>: Change the default to support
+          <span class="acronym">GPG</span> if 'GnuPG made easy' (<span class=
+          "acronym">GPGME</span>) is installed.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Balsa
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3144830" name="id3144830"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            All configuration of <span class="application">Balsa</span> is
+            done through the <span class="application">Balsa</span> menu
+            system, with mailbox configuration done with the
+            Settings-&gt;Preferences menu.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The Balsa package contains <span><b class=
+          "command">balsa</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id3144516" name="id3144516"></a>balsa
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">balsa</b></span> is the <span class=
+            "application"><span class="acronym">GNOME</span></span> 2 based
+            mail reader.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="pan.html">Prev</a><br />
+        Pan-0.14.2
+      </div>
+      <div class="next">
+        <a accesskey="n" href="../multimedia/multimedia.html">Next</a><br />
+        Part&nbsp;XII.&nbsp;Multimedia
+      </div>
+      <div class="up">
+        <a accesskey="u" href="other.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

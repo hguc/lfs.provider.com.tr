@@ -1,0 +1,308 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Fetchmail-6.2.5
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;20.&nbsp;Mail/News Clients</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="procmail.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="mutt.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Fetchmail-6.2.5
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Fetchmail
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Fetchmail</span> package contains a
+          mail retrieval program. "It retrieves mail from remote mail servers
+          and forwards it to your local (client) machine's delivery system,
+          so it can then be read by normal mail user agents."
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2803073" name="id2803073"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://www.catb.org/~esr/fetchmail/fetchmail-6.2.5.tar.gz">
+                  http://www.catb.org/~esr/fetchmail/fetchmail-6.2.5.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://gnome.dti.ad.jp/.1/unix/net/mail/fetchmail/fetchmail-6.2.5.tar.gz">
+                  ftp://gnome.dti.ad.jp/.1/unix/net/mail/fetchmail/fetchmail-6.2.5.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.2 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 5.8 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.14 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2804344" name="id2804344"></a><span class=
+                  "application">Fetchmail</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2804340" name="id2804340"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/genlib.html#openssl">OpenSSL-0.9.7d</a> and
+              a local MDA (<a href="procmail.html">Procmail-3.22</a>)
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2804370" name="id2804370"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../general/prog.html#Python">Python-2.3.3</a> and
+              <a href="../general/tk.html">Tk-8.4.6</a>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Fetchmail
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Fetchmail</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --with-ssl --enable-fallback=procmail &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <tt class="option">--with-ssl</tt>: This enables <span class=
+          "acronym">SSL</span> if found, so that you can handle connections
+          to secure <span class="acronym">POP</span>3 and <span class=
+          "acronym">IMAP</span> servers.
+        </p>
+        <p>
+          <i class="parameter"><tt>--enable-fallback=procmail</tt></i>: This
+          tells <span class="application">Fetchmail</span> to hand incoming
+          mail to <span class="application">Procmail</span> for delivery if
+          your port 25 mail server is not present or not responding.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Fetchmail
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2804167" name="id2804167"></a>Config files
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <tt class="filename">~/.fetchmailrc</tt>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2804182" name="id2804182"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt; ~/.fetchmailrc &lt;&lt; "EOF"</b></span> 
+set logfile /var/log/fetchmail.log
+set no bouncemail
+set postmaster root
+
+poll SERVERNAME :
+    user <i class="replaceable"><tt>[username]</tt></i> pass <i class=
+"replaceable"><tt>[password]</tt></i>;
+    mda "/usr/bin/procmail -f %F -d %T";
+<span><b class="command">EOF</b></span>
+
+<span><b class="command">chmod 0600 ~/.fetchmailrc</b></span></tt>
+</pre>
+          <p>
+            This is an example configuration that should suffice for most
+            people. You can add as many users and servers as you need using
+            the same syntax.
+          </p>
+          <p>
+            <span><b class="command">man fetchmail</b></span>: Look for the
+            section near the bottom named <span class="strong">CONFIGURATION
+            EXAMPLES</span>. It gives some quick examples. There are
+            countless other config options once you get used to it.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Fetchmail</span> package contains
+          <span><b class="command">fetchmail</b></span> and <span><b class=
+          "command">fetchmailconf</b></span>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2804624" name="id2804624"></a>fetchmail
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            When executed as a user, this will source that users <tt class=
+            "filename">~/.fetchmailrc</tt> and download the appropriate mail.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2804926" name="id2804926"></a>fetchmailconf
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            This program provides a <span class="application">Tk</span>
+            <span class="acronym">GUI</span> interface to your <tt class=
+            "filename">~/.fetchmailrc</tt> file making it much easier to
+            configure. However, you will require <span class=
+            "application">Python</span>, and it must have the Tkinker module
+            available.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="procmail.html">Prev</a><br />
+        Procmail-3.22
+      </div>
+      <div class="next">
+        <a accesskey="n" href="mutt.html">Next</a><br />
+        Mutt-1.4.2.1i
+      </div>
+      <div class="up">
+        <a accesskey="u" href="mailnews.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

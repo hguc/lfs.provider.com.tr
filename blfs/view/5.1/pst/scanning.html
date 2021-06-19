@@ -1,0 +1,334 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;42.&nbsp;Scanning
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;XIII.&nbsp;Printing, Scanning and Typesetting</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="gimp-print.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="xsane.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Scanning
+        </h1>
+      </div>
+      <p>
+        This chapter contains scanning applications which allow you to
+        convert printed documents into formatted documents readable by other
+        applications.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="sane" name="sane"></a>
+          <h2 class="sect1">
+            SANE-1.0.14
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to SANE
+            </h3>
+          </div>
+          <p>
+            <span class="acronym">SANE</span> is short for Scanner Access Now
+            Easy. Scanner access, however, is far from easy, since every
+            vendor has their own protocols. The only known protocol that
+            should bring some unity into this chaos is the TWAIN interface,
+            but this is too imprecise to allow a stable scanning framework.
+            Therefore, <span class="acronym">SANE</span> comes with its own
+            protocol, so the vendor drivers can't be used.
+          </p>
+          <p>
+            <span class="acronym">SANE</span> is split into back ends and
+            front ends. The back ends are drivers for the supported scanners.
+            The front ends are user interfaces to access the backends.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3238743" name="id3238743"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=
+                    "http://gd.tuwien.ac.at/api/sane/sane-backends-1.0.14/sane-backends-1.0.14.tar.gz">
+                    http://gd.tuwien.ac.at/api/sane/sane-backends-1.0.14/sane-backends-1.0.14.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://ftp.sane-project.org/pub/sane/sane-backends-1.0.14/sane-backends-1.0.14.tar.gz">
+                    ftp://ftp.sane-project.org/pub/sane/sane-backends-1.0.14/sane-backends-1.0.14.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 3.1 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 42 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 1.77 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3239354" name="id3239354"></a>Additional
+                    downloads
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Front ends: <a href=
+                    "ftp://ftp.sane-project.org/pub/sane/sane-frontends-1.0.12/sane-frontends-1.0.12.tar.gz">
+                    ftp://ftp.sane-project.org/pub/sane/sane-frontends-1.0.12/sane-frontends-1.0.12.tar.gz</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3239373" name="id3239373"></a><span class=
+                    "application"><span class="acronym">SANE</span></span>
+                    dependencies
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="sect4" lang="en" xml:lang="en">
+              <div class="titlepage">
+                <div>
+                  <div>
+                    <h5 class="title">
+                      <a id="id3239383" name="id3239383"></a>Optional
+                    </h5>
+                  </div>
+                </div>
+              </div>
+              <p>
+                <a href="../general/libusb.html">libusb-0.1.8</a>, <a href=
+                "http://cyberelk.net/tim/libieee1284/">libieee1284</a>,
+                <a href="http://www.gphoto.org/">gPhoto2</a>, X (<a href=
+                "../x/xfree86.html">XFree86-4.4.0</a> or <a href=
+                "../x/installing.html#xorg">X.org-6.7.0</a>), <a href=
+                "../x/gtk2.html">GTK+-2.4.1</a> and <a href=
+                "../xsoft/gimp.html">GIMP-2.0.0</a>
+              </p>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of SANE
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3238832" name="id3238832"></a>Preparing your
+                    system for scanner access
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              To access your scanner, you will probably need the related
+              kernel drivers. A <span class="acronym">SCSI</span> scanner
+              will need <span class="acronym">SCSI</span> drivers, a parallel
+              port scanner needs parallel port support (you should use
+              enhanced <span class="acronym">EPP</span> modes) and an
+              <span class="acronym">USB</span> scanner will need the
+              <span class="acronym">USB</span> scanner module and a
+              <span class="acronym">SCSI</span> system for emulation. Be sure
+              that you have got the necessary devices to access the drivers.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3239657" name="id3239657"></a>Installation of
+                    <span class="application"><span class=
+                    "acronym">SANE</span></span> backends
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              Install <span class="application"><span class=
+              "acronym">SANE</span></span> backends by running the following
+              commands:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --sysconfdir=/etc &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3239693" name="id3239693"></a>Installation of
+                    <span class="application"><span class=
+                    "acronym">SANE</span></span> front ends
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              To install <span class="application"><span class=
+              "acronym">SANE</span></span> front ends, use the following
+              commands:
+            </p>
+            <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation command explanations
+            </h3>
+          </div>
+          <p>
+            <i class="parameter"><tt>--sysconfdir=/etc</tt></i>: This switch
+            installs the configuration files in <tt class=
+            "filename">/etc/sane.d</tt> instead of <tt class=
+            "filename">/usr/etc/sane.d</tt>.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3239265" name="id3239265"></a>Back ends:
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              See <a href=
+              "http://www.sane-project.org/sane-supported-devices.html">http://www.sane-project.org/sane-supported-devices.html</a>
+              for a list of available backends.
+            </p>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id3239229" name="id3239229"></a>Front ends:
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">scanimage</b></span>: Command line
+              interface for scanning.
+            </p>
+            <p>
+              <span><b class="command">xscanimage</b></span>: Graphical user
+              interface for scanning.
+            </p>
+            <p>
+              <span><b class="command">gimp-plugin</b></span>: xscanimage as
+              <span class="application"><span class=
+              "acronym">GIMP</span></span> plugin.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="gimp-print.html">Prev</a><br />
+        Gimp-Print-4.2.6
+      </div>
+      <div class="next">
+        <a accesskey="n" href="xsane.html">Next</a><br />
+        XSane-0.93
+      </div>
+      <div class="up">
+        <a accesskey="u" href="pst.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

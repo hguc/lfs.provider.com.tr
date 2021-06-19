@@ -1,0 +1,122 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Setting the PATH for TeX Live
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-7.7">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 7.7
+      </h4>
+      <h3>
+        Chapter&nbsp;48.&nbsp;Typesetting
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="texlive.html" title=
+          "texlive-20140525-source">Prev</a>
+          <p>
+            texlive-20140525-source
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="biber.html" title=
+          "biblatex-biber-1.9">Next</a>
+          <p>
+            biblatex-biber-1.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="typesetting.html" title=
+          "Chapter&nbsp;48.&nbsp;Typesetting">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.7">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="tex-path" name="tex-path"></a>Setting the PATH for TeX Live
+      </h1>
+      <p>
+        After the package download is complete, the next step is to make sure
+        that the system can properly find the files. If you set up your login
+        scripts as recommended in <a class="xref" href=
+        "../postlfs/profile.html" title="The Bash Shell Startup Files">The
+        Bash Shell Startup Files</a>, update the needed paths by appending to
+        the <code class="filename">extrapaths.sh</code> script. The programs
+        are always installed in an &lt;ARCH&gt;-linux subdirectory and on
+        32-bit x86 this is always i386-linux. For x86_64 and i?86 we can
+        generate this as $TEXARCH:
+      </p>
+      <pre class="root">
+<kbd class=
+"command">export TEXARCH=$(uname -m | sed -e 's/i.86/i386/' -e 's/$/-linux/') &amp;&amp;
+
+cat &gt;&gt; /etc/profile.d/extrapaths.sh &lt;&lt; EOF
+pathappend /opt/texlive/2014/texmf-dist/doc/man  MANPATH
+pathappend /opt/texlive/2014/texmf-dist/doc/info INFOPATH
+pathappend /opt/texlive/2014/bin/$TEXARCH
+EOF
+
+unset TEXARCH</kbd>
+</pre>
+      <p>
+        The new paths can be immediately activated by running <span class=
+        "command"><strong>source /etc/profile</strong></span>.
+      </p>
+      <p>
+        If you arrived here after installing the TeX Live binary and do not
+        wish to build from source, your installation is now complete.
+      </p>
+      <p>
+        Alternatively, if this is a from-source build you can now install
+        <a class="xref" href="../xsoft/asymptote.html" title=
+        "asymptote-2.32">asymptote-2.32</a>, <a class="xref" href=
+        "biber.html" title="biblatex-biber-1.9">biber-1.9</a> and <a class=
+        "xref" href="xindy.html" title="xindy-2.5.1">xindy-2.5.1</a> if you
+        wish.
+      </p>
+      <p class="updated">
+        Last updated on 2015-01-11 13:06:00 -0800
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="texlive.html" title=
+          "texlive-20140525-source">Prev</a>
+          <p>
+            texlive-20140525-source
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="biber.html" title=
+          "biblatex-biber-1.9">Next</a>
+          <p>
+            biblatex-biber-1.9
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="typesetting.html" title=
+          "Chapter&nbsp;48.&nbsp;Typesetting">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 7.7">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

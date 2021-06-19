@@ -1,0 +1,708 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Samba-3.0.4
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;22.&nbsp;Other Server Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="openldap.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="xinetd.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          Samba-3.0.4
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to Samba
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Samba</span> package provides file
+          and print services to <span class="acronym">SMB</span>/<span class=
+          "acronym">CIFS</span> clients and Windows networking to Linux
+          clients.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2860507" name="id2860507"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://us1.samba.org/samba/ftp/samba-3.0.4.tar.gz">http://us1.samba.org/samba/ftp/samba-3.0.4.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.samba.org/pub/samba/samba-3.0.4.tar.gz">ftp://ftp.samba.org/pub/samba/samba-3.0.4.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 14.4 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 123 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 10.5 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2861070" name="id2861070"></a>Additional downloads
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Maintainer Recommended patch: <a href=
+                  "http://www.linuxfromscratch.org/patches/blfs/5.1/samba-3.0.4-maintainer.patch">
+                  http://www.linuxfromscratch.org/patches/blfs/5.1/samba-3.0.4-maintainer.patch</a>
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2861104" name="id2861104"></a><span class=
+                  "application">Samba</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2861115" name="id2861115"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/linux_pam.html">Linux-PAM-0.77</a>,
+              <a href="../general/readline.html">readline-4.3</a>, <a href=
+              "openldap.html">OpenLDAP-2.1.30</a>, <a href=
+              "../pst/printing.html#cups">CUPS-1.1.20</a>, <a href=
+              "../postlfs/heimdal.html">Heimdal-0.6.2</a> or <a href=
+              "../postlfs/mitkrb.html">MIT krb5-1.3.3</a>, <a href=
+              "../general/libxml2.html">libxml2-2.6.9</a>, <a href=
+              "../content/mysql.html">MySQL-4.0.20</a> or <a href=
+              "../content/postgresql.html">PostgreSQL-7.4.2</a>, <a href=
+              "../general/prog.html#Python">Python-2.3.3</a>, and <a href=
+              "http://valgrind.kde.org/">Valgrind</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of Samba
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">Samba</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i samba-3.0.4-maintainer.patch &amp;&amp;
+cd source &amp;&amp;
+install -d /var/cache/samba &amp;&amp;
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --with-piddir=/var/run \
+    --with-fhs \
+    --with-smbmount &amp;&amp;
+make &amp;&amp;
+make install &amp;&amp;
+install -m755 nsswitch/libnss_win{s,bind}.so /lib &amp;&amp;
+ln -sf libnss_winbind.so /lib/libnss_winbind.so.2 &amp;&amp;
+ln -sf libnss_wins.so /lib/libnss_wins.so.2 &amp;&amp;
+cp ../examples/smb.conf.default /etc/samba</b></span></tt>
+</pre>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              You may want to run <span><b class=
+              "command">configure</b></span> with the <i class=
+              "parameter"><tt>--help</tt></i> parameter. There may be other
+              parameters needed to take advantage of the optional
+              dependencies.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation command explanations
+          </h3>
+        </div>
+        <p>
+          <span><b class="command">install -d /var/cache/samba</b></span>:
+          This directory is needed for proper operation of the
+          <span><b class="command">smbd</b></span> and <span><b class=
+          "command">nmbd</b></span> daemons.
+        </p>
+        <p>
+          <i class="parameter"><tt>--sysconfdir=/etc</tt></i>: Sets the
+          configuration file directory to avoid the default of <tt class=
+          "filename">/usr/etc</tt>.
+        </p>
+        <p>
+          <i class="parameter"><tt>--localstatedir=/var</tt></i>: Sets the
+          variable data directory to avoid the default of <tt class=
+          "filename">/usr/var</tt>.
+        </p>
+        <p>
+          <tt class="option">--with-fhs</tt>: Assigns all other file paths in
+          a manner compliant with the Filesystem Hierarchy Standard
+          (<span class="acronym">FHS</span>).
+        </p>
+        <p>
+          <tt class="option">--with-smbmount</tt>: Orders the creation of an
+          extra binary for use by the <span><b class=
+          "command">mount</b></span> command so that mounting remote
+          <span class="acronym">SMB</span> (Windows) shares becomes no more
+          complex than mounting remote <span class="acronym">NFS</span>
+          shares.
+        </p>
+        <p>
+          <span><b class="command">install -m755
+          nsswitch/libnss_win{s,bind}.so /lib</b></span>: The nss libraries
+          are not installed by default. If you intend to use winbindd for
+          domain auth, and/or <span class="acronym">WINS</span> name
+          resolution, you need these libraries.
+        </p>
+        <p>
+          <span><b class="command">ln -sf libnss_winbind.so
+          /lib/libnss_winbind.so.2</b></span> and <span><b class="command">ln
+          -sf libnss_wins.so /lib/libnss_wins.so.2</b></span>: These symlinks
+          are required by glibc to use the nss libraries.
+        </p>
+        <p>
+          <span><b class="command">cp ../examples/smb.conf.default
+          /etc/samba</b></span>: This copies a default <tt class=
+          "filename">smb.conf</tt> into <tt class="filename">/etc/samba</tt>.
+          This sample configuration will not work unless edited for your
+          site, and renamed <tt class="filename">smb.conf</tt>.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring Samba
+          </h3>
+        </div>
+        <p>
+          Because of the various uses for <span class=
+          "application">Samba</span>, complete configuration is well beyond
+          the scope of the BLFS book. In fact, many complete books have been
+          written on this topic alone. The included documentation, a popular
+          book published by O'Reilly, can be viewed by pointing your web
+          browser to <a href=
+          "file:///usr/share/samba/swat/using_samba/toc.html">file:///usr/share/samba/swat/using_samba/toc.html</a>.
+        </p>
+        <p>
+          The built in <span class="acronym">SWAT</span> (Samba Web
+          Administration Tool) utility can be used for basic configuration,
+          however, before using <span class="acronym">SWAT</span> you must
+          add an entry to <tt class="filename">/etc/services</tt> and make
+          changes to your <span><b class=
+          "command">inetd</b></span>/<span><b class=
+          "command">xinetd</b></span> configuration.
+        </p>
+        <p>
+          Add the swat entry to <tt class="filename">/etc/services</tt> with
+          the following command:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">echo "swat            901/tcp" &gt;&gt; /etc/services</b></span></tt>
+</pre>
+        <p>
+          If <span><b class="command">inetd</b></span> is used, the following
+          command will add the swat entry to <tt class=
+          "filename">/etc/inetd.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">echo "swat stream tcp nowait.400 root /usr/sbin/swat swat" \
+    &gt;&gt; /etc/inetd.conf</b></span></tt>
+</pre>
+        <p>
+          Issue a <span><b class="command">killall -HUP inetd</b></span> to
+          reread the changed <tt class="filename">inetd.conf</tt> file.
+        </p>
+        <p>
+          If <span><b class="command">xinetd</b></span> is used, the
+          following command will add the swat entry to <tt class=
+          "filename">/etc/xinetd.conf</tt>:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">cat &gt;&gt; /etc/xinetd.conf &lt;&lt; "EOF"</b></span>
+service swat
+{
+    port            = 901
+    socket_type     = stream
+    wait            = no
+    only_from       = 127.0.0.1
+    user            = root
+    server          = /usr/sbin/swat
+    log_on_failure  += USERID
+}
+<span><b class="command">EOF</b></span></tt>
+</pre>
+        <p>
+          Issue a <span><b class="command">killall -HUP xinetd</b></span> to
+          reread the changed <tt class="filename">xinetd.conf</tt> file.
+        </p>
+        <p>
+          <span class="acronym">SWAT</span> can be launched by pointing your
+          web browser to <a href=
+          "http://localhost:901">http://localhost:901</a>.
+        </p>
+        <p>
+          For your convenience, boot scripts have been provided for
+          <span class="application">Samba</span>. There are two included in
+          the <a href=
+          "../introduction/bootscripts.html">blfs-bootscripts-5.1</a>
+          package. The first, <tt class="filename">samba</tt>, will start the
+          <span><b class="command">smbd</b></span> and <span><b class=
+          "command">nmbd</b></span> daemons needed to provide <span class=
+          "acronym">SMB</span>/<span class="acronym">CIFS</span> services.
+          The second script, <tt class="filename">winbind</tt>, starts the
+          <span><b class="command">winbindd</b></span> daemon, used for
+          providing Windows domain services to Linux clients.
+        </p>
+        <p>
+          Install the <tt class="filename">samba</tt> script with the
+          following command:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-samba</b></span></tt>
+</pre>
+        <p>
+          If you also need the <tt class="filename">winbind</tt> script:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">make install-winbind</b></span></tt>
+</pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The <span class="application">Samba</span> package contains
+          <span><b class="command">make_smbcodepage</b></span>,
+          <span><b class="command">make_unicodemap</b></span>,
+          <span><b class="command">mount.smbfs</b></span>, <span><b class=
+          "command">net</b></span>, <span><b class="command">nmbd</b></span>,
+          <span><b class="command">nmblookup</b></span>, <span><b class=
+          "command">rpcclient</b></span>, <span><b class=
+          "command">smbcacls</b></span>, <span><b class=
+          "command">smbclient</b></span>, <span><b class=
+          "command">smbcontrol</b></span>, <span><b class=
+          "command">smbd</b></span>, <span><b class=
+          "command">smbpasswd</b></span>, <span><b class=
+          "command">smbspool</b></span>, <span><b class=
+          "command">smbstatus</b></span>, <span><b class=
+          "command">swat</b></span>, <span><b class=
+          "command">testparm</b></span>, <span><b class=
+          "command">testprns</b></span>, <span><b class=
+          "command">wbinfo</b></span> and <span><b class=
+          "command">winbindd.</b></span>
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862590" name="id2862590"></a>make_smbcodepage
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">make_smbcodepage</b></span> converts
+            text descriptions of code pages to binary code page files and
+            vice versa.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862604" name="id2862604"></a>make_unicodemap
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">make_unicodemap</b></span> converts text
+            Unicode map files to binary, for use in mapping characters to 16
+            bit Unicode.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862618" name="id2862618"></a>mount.smbfs
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">mount.smbfs</b></span> provides
+            <span><b class="command">/bin/mount</b></span> with a way to
+            mount remote Windows (or Samba) fileshares.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862638" name="id2862638"></a>net
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">net</b></span> is a tool for
+            administration of Samba and remote CIFS servers, similar to the
+            net utility for DOS/Windows.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862651" name="id2862651"></a>nmbd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">nmbd</b></span> is the Samba
+            Net<span class="acronym">BIOS</span> name server.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862668" name="id2862668"></a>nmblookup
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">nmblookup</b></span> is used to query
+            Net<span class="acronym">BIOS</span> names and map them to
+            <span class="acronym">IP</span> addresses.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862687" name="id2862687"></a>rpcclient
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rpcclient</b></span> is used to execute
+            MS-<span class="acronym">RPC</span> client side functions.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862704" name="id2862704"></a>smbcacls
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbcacls</b></span> is used to
+            manipulate NT access control lists.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862717" name="id2862717"></a>smbclient
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbclient</b></span> is a <span class=
+            "acronym">SMB</span>/<span class="acronym">CIFS</span> access
+            utility, similar to <span class="acronym">FTP</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862741" name="id2862741"></a>smbcontrol
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbcontrol</b></span> is used to control
+            running <span><b class="command">smbd</b></span>, <span><b class=
+            "command">nmbd</b></span> and <span><b class=
+            "command">winbindd</b></span> daemons.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862771" name="id2862771"></a>smbd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbd</b></span> is the main <span class=
+            "application">Samba</span> daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862790" name="id2862790"></a>smbpasswd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbpasswd</b></span> changes a user's
+            <span class="application">Samba</span> password.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862809" name="id2862809"></a>smbspool
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbspool</b></span> sends a print job to
+            an <span class="acronym">SMB</span> printer.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862826" name="id2862826"></a>smbstatus
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">smbstatus</b></span> reports current
+            <span class="application">Samba</span> connections.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862845" name="id2862845"></a>swat
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">swat</b></span> is the Samba Web
+            Administration Tool.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862859" name="id2862859"></a>testparm
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">testparm</b></span> checks an <tt class=
+            "filename">smb.conf</tt> file for proper syntax.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862878" name="id2862878"></a>testprns
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">testprns</b></span> tests printer names.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862891" name="id2862891"></a>wbinfo
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">wbinfo</b></span> queries a running
+            <span><b class="command">winbindd</b></span> daemon.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2862910" name="id2862910"></a>winbindd
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">winbindd</b></span> resolves names from
+            NT servers.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="openldap.html">Prev</a><br />
+        OpenLDAP-2.1.30
+      </div>
+      <div class="next">
+        <a accesskey="n" href="xinetd.html">Next</a><br />
+        xinetd-2.3.13
+      </div>
+      <div class="up">
+        <a accesskey="u" href="other.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,313 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      libusb-0.1.12
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.69.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.2.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.2.0
+        </h4>
+        <h3>
+          Chapter&nbsp;8.&nbsp;General Libraries
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="LZO.html" title="LZO-2.02">Prev</a>
+          <p>
+            LZO-2.02
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="iso-codes.html" title=
+          "ISO Codes-0.58-1">Next</a>
+          <p>
+            ISO Codes-0.58-1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;8.&nbsp;General Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="libusb" name="libusb"></a>
+        <h1 class="sect1">
+          libusb-0.1.12
+        </h1>
+      </div>
+      <div class="package" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to libusb
+          </h2>
+        </div>
+        <p>
+          The <span class="application">libusb</span> package contains a
+          library used by some applications for USB device access.
+        </p>
+        <h3>
+          <a id="id2614273" name="id2614273"></a>Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul compact="compact">
+            <li>
+              <p>
+                Download (HTTP): <a href=
+                "http://downloads.sourceforge.net/libusb/libusb-0.1.12.tar.gz">
+                <span class=
+                "url">http://downloads.sourceforge.net/libusb/libusb-0.1.12.tar.gz</span></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a href=""></a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: caf182cbc7565dac0fd72155919672e6
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 389 KB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 8.4 MB (includes installing
+                all documentation)
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.3 SBU (includes building all
+                documentation)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          <a id="id2800431" name="id2800431"></a>libusb Dependencies
+        </h3>
+        <h4>
+          <a id="id2585419" name="id2585419"></a>Optional
+        </h4>
+        <p class="optional">
+          <a href="pkgconfig.html">pkg-config-0.20</a>
+        </p>
+        <h4>
+          <a id="id2650759" name="id2650759"></a>Optional (Required to Build
+          the HTML User Manual)
+        </h4>
+        <p class="optional">
+          <a href="../pst/openjade.html">OpenJade-1.3.2</a> and <a href=
+          "http://www.docbook.org/sgml/4.2/index.html"><span class=
+          "url">DocBOOK SGML DTD-4.2</span></a>
+        </p>
+        <h4>
+          <a id="id2769656" name="id2769656"></a>Optional (Required to Build
+          the API Documentation)
+        </h4>
+        <p class="optional">
+          <a href="doxygen.html">Doxygen-1.4.6</a> and <a href=
+          "graphviz.html">Graphviz-2.8</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/libusb"><span class=
+          "url">http://wiki.linuxfromscratch.org/blfs/wiki/libusb</span></a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of libusb
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">libusb</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput"><kbd class=
+        "command">./configure --prefix=/usr --disable-build-docs &amp;&amp;
+make</kbd></pre>
+        <p>
+          If you wish to build the API documentation (see the required
+          dependencies), issue the following command:
+        </p>
+        <pre class="userinput"><kbd class="command">make apidox</kbd></pre>
+        <p>
+          To test the results, issue <span><strong class="command">make -k
+          check</strong></span>.
+        </p>
+        <p>
+          Now, as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class="command">make install</kbd></pre>
+        <p>
+          If you built the HTML user manual (by having the required
+          dependencies installed and removing the <em class=
+          "parameter"><tt>--disable-build-docs</tt></em> parameter from the
+          <span><strong class="command">configure</strong></span> command),
+          install it using the following commands as the <tt class=
+          "systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">install -v -d -m755 /usr/share/doc/libusb-0.1.12/html &amp;&amp;
+install -v -m644 doc/html/* /usr/share/doc/libusb-0.1.12/html</kbd></pre>
+        <p>
+          If you built the API documentation, install it using the following
+          commands as the <tt class="systemitem">root</tt> user:
+        </p>
+        <pre class="root"><kbd class=
+        "command">install -v -d -m755 /usr/share/doc/libusb-0.1.12/apidocs &amp;&amp;
+install -v -m644 apidocs/html/* \
+    /usr/share/doc/libusb-0.1.12/apidocs</kbd></pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Command Explanations
+          </h2>
+        </div>
+        <p>
+          <em class="parameter"><tt>--disable-build-docs</tt></em>: This
+          switch avoids building the HTML user manual. Remove it if you have
+          the required dependencies installed and wish to build the manual.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Libusb
+          </h2>
+        </div>
+        <p>
+          <a id="libusb-kernel" name="libusb-kernel"></a>To access raw USB
+          devices (those not treated as a disk by the mass-storage driver),
+          appropriate support must be available in the kernel. Check your
+          kernel configuration for Device Drivers &rArr; USB support &rArr;
+          Support for Host-side USB. Select any USB hardware device drivers
+          you may need on the same page.
+        </p>
+        <p>
+          To have raw USB devices set up properly, add the following
+          <span class="application">udev</span> rule and add any users that
+          need to access raw USB devices to the "usb" group.
+        </p>
+        <pre class="screen"><tt class=
+        "literal">cat &gt; /etc/udev/rules.d/23-usb.rules &lt;&lt; "EOF"
+# Set group ownership for raw USB devices
+SUBSYSTEM=="usb_device", GROUP="usb"
+EOF</tt></pre>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Program:</span></strong> <span class="seg">libusb-config</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">libusb.{so,a} and
+              libusbpp.{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directory:</span></strong> <span class=
+              "seg">/usr/share/doc/libusb-0.1.12</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2646832" name="id2646832"></a>Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <a id="libusb-config" name="libusb-config"></a><span class=
+                  "term"><span><strong class=
+                  "command">libusb-config</strong></span></span>
+                </td>
+                <td>
+                  <p>
+                    is a script that provides the right compiler and linker
+                    flags for programs using <tt class=
+                    "filename">libusb</tt>.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <a id="libusb-lib" name="libusb-lib"></a><span class=
+                  "term"><tt class="filename">libusb.{so,a}</tt></span>
+                </td>
+                <td>
+                  <p>
+                    libraries contain C functions for accessing USB hardware.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2007-01-15 17:25:53 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="LZO.html" title="LZO-2.02">Prev</a>
+          <p>
+            LZO-2.02
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="iso-codes.html" title=
+          "ISO Codes-0.58-1">Next</a>
+          <p>
+            ISO Codes-0.58-1
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="genlib.html" title=
+          "Chapter&nbsp;8.&nbsp;General Libraries">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.2.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

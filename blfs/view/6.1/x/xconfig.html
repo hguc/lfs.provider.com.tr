@@ -1,0 +1,229 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Additional X Window System Configuration
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.68.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.1">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.1
+        </h4>
+        <h3>
+          Chapter&nbsp;25.&nbsp;X Window System Environment
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="xfree86.html" title="XFree86-4.5.0">Prev</a>
+          <p>
+            XFree86-4.5.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xfree86-setup.html" title=
+          "X Window System Components">Next</a>
+          <p>
+            X Window System Components
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;25.&nbsp;X Window System Environment">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="x-config" name="x-config"></a>
+        <h1 class="sect1">
+          Additional X Window System Configuration
+        </h1>
+      </div>
+      <p>
+        Below you will find information on fine tuning the components of both
+        variants of <span class="application">X Window System</span>. The
+        documentation links are specifically for <span class=
+        "application">XFree86</span>, however, the information contained in
+        those documents usually pertains to <span class=
+        "application">Xorg</span> as well.
+      </p>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="xinput" name="xinput"></a>
+          <h2 class="sect2">
+            Setting up X Input Devices
+          </h2>
+        </div>
+        <p>
+          This is a new section for BLFS. For now, here are some convenient
+          links for additional configuration of X input devices. Descriptive
+          content will be added soon.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="xkeyboard" name="xkeyboard"></a>Keyboards
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <a href=
+            "http://www.xfree86.org/current/XKB-Config.html"><span class=
+            "url">The <span class="application">XKB</span> Configuration
+            Guide</span></a>
+          </p>
+          <p>
+            <a href=
+            "http://www.xfree86.org/current/XKB-Enhancing.html"><span class=
+            "url">How to furthur enhance <span class="application">XKB</span>
+            configuration</span></a>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="xmice" name="xmice"></a>Mice
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Multi-button mice can be used to their full potential by mapping
+            the additional buttons to X button events. Wheel mice are a
+            common example. The ordinary ones contain two buttons, and a
+            scroll wheel that doubles as a third button. As far as
+            <span class="application">X</span> is concerned, there are 5
+            buttons as it counts the 'scroll up' and 'scroll down' functions
+            (internally they are buttons). Here is an example 'InputDevice'
+            section for a typical PS/2 wheel mouse:
+          </p>
+          <pre class="screen"><tt class="literal">Section "InputDevice"
+  Identifier  "Mouse 0"
+  Driver      "mouse"
+  Option      "Device"        "/dev/input/mice"
+  Option      "Protocol"      "IMPS/2"
+  Option      "ZAxisMapping"  "4 5"
+  Option      "Buttons"       "5"
+EndSection</tt></pre>
+          <p>
+            Button assignments differ for every mouse type. On more exotic
+            mice, you may find that the rocker wheel buttons are 6 and 7.
+            Simply add those values to the <tt class=
+            "option">ZAxisMapping</tt> option, and set the <tt class=
+            "option">Buttons</tt> option appropriately to enable side to side
+            scrolling. Additional information on button assignment can be
+            found in the following <span class="application">XFree86</span>
+            document:
+          </p>
+          <p>
+            <a href="http://www.xfree86.org/current/mouse.html"><span class=
+            "url">Mouse Support in <span class=
+            "application">XFree86</span></span></a>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="xinput-other" name="xinput-other"></a>Other
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To be added...
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Fine Tuning Display Settings
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2752140" name="id2752140"></a>The 'Monitor'
+                  Section
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To be added...
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2746847" name="id2746847"></a>The 'Device' Section
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            To be added...
+          </p>
+          <p>
+            <a href=
+            "http://www.xfree86.org/current/manindex4.html"><span class=
+            "url">Devices</span></a>
+          </p>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-08-01 13:29:19 -0600
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="xfree86.html" title="XFree86-4.5.0">Prev</a>
+          <p>
+            XFree86-4.5.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="xfree86-setup.html" title=
+          "X Window System Components">Next</a>
+          <p>
+            X Window System Components
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="installing.html" title=
+          "Chapter&nbsp;25.&nbsp;X Window System Environment">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.1">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

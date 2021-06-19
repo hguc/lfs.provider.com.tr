@@ -1,0 +1,603 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      libtiff-3.6.1
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Chapter&nbsp;9.&nbsp;Graphics and Font Libraries</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="libpng.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="libungif.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="sect1">
+          libtiff-3.6.1
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Introduction to libtiff
+          </h3>
+        </div>
+        <p>
+          The <span class="application">libtiff</span> package contains the
+          tiff libraries and associated utilities. The libraries are used by
+          many programs for reading and writing tiff files and the utilities
+          are useful for general work with tiff files.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2673545" name="id2673545"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://libtiff.maptools.org/dl/tiff-v3.6.1.tar.gz">http://libtiff.maptools.org/dl/tiff-v3.6.1.tar.gz</a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=""></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 1.1 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated Disk space required: 11 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.16 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2673595" name="id2673595"></a><span class=
+                  "application">libtiff</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2673590" name="id2673590"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="graphlib.html#libjpeg">libjpeg-6b</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Installation of libtiff
+          </h3>
+        </div>
+        <p>
+          Install <span class="application">libtiff</span> by running the
+          following commands:
+        </p>
+        <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">./configure --prefix=/usr --noninteractive \
+    --with-DIR_MAN=/usr/share/man \
+    --with-ZIP=yes --with-DIR_GZLIB=/usr/lib &amp;&amp;
+make &amp;&amp;
+make install</b></span></tt>
+</pre>
+        <div class="admonition">
+          <div class="admonhead">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3 class="note">
+              Note
+            </h3>
+          </div>
+          <div class="admonbody">
+            <p>
+              configure prints false error messages that it is unable to find
+              the library directories for ZIP (and JPEG) support. Ignore
+              them. To verify that <tt class="filename">libtiff</tt> is
+              indeed linked to these libraries, use the <span><b class=
+              "command">ldd</b></span> command.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Command explanations
+          </h3>
+        </div>
+        <p>
+          <tt class="option">--noninteractive</tt>: This switch is used to
+          avoid the configuration routine asking for confirmation of the
+          installation directories (which we pass to configure).
+        </p>
+        <p>
+          <i class="parameter"><tt>--with-DIR_MAN=/usr/share/man</tt></i>:
+          This is used because despite the fact we pass <i class=
+          "parameter"><tt>--prefix=/usr</tt></i>, the configure routine tries
+          to install the man pages in <tt class=
+          "filename">/usr/local/man</tt> instead of the correct place.
+        </p>
+        <p>
+          <i class="parameter"><tt>--with-ZIP=yes
+          --with-DIR_GZLIB=/usr/lib</tt></i>: This enables support for the
+          handling of <span class="acronym">TIFF</span> images with
+          deflate-encoded data.
+        </p>
+        <p>
+          <i class="parameter"><tt>--with-JPEG=yes
+          --with-DIR_JPEGLIB=/usr/lib</tt></i>: Use these switches to enable
+          support for the handling of <span class="acronym">TIFF</span>
+          images with <span class="acronym">JPEG</span>-encoded data.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Configuring libtiff
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2676346" name="id2676346"></a>Configuration
+                  Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            As with most libraries, there is no configuration to do, save
+            that the library directory i.e., <tt class=
+            "filename">/opt/lib</tt> or <tt class=
+            "filename">/usr/local/lib</tt> should appear in <tt class=
+            "filename">/etc/ld.so.conf</tt> so that <span><b class=
+            "command">ldd</b></span> can find the shared libraries. After
+            checking that this is the case, <span><b class=
+            "command">/sbin/ldconfig</b></span> should be run while logged in
+            as root.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Contents
+          </h3>
+        </div>
+        <p>
+          The libtiff package contains <span><b class=
+          "command">fax2ps</b></span>, <span><b class=
+          "command">fax2tiff</b></span>, <span><b class=
+          "command">gif2tiff</b></span>, <span><b class=
+          "command">pal2rgb</b></span>, <span><b class=
+          "command">ppm2tiff</b></span>, <span><b class=
+          "command">ras2tiff</b></span>, <span><b class=
+          "command">raw2tiff</b></span>, <span><b class=
+          "command">rgb2ycbcr</b></span>, <span><b class=
+          "command">thumbnail</b></span>, <span><b class=
+          "command">tiff2bw</b></span>, <span><b class=
+          "command">tiff2pdf</b></span>, <span><b class=
+          "command">tiff2ps</b></span>, <span><b class=
+          "command">tiff2rgba</b></span>, <span><b class=
+          "command">tiffcmp</b></span>, <span><b class=
+          "command">tiffcp</b></span>, <span><b class=
+          "command">tiffdither</b></span>, <span><b class=
+          "command">tiffdump</b></span>, <span><b class=
+          "command">tiffinfo</b></span>, <span><b class=
+          "command">tiffmedian</b></span>, <span><b class=
+          "command">tiffset</b></span>, <span><b class=
+          "command">tiffsplit</b></span> and <tt class=
+          "filename">libtiff</tt> libraries.
+        </p>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h3 class="sect2">
+            Description
+          </h3>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677249" name="id2677249"></a>fax2ps
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">fac2ps</b></span> converts a
+            <span class="acronym">TIFF</span> facsimile to compressed
+            PostScript file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677266" name="id2677266"></a>fax2tiff
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">fax2tiff</b></span> creates a
+            <span class="acronym">TIFF</span> Class F fax file from raw fax
+            data.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677283" name="id2677283"></a>gif2tiff
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">gif2tiff</b></span> creates a
+            <span class="acronym">TIFF</span> file from a <span class=
+            "acronym">GIF87</span> format image file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677303" name="id2677303"></a>pal2rgb
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">pal2rgb</b></span> converts a palette
+            color <span class="acronym">TIFF</span> image to a full color
+            image.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677320" name="id2677320"></a>ppm2tiff
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ppm2tiff</b></span> creates a
+            <span class="acronym">TIFF</span> file from a <span class=
+            "acronym">PPM</span> image file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677340" name="id2677340"></a>ras2tiff
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">ras2tiff</b></span> creates a
+            <span class="acronym">TIFF</span> file from a Sun rasterfile.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677357" name="id2677357"></a>raw2tiff
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">raw2tiff</b></span> converts a raw byte
+            sequence into <span class="acronym">TIFF</span>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677373" name="id2677373"></a>rgb2ycbcr
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">rgb2ycbcr</b></span> converts non-YCbCr
+            <span class="acronym">TIFF</span> images to a YCbCr <span class=
+            "acronym">TIFF</span> image.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677394" name="id2677394"></a>thumbnail
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">thumbnail</b></span> creates a
+            <span class="acronym">TIFF</span> file with thumbnail images.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677410" name="id2677410"></a>tiff2bw
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiff2bw</b></span> converts a color
+            <span class="acronym">TIFF</span> image to grayscale.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677427" name="id2677427"></a>tiff2pdf
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiff2pdf</b></span> converts a
+            <span class="acronym">TIFF</span> image to a <span class=
+            "acronym">PDF</span> document.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677447" name="id2677447"></a>tiff2ps
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiff2ps</b></span> converts a
+            <span class="acronym">TIFF</span> image to a PostScript file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677464" name="id2677464"></a>tiff2rgba
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiff2rgba</b></span> converts a wide
+            variety of <span class="acronym">TIFF</span> images into an
+            <span class="acronym">RGBA</span> <span class=
+            "acronym">TIFF</span> image.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677488" name="id2677488"></a>tiffcmp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiffcmp</b></span> compares two
+            <span class="acronym">TIFF</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677505" name="id2677505"></a>tiffcp
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiffcp</b></span> copies (and possibly
+            converts) a <span class="acronym">TIFF</span> file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677522" name="id2677522"></a>tiffdither
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiffdither</b></span> converts a
+            grayscale image to bilevel using dithering.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677535" name="id2677535"></a>tiffdump
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiffdump</b></span> prints verbatim
+            information about <span class="acronym">TIFF</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677552" name="id2677552"></a>tiffinfo
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiffinfo</b></span> prints information
+            about <span class="acronym">TIFF</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677569" name="id2677569"></a>tiffmedian
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiffmedian</b></span> applies the median
+            cut algorithm to data in a <span class="acronym">TIFF</span>
+            file.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677586" name="id2677586"></a>tiffsplit
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            <span><b class="command">tiffsplit</b></span> splits a
+            multi-image <span class="acronym">TIFF</span> into single-image
+            <span class="acronym">TIFF</span> files.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2677606" name="id2677606"></a>tiff libraries
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            The tiff libraries are used by many programs to read and write
+            tiff files.
+          </p>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="libpng.html">Prev</a><br />
+        libpng-1.2.5
+      </div>
+      <div class="next">
+        <a accesskey="n" href="libungif.html">Next</a><br />
+        libungif-4.1.0b1
+      </div>
+      <div class="up">
+        <a accesskey="u" href="graphlib.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

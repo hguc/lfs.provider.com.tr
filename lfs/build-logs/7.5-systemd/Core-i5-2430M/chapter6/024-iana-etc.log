@@ -1,0 +1,12 @@
+ln -f -s protocol-numbers.dist protocol-numbers
+gawk --re-interval -f protocols.gawk -v strip=no \
+    protocol-numbers > protocols
+ln -f -s port-numbers.dist port-numbers
+gawk -f services.gawk -v strip=no port-numbers > services
+install -d /etc
+install -m 644 protocols /etc
+install -m 644 services /etc
+
+real	0m0.218s
+user	0m0.204s
+sys	0m0.009s

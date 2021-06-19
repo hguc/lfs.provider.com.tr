@@ -1,0 +1,243 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Chapter&nbsp;7.&nbsp;Shells
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.65.1" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body>
+    <div class="navheader">
+      <div class="headertitles">
+        <p>
+          Beyond Linux From Scratch - Version 5.1
+        </p>
+        <p>
+          <b>Part&nbsp;II.&nbsp;Post LFS Configuration and Extra Software</b>
+        </p>
+      </div>
+      <div class="headerlinks">
+        <div class="prev">
+          <a accesskey="p" href="pico.html">Prev</a>
+        </div>
+        <div class="next">
+          <a accesskey="n" href="tcsh.html">Next</a>
+        </div>
+        <div class="home">
+          <a accesskey="h" href="../index.html">Home</a>
+        </div>
+      </div>
+    </div>
+    <div class="chapter" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <h1 class="chapter">
+          Shells
+        </h1>
+      </div>
+      <p>
+        We are all familiar with the Bourne Again SHell, but there are two
+        other user interfaces that are considered useful modern shells -- the
+        Berkeley Unix C shell and the Korn shell. This chapter installs
+        packages compatible with these additional shell types.
+      </p>
+      <div class="sect1" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <a id="ash" name="ash"></a>
+          <h2 class="sect1">
+            ASH-0.4.0
+          </h2>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Introduction to ASH
+            </h3>
+          </div>
+          <p>
+            <span><b class="command">ash</b></span> is a shell that is the
+            most compliant with the Bourne Shell (not to be confused with
+            Bourne Again SHell i.e., <span class="application">Bash</span>
+            installed in <span class="acronym">LFS</span>) without any
+            additional features. Bourne Shell is available on most commercial
+            <span class="acronym">UNIX</span> systems. Hence <span><b class=
+            "command">ash</b></span> is useful for testing scripts to be
+            <span><b class="command">sh</b></span>-compliant. It also has a
+            small memory and space requirements compared to the other
+            <span><b class="command">sh</b></span>-compliant shells.
+          </p>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2629274" name="id2629274"></a>Package
+                    information
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Download (HTTP): <a href=""></a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download (FTP): <a href=
+                    "ftp://distro.ibiblio.org/pub/Linux/distributions/slackware/slackware_source/ap/ash/ash-0.4.0.tar.gz">
+                    ftp://distro.ibiblio.org/pub/Linux/distributions/slackware/slackware_source/ap/ash/ash-0.4.0.tar.gz</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Download size: 118 KB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated Disk space required: 2.7 MB
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Estimated build time: 0.06 SBU
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2629308" name="id2629308"></a>Additional
+                    downloads
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <div class="itemizedlist">
+              <ul compact="compact">
+                <li>
+                  <p>
+                    Required patch: <a href=
+                    "http://www.linuxfromscratch.org/patches/blfs/5.1/ash-0.4.0-cumulative_fixes-1.patch">
+                    http://www.linuxfromscratch.org/patches/blfs/5.1/ash-0.4.0-cumulative_fixes-1.patch</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Installation of ASH
+            </h3>
+          </div>
+          <p>
+            Install <span class="application">ASH</span> by running the
+            following commands:
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">patch -Np1 -i ../ash-0.4.0-cumulative_fixes-1.patch &amp;&amp;
+make &amp;&amp;
+install -m 755 sh /bin/ash &amp;&amp;
+install -m 644 sh.1 /usr/share/man/man1/ash.1</b></span></tt>
+</pre>
+          <p>
+            If you would like to make <span><b class="command">ash</b></span>
+            the default sh shell, make a symlink.
+          </p>
+          <pre class="screen">
+<tt class="userinput"><span><b class=
+"command">ln -sf ash /bin/sh</b></span></tt>
+</pre>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Configuring ASH
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2629649" name="id2629649"></a>Config files
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span class="application">ASH</span> sources <tt class=
+              "filename">/etc/profile</tt> and <tt class=
+              "filename">$HOME/.profile</tt>
+            </p>
+          </div>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Contents
+            </h3>
+          </div>
+          <p>
+            The <span class="application">ASH</span> package contains
+            <span><b class="command">ash</b></span>, a <span><b class=
+            "command">sh</b></span> compliant shell.
+          </p>
+        </div>
+        <div class="sect2" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <h3 class="sect2">
+              Description
+            </h3>
+          </div>
+          <div class="sect3" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h4 class="title">
+                    <a id="id2629525" name="id2629525"></a>ash
+                  </h4>
+                </div>
+              </div>
+            </div>
+            <p>
+              <span><b class="command">ash</b></span> is a <span><b class=
+              "command">sh</b></span>-compliant shell.
+            </p>
+          </div>
+        </div>
+      </div>
+    </div>
+    <div class="navfooter">
+      <div class="prev">
+        <a accesskey="p" href="pico.html">Prev</a><br />
+        Pico
+      </div>
+      <div class="next">
+        <a accesskey="n" href="tcsh.html">Next</a><br />
+        Tcsh-6.13.00
+      </div>
+      <div class="up">
+        <a accesskey="u" href="postlfs.html">Up</a>
+      </div>
+      <div class="home">
+        <a accesskey="h" href="../index.html">Home</a>
+      </div>
+    </div>
+  </body>
+</html>

@@ -1,0 +1,316 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "text/html; charset=iso-8859-1" />
+    <title>
+      Qpopper-4.0.5
+    </title>
+    <link rel="stylesheet" href="../stylesheets/blfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.67.2" />
+    <link rel="stylesheet" href="../stylesheets/blfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body id="blfs" class="6.0">
+    <div class="navheader">
+      <div class="headertitles">
+        <h4>
+          Beyond Linux From Scratch - Version 6.0
+        </h4>
+        <h3>
+          Chapter&nbsp;21.&nbsp;Mail Server Software
+        </h3>
+      </div>
+      <ul class="headerlinks">
+        <li class="prev">
+          <a accesskey="p" href="exim.html" title="Exim-4.43">Prev</a>
+          <p>
+            Exim-4.43
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="courier.html" title="Courier-0.47">Next</a>
+          <p>
+            Courier-0.47
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mail.html" title=
+          "Chapter&nbsp;21.&nbsp;Mail Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <div class="titlepage">
+        <a id="qpopper" name="qpopper"></a>
+        <h1 class="sect1">
+          Qpopper-4.0.5
+        </h1>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Introduction to Qpopper
+          </h2>
+        </div>
+        <p>
+          The <span class="application">Qpopper</span> package contains a
+          <span class="acronym">POP</span>3 mail server.
+        </p>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2673204" name="id2673204"></a>Package information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="itemizedlist">
+            <ul compact="compact">
+              <li>
+                <p>
+                  Download (HTTP): <a href=
+                  "http://ftp.uni-koeln.de/mail/qpopper4.0.5.tar.gz"><span class="url">
+                  http://ftp.uni-koeln.de/mail/qpopper4.0.5.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download (FTP): <a href=
+                  "ftp://ftp.qualcomm.com/eudora/servers/unix/popper/qpopper4.0.5.tar.gz">
+                  <span class=
+                  "url">ftp://ftp.qualcomm.com/eudora/servers/unix/popper/qpopper4.0.5.tar.gz</span></a>
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download MD5 sum: e00853280c9e899711f0b0239d3d8f86
+                </p>
+              </li>
+              <li>
+                <p>
+                  Download size: 2.2 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated disk space required: 9.0 MB
+                </p>
+              </li>
+              <li>
+                <p>
+                  Estimated build time: 0.13 SBU
+                </p>
+              </li>
+            </ul>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="id2645342" name="id2645342"></a><span class=
+                  "application">Qpopper</span> dependencies
+                </h4>
+              </div>
+            </div>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2628411" name="id2628411"></a>Required
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../server/mail.html"><span class="url">MTA</span></a>
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2846847" name="id2846847"></a>Optional
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              <a href="../postlfs/security.html#openssl">OpenSSL-0.9.7e</a>,
+              <a href="../general/gdbm.html">GDBM-1.8.3</a>, <a href=
+              "../postlfs/linux_pam.html">Linux-PAM-0.78</a>, and <a href=
+              "../postlfs/mitkrb.html">MIT krb5-1.4</a> or <a href=
+              "../postlfs/heimdal.html">Heimdal-0.6.3</a>
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Installation of Qpopper
+          </h2>
+        </div>
+        <p>
+          Install <span class="application">Qpopper</span> with the following
+          commands:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">./configure --prefix=/usr &amp;&amp;
+make</strong></span></kbd></pre>
+        <p>
+          Now, as the root user:
+        </p>
+        <pre class="userinput"><kbd class="command"><span><strong class=
+        "command">make install</strong></span></kbd></pre>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Configuring Qpopper
+          </h2>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <div class="titlepage">
+            <div>
+              <div>
+                <h4 class="title">
+                  <a id="qpopper-config" name=
+                  "qpopper-config"></a>Configuration Information
+                </h4>
+              </div>
+            </div>
+          </div>
+          <p>
+            Update the <span class="application">Syslog</span> configuration
+            file and force the <span><strong class=
+            "command">syslogd</strong></span> daemon to reread the new file
+            so that <span class="application">Qpopper</span> events are
+            logged:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">echo "local0.notice;local0.debug /var/log/POP.log" &gt;&gt; \
+    /etc/syslog.conf &amp;&amp;
+killall -HUP syslogd</strong></span></kbd></pre>
+          <p>
+            If you use <span><strong class="command">inetd</strong></span>,
+            the following command will add the <span class=
+            "application">Qpopper</span> entry to <tt class=
+            "filename">/etc/inetd.conf</tt>:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">echo "pop3 stream tcp nowait root /usr/sbin/popper popper" &gt;&gt; \
+    /etc/inetd.conf &amp;&amp;
+killall inetd || inetd</strong></span></kbd></pre>
+          <p>
+            Issue a <span><strong class="command">killall -HUP
+            inetd</strong></span> to reread the changed <tt class=
+            "filename">inetd.conf</tt> file.
+          </p>
+          <p>
+            If you use <span><strong class="command">xinetd</strong></span>,
+            the following command will add the <span class=
+            "application">Qpopper</span> entry to <tt class=
+            "filename">/etc/xinetd.conf</tt>:
+          </p>
+          <pre class="userinput"><kbd class="command"><span><strong class=
+          "command">cat &gt;&gt; /etc/xinetd.conf &lt;&lt; "EOF"</strong></span>
+service pop3
+{
+    port            = 110
+    socket_type     = stream
+    protocol        = tcp
+    wait            = no
+    user            = root
+    server          = /usr/sbin/popper
+}
+<span><strong class="command">EOF</strong></span></kbd></pre>
+          <p>
+            Issue a <span><strong class="command">killall -HUP
+            xinetd</strong></span> to reread the changed <tt class=
+            "filename">xinetd.conf</tt> file.
+          </p>
+        </div>
+      </div>
+      <div class="sect2" lang="en" xml:lang="en">
+        <div class="titlepage">
+          <h2 class="sect2">
+            Contents
+          </h2>
+        </div>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Program:</span></strong> <span class="seg">popper</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Libraries:</span></strong> <span class="seg">None</span>
+            </div>
+            <div class="seg">
+              <strong><span class="segtitle">Installed
+              Directories:</span></strong> <span class="seg">None</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            <a id="id2636815" name="id2636815"></a>Short Descriptions
+          </h3>
+          <dl>
+            <dt>
+              <a id="popper-qpopper" name="popper-qpopper"></a><span class=
+              "term"><span><strong class=
+              "command">popper</strong></span></span>
+            </dt>
+            <dd>
+              <p>
+                is the <span class="acronym">POP</span>3 server daemon.
+              </p>
+            </dd>
+          </dl>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2005-03-07 08:18:53 -0700
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="exim.html" title="Exim-4.43">Prev</a>
+          <p>
+            Exim-4.43
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="courier.html" title="Courier-0.47">Next</a>
+          <p>
+            Courier-0.47
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="mail.html" title=
+          "Chapter&nbsp;21.&nbsp;Mail Server Software">Up</a>.
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.0">Home</a>.
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

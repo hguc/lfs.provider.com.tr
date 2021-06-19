@@ -1,0 +1,1433 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      Samba-3.0.30
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;19.&nbsp;Major Servers
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="proftpd.html" title="ProFTPD-1.3.0">Prev</a>
+          <p>
+            ProFTPD-1.3.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="vsftpd.html" title="vsftpd-2.0.5">Next</a>
+          <p>
+            vsftpd-2.0.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="majorservers.html" title=
+          "Chapter&nbsp;19.&nbsp;Major Servers">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="samba3" name="samba3"></a>Samba-3.0.30
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to Samba
+        </h2>
+        <p>
+          The <span class="application">Samba</span> package provides file
+          and print services to SMB/CIFS clients and Windows networking to
+          Linux clients. <span class="application">Samba</span> can also be
+          configured as a Windows NT 4.0 Domain Controller replacement (with
+          caveats working with NT PDC's and BDC's), a file/print server
+          acting as a member of a Windows NT 4.0 or Active Directory domain
+          and a NetBIOS (rfc1001/1002) nameserver (which amongst other things
+          provides LAN browsing support).
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://us1.samba.org/samba/ftp/stable/samba-3.0.30.tar.gz">http://us1.samba.org/samba/ftp/stable/samba-3.0.30.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://us5.samba.org/pub/samba-ftp/samba-3.0.30.tar.gz">ftp://us5.samba.org/pub/samba-ftp/samba-3.0.30.tar.gz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: d647ec1f34414fa8691f74536dcccfb5
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 20 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 238 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 2.3 SBU (additional 1.0 SBU to run the
+                test suite)
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          Samba Dependencies
+        </h3>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../general/popt.html" title=
+          "Popt-1.10.4">popt-1.10.4</a>, <a class="xref" href=
+          "../postlfs/linux-pam.html" title=
+          "Linux-PAM-0.99.10.0">Linux-PAM-0.99.10.0</a>, <a class="xref"
+          href="../pst/cups.html" title="CUPS-1.2.12">CUPS-1.2.12</a>,
+          <a class="xref" href="openldap.html" title=
+          "OpenLDAP-2.3.39">OpenLDAP-2.3.39</a>, <a class="xref" href=
+          "../general/gamin.html" title="Gamin-0.1.9">Gamin-0.1.9</a>,
+          <a class="xref" href="../postlfs/heimdal.html" title=
+          "Heimdal-1.1">Heimdal-1.1</a> or <a class="xref" href=
+          "../postlfs/mitkrb.html" title="MIT Kerberos V5-1.6">MIT Kerberos
+          V5-1.6</a>, <a class="xref" href="../general/python.html" title=
+          "Python-2.5.2">Python-2.5.2</a> (to build Samba API bindings for
+          the <span class="application">Python</span> installation),
+          <a class="ulink" href=
+          "ftp://oss.sgi.com/projects/xfs/cmd_tars/">libacl</a> (requires
+          <a class="ulink" href=
+          "ftp://oss.sgi.com/projects/xfs/cmd_tars/">libattr</a>), and
+          <a class="ulink" href="http://valgrind.kde.org/">Valgrind</a>
+          (optionally used by the test suite)
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/samba3">http://wiki.linuxfromscratch.org/blfs/wiki/samba3</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of Samba
+        </h2>
+        <div class="admon note">
+          <img alt="[Note]" src="../images/note.png" />
+          <h3>
+            Note
+          </h3>
+          <p>
+            If you wish to run the test suite after the binaries are built,
+            you must add the <code class=
+            "option">--enable-socket-wrapper</code> parameter to the
+            <span class="command"><strong>configure</strong></span> script
+            below. You may want to run <span class=
+            "command"><strong>configure</strong></span> with the <code class=
+            "option">--help</code> parameter first. There may be other
+            parameters needed to take advantage of optional dependencies.
+          </p>
+        </div>
+        <p>
+          Install <span class="application">Samba</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class="command">cd source &amp;&amp;
+
+./configure \
+    --prefix=/usr \
+    --sysconfdir=/etc \
+    --localstatedir=/var \
+    --with-piddir=/var/run \
+    --with-pammodulesdir=/lib/security \
+    --with-fhs \
+    --with-smbmount &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          You must become the <code class="systemitem">root</code> user to
+          run the test framework. To run the tests, issue: <span class=
+          "command"><strong>make test</strong></span>. If you have
+          <span class="application">Linux-PAM</span> installed and built the
+          PAM library modules, you can perform a dlopen test by issuing:
+          <span class="command"><strong>make
+          test_pam_modules</strong></span>.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+mv -v /usr/lib/samba/libsmbclient.so /usr/lib &amp;&amp;
+ln -v -sf ../libsmbclient.so /usr/lib/samba &amp;&amp;
+ln -v -sf libsmbclient.so /usr/lib/libsmbclient.so.0 &amp;&amp;
+
+chmod -v 644 /usr/include/lib{smbclient,msrpc}.h &amp;&amp;
+
+install -v -m755 nsswitch/libnss_win{s,bind}.so /lib &amp;&amp;
+ln -v -sf libnss_winbind.so /lib/libnss_winbind.so.2 &amp;&amp;
+ln -v -sf libnss_wins.so /lib/libnss_wins.so.2 &amp;&amp;
+
+install -v -m644 ../examples/smb.conf.default /etc/samba &amp;&amp;
+
+install -v -m755 -d /usr/share/doc/samba-3.0.30 &amp;&amp;
+install -v -m644 ../docs/*.pdf /usr/share/doc/samba-3.0.30 &amp;&amp;
+ln -v -s ../../samba/swat  /usr/share/doc/samba-3.0.30</kbd>
+</pre>
+        <p>
+          If you passed the <code class="option">--with-python</code> option
+          to the <span class="command"><strong>configure</strong></span>
+          script, issue the following command as the <code class=
+          "systemitem">root</code> user to install the <span class=
+          "application">Python</span> extensions:
+        </p>
+        <pre class="root">
+<kbd class="command">make python_install</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <em class="parameter"><code>--sysconfdir=/etc</code></em>: Sets the
+          configuration file directory to avoid the default of <code class=
+          "filename">/usr/etc</code>.
+        </p>
+        <p>
+          <em class="parameter"><code>--localstatedir=/var</code></em>: Sets
+          the variable data directory to avoid the default of <code class=
+          "filename">/usr/var</code>.
+        </p>
+        <p>
+          <em class="parameter"><code>--with-fhs</code></em>: Assigns all
+          other file paths in a manner compliant with the Filesystem
+          Hierarchy Standard (FHS).
+        </p>
+        <p>
+          <em class="parameter"><code>--with-smbmount</code></em>: Orders the
+          creation of an extra binary for use by the <span class=
+          "command"><strong>mount</strong></span> command so that mounting
+          remote SMB (Windows) shares becomes no more complex than mounting
+          remote NFS shares.
+        </p>
+        <p>
+          <code class="option">--with-pam</code>: Use this parameter to link
+          <span class="application">Linux-PAM</span> into the build. This
+          also builds the <code class="filename">pam_winbind.so</code> and
+          <code class="filename">pam_smbpass.so</code> <span class=
+          "application">PAM</span> modules. You can find instructions on how
+          to configure and use the <code class=
+          "filename">pam_winbind.so</code>module by running <span class=
+          "command"><strong>man winbindd</strong></span>.
+        </p>
+        <p>
+          <span class="command"><strong>mv -v /usr/lib/samba/libsmbclient.so
+          ...; ln -v -sf ../libsmbclient.so ...</strong></span>: The
+          <code class="filename">libsmbclient.so</code> library is needed by
+          other packages. This command moves it to a location where other
+          packages can find it.
+        </p>
+        <p>
+          <span class="command"><strong>install -v -m755
+          nsswitch/libnss_win{s,bind}.so /lib</strong></span>: The nss
+          libraries are not installed by default. If you intend to use
+          winbindd for domain auth, and/or WINS name resolution, you need
+          these libraries.
+        </p>
+        <p>
+          <span class="command"><strong>ln -v -sf libnss_winbind.so
+          /lib/libnss_winbind.so.2</strong></span> and <span class=
+          "command"><strong>ln -v -sf libnss_wins.so
+          /lib/libnss_wins.so.2</strong></span>: These symlinks are required
+          by glibc to use the NSS libraries.
+        </p>
+        <p>
+          <span class="command"><strong>install -v -m644
+          ../examples/smb.conf.default /etc/samba</strong></span>: This
+          copies a default <code class="filename">smb.conf</code> file into
+          <code class="filename">/etc/samba</code>. This sample configuration
+          will not work until you copy it to <code class=
+          "filename">/etc/samba/smb.conf</code> and make the appropriate
+          changes for your installation. See the configuration section for
+          minimum values which must be set.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring Samba
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="samba3-config" name="samba3-config"></a>Config Files
+          </h3>
+          <p>
+            /etc/samba/smb.conf
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Mounting Shares by Unprivileged Users
+          </h3>
+          <p>
+            If it is desired for unprivileged users to directly mount (and
+            unmount) SMB and CIFS shares, the <span class=
+            "command"><strong>smbmnt</strong></span>, <span class=
+            "command"><strong>smbumount</strong></span>, <span class=
+            "command"><strong>mount.cifs</strong></span> and <span class=
+            "command"><strong>umount.cifs</strong></span> commands must be
+            setuid <code class="systemitem">root</code>. Note that users can
+            only mount SMB/CIFS shares on a mount point owned by that user
+            (requires write access also). If desired, change these programs
+            to setuid <code class="systemitem">root</code> by issuing the
+            following command as the <code class="systemitem">root</code>
+            user:
+          </p>
+          <pre class="root">
+<kbd class="command">chmod -v 4755 /usr/bin/smb{mnt,umount} \
+              /usr/sbin/{,u}mount.cifs</kbd>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Printing to SMB Clients
+          </h3>
+          <p>
+            If you use <span class="application">CUPS</span> for print
+            services, and you wish to print to a printer attached to an SMB
+            client, you need to create an SMB backend device. To create the
+            device, issue the following command as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class=
+"command">ln -v -sf /usr/bin/smbspool /usr/lib/cups/backend/smb</kbd>
+</pre>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            Due to the complexity and the many various uses for <span class=
+            "application">Samba</span>, complete configuration for all the
+            package's capabilities is well beyond the scope of the BLFS book.
+            This section provides instructions to configure the <code class=
+            "filename">/etc/samba/smb.conf</code> file for two common
+            scenarios. The complete contents of <code class=
+            "filename">/etc/samba/smb.conf</code> will depend on the purpose
+            of <span class="application">Samba</span> installation.
+          </p>
+          <div class="admon note">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3>
+              Note
+            </h3>
+            <p>
+              You may find it easier to copy the configuration parameters
+              shown below into an empty <code class=
+              "filename">/etc/samba/smb.conf</code> file instead of copying
+              and editing the default file as mentioned in the
+              &ldquo;<span class="quote">Command Explanations</span>&rdquo;
+              section. How you create/edit the <code class=
+              "filename">/etc/samba/smb.conf</code> file will be left up to
+              you. Do ensure the file is only writeable by the <code class=
+              "systemitem">root</code> user (mode 644).
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2748381" name="id2748381"></a>Scenario 1:
+                    Minimal Standalone Client-Only Installation
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              Choose this variant if you only want to transfer files using
+              <span class="command"><strong>smbclient</strong></span>, mount
+              Windows shares and print to Windows printers, and don't want to
+              share your files and printers to Windows machines.
+            </p>
+            <p>
+              A <code class="filename">/etc/samba/smb.conf</code> file with
+              the following three parameters is sufficient:
+            </p>
+            <pre class="root">
+<code class="literal">[global]
+    workgroup = <em class="replaceable"><code>MYGROUP</code></em>
+    dos charset = <em class="replaceable"><code>cp850</code></em>
+    unix charset = <em class=
+"replaceable"><code>ISO-8859-1</code></em></code>
+</pre>
+            <p>
+              The values in this example specify that the computer belongs to
+              a Windows workgroup named &ldquo;<span class="quote"><em class=
+              "replaceable"><code>MYGROUP</code></em></span>&rdquo;, uses the
+              &ldquo;<span class="quote"><em class=
+              "replaceable"><code>cp850</code></em></span>&rdquo; character
+              set on the wire when talking to MS-DOS and MS Windows 9x, and
+              that the filenames are stored in the &ldquo;<span class=
+              "quote"><em class=
+              "replaceable"><code>ISO-8859-1</code></em></span>&rdquo;
+              encoding on the disk. Adjust these values appropriately for
+              your installation. The &ldquo;<span class="quote">unix
+              charset</span>&rdquo; value must be the same as the output of
+              <span class="command"><strong>locale charmap</strong></span>
+              when executed with the <code class="envar">LANG</code> variable
+              set to your preferred locale, otherwise the <span class=
+              "command"><strong>ls</strong></span> command may not display
+              correct filenames of downloaded files.
+            </p>
+            <p>
+              There is no need to run any <span class=
+              "application">Samba</span> servers in this scenario, thus you
+              don't need to install the provided bootscripts.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2748491" name="id2748491"></a>Scenario 2:
+                    Standalone File/Print Server
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              Choose this variant if you want to share your files and
+              printers to Windows machines in your workgroup in addition to
+              the capabilities described in Scenario 1.
+            </p>
+            <p>
+              In this case, the <code class=
+              "filename">/etc/samba/smb.conf.default</code> file may be a
+              good template to start from. Also add &ldquo;<span class=
+              "quote">dos charset</span>&rdquo; and &ldquo;<span class=
+              "quote">unix charset</span>&rdquo; parameters to the
+              &ldquo;<span class="quote">[global]</span>&rdquo; section as
+              described in Scenario 1 in order to prevent filename
+              corruption.
+            </p>
+            <p>
+              The following configuration file creates a separate share for
+              each user's home directory and also makes all printers
+              available to Windows machines:
+            </p>
+            <pre class="root">
+<code class="literal">[global]
+    workgroup = <em class="replaceable"><code>MYGROUP</code></em>
+    dos charset = <em class="replaceable"><code>cp850</code></em>
+    unix charset = <em class="replaceable"><code>ISO-8859-1</code></em>
+
+[homes]
+    comment = Home Directories
+    browseable = no
+    writable = yes
+
+[printers]
+    comment = All Printers
+    path = /var/spool/samba
+    browseable = no
+    guest ok = no
+    printable = yes</code>
+</pre>
+            <p>
+              Other parameters you may wish to customize in the
+              &ldquo;<span class="quote">[global]</span>&rdquo; section
+              include:
+            </p>
+            <pre class="root">
+<code class="literal">    server string =
+    security =
+    hosts allow =
+    load printers =
+    log file =
+    max log size =
+    socket options =
+    local master =</code>
+</pre>
+            <p>
+              Reference the comments in the <code class=
+              "filename">/etc/samba/smb.conf.default</code> file for
+              information regarding these parameters.
+            </p>
+            <p>
+              Since the <span class="command"><strong>smbd</strong></span>
+              and <span class="command"><strong>nmbd</strong></span> daemons
+              are needed in this case, install the <code class=
+              "filename">samba</code> bootscript. Be sure to run <span class=
+              "command"><strong>smbpasswd</strong></span> (with the
+              <code class="option">-a</code> option to add users) to enable
+              and set passwords for all accounts that need <span class=
+              "application">Samba</span> access, or use the SWAT web
+              interface (see below) to do the same. Using the default
+              <span class="application">Samba</span> passdb backend, any user
+              you attempt to add will also be required to exist in the
+              <code class="filename">/etc/passwd</code> file.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2748649" name="id2748649"></a>Advanced
+                    Requirements
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              More complex scenarios involving domain control or membership
+              are possible if the right flags are passed to the ./configure
+              script when the package is built. Such setups are advanced
+              topics and cannot be adequately covered in BLFS. Many complete
+              books have been written on these topics alone. It should be
+              noted, however, that a <span class="application">Samba</span>
+              BDC cannot be used as a fallback for a Windows PDC, and
+              conversely, a Windows BDC cannot be used as a fallback for a
+              <span class="application">Samba</span> PDC. Also in some domain
+              membership scenarios, the <span class=
+              "command"><strong>winbindd</strong></span> daemon and the
+              corresponding bootscript are needed.
+            </p>
+            <p>
+              There is quite a bit of documentation available which covers
+              many of these advanced configurations. Point your web browser
+              to the links below to view some of the documentation included
+              with the <span class="application">Samba</span> package:
+            </p>
+            <div class="itemizedlist">
+              <ul class="compact">
+                <li>
+                  <p>
+                    Using Samba, 2nd Edition; a popular book published by
+                    O'Reilly <a class="ulink" href=
+                    "file:///usr/share/samba/swat/using_samba/toc.html">file:///usr/share/samba/swat/using_samba/toc.html</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    The Official Samba HOWTO and Reference Guide <a class=
+                    "ulink" href=
+                    "file:///usr/share/samba/swat/help/Samba-HOWTO-Collection/index.html">
+                    file:///usr/share/samba/swat/help/Samba-HOWTO-Collection/index.html</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    Samba-3 by Example <a class="ulink" href=
+                    "file:///usr/share/samba/swat/help/Samba-Guide/index.html">
+                    file:///usr/share/samba/swat/help/Samba-Guide/index.html</a>
+                  </p>
+                </li>
+                <li>
+                  <p>
+                    The Samba-3 man Pages <a class="ulink" href=
+                    "file:///usr/share/samba/swat/help/samba.7.html">file:///usr/share/samba/swat/help/samba.7.html</a>
+                  </p>
+                </li>
+              </ul>
+            </div>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="samba3-swat-config" name=
+            "samba3-swat-config"></a>Configuring SWAT
+          </h3>
+          <p>
+            The built in SWAT (<span class="application">Samba</span> Web
+            Administration Tool) utility can be used for basic configuration
+            of the <span class="application">Samba</span> installation, but
+            because it may be inconvenient, undesirable or perhaps even
+            impossible to gain access to the console, BLFS recommends setting
+            up access to SWAT using <span class="application">Stunnel</span>.
+            Without <span class="application">Stunnel</span>, the
+            <code class="systemitem">root</code> password is transmitted in
+            clear text over the wire, and is considered an unacceptable
+            security risk. After considering the security implications of
+            using SWAT without <span class="application">Stunnel</span>, and
+            you still wish to implement SWAT without it, instructions are
+            provided at this end of this section.
+          </p>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2748831" name="id2748831"></a>Setting up SWAT
+                    using Stunnel
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <p>
+              First install, or ensure you have already installed, the
+              <a class="xref" href="../postlfs/stunnel.html" title=
+              "Stunnel-4.21">Stunnel-4.21</a> package.
+            </p>
+            <p>
+              Next you must add entries to <code class=
+              "filename">/etc/services</code> and modify the <span class=
+              "command"><strong>inetd</strong></span>/<span class=
+              "command"><strong>xinetd</strong></span> configuration.
+            </p>
+            <p>
+              Add swat and swat_tunnel entries to <code class=
+              "filename">/etc/services</code> with the following commands
+              issued as the <code class="systemitem">root</code> user:
+            </p>
+            <pre class="root">
+<kbd class=
+"command">echo "swat            904/tcp" &gt;&gt; /etc/services &amp;&amp;
+echo "swat_tunnel     905/tcp" &gt;&gt; /etc/services</kbd>
+</pre>
+            <p>
+              If <span class="command"><strong>inetd</strong></span> is used,
+              the following command will add the swat_tunnel entry to
+              <code class="filename">/etc/inetd.conf</code> (as user
+              <code class="systemitem">root</code>):
+            </p>
+            <pre class="root">
+<kbd class=
+"command">echo "swat_tunnel stream tcp nowait.400 root /usr/sbin/swat swat" \
+    &gt;&gt; /etc/inetd.conf</kbd>
+</pre>
+            <p>
+              Issue a <span class="command"><strong>killall -HUP
+              inetd</strong></span> to reread the changed <code class=
+              "filename">inetd.conf</code> file.
+            </p>
+            <p>
+              If you use <span class=
+              "command"><strong>xinetd</strong></span>, the following command
+              will create the <span class="application">Samba</span> file as
+              <code class="filename">/etc/xinetd.d/swat_tunnel</code> (you
+              may need to modify or remove the &ldquo;<span class=
+              "quote">only_from</span>&rdquo; line to include the desired
+              host[s]):
+            </p>
+            <pre class="root">
+<kbd class="command">cat &gt;&gt; /etc/xinetd.d/swat_tunnel &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/xinetd.d/swat_tunnel
+
+service swat_tunnel
+{
+    port            = 905
+    socket_type     = stream
+    wait            = no
+    only_from       = 127.0.0.1
+    user            = root
+    server          = /usr/sbin/swat
+    log_on_failure  += USERID
+}
+
+# End /etc/xinetd.d/swat_tunnel</code>
+EOF</kbd>
+</pre>
+            <p>
+              Issue a <span class="command"><strong>killall -HUP
+              xinetd</strong></span> to read the new <code class=
+              "filename">/etc/xinetd.d/swat_tunnel</code> file.
+            </p>
+            <p>
+              Next, you must add an entry for the swat service to the
+              <code class="filename">/etc/stunnel/stunnel.conf</code> file
+              (as user <code class="systemitem">root</code>):
+            </p>
+            <pre class="root">
+<kbd class="command">cat &gt;&gt; /etc/stunnel/stunnel.conf &lt;&lt; "EOF"
+<code class="literal">[swat]
+accept  = 904
+connect = 905
+TIMEOUTclose = 1</code>
+
+EOF</kbd>
+</pre>
+            <p>
+              Restart the <span class=
+              "command"><strong>stunnel</strong></span> daemon using the
+              following command as the <code class="systemitem">root</code>
+              user:
+            </p>
+            <pre class="root">
+<kbd class="command">/etc/rc.d/init.d/stunnel restart</kbd>
+</pre>
+            <p>
+              SWAT can be launched by pointing your web browser to
+              <code class="uri">https://<em class=
+              "replaceable"><code>&lt;CA_DN_field&gt;</code></em>:904</code>.
+              Substitute the hostname listed in the DN field of the CA
+              certificate used with <span class="application">Stunnel</span>
+              for <em class=
+              "replaceable"><code>&lt;CA_DN_field&gt;</code></em>.
+            </p>
+          </div>
+          <div class="sect4" lang="en" xml:lang="en">
+            <div class="titlepage">
+              <div>
+                <div>
+                  <h5 class="title">
+                    <a id="id2749194" name="id2749194"></a>Setting up SWAT
+                    without Stunnel
+                  </h5>
+                </div>
+              </div>
+            </div>
+            <div class="admon warning">
+              <img alt="[Warning]" src="../images/warning.png" />
+              <h3>
+                Warning
+              </h3>
+              <p>
+                BLFS does not recommend using these procedures because of the
+                security risk involved. However, in a home network
+                environment and disclosure of the <code class=
+                "systemitem">root</code> password is an acceptable risk, the
+                following instructions are provided for your convenience.
+              </p>
+            </div>
+            <p>
+              Add a swat entry to <code class="filename">/etc/services</code>
+              with the following command issued as the <code class=
+              "systemitem">root</code> user:
+            </p>
+            <pre class="root">
+<kbd class=
+"command">echo "swat            904/tcp" &gt;&gt; /etc/services</kbd>
+</pre>
+            <p>
+              If <span class="command"><strong>inetd</strong></span> is used,
+              the following command issued as the <code class=
+              "systemitem">root</code> user will add a swat entry to the
+              <code class="filename">/etc/inetd.conf</code> file:
+            </p>
+            <pre class="root">
+<kbd class=
+"command">echo "swat stream tcp nowait.400 root /usr/sbin/swat swat" \
+    &gt;&gt; /etc/inetd.conf</kbd>
+</pre>
+            <p>
+              Issue a <span class="command"><strong>killall -HUP
+              inetd</strong></span> to reread the changed <code class=
+              "filename">inetd.conf</code> file.
+            </p>
+            <p>
+              If <span class="command"><strong>xinetd</strong></span> is
+              used, the following command issued as the <code class=
+              "systemitem">root</code> user will create an <code class=
+              "filename">/etc/xinetd.d/swat</code> file:
+            </p>
+            <pre class="root">
+<kbd class="command">cat &gt;&gt; /etc/xinetd.d/swat &lt;&lt; "EOF"
+<code class="literal"># Begin /etc/xinetd.d/swat
+
+service swat
+{
+    port            = 904
+    socket_type     = stream
+    wait            = no
+    only_from       = 127.0.0.1
+    user            = root
+    server          = /usr/sbin/swat
+    log_on_failure  += USERID
+}
+
+# End /etc/xinetd.d/swat</code>
+EOF</kbd>
+</pre>
+            <p>
+              Issue a <span class="command"><strong>killall -HUP
+              xinetd</strong></span> to read the new <code class=
+              "filename">/etc/xinetd.d/swat</code> file.
+            </p>
+            <p>
+              SWAT can be launched by pointing your web browser to
+              http://localhost:904.
+            </p>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3"></h3>
+          <div class="admon note">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3>
+              Note
+            </h3>
+            <p>
+              If you linked <span class="application">Linux-PAM</span> into
+              the <span class="application">Samba</span> build, you'll need
+              to create an <code class="filename">/etc/pam.d/samba</code>
+              file.
+            </p>
+          </div>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="samba3-init" name="samba3-init"></a>Boot Script
+          </h3>
+          <p>
+            For your convenience, boot scripts have been provided for
+            <span class="application">Samba</span>. There are two included in
+            the <a class="xref" href="../introduction/bootscripts.html"
+            title="BLFS Boot Scripts">blfs-bootscripts-20080816</a> package.
+            The first, <code class="filename">samba</code>, will start the
+            <span class="command"><strong>smbd</strong></span> and
+            <span class="command"><strong>nmbd</strong></span> daemons needed
+            to provide SMB/CIFS services. The second script, <code class=
+            "filename">winbind</code>, starts the <span class=
+            "command"><strong>winbindd</strong></span> daemon, used for
+            providing Windows domain services to Linux clients.
+          </p>
+          <p>
+            The default <span class="application">Samba</span> installation
+            uses the <code class="systemitem">nobody</code> user for guest
+            access to the server. This can be overridden by setting the
+            <code class="option">guest account =</code> parameter in the
+            <code class="filename">/etc/samba/smb.conf</code> file. If you
+            utilize the <code class="option">guest account =</code>
+            parameter, ensure this user exists in the <code class=
+            "filename">/etc/passwd</code> file. To use the default user,
+            issue the following commands as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="userinput">
+<kbd class="command">groupadd -g 99 nogroup &amp;&amp;
+useradd -c "Unprivileged Nobody" -d /dev/null -g nogroup \
+    -s /bin/false -u 99 nobody</kbd>
+</pre>
+          <p>
+            Install the <code class="filename">samba</code> script with the
+            following command issued as the <code class=
+            "systemitem">root</code> user:
+          </p>
+          <pre class="root">
+<kbd class="command">make install-samba</kbd>
+</pre>
+          <p>
+            If you also need the <code class="filename">winbind</code>
+            script:
+          </p>
+          <pre class="root">
+<kbd class="command">make install-winbind</kbd>
+</pre>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">eventlogadm, findsmb, mount.cifs,
+              mount.smbfs, net, nmbd, nmblookup, ntlm_auth, pdbedit,
+              profiles, rpcclient, smbcacls, smbclient, smbcontrol,
+              smbcquotas, smbd, smbget, smbmnt, smbmount, smbpasswd,
+              smbspool, smbstatus, smbtar, smbtree, smbumount, swat,
+              tdbbackup, tdbdump, tdbtool, testparm, unmount.cifs, wbinfo and
+              winbindd</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Libraries:</strong>
+              <span class="segbody">libnss_winbind.so, libnss_wins.so,
+              libsmbclient.so, libmsrpc.so, the pam_winbind.so and
+              pam_smbpass.so PAM libraries, and assorted character set,
+              filesystem and support modules.</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/samba,
+              /usr/lib/python2.5/site-packages/samba, /usr/lib/samba,
+              /usr/share/doc/samba-3.0.30, /usr/share/samba, /var/lib/samba
+              and /var/log/samba</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="eventlogadm" name="eventlogadm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>eventlogadm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to write records to eventlogs from STDIN, add the
+                    specified source and DLL eventlog registry entries and
+                    display the active eventlog names (from <code class=
+                    "filename">smb.conf</code>).
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="findsmb" name="findsmb"></a><span class=
+                    "term"><span class=
+                    "command"><strong>findsmb</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    lists information about machines that respond to SMB name
+                    queries on a subnet.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mount.cifs" name="mount.cifs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mount.cifs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    mounts a Linux CIFS filesystem. It is usually invoked
+                    indirectly by the <span class=
+                    "command"><strong>mount</strong></span> command when
+                    using the <code class="option">-t cifs</code> option.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="mount.smbfs" name="mount.smbfs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>mount.smbfs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span class=
+                    "command"><strong>smbmount</strong></span> which provides
+                    <span class="command"><strong>/bin/mount</strong></span>
+                    with a way to mount remote Windows (or <span class=
+                    "application">Samba</span>) fileshares.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="net" name="net"></a><span class=
+                    "term"><span class="command"><strong>net</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool for administration of <span class=
+                    "application">Samba</span> and remote CIFS servers,
+                    similar to the <span class=
+                    "command"><strong>net</strong></span> utility for
+                    DOS/Windows.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nmbd" name="nmbd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nmbd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">Samba</span> NetBIOS
+                    name server.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="nmblookup" name="nmblookup"></a><span class=
+                    "term"><span class=
+                    "command"><strong>nmblookup</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to query NetBIOS names and map them to IP
+                    addresses.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="ntlm_auth" name="ntlm_auth"></a><span class=
+                    "term"><span class=
+                    "command"><strong>ntlm_auth</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool to allow external access to Winbind's NTLM
+                    authentication function.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="pdbedit" name="pdbedit"></a><span class=
+                    "term"><span class=
+                    "command"><strong>pdbedit</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool used to manage the SAM database.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="profiles" name="profiles"></a><span class=
+                    "term"><span class=
+                    "command"><strong>profiles</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a utility that reports and changes SIDs in Windows
+                    registry files. It currently only supports Windows NT.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="rpcclient" name="rpcclient"></a><span class=
+                    "term"><span class=
+                    "command"><strong>rpcclient</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to execute MS-RPC client side functions.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbcacls" name="smbcacls"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbcacls</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to manipulate Windows NT access control lists.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbclient" name="smbclient"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbclient</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a SMB/CIFS access utility, similar to FTP.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbcontrol" name="smbcontrol"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbcontrol</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to control running <span class=
+                    "command"><strong>smbd</strong></span>, <span class=
+                    "command"><strong>nmbd</strong></span> and <span class=
+                    "command"><strong>winbindd</strong></span> daemons.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbcquotas" name="smbcquotas"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbcquotas</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used to manipulate Windows NT quotas on SMB file
+                    shares.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbd" name="smbd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the main <span class="application">Samba</span> daemon
+                    which provides SMB/CIFS services to clients.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbget" name="smbget"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbget</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a simple utility with <span class=
+                    "command"><strong>wget</strong></span>-like semantics,
+                    that can download files from SMB servers. You can specify
+                    the files you would like to download on the command-line.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbmnt" name="smbmnt"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbmnt</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a helper application used by the <span class=
+                    "command"><strong>smbmount</strong></span> program to do
+                    the actual mounting of SMB shares. It can be installed
+                    setuid <code class="systemitem">root</code> if you want
+                    unprivileged users to be able to mount their SMB shares.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbmount" name="smbmount"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbmount</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is usually invoked as <span class=
+                    "command"><strong>mount.smbfs</strong></span> by the
+                    <span class="command"><strong>mount</strong></span>
+                    command when using the <em class="parameter"><code>-t
+                    smbfs</code></em> option, mounts a Linux SMB filesystem.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbpasswd" name="smbpasswd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbpasswd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    changes a user's <span class="application">Samba</span>
+                    password.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbspool" name="smbspool"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbspool</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    sends a print job to an SMB printer.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbstatus" name="smbstatus"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbstatus</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    reports current <span class="application">Samba</span>
+                    connections.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbtar" name="smbtar"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbtar</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a shell script used for backing up SMB/CIFS shares
+                    directly to Linux tape drives or a file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbtree" name="smbtree"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbtree</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a text-based SMB network browser.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="smbumount" name="smbumount"></a><span class=
+                    "term"><span class=
+                    "command"><strong>smbumount</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used by unprivileged users to unmount SMB filesystems,
+                    provided that it is setuid root.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="swat" name="swat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>swat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the <span class="application">Samba</span> Web
+                    Administration Tool.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tdbbackup" name="tdbbackup"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tdbbackup</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool for backing up or validating the integrity of
+                    <span class="application">Samba</span> <code class=
+                    "filename">.tdb</code> files.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tdbdump" name="tdbdump"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tdbdump</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool used to print the contents of a <span class=
+                    "application">Samba</span> <code class=
+                    "filename">.tdb</code> file.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="tdbtool" name="tdbtool"></a><span class=
+                    "term"><span class=
+                    "command"><strong>tdbtool</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a tool which allows simple database manipulation from
+                    the command line.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="testparm" name="testparm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>testparm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    checks an <code class="filename">smb.conf</code> file for
+                    proper syntax.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="umount.cifs" name="umount.cifs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>umount.cifs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is used by normal, non-<code class=
+                    "systemitem">root</code> users, to <span class=
+                    "command"><strong>unmount</strong></span> their own
+                    Common Internet File System (CIFS) mounts.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="wbinfo" name="wbinfo"></a><span class=
+                    "term"><span class=
+                    "command"><strong>wbinfo</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    queries a running <span class=
+                    "command"><strong>winbindd</strong></span> daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="winbindd" name="winbindd"></a><span class=
+                    "term"><span class=
+                    "command"><strong>winbindd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    resolves names from Windows NT servers.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-06-07 02:22:19 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="proftpd.html" title="ProFTPD-1.3.0">Prev</a>
+          <p>
+            ProFTPD-1.3.0
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="vsftpd.html" title="vsftpd-2.0.5">Next</a>
+          <p>
+            vsftpd-2.0.5
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="majorservers.html" title=
+          "Chapter&nbsp;19.&nbsp;Major Servers">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>

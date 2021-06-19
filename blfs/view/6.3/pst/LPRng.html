@@ -1,0 +1,477 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+    "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+  <head>
+    <meta http-equiv="Content-Type" content=
+    "application/xhtml+xml; charset=iso-8859-1" />
+    <title>
+      LPRng-3.8.28
+    </title>
+    <link rel="stylesheet" href="../stylesheets/lfs.css" type="text/css" />
+    <meta name="generator" content="DocBook XSL Stylesheets V1.73.2" />
+    <link rel="stylesheet" href="../stylesheets/lfs-print.css" type=
+    "text/css" media="print" />
+  </head>
+  <body class="blfs" id="blfs-6.3">
+    <div class="navheader">
+      <h4>
+        Beyond Linux<sup>®</sup> From Scratch - Version 6.3
+      </h4>
+      <h3>
+        Chapter&nbsp;39.&nbsp;Printing
+      </h3>
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="cups.html" title="CUPS-1.2.12">Prev</a>
+          <p>
+            CUPS-1.2.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gs.html" title=
+          "AFPL Ghostscript-8.53">Next</a>
+          <p>
+            AFPL Ghostscript-8.53
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="printing.html" title=
+          "Chapter&nbsp;39.&nbsp;Printing">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+    <div class="sect1" lang="en" xml:lang="en">
+      <h1 class="sect1">
+        <a id="LPRng" name="LPRng"></a>LPRng-3.8.28
+      </h1>
+      <div class="package" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Introduction to LPRng
+        </h2>
+        <p>
+          The <span class="application">LPRng</span> package contains an
+          enhanced, extended and portable implementation of the Berkeley Line
+          PRinter (LPR) print spooler. This is useful for queuing print jobs.
+        </p>
+        <p>
+          There may be a more recent release available from the <span class=
+          "application">LPRng</span> home page. You can check <a class=
+          "ulink" href=
+          "http://sourceforge.net/projects/lprng">http://sourceforge.net/projects/lprng</a>
+          and probably use the existing BLFS instructions. Note that versions
+          other than the one shown in the download URLs have not been tested
+          in a BLFS environment.
+        </p>
+        <h3>
+          Package Information
+        </h3>
+        <div class="itemizedlist">
+          <ul class="compact">
+            <li>
+              <p>
+                Download (HTTP): <a class="ulink" href=
+                "http://anduin.linuxfromscratch.org/sources/BLFS/6.3/l/LPRng-3.8.28.tgz">
+                http://anduin.linuxfromscratch.org/sources/BLFS/6.3/l/LPRng-3.8.28.tgz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download (FTP): <a class="ulink" href=
+                "ftp://anduin.linuxfromscratch.org/BLFS/6.3/l/LPRng-3.8.28.tgz">
+                ftp://anduin.linuxfromscratch.org/BLFS/6.3/l/LPRng-3.8.28.tgz</a>
+              </p>
+            </li>
+            <li>
+              <p>
+                Download MD5 sum: 1b3a0abd291b260eab6087ac0e61ed84
+              </p>
+            </li>
+            <li>
+              <p>
+                Download size: 10.2 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated disk space required: 71.8 MB
+              </p>
+            </li>
+            <li>
+              <p>
+                Estimated build time: 0.42 SBU
+              </p>
+            </li>
+          </ul>
+        </div>
+        <h3>
+          LPRng Dependencies
+        </h3>
+        <h4>
+          Optional
+        </h4>
+        <p class="optional">
+          <a class="xref" href="../postlfs/openssl.html" title=
+          "OpenSSL-0.9.8g">OpenSSL-0.9.8g</a>, <a class="xref" href=
+          "../basicnet/tcpwrappers.html" title="TCP Wrapper-7.6">TCP
+          Wrapper-7.6</a>, <a class="xref" href="../postlfs/mitkrb.html"
+          title="MIT Kerberos V5-1.6">MIT Kerberos V5-1.6</a>, and <a class=
+          "ulink" href="http://www.pdc.kth.se/kth-krb/">krb4</a>
+        </p>
+        <p class="usernotes">
+          User Notes: <a class="ulink" href=
+          "http://wiki.linuxfromscratch.org/blfs/wiki/lprng">http://wiki.linuxfromscratch.org/blfs/wiki/lprng</a>
+        </p>
+      </div>
+      <div class="installation" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Installation of LPRng
+        </h2>
+        <p>
+          Install <span class="application">LPRng</span> by running the
+          following commands:
+        </p>
+        <pre class="userinput">
+<kbd class=
+"command">sed -i    's@CLEAR,0@CLEAR,CLEAR,NULL@' src/common/lpq.c &amp;&amp;
+sed -i    's@ fd, l@ fd, (char*) l@'    src/common/krb5_auth.c &amp;&amp;
+sed -i -e 's@\(fi\|done\) \\@\1; \\@' \
+       -e 's/^SHELL/#&amp;/'                Makefile.in &amp;&amp;
+
+./configure --prefix=/usr \
+            --libexecdir=/usr/lib/lprng \
+            --sysconfdir=/etc \
+            --enable-shared &amp;&amp;
+make</kbd>
+</pre>
+        <p>
+          This package does not come with a test suite.
+        </p>
+        <p>
+          Now, as the <code class="systemitem">root</code> user:
+        </p>
+        <pre class="root">
+<kbd class="command">make install &amp;&amp;
+install -v -m755 -d /usr/share/doc/lprng-3.8.28 &amp;&amp;
+cp -v -R DOCS/* PrintingCookbook \
+    /usr/share/doc/lprng-3.8.28</kbd>
+</pre>
+      </div>
+      <div class="commands" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Command Explanations
+        </h2>
+        <p>
+          <span class="command"><strong>sed -i 's@CLEAR ...'</strong></span>:
+          This fixes a <span class="application">GCC</span>-4 warning,
+          treated as an error.
+        </p>
+        <p>
+          <span class="command"><strong>sed -i 's@ fd, l
+          ...'</strong></span>: This fixes a compilation problem with using
+          versions of <span class="application">GCC</span>-4.
+        </p>
+        <p>
+          <span class="command"><strong>sed -i -e '...' -e
+          '...'</strong></span>: This fixes a couple of syntax bugs when
+          using newer versions of <span class=
+          "command"><strong>make</strong></span>.
+        </p>
+      </div>
+      <div class="configuration" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Configuring LPRng
+        </h2>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="lprng-config" name="lprng-config"></a>Config Files
+          </h3>
+          <p>
+            <code class="filename">/etc/printcap</code> and <code class=
+            "filename">/etc/lpd/*</code>
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            Configuration Information
+          </h3>
+          <p>
+            There is no generic <code class="filename">printcap</code> for
+            all printers. A sample printcap is loaded into the <code class=
+            "filename">/etc</code> directory which can be of some help.
+            Information is also available at <a class="ulink" href=
+            "http://www.lprng.org">http://www.lprng.org</a>, <a class="ulink"
+            href=
+            "http://www.linuxprinting.org">http://www.linuxprinting.org</a>
+            and the documentation installed in <code class=
+            "filename">/usr/share/doc/lprng-3.8.28</code>.
+          </p>
+        </div>
+        <div class="sect3" lang="en" xml:lang="en">
+          <h3 class="sect3">
+            <a id="lprng-init" name="lprng-init"></a>Boot Script
+          </h3>
+          <p>
+            The init script installed by <span class=
+            "application">LPRng</span> is not consistent with other BLFS
+            scripts; therefore, install the <code class=
+            "filename">/etc/rc.d/init.d/lprng</code> init script included in
+            the <a class="xref" href="../introduction/bootscripts.html"
+            title="BLFS Boot Scripts">blfs-bootscripts-20080816</a> package
+            (as the <code class="systemitem">root</code> user):
+          </p>
+          <pre class="root">
+<kbd class="command">make install-lprng</kbd>
+</pre>
+          <div class="admon note">
+            <img alt="[Note]" src="../images/note.png" />
+            <h3>
+              Note
+            </h3>
+            <p>
+              You may also want to remove the <span class=
+              "command"><strong>lpd</strong></span> script that was installed
+              in <code class="filename">/etc/rc.d/init.d</code>.
+            </p>
+          </div>
+        </div>
+      </div>
+      <div class="content" lang="en" xml:lang="en">
+        <h2 class="sect2">
+          Contents
+        </h2>
+        <div class="segmentedlist">
+          <div class="seglistitem">
+            <div class="seg">
+              <strong class="segtitle">Installed Programs:</strong>
+              <span class="segbody">cancel, checkpc, lp, lpc, lpd, lpq, lpr,
+              lprm, lprng_certs, lprng_index_certs, and lpstat</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Library:</strong>
+              <span class="segbody">liblpr.{so,a}</span>
+            </div>
+            <div class="seg">
+              <strong class="segtitle">Installed Directories:</strong>
+              <span class="segbody">/etc/lpd, /usr/lib/lprng,
+              /usr/share/doc/3.8.28, /var/run/lpd, and /var/spool/lpd</span>
+            </div>
+          </div>
+        </div>
+        <div class="variablelist">
+          <h3>
+            Short Descriptions
+          </h3>
+          <table border="0">
+            <col align="left" valign="top" />
+            <tbody>
+              <tr>
+                <td>
+                  <p>
+                    <a id="cancel" name="cancel"></a><span class=
+                    "term"><span class=
+                    "command"><strong>cancel</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span class=
+                    "command"><strong>lprm</strong></span> used to send
+                    cancel requests to an <span class=
+                    "application">LPRng</span> print service.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="checkpc" name="checkpc"></a><span class=
+                    "term"><span class=
+                    "command"><strong>checkpc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    checks out the printcap database.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lp" name="lp"></a><span class="term"><span class=
+                    "command"><strong>lp</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a symlink to <span class=
+                    "command"><strong>lpr</strong></span> used to send
+                    requests to an <span class="application">LPRng</span>
+                    print service.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpc" name="lpc"></a><span class=
+                    "term"><span class="command"><strong>lpc</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a control program for the <span class=
+                    "command"><strong>lpd</strong></span> daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpd" name="lpd"></a><span class=
+                    "term"><span class="command"><strong>lpd</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is the print queueing daemon.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpq" name="lpq"></a><span class=
+                    "term"><span class="command"><strong>lpq</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a status monitoring program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpr" name="lpr"></a><span class=
+                    "term"><span class="command"><strong>lpr</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a print job spooler program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lprm" name="lprm"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lprm</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a print job removal program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lprng_certs" name="lprng_certs"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lprng_certs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a program used to manage SSL certificates for the
+                    <span class="application">LPRng</span> software.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lprng_index_certs" name=
+                    "lprng_index_certs"></a><span class="term"><span class=
+                    "command"><strong>lprng_index_certs</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    creates a set of index files in the <span class=
+                    "application">LPRng</span> signing certificate directory.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="lpstat" name="lpstat"></a><span class=
+                    "term"><span class=
+                    "command"><strong>lpstat</strong></span></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    is a print job status reporting program.
+                  </p>
+                </td>
+              </tr>
+              <tr>
+                <td>
+                  <p>
+                    <a id="liblpr" name="liblpr"></a><span class=
+                    "term"><code class="filename">liblpr.{so,a}</code></span>
+                  </p>
+                </td>
+                <td>
+                  <p>
+                    contains the API functions used by the <span class=
+                    "application">LPRng</span> programs.
+                  </p>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+      </div>
+      <p class="updated">
+        Last updated on 2008-05-10 18:53:20 -0500
+      </p>
+    </div>
+    <div class="navfooter">
+      <ul>
+        <li class="prev">
+          <a accesskey="p" href="cups.html" title="CUPS-1.2.12">Prev</a>
+          <p>
+            CUPS-1.2.12
+          </p>
+        </li>
+        <li class="next">
+          <a accesskey="n" href="gs.html" title=
+          "AFPL Ghostscript-8.53">Next</a>
+          <p>
+            AFPL Ghostscript-8.53
+          </p>
+        </li>
+        <li class="up">
+          <a accesskey="u" href="printing.html" title=
+          "Chapter&nbsp;39.&nbsp;Printing">Up</a>
+        </li>
+        <li class="home">
+          <a accesskey="h" href="../index.html" title=
+          "Beyond Linux® From Scratch - Version 6.3">Home</a>
+        </li>
+      </ul>
+    </div>
+  </body>
+</html>
