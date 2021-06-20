@@ -2,43 +2,35 @@
 <!--#include virtual="header.html" -->
 <!--#include virtual="menu.html" -->
     <div class="main">
-     <h1>What is Automated Linux From Scratch?</h1>
-     <p>Automated Linux From Scratch (ALFS) is a project that allows
-	building the LFS system automatically. It also allows building packages
-        from the BLFS book, but that needs some manual intervention.
+     <h1>Automated Linux From Scratch Nedir?</h1>
+     <p>Automated Linux From Scratch (ALFS), LFS sisteminin otomatik olarak oluşturulmasına izin veren bir projedir.
+	Ayrıca, BLFS kitabından paketler oluşturmaya izin verir, ancak bunun için bazı manuel müdahaleler gerekir. 
      </p>
 
-     <h2>Why would I want to use ALFS?</h2>
-     <p>After having gone through the LFS and BLFS books more than 2 or 3
-        times, you will quickly appreciate the ability to automate the task
-        of compiling the software you want for your systems.</p>
+     <h2>Neden ALFS'yi kullanmak isteyeyim? </h2>
+     <p>LFS ve BLFS kitaplarını bir kaç keza inceledikten sonra, sistemleriniz için istediğiniz 
+	     yazılımı derleme görevini otomatikleştirme yeteneğini siz de  takdir edeceksiniz. </p>
 
-     <p>The goal of ALFS is to <em>automate</em> the process of creating an
-        LFS system.
-	It seeks to follow the book as closely as possible by directly
-        extracting instructions from the XML sources. This is the reason why
-        it may also be used as a test of the current book instructions.
+     <p>ALFS'nin amacı, bir LFS sistemi oluşturma sürecini <em>otomatikleştirmektir</em>. 
+	Doğrudan XML kaynaklarından talimatlar çıkararak kitabı mümkün olduğunca yakından 
+	takip etmeye çalışır. Bu nedenle, mevcut kitap talimatlarının bir testi olarak da 
+	kullanılabilir. 
      </p>
 
-     <h2>How is ALFS implemented?</h2>
+     <h2>ALFS nasıl uygulanır? </h2>
      <p>
-	The official implementation of ALFS is called <em>jhalfs</em>.
-	It was originally created by Jeremy Huntwork, then developed and
-	maintained by Manuel Canales Esparcia, George Boudreau, Thomas
-	Pegg, and Pierre Labastie. It has become a light-weight, practical
-        method of automating an LFS build. It is a Bash shell script that
-        makes use of Git and xsltproc to first download the XML sources
-        of the Linux From Scratch book and then extract any necessary commands,
-	placing them into executable shell scripts. If you do not already
-	have the necessary source packages in place on your system, jhalfs
-	can fetch them. Finally, jhalfs generates a Makefile which will
-	control the execution of the shell scripts, allowing for recovery
-	if the build should encounter an error. A framework to use package
-	management has been added by Pierre Labastie. 
+	ALFS'nin resmi uygulamasına <em>jhalfs</em> denir.
+	Başlangıçta Jeremy Huntwork tarafından oluşturulmuş, daha sonra Manuel Canales Esparcia, George Boudreau, 
+	Thomas Pegg ve Pierre Labastie tarafından geliştirilmiş ve sürdürülmüştür. Böylelikle LFS yapısını otomatikleştirmenin 
+	hafif, pratik bir yöntemi haline geldi. ALFS, Linux From Scratch kitabının XML kaynaklarını indirmek için Git ve xsltproc'u 
+	kullanan bir Bash kabuk betiğidir ve ardından gerekli komutları ayıklayarak bunları yürütülebilir kabuk komut dosyalarına 
+	yerleştirir. Sisteminizde zaten gerekli kaynak paketlere sahip değilseniz, jhalfs bunları ekleyebilir. Son olarak, jhalfs, 
+	kabuk komut dosyalarının yürütülmesini kontrol edecek ve derlemenin bir hatayla karşılaşması durumunda kurtarmaya izin verecek 
+	bir Makefile oluşturur. Ek olarak paket yönetimini kullanmak için Pierre Labastie tarafından bir çerçeve eklenmiştir. 
      </p>
 
-     <p>Due to a lack of developers, jhalfs is maintained as a rolling release.
-        It can be obtained by cloning the git repository:</p>
+     <p>Geliştirici eksikliğinden dolayı, jhalfs sürekli bir sürüm olarak korunur. 
+	Git deposunu klonlayarak elde edilebilir: </p>
      <div class="cmd">
 	<p>git clone git://git.linuxfromscratch.org/jhalfs.git jhalfs</p>
      </div>
@@ -53,36 +45,32 @@
         <a href="https://wiki.linuxfromscratch.org/alfs/wiki/SupportedBooks">
          https://wiki.linuxfromscratch.org/alfs/wiki/SupportedBooks</a>.</p>
 -->
-     <p>An extension of ALFS aimed at automating the building
-	of packages in the BLFS book is now included in jhalfs. It
-        still needs editing some scripts (about 1%), mainly when the book
-        layout diverges from standard, but works rather well and
-        most of the packages can be built automatically.</p>
+     <p>BLFS kitabındaki paketlerin oluşturulmasını otomatikleştirmeyi 
+	amaçlayan bir ALFS uzantısı da jhalfs'e dahil edilmiştir. 
+	Özellikle kitap düzeni standarttan farklı olduğunda, bazı komut 
+	dosyalarını (yaklaşık %1) düzenleme ihtiyacı oluşmaktadır  hala ihtiyacı var.
+	Ancak yinede oldukça iyi çalışıyor ve paketlerin çoğu otomatik olarak oluşturulabiliyor.</p>
 
-  <h2>History</h2>
-     <p>Before jhalfs, an implementation named nALFS was developed. A more
-	ambitious project, named simply alfs was designed around 2004, but
-	was never pushed to completion.</p>
+  <h2>Tarihçe</h2>
+     <p>Jhalfs'ten önce nALFS adlı bir uygulama vardı. 
+	2004 yılı civarında "alfs" adlı başka bir iddialı bir proje tasarlandı, 
+	ancak hiçbir zaman tamamlanmadı. </p>
     <h3>nALFS</h3>
-     <p>The first ALFS implementation was nALFS by Neven Has. nALFS was a
-	small program written in C. It first parsed an XML profile that
-	contained information concerning the LFS build process into a series
-	of internal commands. It could then execute these at your discretion,
-	thus automating the compilation of LFS.</p>
+     <p>İlk ALFS uygulaması, Neven Has'ın nALFS'siydi. nALFS, C dilinde yazılmış küçük bir programdı. 
+	İlk olarak, LFS oluşturma süreciyle ilgili bilgileri içeren bir XML profilini bir 
+	dahili komut kümesine ayrıştırıyordu. Daha sonra bunları kendi takdirinize göre çalıştırıp, 
+	böylece LFS'nin derlenmesini otomatik hale getirebiliyordunuz. </p>
     <h3>alfs</h3>
-     <p>There were many in-depth features that had been requested for ALFS
-	implementations. Because of this, development had been slated for
-	an entirely new build tool which would have been called alfs.
-	Eventually, the ease of
-	use of jhalfs ultimately pushed development of alfs to the bottom
-	of the stack.</p>
+     <p>ALFS uygulamaları için talep edilen birçok derinlemesine özellik vardı. 
+	Bu nedenle, alfs olarak adlandırılacak tamamen yeni bir aracın gelişirilmesi planlanmıştı.
+	Fakat jhalfs ile gelen kullanım kolaylığı sonucunda alfs' nin gelişimi durdu. </p>
 
-     <h2>Who's who:</h2>
+     <h2>Kim kimdir</h2>
      <ul>
-        <li>Project Leader and Developper/Maintainer: Pierre Labastie</li>
-        <li>Former Maintainer: Thomas Pegg</li>
-	<li>Former Developers(jhalfs): Jeremy Huntwork, George Boudreau</li>
-        <li>Former Developer(jhalfs, blfs tools): Manuel Canales Esparcia</li>
+        <li>Proje Lideri ve Geliştirici/Bakım sorumlusu:  Pierre Labastie</li>
+        <li>Eski Bakım Sorumlusu: Thomas Pegg</li>
+	<li>Eski Geliştiriciler(jhalfs): Jeremy Huntwork, George Boudreau</li>
+        <li>Eski Gelştiriciler(jhalfs, blfs tools): Manuel Canales Esparcia</li>
      </ul>
 
 <!--#include virtual="/common/footer.html" -->
